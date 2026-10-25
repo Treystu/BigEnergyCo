@@ -1,5 +1,7 @@
 // Optional map integration boundary. Importing this module never loads a map
 // library, requests coordinates, or changes core sizing behavior.
+import { translate as t } from "../shared/i18n.js?v=20261025b";
+
 const PANEL_AREA_M2 = 6;
 function versionedLocalAsset(path) {
   const url = new URL(path, import.meta.url);
@@ -169,7 +171,11 @@ export function createMapProviderRegistry(providers = []) {
 
 export function manualRoofHint(areaM2) {
   const panels = panelCapFromArea(areaM2);
-  return `${Math.round(Number(areaM2) || 0)} m² is about ${panels} panels at ~${PANEL_AREA_M2} m² each.`;
+  return t("roofPanelEstimate", {
+    area: Math.round(Number(areaM2) || 0),
+    panels,
+    panelArea: PANEL_AREA_M2,
+  });
 }
 
 // Policy enforcement: the constants above are the ONLY network destinations
