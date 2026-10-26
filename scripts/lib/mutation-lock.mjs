@@ -38,7 +38,8 @@ export function mutationLockPath(root = process.cwd()) {
  *
  * The file holds the owning pid so a crash mid-tooth is diagnosable rather than
  * leaving a mystery block. Acquisition is bounded, so a crashed holder delays a
- * test rather than wedging the suite.
+ * test rather than wedging the suite. Ten minutes leaves room for several slow
+ * CI readers to run serially, while still putting a firm ceiling on stale locks.
  *
  * ACQUISITION IS ATOMIC, and it has to be. The first version polled
  * `waitForMutationLockFree` and then created the lock file — a textbook
@@ -55,9 +56,17 @@ export function mutationLockPath(root = process.cwd()) {
  * file exists, which is the only test-and-set here that two processes cannot
  * both win.
  */
-export async function withMutationLock(fn, root = process.cwd()) {
+export async function withMutationLock(
+  fn,
+  root = process.cwd(),
+  lockOptions = {},
+) {
   const path = mutationLockPath(root);
-  await acquireMutationLock(path);
+  if (!(await acquireMutationLock(path, lockOptions))) {
+    throw new Error(
+      `Timed out waiting for the shared mutation lock; did not run the protected operation (${path})`,
+    );
+  }
   try {
     return await fn();
   } finally {
@@ -68,14 +77,13 @@ export async function withMutationLock(fn, root = process.cwd()) {
 /**
  * Take the lock, or wait for whoever holds it.
  *
- * Returns true when the lock was acquired. On timeout it proceeds anyway and
- * returns false, preserving the original "a crashed holder must not wedge the
- * suite" contract: the cost of giving up is a flake, the cost of not giving up
- * is a hung CI run.
+ * Returns true when acquired. On timeout it returns false without changing the
+ * existing owner's file. `withMutationLock` treats that as a failure and never
+ * runs an operation that assumes mutual exclusion without holding the lock.
  */
 export async function acquireMutationLock(
   path,
-  { timeoutMs = 30000, stepMs = 50 } = {},
+  { timeoutMs = 600000, stepMs = 50 } = {},
 ) {
   const start = Date.now();
   for (;;) {
@@ -88,7 +96,6 @@ export async function acquireMutationLock(
     } catch (err) {
       if (err?.code !== "EEXIST") throw err;
       if (Date.now() - start > timeoutMs) {
-        writeFileSync(path, String(process.pid), "utf8");
         return false;
       }
       await new Promise((r) => setTimeout(r, stepMs));
