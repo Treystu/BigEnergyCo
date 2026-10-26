@@ -55,9 +55,17 @@ export function mutationLockPath(root = process.cwd()) {
  * file exists, which is the only test-and-set here that two processes cannot
  * both win.
  */
-export async function withMutationLock(fn, root = process.cwd()) {
+export async function withMutationLock(
+  fn,
+  root = process.cwd(),
+  lockOptions = {},
+) {
   const path = mutationLockPath(root);
-  await acquireMutationLock(path);
+  if (!(await acquireMutationLock(path, lockOptions))) {
+    throw new Error(
+      `Timed out waiting for the shared mutation lock; did not run the protected operation (${path})`,
+    );
+  }
   try {
     return await fn();
   } finally {
@@ -75,7 +83,7 @@ export async function withMutationLock(fn, root = process.cwd()) {
  */
 export async function acquireMutationLock(
   path,
-  { timeoutMs = 30000, stepMs = 50 } = {},
+  { timeoutMs = 180000, stepMs = 50 } = {},
 ) {
   const start = Date.now();
   for (;;) {
@@ -88,7 +96,6 @@ export async function acquireMutationLock(
     } catch (err) {
       if (err?.code !== "EEXIST") throw err;
       if (Date.now() - start > timeoutMs) {
-        writeFileSync(path, String(process.pid), "utf8");
         return false;
       }
       await new Promise((r) => setTimeout(r, stepMs));
