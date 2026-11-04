@@ -2933,7 +2933,11 @@ function run(quiet = false, explicit = false) {
   // A site/option change invalidates an adopted curve point (its hardware was
   // simulated for the old site and load); a bill-only change keeps it — the
   // rescale path already re-based it and the quiet refine re-simulates it.
-  if (lastRunInput && !_rescale.sameSiteOptions(lastRunInput, inp)) {
+  if (
+    lastRunInput &&
+    _rescale &&
+    !_rescale.sameSiteOptions(lastRunInput, inp)
+  ) {
     adoptedEntry = null;
     if (selectedKey === "adopted") selectedKey = "best";
     frontierSelected = null;
@@ -4268,10 +4272,21 @@ function moneyRange(lo, hi) {
   return money(lo) + "–" + money(hi);
 }
 
-// Oversize notes are generated in USD by the engine; re-render the savings
-// figure through money() so non-USD readers see their own currency. USD
-// readers (or no-FX) get the original prose byte-identical.
-function bestPriceNote(text) {
+// The engine sends a semantic locale key plus numeric inputs for callouts
+// translated in the browser. Keep its English diagnostic sentence as a
+// fallback for callout variants not yet migrated.
+function bestPriceNote(entry) {
+  const message = entry?.bestPriceCalloutI18n;
+  if (message?.key && message.args) {
+    const vars = { ...message.args };
+    if (Number.isFinite(vars.battKwh)) vars.battKwh = fmt(vars.battKwh);
+    if (Number.isFinite(vars.replacements))
+      vars.replacements = fmt(vars.replacements);
+    if (Number.isFinite(vars.savingsUsd)) vars.savings = money(vars.savingsUsd);
+    delete vars.savingsUsd;
+    return t(message.key, vars);
+  }
+  const text = entry?.bestPriceCallout;
   const fx = fxActive();
   if (!fx || fx.code === "USD") return text;
   return _rescale.relocalizeOversizeCallout(text, money);
@@ -5977,7 +5992,7 @@ function entryDetailRows(p, e) {
     ]);
   }
   if (e.bestPriceCallout) {
-    rows.push(["Scenario note", bestPriceNote(e.bestPriceCallout)]);
+    rows.push(["Scenario note", bestPriceNote(e)]);
   }
   return rows;
 }
@@ -6127,7 +6142,7 @@ function renderBomPanel() {
         style:
           "margin-bottom:0.8rem;padding:0.75rem 1rem;border-radius:8px;background:rgba(0,230,153,0.08);border:1px solid rgba(0,230,153,0.3);font-size:0.85rem;line-height:1.45;color:var(--text-color);",
       },
-      `💡 ${bestPriceNote(f.bestPriceCallout)}`,
+      `💡 ${bestPriceNote(f)}`,
     );
     body.appendChild(callout);
   }
@@ -6604,11 +6619,7 @@ function renderTierCards(p) {
 
     if (t.bestPriceCallout) {
       card.appendChild(
-        el(
-          "div",
-          { class: "best-price-callout" },
-          `💡 ${bestPriceNote(t.bestPriceCallout)}`,
-        ),
+        el("div", { class: "best-price-callout" }, `💡 ${bestPriceNote(t)}`),
       );
     }
 
@@ -6785,11 +6796,7 @@ function renderTargetCards(p, extraTargets = []) {
 
     if (t.bestPriceCallout) {
       card.appendChild(
-        el(
-          "div",
-          { class: "best-price-callout" },
-          `💡 ${bestPriceNote(t.bestPriceCallout)}`,
-        ),
+        el("div", { class: "best-price-callout" }, `💡 ${bestPriceNote(t)}`),
       );
     }
 
