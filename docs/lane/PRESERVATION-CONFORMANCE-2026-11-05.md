@@ -210,3 +210,43 @@ cheap to judge.
 - It does not re-measure the 751 MB machine-wide Claude root (G5) or re-walk the
   8,899 unreadable entries (G2); both are named as carried reads.
 - It issues no ALL-CLEAR, and none may be quoted from it.
+
+## F. Gap ledger re-read, 2026-11-08
+
+Additive section (this sheet is added to, never overwritten). Under LANE PROTOCOL
+point 9 every durable state claim carries a read taken in the reporting session, so
+the six gap states were re-read at lane head rather than carried. Two of the reads
+in section E's "does not claim" list are now discharged, and one receipt in B.2 is
+corrected.
+
+**Head of the reads:** `52b2f0ab5dcad68cf4e5dfb20b971558a7bd0da0`, tree clean,
+`origin/lane/finish == local` (read: `git rev-parse HEAD` + `git status --short` +
+`git rev-parse origin/lane/finish`, 2026-11-08).
+
+| ID  | State at this read | What was read this session (primary)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| --- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| G1  | DECISION-READY     | Both named paths still absent: `C:/tmp/car2-bak/cities.js`, `C:/tmp/car4-bak/frontier.js` (read: `[ -e ]` per exact path, 2026-11-08). Nothing in the lane can recover the bytes, so the state cannot move from DECISION-READY. Owner-only: whether reconstruction from the last committed versions is worth a session.                                                                                                                                                                                                       |
+| G2  | DECISION-READY     | Log re-read in full, not just its headline: `files visited: 1489174`, `errors: 8899`, and the log's own **error kinds** block reads `7268 PermissionError` / `1629 FileNotFoundError`. **Correction to B.2:** that row says the log "carries only the 8,899 total". It does not - it carries the split. The split is now a primary read of the log rather than a carried 2026-11-01 derivation. The two unreadable accounts are named in the log body (`C:/Users/muse-sbx-r1`, `C:/Users/muse-sbx-u1`, both PermissionError). |
+| G3  | DECISION-READY     | Repo-scoped transcripts: **10 files, 3,789.0 KB** (read: PowerShell `Get-ChildItem -Recurse -File` + `Measure-Object -Sum Length`, 2026-11-08). Unchanged at the same file count as the 2026-11-06 record.                                                                                                                                                                                                                                                                                                                    |
+| G4  | DECISION-READY     | Showcase transcripts: **4 files, 62.6 KB** by actual byte sum (read: same method, 2026-11-08). The 76 KB in the prior rows is `du` disk-block rounding of the same 4 files; the byte sum is the honest figure and the file count is unchanged. Owner decision unchanged.                                                                                                                                                                                                                                                      |
+| G5  | DECISION-READY     | Machine-wide Claude root re-measured: **4,206 files, 741 MB** by actual byte sum (read: PowerShell recursive file count + sum, 2026-11-08); the prior 751 MB was `du` blocks. Out of this repo's scope; it exists so the ALL-CLEAR boundary is stated.                                                                                                                                                                                                                                                                        |
+| G6  | CLOSED             | Regenerability re-proven at this head, not carried: `node --test tests/audit-sim-fixture.test.mjs` **5/5 pass** in 5.0 s, including the determinism case (two runs, identical tip SHA) and the case that the pushed refs never contain a fabricated tip (read: the test run itself, 2026-11-08).                                                                                                                                                                                                                              |
+
+Six rows, six states, none unlabelled: **G6 CLOSED, G1-G5 DECISION-READY**,
+unchanged by this re-read. The re-read raised no push toward CLOSED because none of
+G1-G5 has a lane-curable step left: G1 and G2 need an owner decision or owner
+elevation, G3/G4 need an owner decision on out-of-repo durability, and G5 is outside
+this repo's scope by definition.
+
+### Discharged from section E
+
+- E's "does not re-measure the 751 MB machine-wide Claude root (G5)" is discharged
+  by the 2026-11-08 read above (741 MB by byte sum).
+- E's "does not re-walk the 8,899 unreadable entries (G2)" is **not** discharged:
+  the log was re-read, the entries themselves were not re-walked. That half stands.
+
+### ALL-CLEAR status after this re-read
+
+Still **NOT ISSUED**, and this section cannot issue it: it is the same producer
+writing a fresher read. The cure is unchanged - a non-author verdict on these six
+states (A-05 is open for exactly that).
