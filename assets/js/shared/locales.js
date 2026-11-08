@@ -98,6 +98,28 @@ export const LOCALES = {
       "Enter your monthly bill amount to see the daily energy estimate.",
     readoutKwhEmpty: "Enter a daily kWh figure.",
     readoutKwhReady: "Using {kwh} kWh/day directly.",
+    // -- Comprehension glosses (E13/V4): first-use plain words for the four
+    // jargon families a first-timer meets, the fit label on each preset, and the
+    // line above the result tabs. Keyed in every locale; nothing here is prose
+    // the translator has to guess at.
+    glossKwhDay:
+      "kWh/day means kilowatt-hours a day — the unit your power bill uses. A typical US home uses about 30.",
+    glossTier:
+      "The target is the share of the year you run without the grid: 99% leaves about a day a year on the generator, 100% never needs one.",
+    ladderIntro:
+      "Three views of one result: Best pick is the system we would build, Compare batteries puts the chemistries side by side, All options is the full table.",
+    includesNote:
+      "What the two costs include: the first cost buys hardware and install once; the 20-year figure also pays replacements, fuel and upkeep.",
+    presetWho: "Quick presets — pick who it is for:",
+    presetCabin: "Weekend cabin — lights, phone, small fridge",
+    presetVan: "Camper van — two people off-grid",
+    presetHome: "Standard home — the typical starting point",
+    presetHomestead: "Homestead — a family, all electric",
+    presetBackup: "Critical backup — essentials in an outage",
+    presetClear: "Clear all",
+    tierOption100: "100% — never see a generator",
+    tierOption99: "99% — generator about a day a year",
+    tierOption95: "95% — generator now and then",
     lvlBest: "Best pick",
     lvlCompare: "Compare batteries",
     lvlMatrix: "All options",
@@ -110,7 +132,8 @@ export const LOCALES = {
     simpleFirstCost: "First cost",
     simplePanels: "about {panels} panels",
     simpleKwhUsable: "{kwh} kWh usable",
-    simpleKwhInstalled: "about {kwh} kWh installed",
+    simpleKwhInstalled:
+      "about {kwh} kWh installed (nameplate size; usable is what you can draw)",
     simpleWhatItDoes: "What it does",
     simpleYearCovered: "{pct}% of the year covered",
     simpleBillCut: "cuts about {pct}% off your bill",
@@ -514,7 +537,7 @@ export const LOCALES = {
     verdictReserveNoBattery:
       "There is nothing to hold a reserve in: the cheapest system for this goal carries no battery at all.",
     verdictOffGrid:
-      "{pct}% of the year runs with no grid — {unmetHours} hours short in the worst year, {autonomy} days of autonomy.",
+      "{pct}% of the year runs with no grid — {unmetHours} hours short in the worst year, {autonomy} days of autonomy (how long the battery alone runs your essentials).",
     verdictPortable:
       "Your station runs a full day on {days} of {trips} days here, and one charge lasts {runtime} hours.",
     cityLabel: "Where is this system going?",
@@ -829,7 +852,7 @@ export const LOCALES = {
     verdictReserveNoBattery:
       "No hay nada donde guardar una reserva: el sistema más barato para este objetivo no lleva batería.",
     verdictOffGrid:
-      "El {pct}% del año funciona sin red, con {unmetHours} horas de déficit en el peor año y {autonomy} días de autonomía.",
+      "El {pct}% del año funciona sin red, con {unmetHours} horas de déficit en el peor año y {autonomy} días de autonomía (cuánto tiempo la batería sola mantiene lo esencial).",
     verdictPortable:
       "Tu estación alimenta tus dispositivos todo el día en {days} de {trips} días aquí, y una carga dura {runtime} horas.",
     cityLabel: "¿Dónde se instalará el sistema?",
@@ -854,6 +877,25 @@ export const LOCALES = {
     chemLabel: "Química de la batería:",
     tariffNote:
       "Precio estimado para {label} — cámbialo arriba si conoces tu tarifa.",
+    // -- Glosas de comprensión (E13/V4): palabras llanas en el primer uso.
+    glossKwhDay:
+      "kWh/día significa kilovatios-hora al día: la unidad de tu factura. Una casa típica de EE. UU. usa unos 30.",
+    glossTier:
+      "El objetivo es la parte del año sin red: el 99% deja un día al año con el generador, el 100% nunca lo necesita.",
+    ladderIntro:
+      "Tres vistas del mismo resultado: Mejor opción es el sistema que instalaríamos, Comparar baterías compara las químicas y Todas las opciones es la tabla completa.",
+    includesNote:
+      "Qué incluye cada costo: el primero paga equipo e instalación una vez; la cifra a 20 años también cubre reemplazos, combustible y mantenimiento.",
+    presetWho: "Ajustes rápidos: elige para quién es:",
+    presetCabin: "Cabaña de fin de semana: luces, teléfono, nevera pequeña",
+    presetVan: "Furgoneta camper: dos personas sin red",
+    presetHome: "Casa estándar: el punto de partida típico",
+    presetHomestead: "Finca: una familia, todo eléctrico",
+    presetBackup: "Respaldo crítico: lo esencial en un corte",
+    presetClear: "Borrar todo",
+    tierOption100: "100% — nunca ver un generador",
+    tierOption99: "99% — generador alrededor de un día al año",
+    tierOption95: "95% — generador de vez en cuando",
     lvlBest: "Mejor opción",
     lvlCompare: "Comparar baterías",
     lvlMatrix: "Todas las opciones",
@@ -866,7 +908,8 @@ export const LOCALES = {
     simpleFirstCost: "Coste inicial",
     simplePanels: "unos {panels} paneles",
     simpleKwhUsable: "{kwh} kWh utilizables",
-    simpleKwhInstalled: "unos {kwh} kWh instalados",
+    simpleKwhInstalled:
+      "unos {kwh} kWh instalados (tamaño de placa; lo utilizable es lo que puedes sacar)",
     simpleWhatItDoes: "Qué hace",
     simpleYearCovered: "{pct}% del año cubierto",
     simpleBillCut: "recorta cerca de un {pct}% de tu factura",
@@ -1489,7 +1532,7 @@ export const LOCALES = {
     verdictReserveNoBattery:
       "Não há onde guardar uma reserva: o sistema mais barato para esse objetivo não tem bateria nenhuma.",
     verdictOffGrid:
-      "{pct}% do ano funciona sem rede — faltam {unmetHours} horas no pior ano, com {autonomy} dias de autonomia.",
+      "{pct}% do ano funciona sem rede — faltam {unmetHours} horas no pior ano, com {autonomy} dias de autonomia (quanto tempo a bateria sozinha atende o essencial).",
     verdictPortable:
       "Sua estação alimenta seus aparelhos o dia todo em {days} de {trips} dias aqui, e uma carga dura {runtime} horas.",
     cityLabel: "Onde o sistema será instalado?",
@@ -1553,6 +1596,25 @@ export const LOCALES = {
       "A {tariff}/kWh, este uso custa cerca de {annual} por ano em energia da rede. Os valores de retorno abaixo comparam o custo do sistema com esse gasto.",
     tariffSpendFixed:
       " Isso inclui {fixed}/mês em encargos fixos que o solar não reduz.",
+    // -- Glosas de compreensão (E13/V4): palavras simples no primeiro uso.
+    glossKwhDay:
+      "kWh/dia significa quilowatts-hora por dia — a unidade da sua conta. Uma casa típica nos EUA usa cerca de 30.",
+    glossTier:
+      "A meta é a parte do ano sem rede: 99% deixa um dia por ano no gerador, 100% nunca precisa dele.",
+    ladderIntro:
+      "Três visões do mesmo resultado: Melhor escolha é o sistema que instalaríamos, Comparar baterias compara as químicas e Todas as opções é a tabela completa.",
+    includesNote:
+      "O que cada custo inclui: o primeiro paga equipamento e instalação uma vez; o valor de 20 anos também cobre substituições, combustível e manutenção.",
+    presetWho: "Predefinições rápidas — escolha para quem é:",
+    presetCabin: "Cabana de fim de semana — luzes, celular, geladeira pequena",
+    presetVan: "Van camper — duas pessoas sem rede",
+    presetHome: "Casa padrão — o ponto de partida típico",
+    presetHomestead: "Sítio — uma família, tudo elétrico",
+    presetBackup: "Backup crítico — o essencial numa queda",
+    presetClear: "Limpar tudo",
+    tierOption100: "100% — nunca ver um gerador",
+    tierOption99: "99% — gerador cerca de um dia por ano",
+    tierOption95: "95% — gerador de vez em quando",
     lvlBest: "Melhor escolha",
     lvlCompare: "Comparar baterias",
     lvlMatrix: "Todas as opções",
@@ -1565,7 +1627,8 @@ export const LOCALES = {
     simpleFirstCost: "Custo inicial",
     simplePanels: "cerca de {panels} painéis",
     simpleKwhUsable: "{kwh} kWh utilizáveis",
-    simpleKwhInstalled: "cerca de {kwh} kWh instalados",
+    simpleKwhInstalled:
+      "cerca de {kwh} kWh instalados (tamaño de placa; lo utilizável es lo que puedes usar)",
     simpleWhatItDoes: "O que faz",
     simpleYearCovered: "{pct}% do ano coberto",
     simpleBillCut: "reduz cerca de {pct}% da sua conta",
@@ -2175,7 +2238,7 @@ export const LOCALES = {
     verdictReserveNoBattery:
       "Il n'y a rien où garder une réserve : le système le moins cher pour cet objectif ne comporte aucune batterie.",
     verdictOffGrid:
-      "{pct}% de l'année fonctionne sans réseau — {unmetHours} heures manquantes la pire année, {autonomy} jours d'autonomie.",
+      "{pct}% de l'année fonctionne sans réseau — {unmetHours} heures manquantes la pire année, {autonomy} jours d'autonomie (combien de temps la batterie seule fait tourner l'essentiel).",
     verdictPortable:
       "Votre station alimente vos appareils toute la journée sur {days} jours sur {trips} ici, et une charge dure {runtime} heures.",
     cityLabel: "Où sera installé le système ?",
@@ -2243,6 +2306,25 @@ export const LOCALES = {
       "À {tariff}/kWh, cet usage coûte environ {annual} par an en électricité du réseau. Les délais de retour ci-dessous comparent le coût du système à cette dépense.",
     tariffSpendFixed:
       " Dont {fixed}/mois de charges fixes que le solaire ne réduit pas.",
+    // -- Gloses de compréhension (E13/V4) : des mots simples au premier usage.
+    glossKwhDay:
+      "kWh/jour, ce sont des kilowattheures par jour : l'unité de votre facture. Un foyer américain typique en utilise environ 30.",
+    glossTier:
+      "La cible est la part de l'année sans réseau : 99% laisse un jour par an sur le groupe, 100% n'en a jamais besoin.",
+    ladderIntro:
+      "Trois vues du même résultat : Meilleur choix est le système que nous installerions, Comparer les batteries compare les chimies, Toutes les options est le tableau complet.",
+    includesNote:
+      "Ce que chaque coût comprend : le premier paie le matériel et l'installation une fois ; le chiffre à 20 ans couvre aussi remplacements, carburant et entretien.",
+    presetWho: "Préréglages rapides — choisissez pour qui :",
+    presetCabin: "Cabane de week-end — lumières, téléphone, petit frigo",
+    presetVan: "Van aménagé — deux personnes hors réseau",
+    presetHome: "Maison standard — le point de départ typique",
+    presetHomestead: "Ferme — une famille, tout électrique",
+    presetBackup: "Secours critique — l'essentiel pendant une coupure",
+    presetClear: "Tout effacer",
+    tierOption100: "100% — jamais de groupe",
+    tierOption99: "99% — groupe environ un jour par an",
+    tierOption95: "95% — groupe de temps en temps",
     lvlBest: "Meilleur choix",
     lvlCompare: "Comparer les batteries",
     lvlMatrix: "Toutes les options",
@@ -2255,7 +2337,8 @@ export const LOCALES = {
     simpleFirstCost: "Coût initial",
     simplePanels: "environ {panels} panneaux",
     simpleKwhUsable: "{kwh} kWh utilisables",
-    simpleKwhInstalled: "environ {kwh} kWh installés",
+    simpleKwhInstalled:
+      "environ {kwh} kWh installés (taille nominale ; l'utilisable est ce que vous pouvez tirer)",
     simpleWhatItDoes: "Ce que cela fait",
     simpleYearCovered: "{pct} % de l'année couverte",
     simpleBillCut: "réduit d'environ {pct} % votre facture",
@@ -2920,7 +3003,7 @@ export const LOCALES = {
     verdictReserveNoBattery:
       "Es gibt nichts, worin eine Reserve stecken könnte: das billigste System für dieses Ziel hat gar keine Batterie.",
     verdictOffGrid:
-      "{pct}% des Jahres laufen ganz ohne Netz — {unmetHours} Stunden fehlen im schlechtesten Jahr, {autonomy} Tage Autonomie.",
+      "{pct}% des Jahres laufen ganz ohne Netz — {unmetHours} Stunden fehlen im schlechtesten Jahr, {autonomy} Tage Autonomie (wie lange die Batterie allein das Nötigste versorgt).",
     verdictPortable:
       "Deine Station versorgt deine Geräte hier an {days} von {trips} Tagen den ganzen Tag, und eine Ladung reicht {runtime} Stunden.",
     chemLabel: "Batteriechemie:",
@@ -2939,6 +3022,25 @@ export const LOCALES = {
     runBtn: "☀️ System dimensionieren (5-Jahres-Simulation)",
     langLabel: "Sprache",
     suggestTranslationFix: "Übersetzungskorrektur vorschlagen",
+    // -- Verständnis-Glossen (E13/V4): einfache Worte beim ersten Gebrauch.
+    glossKwhDay:
+      "kWh/Tag heißt Kilowattstunden pro Tag — die Einheit Ihrer Rechnung. Ein typischer US-Haushalt braucht etwa 30.",
+    glossTier:
+      "Das Ziel ist der Anteil des Jahres ohne Netz: 99% lässt einen Tag pro Jahr für den Generator, 100% braucht ihn nie.",
+    ladderIntro:
+      "Drei Ansichten eines Ergebnisses: Beste Wahl ist das System, das wir bauen würden, Batterien vergleichen stellt die Chemien nebeneinander, Alle Optionen ist die vollständige Tabelle.",
+    includesNote:
+      "Was die beiden Kosten enthalten: der erste Preis zahlt Hardware und Installation einmal; die 20-Jahres-Zahl deckt auch Ersatz, Brennstoff und Wartung.",
+    presetWho: "Schnellvorlagen — wählen Sie, für wen:",
+    presetCabin: "Wochenendhütte — Licht, Telefon, kleiner Kühlschrank",
+    presetVan: "Camper-Van — zwei Personen ohne Netz",
+    presetHome: "Standardhaus — der typische Ausgangspunkt",
+    presetHomestead: "Hof — eine Familie, alles elektrisch",
+    presetBackup: "Kritische Versorgung — das Nötigste bei Stromausfall",
+    presetClear: "Alles löschen",
+    tierOption100: "100% — nie ein Generator",
+    tierOption99: "99% — Generator etwa einen Tag pro Jahr",
+    tierOption95: "95% — Generator hin und wieder",
     lvlBest: "Beste Wahl",
     lvlCompare: "Batterien vergleichen",
     lvlMatrix: "Alle Optionen",
@@ -2951,7 +3053,8 @@ export const LOCALES = {
     simpleFirstCost: "Anfangskosten",
     simplePanels: "etwa {panels} Module",
     simpleKwhUsable: "{kwh} kWh nutzbar",
-    simpleKwhInstalled: "etwa {kwh} kWh installiert",
+    simpleKwhInstalled:
+      "etwa {kwh} kWh installiert (Nennkapazität; nutzbar ist, was Sie entnehmen können)",
     simpleWhatItDoes: "Was es bewirkt",
     simpleYearCovered: "{pct} % des Jahres abgedeckt",
     simpleBillCut: "senkt die Rechnung um etwa {pct} %",
@@ -3547,6 +3650,25 @@ export const LOCALES = {
       "Voer uw maandelijkse rekeningbedrag in om de dagelijkse energieschatting te zien.",
     readoutKwhEmpty: "Voer een dagelijks kWh-getal in.",
     readoutKwhReady: "{kwh} kWh/dag wordt direct gebruikt.",
+    // -- Begripsglossen (E13/V4): gewone woorden bij het eerste gebruik.
+    glossKwhDay:
+      "kWh/dag betekent kilowattuur per dag — de eenheid van je rekening. Een typisch Amerikaans huishouden gebruikt ongeveer 30.",
+    glossTier:
+      "Het doel is het deel van het jaar zonder net: 99% laat één dag per jaar op de generator, 100% heeft hem nooit nodig.",
+    ladderIntro:
+      "Drie weergaven van één resultaat: Beste keuze is het systeem dat we zouden bouwen, Batterijen vergelijken zet de chemieën naast elkaar, Alle opties is de volledige tabel.",
+    includesNote:
+      "Wat de twee kosten bevatten: de eerste prijs betaalt hardware en installatie één keer; het 20-jaarbedrag dekt ook vervanging, brandstof en onderhoud.",
+    presetWho: "Snelkeuzes — kies voor wie:",
+    presetCabin: "Weekendhuisje — licht, telefoon, kleine koelkast",
+    presetVan: "Camperbus — twee personen off-grid",
+    presetHome: "Standaardwoning — het typische startpunt",
+    presetHomestead: "Boerderij — een gezin, alles elektrisch",
+    presetBackup: "Kritieke back-up — het essentiële bij een storing",
+    presetClear: "Alles wissen",
+    tierOption100: "100% — nooit een generator",
+    tierOption99: "99% — generator ongeveer één dag per jaar",
+    tierOption95: "95% — generator af en toe",
     lvlBest: "Beste keuze",
     lvlCompare: "Accu's vergelijken",
     lvlMatrix: "Alle opties",
@@ -3559,7 +3681,8 @@ export const LOCALES = {
     simpleFirstCost: "Initiële kosten",
     simplePanels: "ongeveer {panels} panelen",
     simpleKwhUsable: "{kwh} kWh bruikbaar",
-    simpleKwhInstalled: "ongeveer {kwh} kWh geïnstalleerd",
+    simpleKwhInstalled:
+      "ongeveer {kwh} kWh geïnstalleerd (naamplaatwaarde; bruikbaar is wat je kunt gebruiken)",
     simpleWhatItDoes: "Wat het doet",
     simpleYearCovered: "{pct}% van het jaar gedekt",
     simpleBillCut: "verlaagt je rekening met ongeveer {pct}%",
@@ -3893,7 +4016,7 @@ export const LOCALES = {
     verdictReserveNoBattery:
       "Er is niets om een reserve in aan te houden: het goedkoopste systeem voor dit doel heeft helemaal geen accu.",
     verdictOffGrid:
-      "{pct}% van het jaar draait zonder net — {unmetHours} uur tekort in het slechtste jaar, {autonomy} dagen autonomie.",
+      "{pct}% van het jaar draait zonder net — {unmetHours} uur tekort in het slechtste jaar, {autonomy} dagen autonomie (hoe lang de batterij alleen het essentiële draait).",
     verdictPortable:
       "Uw station draait een volle dag op {days} van {trips} dagen hier, en één lading gaat {runtime} uur mee.",
     cityLabel: "Waar komt dit systeem?",
@@ -4353,7 +4476,7 @@ export const LOCALES = {
     verdictReserveNoBattery:
       "لا يوجد مكان للاحتفاظ بهامش: أرخص نظام لهذا الهدف لا يحمل بطارية إطلاقًا.",
     verdictOffGrid:
-      "{pct}% من السنة تعمل بلا شبكة — تنقص {unmetHours} ساعة في أسوأ عام، مع {autonomy} يومًا من الاستقلالية.",
+      "{pct}% من السنة تعمل بلا شبكة — تنقص {unmetHours} ساعة في أسوأ عام، مع {autonomy} يومًا من الاستقلالية (المدة التي تشغّل فيها البطارية وحدها الأساسيات).",
     verdictPortable:
       "تغذّي محطتك أجهزتك طوال اليوم في {days} يومًا من {trips} يومًا هنا، وشحنة واحدة تدوم {runtime} ساعة.",
     cityLabel: "أين سيُركَّب النظام؟",
@@ -4413,6 +4536,25 @@ export const LOCALES = {
       "بسعر {tariff}/كيلوواط/ساعة، يكلفك هذا الاستخدام حوالي {annual} سنويًا من كهرباء الشبكة. أرقام الاسترداد أدناه تقارن تكلفة النظام بهذا الإنفاق.",
     tariffSpendFixed:
       " ويشمل ذلك {fixed}/شهريًا في رسوم ثابتة لا تخفضها الطاقة الشمسية.",
+    // -- شروح الفهم (E13/V4): كلمات بسيطة عند أول استخدام.
+    glossKwhDay:
+      "كيلوواط ساعة/يوم تعني كيلوواط-ساعة في اليوم — وحدة فاتورتك. يستهلك منزل أمريكي نموذجي نحو 30.",
+    glossTier:
+      "الهدف هو حصة السنة دون شبكة: 99% تترك يومًا في السنة على المولد، و100% لا يحتاجه أبدًا.",
+    ladderIntro:
+      "ثلاثة عروض لنتيجة واحدة: الاختيار الأفضل هو النظام الذي سنبنيه، ومقارنة البطاريات تضع الكيمياءات جنبًا إلى جنب، وكل الخيارات هو الجدول الكامل.",
+    includesNote:
+      "ما تشمله التكلفتان: الأولى تدفع العتاد والتركيب مرة واحدة؛ ورقم العشرين سنة يغطي أيضًا الاستبدال والوقود والصيانة.",
+    presetWho: "إعدادات سريعة — اختر لمن:",
+    presetCabin: "كوخ نهاية الأسبوع — إضاءة وهاتف وثلاجة صغيرة",
+    presetVan: "فان تخييم — شخصان بلا شبكة",
+    presetHome: "منزل عادي — نقطة البداية المعتادة",
+    presetHomestead: "مزرعة — عائلة وكل شيء كهربائي",
+    presetBackup: "نسخة احتياطية حرجة — الأساسيات أثناء انقطاع",
+    presetClear: "مسح الكل",
+    tierOption100: "100% — دون مولد أبدًا",
+    tierOption99: "99% — المولد نحو يوم في السنة",
+    tierOption95: "95% — المولد من وقت لآخر",
     lvlBest: "الاختيار الأفضل",
     lvlCompare: "مقارنة البطاريات",
     lvlMatrix: "كل الخيارات",
@@ -4425,7 +4567,8 @@ export const LOCALES = {
     simpleFirstCost: "التكلفة الأولية",
     simplePanels: "حوالي {panels} لوحًا",
     simpleKwhUsable: "{kwh} كيلوواط ساعة قابلة للاستخدام",
-    simpleKwhInstalled: "حوالي {kwh} كيلوواط ساعة مركّبة",
+    simpleKwhInstalled:
+      "حوالي {kwh} كيلوواط ساعة مركّبة (سعة اللوحة؛ المتاح هو ما يمكنك سحبه)",
     simpleWhatItDoes: "ماذا يفعل",
     simpleYearCovered: "{pct}% من السنة مغطاة",
     simpleBillCut: "يقلّل فاتورتك بنحو {pct}%",

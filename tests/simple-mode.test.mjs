@@ -41,7 +41,10 @@ test("simple view: heroes carry the headline figures from the same entry", () =>
   assert.equal(byLabel["Solar"].value, "6.6 kW");
   assert.equal(byLabel["Solar"].sub, "about 12 panels");
   assert.equal(byLabel["Battery"].value, "13.4 kWh usable");
-  assert.equal(byLabel["Battery"].sub, "about 15.9 kWh installed");
+  assert.equal(
+    byLabel["Battery"].sub,
+    "about 15.9 kWh installed (nameplate size; usable is what you can draw)",
+  );
   assert.equal(byLabel["First cost"].value, "~$4200-$8100");
   assert.equal(byLabel["What it does"].value, "cuts about 80% off your bill");
   assert.equal(byLabel["Saved over 20 years"].value, "~$21000");

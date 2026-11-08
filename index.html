@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261107j" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261107j" />
+    <link rel="preload" href="./assets/site.css?v=20261108a" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261108a" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261107j" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261108a" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -1119,6 +1119,11 @@
                       I know my kWh/day (advanced)
                     </option>
                   </select>
+
+                  <p class="uc-note" data-i18n="glossKwhDay">
+                    kWh/day means kilowatt-hours a day — the unit your power
+                    bill uses. A typical US home uses about 30.
+                  </p>
                 </div>
 
                 <div class="form-group">
@@ -1301,42 +1306,58 @@
                         color: var(--text-muted);
                         margin-right: 0.2rem;
                       "
-                      >Quick Presets:</span
+                      data-i18n="presetWho"
+                      >Quick presets — pick who it is for:</span
                     >
                     <button
                       type="button"
                       class="btn btn-outline btn-xs preset-btn preset-button"
                       data-preset="cabin"
                     >
-                      &#127957;&#65039; Weekend Cabin
+                      🏕️
+                      <span data-i18n="presetCabin"
+                        >Weekend cabin — lights, phone, small fridge</span
+                      >
                     </button>
                     <button
                       type="button"
                       class="btn btn-outline btn-xs preset-btn preset-button"
                       data-preset="van"
                     >
-                      &#128656; Camper Van
+                      🚐
+                      <span data-i18n="presetVan"
+                        >Camper van — two people off-grid</span
+                      >
                     </button>
                     <button
                       type="button"
                       class="btn btn-outline btn-xs preset-btn preset-button"
                       data-preset="home"
                     >
-                      &#127969; Standard Home
+                      🏡
+                      <span data-i18n="presetHome"
+                        >Standard home — the typical starting point</span
+                      >
                     </button>
                     <button
                       type="button"
                       class="btn btn-outline btn-xs preset-btn preset-button"
                       data-preset="homestead"
                     >
-                      &#128668; Homestead
+                      🏤
+                      <span data-i18n="presetHomestead"
+                        >Homestead — a family, all electric</span
+                      >
                     </button>
                     <button
                       type="button"
                       class="btn btn-outline btn-xs preset-btn preset-button"
                       data-preset="backup"
                     >
-                      &#128268; Critical Backup
+                      🔌
+                      <span data-i18n="presetBackup"
+                        >Critical backup — essentials in an outage</span
+                      >
                     </button>
                     <button
                       type="button"
@@ -1348,7 +1369,7 @@
                         color: var(--text-muted);
                       "
                     >
-                      &#129529; Clear All
+                      🧹 <span data-i18n="presetClear">Clear all</span>
                     </button>
                   </div>
 
@@ -1839,18 +1860,24 @@
                   >
 
                   <select id="autoTier" class="form-control">
-                    <option value="tier100">
+                    <option value="tier100" data-i18n="tierOption100">
                       100% &mdash; never see a generator
                     </option>
 
-                    <option value="tier99" selected>
+                    <option value="tier99" selected data-i18n="tierOption99">
                       99% &mdash; generator about a day a year
                     </option>
 
-                    <option value="tier95">
+                    <option value="tier95" data-i18n="tierOption95">
                       95% &mdash; generator now and then
                     </option>
                   </select>
+
+                  <p class="uc-note" data-i18n="glossTier">
+                    The target is the share of the year you run without the
+                    grid: 99% leaves about a day a year on the generator, 100%
+                    never needs one.
+                  </p>
                 </div>
 
                 <div
@@ -2195,6 +2222,17 @@
                 <div id="useCaseOutcomeWrap" aria-live="polite"></div>
 
                 <div id="simpleResultsWrap" aria-live="polite"></div>
+
+                <p
+                  id="ladderIntro"
+                  class="uc-note"
+                  data-i18n="ladderIntro"
+                  hidden
+                >
+                  Three views of one result: Best pick is the system we would
+                  build, Compare batteries puts the chemistries side by side,
+                  All options is the full table.
+                </p>
 
                 <div
                   id="resultLadder"
@@ -3586,15 +3624,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261107j"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261108a"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261107j"
+      src="./assets/js/turnstile-client.js?v=20261108a"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261107j"></script>
+    <script defer src="./assets/js/chat.js?v=20261108a"></script>
   </body>
 </html>
 
