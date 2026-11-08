@@ -34,7 +34,12 @@ import {
   seedCountryFile,
   serialise,
 } from "../scripts/seed-registry-countries.mjs";
-import { REQUIRED_FIELDS, validateCountry } from "../scripts/lib/registry.mjs";
+import {
+  REQUIRED_FIELDS,
+  canEmbed,
+  latestReviewBy,
+  validateCountry,
+} from "../scripts/lib/registry.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SOURCES = JSON.parse(
@@ -152,6 +157,87 @@ test("SEEDED ROWS: every row validates against the registry schema", () => {
     errors.push(...validateCountry(code, doc, { sources: SOURCES }));
   }
   assert.deepEqual(errors, []);
+});
+
+// The eurozone rows are the first tariffs the registry actually cites. They are
+// held to the plan's citation rules rather than to the seeded shape, because the
+// risk is different: a seeded row can only be too silent, a cited row can be
+// wrong. So the number, its currency, its unit, its window and the fact it names
+// in its own note are all pinned.
+test("EUROSTAT ROWS: the cited tariffs are well-formed and belong to their country", () => {
+  const cited = countryFiles.filter((code) => {
+    const doc = JSON.parse(readCountry(code));
+    return doc.values?.tariff?.source === "eurostat_household_prices";
+  });
+  assert.equal(
+    cited.length,
+    20,
+    `expected the 20 euro-area rows, found ${cited.length}`,
+  );
+  assert.equal(canEmbed(SOURCES.eurostat_household_prices), true);
+  for (const code of cited) {
+    const doc = JSON.parse(readCountry(code));
+    const tariff = doc.values.tariff;
+    const where = `${code}.tariff`;
+    assert.equal(
+      tariff.grade,
+      "A",
+      `${where}: Eurostat is an official statistic`,
+    );
+    assert.equal(
+      tariff.unit,
+      "EUR/kWh",
+      `${where}: unit must carry its currency`,
+    );
+    assert.equal(
+      tariff.currency,
+      doc.values.currency.code,
+      `${where}: the price currency must be the country's own currency`,
+    );
+    assert.equal(
+      tariff.currency,
+      COUNTRY_CURRENCY[code],
+      `${where}: the price currency must match the shipped country table`,
+    );
+    assert.equal(
+      tariff.lo,
+      tariff.mid,
+      `${where}: a point statistic has no spread`,
+    );
+    assert.equal(
+      tariff.mid,
+      tariff.hi,
+      `${where}: a point statistic has no spread`,
+    );
+    assert.ok(
+      tariff.mid > 0 && tariff.mid < 2,
+      `${where}: ${tariff.mid} is not a plausible per-kWh price`,
+    );
+    assert.equal(
+      tariff.year,
+      2026,
+      `${where}: year must be the reference year`,
+    );
+    assert.ok(
+      tariff.review_by <= latestReviewBy("tariff", tariff.retrieved),
+      `${where}: review_by is past the 12-month window`,
+    );
+    assert.match(
+      tariff.note,
+      /nrg_pc_204/,
+      `${where}: the note must name the dataset`,
+    );
+    assert.match(
+      tariff.note,
+      /2500-4999/,
+      `${where}: the note must name the consumption band`,
+    );
+    assert.match(
+      tariff.note,
+      /2026-S1/,
+      `${where}: the note must name the reference period`,
+    );
+  }
 });
 
 test("CURATED ROWS: the seeder never overwrites a cited file", () => {

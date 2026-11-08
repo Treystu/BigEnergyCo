@@ -103,6 +103,18 @@
       "basis": "\"Freely downloadable\" is a reading permission, not a redistribution licence. Values taken from the report are linked for the visitor to check rather than embedded.",
       "v09_status": "PENDING EVALUATION",
       "v09_evaluated": false
+    },
+    "eurostat_household_prices": {
+      "publisher": "Eurostat, European Commission",
+      "title": "Household electricity prices by consumption band - nrg_pc_204 (half-yearly)",
+      "url": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table",
+      "license": "European Commission reuse policy: reuse authorised provided the source is acknowledged",
+      "as_of": "2026-11-08",
+      "redistribution": "permitted",
+      "basis": "Read at Eurostat's copyright notice on 2026-11-08, which authorises reuse of statistical data for commercial or non-commercial purposes 'provided the source is acknowledged', implemented by Commission Decision of 12 December 2011; editorial content there is CC BY 4.0. No non-commercial or no-derivatives term appears, so the value may be embedded, and every row's note names the dataset, the consumption band, the reference period and the read date.",
+      "verified_url": "https://ec.europa.eu/eurostat/web/main/help/copyright-notice",
+      "v09_status": "APPROVED",
+      "v09_evaluated": false
     }
   }
 }

@@ -1,0 +1,54 @@
+{
+  "read": "Eurostat household electricity prices, cited into the registry (P2.3)",
+  "read_at": "2026-11-08T12:2xZ",
+  "dataset": {
+    "code": "nrg_pc_204",
+    "title": "Electricity prices for household consumers - bi-annual data (from 2007 onwards)",
+    "api": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_pc_204",
+    "databrowser": "https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table",
+    "dataset_updated": "2026-10-19T23:00:00+0200"
+  },
+  "query": {
+    "freq": "S",
+    "siec": "E7000",
+    "nrg_cons": "KWH2500-4999",
+    "unit": "KWH",
+    "tax": "I_TAX",
+    "currency": "EUR",
+    "time": "2026-S1"
+  },
+  "why_this_slice": "Household band 2500-4999 kWh/year is the closest published band to the domestic bills this calculator starts from, I_TAX is the price a household actually pays, and currency EUR makes the figure native rather than converted for the countries cited here. Non-euro EU members are deliberately NOT cited from this dataset: their Eurostat figure is published in EUR, and embedding it against a local-currency row would be a conversion without an exchange rate this project has not verified (V-07 is open).",
+  "verification": "The values were read twice: once by extracting the full JSON-stat response with explicit stride arithmetic, and once by re-querying the API with every dimension filtered server-side so each country returns exactly one value. The two reads agree, which is what rules out a mis-indexed extraction.",
+  "licence": {
+    "url": "https://ec.europa.eu/eurostat/web/main/help/copyright-notice",
+    "read_at": "2026-11-08",
+    "finding": "Reuse of statistical data for commercial or non-commercial purposes is authorised provided the source is acknowledged (Commission Decision of 12 December 2011); editorial content is CC BY 4.0. No non-commercial or no-derivatives term appears, so the values are embeddable under R-DATA-04, and each row's note acknowledges the source."
+  },
+  "values_eur_per_kwh": {
+    "AT": { "I_TAX": 0.326, "X_TAX": 0.2481 },
+    "BE": { "I_TAX": 0.3575, "X_TAX": 0.2783 },
+    "HR": { "I_TAX": 0.1816, "X_TAX": 0.1474 },
+    "CY": { "I_TAX": 0.2688, "X_TAX": 0.195 },
+    "EE": { "I_TAX": 0.2118, "X_TAX": 0.1512 },
+    "FI": { "I_TAX": 0.2694, "X_TAX": 0.1919 },
+    "FR": { "I_TAX": 0.2485, "X_TAX": 0.1726 },
+    "DE": { "I_TAX": 0.3618, "X_TAX": 0.2388 },
+    "GR": { "I_TAX": 0.2401, "X_TAX": 0.1967 },
+    "IE": { "I_TAX": 0.3871, "X_TAX": 0.3506 },
+    "IT": { "I_TAX": 0.3142, "X_TAX": 0.2356 },
+    "LV": { "I_TAX": 0.2415, "X_TAX": 0.1991 },
+    "LT": { "I_TAX": 0.2162, "X_TAX": 0.179 },
+    "LU": { "I_TAX": 0.2023, "X_TAX": 0.1873 },
+    "MT": { "I_TAX": 0.1268, "X_TAX": 0.1193 },
+    "NL": { "I_TAX": 0.244, "X_TAX": 0.2681 },
+    "PT": { "I_TAX": 0.2367, "X_TAX": 0.1576 },
+    "SK": { "I_TAX": 0.1985, "X_TAX": 0.1385 },
+    "SI": { "I_TAX": 0.2118, "X_TAX": 0.1625 },
+    "ES": { "I_TAX": 0.2509, "X_TAX": 0.1782 }
+  },
+  "observed_and_not_used": [
+    "NL reports I_TAX (0.244) below X_TAX (0.2681). That is Eurostat's own figure, not an extraction slip - the filtered re-query returns the same pair - and it is consistent with a tax credit that can leave the tax-inclusive price below the tax-exclusive one. Recorded here because it looks like an error and the next reader should not have to re-derive that conclusion.",
+    "Eurostat geo uses EL for Greece; the registry row is GR, so the code is mapped rather than copied.",
+    "Bulgaria (BG) was NOT cited: the API still publishes a BG series in EUR, but whether Bulgaria's own currency is BGN or EUR in this period is a separate question this read does not settle. See the lane status for the open question."
+  ]
+}

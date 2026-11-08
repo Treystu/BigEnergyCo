@@ -10,9 +10,17 @@
       "review_by": "2027-11-08"
     },
     "tariff": {
-      "unknown": true,
-      "note": "No verified retail tariff for DE yet; an explicit unknown (R-DATA-02) rather than a guess.",
-      "review_by": "2027-11-08"
+      "lo": 0.3618,
+      "mid": 0.3618,
+      "hi": 0.3618,
+      "unit": "EUR/kWh",
+      "currency": "EUR",
+      "year": 2026,
+      "grade": "A",
+      "source": "eurostat_household_prices",
+      "retrieved": "2026-11-08",
+      "review_by": "2027-05-08",
+      "note": "Eurostat nrg_pc_204, household consumption band 2500-4999 kWh/year, all taxes included, reference period 2026-S1 (dataset updated 2026-10-19), read at the Eurostat API on 2026-11-08. A published point statistic, so lo, mid and hi are the same number rather than a spread invented around it. Half-yearly series with a 6-month review: the next release is the trigger, not a guess."
     },
     "fixed_charge": {
       "unknown": true,
