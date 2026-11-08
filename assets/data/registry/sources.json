@@ -115,6 +115,18 @@
       "verified_url": "https://ec.europa.eu/eurostat/web/main/help/copyright-notice",
       "v09_status": "APPROVED",
       "v09_evaluated": false
+    },
+    "ure_household_avg": {
+      "publisher": "President of the Energy Regulatory Office of Poland (URE)",
+      "title": "Information 15/2026 - 2025 average household electricity price",
+      "url": "https://bip.ure.gov.pl/download/3/20633/InformacjaPURE152026.pdf",
+      "license": "Polish public-sector information reuse under the Open Data and Reuse of Public Sector Information Act; URE BIP attribution conditions",
+      "as_of": "2026-11-08",
+      "redistribution": "permitted",
+      "basis": "URE's BIP reuse page grants the right to reuse public-sector information published in its BIP and requires naming the source, retrieval date, and whether/how the information was processed. The embedded material is one numeric fact from Information 15/2026, not the document's expression; the country-row note names the source, date, unit, year, tax treatment, and that the point value is repeated into lo/mid/hi without a derived range. No non-commercial or no-derivatives restriction is stated.",
+      "verified_url": "https://bip.ure.gov.pl/bip/informacja-publiczna/1061,Ponowne-wykorzystywanie-informacji-sektora-publicznego.html",
+      "v09_status": "PENDING EVALUATION",
+      "v09_evaluated": false
     }
   }
 }

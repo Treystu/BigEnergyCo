@@ -1,0 +1,28 @@
+{
+  "read": "Poland household electricity price, cited into the registry under P2.3",
+  "read_at": "2026-11-08T15:34:19Z",
+  "primary_source": {
+    "publisher": "President of the Energy Regulatory Office of Poland (URE)",
+    "document": "Information 15/2026",
+    "url": "https://bip.ure.gov.pl/download/3/20633/InformacjaPURE152026.pdf",
+    "issued": "2026-03-26",
+    "finding": "The 2025 average household electricity price, based on comprehensive contracts and including the distribution service, was 0.9198 PLN/kWh. Footnote: the price includes excise and excludes VAT."
+  },
+  "cross_check": {
+    "url": "https://www.ure.gov.pl/pl/energia-elektryczna/ceny-wskazniki/7853,Srednia-cena-energii-elektrycznej-dla-gospodarstw-domowych.html",
+    "finding": "URE's annual table lists 2025 as 0.9198 PLN/kWh and states that the price includes excise and excludes VAT."
+  },
+  "reuse": {
+    "terms_url": "https://bip.ure.gov.pl/bip/informacja-publiczna/1061,Ponowne-wykorzystywanie-informacji-sektora-publicznego.html",
+    "read_at": "2026-11-08",
+    "finding": "URE BIP states that public-sector information published in its BIP may be reused. It requires identifying the source and retrieval time, and declaring whether and how the information was processed. This artifact records the retrieved statistic and transformations; the row note names URE, its report, year, units, tax scope, retrieval date, and repeated point value."
+  },
+  "transformation": {
+    "published_value": "0,9198 zł/kWh",
+    "registry_value": 0.9198,
+    "unit": "PLN/kWh",
+    "year": 2025,
+    "reason": "Decimal comma normalized to JSON decimal notation. As the source publishes a single aggregate point, lo, mid, and hi are all the published value; no spread or VAT adjustment is inferred."
+  },
+  "classification": "National average household comprehensive-contract price including distribution, excise included and VAT excluded; it is not a current individual supplier offer."
+}

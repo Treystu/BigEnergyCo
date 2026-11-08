@@ -10,9 +10,17 @@
       "review_by": "2027-11-08"
     },
     "tariff": {
-      "unknown": true,
-      "note": "No verified retail tariff for PL yet; an explicit unknown (R-DATA-02) rather than a guess.",
-      "review_by": "2027-11-08"
+      "lo": 0.9198,
+      "mid": 0.9198,
+      "hi": 0.9198,
+      "unit": "PLN/kWh",
+      "currency": "PLN",
+      "year": 2025,
+      "grade": "A",
+      "source": "ure_household_avg",
+      "retrieved": "2026-11-08",
+      "review_by": "2027-11-08",
+      "note": "URE Information 15/2026 reports the 2025 average household electricity price from comprehensive contracts, including distribution: 0.9198 PLN/kWh. It includes excise and excludes VAT. Read at the URE BIP PDF on 2026-11-08 and cross-checked against URE's annual price table. This is a published point statistic, not a current supplier offer; lo, mid and hi repeat the published value without inventing a spread."
     },
     "fixed_charge": {
       "unknown": true,
