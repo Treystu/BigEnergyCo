@@ -161,8 +161,11 @@ if (EMIT_DIR) {
 }
 
 // Coverage against the place data the site already ships: a country the visitor
-// can pick but the registry cannot describe is a visible gap, reported here so
-// P2.3 has a worklist rather than a surprise.
+// can pick but the registry cannot describe is a visible gap. Until P2.3 this
+// was printed as a worklist and the gate still exited 0, which is how 219 of 220
+// resolvable countries sat without a row - the gate could see the hole and pass.
+// The worklist is now closed, so the hole fails instead, and the message names
+// the seeder that fills it.
 const cityDataDir = join(ROOT, "assets", "js", "sizing", "city-data");
 let placeCodes = [];
 try {
@@ -188,7 +191,12 @@ console.log(
     `${regionRows} sub-national region(s), ${covered}/${placeCodes.length} place-data countries covered as of ${today}`,
 );
 if (missing.length) {
-  console.log(
-    `registry coverage: ${missing.length} place-data countries have no registry file yet (P2.3 worklist): ${missing.slice(0, 12).join(" ")}${missing.length > 12 ? " ..." : ""}`,
+  console.error(
+    `FAIL ${missing.length} place-data country(ies) have no registry row (R-DATA-02, P2.3): ` +
+      `${missing.slice(0, 12).join(" ")}${missing.length > 12 ? " ..." : ""}`,
   );
+  console.error(
+    "  fix: node scripts/seed-registry-countries.mjs --write, then cite the values you have read",
+  );
+  process.exit(1);
 }

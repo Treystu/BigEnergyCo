@@ -64,15 +64,15 @@ Max:      Autonomy ~0.9 days (+0.4 d)
 
 ## Checks run at `a1e94e86`
 
-| Check                                   | Result                                                                                       |
-| --------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `npm test`                              | 2100/2105; the 5 failures are the value-moment copy pins, identical on a pristine `git archive HEAD` checkout, so they are pre-existing lane reds, not this change |
-| `node scripts/check-i18n.mjs`           | I18N OK — 549 keys across 7 locales, placeholder parity, unkeyed prose still 376/485         |
-| `node scripts/check-format.mjs`         | OK, 1149 tracked files                                                                        |
-| `node scripts/check-chars.mjs`          | OK, stamps `20261108d` across graph and page                                                  |
-| `node scripts/bump-asset-tokens.mjs --check` | OK after the commit (61 referenced assets verified against the stamp commit)              |
-| `node scripts/check-byte-budgets.mjs`   | `js_to_first_result` 202.8 → 203.5 KB, over its 200.0 KB limit: reported, non-blocking per P6/P8 |
-| Browser drive (local stage, loopback)   | Both defects verified fixed in the rendered page; no console messages                         |
+| Check                                        | Result                                                                                                                                                             |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm test`                                   | 2100/2105; the 5 failures are the value-moment copy pins, identical on a pristine `git archive HEAD` checkout, so they are pre-existing lane reds, not this change |
+| `node scripts/check-i18n.mjs`                | I18N OK — 549 keys across 7 locales, placeholder parity, unkeyed prose still 376/485                                                                               |
+| `node scripts/check-format.mjs`              | OK, 1149 tracked files                                                                                                                                             |
+| `node scripts/check-chars.mjs`               | OK, stamps `20261108d` across graph and page                                                                                                                       |
+| `node scripts/bump-asset-tokens.mjs --check` | OK after the commit (61 referenced assets verified against the stamp commit)                                                                                       |
+| `node scripts/check-byte-budgets.mjs`        | `js_to_first_result` 202.8 → 203.5 KB, over its 200.0 KB limit: reported, non-blocking per P6/P8                                                                   |
+| Browser drive (local stage, loopback)        | Both defects verified fixed in the rendered page; no console messages                                                                                              |
 
 No deployment, production change, promotion, credential change, or
 billing-locked CI rerun was attempted.
