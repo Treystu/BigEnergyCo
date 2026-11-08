@@ -12,10 +12,16 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-const HTML = readFileSync("index.html", "utf8");
-const UI = readFileSync("assets/js/sizing/ui.js", "utf8");
-const CSS = readFileSync("assets/site.css", "utf8");
-const LOCALES = readFileSync("assets/js/shared/locales.js", "utf8");
+// Line endings are normalised at read time: the patterns below anchor on `\n`,
+// and a Windows checkout with core.autocrlf leaves `\r\n`, which made the
+// multi-line locale pattern miss and reported a false regression. Under CI's LF
+// checkout the replace is a no-op.
+const lf = (p) => readFileSync(p, "utf8").replace(/\r\n/g, "\n");
+
+const HTML = lf("index.html");
+const UI = lf("assets/js/sizing/ui.js");
+const CSS = lf("assets/site.css");
+const LOCALES = lf("assets/js/shared/locales.js");
 
 const LOCALE_IDS = ["en", "es", "pt", "fr", "de", "nl", "ar"];
 

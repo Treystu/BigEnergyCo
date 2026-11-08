@@ -66,6 +66,21 @@ const seeded = countryFiles.filter((code) => {
   return doc.values?.tariff?.unknown === true;
 });
 
+// Cited rows are not all Eurostat: US carries an EIA retail price and PL an URE
+// published average. A cited row is any row that named a tariff source instead
+// of declaring the tariff unknown. A row that is neither seeded-unknown nor
+// cited has had nothing decided about it, which is what the accounting test is
+// there to catch.
+const otherCited = countryFiles.filter((code) => {
+  const tariff = JSON.parse(readCountry(code)).values?.tariff;
+  return (
+    tariff?.unknown !== true &&
+    typeof tariff?.source === "string" &&
+    tariff.source.length > 0 &&
+    tariff.source !== "eurostat_household_prices"
+  );
+});
+
 test("COVERAGE: every country the calculator can resolve has a registry row", () => {
   assert.deepEqual(missingCountries(), []);
   assert.equal(
@@ -92,16 +107,15 @@ test("COVERAGE: a resolvable country's row is never a name-only placeholder", ()
 });
 
 test("SEEDED ROWS: deterministic output of the committed seeder", () => {
-  // Every country row is accounted for: US is curated, 21 carry a Eurostat
-  // citation, and the rest are the seeder's unknowns. A row that is neither is a
-  // row nobody has decided anything about, which is how the 219 missing files
-  // happened in the first place.
+  // Every country row is accounted for: 21 carry a Eurostat citation, US and PL
+  // carry a national-source citation, and the rest are the seeder's unknowns. A
+  // row that is none of those is a row nobody has decided anything about, which
+  // is how the 219 missing files happened in the first place. The non-Eurostat
+  // cited rows are named in the message so a citation cannot slip in unrecorded.
   assert.equal(
-    seeded.length + eurostatCited.length + 1,
+    seeded.length + eurostatCited.length + otherCited.length,
     countryFiles.length,
-    `${countryFiles.length} country files: ${seeded.length} seeded + ${eurostatCited.length} cited + US = ${
-      seeded.length + eurostatCited.length + 1
-    }`,
+    `${countryFiles.length} country files: ${seeded.length} seeded + ${eurostatCited.length} Eurostat-cited + ${otherCited.length} other-cited (${otherCited.join(", ") || "none"})`,
   );
   assert.ok(
     seeded.length >= 190,
