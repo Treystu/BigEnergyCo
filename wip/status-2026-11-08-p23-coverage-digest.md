@@ -1,8 +1,9 @@
 # Session digest — 2026-11-08, lane continuation hour (P2.3 structural half)
 
-Read time 2026-11-08T11:59Z. Lane `lane/finish`, standing draft PR #330, tracker
-#145. Session opened at `d73965b3` (verified equal to `origin/lane/finish`,
-working tree clean). Staging only: no deploy, no promotion, no production change,
+Read time 2026-11-08T11:59Z, updated 12:58Z. Lane `lane/finish`, standing draft
+PR #330, tracker #145. Session opened at `d73965b3` (verified equal to
+`origin/lane/finish`, working tree clean); final head for this digest is
+`f4671746`. Staging only: no deploy, no promotion, no production change,
 no billing-locked CI rerun, no deletions, #328 untouched.
 
 ## 1. Preservation six — re-read, live state
@@ -80,6 +81,38 @@ figure is a structural fact, not a data claim.
 
 Ledger: a `note` row for P2.3's structural half and a `P0.4` `baseline` row for
 the E13 basis copy (207,717 → 208,363 B JS, +646), both at `a821903e`.
+
+## 4b. DONE, second increment — the first cited prices outside the US (P2.3 tariff half, slice 1)
+
+- **Source read at the provider, licence read at the provider.** Eurostat
+  `nrg_pc_204`, household band 2500–4999 kWh/year, all taxes included, reference
+  period 2026-S1 (dataset updated 2026-10-19), read at the API on 2026-11-08;
+  reuse authorised for commercial or non-commercial use with acknowledgement
+  (read at Eurostat's own copyright notice the same day), so embeddable under
+  R-DATA-04.
+- **Two independent reads that agree.** A full JSON-stat extraction with stride
+  arithmetic, then a re-query with every dimension filtered server-side so each
+  country returns exactly one value. Agreement is what rules out a mis-indexed
+  extraction; the first read alone would not.
+- **21 rows cited at grade A** — the 20 euro-area members plus BG, whose euro
+  membership was verified at the ECB press release of 2026-01-01, the
+  Commission's "Bulgaria and the euro" page and the Council decision of
+  2025-07-08, because a price in EUR is only _native_ once the country uses the
+  euro. Non-euro EU members are deliberately not cited from this dataset: their
+  Eurostat figure is in EUR and converting it needs a rate V-07 has not verified.
+- **Tests:** the seventh test pins that each cited row is grade A, carries the
+  country's own currency, keeps `lo = mid = hi`, sits inside the 12-month
+  window, and names dataset, band and period in its own note; a new assertion
+  also proves every country file is either curated, cited, or a seeder unknown —
+  no row is left undecided.
+- **Not implied:** 199 of 220 rows still carry an explicit unknown tariff.
+- **Recorded anomaly, not smoothed:** NL reports a tax-inclusive price below its
+  tax-exclusive one. The filtered re-query reproduces it, so it is Eurostat's
+  figure, not an extraction slip.
+- **Gate slip, named:** the receipt file was committed (b4b796e7) with a doubled
+  quote from a string edit, so it was not valid JSON and `check-format` failed on
+  the next read. Caught by the gate, fixed forward at b19168e5 rather than
+  rewritten, and recorded here instead of being quietened.
 
 ## 5. NEXT, with the blockers named rather than skipped silently
 
