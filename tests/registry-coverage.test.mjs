@@ -55,6 +55,12 @@ const countryFiles = readdirSync(REGISTRY_DIR)
   .map((f) => f.slice(0, -5))
   .sort();
 
+const eurostatCited = countryFiles.filter(
+  (code) =>
+    JSON.parse(readCountry(code)).values?.tariff?.source ===
+    "eurostat_household_prices",
+);
+
 const seeded = countryFiles.filter((code) => {
   const doc = JSON.parse(readCountry(code));
   return doc.values?.tariff?.unknown === true;
@@ -86,8 +92,19 @@ test("COVERAGE: a resolvable country's row is never a name-only placeholder", ()
 });
 
 test("SEEDED ROWS: deterministic output of the committed seeder", () => {
+  // Every country row is accounted for: US is curated, 21 carry a Eurostat
+  // citation, and the rest are the seeder's unknowns. A row that is neither is a
+  // row nobody has decided anything about, which is how the 219 missing files
+  // happened in the first place.
+  assert.equal(
+    seeded.length + eurostatCited.length + 1,
+    countryFiles.length,
+    `${countryFiles.length} country files: ${seeded.length} seeded + ${eurostatCited.length} cited + US = ${
+      seeded.length + eurostatCited.length + 1
+    }`,
+  );
   assert.ok(
-    seeded.length >= 200,
+    seeded.length >= 190,
     `expected the seeded rows, found ${seeded.length}`,
   );
   for (const code of seeded) {
@@ -165,14 +182,11 @@ test("SEEDED ROWS: every row validates against the registry schema", () => {
 // wrong. So the number, its currency, its unit, its window and the fact it names
 // in its own note are all pinned.
 test("EUROSTAT ROWS: the cited tariffs are well-formed and belong to their country", () => {
-  const cited = countryFiles.filter((code) => {
-    const doc = JSON.parse(readCountry(code));
-    return doc.values?.tariff?.source === "eurostat_household_prices";
-  });
+  const cited = eurostatCited;
   assert.equal(
     cited.length,
-    20,
-    `expected the 20 euro-area rows, found ${cited.length}`,
+    21,
+    `expected the 21 euro-area rows, found ${cited.length}`,
   );
   assert.equal(canEmbed(SOURCES.eurostat_household_prices), true);
   for (const code of cited) {

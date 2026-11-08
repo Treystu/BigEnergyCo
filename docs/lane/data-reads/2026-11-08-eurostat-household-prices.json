@@ -27,6 +27,7 @@
   "values_eur_per_kwh": {
     "AT": { "I_TAX": 0.326, "X_TAX": 0.2481 },
     "BE": { "I_TAX": 0.3575, "X_TAX": 0.2783 },
+    "BG": { "I_TAX": 0.1355, "X_TAX": 0.1041 },
     "HR": { "I_TAX": 0.1816, "X_TAX": 0.1474 },
     "CY": { "I_TAX": 0.2688, "X_TAX": 0.195 },
     "EE": { "I_TAX": 0.2118, "X_TAX": 0.1512 },
@@ -49,6 +50,6 @@
   "observed_and_not_used": [
     "NL reports I_TAX (0.244) below X_TAX (0.2681). That is Eurostat's own figure, not an extraction slip - the filtered re-query returns the same pair - and it is consistent with a tax credit that can leave the tax-inclusive price below the tax-exclusive one. Recorded here because it looks like an error and the next reader should not have to re-derive that conclusion.",
     "Eurostat geo uses EL for Greece; the registry row is GR, so the code is mapped rather than copied.",
-    "Bulgaria (BG) was NOT cited: the API still publishes a BG series in EUR, but whether Bulgaria's own currency is BGN or EUR in this period is a separate question this read does not settle. See the lane status for the open question."
+    "Bulgaria (BG) was first held back from this slice: the API publishes a BG series in EUR, but a price cited in EUR is only NATIVE once the country uses the euro, and euro membership is not something a price dataset settles. It was then verified and cited: Bulgaria adopted the euro on 1 January 2026 and became the 21st euro-area member (read: ECB press release of 2026-01-01, the European Commission's 'Bulgaria and the euro' page, and the Council decision of 2025-07-08 that set the irrevocable rate at 1.95583 BGN per EUR). The shipped COUNTRY_CURRENCY table already says EUR for BG, so the two agree - checked rather than assumed.""
   ]
 }
