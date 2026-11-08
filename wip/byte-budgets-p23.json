@@ -414,8 +414,6 @@
     "line 52: a baseline row (P0.4) carries no numeric metrics, so it sets no bar",
     "line 72: a baseline row (P0.4) carries no numeric metrics, so it sets no bar"
   ],
-  "facet_axes": [
-    "quality"
-  ],
+  "facet_axes": ["quality"],
   "facet_line": "plan §3.1 shipped bytes, staged: 1/9 REGRESSED — js_to_first_result. It grew: not the smallest version that keeps the proven behavior."
 }
