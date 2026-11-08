@@ -3,7 +3,7 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261108b";
+import { HOME_COPY } from "./home-copy.js?v=20261108d";
 
 export const LOCALES = {
   en: {
@@ -491,6 +491,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "A power station for a van, a boat or a campsite. No roof, no grid, no tariff.",
     metricBillCut: "of your bill removed over 20 years",
+    metricBillCutReserve:
+      "of your bill removed over 20 years, with {pct}% of the battery kept in reserve",
     metricTouOffset: "of your peak-window energy run by the battery",
     metricOutageCoverage:
       "of power cuts your essentials ride out for the full target",
@@ -809,6 +811,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Una estación de energía para furgoneta, barco o campamento. Sin tejado, sin red, sin tarifa.",
     metricBillCut: "de tu factura eliminada en 20 años",
+    metricBillCutReserve:
+      "de tu factura eliminada en 20 años, con el {pct}% de la batería en reserva",
     metricTouOffset: "de tu energía en horas punta cubierta por la batería",
     metricOutageCoverage:
       "de los apagones que lo esencial aguanta el tiempo completo",
@@ -1489,6 +1493,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Uma estação de energia para van, barco ou acampamento. Sem telhado, sem rede, sem tarifa.",
     metricBillCut: "da sua conta eliminada em 20 anos",
+    metricBillCutReserve:
+      "da sua conta eliminada em 20 anos, com {pct}% da bateria em reserva",
     metricTouOffset: "da sua energia nas horas de pico coberta pela bateria",
     metricOutageCoverage:
       "dos apagões que o essencial atravessa pelo tempo todo",
@@ -2192,6 +2198,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Une station d'énergie pour un van, un bateau ou un camp-site. Pas de toit, pas de réseau, pas de tarif.",
     metricBillCut: "de votre facture supprimée sur 20 ans",
+    metricBillCutReserve:
+      "de votre facture supprimée sur 20 ans, avec {pct}% de la batterie gardés en réserve",
     metricTouOffset:
       "de votre énergie en heures pleines couverte par la batterie",
     metricOutageCoverage:
@@ -2960,6 +2968,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Eine Stromstation für Wohnmobil, Boot oder Campingplatz. Kein Dach, kein Netz, kein Tarif.",
     metricBillCut: "deiner Rechnung, über 20 Jahre eingespart",
+    metricBillCutReserve:
+      "deiner Rechnung, über 20 Jahre eingespart, mit {pct}% der Batterie als Reserve",
     metricTouOffset:
       "deiner Energie in den Spitzenstunden, die die Batterie deckt",
     metricOutageCoverage:
@@ -3976,6 +3986,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Een powerstation voor een bus, een boot of een kampeerplek. Geen dak, geen net, geen tarief.",
     metricBillCut: "van uw rekening weggenomen over 20 jaar",
+    metricBillCutReserve:
+      "van uw rekening weggenomen over 20 jaar, met {pct}% van de accu als reserve",
     metricTouOffset: "van uw piekuren-energie door de accu geleverd",
     metricOutageCoverage:
       "van de stroomuitvallen die uw essentiële apparaten volledig doorstaan",
@@ -4435,6 +4447,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "محطة طاقة لشاحنة أو قارب أو مخيم. بلا سطح، بلا شبكة، بلا تعرفة.",
     metricBillCut: "من فاتورتك يزيلها النظام على مدى 20 عامًا",
+    metricBillCutReserve:
+      "من فاتورتك يزيلها النظام على مدى 20 عامًا، مع إبقاء {pct}% من البطارية احتياطيًا",
     metricTouOffset: "من طاقتك في ساعات الذروة تغطيها البطارية",
     metricOutageCoverage:
       "من انقطاعات الكهرباء التي تصمد الأساسيات خلالها طوال المدة المطلوبة",

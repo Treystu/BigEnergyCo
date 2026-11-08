@@ -557,19 +557,47 @@ test("All Options: strictly excludes AGM, compares capacity tiers relative to ba
   assert.match(uiJs, /label:\s*"High Resilience"/);
   assert.match(uiJs, /label:\s*"Maximum Independence"/);
 
-  // Verify delta calculation format
-  const fmtDelta = (val, prefix = "$") => {
-    if (Math.abs(val) < 1) return "Baseline";
-    return val > 0
-      ? `+${prefix}${Math.round(val).toLocaleString()}`
-      : `\u2212${prefix}${Math.abs(Math.round(val)).toLocaleString()}`;
+  // Verify delta calculation format. The baseline card used to render
+  // "(Baseline kW)" / "(Baseline kWh)" because a zero delta returned the bare
+  // word "Baseline" and the row appended its own unit. A zero delta now says
+  // nothing, and the unit travels inside the helper.
+  assert.match(
+    uiJs,
+    /const deltaSuffix = \(val, unit = "", prefix = "", digits = 0\)/,
+  );
+  assert.ok(
+    !/\(\$\{fmtDelta\(|fmtDelta/.test(uiJs),
+    "no row may append a unit to a zero-delta placeholder",
+  );
+  const deltaSuffix = (val, unit = "", prefix = "", digits = 0) => {
+    const step = 10 ** digits;
+    const magnitudeAbs = Math.round(Math.abs(val) * step) / step;
+    if (magnitudeAbs === 0) return "";
+    const magnitude = `${prefix}${
+      digits ? magnitudeAbs.toFixed(digits) : magnitudeAbs.toLocaleString()
+    }`;
+    return ` (${val > 0 ? "+" : "\u2212"}${magnitude}${unit ? ` ${unit}` : ""})`;
   };
 
-  assert.equal(fmtDelta(0), "Baseline");
-  assert.equal(fmtDelta(1200), "+$1,200");
-  assert.equal(fmtDelta(-500), "\u2212$500");
-  assert.equal(fmtDelta(4.5, ""), "+5");
-  assert.equal(fmtDelta(-3.2, ""), "\u22123");
+  assert.equal(
+    deltaSuffix(0, "kW"),
+    "",
+    "baseline says nothing, not 'Baseline kW'",
+  );
+  assert.equal(deltaSuffix(1200, "", "$"), " (+$1,200)");
+  assert.equal(deltaSuffix(-500, "", "$"), " (\u2212$500)");
+  assert.equal(deltaSuffix(1.2, "kW"), " (+1 kW)");
+  assert.equal(deltaSuffix(-3.2, "kWh"), " (\u22123 kWh)");
+  assert.equal(
+    deltaSuffix(0.4, "d"),
+    "",
+    "a sub-unit delta still reads as none",
+  );
+  assert.equal(
+    deltaSuffix(0.2, "d", "", 1),
+    " (+0.2 d)",
+    "autonomy carries tenths: 0.2 days is 4.8 hours, not nothing",
+  );
 });
 
 test("DOM Parity: autoTargetRow exists and interactive controls are wired in JS", async () => {

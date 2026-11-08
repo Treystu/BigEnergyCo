@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261108b";
+import { APPLIANCES } from "./appliances.js?v=20261108d";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261108b";
+} from "./pwa-install.js?v=20261108d";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261108b";
+} from "./usecases.js?v=20261108d";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261108b";
+} from "./run-coordinator.js?v=20261108d";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261108b";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261108b";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261108b";
+} from "./mode-chrome.js?v=20261108d";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261108d";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261108d";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261108b";
+} from "./location-picker.js?v=20261108d";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261108b";
+} from "./pricing.js?v=20261108d";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261108b";
+import { currencyForCountry } from "./country-currency.js?v=20261108d";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261108b";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261108d";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -96,7 +96,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261108b").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261108d").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -107,15 +107,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261108b";
+} from "./lead-acid.js?v=20261108d";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261108b";
+} from "./bom.js?v=20261108d";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261108b";
+import { BOM_ITEMS } from "../shared/content.js?v=20261108d";
 
 import {
   applyI18n,
@@ -124,18 +124,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261108b";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261108b";
-import { byId as $, el } from "../shared/dom.js?v=20261108b";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261108b";
+} from "../shared/i18n.js?v=20261108d";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261108d";
+import { byId as $, el } from "../shared/dom.js?v=20261108d";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261108d";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261108b";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261108b";
+} from "../shared/simple-mode.js?v=20261108d";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261108d";
 import {
   advisorJevContext,
   interpretSanity,
@@ -143,29 +143,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261108b";
+} from "./validate.js?v=20261108d";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261108b";
+} from "../shared/cut-targets.js?v=20261108d";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261108b";
+} from "./share-codec.js?v=20261108d";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261108b";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261108b";
+} from "./infeasible-copy.js?v=20261108d";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261108d";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261108b";
+} from "./fuel-units.js?v=20261108d";
 
 import {
   createLeafletProvider,
@@ -173,18 +173,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261108b";
+} from "./map-provider.js?v=20261108d";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261108b";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261108b";
+} from "./wizard.js?v=20261108d";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261108d";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261108b";
+} from "./budget-span.js?v=20261108d";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -196,10 +196,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261108b"),
-      import("./charts.js?v=20261108b"),
-      import("./frontier-chart.js?v=20261108b"),
-      import("./rescale.js?v=20261108b"),
+      import("./engine.js?v=20261108d"),
+      import("./charts.js?v=20261108d"),
+      import("./frontier-chart.js?v=20261108d"),
+      import("./rescale.js?v=20261108d"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -267,9 +267,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261108b";
+} from "./money.js?v=20261108d";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261108b";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261108d";
 
 let worker = null;
 
@@ -1009,7 +1009,13 @@ function renderUseCaseOutcome(p) {
       {
         style: "font-size:0.8rem;color:var(--text-muted);margin-bottom:0.6rem",
       },
-      t(o.labelKey),
+      // The reserve-aware bill-cut label interpolates the share held back;
+      // every other metric label carries no placeholder and ignores it.
+      t(o.labelKey, {
+        pct:
+          Math.round(Number(o.measurement && o.measurement.reservePct) * 100) ||
+          0,
+      }),
     ),
   );
 
@@ -3836,12 +3842,31 @@ function renderFocusPanel(p, entry, isPreview) {
     chip("🔋", `${fmt(entry.battKwh)} kWh`, chemShort(entry) || "battery");
   if (Number.isFinite(entry.costLo) && Number.isFinite(entry.costHi))
     chip("💵", `~${moneyRange(entry.costLo, entry.costHi)}`, "up-front");
+  // The cut here is the system with its whole bank available, which is the
+  // same figure the sizing search solved for. When the visitor holds a reserve
+  // back, the measured result below it is lower (76% against 81%, measured
+  // 2026-11-08 in the browser), so this chip says which basis it quotes
+  // instead of leaving two numbers to argue.
+  const reserveHeldPct =
+    Math.round(
+      Number(
+        p &&
+          p.useCaseOutcome &&
+          p.useCaseOutcome.measurement &&
+          p.useCaseOutcome.measurement.reservePct,
+      ) * 100,
+    ) || 0;
   // A system with no panels has no generation to displace imported energy, so
   // its number is a peak-hour offset, not a bill cut — and a positive offset
   // takes no minus sign. Labelling it a bill cut put a savings claim directly
   // above the panel's own "never" break-even line.
   if (isGT && Number.isFinite(entry.cutPct)) {
-    if (entry.pvKw > 0) chip("⚡", `−${entry.cutPct}%`, "bill cut");
+    if (entry.pvKw > 0)
+      chip(
+        "⚡",
+        `−${entry.cutPct}%`,
+        reserveHeldPct > 0 ? "bill cut, no reserve held" : "bill cut",
+      );
     else chip("⚡", `${entry.cutPct}%`, "peak offset");
   }
   if (
@@ -4001,7 +4026,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261108b",
+      "./assets/js/sizing/sizing-worker.js?v=20261108d",
       {
         type: "module",
       },
@@ -4830,11 +4855,20 @@ function renderRelativeOptions(p, selectedSystem) {
   `;
   grid.appendChild(header);
 
-  const fmtDelta = (val, prefix = "$") => {
-    if (Math.abs(val) < 1) return "Baseline";
-    return val > 0
-      ? `+${prefix}${Math.round(val).toLocaleString()}`
-      : `\u2212${prefix}${Math.abs(Math.round(val)).toLocaleString()}`;
+  // A zero delta is not a value. This used to return the bare word
+  // "Baseline", which every row then suffix-typed: the current-selection card
+  // read "3.8 kW (Baseline kW)" and "10 kWh (Baseline kWh)", so the baseline
+  // rendered as a placeholder where a number should be. The suffix now carries
+  // its own unit and returns nothing at all when there is no change, which is
+  // what the baseline row means.
+  const deltaSuffix = (val, unit = "", prefix = "", digits = 0) => {
+    const step = 10 ** digits;
+    const magnitudeAbs = Math.round(Math.abs(val) * step) / step;
+    if (magnitudeAbs === 0) return "";
+    const magnitude = `${prefix}${
+      digits ? magnitudeAbs.toFixed(digits) : magnitudeAbs.toLocaleString()
+    }`;
+    return ` (${val > 0 ? "+" : "\u2212"}${magnitude}${unit ? ` ${unit}` : ""})`;
   };
 
   const tiers = [
@@ -4970,23 +5004,25 @@ function renderRelativeOptions(p, selectedSystem) {
 
     appendRows(card, [
       hasBasePanels
-        ? ["PV array", `${pvKw} kW (${fmtDelta(pvKw - basePvKw, "")} kW)`]
+        ? ["PV array", `${pvKw} kW${deltaSuffix(pvKw - basePvKw, "kW")}`]
         : ["Solar array", "None (Battery-only)"],
       [
         "Battery bank",
-        `${fmt(battKwh)} kWh (${fmtDelta(battKwh - baseBattKwh, "")} kWh)`,
+        `${fmt(battKwh)} kWh${deltaSuffix(battKwh - baseBattKwh, "kWh")}`,
       ],
       [
         "Autonomy",
-        `~${autonomy.toFixed(1)} days (${fmtDelta(autonomy - baseAutonomy, "")} d)`,
+        // Tenths matter here: 0.3 days against a 0.5-day baseline is a real
+        // 4.8-hour difference, and a whole-unit threshold read it as none.
+        `~${autonomy.toFixed(1)} days${deltaSuffix(autonomy - baseAutonomy, "d", "", 1)}`,
       ],
       [
         "System first cost",
-        `${moneyRange(cost.lo, cost.hi)} (${fmtDelta(cost.objectiveMid - baseCost.objectiveMid)})`,
+        `${moneyRange(cost.lo, cost.hi)}${deltaSuffix(cost.objectiveMid - baseCost.objectiveMid, "", "$")}`,
       ],
       [
         "True 20-yr cost",
-        `${money(life.total)} (${fmtDelta(life.total - baseLife.total)})`,
+        `${money(life.total)}${deltaSuffix(life.total - baseLife.total, "", "$")}`,
       ],
       [
         "20-yr swaps",
@@ -9080,11 +9116,11 @@ async function initSizingUI() {
     // can click, and the browser smoke gate polls for the ready flag
     // rather than assuming it. Without the loader the CTA is a plain
     // link — the same fallback the loader's own catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261108b")
+    import("../shared/translation-suggestion-loader.js?v=20261108d")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261108b"),
+          () => import("../translation-suggestion.js?v=20261108d"),
         );
       })
       .catch(() => {});

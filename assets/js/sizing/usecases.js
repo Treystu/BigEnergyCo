@@ -428,11 +428,21 @@ export function outcomeFor(id, measurement) {
   // the card says so instead — one short sentence, shared by every case,
   // because "this cannot be sized at all" is the same fact for all of them.
   const measured = measurement.measured !== false;
+  // The bill-cut measurement holds the visitor's reserve back, so it reads
+  // lower than the full-battery figure every hardware surface quotes (76%
+  // against 81% on one card, measured 2026-11-08). Two numbers are fine; two
+  // unexplained numbers are not, so the label carries the reserve basis and
+  // the chip beside it says it quotes the full bank.
+  const reservePct = Number(measurement.reservePct) || 0;
+  const labelKey =
+    c.id === "billcut" && reservePct > 0
+      ? "metricBillCutReserve"
+      : c.metric.labelKey;
   return {
     useCase: c.id,
     metricId: c.metric.id,
     unit: c.metric.unit,
-    labelKey: c.metric.labelKey,
+    labelKey,
     value,
     measured,
     status: v.status,
