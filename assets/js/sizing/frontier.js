@@ -27,8 +27,11 @@ import { batteryReplacements, lifetimeCostUsd } from "./money.js?v=20261108d";
 // squashes the interesting part of the curve into the top corner.
 const FRONTIER_MIN_OUTCOME = 0.25;
 
-// Two points one-third of a percentage point apart are the same answer to a
+// Two points less than one percentage point apart are the same answer to a
 // human. Thinning keeps the chart readable without touching the math.
+// (#353: this comment used to describe a third of a point while the value
+// below was always 1.0 - the value is the shipped rule, so it is the comment
+// that was corrected.)
 const FRONTIER_MIN_STEP_PP = 1.0;
 const FRONTIER_MAX_POINTS = 22;
 

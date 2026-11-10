@@ -1,0 +1,1568 @@
+{
+  "issue": 353,
+  "generated": "2026-11-10T06:09:44.092Z",
+  "head": null,
+  "acceptance": {
+    "RUNG_MOVE_REQUIRED": 1,
+    "COST_MOVE_REQUIRED": 0.05,
+    "SITE_SHARE_REQUIRED": 0.2
+  },
+  "shipped": {
+    "lattice": {
+      "pvSteps": 18,
+      "battSteps": 16
+    },
+    "minStepPp": 1,
+    "commentClaimPp": 0.3333333333333333
+  },
+  "summary": {
+    "cases": 12,
+    "firers": 12,
+    "fireShare": 1,
+    "rungMovers": 0,
+    "costMovers": 12,
+    "budgetPicksMoved": 36,
+    "budgetPicksTotal": 36,
+    "kneeVsOptimumDiverge": 8,
+    "rulesChange": true,
+    "commentConstantMismatch": true
+  },
+  "rows": [
+    {
+      "city": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "knee": {
+        "at1x": {
+          "index": 11,
+          "pvKw": 3.1,
+          "battKwh": 7,
+          "outcomePct": 85.2,
+          "capexUsd": 2622
+        },
+        "at2x": {
+          "index": 17,
+          "pvKw": 3.3,
+          "battKwh": 8,
+          "outcomePct": 91.3,
+          "capexUsd": 2867
+        },
+        "at4x": {
+          "index": 19,
+          "pvKw": 3.2,
+          "battKwh": 8,
+          "outcomePct": 90.4,
+          "capexUsd": 2813
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 8,
+          "battRung": 5
+        },
+        "at2x": {
+          "pvRung": 8,
+          "battRung": 5
+        },
+        "at4x": {
+          "pvRung": 8,
+          "battRung": 5
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 13,
+          "loPct": 26.7,
+          "loCostUsd": 597,
+          "hiPct": 99,
+          "hiCostUsd": 3463
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 19,
+          "loPct": 26.1,
+          "loCostUsd": 586,
+          "hiPct": 97.7,
+          "hiCostUsd": 3218
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 20,
+          "loPct": 25.8,
+          "loCostUsd": 581,
+          "hiPct": 95.5,
+          "hiCostUsd": 3058
+        }
+      },
+      "kneeMoveRungs2x": 0,
+      "kneeMoveRungs4x": 0,
+      "kneeCostMove2x": 0.09344012204424104,
+      "kneeCostMove4x": 0.07284515636918383,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 2622,
+          "at1x": {
+            "capexUsd": 2622,
+            "outcomePct": 85.2
+          },
+          "at2x": {
+            "capexUsd": 2590,
+            "outcomePct": 81.4
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 3409,
+          "at1x": {
+            "capexUsd": 3037,
+            "outcomePct": 90.9
+          },
+          "at2x": {
+            "capexUsd": 3218,
+            "outcomePct": 97.7
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 4195,
+          "at1x": {
+            "capexUsd": 4103,
+            "outcomePct": 100
+          },
+          "at2x": {
+            "capexUsd": 3752,
+            "outcomePct": 100
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 4.5,
+        "battKwh": 9,
+        "cost": 3740
+      },
+      "pointCounts": {
+        "at1x": 15,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 972,
+        "at4x": 3456
+      }
+    },
+    {
+      "city": "Nairobi, Kenya",
+      "mode": "billcut",
+      "knee": {
+        "at1x": {
+          "index": 12,
+          "pvKw": 3.1,
+          "battKwh": 7,
+          "outcomePct": 85.2,
+          "capexUsd": 2622
+        },
+        "at2x": {
+          "index": 17,
+          "pvKw": 3.3,
+          "battKwh": 8,
+          "outcomePct": 91.3,
+          "capexUsd": 2867
+        },
+        "at4x": {
+          "index": 19,
+          "pvKw": 3.2,
+          "battKwh": 8,
+          "outcomePct": 90.4,
+          "capexUsd": 2813
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 8,
+          "battRung": 6
+        },
+        "at2x": {
+          "pvRung": 8,
+          "battRung": 6
+        },
+        "at4x": {
+          "pvRung": 8,
+          "battRung": 6
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 14,
+          "loPct": 26.7,
+          "loCostUsd": 597,
+          "hiPct": 99,
+          "hiCostUsd": 3463
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 19,
+          "loPct": 26.1,
+          "loCostUsd": 586,
+          "hiPct": 97.8,
+          "hiCostUsd": 3357
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 20,
+          "loPct": 25.8,
+          "loCostUsd": 581,
+          "hiPct": 95.5,
+          "hiCostUsd": 3058
+        }
+      },
+      "kneeMoveRungs2x": 0,
+      "kneeMoveRungs4x": 0,
+      "kneeCostMove2x": 0.09344012204424104,
+      "kneeCostMove4x": 0.07284515636918383,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 2622,
+          "at1x": {
+            "capexUsd": 2622,
+            "outcomePct": 85.2
+          },
+          "at2x": {
+            "capexUsd": 2515,
+            "outcomePct": 83.1
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 3409,
+          "at1x": {
+            "capexUsd": 3037,
+            "outcomePct": 90.9
+          },
+          "at2x": {
+            "capexUsd": 3357,
+            "outcomePct": 97.8
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 4195,
+          "at1x": {
+            "capexUsd": 4103,
+            "outcomePct": 100
+          },
+          "at2x": {
+            "capexUsd": 3890,
+            "outcomePct": 100
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 2.73,
+        "battKwh": 7,
+        "cost": 2497
+      },
+      "pointCounts": {
+        "at1x": 16,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 936,
+        "at4x": 3168
+      }
+    },
+    {
+      "city": "Honolulu, USA",
+      "mode": "offgrid",
+      "knee": {
+        "at1x": {
+          "index": 12,
+          "pvKw": 3.1,
+          "battKwh": 7,
+          "outcomePct": 83.9,
+          "capexUsd": 2719
+        },
+        "at2x": {
+          "index": 18,
+          "pvKw": 3.3,
+          "battKwh": 8,
+          "outcomePct": 89.8,
+          "capexUsd": 2973
+        },
+        "at4x": {
+          "index": 18,
+          "pvKw": 3.2,
+          "battKwh": 8,
+          "outcomePct": 88.8,
+          "capexUsd": 2918
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 8,
+          "battRung": 5
+        },
+        "at2x": {
+          "pvRung": 8,
+          "battRung": 5
+        },
+        "at4x": {
+          "pvRung": 8,
+          "battRung": 5
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 14,
+          "loPct": 26.8,
+          "loCostUsd": 619,
+          "hiPct": 96,
+          "hiCostUsd": 3592
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 20,
+          "loPct": 26.1,
+          "loCostUsd": 608,
+          "hiPct": 97.5,
+          "hiCostUsd": 3614
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 20,
+          "loPct": 25.8,
+          "loCostUsd": 602,
+          "hiPct": 96.4,
+          "hiCostUsd": 3504
+        }
+      },
+      "kneeMoveRungs2x": 0,
+      "kneeMoveRungs4x": 0,
+      "kneeCostMove2x": 0.09341669731518941,
+      "kneeCostMove4x": 0.07318867230599485,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 2719,
+          "at1x": {
+            "capexUsd": 2719,
+            "outcomePct": 83.9
+          },
+          "at2x": {
+            "capexUsd": 2686,
+            "outcomePct": 80.6
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 3535,
+          "at1x": {
+            "capexUsd": 3149,
+            "outcomePct": 89
+          },
+          "at2x": {
+            "capexUsd": 3338,
+            "outcomePct": 94.8
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 4350,
+          "at1x": {
+            "capexUsd": 4255,
+            "outcomePct": 99.8
+          },
+          "at2x": {
+            "capexUsd": 3614,
+            "outcomePct": 97.5
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 5,
+        "battKwh": 10,
+        "cost": 4578
+      },
+      "pointCounts": {
+        "at1x": 17,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 972,
+        "at4x": 3456
+      }
+    },
+    {
+      "city": "Honolulu, USA",
+      "mode": "billcut",
+      "knee": {
+        "at1x": {
+          "index": 13,
+          "pvKw": 3.1,
+          "battKwh": 7,
+          "outcomePct": 83.9,
+          "capexUsd": 2719
+        },
+        "at2x": {
+          "index": 17,
+          "pvKw": 3.3,
+          "battKwh": 8,
+          "outcomePct": 89.8,
+          "capexUsd": 2973
+        },
+        "at4x": {
+          "index": 18,
+          "pvKw": 3.2,
+          "battKwh": 8,
+          "outcomePct": 88.8,
+          "capexUsd": 2918
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 8,
+          "battRung": 6
+        },
+        "at2x": {
+          "pvRung": 8,
+          "battRung": 6
+        },
+        "at4x": {
+          "pvRung": 8,
+          "battRung": 6
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 15,
+          "loPct": 26.8,
+          "loCostUsd": 619,
+          "hiPct": 96,
+          "hiCostUsd": 3592
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 26.1,
+          "loCostUsd": 608,
+          "hiPct": 92.7,
+          "hiCostUsd": 3194
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 20,
+          "loPct": 25.8,
+          "loCostUsd": 602,
+          "hiPct": 96.4,
+          "hiCostUsd": 3504
+        }
+      },
+      "kneeMoveRungs2x": 0,
+      "kneeMoveRungs4x": 0,
+      "kneeCostMove2x": 0.09341669731518941,
+      "kneeCostMove4x": 0.07318867230599485,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 2719,
+          "at1x": {
+            "capexUsd": 2719,
+            "outcomePct": 83.9
+          },
+          "at2x": {
+            "capexUsd": 2608,
+            "outcomePct": 81.7
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 3535,
+          "at1x": {
+            "capexUsd": 3149,
+            "outcomePct": 89
+          },
+          "at2x": {
+            "capexUsd": 3471,
+            "outcomePct": 95.1
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 4350,
+          "at1x": {
+            "capexUsd": 4255,
+            "outcomePct": 99.8
+          },
+          "at2x": {
+            "capexUsd": 3758,
+            "outcomePct": 97.5
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 2.86,
+        "battKwh": 7,
+        "cost": 2849
+      },
+      "pointCounts": {
+        "at1x": 18,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 936,
+        "at4x": 3168
+      }
+    },
+    {
+      "city": "Phoenix, USA",
+      "mode": "offgrid",
+      "knee": {
+        "at1x": {
+          "index": 12,
+          "pvKw": 3.1,
+          "battKwh": 7,
+          "outcomePct": 81.4,
+          "capexUsd": 2039
+        },
+        "at2x": {
+          "index": 17,
+          "pvKw": 3.3,
+          "battKwh": 8,
+          "outcomePct": 86.4,
+          "capexUsd": 2230
+        },
+        "at4x": {
+          "index": 18,
+          "pvKw": 3.4,
+          "battKwh": 8,
+          "outcomePct": 87.4,
+          "capexUsd": 2271
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 8,
+          "battRung": 5
+        },
+        "at2x": {
+          "pvRung": 8,
+          "battRung": 5
+        },
+        "at4x": {
+          "pvRung": 8,
+          "battRung": 5
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 26.2,
+          "loCostUsd": 464,
+          "hiPct": 100,
+          "hiCostUsd": 4203
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 20,
+          "loPct": 25.6,
+          "loCostUsd": 456,
+          "hiPct": 96.7,
+          "hiCostUsd": 2918
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 19,
+          "loPct": 25.3,
+          "loCostUsd": 452,
+          "hiPct": 93.3,
+          "hiCostUsd": 2628
+        }
+      },
+      "kneeMoveRungs2x": 0,
+      "kneeMoveRungs4x": 0,
+      "kneeCostMove2x": 0.09367336929867583,
+      "kneeCostMove4x": 0.11378126532614026,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 2039,
+          "at1x": {
+            "capexUsd": 2039,
+            "outcomePct": 81.4
+          },
+          "at2x": {
+            "capexUsd": 2014,
+            "outcomePct": 79.1
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 2651,
+          "at1x": {
+            "capexUsd": 2371,
+            "outcomePct": 87.2
+          },
+          "at2x": {
+            "capexUsd": 2603,
+            "outcomePct": 92.7
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 3262,
+          "at1x": {
+            "capexUsd": 3191,
+            "outcomePct": 98.4
+          },
+          "at2x": {
+            "capexUsd": 2918,
+            "outcomePct": 96.7
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 5.5,
+        "battKwh": 10,
+        "cost": 3672
+      },
+      "pointCounts": {
+        "at1x": 19,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 972,
+        "at4x": 3456
+      }
+    },
+    {
+      "city": "Phoenix, USA",
+      "mode": "billcut",
+      "knee": {
+        "at1x": {
+          "index": 14,
+          "pvKw": 3.1,
+          "battKwh": 7,
+          "outcomePct": 81.4,
+          "capexUsd": 2039
+        },
+        "at2x": {
+          "index": 17,
+          "pvKw": 3.3,
+          "battKwh": 8,
+          "outcomePct": 86.4,
+          "capexUsd": 2230
+        },
+        "at4x": {
+          "index": 18,
+          "pvKw": 3.4,
+          "battKwh": 8,
+          "outcomePct": 87.4,
+          "capexUsd": 2271
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 8,
+          "battRung": 6
+        },
+        "at2x": {
+          "pvRung": 8,
+          "battRung": 6
+        },
+        "at4x": {
+          "pvRung": 8,
+          "battRung": 6
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 20,
+          "loPct": 26.2,
+          "loCostUsd": 464,
+          "hiPct": 100,
+          "hiCostUsd": 4203
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 19,
+          "loPct": 25.6,
+          "loCostUsd": 456,
+          "hiPct": 92.7,
+          "hiCostUsd": 2603
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 19,
+          "loPct": 25.3,
+          "loCostUsd": 452,
+          "hiPct": 93.3,
+          "hiCostUsd": 2628
+        }
+      },
+      "kneeMoveRungs2x": 0,
+      "kneeMoveRungs4x": 0,
+      "kneeCostMove2x": 0.09367336929867583,
+      "kneeCostMove4x": 0.11378126532614026,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 2039,
+          "at1x": {
+            "capexUsd": 2039,
+            "outcomePct": 81.4
+          },
+          "at2x": {
+            "capexUsd": 1956,
+            "outcomePct": 78.9
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 2651,
+          "at1x": {
+            "capexUsd": 2371,
+            "outcomePct": 87.2
+          },
+          "at2x": {
+            "capexUsd": 2603,
+            "outcomePct": 92.7
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 3262,
+          "at1x": {
+            "capexUsd": 3191,
+            "outcomePct": 98.4
+          },
+          "at2x": {
+            "capexUsd": 3026,
+            "outcomePct": 96.8
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 2.98,
+        "battKwh": 7,
+        "cost": 2209
+      },
+      "pointCounts": {
+        "at1x": 21,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 936,
+        "at4x": 3168
+      }
+    },
+    {
+      "city": "London, UK",
+      "mode": "offgrid",
+      "knee": {
+        "at1x": {
+          "index": 17,
+          "pvKw": 10.9,
+          "battKwh": 10,
+          "outcomePct": 87.4,
+          "capexUsd": 5864
+        },
+        "at2x": {
+          "index": 16,
+          "pvKw": 9.9,
+          "battKwh": 8,
+          "outcomePct": 84.5,
+          "capexUsd": 5204
+        },
+        "at4x": {
+          "index": 14,
+          "pvKw": 5.8,
+          "battKwh": 9,
+          "outcomePct": 74.3,
+          "capexUsd": 3535
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 13,
+          "battRung": 6
+        },
+        "at2x": {
+          "pvRung": 13,
+          "battRung": 5
+        },
+        "at4x": {
+          "pvRung": 10,
+          "battRung": 6
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 25.9,
+          "loCostUsd": 730,
+          "hiPct": 92.1,
+          "hiCostUsd": 7211
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 28.2,
+          "loCostUsd": 786,
+          "hiPct": 90,
+          "hiCostUsd": 6533
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 26,
+          "loCostUsd": 734,
+          "hiPct": 90.6,
+          "hiCostUsd": 6689
+        }
+      },
+      "kneeMoveRungs2x": 1,
+      "kneeMoveRungs4x": 3,
+      "kneeCostMove2x": 0.11255115961800818,
+      "kneeCostMove4x": 0.39716916780354705,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 5864,
+          "at1x": {
+            "capexUsd": 5864,
+            "outcomePct": 87.4
+          },
+          "at2x": {
+            "capexUsd": 5768,
+            "outcomePct": 86.9
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 7623,
+          "at1x": {
+            "capexUsd": 7211,
+            "outcomePct": 92.1
+          },
+          "at2x": {
+            "capexUsd": 6533,
+            "outcomePct": 90
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 9382,
+          "at1x": {
+            "capexUsd": 8992,
+            "outcomePct": 96.3
+          },
+          "at2x": {
+            "capexUsd": 8054,
+            "outcomePct": 94
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 24,
+        "battKwh": 13,
+        "cost": 12412
+      },
+      "pointCounts": {
+        "at1x": 22,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 972,
+        "at4x": 3456
+      }
+    },
+    {
+      "city": "London, UK",
+      "mode": "billcut",
+      "knee": {
+        "at1x": {
+          "index": 17,
+          "pvKw": 10.9,
+          "battKwh": 10,
+          "outcomePct": 87.4,
+          "capexUsd": 5864
+        },
+        "at2x": {
+          "index": 16,
+          "pvKw": 7.7,
+          "battKwh": 8,
+          "outcomePct": 78.7,
+          "capexUsd": 4248
+        },
+        "at4x": {
+          "index": 14,
+          "pvKw": 5.8,
+          "battKwh": 9,
+          "outcomePct": 74.3,
+          "capexUsd": 3535
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 13,
+          "battRung": 7
+        },
+        "at2x": {
+          "pvRung": 12,
+          "battRung": 6
+        },
+        "at4x": {
+          "pvRung": 10,
+          "battRung": 7
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 25.9,
+          "loCostUsd": 730,
+          "hiPct": 92.1,
+          "hiCostUsd": 7211
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 19,
+          "loPct": 28.2,
+          "loCostUsd": 786,
+          "hiPct": 90.5,
+          "hiCostUsd": 6646
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 26,
+          "loCostUsd": 734,
+          "hiPct": 90.6,
+          "hiCostUsd": 6689
+        }
+      },
+      "kneeMoveRungs2x": 1,
+      "kneeMoveRungs4x": 3,
+      "kneeCostMove2x": 0.2755798090040928,
+      "kneeCostMove4x": 0.39716916780354705,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 5864,
+          "at1x": {
+            "capexUsd": 5864,
+            "outcomePct": 87.4
+          },
+          "at2x": {
+            "capexUsd": 5768,
+            "outcomePct": 86.9
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 7623,
+          "at1x": {
+            "capexUsd": 7211,
+            "outcomePct": 92.1
+          },
+          "at2x": {
+            "capexUsd": 6646,
+            "outcomePct": 90.5
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 9382,
+          "at1x": {
+            "capexUsd": 8992,
+            "outcomePct": 96.3
+          },
+          "at2x": {
+            "capexUsd": 8166,
+            "outcomePct": 94.7
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 8.24,
+        "battKwh": 8,
+        "cost": 4801
+      },
+      "pointCounts": {
+        "at1x": 22,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 936,
+        "at4x": 3168
+      }
+    },
+    {
+      "city": "Berlin, Germany",
+      "mode": "offgrid",
+      "knee": {
+        "at1x": {
+          "index": 15,
+          "pvKw": 10.9,
+          "battKwh": 10,
+          "outcomePct": 85.4,
+          "capexUsd": 5864
+        },
+        "at2x": {
+          "index": 16,
+          "pvKw": 9.9,
+          "battKwh": 8,
+          "outcomePct": 82.5,
+          "capexUsd": 5204
+        },
+        "at4x": {
+          "index": 13,
+          "pvKw": 7.4,
+          "battKwh": 9,
+          "outcomePct": 77,
+          "capexUsd": 4230
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 13,
+          "battRung": 6
+        },
+        "at2x": {
+          "pvRung": 13,
+          "battRung": 5
+        },
+        "at4x": {
+          "pvRung": 11,
+          "battRung": 6
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 16,
+          "loPct": 30.5,
+          "loCostUsd": 912,
+          "hiPct": 89.6,
+          "hiCostUsd": 7211
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 26.1,
+          "loCostUsd": 786,
+          "hiPct": 87.7,
+          "hiCostUsd": 6533
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 16,
+          "loPct": 25.6,
+          "loCostUsd": 773,
+          "hiPct": 87.6,
+          "hiCostUsd": 6342
+        }
+      },
+      "kneeMoveRungs2x": 1,
+      "kneeMoveRungs4x": 2,
+      "kneeCostMove2x": 0.11255115961800818,
+      "kneeCostMove4x": 0.2786493860845839,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 5864,
+          "at1x": {
+            "capexUsd": 5864,
+            "outcomePct": 85.4
+          },
+          "at2x": {
+            "capexUsd": 5768,
+            "outcomePct": 84.7
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 7623,
+          "at1x": {
+            "capexUsd": 7211,
+            "outcomePct": 89.6
+          },
+          "at2x": {
+            "capexUsd": 6533,
+            "outcomePct": 87.7
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 9382,
+          "at1x": {
+            "capexUsd": 8992,
+            "outcomePct": 93.8
+          },
+          "at2x": {
+            "capexUsd": 8054,
+            "outcomePct": 91.4
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 27,
+        "battKwh": 11,
+        "cost": 13480
+      },
+      "pointCounts": {
+        "at1x": 21,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 972,
+        "at4x": 3456
+      }
+    },
+    {
+      "city": "Berlin, Germany",
+      "mode": "billcut",
+      "knee": {
+        "at1x": {
+          "index": 16,
+          "pvKw": 10.9,
+          "battKwh": 10,
+          "outcomePct": 85.4,
+          "capexUsd": 5864
+        },
+        "at2x": {
+          "index": 16,
+          "pvKw": 9.9,
+          "battKwh": 8,
+          "outcomePct": 82.5,
+          "capexUsd": 5204
+        },
+        "at4x": {
+          "index": 13,
+          "pvKw": 7.4,
+          "battKwh": 9,
+          "outcomePct": 77,
+          "capexUsd": 4230
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 13,
+          "battRung": 7
+        },
+        "at2x": {
+          "pvRung": 13,
+          "battRung": 6
+        },
+        "at4x": {
+          "pvRung": 11,
+          "battRung": 7
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 17,
+          "loPct": 30.5,
+          "loCostUsd": 912,
+          "hiPct": 89.6,
+          "hiCostUsd": 7211
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 26.1,
+          "loCostUsd": 786,
+          "hiPct": 88.3,
+          "hiCostUsd": 6646
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 16,
+          "loPct": 25.6,
+          "loCostUsd": 773,
+          "hiPct": 87.6,
+          "hiCostUsd": 6342
+        }
+      },
+      "kneeMoveRungs2x": 1,
+      "kneeMoveRungs4x": 2,
+      "kneeCostMove2x": 0.11255115961800818,
+      "kneeCostMove4x": 0.2786493860845839,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 5864,
+          "at1x": {
+            "capexUsd": 5864,
+            "outcomePct": 85.4
+          },
+          "at2x": {
+            "capexUsd": 5768,
+            "outcomePct": 84.7
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 7623,
+          "at1x": {
+            "capexUsd": 7211,
+            "outcomePct": 89.6
+          },
+          "at2x": {
+            "capexUsd": 6646,
+            "outcomePct": 88.3
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 9382,
+          "at1x": {
+            "capexUsd": 8992,
+            "outcomePct": 93.8
+          },
+          "at2x": {
+            "capexUsd": 9079,
+            "outcomePct": 94
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 8.87,
+        "battKwh": 8,
+        "cost": 5124
+      },
+      "pointCounts": {
+        "at1x": 22,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 936,
+        "at4x": 3168
+      }
+    },
+    {
+      "city": "Delhi, India",
+      "mode": "offgrid",
+      "knee": {
+        "at1x": {
+          "index": 12,
+          "pvKw": 3.9,
+          "battKwh": 7,
+          "outcomePct": 82.9,
+          "capexUsd": 2823
+        },
+        "at2x": {
+          "index": 18,
+          "pvKw": 4.2,
+          "battKwh": 8,
+          "outcomePct": 89.1,
+          "capexUsd": 3099
+        },
+        "at4x": {
+          "index": 18,
+          "pvKw": 4.3,
+          "battKwh": 8,
+          "outcomePct": 90.1,
+          "capexUsd": 3148
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 9,
+          "battRung": 5
+        },
+        "at2x": {
+          "pvRung": 9,
+          "battRung": 5
+        },
+        "at4x": {
+          "pvRung": 9,
+          "battRung": 5
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 15,
+          "loPct": 27,
+          "loCostUsd": 671,
+          "hiPct": 96.9,
+          "hiCostUsd": 3799
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 20,
+          "loPct": 26.2,
+          "loCostUsd": 656,
+          "hiPct": 97.3,
+          "hiCostUsd": 3770
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 19,
+          "loPct": 26,
+          "loCostUsd": 652,
+          "hiPct": 95.4,
+          "hiCostUsd": 3523
+        }
+      },
+      "kneeMoveRungs2x": 0,
+      "kneeMoveRungs4x": 0,
+      "kneeCostMove2x": 0.09776833156216791,
+      "kneeCostMove4x": 0.11512575274530641,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 2823,
+          "at1x": {
+            "capexUsd": 2823,
+            "outcomePct": 82.9
+          },
+          "at2x": {
+            "capexUsd": 2596,
+            "outcomePct": 77.6
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 3670,
+          "at1x": {
+            "capexUsd": 3415,
+            "outcomePct": 88.7
+          },
+          "at2x": {
+            "capexUsd": 3346,
+            "outcomePct": 92.8
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 4517,
+          "at1x": {
+            "capexUsd": 4491,
+            "outcomePct": 100
+          },
+          "at2x": {
+            "capexUsd": 3770,
+            "outcomePct": 97.3
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 6.5,
+        "battKwh": 10,
+        "cost": 4575
+      },
+      "pointCounts": {
+        "at1x": 17,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 972,
+        "at4x": 3456
+      }
+    },
+    {
+      "city": "Delhi, India",
+      "mode": "billcut",
+      "knee": {
+        "at1x": {
+          "index": 14,
+          "pvKw": 3.9,
+          "battKwh": 7,
+          "outcomePct": 82.9,
+          "capexUsd": 2823
+        },
+        "at2x": {
+          "index": 17,
+          "pvKw": 4.2,
+          "battKwh": 8,
+          "outcomePct": 89.1,
+          "capexUsd": 3099
+        },
+        "at4x": {
+          "index": 18,
+          "pvKw": 4.3,
+          "battKwh": 8,
+          "outcomePct": 90.1,
+          "capexUsd": 3148
+        }
+      },
+      "position": {
+        "at1x": {
+          "pvRung": 9,
+          "battRung": 6
+        },
+        "at2x": {
+          "pvRung": 9,
+          "battRung": 6
+        },
+        "at4x": {
+          "pvRung": 9,
+          "battRung": 6
+        }
+      },
+      "range": {
+        "at1x": {
+          "loIndex": 0,
+          "hiIndex": 17,
+          "loPct": 27,
+          "loCostUsd": 671,
+          "hiPct": 96.9,
+          "hiCostUsd": 3799
+        },
+        "at2x": {
+          "loIndex": 0,
+          "hiIndex": 18,
+          "loPct": 26.2,
+          "loCostUsd": 656,
+          "hiPct": 92.8,
+          "hiCostUsd": 3346
+        },
+        "at4x": {
+          "loIndex": 0,
+          "hiIndex": 19,
+          "loPct": 26,
+          "loCostUsd": 652,
+          "hiPct": 95.4,
+          "hiCostUsd": 3523
+        }
+      },
+      "kneeMoveRungs2x": 0,
+      "kneeMoveRungs4x": 0,
+      "kneeCostMove2x": 0.09776833156216791,
+      "kneeCostMove4x": 0.11512575274530641,
+      "fires": true,
+      "budgetPicks": [
+        {
+          "multiple": 1,
+          "budgetUsd": 2823,
+          "at1x": {
+            "capexUsd": 2823,
+            "outcomePct": 82.9
+          },
+          "at2x": {
+            "capexUsd": 2724,
+            "outcomePct": 80.9
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.3,
+          "budgetUsd": 3670,
+          "at1x": {
+            "capexUsd": 3415,
+            "outcomePct": 88.7
+          },
+          "at2x": {
+            "capexUsd": 3602,
+            "outcomePct": 95
+          },
+          "moved": true
+        },
+        {
+          "multiple": 1.6,
+          "budgetUsd": 4517,
+          "at1x": {
+            "capexUsd": 4491,
+            "outcomePct": 100
+          },
+          "at2x": {
+            "capexUsd": 3898,
+            "outcomePct": 97.7
+          },
+          "moved": true
+        }
+      ],
+      "optimum": {
+        "pvKw": 3.64,
+        "battKwh": 7,
+        "cost": 2752
+      },
+      "pointCounts": {
+        "at1x": 19,
+        "at2x": 22,
+        "at4x": 22
+      },
+      "simCounts": {
+        "at1x": 270,
+        "at2x": 936,
+        "at4x": 3168
+      }
+    }
+  ]
+}
