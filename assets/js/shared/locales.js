@@ -3,11 +3,13 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261110c";
+import { HOME_COPY } from "./home-copy.js?v=20261110f";
+import { RESULT_COPY } from "./result-copy.js?v=20261110f";
 
 export const LOCALES = {
   en: {
     ...HOME_COPY.en,
+    ...RESULT_COPY.en,
     sizingFor: "What are you sizing for?",
     goalCutBill: "Cut My Electric Bill",
     goalOffgrid: "Off-grid / Backup",
@@ -712,6 +714,7 @@ export const LOCALES = {
   },
   es: {
     ...HOME_COPY.es,
+    ...RESULT_COPY.es,
     sizingFor: "¿Qué estás dimensionando?",
     goalCutBill: "Reducir mi factura eléctrica",
     goalOffgrid: "Aislado / Respaldo",
@@ -1428,6 +1431,7 @@ export const LOCALES = {
   },
   pt: {
     ...HOME_COPY.pt,
+    ...RESULT_COPY.pt,
     sizingFor: "O que você está dimensionando?",
     goalCutBill: "Reduzir minha conta de luz",
     goalOffgrid: "Isolado / Backup",
@@ -2135,6 +2139,7 @@ export const LOCALES = {
   },
   fr: {
     ...HOME_COPY.fr,
+    ...RESULT_COPY.fr,
     sizingFor: "Que dimensionnez-vous ?",
     goalCutBill: "Réduire ma facture d'électricité",
     goalOffgrid: "Autonome / Secours",
@@ -2854,6 +2859,7 @@ export const LOCALES = {
   },
   de: {
     ...HOME_COPY.de,
+    ...RESULT_COPY.de,
     sizingFor: "Was möchten Sie dimensionieren?",
     goalCutBill: "Meine Stromrechnung senken",
     goalOffgrid: "Insel / Notstrom",
@@ -3566,6 +3572,7 @@ export const LOCALES = {
       "Bester 20-Jahres-Preis für genau diese Hardware: Standardgröße mit {replacements} Wechsel(n) über 20 Jahre (oben gezählt).",
   },
   nl: {
+    ...RESULT_COPY.nl,
     sizingFor: "Waar dimensionneert u voor?",
     goalCutBill: "Mijn energierekening verlagen",
     goalOffgrid: "Off-grid / Noodstroom",
@@ -4387,6 +4394,7 @@ export const LOCALES = {
   },
   ar: {
     ...HOME_COPY.ar,
+    ...RESULT_COPY.ar,
     rtl: true,
     sizingFor: "ما الذي تحدد حجمه؟",
     goalCutBill: "تقليل فاتورة الكهرباء",

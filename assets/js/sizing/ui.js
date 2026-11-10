@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261110c";
+import { APPLIANCES } from "./appliances.js?v=20261110f";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261110c";
+} from "./pwa-install.js?v=20261110f";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261110c";
+} from "./usecases.js?v=20261110f";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261110c";
+} from "./run-coordinator.js?v=20261110f";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261110c";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261110c";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261110c";
+} from "./mode-chrome.js?v=20261110f";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261110f";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261110f";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261110c";
+} from "./location-picker.js?v=20261110f";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261110c";
+} from "./pricing.js?v=20261110f";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261110c";
+import { currencyForCountry } from "./country-currency.js?v=20261110f";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261110c";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261110f";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -96,7 +96,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261110c").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261110f").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -107,15 +107,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261110c";
+} from "./lead-acid.js?v=20261110f";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261110c";
+} from "./bom.js?v=20261110f";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261110c";
+import { BOM_ITEMS } from "../shared/content.js?v=20261110f";
 
 import {
   applyI18n,
@@ -124,18 +124,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261110c";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261110c";
-import { byId as $, el } from "../shared/dom.js?v=20261110c";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261110c";
+} from "../shared/i18n.js?v=20261110f";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261110f";
+import { byId as $, el } from "../shared/dom.js?v=20261110f";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261110f";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261110c";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261110c";
+} from "../shared/simple-mode.js?v=20261110f";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261110f";
 import {
   advisorJevContext,
   interpretSanity,
@@ -143,29 +143,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261110c";
+} from "./validate.js?v=20261110f";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261110c";
+} from "../shared/cut-targets.js?v=20261110f";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261110c";
+} from "./share-codec.js?v=20261110f";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261110c";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261110c";
+} from "./infeasible-copy.js?v=20261110f";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261110f";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261110c";
+} from "./fuel-units.js?v=20261110f";
 
 import {
   createLeafletProvider,
@@ -173,18 +173,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261110c";
+} from "./map-provider.js?v=20261110f";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261110c";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261110c";
+} from "./wizard.js?v=20261110f";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261110f";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261110c";
+} from "./budget-span.js?v=20261110f";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -196,10 +196,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261110c"),
-      import("./charts.js?v=20261110c"),
-      import("./frontier-chart.js?v=20261110c"),
-      import("./rescale.js?v=20261110c"),
+      import("./engine.js?v=20261110f"),
+      import("./charts.js?v=20261110f"),
+      import("./frontier-chart.js?v=20261110f"),
+      import("./rescale.js?v=20261110f"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -267,9 +267,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261110c";
+} from "./money.js?v=20261110f";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261110c";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261110f";
 
 let worker = null;
 
@@ -3254,6 +3254,7 @@ function mergeReSlice(result) {
     p.best = result.best || null;
     p.bestReason = result.bestReason || null;
     p.focus = result.focus || null;
+    p.bestReasonParts = result.bestReasonParts || null;
     if (selectedKey === "best" || selectedKey === "focus") {
       selectedKey = p.best ? "best" : "custom";
     }
@@ -3300,9 +3301,11 @@ function mergeReSlice(result) {
   }
   // Keep the custom column header in lockstep with the slider.
   const label = result.customCut
-    ? `Your ~${Math.round(result.customCut.fraction * 100)}% target`
+    ? t("resColCustom", { pct: Math.round(result.customCut.fraction * 100) })
     : result.customTarget
-      ? `Your ~${Math.round(p.customCut ? p.customCut.fraction * 100 : 0)}% target`
+      ? t("resColCustom", {
+          pct: Math.round(p.customCut ? p.customCut.fraction * 100 : 0),
+        })
       : null;
   if (label && p.matrix) {
     const col = p.matrix.cols && p.matrix.cols.find((c) => c.id === "custom");
@@ -3771,8 +3774,8 @@ function renderPlayReadout(q) {
   out.textContent =
     `🔎 ☀️ ${q.pvKw} kW + 🔋 ${fmt(q.battKwh)} kWh ${chemShort(q)} ≈ ${money(Math.round(q.x))} → ` +
     (lastPayload && lastPayload.mode === "gridtie"
-      ? `⚡ −${Math.round(q.y)}% bill`
-      : `☁️ ${Math.round(q.y)}% covered`);
+      ? t("resChipBillCut", { pct: Math.round(q.y) })
+      : t("resChipCovered", { pct: Math.round(q.y) }));
 }
 
 function clearPlayReadout() {
@@ -3788,7 +3791,9 @@ function clearPlayReadout() {
 // is — never "~-$X/mo". Null-safe (missing tariff stays missing).
 function fmtBillAfter(usd) {
   if (usd === null || usd === undefined) return null;
-  return usd < 0 ? `−${money(-usd)}/mo credit` : `~${money(usd)}/mo`;
+  return usd < 0
+    ? t("resCreditMo", { amount: money(-usd) })
+    : t("resPerMo", { amount: money(usd) });
 }
 
 function renderFocusPanel(p, entry, isPreview) {
@@ -3803,10 +3808,10 @@ function renderFocusPanel(p, entry, isPreview) {
   const sel = resolveSelected(p);
   const isRec = !isPreview && (!sel || !p.best || sameSystem(sel, p.best));
   $("focusTitle").textContent = isPreview
-    ? "🔎 Preview — release to select"
+    ? t("resPreviewRelease")
     : isRec
-      ? "★ Recommended"
-      : "👆 Selected system";
+      ? t("resRecommended")
+      : t("resSelectedSystem");
   const chips = $("focusChips");
   chips.innerHTML = "";
   // Wraps instead of clipping: nowrap put this chip 34px past a 241px parent at
@@ -3865,9 +3870,9 @@ function renderFocusPanel(p, entry, isPreview) {
       chip(
         "⚡",
         `−${entry.cutPct}%`,
-        reserveHeldPct > 0 ? "bill cut, no reserve held" : "bill cut",
+        reserveHeldPct > 0 ? t("resBillCutNoReserve") : t("resBillCutChip"),
       );
-    else chip("⚡", `${entry.cutPct}%`, "peak offset");
+    else chip("⚡", `${entry.cutPct}%`, t("resPeakOffsetChip"));
   }
   if (
     entry.billAfterMonthlyUsd !== null &&
@@ -3911,7 +3916,7 @@ function renderFocusPanel(p, entry, isPreview) {
         cost: money(p.best.lifetimeCostMid),
       });
     else if (!isPreview && isRec && p.bestReason)
-      note.textContent = p.bestReason;
+      note.textContent = localizedBestReason(p);
     else note.textContent = "";
   }
 }
@@ -4026,7 +4031,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261110c",
+      "./assets/js/sizing/sizing-worker.js?v=20261110f",
       {
         type: "module",
       },
@@ -4564,9 +4569,7 @@ function renderBatteryComparison(p, selectedSystem) {
         el(
           "div",
           { class: "bom-badge" },
-          isCold
-            ? "❄️ Cold Champion — Recommended"
-            : "✅ Best Value — Recommended",
+          isCold ? t("resColdChampion") : t("resBestValue"),
         ),
       );
     } else if (isAGM) {
@@ -4578,7 +4581,7 @@ function renderBatteryComparison(p, selectedSystem) {
             style:
               "background: rgba(239,68,68,0.15); color: rgb(239,68,68); border-color: rgba(239,68,68,0.35);",
           },
-          "⚠️ Reference Only — Not Recommended",
+          t("resReferenceOnly"),
         ),
       );
     }
@@ -5227,17 +5230,15 @@ function renderBestPick(p) {
   card.style.borderColor = "var(--border-glow)";
   const title =
     b.pvKw === 0 && b.battKwh > 0
-      ? `${b.chemLabel}: ${fmt(b.battKwh)} kWh battery (peak-hour offset)`
+      ? t("resRowPeakOffset", { chem: b.chemLabel, kwh: fmt(b.battKwh) })
       : b.battKwh === 0
-        ? `${b.chemLabel}: ${b.pvKw} kW solar (no battery needed)`
-        : `${b.chemLabel}: ${b.pvKw} kW solar + ${fmt(b.battKwh)} kWh battery`;
-  card.appendChild(
-    el(
-      "div",
-      { class: "bom-badge" },
-      "Recommended \u2014 safety-first true-cost pick",
-    ),
-  );
+        ? t("resRowNoBattery", { chem: b.chemLabel, kw: b.pvKw })
+        : t("resRowSolarPlus", {
+            chem: b.chemLabel,
+            kw: b.pvKw,
+            kwh: fmt(b.battKwh),
+          });
+  card.appendChild(el("div", { class: "bom-badge" }, t("resRecommendedWhy")));
   card.appendChild(el("h3", {}, title));
   const rows = [
     ["Solar array", b.pvKw > 0 ? `${b.pvKw} kW` : "None (Battery-only)"],
@@ -5296,13 +5297,10 @@ function renderBestPick(p) {
     b.trueBreakEvenYear === null &&
     b.replacementsHorizon > 0
   ) {
-    rows.push([
-      "True 20-yr break-even",
-      "never \u2014 replacements outpace savings",
-    ]);
+    rows.push([t("resRowTrueBreakeven"), t("resRowNever")]);
   } else if (!p.tariff && b.paybackYearsLo !== null) {
     rows.push([
-      "Pays for itself in",
+      t("resRowPaysForItself"),
       fmtPaybackRange(b.paybackYearsLo, b.paybackYearsHi),
     ]);
   }
@@ -5318,22 +5316,21 @@ function renderBestPick(p) {
           style:
             "font-size:0.85rem;color:var(--text-main);margin-top:0.7rem;line-height:1.55;",
         },
-        p.bestReason,
+        localizedBestReason(p),
       ),
     );
   }
-  const compareHint = isGT
-    ? solvablePool.length >= 2
-      ? " Click any cell in the matrix below to see that exact system in every chart and the hardware list."
-      : " The matrix shows why the other chemistries weren't practical at this site."
-    : solvablePool.length >= 2
-      ? " Use the tabs above to compare every option side by side."
-      : " The matrix shows why the other chemistries weren't practical at this site.";
+  const compareHint =
+    isGT && solvablePool.length >= 2
+      ? " " + t("resMatrixHintClickBoth")
+      : solvablePool.length >= 2
+        ? " " + t("resMatrixHintTabs")
+        : " " + t("resMatrixHintWhyNot");
   card.appendChild(
     el(
       "p",
       { style: "font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;" },
-      `${p.autoNote}.${compareHint}`,
+      `${localizedAutoNote(p)}.${compareHint}`,
     ),
   );
   wrap.appendChild(card);
@@ -5693,22 +5690,125 @@ function renderEli5Card(p, sys, paths = null) {
 }
 
 /** Compact column labels for the matrix header. */
+// The auto-card note, rebuilt in the visitor's language (#365). The engine
+// still ships the English `autoNote` string as the payload contract; the parts
+// beside it name the chemistries and the basis id so the sentence can be
+// rendered in the visitor's own language.
+// One literal per target id, switched here rather than built by string
+// concatenation: the key-existence gate scans for literal translate calls, and
+// a concatenated key would be invisible to it - exactly how an untranslated
+// sentence ships silently.
+function basisPhrase(kind, id) {
+  if (kind === "offgrid") {
+    if (id === "tier100") return t("resBasisTier100");
+    if (id === "tier99") return t("resBasisTier99");
+    if (id === "tier95") return t("resBasisTier95");
+    return "";
+  }
+  if (kind === "battery") {
+    if (id === "cut10") return t("resBasisPeak10");
+    if (id === "cut15") return t("resBasisPeak15");
+    if (id === "cut20") return t("resBasisPeak20");
+    return "";
+  }
+  switch (id) {
+    case "cut10":
+      return t("resBasisCut10");
+    case "cut15":
+      return t("resBasisCut15");
+    case "cut20":
+      return t("resBasisCut20");
+    case "cut25":
+      return t("resBasisCut25");
+    case "cut30":
+      return t("resBasisCut30");
+    case "cut60":
+      return t("resBasisCut60");
+    case "cut80":
+      return t("resBasisCut80");
+    case "cut95":
+      return t("resBasisCut95");
+    default:
+      return "";
+  }
+}
+
+function localizedAutoNote(p) {
+  const parts = p && p.autoNoteParts;
+  if (!parts) return (p && p.autoNote) || "";
+  const basis = basisPhrase(parts.kind, parts.effective);
+  if (parts.fallback) {
+    return t("resAutoFallback", {
+      requested: basisPhrase(parts.kind, parts.requested),
+      effective: basis,
+    });
+  }
+  const names = parts.names || [];
+  if (names.length >= 2)
+    return t("resAutoNoteTwo", {
+      a: names[0],
+      b: names[1],
+      basis,
+    });
+  if (names.length === 1) return t("resAutoNoteOne", { a: names[0], basis });
+  return t("resAutoNoteNone", { basis });
+}
+
+// The recommendation's reason, rebuilt in the visitor's language (#365).
+// `bestReasonParts` is the structured walk behind the engine's English prose;
+// when it is absent (an old cached payload) the English string is used as-is,
+// because showing nothing is worse than showing the language the payload has.
+function localizedBestReason(p) {
+  const parts = p && p.bestReasonParts;
+  if (!parts) return (p && p.bestReason) || "";
+  const ahead =
+    parts.gapPct !== null && parts.runnerUpChem
+      ? t("resAhead", { pct: parts.gapPct, chem: parts.runnerUpChem })
+      : "";
+  let why;
+  if (parts.kind === "naion") {
+    why =
+      t("resWhyNaion", { chem: parts.chem, ahead }) +
+      (parts.lfpCheaper
+        ? t("resWhyNaionLfpCheaper")
+        : t("resWhyNaionCostWin")) +
+      (parts.cold ? t("resWhyNaionCold") : "");
+  } else if (parts.kind === "lfp") {
+    why =
+      t("resWhyLfp", { chem: parts.chem, ahead }) +
+      (parts.cold ? t("resWhyLfpCold") : t("resWhyLfpWarm"));
+  } else {
+    why = t("resWhyOther", { chem: parts.chem, ahead, n: parts.swaps });
+  }
+  const tail =
+    parts.alternatives >= 2
+      ? t("resTailOthers")
+      : parts.alternatives === 1
+        ? t("resTailOne")
+        : t("resTailNone");
+  const agm =
+    parts.agmSwaps !== null ? t("resAgmRef", { n: parts.agmSwaps }) : "";
+  return `${why}${tail}${agm}`;
+}
+
 function matrixColShort(p, col) {
   if (p.mode === "gridtie") {
     if (col.custom)
       return (
         col.label ||
-        `Your ~${p.customCut ? Math.round(p.customCut.fraction * 100) : 80}% target`
+        t("resColCustom", {
+          pct: p.customCut ? Math.round(p.customCut.fraction * 100) : 80,
+        })
       );
     return col.id === "cut60"
-      ? "\u221260% bill"
+      ? t("resColBill60")
       : col.id === "cut80"
-        ? "\u221280% bill"
+        ? t("resColBill80")
         : col.id === "cut95"
-          ? "\u221295% bill"
+          ? t("resColBill95")
           : col.label
             ? col.label.split("\u2014")[0].trim()
-            : `\u2212${col.id.replace("cut", "")}% bill`;
+            : t("resChipBillCut", { pct: col.id.replace("cut", "") });
   }
   return col.label.split("\u2014")[0].trim();
 }
@@ -5823,13 +5923,11 @@ function matrixHtml(p) {
     })
     .join("");
   const hint =
-    p.mode === "gridtie"
-      ? "Green outline = lowest true 20-year cost in that column. Click any cell to make it the system shown in every chart, the hardware list, and the export figures below. The \u201Cyour target\u201D column follows the slider."
-      : 'Green outline = lowest true 20-year cost in that column (every bank swap counted). "Unmet" hours are covered by a generator or the grid.';
+    p.mode === "gridtie" ? t("resMatrixLegend") : t("resMatrixLegendOffgrid");
   return (
     // tabindex + role + name: the wrap scrolls sideways and has no focusable
     // child, so a keyboard could not reach it (WCAG 2.1.1).
-    `<div class="matrix-wrap" tabindex="0" role="region" aria-label="${escapeAttr(t("matrixScroll"))}"><table class="matrix-table"><thead><tr><th>Battery \u2193 \u00B7 Goal \u2192</th>${head}</tr></thead><tbody>${body}</tbody></table></div>` +
+    `<div class="matrix-wrap" tabindex="0" role="region" aria-label="${escapeAttr(t("matrixScroll"))}"><table class="matrix-table"><thead><tr><th>${escapeHtml(t("resMatrixBatteryGoalHeader"))}</th>${head}</tr></thead><tbody>${body}</tbody></table></div>` +
     `<p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.55;">${hint}</p>`
   );
 }
@@ -6016,20 +6114,14 @@ function pushSeriesBreakdown(rows, entry) {
     entry && entry.cumCostSeries ? seriesBreakdown(entry.cumCostSeries) : null;
   if (!bd || bd.systemTotal === null || bd.residualBills === 0) return;
   if (bd.residualBills > 0) {
-    rows.push(["Remaining 20-yr bills", `~${money(bd.residualBills)}`]);
-    rows.push([
-      "All-in over 20 yrs (system + bills)",
-      `~${money(bd.withSolar)}`,
-    ]);
+    rows.push([t("resLblRemainingBills"), `~${money(bd.residualBills)}`]);
+    rows.push([t("resLblAllIn"), `~${money(bd.withSolar)}`]);
   } else {
     // Net metering: the feed-in credit on surplus out-earns the remaining
     // bill, so the residual is negative — present it as the credit it is.
+    rows.push([t("resLblNetFeedCredit"), `~${money(-bd.residualBills)}`]);
     rows.push([
-      "Net feed-in credit over 20 yrs",
-      `~${money(-bd.residualBills)}`,
-    ]);
-    rows.push([
-      "All-in over 20 yrs (system \u2212 credit)",
+      t("resLblAllInMinusCredit"),
       bd.withSolar < 0
         ? `~\u2212${money(-bd.withSolar)}`
         : `~${money(bd.withSolar)}`,
@@ -6049,69 +6141,82 @@ function entryDetailRows(p, e) {
       p.matrix.rows.find((r) => r.id === e.chemistry)?.label) ||
     e.chemistry ||
     "—";
-  rows.push(["Chemistry", chemLabel]);
+  rows.push([t("resLblChemistry"), chemLabel]);
   // The same wording the card above uses: this row is the selected system's
   // own spec sheet, and "0 kW" beside a card reading "None (Battery-only)"
   // described one system two ways.
   rows.push([
-    "Solar array",
-    e.pvKw > 0 ? `${e.pvKw} kW` : "None (Battery-only)",
+    t("resLblSolarArray"),
+    e.pvKw > 0 ? `${e.pvKw} kW` : t("resValNoPv"),
   ]);
   rows.push([
-    "Battery (usable)",
+    t("resLblBatteryUsable"),
     e.battKwh > 0
-      ? `${fmt(e.battKwh)} kWh${e.battNameplateKwh ? ` — ~${fmt(e.battNameplateKwh)} nameplate` : ""}`
-      : "none needed",
+      ? `${fmt(e.battKwh)} kWh${
+          e.battNameplateKwh
+            ? t("resValNameplate", { kwh: fmt(e.battNameplateKwh) })
+            : ""
+        }`
+      : t("resValNoBatt"),
   ]);
   const foot = footprintText(e.pvKw);
-  if (foot) rows.push(["Footprint", foot]);
+  if (foot) rows.push([t("resLblFootprint"), foot]);
   if (e.cutPct !== undefined && e.cutPct !== null) {
     rows.push([
-      p.mode === "gridtie" ? "Bill cut" : "Coverage",
+      t(p.mode === "gridtie" ? "resLblBillCut" : "resLblCoverage"),
       p.mode === "gridtie"
         ? e.pvKw > 0
           ? `-${e.cutPct}%`
-          : `${e.cutPct}% peak offset`
+          : t("resValPeakOffsetPct", { pct: e.cutPct })
         : `${e.cutPct}%`,
     ]);
   }
-  rows.push(["Component cost", `~${moneyRange(e.costLo, e.costHi)}`]);
+  rows.push([t("resLblComponentCost"), `~${moneyRange(e.costLo, e.costHi)}`]);
   const baEntry = fmtBillAfter(e.billAfterMonthlyUsd);
   if (baEntry !== null) {
-    rows.push([e.pvKw > 0 ? "Bill after solar" : "Bill after", baEntry]);
+    rows.push([
+      t(e.pvKw > 0 ? "resLblBillAfterSolar" : "resLblBillAfter"),
+      baEntry,
+    ]);
   }
   if (e.importedKwhPerYear !== undefined && e.importedKwhPerYear !== null) {
-    rows.push(["Imported from grid", `${fmt(e.importedKwhPerYear)} kWh/yr`]);
+    rows.push([t("resLblImported"), `${fmt(e.importedKwhPerYear)} kWh/yr`]);
   }
   if (e.clippedKwhPerYear !== undefined && e.clippedKwhPerYear !== null) {
     const feed =
       e.exportValueAnnualUsd > 0
-        ? ` · feed-in +${money(e.exportValueAnnualUsd)}/yr`
-        : " · enter a feed-in credit to value it";
+        ? t("resValFeedIn", { amount: money(e.exportValueAnnualUsd) })
+        : t("resValFeedInNone");
     rows.push([
-      p.mode === "gridtie" ? "Surplus clipped" : "Sun clipped",
+      t(p.mode === "gridtie" ? "resLblSurplusClipped" : "resLblSunClipped"),
       `${fmt(e.clippedKwhPerYear)} kWh/yr${feed}`,
     ]);
   }
   if (e.paybackYearsLo !== null && e.paybackYearsLo !== undefined) {
     rows.push([
-      "Pays back its first cost in",
+      t("resLblPaysBack"),
       fmtPaybackRange(e.paybackYearsLo, e.paybackYearsHi),
     ]);
   }
   if (typeof e.trueBreakEvenYear === "number") {
-    rows.push(["True 20-yr break-even", `Year ${e.trueBreakEvenYear}`]);
+    rows.push([
+      t("resLblTrueBreakeven"),
+      t("resValYear", { n: e.trueBreakEvenYear }),
+    ]);
   } else if (e.trueBreakEvenYear === null && e.replacementsHorizon > 0) {
-    rows.push(["True 20-yr break-even", "never — swaps outpace savings"]);
+    rows.push([t("resLblTrueBreakeven"), t("resValNeverSwaps")]);
   }
   if (e.replacementsHorizon > 0 && e.battKwh > 0) {
     rows.push([
-      "Battery swaps over 20 yr",
-      `~${e.replacementsHorizon}x — adds ~${money(e.swapsAndLaborUsd)} with labor`,
+      t("resLblBatterySwaps"),
+      t("resValSwaps", {
+        n: e.replacementsHorizon,
+        amount: money(e.swapsAndLaborUsd),
+      }),
     ]);
   }
   if (Number.isFinite(e.lifetimeCostMid)) {
-    rows.push(["Total 20-year cost", `~${money(e.lifetimeCostMid)}`]);
+    rows.push([t("resLblTotalCost"), `~${money(e.lifetimeCostMid)}`]);
   }
   pushSeriesBreakdown(rows, e);
   if (Number.isFinite(e.lcoeUsdPerKwh)) {
@@ -6119,12 +6224,15 @@ function entryDetailRows(p, e) {
   }
   if (e.unmetHoursPerYear !== undefined && e.unmetHoursPerYear !== null) {
     rows.push([
-      "Unmet hours",
-      `${fmt(e.unmetHoursPerYear)} h/yr · longest gap ${fmt(e.longestGapHours ?? 0)} h`,
+      t("resLblUnmetHours"),
+      t("resValUnmet", {
+        h: fmt(e.unmetHoursPerYear),
+        gap: fmt(e.longestGapHours ?? 0),
+      }),
     ]);
   }
   if (e.bestPriceCallout) {
-    rows.push(["Scenario note", bestPriceNote(e)]);
+    rows.push([t("resLblScenarioNote"), bestPriceNote(e)]);
   }
   return rows;
 }
@@ -6174,10 +6282,7 @@ function showSystemModal(p, entry, adopt) {
           style:
             "font-size:0.78rem;color:var(--text-muted);margin-top:0.7rem;line-height:1.5;",
         },
-        "Every figure is computed from the same hourly weather simulation as the cards — nothing here is estimated by eye." +
-          (p.tariff
-            ? ""
-            : " Enter your grid price above to see payback vs. your bill."),
+        t("resModalNote") + (p.tariff ? "" : t("resModalNoteNoTariff")),
       ),
     );
   }
@@ -6783,21 +6888,21 @@ function renderTargetCards(p, extraTargets = []) {
 
   grid.innerHTML = "";
 
-  for (const t of (p.targets || []).concat(extraTargets)) {
-    const isCustom = t.id === "custom";
+  for (const tg of (p.targets || []).concat(extraTargets)) {
+    const isCustom = tg.id === "custom";
 
-    const targetKey = isCustom ? "custom" : "target:" + t.id;
+    const targetKey = isCustom ? "custom" : "target:" + tg.id;
 
     const isSelected = selectedKey === targetKey;
 
     const card = el("div", {
       class:
         "bom-card" +
-        (t.solvable ? " card-selectable" : "") +
+        (tg.solvable ? " card-selectable" : "") +
         (isSelected ? " bom-card-selected" : ""),
     });
 
-    if (t.solvable) {
+    if (tg.solvable) {
       card.setAttribute("role", "button");
       card.setAttribute("tabindex", "0");
       card.style.cursor = "pointer";
@@ -6819,7 +6924,7 @@ function renderTargetCards(p, extraTargets = []) {
 
     card.style.borderColor = isSelected
       ? "var(--primary-accent)"
-      : isCustom || t.id === "cut80"
+      : isCustom || tg.id === "cut80"
         ? "var(--border-glow)"
         : "var(--border-card)";
 
@@ -6827,11 +6932,11 @@ function renderTargetCards(p, extraTargets = []) {
       el(
         "div",
         { class: "bom-badge" },
-        t.solvable
+        tg.solvable
           ? isCustom
-            ? `Your target \u2014 bill -${t.cutPct}%`
-            : `Bill -${t.cutPct}%`
-          : "Not reachable",
+            ? t("resBadgeYourTarget", { pct: tg.cutPct })
+            : t("resBadgeBill", { pct: tg.cutPct })
+          : t("resBadgeUnreachable"),
       ),
     );
 
@@ -6840,12 +6945,14 @@ function renderTargetCards(p, extraTargets = []) {
         "h3",
         {},
         isCustom
-          ? `Your ~${Math.round((t.minFraction || 1) * 100)}% target`
-          : t.label,
+          ? t("resColCustom", {
+              pct: Math.round((tg.minFraction || 1) * 100),
+            })
+          : tg.label,
       ),
     );
 
-    if (!t.solvable) {
+    if (!tg.solvable) {
       card.appendChild(el("p", {}, t("billCutImpossible")));
 
       grid.appendChild(card);
@@ -6854,87 +6961,88 @@ function renderTargetCards(p, extraTargets = []) {
     }
 
     const rows = [
-      ["Solar array", `${t.pvKw} kW`],
+      ["Solar array", `${tg.pvKw} kW`],
 
       [
         "Battery (usable)",
-        t.battKwh > 0
-          ? `${fmt(t.battKwh)} kWh - ~${fmt(t.battNameplateKwh)} nameplate`
+        tg.battKwh > 0
+          ? `${fmt(tg.battKwh)} kWh - ~${fmt(tg.battNameplateKwh)} nameplate`
           : "none needed",
       ],
 
-      ["Component cost", `~${moneyRange(t.costLo, t.costHi)}`],
+      ["Component cost", `~${moneyRange(tg.costLo, tg.costHi)}`],
 
       [
-        t.pvKw > 0 ? "Bill after solar" : "Bill after",
-        (fmtBillAfter(t.billAfterMonthlyUsd) ?? "needs your tariff") +
-          (t.billAfterMonthlyUsd !== null && t.billAfterMonthlyUsd !== undefined
+        tg.pvKw > 0 ? "Bill after solar" : "Bill after",
+        (fmtBillAfter(tg.billAfterMonthlyUsd) ?? "needs your tariff") +
+          (tg.billAfterMonthlyUsd !== null &&
+          tg.billAfterMonthlyUsd !== undefined
             ? ` (was ~${money(Math.round(p.annualGridSpendUsd / 12))})`
             : ""),
       ],
 
-      ["Imported from grid", `${fmt(t.importedKwhPerYear)} kWh/yr`],
+      ["Imported from grid", `${fmt(tg.importedKwhPerYear)} kWh/yr`],
     ];
 
-    const footTarget = t.pvKw > 0 ? footprintText(t.pvKw) : null;
+    const footTarget = tg.pvKw > 0 ? footprintText(tg.pvKw) : null;
 
     if (footTarget) rows.splice(2, 0, ["Footprint", footTarget]);
 
-    const exportActive = t.exportValueAnnualUsd > 0;
+    const exportActive = tg.exportValueAnnualUsd > 0;
 
     if (exportActive) {
       rows.push([
         "Feed-in credit on clipped sun",
-        `+${money(t.exportValueAnnualUsd)}/yr (${fmt(t.clippedKwhPerYear)} kWh clipped)`,
+        `+${money(tg.exportValueAnnualUsd)}/yr (${fmt(tg.clippedKwhPerYear)} kWh clipped)`,
       ]);
-    } else if (t.clippedKwhPerYear > 50) {
+    } else if (tg.clippedKwhPerYear > 50) {
       rows.push([
         "Sun clipped (no export)",
-        `${fmt(t.clippedKwhPerYear)} kWh/yr - enter a feed-in credit to value it`,
+        `${fmt(tg.clippedKwhPerYear)} kWh/yr - enter a feed-in credit to value it`,
       ]);
     }
 
-    if (t.paybackYearsLo !== null && t.paybackYearsHi !== null) {
+    if (tg.paybackYearsLo !== null && tg.paybackYearsHi !== null) {
       rows.push([
         "Pays back its first cost in",
-        fmtPaybackRange(t.paybackYearsLo, t.paybackYearsHi) +
+        fmtPaybackRange(tg.paybackYearsLo, tg.paybackYearsHi) +
           (exportActive ? " incl. feed-in" : ""),
       ]);
     }
 
     if (
-      t.battKwh > 0 &&
-      (typeof t.trueBreakEvenYear === "number" ||
-        (t.trueBreakEvenYear === null && t.replacementsHorizon > 0))
+      tg.battKwh > 0 &&
+      (typeof tg.trueBreakEvenYear === "number" ||
+        (tg.trueBreakEvenYear === null && tg.replacementsHorizon > 0))
     ) {
       rows.push([
         "Breaks even on true 20-yr cost",
-        typeof t.trueBreakEvenYear === "number"
-          ? `\u2248 year ${t.trueBreakEvenYear} (every swap counted)`
+        typeof tg.trueBreakEvenYear === "number"
+          ? `\u2248 year ${tg.trueBreakEvenYear} (every swap counted)`
           : "never \u2014 swaps outpace savings",
       ]);
     }
 
-    if (Number.isFinite(t.lcoeUsdPerKwh)) {
+    if (Number.isFinite(tg.lcoeUsdPerKwh)) {
       rows.push(powerCostRow(t, p.tariff));
     }
 
-    if (t.replacementsHorizon > 0 && t.battKwh > 0) {
+    if (tg.replacementsHorizon > 0 && tg.battKwh > 0) {
       rows.push([
         "Battery swaps over 20 yr",
-        `~${t.replacementsHorizon}x - adds ~${money(t.swapsAndLaborUsd)} with labor`,
+        `~${tg.replacementsHorizon}x - adds ~${money(tg.swapsAndLaborUsd)} with labor`,
       ]);
     }
 
-    if (t.battKwh > 0) {
-      rows.push(["Total 20-year cost", `~${money(t.lifetimeCostMid)}`]);
+    if (tg.battKwh > 0) {
+      rows.push(["Total 20-year cost", `~${money(tg.lifetimeCostMid)}`]);
     }
 
     pushSeriesBreakdown(rows, t);
 
     appendRows(card, rows);
 
-    if (t.bestPriceCallout) {
+    if (tg.bestPriceCallout) {
       card.appendChild(
         el("div", { class: "best-price-callout" }, `💡 ${bestPriceNote(t)}`),
       );
@@ -9116,11 +9224,11 @@ async function initSizingUI() {
     // can click, and the browser smoke gate polls for the ready flag
     // rather than assuming it. Without the loader the CTA is a plain
     // link — the same fallback the loader's own catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261110c")
+    import("../shared/translation-suggestion-loader.js?v=20261110f")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261110c"),
+          () => import("../translation-suggestion.js?v=20261110f"),
         );
       })
       .catch(() => {});
