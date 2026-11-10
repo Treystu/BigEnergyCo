@@ -15,7 +15,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { runCase } from "../scripts/champion-audit-sizeForBillCut.mjs";
+import {
+  runCase,
+  summarize,
+} from "../scripts/champion-audit-sizeForBillCut.mjs";
 
 const ENVELOPE = {
   pvMax: 8,
@@ -66,9 +69,67 @@ test("#347: the rendered bill cut is the constrained fraction (net-metered, 80%)
     result.rendered.fraction + 1e-9 >= 0.8,
     `rendered cut ${result.rendered.fraction} must meet the 0.8 target`,
   );
+  // The printed integer is what a visitor reads, so the label claim is checked
+  // against it, and the error is a MAGNITUDE - rounding 81.45% up to 82% is as
+  // wrong as rounding it down to 81%.
+  assert.equal(
+    result.rendered.pct,
+    Math.round(result.rendered.fraction * 100),
+    "the audited label must be the integer run.js prints",
+  );
   assert.ok(
-    result.rendered.mismatchPp <= 0.5,
+    Math.abs(result.rendered.mismatchPp) <= 0.5,
     `label mismatch ${result.rendered.mismatchPp} pp exceeds the 0.5 pp margin`,
+  );
+  // Overshoot against the target is a different quantity and must be recorded
+  // as itself, not as a label defect.
+  assert.ok(
+    result.rendered.targetOffsetPp >= 0,
+    "a pick that meets the target cannot come out below it",
+  );
+});
+
+test("#347: the aggregate reports target offset at its true magnitude, not zero", () => {
+  // Regression for the audit's own first pass: target offset was computed as
+  // (target - outcome), i.e. negative whenever the search overshot, and the
+  // aggregate reduced those signed values with Math.max(…, 0), so a case sitting
+  // 1.74 pp past its target published as "max label mismatch 0.00 pp".
+  const synthetic = (over) => ({
+    champion: { meetsConstraint: true },
+    regret: 0,
+    searchRegret: 0,
+    rendered: {
+      metric: "bill-cut",
+      fraction: 0.8174,
+      pct: 82,
+      target: 0.8,
+      mismatchPp: 0.26,
+      targetOffsetPp: 1.74,
+      ...over,
+    },
+  });
+  const summary = summarize([synthetic({}), synthetic({})]);
+  assert.ok(
+    summary.maxTargetOvershootPp > 1.7,
+    `overshoot must survive aggregation, got ${summary.maxTargetOvershootPp}`,
+  );
+  assert.ok(
+    summary.maxMismatchPp < 0.5,
+    `label truth is rounding-bounded, got ${summary.maxMismatchPp}`,
+  );
+  assert.equal(summary.labelBreaches.length, 0);
+  // A shortfall is the direction that matters to a visitor and must stay signed.
+  const shortfall = summarize([
+    synthetic({
+      fraction: 0.795,
+      pct: 80,
+      mismatchPp: -0.5,
+      targetOffsetPp: -0.5,
+    }),
+  ]);
+  assert.ok(
+    shortfall.maxTargetShortfallPp < -0.4,
+    `shortfall must survive aggregation, got ${shortfall.maxTargetShortfallPp}`,
   );
 });
 

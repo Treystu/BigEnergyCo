@@ -31,12 +31,18 @@
 // champion picked, which no grid resolution can explain away.
 //
 // LABEL AUDIT. #347 also asks whether a rendered "cut %" equals the fraction the
-// search constrained. Two regimes are excluded from that numeric comparison on
-// purpose, because their labels are not bill-cut percentages and run.js already
-// renders them differently: battery-only mode renders "peak-hour offset"
-// (cut10/15/20), and a >100% target without a feed-in credit renders the
-// physical-surplus condition (imports ~0 plus produced surplus). Both are judged
-// by `meetsConstraint` instead, which is the honest test for those labels.
+// search constrained. run.js prints `Math.round(billCutFraction * 100)`, so the
+// measured quantity is |printed integer - simulated outcome|, which is bounded
+// by display rounding and is zero only if that round-trip is exact. It is NOT
+// the gap between the outcome and the target the visitor asked for: the search
+// must MEET the target and overshoots it by up to a binary-search step, which is
+// reported separately (`targetOffsetPp`, signed) and never counted as a lying
+// label. Two regimes are excluded from the numeric comparison on purpose,
+// because their labels are not bill-cut percentages and run.js already renders
+// them differently: battery-only mode renders "peak-hour offset" (cut10/15/20),
+// and a >100% target without a feed-in credit renders the physical-surplus
+// condition (imports ~0 plus produced surplus). Both are judged by
+// `meetsConstraint` instead, which is the honest test for those labels.
 //
 // ACCEPTANCE (from #347). A finer/exact search ships only if champion
 // lifetime-cost regret exceeds 2% OR label-vs-simulated-cut mismatch exceeds
@@ -355,11 +361,22 @@ export function runCase(entry, envelope = DEFAULT_ENVELOPE) {
     : physicalSurplus
       ? "physical-surplus"
       : "bill-cut";
-  // Only the bill-cut regimes carry a numeric cut label. The other two are
-  // judged by meetsConstraint, so their numeric mismatch is 0 by construction,
-  // not because the champion was given a pass.
-  const labelMismatchPp =
-    renderedLabel === "bill-cut" ? (f - renderedFraction) * 100 : 0;
+  // The label's own truth test. run.js prints the outcome as a whole percent
+  // (`gridtieCutPct` = Math.round(fraction * 100), or the peak offset when the
+  // pick carries no PV), so what a visitor can be misled by is the gap between
+  // that printed integer and the simulated outcome - NOT the gap between the
+  // outcome and the target they asked for. The search must meet the target and
+  // routinely overshoots it; reporting an overshoot as a "label mismatch" both
+  // mislabels the finding and, because the overshoot is signed negative in that
+  // formula, let the aggregate floor every case to 0.00 pp.
+  const renderedPct = Math.round(renderedFraction * 100);
+  const labelMismatchPp = (renderedPct / 100 - renderedFraction) * 100;
+  // Signed shortfall (-) / overshoot (+) against the requested target. Only
+  // bill-cut rows have a comparable numeric target: peak rows render a peak
+  // offset and a >100% target without a credit renders the physical-surplus
+  // condition, so neither has a cut percentage to compare.
+  const targetOffsetPp =
+    renderedLabel === "bill-cut" ? (renderedFraction - f) * 100 : null;
 
   return {
     ...entry,
@@ -391,8 +408,11 @@ export function runCase(entry, envelope = DEFAULT_ENVELOPE) {
     rendered: {
       metric: renderedLabel,
       fraction: +renderedFraction.toFixed(6),
+      pct: renderedPct,
       target: f,
       mismatchPp: +labelMismatchPp.toFixed(4),
+      targetOffsetPp:
+        targetOffsetPp === null ? null : +targetOffsetPp.toFixed(4),
     },
     regret: +regret.toFixed(6),
     regretUsd: +(champObj - controlCost).toFixed(2),
@@ -404,9 +424,17 @@ export function runCase(entry, envelope = DEFAULT_ENVELOPE) {
   };
 }
 
-function main() {
-  // Wrapped, not passed bare: Array.map would hand the index to `envelope`.
-  const cases = CORPUS.map((entry) => runCase(entry));
+/**
+ * Acceptance arithmetic, split out so it can be tested without an 8-case sweep.
+ *
+ * The label comparison is a MAGNITUDE: a printed 81% against a simulated
+ * 81.45% is 0.45 pp off, and so is a printed 82%. Reducing signed errors with
+ * Math.max would report both as whatever the most-positive case happened to be
+ * (0), which is how the first pass of this audit claimed 0.00 pp while a case
+ * sat 1.74 pp past its target. Target offset is therefore carried as its own
+ * quantity, signed and unbounded, and never folded into the label verdict.
+ */
+export function summarize(cases) {
   const measured = cases.filter((c) => c.champion);
   const maxRegret = measured.reduce((m, c) => Math.max(m, c.regret), 0);
   const maxSearchRegret = measured.reduce(
@@ -414,18 +442,53 @@ function main() {
     0,
   );
   const maxMismatchPp = measured.reduce(
-    (m, c) => Math.max(m, c.rendered.mismatchPp),
+    (m, c) => Math.max(m, Math.abs(c.rendered.mismatchPp)),
+    0,
+  );
+  const billCut = measured.filter((c) => c.rendered.targetOffsetPp !== null);
+  const maxTargetOvershootPp = billCut.reduce(
+    (m, c) => Math.max(m, c.rendered.targetOffsetPp),
+    0,
+  );
+  const maxTargetShortfallPp = billCut.reduce(
+    (m, c) => Math.min(m, c.rendered.targetOffsetPp),
     0,
   );
   const regretBreaches = measured.filter((c) => c.regret > REGRET_LIMIT);
   const labelBreaches = measured.filter(
-    (c) => c.rendered.mismatchPp > LABEL_LIMIT_PP,
+    (c) => Math.abs(c.rendered.mismatchPp) > LABEL_LIMIT_PP,
   );
   const challengerShips = regretBreaches.length > 0 || labelBreaches.length > 0;
 
-  const verdict = challengerShips
-    ? "CHALLENGER QUALIFIES - a corpus case exceeds the 2% regret or 0.5 pp label margin, so a finer/exact search is in scope"
-    : "NO CHANGE - champion regret and label mismatch are inside the stated margins on the corpus, so the shipped search and its labels stay";
+  return {
+    measured,
+    maxRegret,
+    maxSearchRegret,
+    maxMismatchPp,
+    maxTargetOvershootPp,
+    maxTargetShortfallPp,
+    regretBreaches,
+    labelBreaches,
+    verdict: challengerShips
+      ? "CHALLENGER QUALIFIES - a corpus case exceeds the 2% regret or 0.5 pp label margin, so a finer/exact search is in scope"
+      : "NO CHANGE - champion regret and label mismatch are inside the stated margins on the corpus, so the shipped search and its labels stay",
+  };
+}
+
+function main() {
+  // Wrapped, not passed bare: Array.map would hand the index to `envelope`.
+  const cases = CORPUS.map((entry) => runCase(entry));
+  const {
+    measured,
+    maxRegret,
+    maxSearchRegret,
+    maxMismatchPp,
+    maxTargetOvershootPp,
+    maxTargetShortfallPp,
+    regretBreaches,
+    labelBreaches,
+    verdict,
+  } = summarize(cases);
 
   const report = {
     issue: 347,
@@ -448,6 +511,8 @@ function main() {
       maxRegret: +maxRegret.toFixed(6),
       maxSearchRegret: +maxSearchRegret.toFixed(6),
       maxLabelMismatchPp: +maxMismatchPp.toFixed(4),
+      maxTargetOvershootPp: +maxTargetOvershootPp.toFixed(4),
+      maxTargetShortfallPp: +maxTargetShortfallPp.toFixed(4),
     },
     verdict,
     cases,
@@ -459,7 +524,7 @@ function main() {
 
   console.log(out);
   console.log(
-    `cases ${measured.length}, max regret ${(maxRegret * 100).toFixed(4)}% (search-only ${(maxSearchRegret * 100).toFixed(4)}%), max label mismatch ${maxMismatchPp.toFixed(4)} pp`,
+    `cases ${measured.length}, max regret ${(maxRegret * 100).toFixed(4)}% (search-only ${(maxSearchRegret * 100).toFixed(4)}%), max label mismatch ${maxMismatchPp.toFixed(4)} pp (|printed - simulated|), target offset ${maxTargetShortfallPp.toFixed(2)}..+${maxTargetOvershootPp.toFixed(2)} pp`,
   );
   for (const c of cases) {
     if (!c.champion) {
@@ -467,7 +532,7 @@ function main() {
       continue;
     }
     console.log(
-      `  ${c.city} ${c.kwhPerDay}kWh ${c.regime} f=${c.minFraction}: champion ${c.champion.pvKw}kW/${c.champion.battKwh}kWh $${c.champion.lifetimeCostUsd} vs control ${c.control.pvKw}kW/${c.control.battKwh}kWh $${c.control.lifetimeCostUsd} -> regret ${(c.regret * 100).toFixed(4)}% (search ${c.searchRegret === null ? "n/a" : `${(c.searchRegret * 100).toFixed(4)}%`}), ${c.rendered.metric} ${(c.rendered.fraction * 100).toFixed(2)}% vs target ${(c.rendered.target * 100).toFixed(0)}%`,
+      `  ${c.city} ${c.kwhPerDay}kWh ${c.regime} f=${c.minFraction}: champion ${c.champion.pvKw}kW/${c.champion.battKwh}kWh $${c.champion.lifetimeCostUsd} vs control ${c.control.pvKw}kW/${c.control.battKwh}kWh $${c.control.lifetimeCostUsd} -> regret ${(c.regret * 100).toFixed(4)}% (search ${c.searchRegret === null ? "n/a" : `${(c.searchRegret * 100).toFixed(4)}%`}), ${c.rendered.metric} prints ${c.rendered.metric === "physical-surplus" ? "n/a" : `${c.rendered.pct}%`} for simulated ${(c.rendered.fraction * 100).toFixed(2)}% (label ${c.rendered.mismatchPp.toFixed(2)} pp), target ${(c.rendered.target * 100).toFixed(0)}%${c.rendered.targetOffsetPp === null ? "" : `, offset ${c.rendered.targetOffsetPp > 0 ? "+" : ""}${c.rendered.targetOffsetPp.toFixed(2)} pp`}`,
     );
   }
   console.log(verdict);
