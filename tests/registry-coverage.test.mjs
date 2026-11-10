@@ -11,10 +11,14 @@
 //
 //   1. COVERAGE is total against the shipped place data, so a new country
 //      partition cannot arrive without a registry row behind it.
-//   2. A SEEDED ROW IS DETERMINISTIC. The committed file is compared byte for
-//      byte with what the committed seeder produces from the same inputs, so the
-//      220 unknown rows are a generator's output rather than 220 hand-written
-//      paragraphs that could drift.
+//   2. A SEEDED ROW IS DETERMINISTIC. The committed file is compared with what
+//      the committed seeder produces from the same inputs, so the 220 unknown
+//      rows are a generator's output rather than 220 hand-written paragraphs
+//      that could drift. The comparison normalises newlines first: the seeder
+//      emits LF, while a Windows checkout with core.autocrlf=true (which
+//      .gitattributes' `* text=auto` allows) hands the file back as CRLF. That
+//      is the checkout policy talking, not the seeder - the blob in git is LF
+//      either way - so every other byte still has to match exactly.
 //   3. A SEEDED ROW CLAIMS NOTHING. Every field except currency is an explicit
 //      unknown with a note and a review date, and no seeded row carries a
 //      number, a grade or a source. This is what stops the seeder becoming a
@@ -47,7 +51,12 @@ const SOURCES = JSON.parse(
 ).sources;
 
 function readCountry(code) {
-  return readFileSync(join(REGISTRY_DIR, `${code}.json`), "utf8");
+  // Normalised to the seeder's LF so this check tests the generator, not the
+  // platform's checkout newlines. The equality assertion below is unchanged.
+  return readFileSync(join(REGISTRY_DIR, `${code}.json`), "utf8").replace(
+    /\r\n/g,
+    "\n",
+  );
 }
 
 const countryFiles = readdirSync(REGISTRY_DIR)
