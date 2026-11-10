@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261110g";
+import { APPLIANCES } from "./appliances.js?v=20261110h";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261110g";
+} from "./pwa-install.js?v=20261110h";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261110g";
+} from "./usecases.js?v=20261110h";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261110g";
+} from "./run-coordinator.js?v=20261110h";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261110g";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261110g";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261110g";
+} from "./mode-chrome.js?v=20261110h";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261110h";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261110h";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261110g";
+} from "./location-picker.js?v=20261110h";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261110g";
+} from "./pricing.js?v=20261110h";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261110g";
+import { currencyForCountry } from "./country-currency.js?v=20261110h";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261110g";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261110h";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -96,7 +96,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261110g").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261110h").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -107,15 +107,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261110g";
+} from "./lead-acid.js?v=20261110h";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261110g";
+} from "./bom.js?v=20261110h";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261110g";
+import { BOM_ITEMS } from "../shared/content.js?v=20261110h";
 
 import {
   applyI18n,
@@ -124,18 +124,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261110g";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261110g";
-import { byId as $, el } from "../shared/dom.js?v=20261110g";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261110g";
+} from "../shared/i18n.js?v=20261110h";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261110h";
+import { byId as $, el } from "../shared/dom.js?v=20261110h";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261110h";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261110g";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261110g";
+} from "../shared/simple-mode.js?v=20261110h";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261110h";
 import {
   advisorJevContext,
   interpretSanity,
@@ -143,29 +143,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261110g";
+} from "./validate.js?v=20261110h";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261110g";
+} from "../shared/cut-targets.js?v=20261110h";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261110g";
+} from "./share-codec.js?v=20261110h";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261110g";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261110g";
+} from "./infeasible-copy.js?v=20261110h";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261110h";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261110g";
+} from "./fuel-units.js?v=20261110h";
 
 import {
   createLeafletProvider,
@@ -173,18 +173,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261110g";
+} from "./map-provider.js?v=20261110h";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261110g";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261110g";
+} from "./wizard.js?v=20261110h";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261110h";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261110g";
+} from "./budget-span.js?v=20261110h";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -196,10 +196,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261110g"),
-      import("./charts.js?v=20261110g"),
-      import("./frontier-chart.js?v=20261110g"),
-      import("./rescale.js?v=20261110g"),
+      import("./engine.js?v=20261110h"),
+      import("./charts.js?v=20261110h"),
+      import("./frontier-chart.js?v=20261110h"),
+      import("./rescale.js?v=20261110h"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -267,9 +267,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261110g";
+} from "./money.js?v=20261110h";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261110g";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261110h";
 
 let worker = null;
 
@@ -3842,11 +3842,19 @@ function renderFocusPanel(p, entry, isPreview) {
       );
     chips.appendChild(s);
   };
-  if (entry.pvKw > 0) chip("☀️", `${entry.pvKw} kW`, "solar");
+  if (entry.pvKw > 0) chip("☀️", `${entry.pvKw} kW`, t("resChipSolar"));
   if (entry.battKwh > 0)
-    chip("🔋", `${fmt(entry.battKwh)} kWh`, chemShort(entry) || "battery");
+    chip(
+      "🔋",
+      `${fmt(entry.battKwh)} kWh`,
+      chemShort(entry) || t("resChipBattery"),
+    );
   if (Number.isFinite(entry.costLo) && Number.isFinite(entry.costHi))
-    chip("💵", `~${moneyRange(entry.costLo, entry.costHi)}`, "up-front");
+    chip(
+      "💵",
+      `~${moneyRange(entry.costLo, entry.costHi)}`,
+      t("resChipUpfront"),
+    );
   // The cut here is the system with its whole bank available, which is the
   // same figure the sizing search solved for. When the visitor holds a reserve
   // back, the measured result below it is lower (76% against 81%, measured
@@ -3879,23 +3887,36 @@ function renderFocusPanel(p, entry, isPreview) {
     entry.billAfterMonthlyUsd !== undefined
   ) {
     const baText = fmtBillAfter(entry.billAfterMonthlyUsd);
-    chip("🧾", baText, entry.billAfterMonthlyUsd < 0 ? "" : "bill after");
+    chip(
+      "🧾",
+      baText,
+      entry.billAfterMonthlyUsd < 0 ? "" : t("resChipBillAfter"),
+    );
   }
   if (!isGT && Number.isFinite(entry.unmetHoursPerYear))
-    chip("🔌", `${fmt(entry.unmetHoursPerYear)} h/yr`, "generator cover");
+    chip(
+      "🔌",
+      `${fmt(entry.unmetHoursPerYear)} h/yr`,
+      t("resChipGeneratorCover"),
+    );
   if (entry.paybackYearsLo !== null && entry.paybackYearsHi !== null)
     chip(
       "⏳",
       fmtPaybackRange(entry.paybackYearsLo, entry.paybackYearsHi),
-      "payback",
+      t("resChipPayback"),
     );
   else if (typeof entry.trueBreakEvenYear === "number")
-    chip("⏳", `yr ${entry.trueBreakEvenYear}`, "breaks even");
+    chip(
+      "⏳",
+      t("resValYr", { n: entry.trueBreakEvenYear }),
+      t("resChipBreaksEven"),
+    );
   if (entry.replacementsHorizon > 0)
-    chip("🔁", `~${entry.replacementsHorizon}×`, "bank swaps");
-  else if (entry.replacementsHorizon === 0) chip("🔁", "no swaps", "20 yrs");
+    chip("🔁", `~${entry.replacementsHorizon}×`, t("resChipBankSwaps"));
+  else if (entry.replacementsHorizon === 0)
+    chip("🔁", t("resChipNoSwaps"), t("resChipTwentyYrs"));
   if (Number.isFinite(entry.lifetimeCostMid))
-    chip("🏁", `~${money(entry.lifetimeCostMid)}`, "20-yr true cost");
+    chip("🏁", `~${money(entry.lifetimeCostMid)}`, t("resChipTrueCost"));
   // Lead-acid savings indicator (reference only — never recommended).
   // leadAcidComparison owns WHEN this is a real comparison (both designs need
   // a battery, and the selection must not itself be lead-acid) and what the
@@ -4031,7 +4052,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261110g",
+      "./assets/js/sizing/sizing-worker.js?v=20261110h",
       {
         type: "module",
       },
@@ -4301,7 +4322,9 @@ function energyRate(usdPerKwh) {
 }
 
 function gridRate(usdPerKwh) {
-  return Number.isFinite(usdPerKwh) ? ` (grid ${energyRate(usdPerKwh)})` : "";
+  return Number.isFinite(usdPerKwh)
+    ? t("resValGridSuffix", { rate: energyRate(usdPerKwh) })
+    : "";
 }
 
 /**
@@ -4318,11 +4341,11 @@ function gridRate(usdPerKwh) {
 function powerCostRow(entry, tariff) {
   const lcoe = energyRate(entry.lcoeUsdPerKwh);
   if (Number(entry.pvKw) > 0)
-    return ["Your power cost", lcoe + gridRate(tariff)];
+    return [t("resRowPowerCost"), lcoe + gridRate(tariff)];
   return [
-    "Cost per shifted kWh",
+    t("resRowShiftedKwh"),
     Number.isFinite(tariff)
-      ? `${lcoe} — on top of the ${energyRate(tariff)} you still pay for that energy`
+      ? t("resValShiftedRate", { rate: lcoe, grid: energyRate(tariff) })
       : lcoe,
   ];
 }
@@ -5241,29 +5264,36 @@ function renderBestPick(p) {
   card.appendChild(el("div", { class: "bom-badge" }, t("resRecommendedWhy")));
   card.appendChild(el("h3", {}, title));
   const rows = [
-    ["Solar array", b.pvKw > 0 ? `${b.pvKw} kW` : "None (Battery-only)"],
+    [t("resLblSolarArray"), b.pvKw > 0 ? `${b.pvKw} kW` : t("resValNoPv")],
     [
-      "Battery (usable)",
+      t("resLblBatteryUsable"),
       b.battKwh > 0
-        ? `${fmt(b.battKwh)} kWh \u2014 ~${fmt(b.battNameplateKwh)} nameplate`
-        : "None (Solar-only)",
+        ? `${fmt(b.battKwh)} kWh${
+            Number.isFinite(b.battNameplateKwh)
+              ? t("resValNameplate", { kwh: fmt(b.battNameplateKwh) })
+              : ""
+          }`
+        : t("resCardNoSolar"),
     ],
   ];
   const foot = b.pvKw > 0 ? footprintText(b.pvKw) : null;
-  if (foot) rows.push(["Footprint", foot]);
-  rows.push(["Cost to buy", `~${moneyRange(b.costLo, b.costHi)}`]);
+  if (foot) rows.push([t("resLblFootprint"), foot]);
+  rows.push([t("resCardCostToBuy"), `~${moneyRange(b.costLo, b.costHi)}`]);
   rows.push([
-    "Battery swaps",
+    t("resLblBatterySwaps"),
     b.replacementsHorizon > 0
       ? b.batteryLifeYears
-        ? `~${b.replacementsHorizon}x (about every ${fmtLife(b.batteryLifeYears)})`
-        : `~${b.replacementsHorizon}x`
-      : "None in 20 years",
+        ? t("resValSwapsEvery", {
+            n: b.replacementsHorizon,
+            life: fmtLife(b.batteryLifeYears),
+          })
+        : t("resValSwapsBare", { n: b.replacementsHorizon })
+      : t("resCardNoSwaps"),
   ]);
   if (b.swapsAndLaborUsd > 0)
-    rows.push(["Swaps + labor add", `~${money(b.swapsAndLaborUsd)}`]);
+    rows.push([t("resCardSwapsAdd"), `~${money(b.swapsAndLaborUsd)}`]);
   rows.push([
-    "Total 20-year cost",
+    t("resLblTotalCost"),
     `~${money(b.lifetimeCostMid)}${bestSuffix}`,
   ]);
   pushSeriesBreakdown(rows, b);
@@ -5271,24 +5301,33 @@ function renderBestPick(p) {
     if (b.battKwh > 0 && p.dailyKwh > 0) {
       const autonomyDays = (b.battKwh / p.dailyKwh).toFixed(1);
       rows.push([
-        "Battery autonomy",
-        `~${autonomyDays} days of storage with zero sun`,
+        t("resCardAutonomy"),
+        t("resValAutonomy", { days: autonomyDays }),
       ]);
     }
     rows.push([
-      "Unmet hours",
-      `${fmt(b.unmetHoursPerYear ?? 0)} h/yr \u00B7 longest gap ${fmt(b.longestGapHours ?? 0)} h`,
+      t("resLblUnmetHours"),
+      t("resValUnmet", {
+        h: fmt(b.unmetHoursPerYear ?? 0),
+        gap: fmt(b.longestGapHours ?? 0),
+      }),
     ]);
   } else {
     const baBest = fmtBillAfter(b.billAfterMonthlyUsd);
     if (baBest !== null)
-      rows.push([b.pvKw > 0 ? "Bill after solar" : "Bill after", baBest]);
+      rows.push([
+        t(b.pvKw > 0 ? "resLblBillAfterSolar" : "resLblBillAfter"),
+        baBest,
+      ]);
   }
   if (p.tariff && typeof b.trueBreakEvenYear === "number") {
-    rows.push(["Pays for itself", `Year ${b.trueBreakEvenYear}`]);
+    rows.push([
+      t("resCardPaysForItself"),
+      t("resValYear", { n: b.trueBreakEvenYear }),
+    ]);
     if (b.replacementsHorizon > 0 && b.paybackYearsLo !== null) {
       rows.push([
-        "  \u2014 first cost alone pays back in",
+        t("resCardFirstCostAlone"),
         fmtPaybackRange(b.paybackYearsLo, b.paybackYearsHi),
       ]);
     }
@@ -5884,19 +5923,22 @@ function matrixHtml(p) {
           }
           let rel;
           if (p.mode === "offgrid")
-            rel = `${fmt(cell.unmetHoursPerYear)} h/yr unmet`;
-          else if (col.id === "custom" && surplusCol)
-            rel = "bill gone + surplus";
+            rel = t("resValUnmetShort", { h: fmt(cell.unmetHoursPerYear) });
+          else if (col.id === "custom" && surplusCol) rel = t("resValBillGone");
           else
             rel =
               cell.pvKw > 0
-                ? `-${cell.cutPct}% bill`
-                : `${cell.cutPct}% peak offset`;
-          const pvText = `${cell.pvKw} kW PV`;
+                ? t("resValBillPct", { pct: cell.cutPct })
+                : t("resValPeakOffsetPct", { pct: cell.cutPct });
+          const pvText = t("resValPvKw", { kw: cell.pvKw });
           const batteryText =
-            cell.battKwh > 0 ? `${fmt(cell.battKwh)} kWh batt` : "no battery";
+            cell.battKwh > 0
+              ? t("resValBattKwh", { kwh: fmt(cell.battKwh) })
+              : t("resValNoBattery");
           const costText = `~${moneyRange(cell.costLo, cell.costHi)}`;
-          const lifetimeText = `20-yr ~${money(cell.lifetimeCostMid)}`;
+          const lifetimeText = t("resValLifetime", {
+            amount: money(cell.lifetimeCostMid),
+          });
           const lcoeText = Number.isFinite(cell.lcoeUsdPerKwh)
             ? `\u00B7 ${energyRate(cell.lcoeUsdPerKwh)}`
             : "";
@@ -8333,17 +8375,17 @@ function populatePrintSheet(p, inp) {
 
             `${t.pvKw} kW`,
 
-            t.battKwh > 0 ? `${fmt(t.battKwh)} kWh` : "none",
+            t.battKwh > 0 ? `${fmt(t.battKwh)} kWh` : t("resValNoneShort"),
 
             moneyRange(t.costLo, t.costHi),
 
-            `-${t.cutPct}% bill`,
+            t("resValBillPct", { pct: t.cutPct }),
 
-            fmtBillAfter(t.billAfterMonthlyUsd) ?? "n/a",
+            fmtBillAfter(t.billAfterMonthlyUsd) ?? t("resValNa"),
 
             t.paybackYearsLo !== null
               ? fmtPaybackRange(t.paybackYearsLo, t.paybackYearsHi)
-              : "n/a",
+              : t("resValNa"),
           ].join("</td><td>") +
           "</td></tr>",
       )
@@ -9224,11 +9266,11 @@ async function initSizingUI() {
     // can click, and the browser smoke gate polls for the ready flag
     // rather than assuming it. Without the loader the CTA is a plain
     // link — the same fallback the loader's own catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261110g")
+    import("../shared/translation-suggestion-loader.js?v=20261110h")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261110g"),
+          () => import("../translation-suggestion.js?v=20261110h"),
         );
       })
       .catch(() => {});
