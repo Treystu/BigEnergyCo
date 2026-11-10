@@ -1,0 +1,861 @@
+{
+  "issue": 348,
+  "generated": "2026-11-10T04:43:28.074Z",
+  "head": null,
+  "acceptance": {
+    "MEAN_CUT_REQUIRED": 0.01,
+    "NO_CASE_WORSE_BY": 0.005
+  },
+  "legs": {
+    "tier": {
+      "cases": 14,
+      "meanChampionRegret": 0,
+      "meanChallengerRegret": 0,
+      "meanDeltaVsChampion": 0,
+      "worstCaseDeltaVsChampion": 0,
+      "bestCaseDeltaVsChampion": 0,
+      "challengerQualifies": false,
+      "championWithinMargin": true,
+      "adoptionFiredCases": 0,
+      "swapBearingCases": 0,
+      "adoptedOfSwapBearing": 0,
+      "screenSkippedCases": 0,
+      "ladderOvershootCases": 0,
+      "maxLadderOverKwh": 0
+    },
+    "billCut": {
+      "cases": 8,
+      "meanChampionRegret": -0.018251,
+      "meanChallengerRegret": -0.024605,
+      "meanDeltaVsChampion": -0.006046,
+      "worstCaseDeltaVsChampion": 0,
+      "bestCaseDeltaVsChampion": -0.048371,
+      "challengerQualifies": false,
+      "championWithinMargin": false,
+      "adoptionFiredCases": 0,
+      "swapBearingCases": 4,
+      "adoptedOfSwapBearing": 0,
+      "screenSkippedCases": 1,
+      "ladderOvershootCases": 0,
+      "maxLadderOverKwh": 0
+    }
+  },
+  "summary": {
+    "cases": 22,
+    "meanChampionRegret": -0.006637,
+    "meanChallengerRegret": -0.008947,
+    "meanDeltaVsChampion": -0.002199,
+    "worstCaseDeltaVsChampion": 0,
+    "bestCaseDeltaVsChampion": -0.048371,
+    "challengerQualifies": false,
+    "championWithinMargin": false,
+    "adoptionFiredCases": 0,
+    "swapBearingCases": 4,
+    "adoptedOfSwapBearing": 0,
+    "screenSkippedCases": 1,
+    "ladderOvershootCases": 0,
+    "maxLadderOverKwh": 0
+  },
+  "cases": [
+    {
+      "label": "Nairobi, Kenya 8kWh/d tier100 lfp",
+      "champion": {
+        "pvKw": 2.5,
+        "battKwh": 5,
+        "cost": 2078,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 2.5,
+        "battKwh": 5,
+        "cost": 2078,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 2.5,
+        "battKwh": 5,
+        "cost": 2078,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 2.5,
+        "battKwh": 5,
+        "cost": 2078
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1204
+    },
+    {
+      "label": "Nairobi, Kenya 8kWh/d tier99 lfp",
+      "champion": {
+        "pvKw": 2.5,
+        "battKwh": 5,
+        "cost": 2078,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 2.5,
+        "battKwh": 5,
+        "cost": 2078,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 2.5,
+        "battKwh": 5,
+        "cost": 2078,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 2.5,
+        "battKwh": 5,
+        "cost": 2078
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1116
+    },
+    {
+      "label": "Nairobi, Kenya 8kWh/d tier95 lfp",
+      "champion": {
+        "pvKw": 2,
+        "battKwh": 5,
+        "cost": 1811,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 2,
+        "battKwh": 5,
+        "cost": 1811,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 2,
+        "battKwh": 5,
+        "cost": 1811,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 2,
+        "battKwh": 5,
+        "cost": 1811
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1169
+    },
+    {
+      "label": "Honolulu, USA 20kWh/d tier99 lfp",
+      "champion": {
+        "pvKw": 6.5,
+        "battKwh": 13,
+        "cost": 5951,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 6.5,
+        "battKwh": 13,
+        "cost": 5951,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 6.5,
+        "battKwh": 13,
+        "cost": 5951,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 6.5,
+        "battKwh": 13,
+        "cost": 5951
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1764
+    },
+    {
+      "label": "Phoenix, USA 30kWh/d tier99 lfp",
+      "champion": {
+        "pvKw": 11,
+        "battKwh": 20,
+        "cost": 7345,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 11,
+        "battKwh": 20,
+        "cost": 7345,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 11,
+        "battKwh": 20,
+        "cost": 7345,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 11,
+        "battKwh": 20,
+        "cost": 7345
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1984
+    },
+    {
+      "label": "London, UK 10kWh/d tier100 lfp",
+      "champion": {
+        "pvKw": 18,
+        "battKwh": 8,
+        "cost": 9042,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 18,
+        "battKwh": 8,
+        "cost": 9042,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 18,
+        "battKwh": 8,
+        "cost": 9042,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 18,
+        "battKwh": 8,
+        "cost": 9042
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1683
+    },
+    {
+      "label": "London, UK 10kWh/d tier99 lfp",
+      "champion": {
+        "pvKw": 16,
+        "battKwh": 9,
+        "cost": 8326,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 16,
+        "battKwh": 9,
+        "cost": 8326,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 16,
+        "battKwh": 9,
+        "cost": 8326,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 16,
+        "battKwh": 9,
+        "cost": 8326
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1968
+    },
+    {
+      "label": "London, UK 10kWh/d tier95 lfp",
+      "champion": {
+        "pvKw": 11.5,
+        "battKwh": 7,
+        "cost": 6065,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 11.5,
+        "battKwh": 7,
+        "cost": 6065,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 11.5,
+        "battKwh": 7,
+        "cost": 6065,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 11.5,
+        "battKwh": 7,
+        "cost": 6065
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1707
+    },
+    {
+      "label": "Berlin, Germany 8kWh/d tier99 naion",
+      "champion": {
+        "pvKw": 15,
+        "battKwh": 7,
+        "cost": 7711,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 15,
+        "battKwh": 7,
+        "cost": 7711,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 15,
+        "battKwh": 7,
+        "cost": 7711,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 15,
+        "battKwh": 7,
+        "cost": 7711
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1521
+    },
+    {
+      "label": "Delhi, India 20kWh/d tier100 naion",
+      "champion": {
+        "pvKw": 9,
+        "battKwh": 16,
+        "cost": 6838,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 9,
+        "battKwh": 16,
+        "cost": 6838,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 9,
+        "battKwh": 16,
+        "cost": 6838,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 9,
+        "battKwh": 16,
+        "cost": 6838
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1759
+    },
+    {
+      "label": "Delhi, India 20kWh/d tier99 naion",
+      "champion": {
+        "pvKw": 8.5,
+        "battKwh": 16,
+        "cost": 6591,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 8.5,
+        "battKwh": 16,
+        "cost": 6591,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 8.5,
+        "battKwh": 16,
+        "cost": 6591,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 8.5,
+        "battKwh": 16,
+        "cost": 6591
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1898
+    },
+    {
+      "label": "Delhi, India 20kWh/d tier95 naion",
+      "champion": {
+        "pvKw": 7,
+        "battKwh": 14,
+        "cost": 5551,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 7,
+        "battKwh": 14,
+        "cost": 5551,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 7,
+        "battKwh": 14,
+        "cost": 5551,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 7,
+        "battKwh": 14,
+        "cost": 5551
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1751
+    },
+    {
+      "label": "Sydney, Australia 12kWh/d tier99 lfp",
+      "champion": {
+        "pvKw": 6,
+        "battKwh": 8,
+        "cost": 4114,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 6,
+        "battKwh": 8,
+        "cost": 4114,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 6,
+        "battKwh": 8,
+        "cost": 4114,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 6,
+        "battKwh": 8,
+        "cost": 4114
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1878
+    },
+    {
+      "label": "Cairo, Egypt 18kWh/d tier99 naion",
+      "champion": {
+        "pvKw": 7,
+        "battKwh": 14,
+        "cost": 5769,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 7,
+        "battKwh": 14,
+        "cost": 5769,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 7,
+        "battKwh": 14,
+        "cost": 5769,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 7,
+        "battKwh": 14,
+        "cost": 5769
+      },
+      "adoptionFired": false,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 2133
+    },
+    {
+      "label": "Honolulu, USA 10kWh/d import-only 0.6",
+      "champion": {
+        "pvKw": 1.32,
+        "battKwh": 3,
+        "cost": 1818,
+        "replacements": 1,
+        "scenario": "swaps_cheaper"
+      },
+      "neverOversize": {
+        "pvKw": 1.32,
+        "battKwh": 3,
+        "cost": 1818,
+        "replacements": 1
+      },
+      "directZeroSwap": {
+        "pvKw": 1.32,
+        "battKwh": 3,
+        "cost": 1818,
+        "adopted": false,
+        "reason": "verified_more_expensive",
+        "target": 6
+      },
+      "oracle": {
+        "pvKw": 1.8,
+        "battKwh": 2,
+        "cost": 2083
+      },
+      "adoptionFired": false,
+      "swapBearing": true,
+      "ladderOverKwh": null,
+      "championRegret": -0.12722,
+      "challengerRegret": -0.12722,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1880
+    },
+    {
+      "label": "Phoenix, USA 20kWh/d import-only 0.95",
+      "champion": {
+        "pvKw": 5.67,
+        "battKwh": 26,
+        "cost": 5969,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 5.67,
+        "battKwh": 26,
+        "cost": 5969,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 5.67,
+        "battKwh": 26,
+        "cost": 5969,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 5.8,
+        "battKwh": 13,
+        "cost": 6023
+      },
+      "adoptionFired": false,
+      "swapBearing": false,
+      "ladderOverKwh": null,
+      "championRegret": -0.008966,
+      "challengerRegret": -0.008966,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1304
+    },
+    {
+      "label": "London, UK 10kWh/d net-metered 0.8",
+      "champion": {
+        "pvKw": 2.98,
+        "battKwh": 0,
+        "cost": 1295,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 2.98,
+        "battKwh": 0,
+        "cost": 1295,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 2.98,
+        "battKwh": 0,
+        "cost": 1295,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 3.05,
+        "battKwh": 0,
+        "cost": 1325
+      },
+      "adoptionFired": false,
+      "swapBearing": false,
+      "ladderOverKwh": null,
+      "championRegret": -0.022642,
+      "challengerRegret": -0.022642,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1394
+    },
+    {
+      "label": "Berlin, Germany 8kWh/d net-metered 0.95",
+      "champion": {
+        "pvKw": 7.64,
+        "battKwh": 0,
+        "cost": 3320,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 7.64,
+        "battKwh": 0,
+        "cost": 3320,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 7.64,
+        "battKwh": 0,
+        "cost": 3320,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 7.8,
+        "battKwh": 0,
+        "cost": 3389
+      },
+      "adoptionFired": false,
+      "swapBearing": false,
+      "ladderOverKwh": null,
+      "championRegret": -0.02036,
+      "challengerRegret": -0.02036,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1343
+    },
+    {
+      "label": "Delhi, India 15kWh/d net-metered-over100 1.2",
+      "champion": {
+        "pvKw": 4.96,
+        "battKwh": 0,
+        "cost": 2449,
+        "replacements": 0,
+        "scenario": "zero_swap_natural"
+      },
+      "neverOversize": {
+        "pvKw": 4.96,
+        "battKwh": 0,
+        "cost": 2449,
+        "replacements": 0
+      },
+      "directZeroSwap": {
+        "pvKw": 4.96,
+        "battKwh": 0,
+        "cost": 2449,
+        "adopted": false,
+        "reason": "already_zero_swap",
+        "target": null
+      },
+      "oracle": {
+        "pvKw": 5.05,
+        "battKwh": 0,
+        "cost": 2493
+      },
+      "adoptionFired": false,
+      "swapBearing": false,
+      "ladderOverKwh": null,
+      "championRegret": -0.017649,
+      "challengerRegret": -0.017649,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 1499
+    },
+    {
+      "label": "Nairobi, Kenya 5kWh/d surplus-physical 1.2",
+      "champion": {
+        "pvKw": 1.45,
+        "battKwh": 4,
+        "cost": 1964,
+        "replacements": 1,
+        "scenario": "swaps_cheaper"
+      },
+      "neverOversize": {
+        "pvKw": 1.45,
+        "battKwh": 4,
+        "cost": 1964,
+        "replacements": 1
+      },
+      "directZeroSwap": {
+        "pvKw": 1.55,
+        "battKwh": 7,
+        "cost": 1869,
+        "adopted": true,
+        "reason": "verified_cheaper",
+        "target": 8
+      },
+      "oracle": {
+        "pvKw": 1.55,
+        "battKwh": 7,
+        "cost": 1869
+      },
+      "adoptionFired": false,
+      "swapBearing": true,
+      "ladderOverKwh": null,
+      "championRegret": 0.050829,
+      "challengerRegret": 0,
+      "challengerVsChampion": -0.048371,
+      "screenSkipped": true,
+      "ms": 1638
+    },
+    {
+      "label": "Sydney, Australia 12kWh/d peak-only 0.1",
+      "champion": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "cost": 476,
+        "replacements": 2,
+        "scenario": "swaps_cheaper"
+      },
+      "neverOversize": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "cost": 476,
+        "replacements": 2
+      },
+      "directZeroSwap": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "cost": 476,
+        "adopted": false,
+        "reason": "zero_swap_unreachable",
+        "target": 3
+      },
+      "oracle": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "cost": 476
+      },
+      "adoptionFired": false,
+      "swapBearing": true,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 37
+    },
+    {
+      "label": "Cairo, Egypt 18kWh/d peak-only 0.2",
+      "champion": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "cost": 425,
+        "replacements": 2,
+        "scenario": "swaps_cheaper"
+      },
+      "neverOversize": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "cost": 425,
+        "replacements": 2
+      },
+      "directZeroSwap": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "cost": 425,
+        "adopted": false,
+        "reason": "zero_swap_unreachable",
+        "target": 3
+      },
+      "oracle": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "cost": 425
+      },
+      "adoptionFired": false,
+      "swapBearing": true,
+      "ladderOverKwh": null,
+      "championRegret": 0,
+      "challengerRegret": 0,
+      "challengerVsChampion": 0,
+      "screenSkipped": false,
+      "ms": 16
+    }
+  ]
+}
