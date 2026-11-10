@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261110i";
+import { APPLIANCES } from "./appliances.js?v=20261110j";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261110i";
+} from "./pwa-install.js?v=20261110j";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261110i";
+} from "./usecases.js?v=20261110j";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261110i";
+} from "./run-coordinator.js?v=20261110j";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261110i";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261110i";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261110i";
+} from "./mode-chrome.js?v=20261110j";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261110j";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261110j";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261110i";
+} from "./location-picker.js?v=20261110j";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261110i";
+} from "./pricing.js?v=20261110j";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261110i";
+import { currencyForCountry } from "./country-currency.js?v=20261110j";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261110i";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261110j";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -96,7 +96,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261110i").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261110j").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -107,15 +107,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261110i";
+} from "./lead-acid.js?v=20261110j";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261110i";
+} from "./bom.js?v=20261110j";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261110i";
+import { BOM_ITEMS } from "../shared/content.js?v=20261110j";
 
 import {
   applyI18n,
@@ -124,18 +124,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261110i";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261110i";
-import { byId as $, el } from "../shared/dom.js?v=20261110i";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261110i";
+} from "../shared/i18n.js?v=20261110j";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261110j";
+import { byId as $, el } from "../shared/dom.js?v=20261110j";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261110j";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261110i";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261110i";
+} from "../shared/simple-mode.js?v=20261110j";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261110j";
 import {
   advisorJevContext,
   interpretSanity,
@@ -143,29 +143,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261110i";
+} from "./validate.js?v=20261110j";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261110i";
+} from "../shared/cut-targets.js?v=20261110j";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261110i";
+} from "./share-codec.js?v=20261110j";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261110i";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261110i";
+} from "./infeasible-copy.js?v=20261110j";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261110j";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261110i";
+} from "./fuel-units.js?v=20261110j";
 
 import {
   createLeafletProvider,
@@ -173,18 +173,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261110i";
+} from "./map-provider.js?v=20261110j";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261110i";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261110i";
+} from "./wizard.js?v=20261110j";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261110j";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261110i";
+} from "./budget-span.js?v=20261110j";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -196,10 +196,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261110i"),
-      import("./charts.js?v=20261110i"),
-      import("./frontier-chart.js?v=20261110i"),
-      import("./rescale.js?v=20261110i"),
+      import("./engine.js?v=20261110j"),
+      import("./charts.js?v=20261110j"),
+      import("./frontier-chart.js?v=20261110j"),
+      import("./rescale.js?v=20261110j"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -267,9 +267,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261110i";
+} from "./money.js?v=20261110j";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261110i";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261110j";
 
 let worker = null;
 
@@ -2055,18 +2055,17 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
     : Math.min(75, Math.max(15, Math.round(absLat + 15)));
   const smrTilt = isEquator ? 10 : Math.max(10, Math.round(absLat - 15));
 
-  let compassHeading = "True South (180\u00B0)";
-  let compassShort = "South";
-  let headingDetail = "Face Due South (180\u00B0) toward the Equator";
+  let compassHeading = t("resTiltCompassSouth");
+  let compassShort = t("resTiltCompassSouthShort");
+  let headingDetail = t("resTiltHeadingSouth");
   if (isEquator) {
-    compassHeading = "South or North (~10\u00B0 self-cleaning tilt)";
-    compassShort = "Flat / 10\u00B0";
-    headingDetail =
-      "Slight ~10\u00B0 tilt in either direction for rain self-cleaning";
+    compassHeading = t("resTiltCompassEquator");
+    compassShort = t("resTiltCompassEquatorShort");
+    headingDetail = t("resTiltHeadingEquator");
   } else if (!isNorth) {
-    compassHeading = "True North (0\u00B0)";
-    compassShort = "North";
-    headingDetail = "Face Due North (0\u00B0) toward the Equator";
+    compassHeading = t("resTiltCompassNorth");
+    compassShort = t("resTiltCompassNorthShort");
+    headingDetail = t("resTiltHeadingNorth");
   }
 
   const svgW = 460,
@@ -2100,7 +2099,7 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
   const extraPanels = tiltValue.panelsFlatPerTenTilted - 10;
   const tiltValueCard = `
       <div class="sun-path-metric">
-        <div class="sun-path-metric-title">\uD83D\uDCB0 Value of the Right Angle</div>
+        <div class="sun-path-metric-title">${t("resTiltValueTitle")}</div>
         <div class="sun-path-metric-val" style="color:#f59e0b;">${tiltValue.flatLossPct > 0 ? "\u2212" + tiltValue.flatLossPct + "%" : "~0%"}</div>
         <div class="sun-path-metric-sub">${
           tiltValue.flatLossPct > 0
@@ -2125,8 +2124,8 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
 
   wrap.innerHTML = `
     <div class="sun-path-header">
-      <span>\uD83D\uDCD0 Solar Orientation &amp; Array Tilt Guide (${validLat >= 0 ? validLat.toFixed(1) + "\u00B0N" : Math.abs(validLat).toFixed(1) + "\u00B0S"})</span>
-      <span style="font-size:0.75rem;font-weight:600;color:var(--primary-accent);background:rgba(0,230,153,0.1);padding:0.15rem 0.55rem;border-radius:4px;border:1px solid rgba(0,230,153,0.25);">Optimal Year-Round Tilt: ~${yrTilt}\u00B0</span>
+      <span>${t("resTiltHeader", { lat: validLat >= 0 ? validLat.toFixed(1) + "\u00B0N" : Math.abs(validLat).toFixed(1) + "\u00B0S" })}</span>
+      <span style="font-size:0.75rem;font-weight:600;color:var(--primary-accent);background:rgba(0,230,153,0.1);padding:0.15rem 0.55rem;border-radius:4px;border:1px solid rgba(0,230,153,0.25);">${t("resTiltBadge", { tilt: yrTilt })}</span>
     </div>
 
     <svg viewBox="0 0 ${svgW} ${svgH}" role="img" aria-label="Sun-path diagram: face ${compassShort} at about ${yrTilt} degrees tilt" style="width:100%;height:auto;display:block;overflow:visible;">
@@ -2169,9 +2168,9 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
         <div class="sun-path-metric-sub">${headingDetail}</div>
       </div>
       <div class="sun-path-metric">
-        <div class="sun-path-metric-title">\uD83D\uDCD0 Year-Round Fixed Tilt</div>
+        <div class="sun-path-metric-title">${t("resTiltYearRoundTitle")}</div>
         <div class="sun-path-metric-val" style="color:#34d399;">~${yrTilt}\u00B0</div>
-        <div class="sun-path-metric-sub">Optimal set-and-forget angle for fixed roofs</div>
+        <div class="sun-path-metric-sub">${t("resTiltYearRoundSub")}</div>
       </div>
       <div class="sun-path-metric">
         <div class="sun-path-metric-title">\u2744\uFE0F Winter Boost Tilt</div>
@@ -2181,19 +2180,26 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
       <div class="sun-path-metric">
         <div class="sun-path-metric-title">\u2600\uFE0F Daylight &amp; Seasonal Swing</div>
         <div class="sun-path-metric-val" style="color:#fbbf24;">${hoursSummer.toFixed(1)}h \u2794 ${hoursWinter.toFixed(1)}h</div>
-        <div class="sun-path-metric-sub">Sun drops ${Math.round(elevSummer - elevWinter)}\u00B0 between summer and winter noon</div>
+        <div class="sun-path-metric-sub">${t("resTiltDaylightSub", { deg: Math.round(elevSummer - elevWinter) })}</div>
       </div>
       ${tiltValueCard}
     </div>
 
     <div class="sun-path-takeaway">
-      <strong>\uD83D\uDCA1 How much does the angle really matter?</strong>
+      <strong>${t("resTiltTakeawayTitle")}</strong>
       ${
         isEquator
           ? `Near the equator the sun sits almost overhead year-round, so angle barely changes the harvest — a modest ~10\u00B0 tilt exists mainly so tropical rain washes off dust. Spend your effort on keeping panels clean, not on precision aiming. (Flat loses only ~${Math.max(0, tiltValue.flatLossPct)}% here.)`
           : absLat >= 66.5 && elevWinter <= 0
             ? `At high latitude (${absLat.toFixed(1)}\u00B0), winter brings polar night (0h direct sun). A steep array (~${wtrTilt}\u00B0) sheds snow and catches low shoulder rays — flat panels would forfeit ~${tiltValue.flatLossPct}% of the year's harvest, so precise mounting genuinely pays off here, backed by adequate battery reserve.`
-            : `Here a flat roof forfeits about ${tiltValue.flatLossPct}% of the annual harvest versus the optimal ~${yrTilt}\u00B0 tilt — roughly ${extraPanels > 0 ? extraPanels + " extra panel" + (extraPanels > 1 ? "s" : "") + " per 10" : "the same panels tilted properly"} to make up the difference. Precision is forgiving, though: within \u00B110\u00B0 of optimal you keep nearly all of it, so "close" is genuinely good enough on most roofs. Our simulation already assumes the recommended tilt when sizing your array and battery.`
+            : t("resTiltTakeawayMid", {
+                loss: tiltValue.flatLossPct,
+                tilt: yrTilt,
+                extra:
+                  extraPanels > 0
+                    ? t("resTiltExtraPanels", { n: extraPanels })
+                    : t("resTiltExtraSame"),
+              })
       }
     </div>
   `;
@@ -4052,7 +4058,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261110i",
+      "./assets/js/sizing/sizing-worker.js?v=20261110j",
       {
         type: "module",
       },
@@ -5184,7 +5190,11 @@ function renderRelativeOptions(p, selectedSystem) {
 function footprintText(pvKw, panelWatts = PANEL_WATTS_DEFAULT) {
   const lay = panelLayout(pvKw, panelWatts);
   if (!lay) return null;
-  return `~${lay.count} \u00D7 ${lay.panelWatts} W panels \u00B7 about ${lay.areaM2} m\u00B2 of roof or ground`;
+  return t("resBomArraySummary", {
+    n: lay.count,
+    watts: lay.panelWatts,
+    area: lay.areaM2,
+  });
 }
 
 function syncLadderTabs() {
@@ -5488,9 +5498,15 @@ export function turnkeyQuoteText(
   // "-$300 below a typical quote" for a system that cost MORE.
   const vs =
     gap >= 0
-      ? `${moneyFn(gap)} cheaper than the installer's price`
-      : `${moneyFn(-gap)} dearer than the installer's price`;
-  return `Hardware for this system is ~${directCost}. A full-service installer quotes ${band(turnkey)} all-in for exactly this array. Buying the same parts yourself and paying a licensed electrician for the connection lands near ${band(direct)} — ${vs}. Over ${PATHS_HORIZON_YEARS} years, permits, incentives and every bank replacement included, all four routes are priced together below.`;
+      ? t("resPathsVsCheaper", { amount: moneyFn(gap) })
+      : t("resPathsVsDearer", { amount: moneyFn(-gap) });
+  return t("resPathsHardware", {
+    direct: directCost,
+    turnkey: band(turnkey),
+    self: band(direct),
+    vs,
+    years: PATHS_HORIZON_YEARS,
+  });
 }
 
 /**
@@ -9281,11 +9297,11 @@ async function initSizingUI() {
     // can click, and the browser smoke gate polls for the ready flag
     // rather than assuming it. Without the loader the CTA is a plain
     // link — the same fallback the loader's own catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261110i")
+    import("../shared/translation-suggestion-loader.js?v=20261110j")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261110i"),
+          () => import("../translation-suggestion.js?v=20261110j"),
         );
       })
       .catch(() => {});
