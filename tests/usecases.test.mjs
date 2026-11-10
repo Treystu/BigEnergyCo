@@ -335,7 +335,8 @@ test("the bill-cut label states the reserve basis both numbers rest on", () => {
   const uiJs = fs.readFileSync("assets/js/sizing/ui.js", "utf8");
   assert.match(
     uiJs,
-    /reserveHeldPct > 0 \? "bill cut, no reserve held" : "bill cut"/,
+    /reserveHeldPct > 0\s*\?\s*t\("resBillCutNoReserve"\)\s*:\s*t\("resBillCutChip"\)/,
+    "the chip must state the reserve basis through its locale keys, never an English literal",
   );
 });
 

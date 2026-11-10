@@ -28,7 +28,10 @@ function placeholders(text) {
 }
 
 test("every locale carries every result-surface string", () => {
-  assert.ok(KEYS.length >= 50, `expected the table to be substantive, got ${KEYS.length}`);
+  assert.ok(
+    KEYS.length >= 50,
+    `expected the table to be substantive, got ${KEYS.length}`,
+  );
   for (const lang of LANGS) {
     for (const key of KEYS) {
       const value = LOCALES[lang][key];
@@ -146,7 +149,10 @@ test("every basis id the payload can name has a phrase in every locale", () => {
         "string",
         `${lang}.${id} missing - that target would render an empty sentence`,
       );
-      assert.ok(LOCALES[lang][id].trim().length > 4, `${lang}.${id} is not a phrase`);
+      assert.ok(
+        LOCALES[lang][id].trim().length > 4,
+        `${lang}.${id} is not a phrase`,
+      );
     }
   }
   // A peak-hour offset must never be described as a bill cut in any locale:
@@ -154,9 +160,15 @@ test("every basis id the payload can name has a phrase in every locale", () => {
   for (const lang of LANGS) {
     for (const id of ["resBasisPeak10", "resBasisPeak15", "resBasisPeak20"]) {
       const value = LOCALES[lang][id].toLowerCase();
-      const billCut = /(bill cut|recorte de factura|baisse de facture|conta de|rechnungssenkung|rekeningverlaging|خفض للفاتورة)/;
+      const billCut =
+        /(bill cut|recorte de factura|baisse de facture|conta de|rechnungssenkung|rekeningverlaging|خفض للفاتورة)/;
       assert.ok(
-        !billCut.test(value.replace(/peak-hour|horas punta|heures de pointe|spitzenstunden|piekuren|ساعات الذروة/, "")),
+        !billCut.test(
+          value.replace(
+            /peak-hour|horas punta|heures de pointe|spitzenstunden|piekuren|ساعات الذروة/,
+            "",
+          ),
+        ),
         `${lang}.${id} calls a peak offset a bill cut: ${LOCALES[lang][id]}`,
       );
       assert.ok(

@@ -27,12 +27,15 @@ export const RESULT_COPY = {
     resBasisTier95: "95% reliability — generator runs now and then",
     resAutoNoteTwo: "{a} and {b} sized for {basis}",
     resAutoNoteOne: "{a} sized for {basis}",
-    resAutoNoteNone: "No chemistry produced a practical system here for {basis}.",
-    resAutoFallback: "{requested} isn't reachable within the sizes this tool searches at this site, so the cards below show {effective} instead — the curve shows how far this location can actually get.",
+    resAutoNoteNone:
+      "No chemistry produced a practical system here for {basis}.",
+    resAutoFallback:
+      "{requested} isn't reachable within the sizes this tool searches at this site, so the cards below show {effective} instead — the curve shows how far this location can actually get.",
     resRowTrueBreakeven: "True 20-yr break-even",
     resRowNever: "never — replacements outpace savings",
     resRowPaysForItself: "Pays for itself in",
-    resMatrixLegendOffgrid: "Green outline = lowest true 20-year cost in that column (every bank swap counted). \"Unmet\" hours are covered by a generator or the grid.",
+    resMatrixLegendOffgrid:
+      'Green outline = lowest true 20-year cost in that column (every bank swap counted). "Unmet" hours are covered by a generator or the grid.',
     resMatrixBatteryGoalHeader: "Battery ↓ · Goal →",
     resPreviewRelease: "🔎 Preview — release to select",
     resSelectedSystem: "👆 Selected system",
@@ -122,8 +125,10 @@ export const RESULT_COPY = {
     resValNeverSwaps: "never — swaps outpace savings",
     resValSwaps: "~{n}x — adds ~{amount} with labor",
     resValUnmet: "{h} h/yr · longest gap {gap} h",
-    resModalNote: "Every figure is computed from the same hourly weather simulation as the cards — nothing here is estimated by eye.",
-    resModalNoteNoTariff: " Enter your grid price above to see payback vs. your bill.",
+    resModalNote:
+      "Every figure is computed from the same hourly weather simulation as the cards — nothing here is estimated by eye.",
+    resModalNoteNoTariff:
+      " Enter your grid price above to see payback vs. your bill.",
   },
   es: {
     resBasisCut10: "un recorte de factura de ~10% en horas punta",
@@ -142,12 +147,15 @@ export const RESULT_COPY = {
     resBasisTier95: "95% fiabilidad — el generador funciona de vez en cuando",
     resAutoNoteTwo: "{a} y {b} dimensionados para {basis}",
     resAutoNoteOne: "{a} dimensionado para {basis}",
-    resAutoNoteNone: "Ninguna química produjo un sistema práctico aquí para {basis}.",
-    resAutoFallback: "{requested} no es alcanzable con los tamaños que esta herramienta busca en este sitio, así que las tarjetas de abajo muestran {effective}: la curva muestra hasta dónde puede llegar realmente este lugar.",
+    resAutoNoteNone:
+      "Ninguna química produjo un sistema práctico aquí para {basis}.",
+    resAutoFallback:
+      "{requested} no es alcanzable con los tamaños que esta herramienta busca en este sitio, así que las tarjetas de abajo muestran {effective}: la curva muestra hasta dónde puede llegar realmente este lugar.",
     resRowTrueBreakeven: "Punto de equilibrio real a 20 años",
     resRowNever: "nunca: los cambios superan el ahorro",
     resRowPaysForItself: "Se paga en",
-    resMatrixLegendOffgrid: "El contorno verde marca el coste real más bajo a 20 años en esa columna (contando cada cambio de batería). Las horas «sin cubrir» las cubre un generador o la red.",
+    resMatrixLegendOffgrid:
+      "El contorno verde marca el coste real más bajo a 20 años en esa columna (contando cada cambio de batería). Las horas «sin cubrir» las cubre un generador o la red.",
     resMatrixBatteryGoalHeader: "Batería ↓ · Objetivo →",
     resPreviewRelease: "🔎 Vista previa: suelta para elegir",
     resSelectedSystem: "👆 Sistema seleccionado",
@@ -164,7 +172,8 @@ export const RESULT_COPY = {
     resColdChampion: "❄️ Campeón en frío — Recomendado",
     resBestValue: "✅ Mejor valor — Recomendado",
     resReferenceOnly: "⚠️ Solo referencia — No recomendado",
-    resRecommendedWhy: "Recomendado: la opción de menor coste real, priorizando seguridad",
+    resRecommendedWhy:
+      "Recomendado: la opción de menor coste real, priorizando seguridad",
     resColBill60: "−60% factura",
     resColBill80: "−80% factura",
     resColBill95: "−95% factura",
@@ -237,8 +246,10 @@ export const RESULT_COPY = {
     resValNeverSwaps: "nunca — los recambios superan el ahorro",
     resValSwaps: "~{n}x — añade ~{amount} con mano de obra",
     resValUnmet: "{h} h/año · hueco más largo {gap} h",
-    resModalNote: "Cada cifra sale de la misma simulación horaria del clima que las tarjetas: nada aquí está estimado a ojo.",
-    resModalNoteNoTariff: " Indica tu precio de red arriba para ver la amortización frente a tu factura.",
+    resModalNote:
+      "Cada cifra sale de la misma simulación horaria del clima que las tarjetas: nada aquí está estimado a ojo.",
+    resModalNoteNoTariff:
+      " Indica tu precio de red arriba para ver la amortización frente a tu factura.",
   },
   pt: {
     resBasisCut10: "um corte na conta de ~10% em horas de ponta",
@@ -257,12 +268,15 @@ export const RESULT_COPY = {
     resBasisTier95: "95% fiabilidade — o gerador funciona de vez em quando",
     resAutoNoteTwo: "{a} e {b} dimensionados para {basis}",
     resAutoNoteOne: "{a} dimensionado para {basis}",
-    resAutoNoteNone: "Nenhuma química produziu um sistema prático aqui para {basis}.",
-    resAutoFallback: "{requested} não é alcançável com os tamanhos que esta ferramenta procura neste local, por isso os cartões abaixo mostram {effective}: a curva mostra até onde este local consegue realmente chegar.",
+    resAutoNoteNone:
+      "Nenhuma química produziu um sistema prático aqui para {basis}.",
+    resAutoFallback:
+      "{requested} não é alcançável com os tamanhos que esta ferramenta procura neste local, por isso os cartões abaixo mostram {effective}: a curva mostra até onde este local consegue realmente chegar.",
     resRowTrueBreakeven: "Ponto de equilíbrio real a 20 anos",
     resRowNever: "nunca: as substituições superam a poupança",
     resRowPaysForItself: "Paga-se em",
-    resMatrixLegendOffgrid: "O contorno verde marca o custo real mais baixo a 20 anos nessa coluna (contando cada troca de bateria). As horas «não cobertas» são cobertas por um gerador ou pela rede.",
+    resMatrixLegendOffgrid:
+      "O contorno verde marca o custo real mais baixo a 20 anos nessa coluna (contando cada troca de bateria). As horas «não cobertas» são cobertas por um gerador ou pela rede.",
     resMatrixBatteryGoalHeader: "Bateria ↓ · Meta →",
     resPreviewRelease: "🔎 Pré-visualização: solta para escolher",
     resSelectedSystem: "👆 Sistema selecionado",
@@ -279,7 +293,8 @@ export const RESULT_COPY = {
     resColdChampion: "❄️ Campeão no frio — Recomendado",
     resBestValue: "✅ Melhor valor — Recomendado",
     resReferenceOnly: "⚠️ Apenas referência — Não recomendado",
-    resRecommendedWhy: "Recomendado: a opção de menor custo real, com a segurança à frente",
+    resRecommendedWhy:
+      "Recomendado: a opção de menor custo real, com a segurança à frente",
     resColBill60: "−60% conta",
     resColBill80: "−80% conta",
     resColBill95: "−95% conta",
@@ -352,8 +367,10 @@ export const RESULT_COPY = {
     resValNeverSwaps: "nunca — as trocas superam a economia",
     resValSwaps: "~{n}x — acrescenta ~{amount} com mão de obra",
     resValUnmet: "{h} h/ano · maior lacuna {gap} h",
-    resModalNote: "Cada número vem da mesma simulação horária de clima dos cartões: nada aqui é estimado a olho.",
-    resModalNoteNoTariff: " Informe seu preço de rede acima para ver o retorno frente à sua conta.",
+    resModalNote:
+      "Cada número vem da mesma simulação horária de clima dos cartões: nada aqui é estimado a olho.",
+    resModalNoteNoTariff:
+      " Informe seu preço de rede acima para ver o retorno frente à sua conta.",
   },
   fr: {
     resBasisCut10: "une baisse de facture de ~10% en heures de pointe",
@@ -372,12 +389,15 @@ export const RESULT_COPY = {
     resBasisTier95: "95% de fiabilité — le groupe tourne de temps en temps",
     resAutoNoteTwo: "{a} et {b} dimensionnés pour {basis}",
     resAutoNoteOne: "{a} dimensionné pour {basis}",
-    resAutoNoteNone: "Aucune chimie n'a produit de système praticable ici pour {basis}.",
-    resAutoFallback: "{requested} n'est pas atteignable avec les tailles que cet outil recherche sur ce site, donc les fiches ci-dessous montrent {effective} : la courbe montre jusqu'où ce lieu peut réellement aller.",
+    resAutoNoteNone:
+      "Aucune chimie n'a produit de système praticable ici pour {basis}.",
+    resAutoFallback:
+      "{requested} n'est pas atteignable avec les tailles que cet outil recherche sur ce site, donc les fiches ci-dessous montrent {effective} : la courbe montre jusqu'où ce lieu peut réellement aller.",
     resRowTrueBreakeven: "Seuil de rentabilité réel sur 20 ans",
     resRowNever: "jamais — les remplacements dépassent les économies",
     resRowPaysForItself: "Rentabilisé en",
-    resMatrixLegendOffgrid: "Le contour vert indique le coût réel sur 20 ans le plus bas de la colonne (chaque remplacement de parc compté). Les heures «non couvertes» le sont par un groupe ou le réseau.",
+    resMatrixLegendOffgrid:
+      "Le contour vert indique le coût réel sur 20 ans le plus bas de la colonne (chaque remplacement de parc compté). Les heures «non couvertes» le sont par un groupe ou le réseau.",
     resMatrixBatteryGoalHeader: "Batterie ↓ · Objectif →",
     resPreviewRelease: "🔎 Aperçu : relâchez pour choisir",
     resSelectedSystem: "👆 Système sélectionné",
@@ -385,7 +405,8 @@ export const RESULT_COPY = {
     resCreditMo: "−{amount}/mois de crédit",
     resPerMo: "~{amount}/mois",
     resRowNoBattery: "{chem} : {kw} kW solaire (aucune batterie nécessaire)",
-    resRowPeakOffset: "{chem} : {kwh} kWh de batterie (couvre les heures de pointe)",
+    resRowPeakOffset:
+      "{chem} : {kwh} kWh de batterie (couvre les heures de pointe)",
     resRowSolarPlus: "{chem} : {kw} kW solaire + {kwh} kWh de batterie",
     resBillCutChip: "baisse de facture",
     resBillCutNoReserve: "baisse de facture, sans réserve gardée",
@@ -394,7 +415,8 @@ export const RESULT_COPY = {
     resColdChampion: "❄️ Champion du froid — Recommandé",
     resBestValue: "✅ Meilleur rapport — Recommandé",
     resReferenceOnly: "⚠️ Référence seulement — Non recommandé",
-    resRecommendedWhy: "Recommandé : le coût réel le plus bas, la sécurité d'abord",
+    resRecommendedWhy:
+      "Recommandé : le coût réel le plus bas, la sécurité d'abord",
     resColBill60: "−60% facture",
     resColBill80: "−80% facture",
     resColBill95: "−95% facture",
@@ -467,8 +489,10 @@ export const RESULT_COPY = {
     resValNeverSwaps: "jamais — les remplacements dépassent l'économie",
     resValSwaps: "~{n}x — ajoute ~{amount} avec la main-d'œuvre",
     resValUnmet: "{h} h/an · plus long creux {gap} h",
-    resModalNote: "Chaque chiffre vient de la même simulation horaire du climat que les cartes : rien ici n'est estimé à l'œil.",
-    resModalNoteNoTariff: " Indiquez votre prix réseau ci-dessus pour voir le retour sur votre facture.",
+    resModalNote:
+      "Chaque chiffre vient de la même simulation horaire du climat que les cartes : rien ici n'est estimé à l'œil.",
+    resModalNoteNoTariff:
+      " Indiquez votre prix réseau ci-dessus pour voir le retour sur votre facture.",
   },
   de: {
     resBasisCut10: "eine Rechnungssenkung von ~10% in Spitzenstunden",
@@ -487,12 +511,15 @@ export const RESULT_COPY = {
     resBasisTier95: "95% Zuverlässigkeit — der Generator läuft gelegentlich",
     resAutoNoteTwo: "{a} und {b} ausgelegt für {basis}",
     resAutoNoteOne: "{a} ausgelegt für {basis}",
-    resAutoNoteNone: "Keine Chemie ergab hier ein praktikables System für {basis}.",
-    resAutoFallback: "{requested} ist mit den Größen, die dieses Werkzeug hier sucht, nicht erreichbar, daher zeigen die Karten unten {effective} — die Kurve zeigt, wie weit dieser Standort tatsächlich kommt.",
+    resAutoNoteNone:
+      "Keine Chemie ergab hier ein praktikables System für {basis}.",
+    resAutoFallback:
+      "{requested} ist mit den Größen, die dieses Werkzeug hier sucht, nicht erreichbar, daher zeigen die Karten unten {effective} — die Kurve zeigt, wie weit dieser Standort tatsächlich kommt.",
     resRowTrueBreakeven: "Echter Break-even über 20 Jahre",
     resRowNever: "nie — Wechsel übersteigen die Ersparnis",
     resRowPaysForItself: "Amortisiert in",
-    resMatrixLegendOffgrid: "Grüner Rahmen = niedrigste echte Kosten über 20 Jahre in dieser Spalte (jeder Akkuwechsel gezählt). „Ungedeckte“ Stunden übernehmen Generator oder Netz.",
+    resMatrixLegendOffgrid:
+      "Grüner Rahmen = niedrigste echte Kosten über 20 Jahre in dieser Spalte (jeder Akkuwechsel gezählt). „Ungedeckte“ Stunden übernehmen Generator oder Netz.",
     resMatrixBatteryGoalHeader: "Akku ↓ · Ziel →",
     resPreviewRelease: "🔎 Vorschau: zum Auswählen loslassen",
     resSelectedSystem: "👆 Ausgewähltes System",
@@ -582,8 +609,10 @@ export const RESULT_COPY = {
     resValNeverSwaps: "nie — Wechsel übersteigen die Einsparung",
     resValSwaps: "~{n}x — kostet ~{amount} mit Arbeitszeit",
     resValUnmet: "{h} h/Jahr · längste Lücke {gap} h",
-    resModalNote: "Jede Zahl stammt aus derselben stündlichen Wettersimulation wie die Karten — nichts hier ist geschätzt.",
-    resModalNoteNoTariff: " Tragen Sie oben Ihren Netzpreis ein, um die Amortisation gegenüber Ihrer Rechnung zu sehen.",
+    resModalNote:
+      "Jede Zahl stammt aus derselben stündlichen Wettersimulation wie die Karten — nichts hier ist geschätzt.",
+    resModalNoteNoTariff:
+      " Tragen Sie oben Ihren Netzpreis ein, um die Amortisation gegenüber Ihrer Rechnung zu sehen.",
   },
   nl: {
     resBasisCut10: "een rekeningverlaging van ~10% in piekuren",
@@ -598,16 +627,20 @@ export const RESULT_COPY = {
     resBasisPeak15: "een compensatie van ~15% in piekuren",
     resBasisPeak20: "een compensatie van ~20% in piekuren",
     resBasisTier100: "100% onafhankelijkheid — nooit een generator nodig",
-    resBasisTier99: "99% betrouwbaarheid — generator alleen als zeldzame back-up",
+    resBasisTier99:
+      "99% betrouwbaarheid — generator alleen als zeldzame back-up",
     resBasisTier95: "95% betrouwbaarheid — de generator draait af en toe",
     resAutoNoteTwo: "{a} en {b} gedimensioneerd voor {basis}",
     resAutoNoteOne: "{a} gedimensioneerd voor {basis}",
-    resAutoNoteNone: "Geen enkele chemie leverde hier een praktisch systeem voor {basis}.",
-    resAutoFallback: "{requested} is met de formaten die dit hulpmiddel hier zoekt niet haalbaar, dus de kaarten hieronder tonen {effective} — de curve laat zien hoe ver deze locatie echt kan komen.",
+    resAutoNoteNone:
+      "Geen enkele chemie leverde hier een praktisch systeem voor {basis}.",
+    resAutoFallback:
+      "{requested} is met de formaten die dit hulpmiddel hier zoekt niet haalbaar, dus de kaarten hieronder tonen {effective} — de curve laat zien hoe ver deze locatie echt kan komen.",
     resRowTrueBreakeven: "Echt break-evenpunt over 20 jaar",
     resRowNever: "nooit — vervangingen overtreffen de besparing",
     resRowPaysForItself: "Terugverdiend in",
-    resMatrixLegendOffgrid: "Groene rand = laagste echte kosten over 20 jaar in die kolom (elke accuwissel meegeteld). „Niet gedekte” uren worden door een generator of het net gedekt.",
+    resMatrixLegendOffgrid:
+      "Groene rand = laagste echte kosten over 20 jaar in die kolom (elke accuwissel meegeteld). „Niet gedekte” uren worden door een generator of het net gedekt.",
     resMatrixBatteryGoalHeader: "Accu ↓ · Doel →",
     resPreviewRelease: "🔎 Voorbeeld: laat los om te kiezen",
     resSelectedSystem: "👆 Gekozen systeem",
@@ -697,8 +730,10 @@ export const RESULT_COPY = {
     resValNeverSwaps: "nooit — wissels overtreffen de besparing",
     resValSwaps: "~{n}x — kost ~{amount} met arbeid",
     resValUnmet: "{h} uur/jaar · langste gat {gap} u",
-    resModalNote: "Elk cijfer komt uit dezelfde uurlijkse weersimulatie als de kaarten — niets hier is op het oog geschat.",
-    resModalNoteNoTariff: " Vul hierboven uw netprijs in om de terugverdientijd tegen uw rekening te zien.",
+    resModalNote:
+      "Elk cijfer komt uit dezelfde uurlijkse weersimulatie als de kaarten — niets hier is op het oog geschat.",
+    resModalNoteNoTariff:
+      " Vul hierboven uw netprijs in om de terugverdientijd tegen uw rekening te zien.",
   },
   ar: {
     resBasisCut10: "خفض للفاتورة بنحو 10% في ساعات الذروة",
@@ -718,11 +753,13 @@ export const RESULT_COPY = {
     resAutoNoteTwo: "{a} و{b} بمقاس {basis}",
     resAutoNoteOne: "{a} بمقاس {basis}",
     resAutoNoteNone: "لم تنتج أي كيمياء نظامًا عمليًا هنا لـ {basis}.",
-    resAutoFallback: "{requested} غير قابل للتحقيق ضمن المقاسات التي يبحث عنها هذا البرنامج في هذا الموقع، لذا تعرض البطاقات أدناه {effective} — ويوضح المنحنى إلى أي مدى يمكن لهذا الموقع أن يصل فعلًا.",
+    resAutoFallback:
+      "{requested} غير قابل للتحقيق ضمن المقاسات التي يبحث عنها هذا البرنامج في هذا الموقع، لذا تعرض البطاقات أدناه {effective} — ويوضح المنحنى إلى أي مدى يمكن لهذا الموقع أن يصل فعلًا.",
     resRowTrueBreakeven: "نقطة التعادل الحقيقية على 20 عامًا",
     resRowNever: "أبدًا — الاستبدالات تتجاوز التوفير",
     resRowPaysForItself: "يُسترد ثمنه في",
-    resMatrixLegendOffgrid: "الإطار الأخضر يعني أقل تكلفة حقيقية على 20 عامًا في ذلك العمود (مع حساب كل تبديل بطارية). الساعات «غير المغطاة» يغطيها مولد أو الشبكة.",
+    resMatrixLegendOffgrid:
+      "الإطار الأخضر يعني أقل تكلفة حقيقية على 20 عامًا في ذلك العمود (مع حساب كل تبديل بطارية). الساعات «غير المغطاة» يغطيها مولد أو الشبكة.",
     resMatrixBatteryGoalHeader: "البطارية ↓ · الهدف →",
     resPreviewRelease: "🔎 معاينة: أفلت للاختيار",
     resSelectedSystem: "👆 النظام المحدد",
@@ -752,8 +789,7 @@ export const RESULT_COPY = {
       "انقر أي خلية في الجدول لترى ذلك النظام نفسه في كل المخططات وقائمة المعدات.",
     resMatrixHintWhyNot:
       "يوضح الجدول لماذا لم تكن الكيمياءات الأخرى عملية في هذا الموقع.",
-    resMatrixHintTabs:
-      "استخدم التبويبات أعلاه لمقارنة كل خيار جنبًا إلى جنب.",
+    resMatrixHintTabs: "استخدم التبويبات أعلاه لمقارنة كل خيار جنبًا إلى جنب.",
     resMatrixLegend:
       "الإطار الأخضر يعني أقل تكلفة حقيقية على 20 عامًا في ذلك العمود. انقر أي خلية لتصبح ذلك النظام هو المعروض في كل المخططات وقائمة المعدات وأرقام التصدير. عمود «هدفك» يتبع شريط التمرير.",
     resAhead: " — بنحو {pct}% متقدمًا على {chem}",
@@ -762,14 +798,12 @@ export const RESULT_COPY = {
     resWhyNaionLfpCheaper:
       " LFP أرخص على الورق هنا، لكن داخل الهامش الذي تحسمه السلامة.",
     resWhyNaionCostWin: " كما فاز في التكلفة الحقيقية على 20 عامًا.",
-    resWhyNaionCold:
-      " شتاؤكم متجمد: سيحتاج LFP هنا إلى حاوية مدفأة.",
+    resWhyNaionCold: " شتاؤكم متجمد: سيحتاج LFP هنا إلى حاوية مدفأة.",
     resWhyLfp:
       "{chem} يفوز في المال هنا{ahead} — أرخص فعلًا بما يكفي لاختياره على أساس التكلفة.",
     resWhyLfpCold:
       " تحذير للمواقع الباردة: يجب أن يكون في الداخل أو مدفأً، وألا يُشحن أبدًا تحت 0 °م وإلا تلفت البطارية تلفًا دائمًا.",
-    resWhyLfpWarm:
-      " يستخدم معظم قدرته الاسمية كل يوم ولديه عمر دورات طويل.",
+    resWhyLfpWarm: " يستخدم معظم قدرته الاسمية كل يوم ولديه عمر دورات طويل.",
     resWhyOther:
       "عند هذا الحمل وهذا الهدف، يفوز {chem} في تكلفة الشراء{ahead} — لكن توقّع نحو {n} تبديلات للبطارية خلال 20 عامًا، محسوبة أصلًا في كل الأرقام أعلاه.",
     resTailOthers:
@@ -812,7 +846,8 @@ export const RESULT_COPY = {
     resValNeverSwaps: "أبدًا — الاستبدالات تتجاوز الوفر",
     resValSwaps: "~{n} مرة — يضيف ~{amount} مع أجرة العمل",
     resValUnmet: "{h} ساعة/سنة · أطول فجوة {gap} ساعة",
-    resModalNote: "كل رقم محسوب من نفس محاكاة الطقس الساعية التي تُبنى عليها البطاقات — لا شيء هنا مقدَّر بالنظر.",
+    resModalNote:
+      "كل رقم محسوب من نفس محاكاة الطقس الساعية التي تُبنى عليها البطاقات — لا شيء هنا مقدَّر بالنظر.",
     resModalNoteNoTariff: " أدخل سعر شبكتك أعلاه لترى الاسترداد مقابل فاتورتك.",
   },
 };
