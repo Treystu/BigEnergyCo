@@ -34,6 +34,19 @@ test("getAllowedOrigin locks to the explicit allowlist", () => {
     getAllowedOrigin("https://staging-bca832d.bigenergyco.pages.dev"),
     "https://staging-bca832d.bigenergyco.pages.dev",
   );
+  // The aliases the deploy workflow and the rollback target actually serve.
+  // Measured 2026-11-10: both were untrusted, so the advisor's cross-origin
+  // call was refused on the very surfaces used to check it before a promotion.
+  assert.equal(
+    getAllowedOrigin("https://staging.bigenergyco.pages.dev"),
+    "https://staging.bigenergyco.pages.dev",
+    "the staging alias must be able to call the advisor",
+  );
+  assert.equal(
+    getAllowedOrigin("https://bigenergyco-prod.pages.dev"),
+    "https://bigenergyco-prod.pages.dev",
+    "the rollback target must be able to call the advisor",
+  );
   assert.equal(
     getAllowedOrigin("https://another-preview.bigenergyco.pages.dev"),
     null,

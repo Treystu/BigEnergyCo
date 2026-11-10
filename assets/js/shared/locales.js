@@ -3,7 +3,7 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261110a";
+import { HOME_COPY } from "./home-copy.js?v=20261110b";
 
 export const LOCALES = {
   en: {
@@ -4182,13 +4182,14 @@ export const LOCALES = {
       "Wat verandert de accu aan uw kosten over 20 jaar? (cumulatieve kosten)",
     cumCostTitleSolar:
       "Wat bespaart zonne-energie werkelijk? (cumulatieve kosten over 20 jaar)",
+    supportSectionTitle: "Dit hulpmiddel steunen",
     donationIntro:
-      "Deze dienst is en blijft gratis. Als u er baat bij had en wilt bijdragen aan de kosten van AI en hosting, vindt u hier hoe.",
+      "Als dit u een telefoontje, een offerte of een middag zoeken bespaarde, kunt u bijdragen aan de weerdata en de hosting. Gratis blijft het sowieso voor iedereen.",
     donationNotTaxDeductible: "niet aftrekbaar van de belasting",
     donationRecipientPrefix: "Bijdragen gaan rechtstreeks naar",
     donationRecipientSuffix: "persoonlijk.",
     donationTerms:
-      "Lees dit voordat u iets overmaakt. Bijdragen zijn vrijwillige giften aan een persoon, geen betaling voor een dienst. Ze zijn niet aftrekbaar van de belasting — dit is geen liefdadigheidsinstelling of geregistreerde non-profitorganisatie. Ze kopen niets: geen voorrang, functies, persoonlijk advies, supportverplichting of gegarandeerde beschikbaarheid van deze site. Iedereen krijgt precies hetzelfde gratis hulpmiddel, ongeacht of men bijdraagt. Stuur geen geld dat u nodig heeft. Als u professionele technische hulp wilde betalen, besteed het dan aan een erkende lokale engineer of elektricien; dat is een betere besteding.",
+      "Vrijwillige gift aan één persoon, geen betaling voor een dienst. Het koopt geen voorrang, functies of support, en het is niet aftrekbaar van de belasting — dit is geen goed doel. Iedereen krijgt hetzelfde gratis hulpmiddel, met of zonder bijdrage.",
     donationTermsPrefix:
       "Elke bijdrage die u kiest te sturen, is een vrijwillige gift aan een persoon. Het is",
     donationTermsSuffix:
@@ -4198,8 +4199,9 @@ export const LOCALES = {
     electricityRateLabel:
       "Elektriciteitsprijs bij u thuis (bepaalt uw rekening- en terugverdientijdschatting) - uw prijs per kWh ($):",
     emailSupportExpectations:
-      "Dit is één persoon die e-mail in zijn eigen tijd beantwoordt, als gunst — geen helpdesk. Ik lees wat ik kan en antwoord wanneer ik daartoe in staat ben, maar ik kan geen antwoord of termijn beloven. Alles wat ik terugstuur is een vriendelijke mening voor uw eigen verdere onderzoek, geen professioneel technisch, elektrisch of financieel advies, en schept geen professionele relatie of verplichting. Praat voor alles wat u echt wilt bouwen, inschakelen of waar u echt geld aan wilt uitgeven met een erkende elektricien of engineer in uw omgeving.",
-    emailWelcome: "U kunt me mailen:",
+      "Het is één persoon die in zijn eigen tijd leest, dus een antwoord kan even duren. Wat ik terugstuur is een vriendelijke mening voor uw eigen onderzoek, geen professioneel advies op het gebied van techniek, elektra of financiën. Praat voor alles wat u echt gaat bouwen, aansluiten of betalen met een erkende elektricien of engineer bij u in de buurt.",
+    emailTitle: "Iets mee gebouwd — of een getal gevonden dat er niet klopt?",
+    emailWelcome: "Mail me in beide gevallen:",
     endplateSpec:
       "Eindplaten met schotelveren zorgen voor gelijkmatige compressie (ongeveer 3.000 N). Fabrikanten noemen voordelen voor de levensduur; specifieke winst moet als niet-geverifieerd worden beschouwd.",
     estimateMethodDisclaimer:

@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261110a" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261110a" />
+    <link rel="preload" href="./assets/site.css?v=20261110b" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261110b" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261110a" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261110b" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -2998,11 +2998,14 @@
       <section id="support" class="legal-section">
         <div class="container">
           <div class="section-header">
-            <h2 class="section-title">Support This Tool</h2>
+            <h2 class="section-title" data-i18n="supportSectionTitle">
+              Support This Tool
+            </h2>
 
             <p class="section-desc" data-i18n="donationIntro">
-              This is free and always will be. If it helped you and you want to
-              chip in toward the AI and hosting costs, here's where.
+              If this saved you a call, a quote, or an afternoon of research,
+              you can chip in toward the weather data and the hosting. It stays
+              free for everyone either way.
             </p>
           </div>
 
@@ -3059,18 +3062,11 @@
                 "
                 data-i18n="donationTerms"
               >
-                <strong>Please read before sending anything.</strong>
-                Contributions are voluntary gifts to an individual, not payment
-                for a service. They are
+                Voluntary gift to one person, not payment for a service. It buys
+                no priority, features, or support, and it is
                 <strong>not tax-deductible</strong> &mdash; this is not a
-                charity or a registered nonprofit. They buy nothing: no
-                priority, no features, no personal advice, no support
-                obligation, and no continued availability of this site. Everyone
-                gets exactly the same free tool whether they contribute or not.
-                Please don't send money you need. If you were hoping to pay for
-                professional engineering help, spend it on a licensed local
-                engineer or electrician instead &mdash; that is genuinely the
-                better use of it.
+                charity. Everyone gets the same free tool whether they chip in
+                or not.
               </p>
             </div>
           </div>
@@ -3175,12 +3171,13 @@
             style="max-width: 640px; margin: 2.5rem auto 0; text-align: center"
           >
             <div class="legal-card">
-              <h3>Questions the AI couldn't answer?</h3>
+              <h3 data-i18n="emailTitle">
+                Built something with it &mdash; or found a number that looks
+                wrong?
+              </h3>
 
               <p class="paragraph-spacing">
-                <span data-i18n="emailWelcome"
-                  >You're welcome to email me:</span
-                >
+                <span data-i18n="emailWelcome">Tell me either way:</span>
 
                 <a class="text-accent" href="mailto:lucasballek@gmail.com"
                   >lucasballek@gmail.com</a
@@ -3195,17 +3192,14 @@
                 "
                 data-i18n="emailSupportExpectations"
               >
-                This is one person answering email in his own time, as a favor
-                &mdash; not a support desk. I read what I can and reply when I'm
-                able, but I can't promise a response or a timeframe. Anything I
-                send back is a friendly opinion for your own further research,
+                It is one person reading in his own time, so a reply can take a
+                while. What I send back is a friendly opinion for your own
+                research &mdash;
                 <strong
                   >not professional engineering, electrical, or financial
                   advice</strong
-                >, and it doesn't create any professional relationship or
-                obligation. For anything you're going to actually build,
-                energize, or spend real money on, please talk to a licensed
-                electrician or engineer in your area.
+                >. For anything you will actually build, energize, or pay for,
+                talk to a licensed electrician or engineer near you.
               </p>
             </div>
           </div>
@@ -3624,15 +3618,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261110a"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261110b"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261110a"
+      src="./assets/js/turnstile-client.js?v=20261110b"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261110a"></script>
+    <script defer src="./assets/js/chat.js?v=20261110b"></script>
   </body>
 </html>
 

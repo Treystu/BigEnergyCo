@@ -66,21 +66,23 @@ export const HOME_COPY = {
       "Yes. After your first visit the tool installs itself as an offline app: sizing math runs entirely in your browser, and if the network is down it falls back to bundled typical-year weather for the nearest of 66 reference cities.",
     batterySafety:
       "It demands respect: lithium cells store enough energy to start fires, and DC arcs don't switch off. The guides here insist on proper fusing, BMS use, and code compliance - and on having a licensed electrician check anything before you energize it.",
+    supportSectionTitle: "Support This Tool",
     donationIntro:
-      "This is free and always will be. If it helped you and you want to chip in toward the AI and hosting costs, here's where.",
+      "If this saved you a call, a quote, or an afternoon of research, you can chip in toward the weather data and the hosting. It stays free for everyone either way.",
     donationRecipientPrefix: "Contributions go directly to",
     donationRecipientSuffix: "personally.",
     donationTerms:
-      "Please read before sending anything. Contributions are voluntary gifts to an individual, not payment for a service. They are not tax-deductible — this is not a charity or a registered nonprofit. They buy nothing: no priority, no features, no personal advice, no support obligation, and no continued availability of this site. Everyone gets exactly the same free tool whether they contribute or not. Please don't send money you need. If you were hoping to pay for professional engineering help, spend it on a licensed local engineer or electrician instead — that is genuinely the better use of it.",
+      "Voluntary gift to one person, not payment for a service. It buys no priority, features, or support, and it is not tax-deductible — this is not a charity. Everyone gets the same free tool whether they chip in or not.",
     freeToolDisclaimer:
       "Short version: this is a free educational toy that produces rough estimates, run by one person, with no warranty of any kind.",
     resultEstimateDisclaimer:
       "Output is an automated educational estimate. It is not engineering, not a stamped design, not a quote, and not a safety certification. It may be wrong. Have any real system reviewed by a licensed electrician or engineer before you build or energize it.",
     chatPrivacySummary:
       "No signup, no cookies for advertising, no analytics profile. Your chat text is sent to the AI provider to generate a reply and is not stored here. Don't type anything sensitive into it.",
-    emailWelcome: "You're welcome to email me:",
+    emailTitle: "Built something with it — or found a number that looks wrong?",
+    emailWelcome: "Tell me either way:",
     emailSupportExpectations:
-      "This is one person answering email in his own time, as a favor — not a support desk. I read what I can and reply when I'm able, but I can't promise a response or a timeframe. Anything I send back is a friendly opinion for your own further research, not professional engineering, electrical, or financial advice, and it doesn't create any professional relationship or obligation. For anything you're going to actually build, energize, or spend real money on, please talk to a licensed electrician or engineer in your area.",
+      "It is one person reading in his own time, so a reply can take a while. What I send back is a friendly opinion for your own research — not professional engineering, electrical, or financial advice. For anything you will actually build, energize, or pay for, talk to a licensed electrician or engineer near you.",
     footerWarranty:
       "Provided free and as-is, with no warranty of any kind, express or implied. Estimates are educational only and may be inaccurate. Working with batteries, high DC current, and mains wiring can cause fire, serious injury, and death — you are responsible for your own safety, your own decisions, and compliance with your local electrical code. Verify everything with a licensed professional before building. - Blog - Worldwide Benchmarks - Heatmap - About - Terms - Support - lucasballek@gmail.com",
     operatorDescription:
@@ -171,21 +173,23 @@ export const HOME_COPY = {
       "Sí. Después de tu primera visita, la herramienta se instala como una aplicación sin conexión: los cálculos se ejecutan por completo en tu navegador y, si no hay red, usa datos meteorológicos típicos de un año incluidos para la más cercana de 66 ciudades de referencia.",
     batterySafety:
       "Hay que tratarlo con respeto: las celdas de litio almacenan energía suficiente para iniciar incendios y los arcos de CC no se apagan solos. Estas guías insisten en instalar fusibles adecuados, usar un BMS y cumplir el código, y en que un electricista autorizado revise todo antes de energizarlo.",
+    supportSectionTitle: "Apoya esta herramienta",
     donationIntro:
-      "Es gratis y siempre lo será. Si te ayudó y quieres aportar algo a los costos de IA y alojamiento, aquí puedes hacerlo.",
+      "Si esto te ahorró una llamada, un presupuesto o una tarde de investigación, puedes colaborar con los datos meteorológicos y el alojamiento. Sigue siendo gratis para todos en cualquier caso.",
     donationRecipientPrefix: "Las contribuciones se entregan directamente a",
     donationRecipientSuffix: "en persona.",
     donationTerms:
-      "Lee esto antes de enviar nada. Las contribuciones son regalos voluntarios a una persona, no el pago de un servicio. No son deducibles de impuestos; esto no es una organización benéfica ni una entidad sin fines de lucro registrada. No compran nada: ni prioridad, ni funciones, ni asesoría personal, ni obligación de soporte, ni la disponibilidad futura de este sitio. Todas las personas reciben exactamente la misma herramienta gratuita, contribuyan o no. No envíes dinero que necesites. Si querías pagar por ayuda de ingeniería profesional, es mejor gastarlo en un ingeniero o electricista local autorizado.",
+      "Donación voluntaria a una persona, no un pago por un servicio. No compra prioridad, funciones ni soporte, y no es deducible de impuestos — esto no es una organización benéfica. Todos reciben la misma herramienta gratuita, colaboren o no.",
     freeToolDisclaimer:
       "En resumen: es una herramienta educativa gratuita que ofrece estimaciones aproximadas, gestionada por una persona y sin garantía de ningún tipo.",
     resultEstimateDisclaimer:
       "El resultado es una estimación educativa automatizada. No es un trabajo de ingeniería, un diseño visado, un presupuesto ni una certificación de seguridad. Puede ser incorrecto. Antes de construir o energizar un sistema real, pide a un electricista o ingeniero autorizado que lo revise.",
     chatPrivacySummary:
       "No hace falta registrarse; no hay cookies publicitarias ni perfil analítico. El texto de tu conversación se envía al proveedor de IA para generar una respuesta y este sitio no lo almacena. No escribas información sensible.",
-    emailWelcome: "Puedes escribirme por correo electrónico:",
+    emailTitle: "¿Construiste algo con esto, o viste una cifra que parece mal?",
+    emailWelcome: "Cuéntame lo que sea:",
     emailSupportExpectations:
-      "Soy una sola persona que responde correos en su tiempo libre, como favor; no es un servicio de soporte. Leo lo que puedo y respondo cuando me es posible, pero no puedo prometer una respuesta ni un plazo. Lo que te envíe será una opinión cordial para que sigas investigando, no asesoría profesional de ingeniería, electricidad o finanzas, y no crea una relación ni obligación profesional. Para cualquier cosa que vayas a construir, energizar o pagar con dinero real, consulta a un electricista o ingeniero autorizado de tu zona.",
+      "Hay una persona leyendo en su tiempo libre, así que la respuesta puede tardar. Lo que te envío es una opinión amistosa para tu propia investigación, no asesoramiento profesional de ingeniería, eléctrico ni financiero. Para cualquier cosa que vayas a construir, energizar o pagar de verdad, habla con un electricista o ingeniero autorizado de tu zona.",
     footerWarranty:
       "Se ofrece gratis y tal cual, sin garantía de ningún tipo, expresa ni implícita. Las estimaciones son solo educativas y pueden ser inexactas. Trabajar con baterías, alta corriente CC y cableado de red eléctrica puede causar incendios, lesiones graves y la muerte; eres responsable de tu seguridad, tus decisiones y el cumplimiento del código eléctrico local. Verifica todo con un profesional autorizado antes de construir. - Blog - Referencias mundiales - Mapa de calor - Acerca de - Términos - Soporte - lucasballek@gmail.com",
     operatorDescription:
@@ -275,21 +279,24 @@ export const HOME_COPY = {
       "Sim. Depois da primeira visita, a ferramenta se instala como um aplicativo offline: os cálculos de dimensionamento rodam inteiramente no navegador e, se a rede cair, usam dados meteorológicos típicos de um ano incluídos para a mais próxima das 66 cidades de referência.",
     batterySafety:
       "É preciso ter respeito: células de lítio armazenam energia suficiente para iniciar incêndios, e arcos CC não se desligam sozinhos. Estas orientações exigem fusíveis adequados, uso de BMS e cumprimento do código, além de uma inspeção por eletricista habilitado antes de energizar o sistema.",
+    supportSectionTitle: "Apoia esta ferramenta",
     donationIntro:
-      "É gratuito e sempre será. Se ajudou você e quiser contribuir com os custos de IA e hospedagem, pode fazer isso aqui.",
+      "Se isto te poupou uma chamada, um orçamento ou uma tarde de pesquisa, podes contribuir para os dados meteorológicos e o alojamento. Continua gratuito para todos de qualquer forma.",
     donationRecipientPrefix: "As contribuições vão diretamente para",
     donationRecipientSuffix: "pessoalmente.",
     donationTerms:
-      "Leia antes de enviar qualquer valor. As contribuições são doações voluntárias a uma pessoa, não pagamento por um serviço. Não são dedutíveis do imposto; isto não é uma instituição de caridade nem uma organização sem fins lucrativos registrada. Elas não compram nada: prioridade, recursos, aconselhamento pessoal, obrigação de suporte ou disponibilidade contínua deste site. Todos recebem exatamente a mesma ferramenta gratuita, contribuam ou não. Não envie dinheiro de que você precise. Se queria pagar por ajuda profissional de engenharia, é melhor contratar um engenheiro ou eletricista local habilitado.",
+      "Doação voluntária a uma pessoa, não pagamento por um serviço. Não compra prioridade, funcionalidades nem suporte, e não é dedutível de impostos — isto não é uma instituição de caridade. Todos recebem a mesma ferramenta gratuita, contribuam ou não.",
     freeToolDisclaimer:
       "Em resumo: é uma ferramenta educativa gratuita que fornece estimativas aproximadas, administrada por uma pessoa e sem garantia de qualquer tipo.",
     resultEstimateDisclaimer:
       "O resultado é uma estimativa educativa automatizada. Não é engenharia, projeto assinado, orçamento nem certificação de segurança. Pode estar errado. Antes de construir ou energizar um sistema real, peça a um eletricista ou engenheiro habilitado que o revise.",
     chatPrivacySummary:
       "Não é preciso se cadastrar; não há cookies de publicidade nem perfil analítico. O texto da conversa é enviado ao provedor de IA para gerar uma resposta e não é armazenado aqui. Não digite informações sensíveis.",
-    emailWelcome: "Fique à vontade para me enviar um e-mail:",
+    emailTitle:
+      "Construíste algo com isto, ou encontraste um número que parece errado?",
+    emailWelcome: "Conta-me como foi:",
     emailSupportExpectations:
-      "Sou uma pessoa respondendo e-mails no meu próprio tempo, como um favor — não é uma central de suporte. Leio o que posso e respondo quando consigo, mas não posso prometer resposta nem prazo. O que eu enviar será uma opinião amigável para sua própria pesquisa, não aconselhamento profissional de engenharia, eletricidade ou finanças, e não cria relação nem obrigação profissional. Para qualquer coisa que você realmente vá construir, energizar ou pagar com dinheiro de verdade, converse com um eletricista ou engenheiro habilitado na sua região.",
+      "É uma pessoa a ler no seu tempo, por isso a resposta pode demorar. O que eu envio é uma opinião amigável para a tua própria pesquisa, não aconselhamento profissional de engenharia, elétrico ou financeiro. Para tudo o que vais construir, ligar ou pagar a sério, fala com um eletricista ou engenheiro habilitado perto de ti.",
     footerWarranty:
       "Fornecido gratuitamente e no estado em que se encontra, sem garantia de qualquer tipo, expressa ou implícita. As estimativas são apenas educativas e podem estar incorretas. Trabalhar com baterias, alta corrente CC e fiação da rede elétrica pode causar incêndio, lesões graves e morte — você é responsável pela sua segurança, pelas suas decisões e pelo cumprimento do código elétrico local. Verifique tudo com um profissional habilitado antes de construir. - Blog - Referências mundiais - Mapa de calor - Sobre - Termos - Suporte - lucasballek@gmail.com",
     operatorDescription:
@@ -306,7 +313,7 @@ export const HOME_COPY = {
       "Na máxima extensão permitida pela lei aplicável, o operador não será responsável por danos diretos, indiretos, incidentais, consequenciais, especiais ou punitivos — incluindo danos materiais, incêndio, lesões pessoais, perda de economias ou interrupção de negócios — decorrentes do uso desta ferramenta gratuita ou da confiança depositada nela. Algumas jurisdições não permitem certas exclusões; nesses casos, elas se aplicam somente na medida permitida. Nada aqui exclui responsabilidade que não possa ser legalmente excluída, incluindo morte ou lesão pessoal causada por negligência, ou fraude.",
     donationTermsPrefix:
       "Qualquer contribuição que você decidir enviar é uma doação voluntária a uma pessoa. Ela não é",
-    donationNotTaxDeductible: "dedutível do imposto",
+    donationNotTaxDeductible: "dedutível de impostos",
     donationTermsSuffix:
       ", não é pagamento por bens ou serviços, não cria contrato, não dá direito a nada e não é reembolsável em troca de qualquer obrigação. Contribuir não altera de modo algum o serviço que você recebe.",
     advisorPrivacyDisclosure:
@@ -381,21 +388,24 @@ export const HOME_COPY = {
       "Oui. Après votre première visite, l’outil s’installe comme application hors ligne : les calculs de dimensionnement s’exécutent entièrement dans votre navigateur et, si le réseau tombe, utilisent les données météo typiques d’une année incluses pour la plus proche des 66 villes de référence.",
     batterySafety:
       "La prudence s’impose : les cellules au lithium stockent assez d’énergie pour déclencher un incendie et les arcs CC ne s’éteignent pas seuls. Ces guides exigent des fusibles adaptés, un BMS et le respect des normes, ainsi qu’un contrôle par un électricien agréé avant toute mise sous tension.",
+    supportSectionTitle: "Soutenir cet outil",
     donationIntro:
-      "C’est gratuit et cela le restera. Si cet outil vous a aidé et que vous souhaitez contribuer aux frais d’IA et d’hébergement, vous pouvez le faire ici.",
+      "Si cela vous a épargné un appel, un devis ou un après-midi de recherche, vous pouvez participer aux données météo et à l’hébergement. L’outil reste gratuit pour tout le monde dans tous les cas.",
     donationRecipientPrefix: "Les contributions vont directement à",
     donationRecipientSuffix: "en personne.",
     donationTerms:
-      "Veuillez lire avant tout envoi. Les contributions sont des dons volontaires à une personne, et non le paiement d’un service. Elles ne sont pas déductibles des impôts ; il ne s’agit ni d’une œuvre caritative ni d’un organisme sans but lucratif enregistré. Elles n’achètent rien : ni priorité, ni fonctionnalité, ni conseil personnalisé, ni obligation d’assistance, ni disponibilité continue de ce site. Tout le monde reçoit exactement le même outil gratuit, avec ou sans contribution. N’envoyez pas d’argent dont vous avez besoin. Si vous vouliez payer une aide professionnelle en ingénierie, adressez-vous plutôt à un ingénieur ou à un électricien agréé près de chez vous.",
+      "Don volontaire à une personne, et non paiement d’un service. Il n’achète ni priorité, ni fonctionnalités, ni support, et n’est pas déductible des impôts — ce n’est pas une association caritative. Tout le monde reçoit le même outil gratuit, avec ou sans participation.",
     freeToolDisclaimer:
       "En bref : c’est un outil pédagogique gratuit qui fournit des estimations approximatives, géré par une personne et sans aucune garantie.",
     resultEstimateDisclaimer:
       "Le résultat est une estimation pédagogique automatisée. Ce n’est ni une étude d’ingénierie, ni un plan signé, ni un devis, ni une certification de sécurité. Il peut être erroné. Avant de construire ou de mettre sous tension un système réel, faites-le vérifier par un ingénieur ou un électricien agréé.",
     chatPrivacySummary:
       "Aucune inscription, aucun cookie publicitaire ni profil analytique. Le texte de votre conversation est envoyé au fournisseur d’IA pour générer une réponse et n’est pas conservé ici. N’y saisissez aucune information sensible.",
-    emailWelcome: "Vous pouvez m’écrire par e-mail :",
+    emailTitle:
+      "Vous avez construit quelque chose avec, ou repéré un chiffre qui semble faux ?",
+    emailWelcome: "Écrivez-moi dans les deux cas :",
     emailSupportExpectations:
-      "Je suis une seule personne qui répond aux e-mails sur son temps libre, par gentillesse — ce n’est pas un service d’assistance. Je lis ce que je peux et réponds quand je le peux, sans pouvoir garantir une réponse ni un délai. Mes messages sont des avis amicaux destinés à vos recherches, pas des conseils professionnels en ingénierie, électricité ou finance, et ne créent aucune relation ni obligation professionnelle. Pour tout ce que vous comptez réellement construire, mettre sous tension ou payer, consultez un ingénieur ou un électricien agréé de votre région.",
+      "C’est une personne qui lit sur son temps libre, une réponse peut donc prendre un moment. Ce que j’envoie est un avis amical pour vos propres recherches, pas un conseil professionnel en ingénierie, en électricité ou en finance. Pour tout ce que vous allez réellement construire, mettre sous tension ou payer, parlez à un électricien ou un ingénieur qualifié près de chez vous.",
     footerWarranty:
       "Fourni gratuitement en l’état, sans garantie d’aucune sorte, expresse ou implicite. Les estimations sont uniquement pédagogiques et peuvent être inexactes. Le travail sur des batteries, de forts courants CC et le câblage secteur peut provoquer un incendie, des blessures graves ou la mort — vous êtes responsable de votre sécurité, de vos décisions et du respect du code électrique local. Faites tout vérifier par un professionnel agréé avant de construire. - Blog - Références mondiales - Carte thermique - À propos - Conditions - Assistance - lucasballek@gmail.com",
     operatorDescription:
@@ -486,21 +496,24 @@ export const HOME_COPY = {
       "Ja. Nach Ihrem ersten Besuch installiert sich das Werkzeug als Offline-App: Die Berechnungen laufen vollständig im Browser. Bei einem Netzausfall werden mitgelieferte typische Wetterdaten für die nächstgelegene von 66 Referenzstädten verwendet.",
     batterySafety:
       "Das erfordert Respekt: Lithiumzellen speichern genug Energie, um Brände auszulösen, und DC-Lichtbögen schalten sich nicht von selbst ab. Die Anleitungen bestehen auf geeigneten Sicherungen, einem BMS und der Einhaltung der Vorschriften. Vor dem Einschalten soll eine zugelassene Elektrofachkraft alles prüfen.",
+    supportSectionTitle: "Dieses Werkzeug unterstützen",
     donationIntro:
-      "Das Werkzeug ist kostenlos und bleibt es auch. Wenn es Ihnen geholfen hat und Sie etwas zu den KI- und Hostingkosten beitragen möchten, können Sie das hier tun.",
+      "Wenn Ihnen das einen Anruf, ein Angebot oder einen Nachmittag Recherche erspart hat, können Sie sich an Wetterdaten und Hosting beteiligen. Gratis bleibt es für alle sowieso.",
     donationRecipientPrefix: "Beiträge gehen direkt an",
     donationRecipientSuffix: "persönlich.",
     donationTerms:
-      "Bitte lesen Sie dies, bevor Sie etwas senden. Beiträge sind freiwillige Geschenke an eine Privatperson und keine Zahlung für eine Dienstleistung. Sie sind nicht steuerlich absetzbar — dies ist weder eine Wohltätigkeitsorganisation noch eine eingetragene gemeinnützige Organisation. Sie kaufen nichts: keine Priorität, Funktionen, persönliche Beratung, Supportpflicht oder fortgesetzte Verfügbarkeit dieser Website. Alle erhalten genau dasselbe kostenlose Werkzeug, unabhängig von einem Beitrag. Senden Sie kein Geld, das Sie benötigen. Für professionelle Ingenieurhilfe wenden Sie sich stattdessen an einen zugelassenen Ingenieur oder Elektriker vor Ort.",
+      "Freiwillige Schenkung an eine Person, keine Bezahlung einer Leistung. Sie kauft weder Vorrang noch Funktionen noch Support und ist nicht steuerlich absetzbar — das hier ist keine gemeinnützige Organisation. Alle bekommen dasselbe kostenlose Werkzeug, ob mit oder ohne Beteiligung.",
     freeToolDisclaimer:
       "Kurz gesagt: Dies ist ein kostenloses Lernwerkzeug einer einzelnen Person, das grobe Schätzungen liefert und keinerlei Gewährleistung bietet.",
     resultEstimateDisclaimer:
       "Die Ausgabe ist eine automatisierte Lernschätzung. Sie ist weder Ingenieurarbeit noch ein genehmigter Entwurf, ein Angebot oder eine Sicherheitszertifizierung. Sie kann falsch sein. Lassen Sie ein reales System vor dem Bau oder Einschalten von einem zugelassenen Elektriker oder Ingenieur prüfen.",
     chatPrivacySummary:
       "Keine Anmeldung, keine Werbe-Cookies und kein Analyseprofil. Ihr Chattext wird zur Antwortgenerierung an den KI-Anbieter gesendet und hier nicht gespeichert. Geben Sie keine vertraulichen Informationen ein.",
-    emailWelcome: "Sie können mir gern eine E-Mail schreiben:",
+    emailTitle:
+      "Etwas damit gebaut — oder eine Zahl gefunden, die falsch aussieht?",
+    emailWelcome: "Schreiben Sie mir in beiden Fällen:",
     emailSupportExpectations:
-      "Ich bin eine einzelne Person, die in der Freizeit und aus Gefälligkeit E-Mails beantwortet — kein Supportteam. Ich lese, was ich kann, und antworte, wenn es möglich ist; eine Antwort oder einen Zeitrahmen kann ich nicht versprechen. Meine Rückmeldung ist eine freundliche Meinung für Ihre weitere Recherche, keine professionelle Beratung zu Ingenieurwesen, Elektrik oder Finanzen und begründet weder ein berufliches Verhältnis noch eine Verpflichtung. Wenn Sie etwas tatsächlich bauen, einschalten oder mit viel Geld bezahlen wollen, wenden Sie sich an einen zugelassenen Elektriker oder Ingenieur in Ihrer Nähe.",
+      "Es liest eine Person in ihrer Freizeit, eine Antwort kann daher dauern. Was ich zurückschreibe, ist eine freundliche Meinung für Ihre eigene Recherche, keine professionelle Ingenieur-, Elektro- oder Finanzberatung. Für alles, was Sie wirklich bauen, einschalten oder bezahlen, sprechen Sie mit einer zugelassenen Elektrofachkraft oder einem Ingenieur in Ihrer Nähe.",
     footerWarranty:
       "Kostenlos und wie besehen bereitgestellt, ohne Gewährleistung jeglicher Art, weder ausdrücklich noch stillschweigend. Die Schätzungen dienen nur der Information und können ungenau sein. Arbeiten an Batterien, hohen DC-Strömen und Netzleitungen können Brände, schwere Verletzungen und Tod verursachen — Sie sind für Ihre Sicherheit, Ihre Entscheidungen und die Einhaltung der örtlichen Elektrovorschriften verantwortlich. Lassen Sie vor dem Bau alles von einer zugelassenen Fachkraft prüfen. - Blog - Weltweite Referenzwerte - Heatmap - Über uns - Bedingungen - Support - lucasballek@gmail.com",
     operatorDescription:
@@ -590,21 +603,23 @@ export const HOME_COPY = {
       "نعم. بعد زيارتك الأولى، تثبّت الأداة نفسها كتطبيق يعمل دون اتصال: تُجرى حسابات تحديد الحجم بالكامل في المتصفح، وعند انقطاع الشبكة تستخدم بيانات طقس نموذجية لسنة واحدة المضمّنة لأقرب مدينة من 66 مدينة مرجعية.",
     batterySafety:
       "يتطلب الأمر احترامًا وحذرًا: تخزّن خلايا الليثيوم طاقة كافية لبدء حريق، ولا تنطفئ أقواس التيار المستمر تلقائيًا. تشدد الأدلة هنا على استخدام المصاهر المناسبة وBMS والامتثال للكود، وعلى فحص كهربائي مرخّص لكل شيء قبل تشغيله.",
+    supportSectionTitle: "ادعم هذه الأداة",
     donationIntro:
-      "هذه الأداة مجانية وستبقى كذلك. إذا أفادتك وأردت المساهمة في تكاليف الذكاء الاصطناعي والاستضافة، فإليك الطريقة.",
+      "إن كانت هذه الأداة قد وفّرت عليك مكالمة أو عرض سعر أو بعد ظهر من البحث، يمكنك المساهمة في بيانات الطقس والاستضافة. ستبقى مجانية للجميع في كل الأحوال.",
     donationRecipientPrefix: "تذهب المساهمات مباشرة إلى",
     donationRecipientSuffix: "شخصيًا.",
     donationTerms:
-      "يرجى القراءة قبل إرسال أي مبلغ. المساهمات هدايا طوعية لفرد وليست مقابل خدمة. وهي غير قابلة للخصم الضريبي؛ فهذا ليس عملًا خيريًا ولا مؤسسة غير ربحية مسجلة. لا تشتري أي شيء: لا أولوية ولا ميزات ولا نصيحة شخصية ولا التزام دعم ولا ضمان استمرار هذا الموقع. يحصل الجميع على الأداة المجانية نفسها تمامًا سواء ساهموا أم لا. لا ترسل مالًا تحتاج إليه. وإذا كنت تريد دفع تكلفة مساعدة هندسية مهنية، فالأفضل إنفاقه لدى مهندس أو كهربائي محلي مرخّص.",
+      "تبرّع طوعي لشخص واحد، وليس دفعًا مقابل خدمة. لا يشتري أولوية ولا ميزات ولا دعمًا، وهو غير قابل للخصم الضريبي — هذه ليست مؤسسة خيرية. الجميع يحصل على الأداة المجانية نفسها، سواء ساهم أم لم يساهم.",
     freeToolDisclaimer:
       "باختصار: هذه أداة تعليمية مجانية يقدمها شخص واحد، وتنتج تقديرات تقريبية من دون أي ضمان من أي نوع.",
     resultEstimateDisclaimer:
       "المخرجات تقدير تعليمي آلي. وهي ليست عملًا هندسيًا ولا تصميمًا مختومًا ولا عرض سعر ولا شهادة سلامة. وقد تكون خاطئة. اطلب من كهربائي أو مهندس مرخّص مراجعة أي نظام فعلي قبل بنائه أو تشغيله.",
     chatPrivacySummary:
       "لا يلزم التسجيل، ولا توجد ملفات تعريف ارتباط إعلانية أو ملفات تحليلية. يُرسل نص محادثتك إلى مزود الذكاء الاصطناعي لإعداد الرد ولا يُخزّن هنا. لا تكتب معلومات حساسة.",
-    emailWelcome: "يسعدني أن تراسلني عبر البريد الإلكتروني:",
+    emailTitle: "هل بنيت شيئًا بها، أو وجدت رقمًا يبدو خاطئًا؟",
+    emailWelcome: "أخبرني في الحالتين:",
     emailSupportExpectations:
-      "أنا شخص واحد أجيب عن البريد في وقتي الخاص كمجاملة — ولست مكتب دعم. أقرأ ما أستطيع وأرد عندما يتاح لي ذلك، لكن لا أستطيع ضمان الرد أو موعده. ما أرسله رأي ودي لمساعدتك في بحثك، وليس نصيحة هندسية أو كهربائية أو مالية مهنية، ولا ينشئ علاقة أو التزامًا مهنيًا. لأي شيء تنوي بناءه أو تشغيله أو دفع مال حقيقي مقابله، تحدّث إلى كهربائي أو مهندس مرخّص في منطقتك.",
+      "شخص واحد يقرأ في وقته الخاص، لذلك قد يتأخر الرد. ما أرسله هو رأي ودّي لبحثك الخاص، وليس استشارة هندسية أو كهربائية أو مالية مهنية. لأي شيء ستبنيه أو توصله بالكهرباء أو تدفع مقابله فعليًا، تحدّث إلى كهربائي أو مهندس مرخّص قريب منك.",
     footerWarranty:
       "تُقدّم الأداة مجانًا كما هي، من دون أي ضمان صريح أو ضمني. التقديرات تعليمية فقط وقد تكون غير دقيقة. قد يؤدي العمل بالبطاريات والتيارات العالية المستمرة وأسلاك الكهرباء الرئيسية إلى حريق أو إصابة خطيرة أو وفاة — وأنت مسؤول عن سلامتك وقراراتك والامتثال للكود الكهربائي المحلي. تحقّق من كل شيء مع مختص مرخّص قبل البناء. - المدونة - مراجع عالمية - خريطة حرارية - من نحن - الشروط - الدعم - lucasballek@gmail.com",
     operatorDescription:
@@ -620,7 +635,7 @@ export const HOME_COPY = {
     liabilityLimitation:
       "إلى أقصى حد يسمح به القانون المعمول به، لا يكون المشغّل مسؤولًا عن أي أضرار مباشرة أو غير مباشرة أو عرضية أو تبعية أو خاصة أو عقابية — بما فيها تلف الممتلكات والحريق والإصابة الشخصية وفقدان المدخرات أو توقف الأعمال — الناشئة عن استخدامك لهذه الأداة المجانية أو اعتمادك عليها. لا تسمح بعض الولايات القضائية باستثناءات معينة، وعندئذ لا تسري إلا بالقدر المسموح به. لا يستثني أي شيء هنا مسؤولية لا يجوز استثناؤها قانونًا، بما في ذلك الوفاة أو الإصابة الشخصية الناتجة عن الإهمال أو الاحتيال.",
     donationTermsPrefix: "أي مساهمة تختار إرسالها هي هدية طوعية لفرد. وهي ليست",
-    donationNotTaxDeductible: "قابلة للخصم الضريبي",
+    donationNotTaxDeductible: "غير قابل للخصم الضريبي",
     donationTermsSuffix:
       "، وليست دفعًا مقابل سلع أو خدمات، ولا تنشئ عقدًا أو تمنحك حقًا، ولا تُسترد مقابل أي التزام. ولا تغيّر مساهمتك الخدمة التي تحصل عليها بأي شكل.",
     advisorPrivacyDisclosure:
