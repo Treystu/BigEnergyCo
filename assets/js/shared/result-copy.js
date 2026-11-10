@@ -171,6 +171,25 @@ export const RESULT_COPY = {
     resValShiftedRate:
       "{rate} — on top of the {grid} you still pay for that energy",
     resValGridSuffix: " (grid {rate})",
+    resEli5Panels:
+      "~{n} standard rooftop or ground panels ({watts} W each). Needs about {area} m² (~{sqft} sq ft) of unshaded space. On a clear sunny day, this harvests around {kwh} kWh of free electricity.",
+    resEli5NoPanels:
+      "No solar panels are included in this battery-only configuration (it charges during cheap off-peak hours to avoid expensive peak electricity).",
+    resEli5NoBattery:
+      "No battery bank selected. Power generated during the day is consumed immediately or sent to the grid.",
+    resEli5Battery:
+      "{usable} kWh usable (~{total} kWh total). That provides ~{days} full days of normal power with zero sunlight. In physical size this is about {units} standard server-rack battery module(s), roughly the size of small desktop PC cases.",
+    resEli5InverterLabel: "⚡ The Inverter (System Brain)",
+    resEli5InverterGridTie:
+      "A grid-tied string inverter (~{kw} kW). It converts daytime solar DC electricity directly into 120V/240V AC power for your home appliances and sends excess to the grid.",
+    resEli5InverterBattery:
+      "A bidirectional battery inverter / charger (~{kw} kW). It quietly charges your batteries during cheap off-peak hours and discharges during peak-rate periods to avoid expensive utility power.",
+    resEli5InverterHybrid:
+      "A wall-mounted hybrid inverter / charger (~{from} to {to} kW continuous). It quietly converts DC power from solar and batteries into clean AC power for your outlets.",
+    resEli5SplitRequired:
+      " Native 240V split-phase is required for your selected 240V appliances (well pump, EV, or heat pump, for example).",
+    resEli5SplitStandard: " It supplies standard 120V household power.",
+    resEli5CostLabel: "💰 Wholesale vs Turnkey Quotes",
   },
   es: {
     resBasisCut10: "un recorte de factura de ~10% en horas punta",
@@ -334,6 +353,26 @@ export const RESULT_COPY = {
     resValShiftedRate:
       "{rate} — además de los {grid} que sigues pagando por esa energía",
     resValGridSuffix: " (red {rate})",
+    resEli5Panels:
+      "~{n} paneles estándar de tejado o suelo ({watts} W cada uno). Necesita unos {area} m² (~{sqft} pies²) de espacio sin sombra. En un día despejado recoge unos {kwh} kWh de electricidad gratis.",
+    resEli5NoPanels:
+      "Esta configuración solo lleva batería, sin paneles solares (se carga en horas valle baratas para evitar la electricidad cara de punta).",
+    resEli5NoBattery:
+      "No hay banco de baterías. La energía generada durante el día se consume al momento o se vierte a la red.",
+    resEli5Battery:
+      "{usable} kWh útiles (~{total} kWh en total). Eso da ~{days} días completos de consumo normal sin nada de sol. En tamaño físico son unos {units} módulos de batería de rack estándar, más o menos como ordenadores de sobremesa pequeños.",
+    resEli5InverterLabel: "⚡ El inversor (el cerebro del sistema)",
+    resEli5InverterGridTie:
+      "Un inversor de cadena conectado a red (~{kw} kW). Convierte la corriente continua solar del día directamente en corriente alterna de 120 V/240 V para tus aparatos y vierte el excedente a la red.",
+    resEli5InverterBattery:
+      "Un inversor/cargador de batería bidireccional (~{kw} kW). Carga tus baterías en horas valle baratas y las descarga en horas punta para evitar la electricidad cara de la red.",
+    resEli5InverterHybrid:
+      "Un inversor/cargador híbrido de pared (~{from} a {to} kW continuos). Convierte en silencio la corriente continua del sol y de las baterías en corriente alterna limpia para tus enchufes.",
+    resEli5SplitRequired:
+      " Hace falta fase partida nativa de 240 V para los aparatos de 240 V que has elegido (por ejemplo bomba de pozo, coche eléctrico o bomba de calor).",
+    resEli5SplitStandard:
+      " Suministra la corriente doméstica estándar de 120 V.",
+    resEli5CostLabel: "💰 Precio mayorista frente a presupuesto llave en mano",
   },
   pt: {
     resBasisCut10: "um corte na conta de ~10% em horas de ponta",
@@ -497,6 +536,25 @@ export const RESULT_COPY = {
     resValShiftedRate:
       "{rate} — além dos {grid} que você ainda paga por essa energia",
     resValGridSuffix: " (rede {rate})",
+    resEli5Panels:
+      "~{n} painéis padrão de telhado ou solo ({watts} W cada). Precisa de cerca de {area} m² (~{sqft} pés²) de área sem sombra. Num dia limpo, colhe cerca de {kwh} kWh de eletricidade grátis.",
+    resEli5NoPanels:
+      "Esta configuração é só de bateria, sem painéis solares (carrega nas horas de vazio baratas para evitar a eletricidade cara de ponta).",
+    resEli5NoBattery:
+      "Nenhum banco de baterias selecionado. A energia gerada durante o dia é consumida na hora ou injetada na rede.",
+    resEli5Battery:
+      "{usable} kWh utilizáveis (~{total} kWh no total). Isso dá ~{days} dias completos de consumo normal sem sol. Em tamanho físico são cerca de {units} módulos de bateria de rack padrão, mais ou menos como computadores de mesa pequenos.",
+    resEli5InverterLabel: "⚡ O inversor (o cérebro do sistema)",
+    resEli5InverterGridTie:
+      "Um inversor string ligado à rede (~{kw} kW). Converte a corrente contínua solar do dia diretamente em corrente alternada de 120 V/240 V para os seus aparelhos e injeta o excedente na rede.",
+    resEli5InverterBattery:
+      "Um inversor/carregador de bateria bidirecional (~{kw} kW). Carrega as baterias nas horas de vazio baratas e descarrega nas horas de ponta para evitar a eletricidade cara da rede.",
+    resEli5InverterHybrid:
+      "Um inversor/carregador híbrido de parede (~{from} a {to} kW contínuos). Converte em silêncio a corrente contínua do sol e das baterias em corrente alternada limpa para as suas tomadas.",
+    resEli5SplitRequired:
+      " É necessária fase dividida nativa de 240 V para os aparelhos de 240 V que escolheu (bomba de poço, carro elétrico ou bomba de calor, por exemplo).",
+    resEli5SplitStandard: " Fornece a energia doméstica padrão de 120 V.",
+    resEli5CostLabel: "💰 Preço no atacado versus orçamento chave na mão",
   },
   fr: {
     resBasisCut10: "une baisse de facture de ~10% en heures de pointe",
@@ -661,6 +719,25 @@ export const RESULT_COPY = {
     resValShiftedRate:
       "{rate} — en plus des {grid} que vous payez toujours pour cette énergie",
     resValGridSuffix: " (réseau {rate})",
+    resEli5Panels:
+      "~{n} panneaux standard en toiture ou au sol ({watts} W chacun). Il faut environ {area} m² (~{sqft} pi²) sans ombre. Par beau temps, cela récolte environ {kwh} kWh d'électricité gratuite.",
+    resEli5NoPanels:
+      "Cette configuration ne comporte que des batteries, sans panneaux solaires (elle se charge aux heures creuses bon marché pour éviter l'électricité chère en pointe).",
+    resEli5NoBattery:
+      "Aucun parc de batteries choisi. L'énergie produite dans la journée est consommée aussitôt ou injectée sur le réseau.",
+    resEli5Battery:
+      "{usable} kWh utiles (~{total} kWh au total). Cela couvre ~{days} jours complets de consommation normale sans aucun soleil. En volume, cela représente environ {units} modules de batterie rack standard, à peu près la taille de petits ordinateurs de bureau.",
+    resEli5InverterLabel: "⚡ L'onduleur (le cerveau du système)",
+    resEli5InverterGridTie:
+      "Un onduleur string raccordé au réseau (~{kw} kW). Il convertit le courant continu solaire de la journée directement en courant alternatif 120 V/240 V pour vos appareils et injecte le surplus sur le réseau.",
+    resEli5InverterBattery:
+      "Un onduleur/chargeur de batterie bidirectionnel (~{kw} kW). Il charge vos batteries aux heures creuses bon marché et les décharge aux heures de pointe pour éviter l'électricité chère du réseau.",
+    resEli5InverterHybrid:
+      "Un onduleur/chargeur hybride mural (~{from} à {to} kW en continu). Il convertit discrètement le courant continu du soleil et des batteries en courant alternatif propre pour vos prises.",
+    resEli5SplitRequired:
+      " Une phase dédoublée 240 V native est nécessaire pour les appareils 240 V que vous avez choisis (pompe de puits, véhicule électrique ou pompe à chaleur, par exemple).",
+    resEli5SplitStandard: " Il fournit le courant domestique standard 120 V.",
+    resEli5CostLabel: "💰 Prix de gros contre devis clé en main",
   },
   de: {
     resBasisCut10: "eine Rechnungssenkung von ~10% in Spitzenstunden",
@@ -823,6 +900,25 @@ export const RESULT_COPY = {
     resValShiftedRate:
       "{rate} — zusätzlich zu den {grid}, die Sie für diese Energie weiter zahlen",
     resValGridSuffix: " (Netz {rate})",
+    resEli5Panels:
+      "~{n} Standardmodule auf Dach oder Boden (je {watts} W). Sie brauchen etwa {area} m² (~{sqft} sq ft) schattenfreie Fläche. An einem klaren Tag ernten sie rund {kwh} kWh kostenlosen Strom.",
+    resEli5NoPanels:
+      "Diese Konfiguration besteht nur aus Batterien, ohne Solarmodule (sie lädt in günstigen Schwachlastzeiten, um teuren Spitzenstrom zu vermeiden).",
+    resEli5NoBattery:
+      "Kein Batteriespeicher gewählt. Der tagsüber erzeugte Strom wird sofort verbraucht oder ins Netz eingespeist.",
+    resEli5Battery:
+      "{usable} kWh nutzbar (~{total} kWh gesamt). Das deckt ~{days} volle Tage normalen Verbrauch ohne Sonne. Vom Volumen her sind das etwa {units} Standard-Rack-Batteriemodule, ungefähr so groß wie kleine Desktop-PCs.",
+    resEli5InverterLabel: "⚡ Der Wechselrichter (das Gehirn des Systems)",
+    resEli5InverterGridTie:
+      "Ein netzgekoppelter String-Wechselrichter (~{kw} kW). Er wandelt den Solar-Gleichstrom des Tages direkt in 120-V/240-V-Wechselstrom für Ihre Geräte um und speist den Überschuss ins Netz.",
+    resEli5InverterBattery:
+      "Ein bidirektionaler Batterie-Wechselrichter/-Lader (~{kw} kW). Er lädt Ihre Batterien in günstigen Schwachlastzeiten und entlädt sie in Spitzenzeiten, um teuren Netzstrom zu vermeiden.",
+    resEli5InverterHybrid:
+      "Ein wandmontierter Hybrid-Wechselrichter/-Lader (~{from} bis {to} kW Dauerleistung). Er wandelt Gleichstrom aus Sonne und Batterien leise in sauberen Wechselstrom für Ihre Steckdosen um.",
+    resEli5SplitRequired:
+      " Für die gewählten 240-V-Geräte ist ein natives 240-V-Split-Phase-Netz nötig (zum Beispiel Brunnenpumpe, E-Auto oder Wärmepumpe).",
+    resEli5SplitStandard: " Er liefert den üblichen 120-V-Haushaltsstrom.",
+    resEli5CostLabel: "💰 Großhandelspreis gegenüber schlüsselfertigem Angebot",
   },
   nl: {
     resBasisCut10: "een rekeningverlaging van ~10% in piekuren",
@@ -986,6 +1082,25 @@ export const RESULT_COPY = {
     resValShiftedRate:
       "{rate} — bovenop de {grid} die u voor die energie blijft betalen",
     resValGridSuffix: " (net {rate})",
+    resEli5Panels:
+      "~{n} standaardpanelen op dak of grond ({watts} W per stuk). Nodig: ongeveer {area} m² (~{sqft} sq ft) schaduwvrije ruimte. Op een heldere dag oogst dit zo'n {kwh} kWh gratis stroom.",
+    resEli5NoPanels:
+      "Deze configuratie heeft alleen accu's, geen zonnepanelen (hij laadt in goedkope daluren om dure piekstroom te vermijden).",
+    resEli5NoBattery:
+      "Geen accupakket gekozen. Stroom die overdag wordt opgewekt, wordt direct verbruikt of aan het net geleverd.",
+    resEli5Battery:
+      "{usable} kWh bruikbaar (~{total} kWh totaal). Dat dekt ~{days} volle dagen normaal verbruik zonder zon. Qua omvang zijn dat ongeveer {units} standaard rack-accu­modules, ongeveer zo groot als kleine desktop-pc's.",
+    resEli5InverterLabel: "⚡ De omvormer (het brein van het systeem)",
+    resEli5InverterGridTie:
+      "Een netgekoppelde stringomvormer (~{kw} kW). Hij zet de zonne-gelijkstroom van overdag direct om in 120 V/240 V wisselstroom voor uw apparaten en levert het overschot aan het net.",
+    resEli5InverterBattery:
+      "Een bidirectionele accu-omvormer/lader (~{kw} kW). Hij laadt uw accu's in goedkope daluren en ontlaadt ze in piekuren om dure netstroom te vermijden.",
+    resEli5InverterHybrid:
+      "Een wandgemonteerde hybride omvormer/lader (~{from} tot {to} kW continu). Hij zet gelijkstroom van zon en accu's stil om in schone wisselstroom voor uw stopcontacten.",
+    resEli5SplitRequired:
+      " Voor de gekozen 240 V-apparaten is native 240 V split-phase nodig (bijvoorbeeld putpomp, EV of warmtepomp).",
+    resEli5SplitStandard: " Hij levert standaard 120 V huishoudstroom.",
+    resEli5CostLabel: "💰 Groothandelsprijs versus turnkey-offerte",
   },
   ar: {
     resBasisCut10: "خفض للفاتورة بنحو 10% في ساعات الذروة",
@@ -1142,5 +1257,24 @@ export const RESULT_COPY = {
     resValShiftedRate:
       "{rate} — إضافة إلى {grid} التي ما زلت تدفعها لتلك الطاقة",
     resValGridSuffix: " (الشبكة {rate})",
+    resEli5Panels:
+      "~{n} لوحًا قياسيًا على السطح أو الأرض ({watts} واط لكل لوح). تحتاج إلى نحو {area} م² (~{sqft} قدم²) من مساحة بلا ظل. في يوم صافٍ تجمع نحو {kwh} كيلوواط ساعة من الكهرباء المجانية.",
+    resEli5NoPanels:
+      "هذا التكوين بطاريات فقط بلا ألواح شمسية (يشحن في ساعات خارج الذروة الرخيصة لتجنّب كهرباء الذروة الغالية).",
+    resEli5NoBattery:
+      "لم تُختر أي بطاريات. الطاقة المولَّدة نهارًا تُستهلك فورًا أو تُصدَّر إلى الشبكة.",
+    resEli5Battery:
+      "{usable} كيلوواط ساعة قابلة للاستخدام (~{total} كيلوواط ساعة إجمالًا). يغطي ذلك ~{days} يومًا كاملًا من الاستهلاك المعتاد دون أي شمس. من حيث الحجم يعادل نحو {units} وحدات بطارية ركّ قياسية، بحجم حواسيب مكتبية صغيرة تقريبًا.",
+    resEli5InverterLabel: "⚡ العاكس (عقل النظام)",
+    resEli5InverterGridTie:
+      "عاكس سلسلي موصول بالشبكة (~{kw} كيلوواط). يحوّل تيار الشمس المستمر نهارًا مباشرة إلى تيار متردد 120/240 فولت لأجهزتك ويصدّر الفائض إلى الشبكة.",
+    resEli5InverterBattery:
+      "عاكس/شاحن بطارية ثنائي الاتجاه (~{kw} كيلوواط). يشحن بطارياتك في ساعات خارج الذروة الرخيصة ويفرّغها في ساعات الذروة لتجنّب كهرباء الشبكة الغالية.",
+    resEli5InverterHybrid:
+      "عاكس/شاحن هجين مثبَّت على الحائط (~{from} إلى {to} كيلوواط مستمر). يحوّل بهدوء التيار المستمر من الشمس والبطاريات إلى تيار متردد نظيف لمقابسك.",
+    resEli5SplitRequired:
+      " يلزم طوران منفصلان 240 فولت أصليان للأجهزة العاملة على 240 فولت التي اخترتها (مثل مضخة بئر أو سيارة كهربائية أو مضخة حرارية).",
+    resEli5SplitStandard: " يوفّر كهرباء المنزل القياسية 120 فولت.",
+    resEli5CostLabel: "💰 سعر الجملة مقابل عرض تسليم مفتاح",
   },
 };
