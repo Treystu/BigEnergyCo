@@ -1,0 +1,195 @@
+{
+  "issue": 352,
+  "generated": "2026-11-10T05:58:38.043Z",
+  "head": null,
+  "acceptance": {
+    "CLAMP_VISIBLE_SHARE": 0.1
+  },
+  "v1InferenceSource": "ui.js:8006 restoreFromShare, replayed verbatim",
+  "summary": {
+    "cases": 6,
+    "legacyLosses": 3,
+    "v1Losses": 3,
+    "v2Losses": 0,
+    "identityDefect": true,
+    "clampFired": 0,
+    "clampShare": 0,
+    "clampsNeedVisibility": false
+  },
+  "identityMatrix": [
+    {
+      "id": "billcut",
+      "legacy": {
+        "mode": "gridtie",
+        "hardwareConfig": "both"
+      },
+      "viaLegacy": "billcut",
+      "viaV1": "billcut",
+      "viaV2": "billcut",
+      "legacySurvives": true,
+      "v1Survives": true,
+      "v2Survives": true
+    },
+    {
+      "id": "tou",
+      "legacy": {
+        "mode": "gridtie",
+        "hardwareConfig": "battery"
+      },
+      "viaLegacy": "tou",
+      "viaV1": "tou",
+      "viaV2": "tou",
+      "legacySurvives": true,
+      "v1Survives": true,
+      "v2Survives": true
+    },
+    {
+      "id": "backup",
+      "legacy": {
+        "mode": "offgrid",
+        "hardwareConfig": "both"
+      },
+      "viaLegacy": "offgrid",
+      "viaV1": "offgrid",
+      "viaV2": "backup",
+      "legacySurvives": false,
+      "v1Survives": false,
+      "v2Survives": true
+    },
+    {
+      "id": "reserve",
+      "legacy": {
+        "mode": "gridtie",
+        "hardwareConfig": "both"
+      },
+      "viaLegacy": "billcut",
+      "viaV1": "billcut",
+      "viaV2": "reserve",
+      "legacySurvives": false,
+      "v1Survives": false,
+      "v2Survives": true
+    },
+    {
+      "id": "offgrid",
+      "legacy": {
+        "mode": "offgrid",
+        "hardwareConfig": "both"
+      },
+      "viaLegacy": "offgrid",
+      "viaV1": "offgrid",
+      "viaV2": "offgrid",
+      "legacySurvives": true,
+      "v1Survives": true,
+      "v2Survives": true
+    },
+    {
+      "id": "portable",
+      "legacy": {
+        "mode": "portable",
+        "hardwareConfig": null
+      },
+      "viaLegacy": "billcut",
+      "viaV1": "billcut",
+      "viaV2": "portable",
+      "legacySurvives": false,
+      "v1Survives": false,
+      "v2Survives": true
+    }
+  ],
+  "clampCensus": [
+    {
+      "input": {
+        "reserve": 0.1,
+        "outage": 2
+      },
+      "reserveOut": 0.1,
+      "outageOut": 2,
+      "reserveFired": false,
+      "outageFired": false
+    },
+    {
+      "input": {
+        "reserve": 0.2,
+        "outage": 6
+      },
+      "reserveOut": 0.2,
+      "outageOut": 6,
+      "reserveFired": false,
+      "outageFired": false
+    },
+    {
+      "input": {
+        "reserve": 0.5,
+        "outage": 12
+      },
+      "reserveOut": 0.5,
+      "outageOut": 12,
+      "reserveFired": false,
+      "outageFired": false
+    },
+    {
+      "input": {
+        "reserve": 0.9,
+        "outage": 24
+      },
+      "reserveOut": 0.9,
+      "outageOut": 24,
+      "reserveFired": false,
+      "outageFired": false
+    },
+    {
+      "input": {
+        "reserve": 0.85,
+        "outage": 168
+      },
+      "reserveOut": 0.85,
+      "outageOut": 168,
+      "reserveFired": false,
+      "outageFired": false
+    }
+  ],
+  "clampBounds": [
+    {
+      "name": "reserve above cap",
+      "got": 0.9,
+      "want": 0.9,
+      "ok": true
+    },
+    {
+      "name": "reserve percent form",
+      "got": 0.9,
+      "want": 0.9,
+      "ok": true
+    },
+    {
+      "name": "reserve negative",
+      "got": 0,
+      "want": 0,
+      "ok": true
+    },
+    {
+      "name": "outage zero",
+      "got": 6,
+      "want": 6,
+      "ok": true
+    },
+    {
+      "name": "outage default",
+      "got": 6,
+      "want": 6,
+      "ok": true
+    },
+    {
+      "name": "outage above cap",
+      "got": 168,
+      "want": 168,
+      "ok": true
+    },
+    {
+      "name": "outage below floor",
+      "got": 1,
+      "want": 1,
+      "ok": true
+    }
+  ]
+}
