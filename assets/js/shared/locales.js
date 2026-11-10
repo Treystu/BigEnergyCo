@@ -3,7 +3,7 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261110b";
+import { HOME_COPY } from "./home-copy.js?v=20261110c";
 
 export const LOCALES = {
   en: {
@@ -4219,7 +4219,7 @@ export const LOCALES = {
     footerHeatmap: "Wereldkaart",
     footerTerms: "Voorwaarden",
     footerWarranty:
-      "Deze site wordt gratis en zonder enige garantie verstrekt, expliciet noch impliciet. Schattingen zijn uitsluitend educatief en kunnen onjuist zijn. Werken met accu's, hoge DC-stromen en netbedrading kan brand, ernstig letsel of overlijden veroorzaken — u bent verantwoordelijk voor uw veiligheid, uw keuzes en naleving van lokale elektrische voorschriften. Laat alles vóór de bouw controleren door een erkende vakman. - Blog - Wereldwijde benchmarks - Wereldkaart - Over - Voorwaarden - Support - lucasballek@gmail.com",
+      "Deze site wordt gratis en zonder enige garantie verstrekt, expliciet noch impliciet. Schattingen zijn uitsluitend educatief en kunnen onjuist zijn. Werken met accu's, hoge DC-stromen en netbedrading kan brand, ernstig letsel of overlijden veroorzaken — u bent verantwoordelijk voor uw veiligheid, uw keuzes en naleving van lokale elektrische voorschriften. Laat alles vóór de bouw controleren door een erkende vakman.",
     freeToolDisclaimer:
       "Kort gezegd: dit is een gratis educatief hulpmiddel dat grove schattingen maakt, door één persoon wordt beheerd en zonder enige garantie wordt aangeboden.",
     fxRateHelp:

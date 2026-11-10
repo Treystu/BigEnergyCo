@@ -84,7 +84,7 @@ export const HOME_COPY = {
     emailSupportExpectations:
       "It is one person reading in his own time, so a reply can take a while. What I send back is a friendly opinion for your own research — not professional engineering, electrical, or financial advice. For anything you will actually build, energize, or pay for, talk to a licensed electrician or engineer near you.",
     footerWarranty:
-      "Provided free and as-is, with no warranty of any kind, express or implied. Estimates are educational only and may be inaccurate. Working with batteries, high DC current, and mains wiring can cause fire, serious injury, and death — you are responsible for your own safety, your own decisions, and compliance with your local electrical code. Verify everything with a licensed professional before building. - Blog - Worldwide Benchmarks - Heatmap - About - Terms - Support - lucasballek@gmail.com",
+      "Provided free and as-is, with no warranty of any kind, express or implied. Estimates are educational only and may be inaccurate. Working with batteries, high DC current, and mains wiring can cause fire, serious injury, and death — you are responsible for your own safety, your own decisions, and compliance with your local electrical code. Verify everything with a licensed professional before building.",
     operatorDescription:
       "This is a free, personal, non-commercial educational tool operated by an individual, Lucas Ballek. It is not a company, not incorporated, and not a licensed engineering, electrical contracting, or financial advisory practice. Nothing on this site is for sale and no service is being offered or promised to you.",
     independentVerification:
@@ -191,7 +191,7 @@ export const HOME_COPY = {
     emailSupportExpectations:
       "Hay una persona leyendo en su tiempo libre, así que la respuesta puede tardar. Lo que te envío es una opinión amistosa para tu propia investigación, no asesoramiento profesional de ingeniería, eléctrico ni financiero. Para cualquier cosa que vayas a construir, energizar o pagar de verdad, habla con un electricista o ingeniero autorizado de tu zona.",
     footerWarranty:
-      "Se ofrece gratis y tal cual, sin garantía de ningún tipo, expresa ni implícita. Las estimaciones son solo educativas y pueden ser inexactas. Trabajar con baterías, alta corriente CC y cableado de red eléctrica puede causar incendios, lesiones graves y la muerte; eres responsable de tu seguridad, tus decisiones y el cumplimiento del código eléctrico local. Verifica todo con un profesional autorizado antes de construir. - Blog - Referencias mundiales - Mapa de calor - Acerca de - Términos - Soporte - lucasballek@gmail.com",
+      "Se ofrece gratis y tal cual, sin garantía de ningún tipo, expresa ni implícita. Las estimaciones son solo educativas y pueden ser inexactas. Trabajar con baterías, alta corriente CC y cableado de red eléctrica puede causar incendios, lesiones graves y la muerte; eres responsable de tu seguridad, tus decisiones y el cumplimiento del código eléctrico local. Verifica todo con un profesional autorizado antes de construir.",
     operatorDescription:
       "Esta es una herramienta educativa gratuita, personal y sin fines comerciales, gestionada por una persona, Lucas Ballek. No es una empresa ni una sociedad constituida, ni un despacho autorizado de ingeniería, instalaciones eléctricas o asesoría financiera. Nada de este sitio está a la venta y no se te ofrece ni promete ningún servicio.",
     independentVerification:
@@ -298,7 +298,7 @@ export const HOME_COPY = {
     emailSupportExpectations:
       "É uma pessoa a ler no seu tempo, por isso a resposta pode demorar. O que eu envio é uma opinião amigável para a tua própria pesquisa, não aconselhamento profissional de engenharia, elétrico ou financeiro. Para tudo o que vais construir, ligar ou pagar a sério, fala com um eletricista ou engenheiro habilitado perto de ti.",
     footerWarranty:
-      "Fornecido gratuitamente e no estado em que se encontra, sem garantia de qualquer tipo, expressa ou implícita. As estimativas são apenas educativas e podem estar incorretas. Trabalhar com baterias, alta corrente CC e fiação da rede elétrica pode causar incêndio, lesões graves e morte — você é responsável pela sua segurança, pelas suas decisões e pelo cumprimento do código elétrico local. Verifique tudo com um profissional habilitado antes de construir. - Blog - Referências mundiais - Mapa de calor - Sobre - Termos - Suporte - lucasballek@gmail.com",
+      "Fornecido gratuitamente e no estado em que se encontra, sem garantia de qualquer tipo, expressa ou implícita. As estimativas são apenas educativas e podem estar incorretas. Trabalhar com baterias, alta corrente CC e fiação da rede elétrica pode causar incêndio, lesões graves e morte — você é responsável pela sua segurança, pelas suas decisões e pelo cumprimento do código elétrico local. Verifique tudo com um profissional habilitado antes de construir.",
     operatorDescription:
       "Esta é uma ferramenta educativa gratuita, pessoal e sem fins comerciais, administrada por uma pessoa, Lucas Ballek. Não é uma empresa nem uma sociedade constituída, nem um escritório habilitado de engenharia, instalações elétricas ou consultoria financeira. Nada neste site está à venda e nenhum serviço é oferecido ou prometido a você.",
     independentVerification:
@@ -407,7 +407,7 @@ export const HOME_COPY = {
     emailSupportExpectations:
       "C’est une personne qui lit sur son temps libre, une réponse peut donc prendre un moment. Ce que j’envoie est un avis amical pour vos propres recherches, pas un conseil professionnel en ingénierie, en électricité ou en finance. Pour tout ce que vous allez réellement construire, mettre sous tension ou payer, parlez à un électricien ou un ingénieur qualifié près de chez vous.",
     footerWarranty:
-      "Fourni gratuitement en l’état, sans garantie d’aucune sorte, expresse ou implicite. Les estimations sont uniquement pédagogiques et peuvent être inexactes. Le travail sur des batteries, de forts courants CC et le câblage secteur peut provoquer un incendie, des blessures graves ou la mort — vous êtes responsable de votre sécurité, de vos décisions et du respect du code électrique local. Faites tout vérifier par un professionnel agréé avant de construire. - Blog - Références mondiales - Carte thermique - À propos - Conditions - Assistance - lucasballek@gmail.com",
+      "Fourni gratuitement en l’état, sans garantie d’aucune sorte, expresse ou implicite. Les estimations sont uniquement pédagogiques et peuvent être inexactes. Le travail sur des batteries, de forts courants CC et le câblage secteur peut provoquer un incendie, des blessures graves ou la mort — vous êtes responsable de votre sécurité, de vos décisions et du respect du code électrique local. Faites tout vérifier par un professionnel agréé avant de construire.",
     operatorDescription:
       "Cet outil pédagogique est gratuit, personnel et non commercial ; il est exploité par une personne, Lucas Ballek. Ce n’est ni une société ni une entreprise constituée, ni un cabinet agréé d’ingénierie, d’installation électrique ou de conseil financier. Rien sur ce site n’est à vendre et aucun service ne vous est proposé ni promis.",
     independentVerification:
@@ -515,7 +515,7 @@ export const HOME_COPY = {
     emailSupportExpectations:
       "Es liest eine Person in ihrer Freizeit, eine Antwort kann daher dauern. Was ich zurückschreibe, ist eine freundliche Meinung für Ihre eigene Recherche, keine professionelle Ingenieur-, Elektro- oder Finanzberatung. Für alles, was Sie wirklich bauen, einschalten oder bezahlen, sprechen Sie mit einer zugelassenen Elektrofachkraft oder einem Ingenieur in Ihrer Nähe.",
     footerWarranty:
-      "Kostenlos und wie besehen bereitgestellt, ohne Gewährleistung jeglicher Art, weder ausdrücklich noch stillschweigend. Die Schätzungen dienen nur der Information und können ungenau sein. Arbeiten an Batterien, hohen DC-Strömen und Netzleitungen können Brände, schwere Verletzungen und Tod verursachen — Sie sind für Ihre Sicherheit, Ihre Entscheidungen und die Einhaltung der örtlichen Elektrovorschriften verantwortlich. Lassen Sie vor dem Bau alles von einer zugelassenen Fachkraft prüfen. - Blog - Weltweite Referenzwerte - Heatmap - Über uns - Bedingungen - Support - lucasballek@gmail.com",
+      "Kostenlos und wie besehen bereitgestellt, ohne Gewährleistung jeglicher Art, weder ausdrücklich noch stillschweigend. Die Schätzungen dienen nur der Information und können ungenau sein. Arbeiten an Batterien, hohen DC-Strömen und Netzleitungen können Brände, schwere Verletzungen und Tod verursachen — Sie sind für Ihre Sicherheit, Ihre Entscheidungen und die Einhaltung der örtlichen Elektrovorschriften verantwortlich. Lassen Sie vor dem Bau alles von einer zugelassenen Fachkraft prüfen.",
     operatorDescription:
       "Dies ist ein kostenloses, persönliches und nicht kommerzielles Lernwerkzeug, betrieben von einer Einzelperson, Lucas Ballek. Es ist weder ein Unternehmen noch eine Kapitalgesellschaft oder ein zugelassenes Ingenieur-, Elektroinstallations- oder Finanzberatungsbüro. Auf dieser Website wird nichts verkauft und Ihnen wird keine Dienstleistung angeboten oder versprochen.",
     independentVerification:
@@ -621,7 +621,7 @@ export const HOME_COPY = {
     emailSupportExpectations:
       "شخص واحد يقرأ في وقته الخاص، لذلك قد يتأخر الرد. ما أرسله هو رأي ودّي لبحثك الخاص، وليس استشارة هندسية أو كهربائية أو مالية مهنية. لأي شيء ستبنيه أو توصله بالكهرباء أو تدفع مقابله فعليًا، تحدّث إلى كهربائي أو مهندس مرخّص قريب منك.",
     footerWarranty:
-      "تُقدّم الأداة مجانًا كما هي، من دون أي ضمان صريح أو ضمني. التقديرات تعليمية فقط وقد تكون غير دقيقة. قد يؤدي العمل بالبطاريات والتيارات العالية المستمرة وأسلاك الكهرباء الرئيسية إلى حريق أو إصابة خطيرة أو وفاة — وأنت مسؤول عن سلامتك وقراراتك والامتثال للكود الكهربائي المحلي. تحقّق من كل شيء مع مختص مرخّص قبل البناء. - المدونة - مراجع عالمية - خريطة حرارية - من نحن - الشروط - الدعم - lucasballek@gmail.com",
+      "تُقدّم الأداة مجانًا كما هي، من دون أي ضمان صريح أو ضمني. التقديرات تعليمية فقط وقد تكون غير دقيقة. قد يؤدي العمل بالبطاريات والتيارات العالية المستمرة وأسلاك الكهرباء الرئيسية إلى حريق أو إصابة خطيرة أو وفاة — وأنت مسؤول عن سلامتك وقراراتك والامتثال للكود الكهربائي المحلي. تحقّق من كل شيء مع مختص مرخّص قبل البناء.",
     operatorDescription:
       "هذه أداة تعليمية مجانية وشخصية وغير تجارية يديرها فرد هو Lucas Ballek. ليست شركة أو كيانًا مسجلًا، ولا ممارسة مرخّصة للهندسة أو المقاولات الكهربائية أو الاستشارات المالية. لا يُباع أي شيء على هذا الموقع، ولا يُعرض عليك أيٌّ من الخدمات أو يُوعَد به.",
     independentVerification:

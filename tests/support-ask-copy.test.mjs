@@ -136,6 +136,39 @@ test("the ask sits with the result and before the support section", () => {
   );
 });
 
+test("the footer prints its links once: no link list inside the warranty prose", () => {
+  // The paragraph renders its own anchors; when the warranty value also carried
+  // " - Blog - Worldwide Benchmarks - ... - lucasballek@gmail.com" the footer
+  // repeated its whole navigation, and the email, twice on every page.
+  for (const lang of LANGS) {
+    const warranty = LOCALES[lang].footerWarranty;
+    assert.equal(typeof warranty, "string", `${lang}.footerWarranty missing`);
+    assert.ok(
+      !/lucasballek@gmail\.com/.test(warranty),
+      `${lang}.footerWarranty still carries the email as prose`,
+    );
+    assert.ok(
+      !/\s[-–—]\s(?:Blog|Worldwide|Heatmap|About|Terms|Support)/i.test(
+        warranty,
+      ),
+      `${lang}.footerWarranty still carries a dash-separated link list`,
+    );
+  }
+  // The anchors are the navigation, and they must all still be there.
+  const footer = HTML.slice(HTML.lastIndexOf("<footer"));
+  for (const href of [
+    '"./blog/"',
+    '"./solar-calculator/"',
+    '"./solar-heatmap/"',
+    '"./about/"',
+    '"#legal"',
+    '"#support"',
+    '"mailto:lucasballek@gmail.com"',
+  ]) {
+    assert.ok(footer.includes(`href=${href}`), `footer lost its ${href} link`);
+  }
+});
+
 test("one source per string: the locale merge does not shadow HOME_COPY", () => {
   // home-copy.js supplies the long-form copy for six locales; any inline
   // duplicate in locales.js silently wins the spread and drifts from it.
