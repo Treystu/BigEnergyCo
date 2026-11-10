@@ -129,6 +129,12 @@ export const RESULT_COPY = {
       "Every figure is computed from the same hourly weather simulation as the cards — nothing here is estimated by eye.",
     resModalNoteNoTariff:
       " Enter your grid price above to see payback vs. your bill.",
+    resChartSocEmpty:
+      "Battery charge over the year renders here after you run a sizing.",
+    resChartCostEmpty:
+      "Cumulative 20-year cost comparison renders here after you run a sizing.",
+    resBomPanelWatts: "Panel wattage you'd buy (W):",
+    resHowCalculated: "How this was calculated",
   },
   es: {
     resBasisCut10: "un recorte de factura de ~10% en horas punta",
@@ -250,6 +256,12 @@ export const RESULT_COPY = {
       "Cada cifra sale de la misma simulación horaria del clima que las tarjetas: nada aquí está estimado a ojo.",
     resModalNoteNoTariff:
       " Indica tu precio de red arriba para ver la amortización frente a tu factura.",
+    resChartSocEmpty:
+      "La carga de la batería a lo largo del año se dibuja aquí después de dimensionar.",
+    resChartCostEmpty:
+      "La comparación de coste acumulado a 20 años se dibuja aquí después de dimensionar.",
+    resBomPanelWatts: "Potencia del panel que comprarías (W):",
+    resHowCalculated: "Cómo se calculó",
   },
   pt: {
     resBasisCut10: "um corte na conta de ~10% em horas de ponta",
@@ -371,6 +383,12 @@ export const RESULT_COPY = {
       "Cada número vem da mesma simulação horária de clima dos cartões: nada aqui é estimado a olho.",
     resModalNoteNoTariff:
       " Informe seu preço de rede acima para ver o retorno frente à sua conta.",
+    resChartSocEmpty:
+      "A carga da bateria ao longo do ano é desenhada aqui depois de dimensionar.",
+    resChartCostEmpty:
+      "A comparação de custo acumulado em 20 anos é desenhada aqui depois de dimensionar.",
+    resBomPanelWatts: "Potência do painel que você compraria (W):",
+    resHowCalculated: "Como isso foi calculado",
   },
   fr: {
     resBasisCut10: "une baisse de facture de ~10% en heures de pointe",
@@ -493,6 +511,12 @@ export const RESULT_COPY = {
       "Chaque chiffre vient de la même simulation horaire du climat que les cartes : rien ici n'est estimé à l'œil.",
     resModalNoteNoTariff:
       " Indiquez votre prix réseau ci-dessus pour voir le retour sur votre facture.",
+    resChartSocEmpty:
+      "La charge de la batterie sur l'année s'affiche ici après un dimensionnement.",
+    resChartCostEmpty:
+      "La comparaison du coût cumulé sur 20 ans s'affiche ici après un dimensionnement.",
+    resBomPanelWatts: "Puissance du panneau que vous achèteriez (W) :",
+    resHowCalculated: "Comment ce calcul a été fait",
   },
   de: {
     resBasisCut10: "eine Rechnungssenkung von ~10% in Spitzenstunden",
@@ -613,6 +637,12 @@ export const RESULT_COPY = {
       "Jede Zahl stammt aus derselben stündlichen Wettersimulation wie die Karten — nichts hier ist geschätzt.",
     resModalNoteNoTariff:
       " Tragen Sie oben Ihren Netzpreis ein, um die Amortisation gegenüber Ihrer Rechnung zu sehen.",
+    resChartSocEmpty:
+      "Der Batterieladezustand über das Jahr erscheint hier nach der Dimensionierung.",
+    resChartCostEmpty:
+      "Der Vergleich der Gesamtkosten über 20 Jahre erscheint hier nach der Dimensionierung.",
+    resBomPanelWatts: "Panel-Leistung, die Sie kaufen würden (W):",
+    resHowCalculated: "Wie das berechnet wurde",
   },
   nl: {
     resBasisCut10: "een rekeningverlaging van ~10% in piekuren",
@@ -734,6 +764,12 @@ export const RESULT_COPY = {
       "Elk cijfer komt uit dezelfde uurlijkse weersimulatie als de kaarten — niets hier is op het oog geschat.",
     resModalNoteNoTariff:
       " Vul hierboven uw netprijs in om de terugverdientijd tegen uw rekening te zien.",
+    resChartSocEmpty:
+      "De acculading over het jaar verschijnt hier nadat je hebt doorgerekend.",
+    resChartCostEmpty:
+      "De vergelijking van de totale kosten over 20 jaar verschijnt hier nadat je hebt doorgerekend.",
+    resBomPanelWatts: "Paneelvermogen dat je zou kopen (W):",
+    resHowCalculated: "Hoe dit is berekend",
   },
   ar: {
     resBasisCut10: "خفض للفاتورة بنحو 10% في ساعات الذروة",
@@ -849,5 +885,10 @@ export const RESULT_COPY = {
     resModalNote:
       "كل رقم محسوب من نفس محاكاة الطقس الساعية التي تُبنى عليها البطاقات — لا شيء هنا مقدَّر بالنظر.",
     resModalNoteNoTariff: " أدخل سعر شبكتك أعلاه لترى الاسترداد مقابل فاتورتك.",
+    resChartSocEmpty: "يُرسم هنا شحن البطارية على مدار السنة بعد تشغيل الحساب.",
+    resChartCostEmpty:
+      "تظهر هنا مقارنة التكلفة التراكمية خلال 20 سنة بعد تشغيل الحساب.",
+    resBomPanelWatts: "قدرة اللوح التي ستشتريها (واط):",
+    resHowCalculated: "كيف تم حساب هذا",
   },
 };

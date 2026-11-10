@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261110f" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261110f" />
+    <link rel="preload" href="./assets/site.css?v=20261110g" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261110g" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261110f" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261110g" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -2550,8 +2550,10 @@
                       touch-action: pan-y;
                     "
                   >
-                    Battery charge over the year renders here after you run a
-                    sizing.
+                    <span data-i18n="resChartSocEmpty"
+                      >Battery charge over the year renders here after you run a
+                      sizing.</span
+                    >
                   </canvas>
 
                   <p class="result-caption" id="socCaption"></p>
@@ -2563,6 +2565,7 @@
                 >
                   <div
                     id="cumCostTitle"
+                    data-i18n="cumCostTitleSolar"
                     style="
                       font-size: 0.95rem;
                       font-weight: 700;
@@ -2602,8 +2605,10 @@
                       background: rgba(9, 13, 22, 0.85);
                     "
                   >
-                    Cumulative 20-year cost comparison renders here after you
-                    run a sizing.
+                    <span data-i18n="resChartCostEmpty"
+                      >Cumulative 20-year cost comparison renders here after you
+                      run a sizing.</span
+                    >
                   </canvas>
 
                   <div
@@ -2654,7 +2659,7 @@
                       class="form-group"
                       style="margin-bottom: 0; max-width: 220px"
                     >
-                      <label for="panelWatts"
+                      <label for="panelWatts" data-i18n="resBomPanelWatts"
                         >Panel wattage you'd buy (W):</label
                       >
 
@@ -2707,6 +2712,7 @@
                   "
                 >
                   <summary
+                    data-i18n="resHowCalculated"
                     style="cursor: pointer; color: var(--primary-accent)"
                   >
                     How this was calculated
@@ -3618,15 +3624,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261110f"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261110g"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261110f"
+      src="./assets/js/turnstile-client.js?v=20261110g"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261110f"></script>
+    <script defer src="./assets/js/chat.js?v=20261110g"></script>
   </body>
 </html>
 
