@@ -124,7 +124,10 @@ test("the ask sits with the result and before the support section", () => {
   const ask = HTML.indexOf('id="valueMomentAsk"');
   const support = HTML.indexOf('id="support"');
   assert.ok(ask > 0, "the value-moment ask element must exist");
-  assert.ok(support > ask, "the ask must precede the support section it links to");
+  assert.ok(
+    support > ask,
+    "the ask must precede the support section it links to",
+  );
   // It stays hidden until a result exists: an ask before a result is a pitch.
   const element = HTML.slice(ask - 400, ask + 40);
   assert.ok(
