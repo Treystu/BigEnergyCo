@@ -69,3 +69,12 @@ No amendments yet: the plan is at its genesis hash.
 - Plan-SHA256-after: e89ebe0bbbe99cefbc3b547902457e2d196f71d81b27ce0e36ce00ea023b6609
 - Sections: Q-01, Section 13.3
 - Rationale: The owner approved B1 on 2026-10-23. Main staging requires a 95.0 combined score, every facet ordinal >= 85, no facet below ordinal 60, the existing all-facet ratchet, and green hard gates. Confidence below 0.95 is telemetry and triggers claim-level investigation under Jev Gate Policy v1 but does not block staging. P10 program exit and weekly P11 retain 95/95/95 through --program-exit; scoped PR thresholds are unchanged. PR #292 supplied the proposal draft; this amendment records the approved implementation policy.
+
+## A-008: Plan alignment - locale and registry counts corrected to the measured tree
+
+- Date: 2026-11-11
+- Approved-by: @Treystu (standing prompt, queue item 6: verify the filed count by direct count, then append this amendment as a factual correction and re-pin)
+- Plan-SHA256-before: e89ebe0bbbe99cefbc3b547902457e2d196f71d81b27ce0e36ce00ea023b6609
+- Plan-SHA256-after: 68aa4b782dc1cd69e141390ee38cb99d050ec6d88242793075605e5c7c3422f8
+- Sections: Coverage of the world (section 2 table row); F-09
+- Rationale: Two counts in the plan were stale against primary reads, filed with evidence on issue #363 (receipt docs/lane/data-reads/2026-11-10-live-surfaces.json). Measured 2026-11-11 on the lane tree: LOCALES has 7 key-complete locales (en, es, pt, fr, de, nl, ar) and assets/data/registry/countries/ holds 221 ISO-3166-1 alpha-2 files, no index file. The Coverage-of-the-world row now reads "221 per-country registry files" and "7 locales (en, es, pt, fr, de, nl, ar), with ar the only RTL one"; F-09 now reads "covers 221 countries". Nothing else in the plan changes: the program-scope lines that still say six locales (Q-13, F-42, P6.9, P7.4, P8.1, P9.1) state a delivery scope, not a count of shipped dictionaries, and are left for their own amendment if scope widens. Re-pinned in the same change.
