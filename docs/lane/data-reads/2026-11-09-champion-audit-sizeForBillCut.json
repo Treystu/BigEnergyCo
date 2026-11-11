@@ -1,0 +1,358 @@
+{
+  "issue": 347,
+  "mechanism": "sizeForBillCut",
+  "generated": "2026-11-10T02:00:33.260Z",
+  "lattice": {
+    "pvFloor": 0.05,
+    "pvControlStep": 0.25,
+    "pvMax": 30,
+    "battStep": 1,
+    "battMax": 100,
+    "evaluationsPerCase": 12120
+  },
+  "acceptance": {
+    "regretLimit": 0.02,
+    "labelLimitPp": 0.5,
+    "casesMeasured": 8,
+    "casesOverRegret": 1,
+    "casesOverLabel": 0,
+    "maxRegret": 0.051899,
+    "maxSearchRegret": 0.051899,
+    "maxLabelMismatchPp": 0.4468,
+    "maxTargetOvershootPp": 1.739,
+    "maxTargetShortfallPp": 0
+  },
+  "verdict": "CHALLENGER QUALIFIES - a corpus case exceeds the 2% regret or 0.5 pp label margin, so a finer/exact search is in scope",
+  "cases": [
+    {
+      "city": "Honolulu, USA",
+      "kwhPerDay": 10,
+      "chemistry": "lfp",
+      "regime": "import-only",
+      "minFraction": 0.6,
+      "champion": {
+        "pvKw": 1.32,
+        "battKwh": 3,
+        "lifetimeCostUsd": 1821,
+        "oversizeScenario": "swaps_cheaper",
+        "meetsConstraint": true,
+        "ms": 84
+      },
+      "championSearchOnly": {
+        "pvKw": 1.32,
+        "battKwh": 3,
+        "lifetimeCostUsd": 1821,
+        "meetsConstraint": true
+      },
+      "control": {
+        "pvKw": 1.8,
+        "battKwh": 2,
+        "lifetimeCostUsd": 2083,
+        "evaluations": 12120,
+        "ms": 719
+      },
+      "rendered": {
+        "metric": "bill-cut",
+        "fraction": 0.601044,
+        "pct": 60,
+        "target": 0.6,
+        "mismatchPp": -0.1044,
+        "targetOffsetPp": 0.1044
+      },
+      "regret": -0.12578,
+      "regretUsd": -262,
+      "searchRegret": -0.12578,
+      "samePoint": false
+    },
+    {
+      "city": "Phoenix, USA",
+      "kwhPerDay": 20,
+      "chemistry": "lfp",
+      "regime": "import-only",
+      "minFraction": 0.95,
+      "champion": {
+        "pvKw": 5.67,
+        "battKwh": 26,
+        "lifetimeCostUsd": 5967,
+        "oversizeScenario": "zero_swap_natural",
+        "meetsConstraint": true,
+        "ms": 49
+      },
+      "championSearchOnly": {
+        "pvKw": 5.67,
+        "battKwh": 26,
+        "lifetimeCostUsd": 5967,
+        "meetsConstraint": true
+      },
+      "control": {
+        "pvKw": 5.8,
+        "battKwh": 13,
+        "lifetimeCostUsd": 6023,
+        "evaluations": 12120,
+        "ms": 773
+      },
+      "rendered": {
+        "metric": "bill-cut",
+        "fraction": 0.950432,
+        "pct": 95,
+        "target": 0.95,
+        "mismatchPp": -0.0432,
+        "targetOffsetPp": 0.0432
+      },
+      "regret": -0.009298,
+      "regretUsd": -56,
+      "searchRegret": -0.009298,
+      "samePoint": false
+    },
+    {
+      "city": "London, UK",
+      "kwhPerDay": 10,
+      "chemistry": "lfp",
+      "regime": "net-metered",
+      "minFraction": 0.8,
+      "tariff": 0.3,
+      "exportRate": 0.3,
+      "champion": {
+        "pvKw": 2.98,
+        "battKwh": 0,
+        "lifetimeCostUsd": 1294,
+        "oversizeScenario": "zero_swap_natural",
+        "meetsConstraint": true,
+        "ms": 64
+      },
+      "championSearchOnly": {
+        "pvKw": 2.98,
+        "battKwh": 0,
+        "lifetimeCostUsd": 1294,
+        "meetsConstraint": true
+      },
+      "control": {
+        "pvKw": 3.05,
+        "battKwh": 0,
+        "lifetimeCostUsd": 1325,
+        "evaluations": 12120,
+        "ms": 713
+      },
+      "rendered": {
+        "metric": "bill-cut",
+        "fraction": 0.814468,
+        "pct": 81,
+        "target": 0.8,
+        "mismatchPp": -0.4468,
+        "targetOffsetPp": 1.4468
+      },
+      "regret": -0.023396,
+      "regretUsd": -31,
+      "searchRegret": -0.023396,
+      "samePoint": false
+    },
+    {
+      "city": "Berlin, Germany",
+      "kwhPerDay": 8,
+      "chemistry": "naion",
+      "regime": "net-metered",
+      "minFraction": 0.95,
+      "tariff": 0.32,
+      "exportRate": 0.08,
+      "champion": {
+        "pvKw": 7.64,
+        "battKwh": 0,
+        "lifetimeCostUsd": 3321,
+        "oversizeScenario": "zero_swap_natural",
+        "meetsConstraint": true,
+        "ms": 61
+      },
+      "championSearchOnly": {
+        "pvKw": 7.64,
+        "battKwh": 0,
+        "lifetimeCostUsd": 3321,
+        "meetsConstraint": true
+      },
+      "control": {
+        "pvKw": 7.8,
+        "battKwh": 0,
+        "lifetimeCostUsd": 3389,
+        "evaluations": 12120,
+        "ms": 881
+      },
+      "rendered": {
+        "metric": "bill-cut",
+        "fraction": 0.956451,
+        "pct": 96,
+        "target": 0.95,
+        "mismatchPp": 0.3549,
+        "targetOffsetPp": 0.6451
+      },
+      "regret": -0.020065,
+      "regretUsd": -68,
+      "searchRegret": -0.020065,
+      "samePoint": false
+    },
+    {
+      "city": "Delhi, India",
+      "kwhPerDay": 15,
+      "chemistry": "lfp",
+      "regime": "net-metered-over100",
+      "minFraction": 1.2,
+      "tariff": 0.12,
+      "exportRate": 0.12,
+      "champion": {
+        "pvKw": 4.96,
+        "battKwh": 0,
+        "lifetimeCostUsd": 2451,
+        "oversizeScenario": "zero_swap_natural",
+        "meetsConstraint": true,
+        "ms": 93
+      },
+      "championSearchOnly": {
+        "pvKw": 4.96,
+        "battKwh": 0,
+        "lifetimeCostUsd": 2451,
+        "meetsConstraint": true
+      },
+      "control": {
+        "pvKw": 5.05,
+        "battKwh": 0,
+        "lifetimeCostUsd": 2493,
+        "evaluations": 12120,
+        "ms": 985
+      },
+      "rendered": {
+        "metric": "bill-cut",
+        "fraction": 1.21739,
+        "pct": 122,
+        "target": 1.2,
+        "mismatchPp": 0.261,
+        "targetOffsetPp": 1.739
+      },
+      "regret": -0.016847,
+      "regretUsd": -42,
+      "searchRegret": -0.016847,
+      "samePoint": false
+    },
+    {
+      "city": "Nairobi, Kenya",
+      "kwhPerDay": 5,
+      "chemistry": "lfp",
+      "regime": "surplus-physical",
+      "minFraction": 1.2,
+      "tariff": 0.2,
+      "exportRate": 0,
+      "champion": {
+        "pvKw": 1.45,
+        "battKwh": 4,
+        "lifetimeCostUsd": 1966,
+        "oversizeScenario": "swaps_cheaper",
+        "meetsConstraint": true,
+        "ms": 86
+      },
+      "championSearchOnly": {
+        "pvKw": 1.45,
+        "battKwh": 4,
+        "lifetimeCostUsd": 1966,
+        "meetsConstraint": true
+      },
+      "control": {
+        "pvKw": 1.55,
+        "battKwh": 7,
+        "lifetimeCostUsd": 1869,
+        "evaluations": 12120,
+        "ms": 1003
+      },
+      "rendered": {
+        "metric": "physical-surplus",
+        "fraction": 1,
+        "pct": 100,
+        "target": 1.2,
+        "mismatchPp": 0,
+        "targetOffsetPp": null
+      },
+      "regret": 0.051899,
+      "regretUsd": 97,
+      "searchRegret": 0.051899,
+      "samePoint": false
+    },
+    {
+      "city": "Sydney, Australia",
+      "kwhPerDay": 12,
+      "chemistry": "lfp",
+      "regime": "peak-only",
+      "minFraction": 0.1,
+      "pvMax": 0,
+      "champion": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "lifetimeCostUsd": 476,
+        "oversizeScenario": "swaps_cheaper",
+        "meetsConstraint": true,
+        "ms": 14
+      },
+      "championSearchOnly": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "lifetimeCostUsd": 476,
+        "meetsConstraint": true
+      },
+      "control": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "lifetimeCostUsd": 476,
+        "evaluations": 101,
+        "ms": 3
+      },
+      "rendered": {
+        "metric": "peak-offset",
+        "fraction": 0.383667,
+        "pct": 38,
+        "target": 0.1,
+        "mismatchPp": -0.3667,
+        "targetOffsetPp": null
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "searchRegret": 0,
+      "samePoint": true
+    },
+    {
+      "city": "Cairo, Egypt",
+      "kwhPerDay": 18,
+      "chemistry": "lfp",
+      "regime": "peak-only",
+      "minFraction": 0.2,
+      "pvMax": 0,
+      "champion": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "lifetimeCostUsd": 425,
+        "oversizeScenario": "swaps_cheaper",
+        "meetsConstraint": true,
+        "ms": 4
+      },
+      "championSearchOnly": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "lifetimeCostUsd": 425,
+        "meetsConstraint": true
+      },
+      "control": {
+        "pvKw": 0,
+        "battKwh": 1,
+        "lifetimeCostUsd": 425,
+        "evaluations": 101,
+        "ms": 3
+      },
+      "rendered": {
+        "metric": "peak-offset",
+        "fraction": 0.255778,
+        "pct": 26,
+        "target": 0.2,
+        "mismatchPp": 0.4222,
+        "targetOffsetPp": null
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "searchRegret": 0,
+      "samePoint": true
+    }
+  ]
+}

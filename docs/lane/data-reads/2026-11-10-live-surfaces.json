@@ -1,0 +1,285 @@
+{
+  "generated": "2026-11-10T20:46:05.964Z",
+  "method": "HTTP GET of each surface, no cache, redirects not followed; sha256 of the response body",
+  "surfaces": {
+    "prod": {
+      "name": "prod",
+      "url": "https://bigenergyco.pages.dev/",
+      "status": 200,
+      "bytes": 125986,
+      "sha256": "4a6cd5b3d11e1dc1b5dfe5966ef575c39ead8934b841841d2174cf7b1c9d0cb8",
+      "stamp": "20261103u",
+      "mitigated": null,
+      "server": "cloudflare",
+      "timestamp": "2026-11-10T20:46:01.666Z"
+    },
+    "staging": {
+      "name": "staging",
+      "url": "https://staging.bigenergyco.pages.dev/",
+      "status": 200,
+      "bytes": 125986,
+      "sha256": "4a6cd5b3d11e1dc1b5dfe5966ef575c39ead8934b841841d2174cf7b1c9d0cb8",
+      "stamp": "20261103u",
+      "mitigated": null,
+      "server": "cloudflare",
+      "timestamp": "2026-11-10T20:46:02.133Z"
+    },
+    "ghPages": {
+      "name": "ghPages",
+      "url": "https://treystu.github.io/BigEnergyCo/",
+      "status": 200,
+      "bytes": 125986,
+      "sha256": "4a6cd5b3d11e1dc1b5dfe5966ef575c39ead8934b841841d2174cf7b1c9d0cb8",
+      "stamp": "20261103u",
+      "mitigated": null,
+      "server": "GitHub.com",
+      "timestamp": "2026-11-10T20:46:02.518Z"
+    },
+    "ghPagesPromoteDefault": {
+      "name": "ghPagesPromoteDefault",
+      "url": "https://sovereign-communication.github.io/BigEnergyCo/",
+      "status": 404,
+      "bytes": 9115,
+      "sha256": "70d613e3acfba24fd2876fcbacaf639e1e111ef4d54baf70761c47673f37d6a3",
+      "stamp": null,
+      "mitigated": null,
+      "server": "GitHub.com",
+      "timestamp": "2026-11-10T20:46:02.983Z"
+    },
+    "rollbackTarget": {
+      "name": "rollbackTarget",
+      "url": "https://bigenergyco-prod.pages.dev/",
+      "status": 200,
+      "bytes": 124463,
+      "sha256": "258062371d9dd13032d37efa58bb6db18c1874112a16a051cd0eb4f86ac44ee9",
+      "stamp": "20261025b",
+      "mitigated": null,
+      "server": "cloudflare",
+      "timestamp": "2026-11-10T20:46:03.456Z"
+    },
+    "brand": {
+      "name": "brand",
+      "url": "https://freeoffgridcalculator.com/",
+      "status": 403,
+      "bytes": 5520,
+      "sha256": "7c7818d68039dbc46d46755f276ad6c46b99072e52c8ae5f6b73d10caa7d68f3",
+      "stamp": null,
+      "mitigated": "challenge",
+      "server": "cloudflare",
+      "timestamp": "2026-11-10T20:46:03.858Z"
+    },
+    "api": {
+      "name": "api",
+      "url": "https://bigenergyco-api.bigenergyco.workers.dev/api/health",
+      "status": 200,
+      "bytes": 267,
+      "sha256": "2927923f9ae5ec996e40544150c88535d459751b3a8f165fa5d0d33f35bc09ff",
+      "stamp": null,
+      "mitigated": null,
+      "server": "cloudflare",
+      "timestamp": "2026-11-10T20:46:04.206Z"
+    }
+  },
+  "parity": {
+    "rows": [
+      {
+        "item": "/",
+        "prod": "200/125986B/4a6cd5b3d11e",
+        "staging": "200/125986B/4a6cd5b3d11e",
+        "prodStatus": 200,
+        "stagingStatus": 200,
+        "verdict": "identical"
+      },
+      {
+        "item": "/sw.js",
+        "prod": "200/4497B/684c0d7de44d",
+        "staging": "200/4497B/684c0d7de44d",
+        "prodStatus": 200,
+        "stagingStatus": 200,
+        "verdict": "identical"
+      },
+      {
+        "item": "/sitemap.xml",
+        "prod": "200/16343B/3f8d995acd16",
+        "staging": "200/16343B/3f8d995acd16",
+        "prodStatus": 200,
+        "stagingStatus": 200,
+        "verdict": "identical"
+      },
+      {
+        "item": "/robots.txt",
+        "prod": "200/101B/bc7869393b98",
+        "staging": "200/101B/bc7869393b98",
+        "prodStatus": 200,
+        "stagingStatus": 200,
+        "verdict": "identical"
+      },
+      {
+        "item": "/manifest.webmanifest",
+        "prod": "200/937B/6dac31619a91",
+        "staging": "200/937B/6dac31619a91",
+        "prodStatus": 200,
+        "stagingStatus": 200,
+        "verdict": "identical"
+      },
+      {
+        "item": "/404.html",
+        "prod": "308/0B/e3b0c44298fc",
+        "staging": "308/0B/e3b0c44298fc",
+        "prodStatus": 308,
+        "stagingStatus": 308,
+        "verdict": "identical"
+      },
+      {
+        "item": "/calculator",
+        "prod": "404/3132B/b48e5b653d3d",
+        "staging": "404/3132B/b48e5b653d3d",
+        "prodStatus": 404,
+        "stagingStatus": 404,
+        "verdict": "identical"
+      },
+      {
+        "item": "/solar-calculator/",
+        "prod": "200/15027B/aca137e5a2d7",
+        "staging": "200/15027B/aca137e5a2d7",
+        "prodStatus": 200,
+        "stagingStatus": 200,
+        "verdict": "identical"
+      },
+      {
+        "item": "/assets/js/shared/locales.js",
+        "prod": "200/347636B/9f61cb0b83f4",
+        "staging": "200/347636B/9f61cb0b83f4",
+        "prodStatus": 200,
+        "stagingStatus": 200,
+        "verdict": "identical"
+      },
+      {
+        "item": "/assets/js/sizing/pricing.js",
+        "prod": "200/30260B/a7dc17bcf0ac",
+        "staging": "200/30260B/a7dc17bcf0ac",
+        "prodStatus": 200,
+        "stagingStatus": 200,
+        "verdict": "identical"
+      }
+    ],
+    "identical": 10,
+    "divergent": 0,
+    "unobservable": 0,
+    "singleSurface": {
+      "brand": {
+        "status": 403,
+        "mitigated": "challenge"
+      },
+      "api": {
+        "status": 200,
+        "body": "2927923f9ae5ec996e40544150c88535d459751b3a8f165fa5d0d33f35bc09ff"
+      },
+      "rollbackTarget": {
+        "status": 200,
+        "stamp": "20261025b"
+      },
+      "ghPages": {
+        "status": 200,
+        "sha256": "4a6cd5b3d11e1dc1b5dfe5966ef575c39ead8934b841841d2174cf7b1c9d0cb8"
+      },
+      "ghPagesPromoteDefault": {
+        "status": 404
+      }
+    }
+  },
+  "planAlignment": {
+    "claims": [
+      {
+        "doc": "docs/plan/MASTER_PLAN.md",
+        "line": 11,
+        "claim": "Product row: production is https://freeoffgridcalculator.com/ (Cloudflare Pages), staging on GitHub Pages, API on the Cloudflare Worker.",
+        "observed": {
+          "brandDomain": "403 cf-mitigated:challenge",
+          "pagesDev": "200 stamp 20261103u",
+          "ghPagesTreystu": "200 sha 4a6cd5b3d11e",
+          "ghPagesPromoteDefault": "404",
+          "apiWorker": "200"
+        },
+        "verdict": "partly-stale",
+        "why": "Production and staging both serve from Cloudflare Pages today (identical bytes), so 'staging on GitHub Pages' describes neither surface in use; the GitHub Pages copy that DOES serve is treystu's, while the one promote.mjs targets 404s (#361). The brand domain is challenge-gated (#328/#360).",
+        "owner": 361
+      },
+      {
+        "doc": "docs/plan/MASTER_PLAN.md",
+        "line": 134,
+        "claim": "Coverage row: 220 per-country place files and 66 city pages; 24 currencies; 6 locales, with ar the only RTL one.",
+        "observed": {
+          "registryCountryFiles": 221,
+          "cityPagesInLiveSitemap": 66,
+          "sitemapSolarCalculatorUrls": 67,
+          "currencies": 24,
+          "localesInDeployedLocalesJs": 7,
+          "localeIds": "en,es,pt,fr,de,nl,ar"
+        },
+        "verdict": "stale",
+        "why": "The city-page count is exact (67 sitemap URLs = the /solar-calculator/ hub + 66 cities) and the currency count is exact (24). Two counts are wrong: 221 registry country files, not 220, and 7 shipped locales, not 6 - `nl` is key-complete (548 keys, the same as every other locale) and appears in the DEPLOYED switcher as 'Nederlands'.",
+        "owner": null,
+        "proposedAmendment": "Coverage of the world: 221 per-country registry files and 66 city pages ... 24 currencies. 7 locales (en, es, pt, fr, de, nl, ar), with ar the only RTL one."
+      },
+      {
+        "doc": "docs/plan/MASTER_PLAN.md",
+        "line": 209,
+        "claim": "F-44: the production domain sits behind a Cloudflare bot challenge; non-browser clients get 403 cf-mitigated: challenge, while bigenergyco.pages.dev answers 200.",
+        "observed": {
+          "brandDomain": "403 cf-mitigated:challenge",
+          "pagesDev": 200
+        },
+        "verdict": "holds",
+        "why": "Re-read today, unchanged. The sitemap compounds it: every <loc> names the brand host, so the advertised URLs are the challenged origin (#328).",
+        "owner": 328
+      },
+      {
+        "doc": "docs/plan/MASTER_PLAN.md",
+        "line": 67,
+        "claim": "Q-01 / D-03: main is staging - the promoted artifact is the exact main commit, and production promotion is gated on a Jev report for origin/main.",
+        "observed": {
+          "deployedSwMatchesCommit": "21fac5f2",
+          "originMain": "7b3c108b",
+          "originMainTouchesShippedAssets": false,
+          "prodStamp": "20261103u",
+          "stagingStamp": "20261103u"
+        },
+        "verdict": "holds-in-substance",
+        "why": "The served sw.js hashes to 21fac5f2, one commit behind origin/main 7b3c108b - but 7b3c108b changes only docs/plan/LEDGER.jsonl and tests/comparison.test.mjs, so the shipped artifact is content-equivalent to main. The invariant is not violated; the SHA equality it implies is, and that is worth knowing before anyone promotes on a SHA comparison.",
+        "owner": null
+      },
+      {
+        "doc": "docs/plan/ASSUMPTIONS.md",
+        "line": null,
+        "claim": "A-12: production (bigenergyco.pages.dev) is at asset stamp 20261025b and staging at 20261103u.",
+        "observed": {
+          "prodStamp": "20261103u",
+          "stagingStamp": "20261103u",
+          "rollbackTargetStamp": "20261025b"
+        },
+        "verdict": "stale",
+        "why": "Production now serves 20261103u - the same stamp, and the same bytes, as staging. The 20261025b artifact is now only on the rollback target bigenergyco-prod (A-13), which is exactly what that project is for.",
+        "owner": null,
+        "note": "ASSERTIONS.md is not hash-pinned; its own protocol requires the row to be re-read and updated, which was done in this commit."
+      },
+      {
+        "doc": "docs/plan/ASSUMPTIONS.md",
+        "line": null,
+        "claim": "A-13: bigenergyco-prod holds a faithful copy of the Oct 25 production artifact and is a valid rollback target.",
+        "observed": {
+          "status": 200,
+          "stamp": "20261025b",
+          "bytes": 124463
+        },
+        "verdict": "holds",
+        "why": "Read again today, read-only: 200 with stamp 20261025b. The rollback target was not touched - no deploy, no flag, no domain change.",
+        "owner": null
+      }
+    ],
+    "holds": 2,
+    "partlyStale": 1,
+    "stale": 2,
+    "holdsInSubstance": 1
+  }
+}

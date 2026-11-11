@@ -365,6 +365,23 @@ export function deriveLegacy(id) {
 }
 
 /**
+ * Which hardware the run actually searches. A case that locks hardware (ToU
+ * is battery-only, off-grid needs both) keeps its pair; an unlocked case
+ * (bill-cut, reserve) honors a visitor's explicit solar/both choice instead
+ * of silently reverting to the legacy "both" — that revert sized a battery
+ * for a solar-only share link.
+ */
+export function hardwareForRun(id, requested) {
+  const c = useCase(id) || USE_CASES.billcut;
+  if (
+    !c.legacy.locksHardware &&
+    (requested === "solar" || requested === "both")
+  )
+    return requested;
+  return c.legacy.hardwareConfig === null ? "battery" : c.legacy.hardwareConfig;
+}
+
+/**
  * The reverse direction, for the share link and for anything restoring saved
  * state: given the legacy pair, which use case was meant? Backup and reserve
  * are not recoverable from the pair alone (they share the pair with
@@ -411,11 +428,21 @@ export function outcomeFor(id, measurement) {
   // the card says so instead — one short sentence, shared by every case,
   // because "this cannot be sized at all" is the same fact for all of them.
   const measured = measurement.measured !== false;
+  // The bill-cut measurement holds the visitor's reserve back, so it reads
+  // lower than the full-battery figure every hardware surface quotes (76%
+  // against 81% on one card, measured 2026-11-08). Two numbers are fine; two
+  // unexplained numbers are not, so the label carries the reserve basis and
+  // the chip beside it says it quotes the full bank.
+  const reservePct = Number(measurement.reservePct) || 0;
+  const labelKey =
+    c.id === "billcut" && reservePct > 0
+      ? "metricBillCutReserve"
+      : c.metric.labelKey;
   return {
     useCase: c.id,
     metricId: c.metric.id,
     unit: c.metric.unit,
-    labelKey: c.metric.labelKey,
+    labelKey,
     value,
     measured,
     status: v.status,

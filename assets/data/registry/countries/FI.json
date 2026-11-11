@@ -1,0 +1,112 @@
+{
+  "iso": "FI",
+  "name": "Finland",
+  "values": {
+    "currency": {
+      "code": "EUR",
+      "grade": "A",
+      "source": "iso_4217",
+      "retrieved": "2026-11-08",
+      "review_by": "2027-11-08"
+    },
+    "tariff": {
+      "lo": 0.2694,
+      "mid": 0.2694,
+      "hi": 0.2694,
+      "unit": "EUR/kWh",
+      "currency": "EUR",
+      "year": 2026,
+      "grade": "A",
+      "source": "eurostat_household_prices",
+      "retrieved": "2026-11-08",
+      "review_by": "2027-05-08",
+      "note": "Eurostat nrg_pc_204, household consumption band 2500-4999 kWh/year, all taxes included, reference period 2026-S1 (dataset updated 2026-10-19), read at the Eurostat API on 2026-11-08. A published point statistic, so lo, mid and hi are the same number rather than a spread invented around it. Half-yearly series with a 6-month review: the next release is the trigger, not a guess."
+    },
+    "fixed_charge": {
+      "unknown": true,
+      "note": "No verified fixed charge for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "export_regime": {
+      "unknown": true,
+      "note": "No cited policy read for FI yet; D-10 keeps export rules unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "legality_gridtie": {
+      "unknown": true,
+      "note": "No cited policy read for FI yet; D-10 keeps grid-tie legality unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "legality_offgrid": {
+      "unknown": true,
+      "note": "No cited policy read for FI yet; D-10 keeps off-grid legality unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "legality_battery_only": {
+      "unknown": true,
+      "note": "No cited policy read for FI yet; D-10 keeps battery-only legality unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "legality_portable": {
+      "unknown": true,
+      "note": "No cited policy read for FI yet; D-10 keeps portable-system legality unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "turnkey_benchmark": {
+      "unknown": true,
+      "note": "No verified turnkey price benchmark for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "hardware_landed_factor": {
+      "unknown": true,
+      "note": "No verified landed hardware factor for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "electrician_rate": {
+      "unknown": true,
+      "note": "No verified electrician labour rate for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "permit_fees": {
+      "unknown": true,
+      "note": "No verified permit fees for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "lease_available": {
+      "unknown": true,
+      "note": "No verified lease availability for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "lease_term_years": {
+      "unknown": true,
+      "note": "No verified lease term for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "lease_buyout_pct": {
+      "unknown": true,
+      "note": "No verified lease buyout share for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "inflation_rate": {
+      "unknown": true,
+      "note": "No verified electricity price inflation for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "real_discount_rate": {
+      "unknown": true,
+      "note": "No verified real discount rate for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "pv_degradation_d1": {
+      "unknown": true,
+      "note": "No verified first-year PV degradation for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "pv_degradation_ann": {
+      "unknown": true,
+      "note": "No verified annual PV degradation for FI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    }
+  },
+  "regions": {}
+}

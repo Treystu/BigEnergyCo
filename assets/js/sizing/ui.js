@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261103u";
+import { APPLIANCES } from "./appliances.js?v=20261111b";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261103u";
+} from "./pwa-install.js?v=20261111b";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,74 +28,62 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261103u";
+} from "./usecases.js?v=20261111b";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261103u";
+} from "./run-coordinator.js?v=20261111b";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261103u";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261103u";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261103u";
+} from "./mode-chrome.js?v=20261111b";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261111b";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261111b";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261103u";
+} from "./location-picker.js?v=20261111b";
 
 import {
   estimateTariff,
   CURRENCIES,
+  fxFreshness,
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261103u";
+} from "./pricing.js?v=20261111b";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261103u";
+import { currencyForCountry } from "./country-currency.js?v=20261111b";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261103u";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261111b";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
-// LAZY, and the measurement is why. It used to be a static import, on the
-// reasoning that the ELI5 card's installer-vs-direct sentence and the
-// comparison panel both read it on first paint. The browser says otherwise:
-// paths.js is fetched and parsed BEFORE the first result card renders, and the
-// plan's own js_to_first_result budget read 201,806 B against a 204,800 B cap
-// on the tree that shipped this — 2,994 B of headroom, of which paths.js was
-// 10,310 B. A pricing model nobody can see yet was sitting on the critical
-// path for a section that renders after the result does.
-//
-// The D-01 objection is answered structurally, not waved away: BOTH surfaces
-// that read the model (the panel and the ELI5 sentence) are rendered inside
-// ONE await, after the module resolves, in the same tick. So there is never a
-// window in which the page shows a guessed quote and then corrects it — which
-// was the exact defect D-01 exists to remove. The module resolves in a few
-// milliseconds from cache and the whole comparison appears at once, priced by
-// one owner.
+// LAZY, measured: paths.js as a static import was fetched and parsed before the
+// first result card — 10,310 B of the metric for a section that renders after the
+// result. Both surfaces that read the model render inside ONE await after it
+// resolves, so the page never shows a guessed quote and then corrects it, which is
+// the defect D-01 exists to remove.
 let pathsApi = null;
 // The one place the horizon crosses into the copy. A bare binding rather than
-// pathsApi.HORIZON_YEARS because turnkeyQuoteText is exported and sliced out
-// of this file by tests/quote-text-bridge.mjs, which supplies the horizon as an
-// injected argument; renaming it would silently unbind the test. The VALUE has
-// one owner (paths.js) either way, and no surface renders before the module has
-// resolved.
+// pathsApi.HORIZON_YEARS because turnkeyQuoteText is sliced out of this file by
+// tests/quote-text-bridge.mjs, which injects the horizon; renaming it would silently
+// unbind the test. The VALUE has one owner (paths.js) either way.
 let PATHS_HORIZON_YEARS = null;
 let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261103u").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261111b").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -106,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261103u";
+} from "./lead-acid.js?v=20261111b";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261103u";
+} from "./bom.js?v=20261111b";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261103u";
+import { BOM_ITEMS } from "../shared/content.js?v=20261111b";
 
 import {
   applyI18n,
@@ -123,18 +111,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261103u";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261103u";
-import { byId as $, el } from "../shared/dom.js?v=20261103u";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261103u";
+} from "../shared/i18n.js?v=20261111b";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261111b";
+import { byId as $, el } from "../shared/dom.js?v=20261111b";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261111b";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261103u";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261103u";
+} from "../shared/simple-mode.js?v=20261111b";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261111b";
 import {
   advisorJevContext,
   interpretSanity,
@@ -142,29 +130,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261103u";
+} from "./validate.js?v=20261111b";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261103u";
+} from "../shared/cut-targets.js?v=20261111b";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261103u";
+} from "./share-codec.js?v=20261111b";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261103u";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261103u";
+} from "./infeasible-copy.js?v=20261111b";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261111b";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261103u";
+} from "./fuel-units.js?v=20261111b";
 
 import {
   createLeafletProvider,
@@ -172,18 +160,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261103u";
+} from "./map-provider.js?v=20261111b";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261103u";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261103u";
+} from "./wizard.js?v=20261111b";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261111b";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261103u";
+} from "./budget-span.js?v=20261111b";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -195,10 +183,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261103u"),
-      import("./charts.js?v=20261103u"),
-      import("./frontier-chart.js?v=20261103u"),
-      import("./rescale.js?v=20261103u"),
+      import("./engine.js?v=20261111b"),
+      import("./charts.js?v=20261111b"),
+      import("./frontier-chart.js?v=20261111b"),
+      import("./rescale.js?v=20261111b"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -266,9 +254,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261103u";
+} from "./money.js?v=20261111b";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261103u";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261111b";
 
 let worker = null;
 
@@ -338,24 +326,19 @@ let pendingFocus = null;
 let runTimer = null;
 let lastRunAdoptsFocus = false;
 
-// The worker runs one full sizing at a time and cannot be preempted: when a
-// new run is requested while one is in flight, collapse it into a single
-// trailing run instead of queueing seconds of stale engine work behind the
-// slider. The screen already shows the rescaled numbers, so nothing is lost.
-// The run channel (run-coordinator.js) is the single owner of that state:
-// busy, the sequence that retires superseded replies, and the collapsed
-// request. Every full-run reply is released through flushPendingRun().
+// The worker runs one full sizing at a time and cannot be preempted: a new run
+// requested mid-flight collapses into a single trailing run instead of queueing stale
+// engine work behind the slider. run-coordinator.js owns that state — busy, the
+// retiring sequence, the collapsed request — and every reply is released through
+// flushPendingRun().
 const runChannel = createRunChannel();
 
-// ── Worker reply deadline ────────────────────────────────────────────────
-// A worker that never replies (challenge-tainted load, dead worker, lost
-// reply) must surface an honest, retryable error instead of hanging forever
-// on "running…" — reproduced live on production through the share-restore
-// auto-run. The watch itself lives in run-coordinator.js: armed with
-// begin(), retired by settle() inside the single flushPendingRun() funnel,
-// so a fired callback whose token is no longer current belongs to a run
-// already answered and reports nothing. Every run uses the fixed three-minute
-// bound so visitors and public URLs cannot weaken the recovery timer.
+// ── Worker reply deadline ───────────────────────────────────────────────────
+// A worker that never replies must surface an honest retryable error instead of
+// hanging on "running…" (reproduced live through the share-restore auto-run). The
+// watch lives in run-coordinator.js, armed by begin() and retired by settle() inside
+// flushPendingRun(), so a stale token reports nothing. The three-minute bound is
+// fixed so public URLs cannot weaken the recovery timer.
 let runDeadlineTimer = null;
 let runDeadlineToken = 0;
 
@@ -380,19 +363,11 @@ function handleRunDeadline() {
   pendingSlice = null;
   sliceToken++;
 
-  // If inputs changed, preserve their newer status. A queued replacement is
-  // retried against a fresh worker; otherwise retire the timed-out sequence
-  // and leave recovery to the visitor. Every branch releases through the
-  // same funnel.
-  //
-  // `abandon()` and not `invalidate()`, and the difference is the whole reason
-  // this recovery works. The worker above has been terminated, so no reply is
-  // ever coming; invalidate() leaves the channel BUSY (correctly, for the
-  // pre-calculation edit path, where a run really is still running), and a busy
-  // channel sends the visitor's next click straight into the collapse branch
-  // where it returns without starting anything. The page then says "click Size
-  // My System to try again" above a button that cannot be retried, which is the
-  // exact failure the deadline exists to end.
+  // If inputs changed, preserve their newer status: a queued replacement is retried
+  // against a fresh worker, otherwise the timed-out sequence retires.
+  // abandon() and not invalidate() — the worker is terminated so no reply is coming,
+  // and a busy channel would swallow the next click, leaving "click Size My System
+  // to try again" above a button that cannot be retried.
   if (current) {
     setStatus(t("errorTimeout"));
     pipelineStop(false);
@@ -423,13 +398,10 @@ let lastOkKey = null;
 // flash status, or scroll — the screen already shows the rescaled numbers.
 let lastRunQuiet = false;
 
-// Serial for incremental "reSlice" patches within one payload epoch.
-// Epoch links every patch to the payload it was computed against: a full run
-// bumps payloadEpoch, so a slice from older inputs can never merge into a
-// newer payload (independent counters alone could not prevent that).
-// sliceBusy/pendingSlice collapse rapid slider edits the same way the run
-// channel collapses full runs
-// does for full runs (see run()).
+// Serial for incremental "reSlice" patches within one payload epoch. Epoch links every
+// patch to the payload it was computed against, so a slice from older inputs can never
+// merge into a newer one. sliceBusy/pendingSlice collapse rapid slider edits the way the
+// run channel collapses full runs.
 let sliceToken = 0;
 let payloadEpoch = 0;
 let sliceBusy = false;
@@ -438,12 +410,11 @@ let pendingSlice = null; // { focusPvKw, focusBattKwh, focusChemistry }
 // PWA install prompt holder
 let deferredInstallPrompt = null;
 
-// ── Unified curve selection state ─────────────────────────────────────────
-// One curve, one selection. curvePreview is the slider drag-preview (amber
-// ring + readout, highlight only, worker untouched); the committed selection
-// lives in selectedKey / adoptedEntry / frontierSelected. focusFirst:
-// grid-tie auto mode where the granular focus panel REPLACES the matrix and
-// the recommendation card (everywhere else the curve stands with them).
+// ── Unified curve selection state ───────────────────────────────────────────
+// One curve, one selection. curvePreview is the slider drag-preview (highlight only,
+// worker untouched); the committed selection lives in selectedKey / adoptedEntry /
+// frontierSelected. focusFirst: grid-tie auto mode, where the granular focus panel
+// REPLACES the matrix and the recommendation card.
 let focusFirst = false;
 let curvePreview = null;
 
@@ -468,11 +439,9 @@ const RESCALE_MIN_KWH = 15;
 // True once the user applied the generator-fuel helper to the price field.
 let generatorBasis = false;
 
-// `t` is shared/i18n.js's translate (imported above), which delegates the
-// placeholder contract to shared/interpolate.js. This file used to carry its
-// own lookup-then-substitute loop; it agreed with i18n.js by luck rather than
-// by construction, and the same "$200" replacer bug had to be found and fixed
-// in both. One owner now, so a fix to substitution lands once.
+// `t` is shared/i18n.js's translate, which delegates the placeholder contract to
+// shared/interpolate.js. This file once carried its own lookup-then-substitute loop and the
+// same "$200" replacer bug had to be fixed twice; one owner now.
 
 // -- Appliance library -------------------------------------------------------
 
@@ -490,11 +459,9 @@ function setStatus(text) {
   if (s) s.textContent = text;
 }
 
-// ── Staged loading pipeline ───────────────────────────────────────────────
-// Data loading must be legible: a determinate stepper (City → Weather →
-// Simulating → Rendering) with a live per-chunk weather bar and elapsed
-// seconds. Weather chunk progress comes through the worker; simulation
-// length is unknowable up front, so its bar is indeterminate by design.
+// ── Staged loading pipeline ─────────────────────────────────────────────────
+// Data loading must be legible: a determinate stepper (City → Weather → Simulating →
+// Rendering) with a live per-chunk weather bar and elapsed seconds. Simulation length is
 const PIPELINE_STEP_IDS = ["pipeCity", "pipeWeather", "pipeSim", "pipeRender"];
 let pipelineTimer = null;
 
@@ -626,14 +593,11 @@ function hideSpeedNote() {
   if (note) note.style.display = "none";
 }
 
-// Background weather prefetch: called the moment a location resolves, so
-// the ~2 MB satellite pull overlaps the visitor's form-filling instead of
-// starting at the click. The prefetch runs INSIDE the sizing worker (same
-// module instance as the runs): its own in-flight dedupe guarantees a
-// single network pull even when a run starts mid-prefetch, and the warmed
-// memo lands exactly where runSizing will look. Deduped per site on this
-// side too (WARMED_SITES). Errors are silent here by design — the run path
-// owns the honest fallback story.
+// Background weather prefetch, fired the moment a location resolves so the ~2 MB pull
+// overlaps form-filling. It runs INSIDE the sizing worker, whose in-flight dedupe
+// guarantees one network pull even when a run starts mid-prefetch, and the warmed
+// memo lands where runSizing looks. Deduped here too (WARMED_SITES); errors are
+// silent because the run path owns the fallback story.
 const WARMED_SITES = new Set();
 let prefetchSeq = 0;
 function warmSiteWeather(lat, lon) {
@@ -664,7 +628,10 @@ function applySimpleMode() {
   const toggle = $("simpleModeToggle");
   if (toggle) {
     toggle.checked = simpleMode;
-    toggle.setAttribute("aria-label", `${modeLabel(simpleMode)} enabled`);
+    toggle.setAttribute(
+      "aria-label",
+      t("simpleModeAria", { mode: modeLabel(simpleMode, t) }),
+    );
   }
   // Simple mode swaps the detail panels for one plain-language card: the
   // wrapper is only ever revealed with fresh content inside, so a stale card
@@ -735,15 +702,11 @@ function setupSimpleMode() {
   applySimpleMode();
 }
 
-// Simple mode's single results surface. Reads the same payload and the same
-// selected entry the technical cards render — the numbers cannot diverge.
-// ── Use cases: the one vocabulary the visitor sees ─────────────────────────
-//
-// Everything below reads assets/js/sizing/usecases.js and nothing else
-// defines what a use case is. The six blocks in index.html are shown or
-// hidden from the registry's own `inputsFor`, so a use case cannot be added
-// to the engine without also being asked of the visitor, and cannot be asked
-// of the visitor without a place to put the answer.
+// Simple mode's single results surface: same payload and same selected entry as the
+// technical cards, so the numbers cannot diverge.
+// ── Use cases: the one vocabulary the visitor sees ──────────────────────────
+// Everything below reads usecases.js; nothing else defines a use case. The six
+// blocks in index.html are shown or hidden from the registry's own inputsFor.
 
 // F-13: the essential-load catalogue the plan names. Typical running watts
 // and typical daily hours — the same conventions appliances.js already
@@ -784,13 +747,11 @@ function selectedUseCase() {
 let lastResultMode = null;
 
 /**
- * The ONE writer of the bill-cut row's visibility. The decision itself is
- * pure (mode-chrome.js) and reads CURRENT state — goal, on-screen result,
- * use case — so no caller can leave a stale write behind: every state
- * change (goal switch, use-case switch, results render) re-syncs, and the
- * row simply follows. Before this function existed, the render wrote the
- * row from the last result's mode and nothing re-hid it on a goal switch,
- * which is how off-grid users kept a "Cut ~80% of your bill" slider.
+ * The ONE writer of the bill-cut row's visibility. The decision is pure
+ * (mode-chrome.js) and reads CURRENT state — goal, on-screen result, use case — so
+ * every state change re-syncs and no caller can leave a stale write behind. Before
+ * this function the render wrote the row from the last result's mode and nothing
+ * re-hid it on a goal switch.
  */
 function syncCutRowVisibility() {
   const cutRow = $("cutSliderRow");
@@ -844,13 +805,8 @@ function renderCatalogue(list, hostId, prefix) {
 }
 
 /**
- * Apply a use case: derive the legacy enum pair from it, sync the hidden
- * selects, show only the inputs this case declares, and say what it is for.
- *
- * The hidden selects are still dispatched, because every existing listener
- * downstream (auto rows, cut labels, chemistry dimming) hangs off them. That
- * is the point of deriving rather than replacing: the F-17 collapse happens
- * at this one boundary, and nothing below it has to change.
+ * Apply a use case: derive the legacy enum pair from it, sync the hidden selects, show
+ * only the inputs this case declares, and say what it is for. The hidden selects are
  */
 function applyUseCase(id, { silent = false } = {}) {
   const node = $("useCase");
@@ -956,7 +912,6 @@ function useCaseInputs() {
 /**
  * The use case's own result: its own metric, its own verdict, and the numbers
  * the verdict rests on. Rendered from payload.useCaseOutcome, which only the
- * registry can shape, so a case can never borrow another's headline.
  */
 function renderUseCaseOutcome(p) {
   const wrap = $("useCaseOutcomeWrap");
@@ -1005,7 +960,13 @@ function renderUseCaseOutcome(p) {
       {
         style: "font-size:0.8rem;color:var(--text-muted);margin-bottom:0.6rem",
       },
-      t(o.labelKey),
+      // The reserve-aware bill-cut label interpolates the share held back;
+      // every other metric label carries no placeholder and ignores it.
+      t(o.labelKey, {
+        pct:
+          Math.round(Number(o.measurement && o.measurement.reservePct) * 100) ||
+          0,
+      }),
     ),
   );
 
@@ -1037,7 +998,11 @@ function renderUseCaseOutcome(p) {
       {
         style: `font-size:0.9rem;font-weight:700;color:${tone};margin:0 0 0.4rem`,
       },
-      t(o.reasonKey, verdictParams(o)),
+      // A plain sentence first, then the measurement. The old form prefixed
+      // the measurement with a bare status label ("Partly: ..."), which read
+      // as a category stamp and, on a not-here verdict, contradicted the
+      // sentence it sat in front of.
+      t(leadKeyForStatus(o.status)) + " " + t(o.reasonKey, verdictParams(o)),
     ),
   );
   card.appendChild(
@@ -1054,20 +1019,24 @@ function renderUseCaseOutcome(p) {
   wrap.appendChild(card);
 }
 
+/**
+ * The plain-words lead for a verdict status: the verdict reads as a sentence, not a label.
+ * This short sentence says how far the plan got; the measurement sentence after it says what
+ * the numbers were.
+ */
+function leadKeyForStatus(status) {
+  return status === "works"
+    ? "verdictLeadWorks"
+    : status === "partial"
+      ? "verdictLeadPartial"
+      : "verdictLeadNotHere";
+}
+
 /** The measured numbers each verdict key interpolates, so no sentence invents one. */
 function verdictParams(o) {
   const m = o.measurement || {};
   const round = (v) => Math.round(Number(v) || 0);
   return {
-    // The status word is a parameter, so one sentence per case reads correctly
-    // whether it is saying yes, half, or no. Three words, six languages.
-    status: t(
-      o.status === "works"
-        ? "statusWorks"
-        : o.status === "partial"
-          ? "statusPartial"
-          : "statusNotHere",
-    ),
     metric: t(o.labelKey),
     pct: round(o.unit === "tradeoff" ? m.reserveSavingsLostPct : o.value),
     hours: round(m.backupHoursP50 ?? m.reserveCoverHours),
@@ -1167,8 +1136,11 @@ function renderSimpleResults(p) {
     p,
     entry,
     saved,
-    // Injected formatters keep number/currency policy in money.js.
+    // Injected formatters keep number/currency policy in money.js; the
+    // translator is injected for the same reason — this module cannot import
+    // the dictionary without duplicating the locale lookup.
     fmt: { fmt, money, moneyRange, fmtPaybackRange },
+    t,
   });
 
   if (!view.feasible) return;
@@ -1239,8 +1211,6 @@ function renderSimpleResults(p) {
   actions.appendChild(details);
   // The advisor is arguably MOST valuable in Simple mode — the visitor chose
   // fewer numbers, so plain-language questions deserve a path in. The result
-  // row's advisor button is hidden by the mode's CSS, so the card carries its
-  // own, wired to the same mode-aware askAdvisor() (ELI5 style when here).
   const advisor = el(
     "button",
     { type: "button", class: "btn btn-secondary", id: "btnSimpleAdvisor" },
@@ -1261,13 +1231,11 @@ function renderSimpleResults(p) {
   wrap.appendChild(card);
 }
 
-// Infeasibility banner: surfaces a structural (mode × hardware × target)
-// reason above the cards so visitors know WHY nothing solved and what to
-// change. Hides itself the moment a payload without a reason arrives (i.e.
-// a normal run) so it never lingers across the page.
-// The code-to-copy mapping is owned by infeasible-copy.js (pure, testable in
-// isolation); the copy itself is owned by locales.js in all six languages.
-// What is left here is only the rendering.
+// Infeasibility banner: surfaces a structural (mode × hardware × target) reason above
+// the cards so visitors know WHY nothing solved and what to change, and hides itself
+// the moment a payload without a reason arrives.
+// The code-to-copy mapping is owned by infeasible-copy.js and the copy by locales.js;
+// what is left here is the rendering.
 function renderInfeasibleBanner(reason) {
   let banner = $("infeasibleBanner");
   // Created on demand, and only when there is something to say: clearing must
@@ -1281,8 +1249,6 @@ function renderInfeasibleBanner(reason) {
   }
   // The visual banner is created on demand and toggled with display:none, which
   // is exactly the shape a screen reader will not announce. The reason is
-  // mirrored into the sr-only region declared in the markup, which stays
-  // rendered — so "why did nothing solve?" reaches assistive tech too.
   const live = $("infeasibleLive");
   if (!reason) {
     banner.style.display = "none";
@@ -1591,16 +1557,10 @@ function displayRate() {
 
 /**
  * Repaint every surface whose text comes from the dictionary but whose node is
- * built by JS rather than by `data-i18n` markup.
- *
- * This is the single owner of that class, and it is called from two places that
- * must agree: once after `applyI18n()` resolves on first paint, and once per
- * `beco:lang` change. The second call is what stops the page from showing two
- * languages at once; the first is what stops it from showing a key at all.
- *
- * Both calls re-run existing painters rather than reaching into the DOM: the
- * painters own their own selectors and their own fallbacks, so a surface cannot
- * drift out of sync with the code that knows how to fill it.
+ * built by JS rather than data-i18n markup. Single owner, called after applyI18n()
+ * on first paint and once per beco:lang change: the first stops a key showing, the
+ * second stops two languages showing at once. Both re-run existing painters, so a
+ * surface cannot drift from the code that fills it.
  */
 function repaintRuntimeCopy() {
   updateFuelUnits();
@@ -1613,12 +1573,9 @@ function repaintRuntimeCopy() {
   // idempotent and costs nothing.
   setLoadPanel();
   applyUseCase(selectedUseCase(), { silent: true });
-  // The results panel is assembled by JS, and applyI18n only rewrites
-  // data-i18n markup — so switching language left the caption, the tariff
-  // line and the frontier verdict in the previous language until the
-  // visitor happened to run again: one page, two languages. Re-rendering
-  // the payload the panel was built from costs nothing (no engine run, no
-  // fetch) and puts the whole surface in one language.
+  // The results panel is assembled by JS and applyI18n only rewrites data-i18n markup,
+  // so switching language left the caption, the tariff line and the frontier verdict in
+  // the previous language: one page, two languages. Re-rendering the payload costs
   if (lastPayload) renderResults(lastPayload);
 }
 
@@ -2032,18 +1989,17 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
     : Math.min(75, Math.max(15, Math.round(absLat + 15)));
   const smrTilt = isEquator ? 10 : Math.max(10, Math.round(absLat - 15));
 
-  let compassHeading = "True South (180\u00B0)";
-  let compassShort = "South";
-  let headingDetail = "Face Due South (180\u00B0) toward the Equator";
+  let compassHeading = t("resTiltCompassSouth");
+  let compassShort = t("resTiltCompassSouthShort");
+  let headingDetail = t("resTiltHeadingSouth");
   if (isEquator) {
-    compassHeading = "South or North (~10\u00B0 self-cleaning tilt)";
-    compassShort = "Flat / 10\u00B0";
-    headingDetail =
-      "Slight ~10\u00B0 tilt in either direction for rain self-cleaning";
+    compassHeading = t("resTiltCompassEquator");
+    compassShort = t("resTiltCompassEquatorShort");
+    headingDetail = t("resTiltHeadingEquator");
   } else if (!isNorth) {
-    compassHeading = "True North (0\u00B0)";
-    compassShort = "North";
-    headingDetail = "Face Due North (0\u00B0) toward the Equator";
+    compassHeading = t("resTiltCompassNorth");
+    compassShort = t("resTiltCompassNorthShort");
+    headingDetail = t("resTiltHeadingNorth");
   }
 
   const svgW = 460,
@@ -2077,7 +2033,7 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
   const extraPanels = tiltValue.panelsFlatPerTenTilted - 10;
   const tiltValueCard = `
       <div class="sun-path-metric">
-        <div class="sun-path-metric-title">\uD83D\uDCB0 Value of the Right Angle</div>
+        <div class="sun-path-metric-title">${t("resTiltValueTitle")}</div>
         <div class="sun-path-metric-val" style="color:#f59e0b;">${tiltValue.flatLossPct > 0 ? "\u2212" + tiltValue.flatLossPct + "%" : "~0%"}</div>
         <div class="sun-path-metric-sub">${
           tiltValue.flatLossPct > 0
@@ -2086,12 +2042,8 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
         }</div>
       </div>`;
 
-  // No array, no tilt to advise on. The guide ends "Our simulation already
-  // assumes the recommended tilt when sizing your array" and asks what "a flat
-  // roof forfeits" — advice and a claim about an array a battery-only run
-  // never builds, on a page whose own card reads "Solar array None
-  // (Battery-only)". Before a run the hardware selector decides it, so the
-  // guide is gone the moment "Battery only" is chosen.
+  // No array, no tilt to advise on: the guide asks what "a flat roof forfeits" on a page
+  // whose card reads "Solar array None (Battery-only)". Before a run the hardware
   if (!hasPv) {
     wrap.style.display = "none";
     wrap.innerHTML = "";
@@ -2102,8 +2054,8 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
 
   wrap.innerHTML = `
     <div class="sun-path-header">
-      <span>\uD83D\uDCD0 Solar Orientation &amp; Array Tilt Guide (${validLat >= 0 ? validLat.toFixed(1) + "\u00B0N" : Math.abs(validLat).toFixed(1) + "\u00B0S"})</span>
-      <span style="font-size:0.75rem;font-weight:600;color:var(--primary-accent);background:rgba(0,230,153,0.1);padding:0.15rem 0.55rem;border-radius:4px;border:1px solid rgba(0,230,153,0.25);">Optimal Year-Round Tilt: ~${yrTilt}\u00B0</span>
+      <span>${t("resTiltHeader", { lat: validLat >= 0 ? validLat.toFixed(1) + "\u00B0N" : Math.abs(validLat).toFixed(1) + "\u00B0S" })}</span>
+      <span style="font-size:0.75rem;font-weight:600;color:var(--primary-accent);background:rgba(0,230,153,0.1);padding:0.15rem 0.55rem;border-radius:4px;border:1px solid rgba(0,230,153,0.25);">${t("resTiltBadge", { tilt: yrTilt })}</span>
     </div>
 
     <svg viewBox="0 0 ${svgW} ${svgH}" role="img" aria-label="Sun-path diagram: face ${compassShort} at about ${yrTilt} degrees tilt" style="width:100%;height:auto;display:block;overflow:visible;">
@@ -2141,36 +2093,43 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
 
     <div class="sun-path-grid">
       <div class="sun-path-metric">
-        <div class="sun-path-metric-title">\uD83E\uDDED Compass Heading</div>
+        <div class="sun-path-metric-title">${t("resTiltCompassTitle")}</div>
         <div class="sun-path-metric-val" style="color:var(--primary-accent);">${compassShort}</div>
         <div class="sun-path-metric-sub">${headingDetail}</div>
       </div>
       <div class="sun-path-metric">
-        <div class="sun-path-metric-title">\uD83D\uDCD0 Year-Round Fixed Tilt</div>
+        <div class="sun-path-metric-title">${t("resTiltYearRoundTitle")}</div>
         <div class="sun-path-metric-val" style="color:#34d399;">~${yrTilt}\u00B0</div>
-        <div class="sun-path-metric-sub">Optimal set-and-forget angle for fixed roofs</div>
+        <div class="sun-path-metric-sub">${t("resTiltYearRoundSub")}</div>
       </div>
       <div class="sun-path-metric">
-        <div class="sun-path-metric-title">\u2744\uFE0F Winter Boost Tilt</div>
+        <div class="sun-path-metric-title">${t("resTiltWinterTitle")}</div>
         <div class="sun-path-metric-val" style="color:#7dd3fc;">~${wtrTilt}\u00B0</div>
         <div class="sun-path-metric-sub">Sheds snow &amp; captures low winter midday sun</div>
       </div>
       <div class="sun-path-metric">
         <div class="sun-path-metric-title">\u2600\uFE0F Daylight &amp; Seasonal Swing</div>
         <div class="sun-path-metric-val" style="color:#fbbf24;">${hoursSummer.toFixed(1)}h \u2794 ${hoursWinter.toFixed(1)}h</div>
-        <div class="sun-path-metric-sub">Sun drops ${Math.round(elevSummer - elevWinter)}\u00B0 between summer and winter noon</div>
+        <div class="sun-path-metric-sub">${t("resTiltDaylightSub", { deg: Math.round(elevSummer - elevWinter) })}</div>
       </div>
       ${tiltValueCard}
     </div>
 
     <div class="sun-path-takeaway">
-      <strong>\uD83D\uDCA1 How much does the angle really matter?</strong>
+      <strong>${t("resTiltTakeawayTitle")}</strong>
       ${
         isEquator
           ? `Near the equator the sun sits almost overhead year-round, so angle barely changes the harvest — a modest ~10\u00B0 tilt exists mainly so tropical rain washes off dust. Spend your effort on keeping panels clean, not on precision aiming. (Flat loses only ~${Math.max(0, tiltValue.flatLossPct)}% here.)`
           : absLat >= 66.5 && elevWinter <= 0
             ? `At high latitude (${absLat.toFixed(1)}\u00B0), winter brings polar night (0h direct sun). A steep array (~${wtrTilt}\u00B0) sheds snow and catches low shoulder rays — flat panels would forfeit ~${tiltValue.flatLossPct}% of the year's harvest, so precise mounting genuinely pays off here, backed by adequate battery reserve.`
-            : `Here a flat roof forfeits about ${tiltValue.flatLossPct}% of the annual harvest versus the optimal ~${yrTilt}\u00B0 tilt — roughly ${extraPanels > 0 ? extraPanels + " extra panel" + (extraPanels > 1 ? "s" : "") + " per 10" : "the same panels tilted properly"} to make up the difference. Precision is forgiving, though: within \u00B110\u00B0 of optimal you keep nearly all of it, so "close" is genuinely good enough on most roofs. Our simulation already assumes the recommended tilt when sizing your array and battery.`
+            : t("resTiltTakeawayMid", {
+                loss: tiltValue.flatLossPct,
+                tilt: yrTilt,
+                extra:
+                  extraPanels > 0
+                    ? t("resTiltExtraPanels", { n: extraPanels })
+                    : t("resTiltExtraSame"),
+              })
       }
     </div>
   `;
@@ -2431,13 +2390,17 @@ function updateCurrencyUnitLabel() {
   const expSpan = document.querySelector('label[for="exportRate"] span');
 
   if (expSpan)
-    expSpan.textContent = `(${fx ? CURRENCIES[fx.code]?.symbol || fx.code : "$"}/kWh, optional \u2014 grid-tie only)`;
+    expSpan.textContent = t("simpleHintFeedIn", {
+      unit: fx ? CURRENCIES[fx.code]?.symbol || fx.code : "$",
+    });
 
   // The fixed charge is entered in the same display currency.
   const fixedCur = document.querySelector('label[for="fixedChargeVal"] span');
 
   if (fixedCur)
-    fixedCur.textContent = `(${fx ? CURRENCIES[fx.code]?.symbol || fx.code : "$"}/mo, optional)`;
+    fixedCur.textContent = t("simpleHintFixed", {
+      unit: fx ? CURRENCIES[fx.code]?.symbol || fx.code : "$",
+    });
 
   // The always-visible bill slider shows the resolved location's currency.
 
@@ -2471,17 +2434,11 @@ function applyEstimatedTariff(lat, lon, region, country) {
 
   const est = estimateTariff(lat, lon, region, country);
 
-  // Which currency, in order of authority:
-  //
-  //   1. the country, when the location carries one. Every city partition
-  //      records its ISO 3166-1 code and the seed catalogue its name, so this
-  //      is a lookup and not a guess.
-  //   2. the tariff box, which is GEOGRAPHIC and routinely spans countries the
-  //      one named in its label does not speak for -- "United Kingdom /
-  //      Ireland" says GBP, so Dublin got pounds. The box still decides when
-  //      there is no country at all, which is the bare-coordinate case.
-  //
-  // The box decides the TARIFF either way; only the currency is overridden.
+  // Which currency, in order of authority: (1) the country, when the location carries
+  // one — every city partition records its ISO 3166-1 code, so this is a lookup;
+  // (2) the tariff box, which is GEOGRAPHIC and spans countries its label does not
+  // speak for ("United Kingdom / Ireland" gave Dublin pounds). The box decides the
+  // TARIFF either way; only the currency is overridden.
   const byCountry = currencyForCountry(country);
   const currency =
     (byCountry && CURRENCIES[byCountry] ? byCountry : null) || est.currency;
@@ -2502,11 +2459,8 @@ function applyEstimatedTariff(lat, lon, region, country) {
   const note = el(
     "div",
     { style: "font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem;" },
-    // Translated, not a template literal: all five translated tariffNote
-    // strings existed and nothing read them, so this one line is why the note
-    // rendered in English on every locale. The rate is appended outside the
-    // translated sentence so the placeholder set stays {label}, which is what
-    // every existing translation already carries.
+    // Translated, not a template literal: all five translated tariffNote strings existed and
+    // nothing read them, so the note rendered in English on every locale. The rate is appended
     `${t("tariffNote", { label: est.label })}${fx ? ` (~ ${est.rate.toFixed(2)} US$/kWh)` : ""}`,
   );
 
@@ -2717,7 +2671,6 @@ function readInputs() {
     // Real measured peak (running watts, incl. duty-cycle averages): the
     // engine sizes the inverter and its cost basis from this instead of the
     // daily average. Bill/kWh modes have no peak information (null = engine
-    // falls back to the average and the BOM says so).
     peakLoadW = ap.peakW > 0 ? Math.round(ap.peakW) : null;
     peakSurgeW = ap.peakSurgeW > 0 ? Math.round(ap.peakSurgeW) : null;
     requiresSplitPhase = ap.requiresSplitPhase;
@@ -2944,12 +2897,8 @@ function run(quiet = false, explicit = false) {
   }
 
   if (runChannel.isBusy) {
-    // Collapse: only the latest inputs matter, re-read fresh when flushed.
-    // A non-quiet request wins so an explicit run still scrolls + spins.
-    // Retire the in-flight run FIRST (the sequence bump) — without this its
-    // stale response would still pass the seq check on arrival and clobber
-    // the screen — e.g. an off-grid response landing mid grid-tie run and
-    // hiding the cut slider under it.
+    // Collapse: only the latest inputs matter, re-read fresh when flushed; a non-quiet
+    // request wins so an explicit run still scrolls + spins. Retire the in-flight run FIRST
     runChannel.collapse(quiet);
     // The epoch bump retires any in-flight slice from the superseded
     // payload, exactly as the old collapse path did.
@@ -3030,7 +2979,6 @@ function scheduleRun(quiet = false) {
 // The form's "Bill-cut target" select offers exactly the grid-tie columns the
 // engine sizes, plus a disabled "custom" option that mirrors whatever
 // arbitrary cut the results slider holds. One decision, two controls; the
-// target policy itself is single-owner in shared/cut-targets.js.
 
 function syncCutLabel() {
   const slider = $("cutSlider");
@@ -3038,11 +2986,8 @@ function syncCutLabel() {
 
   if (!slider) return;
   const v = parseInt(slider.value, 10) || 80;
-  // With no panels there is nothing generated, so this target moves WHEN power
-  // is drawn instead of selling back a share of the bill. Same control, same
-  // number, honest label. The label's data-i18n hook is kept in step with the
-  // wording so a later language switch re-translates the matching variant
-  // instead of silently snapping back to the bill-cut string.
+  // With no panels nothing is generated, so this target moves WHEN power is drawn instead of
+  // selling back a share of the bill. Same control, same number, honest label, with data-i18n
   const batteryOnly = ($("hardwareConfig") || {}).value === "battery";
   const label = document.querySelector('label[for="cutSlider"]');
   if (label) {
@@ -3216,17 +3161,16 @@ function mergeReSlice(result) {
     renderFrontierPanel(p);
     refreshSelectionOutputs(p);
   }
-  // Auto grid-tie: the recommendation follows the bill-cut slider. The worker
-  // re-derives the banner and focus from the custom target column, so the
-  // headline savings and "recommended" system describe the visitor's CURRENT
-  // cut — not the fixed 80% one — unless they've explicitly picked a system.
-  // An explicitly null best means nothing solves at this cut: retire the stale
-  // recommendation NOW ("best" key falls through to the honest empty state)
-  // rather than leaving the previous target's system on screen.
+  // Auto grid-tie: the recommendation follows the bill-cut slider, and the worker
+  // re-derives the banner and focus from the custom target column, so the headline
+  // savings describe the visitor's CURRENT cut. An explicitly null best means nothing
+  // solves at this cut: retire the stale recommendation NOW rather than leaving the
+  // previous target's system on screen.
   if (p.auto && p.mode === "gridtie" && "best" in result) {
     p.best = result.best || null;
     p.bestReason = result.bestReason || null;
     p.focus = result.focus || null;
+    p.bestReasonParts = result.bestReasonParts || null;
     if (selectedKey === "best" || selectedKey === "focus") {
       selectedKey = p.best ? "best" : "custom";
     }
@@ -3273,9 +3217,11 @@ function mergeReSlice(result) {
   }
   // Keep the custom column header in lockstep with the slider.
   const label = result.customCut
-    ? `Your ~${Math.round(result.customCut.fraction * 100)}% target`
+    ? t("resColCustom", { pct: Math.round(result.customCut.fraction * 100) })
     : result.customTarget
-      ? `Your ~${Math.round(p.customCut ? p.customCut.fraction * 100 : 0)}% target`
+      ? t("resColCustom", {
+          pct: Math.round(p.customCut ? p.customCut.fraction * 100 : 0),
+        })
       : null;
   if (label && p.matrix) {
     const col = p.matrix.cols && p.matrix.cols.find((c) => c.id === "custom");
@@ -3396,15 +3342,10 @@ function setupGoalControls() {
 
   const setGoal = (goal) => {
     const isGt = goal === "gridtie";
-    // Single writer: the goal buttons never touch systemGoal. They select a
-    // CASE and let applyUseCase derive the enum from it, so the highlighted
-    // button and the six-case chooser cannot drift apart. The comparison is
-    // the SAME two-value mapping applyUseCase uses (portable derives no enum
-    // pair and lands on gridtie), so a change that came from applyUseCase
-    // itself can never re-enter here and switch the case out from under the
-    // visitor. Choosing by mode rather than by label is deliberate: backup
-    // and offgrid share the mode, and backup sizes the essentials only, so
-    // defaulting a mode switch onto it would silently resize the system.
+    // Single writer: the goal buttons never touch systemGoal. They select a CASE and
+    // let applyUseCase derive the enum, so button and chooser cannot drift. Choosing
+    // by mode, not label: backup and offgrid share the mode and backup sizes the
+    // essentials only, so defaulting a mode switch onto it would silently resize.
     const chooser = $("useCase");
     const current =
       chooser && useCase(chooser.value) ? chooser.value : "billcut";
@@ -3541,17 +3482,14 @@ function setupMatrixSelection() {
 }
 
 // ── Unified selection hub ───────────────────────────────────────────────────
-// One selection drives every chart: the curve's blue dot, the
-// SOC + savings charts, the hardware list and the granular icon panel. Slider
-// drags only move a highlight through CACHED points (preview); release
-// commits the nearest cached system instantly. The single on-demand worker
-// lookup (SOC capture bands after a curve adoption, exact column after a cut
-// edit) reconciles in the background.
+// One selection drives every chart: the curve's blue dot, the SOC + savings charts,
+// the hardware list and the granular icon panel. Slider drags only move a highlight
+// through CACHED points; release commits the nearest cached system. The single
+// on-demand worker lookup reconciles in the background.
 
 // ── Unified curve walk (budget + cut sliders) ─────────────────────────────
 // One curve, no second chart: both sliders walk the frontier's own cached
 // points (plus the recommendation marker). Drag previews — amber ring,
-// readout, focus chips, worker untouched; release commits instantly.
 function curvePool() {
   const p = lastPayload;
   if (!p || !p.frontier || !Array.isArray(p.frontier.points)) return [];
@@ -3626,11 +3564,8 @@ function nearestCurvePoint(value, axis) {
   return best;
 }
 
-// The drag preview's projection of the slider's % onto the curve; the budget
-// thumb rides along (unpinned — pinning is commit-time only) so the pair, the
-// card and the label move together at every input. A budget the visitor has
-// already chosen is NOT unpinned by a cut preview: it stays where they put it,
-// which is the whole point of the two controls being independent.
+// The drag preview's projection of the slider's % onto the curve; the budget thumb rides
+// along (unpinned — pinning is commit-time only) so pair, card and label move together. A
 function previewTargetAt(pct) {
   const p = lastPayload;
   if (!p || !p.frontier || !Array.isArray(p.frontier.points)) return null;
@@ -3744,8 +3679,8 @@ function renderPlayReadout(q) {
   out.textContent =
     `🔎 ☀️ ${q.pvKw} kW + 🔋 ${fmt(q.battKwh)} kWh ${chemShort(q)} ≈ ${money(Math.round(q.x))} → ` +
     (lastPayload && lastPayload.mode === "gridtie"
-      ? `⚡ −${Math.round(q.y)}% bill`
-      : `☁️ ${Math.round(q.y)}% covered`);
+      ? t("resChipBillCut", { pct: Math.round(q.y) })
+      : t("resChipCovered", { pct: Math.round(q.y) }));
 }
 
 function clearPlayReadout() {
@@ -3753,15 +3688,15 @@ function clearPlayReadout() {
   if (out) out.textContent = "";
 }
 
-// Granular icon panel: the selected system as icons + big numbers. Renders
-// purely from the entry's cached analysis — the "singular granular record"
-// for the point, with no lookup.
-// Net-metered monthly residual, one definition for every view: a negative
-// residual means the utility pays the household, framed as the credit it
-// is — never "~-$X/mo". Null-safe (missing tariff stays missing).
+// Granular icon panel: the selected system as icons + big numbers, rendered purely from
+// the entry's cached analysis — no lookup.
+// Net-metered monthly residual, one definition for every view: a negative residual means
+// the utility pays the household, framed as the credit it is — never "~-$X/mo".
 function fmtBillAfter(usd) {
   if (usd === null || usd === undefined) return null;
-  return usd < 0 ? `−${money(-usd)}/mo credit` : `~${money(usd)}/mo`;
+  return usd < 0
+    ? t("resCreditMo", { amount: money(-usd) })
+    : t("resPerMo", { amount: money(usd) });
 }
 
 function renderFocusPanel(p, entry, isPreview) {
@@ -3776,10 +3711,10 @@ function renderFocusPanel(p, entry, isPreview) {
   const sel = resolveSelected(p);
   const isRec = !isPreview && (!sel || !p.best || sameSystem(sel, p.best));
   $("focusTitle").textContent = isPreview
-    ? "🔎 Preview — release to select"
+    ? t("resPreviewRelease")
     : isRec
-      ? "★ Recommended"
-      : "👆 Selected system";
+      ? t("resRecommended")
+      : t("resSelectedSystem");
   const chips = $("focusChips");
   chips.innerHTML = "";
   // Wraps instead of clipping: nowrap put this chip 34px past a 241px parent at
@@ -3810,41 +3745,78 @@ function renderFocusPanel(p, entry, isPreview) {
       );
     chips.appendChild(s);
   };
-  if (entry.pvKw > 0) chip("☀️", `${entry.pvKw} kW`, "solar");
+  if (entry.pvKw > 0) chip("☀️", `${entry.pvKw} kW`, t("resChipSolar"));
   if (entry.battKwh > 0)
-    chip("🔋", `${fmt(entry.battKwh)} kWh`, chemShort(entry) || "battery");
+    chip(
+      "🔋",
+      `${fmt(entry.battKwh)} kWh`,
+      chemShort(entry) || t("resChipBattery"),
+    );
   if (Number.isFinite(entry.costLo) && Number.isFinite(entry.costHi))
-    chip("💵", `~${moneyRange(entry.costLo, entry.costHi)}`, "up-front");
+    chip(
+      "💵",
+      `~${moneyRange(entry.costLo, entry.costHi)}`,
+      t("resChipUpfront"),
+    );
+  // The cut here is the system with its whole bank available, the same figure the sizing search
+  // solved for. With a reserve held back the measured result is lower (76% against 81%,
+  // measured 2026-11-08), so this chip says which basis it quotes.
+  const reserveHeldPct =
+    Math.round(
+      Number(
+        p &&
+          p.useCaseOutcome &&
+          p.useCaseOutcome.measurement &&
+          p.useCaseOutcome.measurement.reservePct,
+      ) * 100,
+    ) || 0;
   // A system with no panels has no generation to displace imported energy, so
   // its number is a peak-hour offset, not a bill cut — and a positive offset
   // takes no minus sign. Labelling it a bill cut put a savings claim directly
-  // above the panel's own "never" break-even line.
   if (isGT && Number.isFinite(entry.cutPct)) {
-    if (entry.pvKw > 0) chip("⚡", `−${entry.cutPct}%`, "bill cut");
-    else chip("⚡", `${entry.cutPct}%`, "peak offset");
+    if (entry.pvKw > 0)
+      chip(
+        "⚡",
+        `−${entry.cutPct}%`,
+        reserveHeldPct > 0 ? t("resBillCutNoReserve") : t("resBillCutChip"),
+      );
+    else chip("⚡", `${entry.cutPct}%`, t("resPeakOffsetChip"));
   }
   if (
     entry.billAfterMonthlyUsd !== null &&
     entry.billAfterMonthlyUsd !== undefined
   ) {
     const baText = fmtBillAfter(entry.billAfterMonthlyUsd);
-    chip("🧾", baText, entry.billAfterMonthlyUsd < 0 ? "" : "bill after");
+    chip(
+      "🧾",
+      baText,
+      entry.billAfterMonthlyUsd < 0 ? "" : t("resChipBillAfter"),
+    );
   }
   if (!isGT && Number.isFinite(entry.unmetHoursPerYear))
-    chip("🔌", `${fmt(entry.unmetHoursPerYear)} h/yr`, "generator cover");
+    chip(
+      "🔌",
+      `${fmt(entry.unmetHoursPerYear)} h/yr`,
+      t("resChipGeneratorCover"),
+    );
   if (entry.paybackYearsLo !== null && entry.paybackYearsHi !== null)
     chip(
       "⏳",
       fmtPaybackRange(entry.paybackYearsLo, entry.paybackYearsHi),
-      "payback",
+      t("resChipPayback"),
     );
   else if (typeof entry.trueBreakEvenYear === "number")
-    chip("⏳", `yr ${entry.trueBreakEvenYear}`, "breaks even");
+    chip(
+      "⏳",
+      t("resValYr", { n: entry.trueBreakEvenYear }),
+      t("resChipBreaksEven"),
+    );
   if (entry.replacementsHorizon > 0)
-    chip("🔁", `~${entry.replacementsHorizon}×`, "bank swaps");
-  else if (entry.replacementsHorizon === 0) chip("🔁", "no swaps", "20 yrs");
+    chip("🔁", `~${entry.replacementsHorizon}×`, t("resChipBankSwaps"));
+  else if (entry.replacementsHorizon === 0)
+    chip("🔁", t("resChipNoSwaps"), t("resChipTwentyYrs"));
   if (Number.isFinite(entry.lifetimeCostMid))
-    chip("🏁", `~${money(entry.lifetimeCostMid)}`, "20-yr true cost");
+    chip("🏁", `~${money(entry.lifetimeCostMid)}`, t("resChipTrueCost"));
   // Lead-acid savings indicator (reference only — never recommended).
   // leadAcidComparison owns WHEN this is a real comparison (both designs need
   // a battery, and the selection must not itself be lead-acid) and what the
@@ -3865,7 +3837,7 @@ function renderFocusPanel(p, entry, isPreview) {
         cost: money(p.best.lifetimeCostMid),
       });
     else if (!isPreview && isRec && p.bestReason)
-      note.textContent = p.bestReason;
+      note.textContent = localizedBestReason(p);
     else note.textContent = "";
   }
 }
@@ -3903,7 +3875,6 @@ function syncBudgetRange(seat = false) {
   // A surplus target (>100% cut) sizes a system beyond the curve's 100% top;
   // budgetSpanMax extends the slider's ceiling with its cost so the budget
   // slider can actually reach what the cut slider just asked for. The floor
-  // stays the curve's own cheapest system.
   const anchor = surplusAnchor(p);
   const xs = pts.map((q) => q.capexUsd).filter(Number.isFinite);
   if (m && Number.isFinite(m.capexUsd)) xs.push(m.capexUsd);
@@ -3980,7 +3951,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261103u",
+      "./assets/js/sizing/sizing-worker.js?v=20261111b",
       {
         type: "module",
       },
@@ -4067,13 +4038,8 @@ function ensureWorker() {
           });
         }
       } else if (ev.data?.type === "reSlice") {
-        // Incremental cut patch: only the slider's "your target" column (and
-        // SOC bands for an adopted curve point) — no full re-render, no scroll,
-        // no status churn. A patch is only merged when it belongs to the
-        // CURRENT payload epoch: a slice computed from pre-edit inputs that
-        // lands after a full run for newer inputs is dropped, never merged.
-        // A superseded patch (a newer slider edit already collapsed behind
-        // it) is likewise dropped in favor of the trailing slice.
+        // Incremental cut patch: only the slider's "your target" column (and SOC bands
+        // for an adopted curve point) — no full re-render, no scroll. A patch merges
 
         sliceBusy = false;
         if (pendingSlice) {
@@ -4250,28 +4216,26 @@ function energyRate(usdPerKwh) {
 }
 
 function gridRate(usdPerKwh) {
-  return Number.isFinite(usdPerKwh) ? ` (grid ${energyRate(usdPerKwh)})` : "";
+  return Number.isFinite(usdPerKwh)
+    ? t("resValGridSuffix", { rate: energyRate(usdPerKwh) })
+    : "";
 }
 
 /**
- * The levelized-cost row, named for what it actually measures.
- *
- * `lcoeUsdPerKwh` is the system's own cost per kWh it serves. With panels that
- * is most of the bill, so "your power cost" is the honest name. A battery-only
- * run serves nothing new — it MOVES energy that is still bought at the tariff —
- * so the same number is the cost of each shifted kWh. Printed as "your power
- * cost" it read as a figure five times below the grid rate, on the same card
- * that says the system never breaks even and beside a money bar that says a
- * battery does not cut what you pay. The number is right; the name was not.
+ * The levelized-cost row, named for what it measures. `lcoeUsdPerKwh` is the
+ * system's cost per kWh it serves — most of the bill with panels, so "your power
+ * cost" is honest. A battery-only run only MOVES energy still bought at the tariff,
+ * so the same number is the cost of each shifted kWh; called "your power cost" it
+ * read five times below the grid rate on a card saying the system never breaks even.
  */
 function powerCostRow(entry, tariff) {
   const lcoe = energyRate(entry.lcoeUsdPerKwh);
   if (Number(entry.pvKw) > 0)
-    return ["Your power cost", lcoe + gridRate(tariff)];
+    return [t("resRowPowerCost"), lcoe + gridRate(tariff)];
   return [
-    "Cost per shifted kWh",
+    t("resRowShiftedKwh"),
     Number.isFinite(tariff)
-      ? `${lcoe} — on top of the ${energyRate(tariff)} you still pay for that energy`
+      ? t("resValShiftedRate", { rate: lcoe, grid: energyRate(tariff) })
       : lcoe,
   ];
 }
@@ -4301,29 +4265,77 @@ function bestPriceNote(entry) {
   return _rescale.relocalizeOversizeCallout(text, money);
 }
 
+// The FX provenance line (P1.4, F-10), rendered on every load including the
+// offline one: "no source and no date" was the defect. data-i18n stays set for the
+// static and failed wordings so a later applyI18n() re-translates them, and is
+// removed for live and stale because those carry a date the static key cannot
+// express.
+/**
+ * The rate's own date in plain words: the provider's raw RFC-822 string printed
+ * as-is read as a date from the wrong window (the V1 defect), so it is formatted as
+ * a plain date and the locale sentence says whose date it is.
+ */
+function fxAsOfDisplay(asOf) {
+  const at = Date.parse(asOf);
+  if (!Number.isFinite(at)) return asOf;
+  try {
+    return new Date(at).toLocaleDateString(
+      document.documentElement.lang || "en",
+      { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" },
+    );
+  } catch {
+    return asOf;
+  }
+}
+
+function renderFxStatus() {
+  const el = $("fxAsOf");
+  if (!el) return;
+  const f = fxFreshness({ asOf: fxMeta.asOf });
+  if (f.state === "stale") {
+    el.removeAttribute("data-i18n");
+    el.textContent = t("fxSourceStale", {
+      asOf: fxAsOfDisplay(f.asOf),
+      days: String(f.days),
+    });
+  } else if (f.state === "live") {
+    el.removeAttribute("data-i18n");
+    el.textContent = t("fxSourceLive", { asOf: fxAsOfDisplay(f.asOf) });
+  } else {
+    const key = fxMeta.failed ? "fxSourceFailed" : "fxSourceStatic";
+    el.setAttribute("data-i18n", key);
+    el.textContent = t(key);
+  }
+}
+
 function fxNote() {
   const fx = fxActive();
 
   if (!fx) return null;
 
-  const asOf = fxMeta.asOf
-    ? ` Live rates as of ${fxMeta.asOf}.`
-    : " Indicative built-in rates (live fetch unavailable).";
+  const f = fxFreshness({ asOf: fxMeta.asOf });
 
-  return `Amounts shown in ${fx.code} at ${fx.rate} per US$1. Energy cost rates and recommendations are converted to ${fx.code}; source price scopes remain USD-denominated.`;
+  const stamp =
+    f.state === "stale"
+      ? t("fxSourceStale", {
+          asOf: fxAsOfDisplay(f.asOf),
+          days: String(f.days),
+        })
+      : f.state === "live"
+        ? t("fxSourceLive", { asOf: fxAsOfDisplay(f.asOf) })
+        : t(fxMeta.failed ? "fxSourceFailed" : "fxSourceStatic");
+
+  return `${stamp} Amounts shown in ${fx.code} at ${fx.rate} per US$1. Energy cost rates and recommendations are converted to ${fx.code}; source price scopes remain USD-denominated.`;
 }
 
-// REMOVED 2026-10-05: renderAutoCards (232 lines) was UNREACHABLE shipped
-// weight — a leftover renderer for the auto-chemistry ladder card, replaced
-// by renderBestPick/renderBatteryComparison, and called from nothing but
-// itself. Removing it is where the four-path module's bytes came from;
-// nothing a visitor loads executed a line of it.
+// REMOVED 2026-10-05: renderAutoCards (232 lines) was UNREACHABLE shipped weight — a leftover
+// renderer for the auto-chemistry ladder card, called from nothing but itself. Removing it is
+// where the four-path module's bytes came from.
 
 // ── Battery Chemistry Comparison (Compare Batteries tab) ────────────────────
-// Uses the selected system as baseline, comparing LFP, Sodium-ion, and AGM
-// across required nameplate sizes (DoD + cold derate), cold weather limits,
-// 20-year battery swap counts vs oversizing trade-off, and total 20-year cost.
-// The most cost-effective chemistry is badged.
+// Uses the selected system as baseline, comparing LFP, Sodium-ion and AGM across required
+// nameplate sizes (DoD + cold derate), cold limits, 20-year swap counts and total 20-year
+// cost. The most cost-effective chemistry is badged.
 function renderBatteryComparison(p, selectedSystem) {
   const grid = $("tierResults");
   if (!grid) return;
@@ -4457,9 +4469,7 @@ function renderBatteryComparison(p, selectedSystem) {
         el(
           "div",
           { class: "bom-badge" },
-          isCold
-            ? "❄️ Cold Champion — Recommended"
-            : "✅ Best Value — Recommended",
+          isCold ? t("resColdChampion") : t("resBestValue"),
         ),
       );
     } else if (isAGM) {
@@ -4471,7 +4481,7 @@ function renderBatteryComparison(p, selectedSystem) {
             style:
               "background: rgba(239,68,68,0.15); color: rgb(239,68,68); border-color: rgba(239,68,68,0.35);",
           },
-          "⚠️ Reference Only — Not Recommended",
+          t("resReferenceOnly"),
         ),
       );
     }
@@ -4565,11 +4575,10 @@ function renderBatteryComparison(p, selectedSystem) {
           swapsAndLaborUsd: r.life.swapsAndLabor,
           replacementsHorizon: r.swaps,
           cumCostSeries: cumCost,
-          // These figures come from this tab's own nameplate/DoD model, not
-          // from the site simulation. The flag keeps the lead-acid comparison
-          // from subtracting a modelled figure from a simulated one — that
-          // cross-model delta is what produced "lead-acid ~€X less" next to a
-          // comparison card showing lead-acid an order of magnitude dearer.
+          // These figures come from this tab's own nameplate/DoD model, not from the site
+          // simulation; the flag stops the lead-acid comparison from subtracting a modelled
+          // figure from a simulated one — the cross-model delta that produced "lead-acid
+          // ~€X less" beside a card showing lead-acid far dearer.
           estimatedFromTab: true,
         };
         selectedKey = "adopted";
@@ -4639,23 +4648,17 @@ function renderRelativeOptions(p, selectedSystem) {
   const chem = rawChem === "sodium" || rawChem === "naion" ? "naion" : "lfp";
   const chemLabel = chem === "naion" ? "Sodium-ion" : "LFP";
   const baseBattKwh = Math.max(2, base.battKwh || (p.dailyKwh || 10) * 1.5);
-  // `basePvKw` is clamped to >= 1 so the tier ratios always have a PV axis to
-  // scale, which means it is never 0 — a battery-only baseline therefore looks
-  // like a "6 kW Solar" array that this mode never builds. Key the labels off
-  // the selection's own pvKw so a no-panel run describes itself honestly; the
-  // clamp is left alone because tier costs are derived from it.
+  // `basePvKw` is clamped to >= 1 so the tier ratios always have a PV axis to scale, so a
+  // battery-only baseline looked like a "6 kW Solar" array this mode never builds. Key the
   const hasBasePanels = Number(base.pvKw) > 0;
   const basePvKw = Math.max(1, base.pvKw || (p.dailyKwh || 10) * 0.6);
   const landedF = (p.assumptions && p.assumptions.landedF) || 1;
   const isGT = p.mode === "gridtie";
-  // A battery-only run builds no panels, so its tiers must scale the battery
-  // alone. Feeding the clamped `basePvKw` into them presented a 12 kW array as
-  // the visitor's OWN system — card label, PV row, price and adoption alike —
-  // and priced it with that array's panels and inverter, which is why the
-  // "Current Selection" baseline quoted a different price for the same system
-  // than the Best-pick card. `baseInvKw` mirrors the engine's inverter basis
-  // (never below the load peak), so a no-panel tier is priced the way the
-  // engine prices that system.
+  // A battery-only run builds no panels, so its tiers scale the battery alone. Feeding
+  // the clamped basePvKw in presented a 12 kW array as the visitor's own system and
+  // priced it with that array's panels, so the Current Selection baseline quoted a
+  // different price for the same system. baseInvKw mirrors the engine's inverter
+  // basis (never below the load peak).
   const baseInvKw = Math.max(0, (Number(p.peakLoadW) || 0) / 1000);
   const tierPvKw = (pvRatio) =>
     hasBasePanels ? Math.round(basePvKw * pvRatio * 10) / 10 : 0;
@@ -4748,11 +4751,18 @@ function renderRelativeOptions(p, selectedSystem) {
   `;
   grid.appendChild(header);
 
-  const fmtDelta = (val, prefix = "$") => {
-    if (Math.abs(val) < 1) return "Baseline";
-    return val > 0
-      ? `+${prefix}${Math.round(val).toLocaleString()}`
-      : `\u2212${prefix}${Math.abs(Math.round(val)).toLocaleString()}`;
+  // A zero delta is not a value. This used to return the bare word "Baseline", which every
+  // row suffix-typed ("3.8 kW (Baseline kW)"), so the baseline rendered as a placeholder
+  // where a number should be. The suffix carries its own unit and returns nothing at all
+  // when there is no change.
+  const deltaSuffix = (val, unit = "", prefix = "", digits = 0) => {
+    const step = 10 ** digits;
+    const magnitudeAbs = Math.round(Math.abs(val) * step) / step;
+    if (magnitudeAbs === 0) return "";
+    const magnitude = `${prefix}${
+      digits ? magnitudeAbs.toFixed(digits) : magnitudeAbs.toLocaleString()
+    }`;
+    return ` (${val > 0 ? "+" : "\u2212"}${magnitude}${unit ? ` ${unit}` : ""})`;
   };
 
   const tiers = [
@@ -4888,23 +4898,25 @@ function renderRelativeOptions(p, selectedSystem) {
 
     appendRows(card, [
       hasBasePanels
-        ? ["PV array", `${pvKw} kW (${fmtDelta(pvKw - basePvKw, "")} kW)`]
+        ? ["PV array", `${pvKw} kW${deltaSuffix(pvKw - basePvKw, "kW")}`]
         : ["Solar array", "None (Battery-only)"],
       [
         "Battery bank",
-        `${fmt(battKwh)} kWh (${fmtDelta(battKwh - baseBattKwh, "")} kWh)`,
+        `${fmt(battKwh)} kWh${deltaSuffix(battKwh - baseBattKwh, "kWh")}`,
       ],
       [
         "Autonomy",
-        `~${autonomy.toFixed(1)} days (${fmtDelta(autonomy - baseAutonomy, "")} d)`,
+        // Tenths matter here: 0.3 days against a 0.5-day baseline is a real
+        // 4.8-hour difference, and a whole-unit threshold read it as none.
+        `~${autonomy.toFixed(1)} days${deltaSuffix(autonomy - baseAutonomy, "d", "", 1)}`,
       ],
       [
         "System first cost",
-        `${moneyRange(cost.lo, cost.hi)} (${fmtDelta(cost.objectiveMid - baseCost.objectiveMid)})`,
+        `${moneyRange(cost.lo, cost.hi)}${deltaSuffix(cost.objectiveMid - baseCost.objectiveMid, "", "$")}`,
       ],
       [
         "True 20-yr cost",
-        `${money(life.total)} (${fmtDelta(life.total - baseLife.total)})`,
+        `${money(life.total)}${deltaSuffix(life.total - baseLife.total, "", "$")}`,
       ],
       [
         "20-yr swaps",
@@ -5040,7 +5052,11 @@ function renderRelativeOptions(p, selectedSystem) {
 function footprintText(pvKw, panelWatts = PANEL_WATTS_DEFAULT) {
   const lay = panelLayout(pvKw, panelWatts);
   if (!lay) return null;
-  return `~${lay.count} \u00D7 ${lay.panelWatts} W panels \u00B7 about ${lay.areaM2} m\u00B2 of roof or ground`;
+  return t("resBomArraySummary", {
+    n: lay.count,
+    watts: lay.panelWatts,
+    area: lay.areaM2,
+  });
 }
 
 function syncLadderTabs() {
@@ -5109,42 +5125,47 @@ function renderBestPick(p) {
   card.style.borderColor = "var(--border-glow)";
   const title =
     b.pvKw === 0 && b.battKwh > 0
-      ? `${b.chemLabel}: ${fmt(b.battKwh)} kWh battery (peak-hour offset)`
+      ? t("resRowPeakOffset", { chem: b.chemLabel, kwh: fmt(b.battKwh) })
       : b.battKwh === 0
-        ? `${b.chemLabel}: ${b.pvKw} kW solar (no battery needed)`
-        : `${b.chemLabel}: ${b.pvKw} kW solar + ${fmt(b.battKwh)} kWh battery`;
-  card.appendChild(
-    el(
-      "div",
-      { class: "bom-badge" },
-      "Recommended \u2014 safety-first true-cost pick",
-    ),
-  );
+        ? t("resRowNoBattery", { chem: b.chemLabel, kw: b.pvKw })
+        : t("resRowSolarPlus", {
+            chem: b.chemLabel,
+            kw: b.pvKw,
+            kwh: fmt(b.battKwh),
+          });
+  card.appendChild(el("div", { class: "bom-badge" }, t("resRecommendedWhy")));
   card.appendChild(el("h3", {}, title));
   const rows = [
-    ["Solar array", b.pvKw > 0 ? `${b.pvKw} kW` : "None (Battery-only)"],
+    [t("resLblSolarArray"), b.pvKw > 0 ? `${b.pvKw} kW` : t("resValNoPv")],
     [
-      "Battery (usable)",
+      t("resLblBatteryUsable"),
       b.battKwh > 0
-        ? `${fmt(b.battKwh)} kWh \u2014 ~${fmt(b.battNameplateKwh)} nameplate`
-        : "None (Solar-only)",
+        ? `${fmt(b.battKwh)} kWh${
+            Number.isFinite(b.battNameplateKwh)
+              ? t("resValNameplate", { kwh: fmt(b.battNameplateKwh) })
+              : ""
+          }`
+        : t("resCardNoSolar"),
     ],
   ];
   const foot = b.pvKw > 0 ? footprintText(b.pvKw) : null;
-  if (foot) rows.push(["Footprint", foot]);
-  rows.push(["Cost to buy", `~${moneyRange(b.costLo, b.costHi)}`]);
+  if (foot) rows.push([t("resLblFootprint"), foot]);
+  rows.push([t("resCardCostToBuy"), `~${moneyRange(b.costLo, b.costHi)}`]);
   rows.push([
-    "Battery swaps",
+    t("resLblBatterySwaps"),
     b.replacementsHorizon > 0
       ? b.batteryLifeYears
-        ? `~${b.replacementsHorizon}x (about every ${fmtLife(b.batteryLifeYears)})`
-        : `~${b.replacementsHorizon}x`
-      : "None in 20 years",
+        ? t("resValSwapsEvery", {
+            n: b.replacementsHorizon,
+            life: fmtLife(b.batteryLifeYears),
+          })
+        : t("resValSwapsBare", { n: b.replacementsHorizon })
+      : t("resCardNoSwaps"),
   ]);
   if (b.swapsAndLaborUsd > 0)
-    rows.push(["Swaps + labor add", `~${money(b.swapsAndLaborUsd)}`]);
+    rows.push([t("resCardSwapsAdd"), `~${money(b.swapsAndLaborUsd)}`]);
   rows.push([
-    "Total 20-year cost",
+    t("resLblTotalCost"),
     `~${money(b.lifetimeCostMid)}${bestSuffix}`,
   ]);
   pushSeriesBreakdown(rows, b);
@@ -5152,24 +5173,33 @@ function renderBestPick(p) {
     if (b.battKwh > 0 && p.dailyKwh > 0) {
       const autonomyDays = (b.battKwh / p.dailyKwh).toFixed(1);
       rows.push([
-        "Battery autonomy",
-        `~${autonomyDays} days of storage with zero sun`,
+        t("resCardAutonomy"),
+        t("resValAutonomy", { days: autonomyDays }),
       ]);
     }
     rows.push([
-      "Unmet hours",
-      `${fmt(b.unmetHoursPerYear ?? 0)} h/yr \u00B7 longest gap ${fmt(b.longestGapHours ?? 0)} h`,
+      t("resLblUnmetHours"),
+      t("resValUnmet", {
+        h: fmt(b.unmetHoursPerYear ?? 0),
+        gap: fmt(b.longestGapHours ?? 0),
+      }),
     ]);
   } else {
     const baBest = fmtBillAfter(b.billAfterMonthlyUsd);
     if (baBest !== null)
-      rows.push([b.pvKw > 0 ? "Bill after solar" : "Bill after", baBest]);
+      rows.push([
+        t(b.pvKw > 0 ? "resLblBillAfterSolar" : "resLblBillAfter"),
+        baBest,
+      ]);
   }
   if (p.tariff && typeof b.trueBreakEvenYear === "number") {
-    rows.push(["Pays for itself", `Year ${b.trueBreakEvenYear}`]);
+    rows.push([
+      t("resCardPaysForItself"),
+      t("resValYear", { n: b.trueBreakEvenYear }),
+    ]);
     if (b.replacementsHorizon > 0 && b.paybackYearsLo !== null) {
       rows.push([
-        "  \u2014 first cost alone pays back in",
+        t("resCardFirstCostAlone"),
         fmtPaybackRange(b.paybackYearsLo, b.paybackYearsHi),
       ]);
     }
@@ -5178,13 +5208,10 @@ function renderBestPick(p) {
     b.trueBreakEvenYear === null &&
     b.replacementsHorizon > 0
   ) {
-    rows.push([
-      "True 20-yr break-even",
-      "never \u2014 replacements outpace savings",
-    ]);
+    rows.push([t("resRowTrueBreakeven"), t("resRowNever")]);
   } else if (!p.tariff && b.paybackYearsLo !== null) {
     rows.push([
-      "Pays for itself in",
+      t("resRowPaysForItself"),
       fmtPaybackRange(b.paybackYearsLo, b.paybackYearsHi),
     ]);
   }
@@ -5200,22 +5227,21 @@ function renderBestPick(p) {
           style:
             "font-size:0.85rem;color:var(--text-main);margin-top:0.7rem;line-height:1.55;",
         },
-        p.bestReason,
+        localizedBestReason(p),
       ),
     );
   }
-  const compareHint = isGT
-    ? solvablePool.length >= 2
-      ? " Click any cell in the matrix below to see that exact system in every chart and the hardware list."
-      : " The matrix shows why the other chemistries weren't practical at this site."
-    : solvablePool.length >= 2
-      ? " Use the tabs above to compare every option side by side."
-      : " The matrix shows why the other chemistries weren't practical at this site.";
+  const compareHint =
+    isGT && solvablePool.length >= 2
+      ? " " + t("resMatrixHintClickBoth")
+      : solvablePool.length >= 2
+        ? " " + t("resMatrixHintTabs")
+        : " " + t("resMatrixHintWhyNot");
   card.appendChild(
     el(
       "p",
       { style: "font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;" },
-      `${p.autoNote}.${compareHint}`,
+      `${localizedAutoNote(p)}.${compareHint}`,
     ),
   );
   wrap.appendChild(card);
@@ -5243,33 +5269,20 @@ function renderEli5Section(p, sys, paths = null) {
 /**
  * THE INSTALLER-vs-DIRECT SENTENCE, priced instead of guessed.
  *
- * This used to price "a typical installer quote" as a MULTIPLE of the hardware
- * estimate — 10x the cheapest build, 5x the dearest — and then add a flat
- * $1,500-$3,000 for the electrician's final hookup. Both numbers were invented
- * at the point of display, so the gap between "hire an installer" and "buy the
- * parts yourself" was a difference in what each side counted rather than a
- * difference in price. That is precisely the claim D-01 §6.4 forbids
- * (R-PATH-03), and it is why the two paths now come out of ONE priced model
- * over ONE system: the turnkey path's all-in band (parts, labour, permits and
- * the installer's margin already inside it) against the self-purchase path's
- * all-in band (the SAME parts, plus paid labour, permits and interconnection).
- *
- * A useful side effect: the old text compared a midpoint against a midpoint and
- * could print "roughly -$300 below a typical quote" — a negative number
- * described as a saving. Two registry prices cannot produce that, so the
- * sign-follows-the-number defect is gone structurally rather than patched.
- *
- * With no priced comparison available the sentence degrades to the hardware
- * cost and points at the panel, instead of inventing a band.
+ * It used to price "a typical installer quote" as a MULTIPLE of the hardware
+ * estimate (10x cheapest, 5x dearest) plus a flat hookup figure — invented at the
+ * point of display, so the gap measured what each side counted rather than price,
+ * which is what D-01 §6.4 forbids (R-PATH-03). Both paths now come from ONE priced
+ * model over ONE system, which also removes the old negative-saving wording
+ * structurally. With no priced comparison the sentence degrades to the hardware
+ * cost and points at the panel.
  */
 
 /**
  * The four paths for ONE system, or null when there is nothing to price.
  *
- * ONE owner. The ELI5 sentence and the comparison panel must not price the
- * same system twice, or the two can disagree on the turnkey band — the defect
- * this module removed. The cache key is the priced identity of the system, not
- * an object identity, so re-selecting the same system does not reprice it.
+ * ONE owner: the ELI5 sentence and the comparison panel must not price the same system
+ * twice, or the two can disagree on the turnkey band. The cache key is the priced
  */
 function purchasePaths(p, sys) {
   if (!p || !sys || sys.solvable === false) return null;
@@ -5280,7 +5293,6 @@ function purchasePaths(p, sys) {
   const baseline = p.annualGridSpendUsd;
   // A non-finite baseline prices against undefined: every break-even becomes
   // "not within 20 years" without any signal that the input was bad. Return
-  // null (nothing to price) instead of a column of honest-looking wrong answers.
   if (!Number.isFinite(baseline)) return null;
   const key = [
     sys.pvKw,
@@ -5327,27 +5339,27 @@ export function turnkeyQuoteText(
     return `DIY or direct hardware cost is ~${directCost}. A full-service installer builds that same system for one all-in price covering the parts, the labour, the permits and their margin — the four ways to pay are priced side by side below.`;
   }
   const gap = turnkey.year0 - direct.year0;
-  // The gap is installer MINUS self-purchase, so the sentence compares the
-  // route it has just described against the installer's price. The word
-  // follows the sign: two registry prices cannot produce a negative number
-  // described as a saving, which is how the old midpoint arithmetic printed
-  // "-$300 below a typical quote" for a system that cost MORE.
+  // The gap is installer MINUS self-purchase, so the sentence compares the route it just
+  // described against the installer's price. The word follows the sign: two registry prices
   const vs =
     gap >= 0
-      ? `${moneyFn(gap)} cheaper than the installer's price`
-      : `${moneyFn(-gap)} dearer than the installer's price`;
-  return `Hardware for this system is ~${directCost}. A full-service installer quotes ${band(turnkey)} all-in for exactly this array. Buying the same parts yourself and paying a licensed electrician for the connection lands near ${band(direct)} — ${vs}. Over ${PATHS_HORIZON_YEARS} years, permits, incentives and every bank replacement included, all four routes are priced together below.`;
+      ? t("resPathsVsCheaper", { amount: moneyFn(gap) })
+      : t("resPathsVsDearer", { amount: moneyFn(-gap) });
+  return t("resPathsHardware", {
+    direct: directCost,
+    turnkey: band(turnkey),
+    self: band(direct),
+    vs,
+    years: PATHS_HORIZON_YEARS,
+  });
 }
 
 /**
- * THE COMPARISON PANEL: four priced routes to the SAME system, side by side.
- *
- * The panel never computes. Every figure below is read out of the model that
- * `purchasePaths` priced, so a card cannot disagree with the ELI5 sentence
- * above it or with the ranking that explains why the cheapest one is cheapest.
- * What the panel owns is the presentation and the instrument toggle — because
- * a PPA buys ENERGY and a lease rents the SYSTEM, and switching between them
- * genuinely changes the price, which is R-PATH-02.
+ * THE COMPARISON PANEL: four priced routes to the SAME system, side by side. It never
+ * computes — every figure is read out of the model purchasePaths priced, so no card
+ * can disagree with the ELI5 sentence above it. The panel owns presentation and the
+ * instrument toggle: a PPA buys ENERGY, a lease rents the SYSTEM, which genuinely
+ * changes the price (R-PATH-02).
  */
 function renderPathsSection(p, sys) {
   const wrap = $("pathsPanel");
@@ -5426,22 +5438,10 @@ function renderPathsSection(p, sys) {
 }
 
 /**
- * BOTH surfaces that read the priced comparison, in the order that guarantees
- * they agree: the panel prices, the sentence quotes the result. Two call sites
- * (a fresh result, a selection change) plus the instrument toggle above.
- *
- * Awaited, because the model is loaded lazily (see loadPaths). The await is
- * the whole point and not a convenience: the two surfaces are painted INSIDE
- * it, one after the other, from one priced result. The alternative — rendering
- * the sentence without a price and correcting it a moment later — is the
- * "two different turnkey numbers on one screen" defect D-01 exists to remove,
- * so nothing here paints until the model is in hand.
- *
- * A generation counter, not a lock: several of these can be in flight at once
- * (a fresh result, then a selection change, then an instrument toggle) and the
- * newest request is the only one whose payload is still current. An older
- * render that resolves late must not repaint the panel with a superseded
- * system.
+ * BOTH surfaces that read the priced comparison, in the order that makes them
+ * agree: the panel prices, the sentence quotes the result. Awaited because the
+ * model loads lazily (loadPaths) — nothing paints until it is in hand. A generation
+ * counter, not a lock: a late resolve from a superseded system must not repaint.
  */
 let pathRenderGeneration = 0;
 async function renderPathSurfaces(p) {
@@ -5449,12 +5449,9 @@ async function renderPathSurfaces(p) {
   try {
     await loadPaths();
   } catch (e) {
-    // A pricing model that will not load is a missing comparison, and the
-    // honest way to say so is the panel's own "priced comparison unavailable"
-    // empty state plus a status line — never a silent blank section, and never
-    // an unhandled rejection that the browser logs and nobody reads. The
-    // in-flight load is cleared so the NEXT render retries rather than
-    // inheriting this failure forever.
+    // A pricing model that will not load is a missing comparison: the panel's own
+    // "priced comparison unavailable" empty state plus a status line, never a silent blank
+    // and never an unhandled rejection. The in-flight load is cleared so the NEXT render
     pathsLoading = null;
     pathsApi = null;
     const wrap = $("pathsPanel");
@@ -5505,8 +5502,14 @@ function renderEli5Card(p, sys, paths = null) {
   const watts = currentPanelWatts();
   const lay = sys.pvKw > 0 ? panelLayout(sys.pvKw, watts) : null;
   const panelDesc = lay
-    ? `~${lay.count} standard rooftop or ground panels (${lay.panelWatts} W each). Needs about ${lay.areaM2} m\u00B2 (~${Math.round(lay.areaM2 * 10.764)} sq ft) of unshaded space. On a clear sunny day, this harvests around ${fmt(sys.pvKw * 4.5)} kWh of free electricity.`
-    : "No solar panels are included in this battery-only configuration (charges during cheap off-peak hours to avoid expensive peak electricity).";
+    ? t("resEli5Panels", {
+        n: lay.count,
+        watts: lay.panelWatts,
+        area: lay.areaM2,
+        sqft: Math.round(lay.areaM2 * 10.764),
+        kwh: fmt(sys.pvKw * 4.5),
+      })
+    : t("resEli5NoPanels");
 
   const itemPanels = el("div", { class: "eli5-item" });
   itemPanels.appendChild(
@@ -5516,8 +5519,7 @@ function renderEli5Card(p, sys, paths = null) {
   eli5Grid.appendChild(itemPanels);
 
   // 2. Battery Storage
-  let battDesc =
-    "No battery bank selected. Power generated during the day is consumed immediately or sent to the grid.";
+  let battDesc = t("resEli5NoBattery");
   if (sys.battKwh > 0) {
     const rackUnits = Math.max(
       1,
@@ -5525,7 +5527,12 @@ function renderEli5Card(p, sys, paths = null) {
     );
     const autonomy =
       p.dailyKwh > 0 ? (sys.battKwh / p.dailyKwh).toFixed(1) : "2-3";
-    battDesc = `${fmt(sys.battKwh)} kWh usable (~${fmt(sys.battNameplateKwh || sys.battKwh)} kWh total). That provides ~${autonomy} full days of normal power with zero sunlight. In physical size, this is about ${rackUnits} standard server-rack battery module(s) (about the size of small desktop PC cases).`;
+    battDesc = t("resEli5Battery", {
+      usable: fmt(sys.battKwh),
+      total: fmt(sys.battNameplateKwh || sys.battKwh),
+      days: autonomy,
+      units: rackUnits,
+    });
   }
   const itemBatt = el("div", { class: "eli5-item" });
   itemBatt.appendChild(
@@ -5536,21 +5543,26 @@ function renderEli5Card(p, sys, paths = null) {
 
   // 3. Inverter / Brain
   const splitWarning = window.lastInputs?.requiresSplitPhase
-    ? " Native 240V split-phase is required for your selected 240V appliances (e.g. well pump, EV, or heat pump)."
-    : " Supplies standard 120V household power.";
+    ? t("resEli5SplitRequired")
+    : t("resEli5SplitStandard");
   const peakW =
     window.lastInputs?.peakLoadW || Math.round(((p.dailyKwh || 0) * 1000) / 24);
   const invContinuous = Math.max(3, Math.ceil((peakW * 1.25) / 1000));
   const invDesc =
     sys.battKwh === 0
-      ? `A grid-tied string inverter (~${Math.max(3, Math.ceil(sys.pvKw))} kW). It converts daytime solar DC electricity directly into 120V/240V AC power for your home appliances and sends excess to the grid.`
+      ? t("resEli5InverterGridTie", {
+          kw: Math.max(3, Math.ceil(sys.pvKw)),
+        })
       : sys.pvKw === 0
-        ? `A bidirectional battery inverter / charger (~${invContinuous} kW). It quietly charges your batteries during cheap off-peak hours and discharges during peak-rate periods to eliminate expensive utility power.`
-        : `A wall-mounted hybrid inverter / charger (~${invContinuous} to ${Math.max(invContinuous, 6)} kW continuous). It quietly converts DC power from solar and batteries into clean AC power for your outlets.${splitWarning}`;
+        ? t("resEli5InverterBattery", { kw: invContinuous })
+        : t("resEli5InverterHybrid", {
+            from: invContinuous,
+            to: Math.max(invContinuous, 6),
+          }) + splitWarning;
 
   const itemInv = el("div", { class: "eli5-item" });
   itemInv.appendChild(
-    el("div", { class: "eli5-item-label" }, "⚡ The Inverter (System Brain)"),
+    el("div", { class: "eli5-item-label" }, t("resEli5InverterLabel")),
   );
   itemInv.appendChild(el("div", { class: "eli5-item-desc" }, invDesc));
   eli5Grid.appendChild(itemInv);
@@ -5565,7 +5577,7 @@ function renderEli5Card(p, sys, paths = null) {
   const costDesc = turnkeyQuoteText(sys, money, moneyRange, paths);
   const itemCost = el("div", { class: "eli5-item" });
   itemCost.appendChild(
-    el("div", { class: "eli5-item-label" }, "💰 Wholesale vs Turnkey Quotes"),
+    el("div", { class: "eli5-item-label" }, t("resEli5CostLabel")),
   );
   itemCost.appendChild(el("div", { class: "eli5-item-desc" }, costDesc));
   eli5Grid.appendChild(itemCost);
@@ -5575,32 +5587,128 @@ function renderEli5Card(p, sys, paths = null) {
 }
 
 /** Compact column labels for the matrix header. */
+// The auto-card note, rebuilt in the visitor's language (#365): the payload still
+// ships the English autoNote, and the parts beside it name the chemistries and the
+// basis id. One literal per target id, never concatenated — the key-existence gate
+// scans for literal translate calls and would not see a built key.
+function basisPhrase(kind, id) {
+  if (kind === "offgrid") {
+    if (id === "tier100") return t("resBasisTier100");
+    if (id === "tier99") return t("resBasisTier99");
+    if (id === "tier95") return t("resBasisTier95");
+    return "";
+  }
+  if (kind === "battery") {
+    if (id === "cut10") return t("resBasisPeak10");
+    if (id === "cut15") return t("resBasisPeak15");
+    if (id === "cut20") return t("resBasisPeak20");
+    return "";
+  }
+  switch (id) {
+    case "cut10":
+      return t("resBasisCut10");
+    case "cut15":
+      return t("resBasisCut15");
+    case "cut20":
+      return t("resBasisCut20");
+    case "cut25":
+      return t("resBasisCut25");
+    case "cut30":
+      return t("resBasisCut30");
+    case "cut60":
+      return t("resBasisCut60");
+    case "cut80":
+      return t("resBasisCut80");
+    case "cut95":
+      return t("resBasisCut95");
+    default:
+      return "";
+  }
+}
+
+function localizedAutoNote(p) {
+  const parts = p && p.autoNoteParts;
+  if (!parts) return (p && p.autoNote) || "";
+  const basis = basisPhrase(parts.kind, parts.effective);
+  if (parts.fallback) {
+    return t("resAutoFallback", {
+      requested: basisPhrase(parts.kind, parts.requested),
+      effective: basis,
+    });
+  }
+  const names = parts.names || [];
+  if (names.length >= 2)
+    return t("resAutoNoteTwo", {
+      a: names[0],
+      b: names[1],
+      basis,
+    });
+  if (names.length === 1) return t("resAutoNoteOne", { a: names[0], basis });
+  return t("resAutoNoteNone", { basis });
+}
+
+// The recommendation's reason, rebuilt in the visitor's language (#365).
+// `bestReasonParts` is the structured walk behind the engine's English prose;
+// when it is absent (an old cached payload) the English string is used as-is,
+// because showing nothing is worse than showing the language the payload has.
+function localizedBestReason(p) {
+  const parts = p && p.bestReasonParts;
+  if (!parts) return (p && p.bestReason) || "";
+  const ahead =
+    parts.gapPct !== null && parts.runnerUpChem
+      ? t("resAhead", { pct: parts.gapPct, chem: parts.runnerUpChem })
+      : "";
+  let why;
+  if (parts.kind === "naion") {
+    why =
+      t("resWhyNaion", { chem: parts.chem, ahead }) +
+      (parts.lfpCheaper
+        ? t("resWhyNaionLfpCheaper")
+        : t("resWhyNaionCostWin")) +
+      (parts.cold ? t("resWhyNaionCold") : "");
+  } else if (parts.kind === "lfp") {
+    why =
+      t("resWhyLfp", { chem: parts.chem, ahead }) +
+      (parts.cold ? t("resWhyLfpCold") : t("resWhyLfpWarm"));
+  } else {
+    why = t("resWhyOther", { chem: parts.chem, ahead, n: parts.swaps });
+  }
+  const tail =
+    parts.alternatives >= 2
+      ? t("resTailOthers")
+      : parts.alternatives === 1
+        ? t("resTailOne")
+        : t("resTailNone");
+  const agm =
+    parts.agmSwaps !== null ? t("resAgmRef", { n: parts.agmSwaps }) : "";
+  return `${why}${tail}${agm}`;
+}
+
 function matrixColShort(p, col) {
   if (p.mode === "gridtie") {
     if (col.custom)
       return (
         col.label ||
-        `Your ~${p.customCut ? Math.round(p.customCut.fraction * 100) : 80}% target`
+        t("resColCustom", {
+          pct: p.customCut ? Math.round(p.customCut.fraction * 100) : 80,
+        })
       );
     return col.id === "cut60"
-      ? "\u221260% bill"
+      ? t("resColBill60")
       : col.id === "cut80"
-        ? "\u221280% bill"
+        ? t("resColBill80")
         : col.id === "cut95"
-          ? "\u221295% bill"
+          ? t("resColBill95")
           : col.label
             ? col.label.split("\u2014")[0].trim()
-            : `\u2212${col.id.replace("cut", "")}% bill`;
+            : t("resChipBillCut", { pct: col.id.replace("cut", "") });
   }
   return col.label.split("\u2014")[0].trim();
 }
 
 /**
- * The full comparison table: every chemistry against every cut level. Green
- * outline marks the cheapest true 20-year cost per column. In grid-tie mode
- * every cell is the SELECTION UI: click (or Tab to and Enter) a cell and the
- * whole results pipeline — banner, curves, charts, hardware list, export
- * figures, share link — switches to that system.
+ * The full comparison table: every chemistry against every cut level, with the cheapest
+ * true 20-year cost per column outlined. In grid-tie mode every cell is the SELECTION UI:
  */
 function matrixHtml(p) {
   const m = p.matrix;
@@ -5643,11 +5751,9 @@ function matrixHtml(p) {
           const cls =
             bestCls || selCls ? ` class="${(bestCls + selCls).trim()}"` : "";
           if (!cell || !cell.solvable) {
-            // Resolve the copy through the same owner the banner uses. This
-            // cell used to read .title/.body off the key table, so a cell with
-            // a known reason rendered the word "undefined" in the print sheet —
-            // a defect no gate looked at, because only an infeasible run and a
-            // print-sheet walk reach it.
+            // Resolve the copy through the same owner the banner uses. This cell used to read
+            // .title/.body off the key table, so a known reason rendered the word "undefined" in
+            // the print sheet — a path only an infeasible run and a print-sheet walk reach.
             const reason = (cell && cell.reason) || null;
             const keys =
               reason && hasInfeasibleCopy(reason)
@@ -5666,19 +5772,22 @@ function matrixHtml(p) {
           }
           let rel;
           if (p.mode === "offgrid")
-            rel = `${fmt(cell.unmetHoursPerYear)} h/yr unmet`;
-          else if (col.id === "custom" && surplusCol)
-            rel = "bill gone + surplus";
+            rel = t("resValUnmetShort", { h: fmt(cell.unmetHoursPerYear) });
+          else if (col.id === "custom" && surplusCol) rel = t("resValBillGone");
           else
             rel =
               cell.pvKw > 0
-                ? `-${cell.cutPct}% bill`
-                : `${cell.cutPct}% peak offset`;
-          const pvText = `${cell.pvKw} kW PV`;
+                ? t("resValBillPct", { pct: cell.cutPct })
+                : t("resValPeakOffsetPct", { pct: cell.cutPct });
+          const pvText = t("resValPvKw", { kw: cell.pvKw });
           const batteryText =
-            cell.battKwh > 0 ? `${fmt(cell.battKwh)} kWh batt` : "no battery";
+            cell.battKwh > 0
+              ? t("resValBattKwh", { kwh: fmt(cell.battKwh) })
+              : t("resValNoBattery");
           const costText = `~${moneyRange(cell.costLo, cell.costHi)}`;
-          const lifetimeText = `20-yr ~${money(cell.lifetimeCostMid)}`;
+          const lifetimeText = t("resValLifetime", {
+            amount: money(cell.lifetimeCostMid),
+          });
           const lcoeText = Number.isFinite(cell.lcoeUsdPerKwh)
             ? `\u00B7 ${energyRate(cell.lcoeUsdPerKwh)}`
             : "";
@@ -5705,13 +5814,11 @@ function matrixHtml(p) {
     })
     .join("");
   const hint =
-    p.mode === "gridtie"
-      ? "Green outline = lowest true 20-year cost in that column. Click any cell to make it the system shown in every chart, the hardware list, and the export figures below. The \u201Cyour target\u201D column follows the slider."
-      : 'Green outline = lowest true 20-year cost in that column (every bank swap counted). "Unmet" hours are covered by a generator or the grid.';
+    p.mode === "gridtie" ? t("resMatrixLegend") : t("resMatrixLegendOffgrid");
   return (
     // tabindex + role + name: the wrap scrolls sideways and has no focusable
     // child, so a keyboard could not reach it (WCAG 2.1.1).
-    `<div class="matrix-wrap" tabindex="0" role="region" aria-label="${escapeAttr(t("matrixScroll"))}"><table class="matrix-table"><thead><tr><th>Battery \u2193 \u00B7 Goal \u2192</th>${head}</tr></thead><tbody>${body}</tbody></table></div>` +
+    `<div class="matrix-wrap" tabindex="0" role="region" aria-label="${escapeAttr(t("matrixScroll"))}"><table class="matrix-table"><thead><tr><th>${escapeHtml(t("resMatrixBatteryGoalHeader"))}</th>${head}</tr></thead><tbody>${body}</tbody></table></div>` +
     `<p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.6rem;line-height:1.55;">${hint}</p>`
   );
 }
@@ -5725,15 +5832,11 @@ function renderMatrix(p) {
 
 // ── Selected system ─────────────────────────────────────────────────────────
 // One system drives everything below the run (charts, hardware list, export
-// figures, share link, print). This resolves whichever the visitor picked
-// last; it falls back to the recommendation.
-// ── Jev sanity check ───────────────────────────────────────────────────────────
-// One probe per distinct result state: the interpretation is cached by the
-// state fingerprint, so mode toggles and re-renders re-mount the badge from
-// cache instead of re-asking the model. A confident "impossible" verdict on
-// our deterministic engine's output would mean a rescale/merge bug — so the
-// on-the-spot response is one full engine re-run (deterministic self-heal);
-// a flag on the re-run renders as-is (refinedPayloads guards the loop).
+// figures, share link, print); it falls back to the recommendation.
+// ── Jev sanity check ────────────────────────────────────────────────────────
+// One probe per distinct result state, cached by state fingerprint. A confident
+// "impossible" verdict on deterministic output means a rescale/merge bug, so the
+// response is one full engine re-run; a flag on the re-run renders as-is.
 let sanityCache = { key: null, state: null, interp: null };
 let sanityStatus = "idle";
 let sanityRequestSeq = 0;
@@ -5898,20 +6001,14 @@ function pushSeriesBreakdown(rows, entry) {
     entry && entry.cumCostSeries ? seriesBreakdown(entry.cumCostSeries) : null;
   if (!bd || bd.systemTotal === null || bd.residualBills === 0) return;
   if (bd.residualBills > 0) {
-    rows.push(["Remaining 20-yr bills", `~${money(bd.residualBills)}`]);
-    rows.push([
-      "All-in over 20 yrs (system + bills)",
-      `~${money(bd.withSolar)}`,
-    ]);
+    rows.push([t("resLblRemainingBills"), `~${money(bd.residualBills)}`]);
+    rows.push([t("resLblAllIn"), `~${money(bd.withSolar)}`]);
   } else {
     // Net metering: the feed-in credit on surplus out-earns the remaining
     // bill, so the residual is negative — present it as the credit it is.
+    rows.push([t("resLblNetFeedCredit"), `~${money(-bd.residualBills)}`]);
     rows.push([
-      "Net feed-in credit over 20 yrs",
-      `~${money(-bd.residualBills)}`,
-    ]);
-    rows.push([
-      "All-in over 20 yrs (system \u2212 credit)",
+      t("resLblAllInMinusCredit"),
       bd.withSolar < 0
         ? `~\u2212${money(-bd.withSolar)}`
         : `~${money(bd.withSolar)}`,
@@ -5931,69 +6028,82 @@ function entryDetailRows(p, e) {
       p.matrix.rows.find((r) => r.id === e.chemistry)?.label) ||
     e.chemistry ||
     "—";
-  rows.push(["Chemistry", chemLabel]);
+  rows.push([t("resLblChemistry"), chemLabel]);
   // The same wording the card above uses: this row is the selected system's
   // own spec sheet, and "0 kW" beside a card reading "None (Battery-only)"
   // described one system two ways.
   rows.push([
-    "Solar array",
-    e.pvKw > 0 ? `${e.pvKw} kW` : "None (Battery-only)",
+    t("resLblSolarArray"),
+    e.pvKw > 0 ? `${e.pvKw} kW` : t("resValNoPv"),
   ]);
   rows.push([
-    "Battery (usable)",
+    t("resLblBatteryUsable"),
     e.battKwh > 0
-      ? `${fmt(e.battKwh)} kWh${e.battNameplateKwh ? ` — ~${fmt(e.battNameplateKwh)} nameplate` : ""}`
-      : "none needed",
+      ? `${fmt(e.battKwh)} kWh${
+          e.battNameplateKwh
+            ? t("resValNameplate", { kwh: fmt(e.battNameplateKwh) })
+            : ""
+        }`
+      : t("resValNoBatt"),
   ]);
   const foot = footprintText(e.pvKw);
-  if (foot) rows.push(["Footprint", foot]);
+  if (foot) rows.push([t("resLblFootprint"), foot]);
   if (e.cutPct !== undefined && e.cutPct !== null) {
     rows.push([
-      p.mode === "gridtie" ? "Bill cut" : "Coverage",
+      t(p.mode === "gridtie" ? "resLblBillCut" : "resLblCoverage"),
       p.mode === "gridtie"
         ? e.pvKw > 0
           ? `-${e.cutPct}%`
-          : `${e.cutPct}% peak offset`
+          : t("resValPeakOffsetPct", { pct: e.cutPct })
         : `${e.cutPct}%`,
     ]);
   }
-  rows.push(["Component cost", `~${moneyRange(e.costLo, e.costHi)}`]);
+  rows.push([t("resLblComponentCost"), `~${moneyRange(e.costLo, e.costHi)}`]);
   const baEntry = fmtBillAfter(e.billAfterMonthlyUsd);
   if (baEntry !== null) {
-    rows.push([e.pvKw > 0 ? "Bill after solar" : "Bill after", baEntry]);
+    rows.push([
+      t(e.pvKw > 0 ? "resLblBillAfterSolar" : "resLblBillAfter"),
+      baEntry,
+    ]);
   }
   if (e.importedKwhPerYear !== undefined && e.importedKwhPerYear !== null) {
-    rows.push(["Imported from grid", `${fmt(e.importedKwhPerYear)} kWh/yr`]);
+    rows.push([t("resLblImported"), `${fmt(e.importedKwhPerYear)} kWh/yr`]);
   }
   if (e.clippedKwhPerYear !== undefined && e.clippedKwhPerYear !== null) {
     const feed =
       e.exportValueAnnualUsd > 0
-        ? ` · feed-in +${money(e.exportValueAnnualUsd)}/yr`
-        : " · enter a feed-in credit to value it";
+        ? t("resValFeedIn", { amount: money(e.exportValueAnnualUsd) })
+        : t("resValFeedInNone");
     rows.push([
-      p.mode === "gridtie" ? "Surplus clipped" : "Sun clipped",
+      t(p.mode === "gridtie" ? "resLblSurplusClipped" : "resLblSunClipped"),
       `${fmt(e.clippedKwhPerYear)} kWh/yr${feed}`,
     ]);
   }
   if (e.paybackYearsLo !== null && e.paybackYearsLo !== undefined) {
     rows.push([
-      "Pays back its first cost in",
+      t("resLblPaysBack"),
       fmtPaybackRange(e.paybackYearsLo, e.paybackYearsHi),
     ]);
   }
   if (typeof e.trueBreakEvenYear === "number") {
-    rows.push(["True 20-yr break-even", `Year ${e.trueBreakEvenYear}`]);
+    rows.push([
+      t("resLblTrueBreakeven"),
+      t("resValYear", { n: e.trueBreakEvenYear }),
+    ]);
   } else if (e.trueBreakEvenYear === null && e.replacementsHorizon > 0) {
-    rows.push(["True 20-yr break-even", "never — swaps outpace savings"]);
+    rows.push([t("resLblTrueBreakeven"), t("resValNeverSwaps")]);
   }
   if (e.replacementsHorizon > 0 && e.battKwh > 0) {
     rows.push([
-      "Battery swaps over 20 yr",
-      `~${e.replacementsHorizon}x — adds ~${money(e.swapsAndLaborUsd)} with labor`,
+      t("resLblBatterySwaps"),
+      t("resValSwaps", {
+        n: e.replacementsHorizon,
+        amount: money(e.swapsAndLaborUsd),
+      }),
     ]);
   }
   if (Number.isFinite(e.lifetimeCostMid)) {
-    rows.push(["Total 20-year cost", `~${money(e.lifetimeCostMid)}`]);
+    rows.push([t("resLblTotalCost"), `~${money(e.lifetimeCostMid)}`]);
   }
   pushSeriesBreakdown(rows, e);
   if (Number.isFinite(e.lcoeUsdPerKwh)) {
@@ -6001,12 +6111,15 @@ function entryDetailRows(p, e) {
   }
   if (e.unmetHoursPerYear !== undefined && e.unmetHoursPerYear !== null) {
     rows.push([
-      "Unmet hours",
-      `${fmt(e.unmetHoursPerYear)} h/yr · longest gap ${fmt(e.longestGapHours ?? 0)} h`,
+      t("resLblUnmetHours"),
+      t("resValUnmet", {
+        h: fmt(e.unmetHoursPerYear),
+        gap: fmt(e.longestGapHours ?? 0),
+      }),
     ]);
   }
   if (e.bestPriceCallout) {
-    rows.push(["Scenario note", bestPriceNote(e)]);
+    rows.push([t("resLblScenarioNote"), bestPriceNote(e)]);
   }
   return rows;
 }
@@ -6039,7 +6152,9 @@ function showSystemModal(p, entry, adopt) {
       : "";
   const title = $("systemModalTitle");
   if (title) {
-    title.textContent = `${p.mode === "gridtie" ? "Full bill-cut analysis" : "Full system analysis"}${headPct}: ${chemLabel}`;
+    title.textContent = `${t(
+      p.mode === "gridtie" ? "analysisFullBill" : "analysisFullSystem",
+    )}${headPct}: ${chemLabel}`;
   }
   if (body) {
     body.innerHTML = "";
@@ -6054,10 +6169,7 @@ function showSystemModal(p, entry, adopt) {
           style:
             "font-size:0.78rem;color:var(--text-muted);margin-top:0.7rem;line-height:1.5;",
         },
-        "Every figure is computed from the same hourly weather simulation as the cards — nothing here is estimated by eye." +
-          (p.tariff
-            ? ""
-            : " Enter your grid price above to see payback vs. your bill."),
+        t("resModalNote") + (p.tariff ? "" : t("resModalNoteNoTariff")),
       ),
     );
   }
@@ -6369,11 +6481,9 @@ function downloadBomCsv() {
 
 // ── Generator fuel helper ────────────────────────────────────────────────────
 
-// The burn tables, the gallon-or-litre geography and the local-price -> USD
-// maths live in fuel-units.js; what stays here is the input plumbing around
-// them. fuelImperial is the cached answer for the current location, refreshed
-// whenever the location changes so the label, the example and the maths below
-// can never disagree with each other.
+// The burn tables, the gallon-or-litre geography and the local-price -> USD maths live in
+// fuel-units.js; what stays here is the input plumbing. fuelImperial is the cached answer for
+// the current location, refreshed whenever the location changes.
 let fuelImperial = false;
 
 function usesImperialUnits() {
@@ -6493,6 +6603,12 @@ function renderMoneyBar(p) {
           tariff: localRate(p.tariff),
           annual: money(p.annualGridSpendUsd),
         })) + feeNote;
+
+  // What the two money figures actually are. The bar quotes a yearly spend and
+  // the cards quote a first cost and a 20-year total, so a reader can take them
+  // for the same purchase quoted twice. The reconciliation belongs on the line
+  // that raises the question.
+  moneyBar.appendChild(el("p", { class: "uc-note" }, t("includesNote")));
 }
 
 function renderTierCards(p) {
@@ -6657,21 +6773,21 @@ function renderTargetCards(p, extraTargets = []) {
 
   grid.innerHTML = "";
 
-  for (const t of (p.targets || []).concat(extraTargets)) {
-    const isCustom = t.id === "custom";
+  for (const tg of (p.targets || []).concat(extraTargets)) {
+    const isCustom = tg.id === "custom";
 
-    const targetKey = isCustom ? "custom" : "target:" + t.id;
+    const targetKey = isCustom ? "custom" : "target:" + tg.id;
 
     const isSelected = selectedKey === targetKey;
 
     const card = el("div", {
       class:
         "bom-card" +
-        (t.solvable ? " card-selectable" : "") +
+        (tg.solvable ? " card-selectable" : "") +
         (isSelected ? " bom-card-selected" : ""),
     });
 
-    if (t.solvable) {
+    if (tg.solvable) {
       card.setAttribute("role", "button");
       card.setAttribute("tabindex", "0");
       card.style.cursor = "pointer";
@@ -6693,7 +6809,7 @@ function renderTargetCards(p, extraTargets = []) {
 
     card.style.borderColor = isSelected
       ? "var(--primary-accent)"
-      : isCustom || t.id === "cut80"
+      : isCustom || tg.id === "cut80"
         ? "var(--border-glow)"
         : "var(--border-card)";
 
@@ -6701,11 +6817,11 @@ function renderTargetCards(p, extraTargets = []) {
       el(
         "div",
         { class: "bom-badge" },
-        t.solvable
+        tg.solvable
           ? isCustom
-            ? `Your target \u2014 bill -${t.cutPct}%`
-            : `Bill -${t.cutPct}%`
-          : "Not reachable",
+            ? t("resBadgeYourTarget", { pct: tg.cutPct })
+            : t("resBadgeBill", { pct: tg.cutPct })
+          : t("resBadgeUnreachable"),
       ),
     );
 
@@ -6714,12 +6830,14 @@ function renderTargetCards(p, extraTargets = []) {
         "h3",
         {},
         isCustom
-          ? `Your ~${Math.round((t.minFraction || 1) * 100)}% target`
-          : t.label,
+          ? t("resColCustom", {
+              pct: Math.round((tg.minFraction || 1) * 100),
+            })
+          : tg.label,
       ),
     );
 
-    if (!t.solvable) {
+    if (!tg.solvable) {
       card.appendChild(el("p", {}, t("billCutImpossible")));
 
       grid.appendChild(card);
@@ -6728,87 +6846,88 @@ function renderTargetCards(p, extraTargets = []) {
     }
 
     const rows = [
-      ["Solar array", `${t.pvKw} kW`],
+      ["Solar array", `${tg.pvKw} kW`],
 
       [
         "Battery (usable)",
-        t.battKwh > 0
-          ? `${fmt(t.battKwh)} kWh - ~${fmt(t.battNameplateKwh)} nameplate`
+        tg.battKwh > 0
+          ? `${fmt(tg.battKwh)} kWh - ~${fmt(tg.battNameplateKwh)} nameplate`
           : "none needed",
       ],
 
-      ["Component cost", `~${moneyRange(t.costLo, t.costHi)}`],
+      ["Component cost", `~${moneyRange(tg.costLo, tg.costHi)}`],
 
       [
-        t.pvKw > 0 ? "Bill after solar" : "Bill after",
-        (fmtBillAfter(t.billAfterMonthlyUsd) ?? "needs your tariff") +
-          (t.billAfterMonthlyUsd !== null && t.billAfterMonthlyUsd !== undefined
+        tg.pvKw > 0 ? "Bill after solar" : "Bill after",
+        (fmtBillAfter(tg.billAfterMonthlyUsd) ?? "needs your tariff") +
+          (tg.billAfterMonthlyUsd !== null &&
+          tg.billAfterMonthlyUsd !== undefined
             ? ` (was ~${money(Math.round(p.annualGridSpendUsd / 12))})`
             : ""),
       ],
 
-      ["Imported from grid", `${fmt(t.importedKwhPerYear)} kWh/yr`],
+      ["Imported from grid", `${fmt(tg.importedKwhPerYear)} kWh/yr`],
     ];
 
-    const footTarget = t.pvKw > 0 ? footprintText(t.pvKw) : null;
+    const footTarget = tg.pvKw > 0 ? footprintText(tg.pvKw) : null;
 
     if (footTarget) rows.splice(2, 0, ["Footprint", footTarget]);
 
-    const exportActive = t.exportValueAnnualUsd > 0;
+    const exportActive = tg.exportValueAnnualUsd > 0;
 
     if (exportActive) {
       rows.push([
         "Feed-in credit on clipped sun",
-        `+${money(t.exportValueAnnualUsd)}/yr (${fmt(t.clippedKwhPerYear)} kWh clipped)`,
+        `+${money(tg.exportValueAnnualUsd)}/yr (${fmt(tg.clippedKwhPerYear)} kWh clipped)`,
       ]);
-    } else if (t.clippedKwhPerYear > 50) {
+    } else if (tg.clippedKwhPerYear > 50) {
       rows.push([
         "Sun clipped (no export)",
-        `${fmt(t.clippedKwhPerYear)} kWh/yr - enter a feed-in credit to value it`,
+        `${fmt(tg.clippedKwhPerYear)} kWh/yr - enter a feed-in credit to value it`,
       ]);
     }
 
-    if (t.paybackYearsLo !== null && t.paybackYearsHi !== null) {
+    if (tg.paybackYearsLo !== null && tg.paybackYearsHi !== null) {
       rows.push([
         "Pays back its first cost in",
-        fmtPaybackRange(t.paybackYearsLo, t.paybackYearsHi) +
+        fmtPaybackRange(tg.paybackYearsLo, tg.paybackYearsHi) +
           (exportActive ? " incl. feed-in" : ""),
       ]);
     }
 
     if (
-      t.battKwh > 0 &&
-      (typeof t.trueBreakEvenYear === "number" ||
-        (t.trueBreakEvenYear === null && t.replacementsHorizon > 0))
+      tg.battKwh > 0 &&
+      (typeof tg.trueBreakEvenYear === "number" ||
+        (tg.trueBreakEvenYear === null && tg.replacementsHorizon > 0))
     ) {
       rows.push([
         "Breaks even on true 20-yr cost",
-        typeof t.trueBreakEvenYear === "number"
-          ? `\u2248 year ${t.trueBreakEvenYear} (every swap counted)`
+        typeof tg.trueBreakEvenYear === "number"
+          ? `\u2248 year ${tg.trueBreakEvenYear} (every swap counted)`
           : "never \u2014 swaps outpace savings",
       ]);
     }
 
-    if (Number.isFinite(t.lcoeUsdPerKwh)) {
+    if (Number.isFinite(tg.lcoeUsdPerKwh)) {
       rows.push(powerCostRow(t, p.tariff));
     }
 
-    if (t.replacementsHorizon > 0 && t.battKwh > 0) {
+    if (tg.replacementsHorizon > 0 && tg.battKwh > 0) {
       rows.push([
         "Battery swaps over 20 yr",
-        `~${t.replacementsHorizon}x - adds ~${money(t.swapsAndLaborUsd)} with labor`,
+        `~${tg.replacementsHorizon}x - adds ~${money(tg.swapsAndLaborUsd)} with labor`,
       ]);
     }
 
-    if (t.battKwh > 0) {
-      rows.push(["Total 20-year cost", `~${money(t.lifetimeCostMid)}`]);
+    if (tg.battKwh > 0) {
+      rows.push(["Total 20-year cost", `~${money(tg.lifetimeCostMid)}`]);
     }
 
     pushSeriesBreakdown(rows, t);
 
     appendRows(card, rows);
 
-    if (t.bestPriceCallout) {
+    if (tg.bestPriceCallout) {
       card.appendChild(
         el("div", { class: "best-price-callout" }, `💡 ${bestPriceNote(t)}`),
       );
@@ -6869,32 +6988,19 @@ function appendRows(card, rows) {
     card.appendChild(line);
   }
 } /**
- * Cumulative 20-year cost chart — the headline money story, drawn as three
- * running sums for the recommended system:
- *   - amber line:   cumulative grid spend if you had stayed on the grid
- *   - emerald line: cumulative cost of the SYSTEM alone (capex + first labor
- *                   + every swap) — it ends exactly on the recommendation's
- *                   "Total 20-year cost" figure, so chart and card agree.
- *   - slate line:   the residual grid cost (the bills you still pay, net of
- *                   the feed-in credit on surplus) — it goes NEGATIVE under
- *                   net metering, when the credit out-earns the bill.
- * The amber figure is a literal STACK — emerald system cost, then the residual
- * bills that remain after solar (the slate wedge), then your saving — so the
- * emerald figure is visibly a slice of the amber total: 25K system + 50K bills
- * + 25K saving = 100K grid, never additive on top of it. Red fills the region
- * where the amber total sits BELOW the with-solar stack (before break-even).
- * A lower panel plots the running difference (grid - solar) as bars — red
- * while the capex is not yet repaid, then growing green bars to the final
- * 20-year total, and a bold HTML callout above the chart carries the
- * headline number (solar-served kWh lives there too).
+ * Cumulative 20-year cost chart: three running sums for the recommended system
+ * — amber stayed-on-grid spend, emerald the system's own cost (capex + labor +
+ * swaps; it ends exactly on the card's "Total 20-year cost"), slate the residual
+ * bills net of feed-in credit (negative under net metering). Amber is a literal
+ * STACK of emerald + slate + saving, so each slice is visible inside it. Red fills
+ * where amber sits below the with-solar stack; a lower panel bars the running
+ * difference and an HTML callout carries the headline.
  */
 
 /**
- * AUTO-comparison chart: one panel, each bank drawn against ITS OWN
- * nameplate. Same-job systems deliver similar energy, so the honest visual
- * difference is the reserve each chemistry must carry: lead-acid's entire
- * working range lives in the bottom half of its hardware; lithium/sodium
- * use nearly all of theirs.
+ * AUTO-comparison chart: one panel, each bank drawn against ITS OWN nameplate —
+ * same-job systems deliver similar energy, so the honest difference is the reserve
+ * each chemistry carries.
  */
 /**
  * SOC reliability chart for ONE selected system: the same daily min/max band
@@ -6912,11 +7018,9 @@ const PAYLOAD_CONTRACT = 16;
 
 // expensive, or impossible where they live.
 
-// Adopting a curve point is THE selection primitive for curve clicks,
-// curve clicks and slider commits alike: the clicked point already carries
-// its full analysis in the cached payload, so every downstream panel follows
-// it immediately — no engine re-run. Only its SOC capture bands arrive a
-// moment later from a tiny background slice (the 1 record lookup).
+// Adopting a curve point is THE selection primitive for curve clicks and slider commits:
+// the clicked point carries its full analysis in the cached payload, so every downstream
+// panel follows it with no engine re-run. Only its SOC capture bands arrive a moment later
 function adoptFrontierPoint(i, opts = {}) {
   const p = lastPayload;
   const f = p && p.frontier;
@@ -7018,12 +7122,9 @@ function renderFrontierPanel(p) {
     }
   }
 
-  // One source of truth for the blue dot: the visitor's click wins, but with
-  // no click the dot sits on the RECOMMENDATION at its true position (the
-  // marker) — never snapped onto the nearest curve point, which quietly
-  // displayed a different battery than the card being read. The slider, the
-  // matrix "your target" column and the recommendation already agree with
-  // each other because every run derives best from the slider target.
+  // One source of truth for the blue dot: the visitor's click wins, but with no click
+  // the dot sits on the RECOMMENDATION at its true position — never snapped onto the
+  // nearest curve point, which quietly displayed a different battery than the card.
 
   const opts = {
     t,
@@ -7069,11 +7170,9 @@ function renderFrontierPanel(p) {
       Number.isFinite(range.loPct) &&
       Number.isFinite(range.hiPct)
     ) {
-      // Through the dictionary: appended as a literal this sentence changed
-      // language halfway through ("… rund 2.6-mal so viel wie zuvor.
-      // Best-value range: ~$255.00–$543.00 (41.9–100%).") on every non-English
-      // run, because _frontierChart.frontierVerdict() is composed from keys and this tail
-      // was not. English output is byte-identical to before.
+      // Through the dictionary: appended as a literal this sentence changed language halfway
+      // through on every non-English run, because frontierVerdict() is composed from keys and
+      // this tail was not. English output is byte-identical.
       verdict.textContent +=
         " " +
         t("frontierBestValueRange", {
@@ -7343,12 +7442,9 @@ async function renderResults(p) {
   renderMoneyBar(p);
 
   const hasAuto = !!(p.auto && p.auto.length);
-  // Router mode: auto vs fixed-chemistry is a payload SHAPE distinction
-  // (fixed-chem runs set p.auto = null; auto runs always set an array, which
-  // may be EMPTY when nothing solved). Routing on content sent empty-auto
-  // payloads down the fixed-chem branch, where renderBestPick's honest
-  // empty state — the one naming the binding roof-cap constraint — was
-  // never reached and the banner just went blank.
+  // Router mode: auto vs fixed-chemistry is a payload SHAPE distinction (fixed-chem runs
+  // set p.auto = null; auto runs always set an array, which may be EMPTY when nothing
+  // solved). Routing on content sent empty-auto payloads down the fixed-chem branch,
   const isAutoMode = Array.isArray(p.auto);
 
   // focusFirst: grid-tie auto can show the granular focus panel instead of
@@ -7360,6 +7456,11 @@ async function renderResults(p) {
   // Options tabs regardless of mode or chemistry count).
   const ladder = $("resultLadder");
   if (ladder) ladder.style.display = "flex";
+  // The line above the ladder says what each tab opens. It belongs to the
+  // result surface, so it is revealed for the same reason the ladder is: as
+  // soon as there is a result for it to describe.
+  const ladderIntro = $("ladderIntro");
+  if (ladderIntro) ladderIntro.hidden = false;
 
   const bpWrap = $("bestPickWrap");
   if (bpWrap) bpWrap.innerHTML = "";
@@ -7432,11 +7533,9 @@ async function renderResults(p) {
     }
   }
 
-  // Called on EVERY payload, with null when this combo is solvable. Guarding
-  // the call instead (as this once did) makes the clear branch below dead
-  // code: the banner for an earlier infeasible combo then outlives the run
-  // that replaced it, so a visitor who switches back to a workable setup
-  // keeps reading "solar-only can't do this" over a page that solved fine.
+  // Called on EVERY payload, with null when this combo is solvable. Guarding the call
+  // instead (as this once did) left the clear branch dead, so the banner for an earlier
+  // infeasible combo outlived the run that replaced it.
   renderInfeasibleBanner(p.unreachableReason || null);
 
   renderEli5Summary(p);
@@ -7543,6 +7642,13 @@ async function renderResults(p) {
     `(seasonal variation, inverter/BOS costs, installation, degradation) around THESE results. Keep it SHORT: a brief verdict, not an essay.]`;
 
   $("btnAskAdvisor").style.display = "inline-flex";
+
+  // V2: the ask appears with the result, never before one exists. It is one
+  // quiet line, not a modal, and it sells nothing - the same three doors as
+  // the support section, brought to the moment the visitor is actually glad.
+  const vmAsk = $("valueMomentAsk");
+
+  if (vmAsk) vmAsk.hidden = false;
 
   const shareBtn = $("btnShareResult");
 
@@ -7882,6 +7988,26 @@ function restoreFromShare() {
 
   $("dailyKwhInput").value = String(kw);
 
+  // Off-grid reads the slider BEFORE the numeric input (readInputs), so a
+  // share link that only wrote the input left the previous slider load in
+  // charge of sizing. Write the slider too when the shared value fits its
+  const sharedSlider = $("offgridKwhSlider");
+  if (sharedSlider) {
+    const sliderMin = parseFloat(sharedSlider.min);
+    const sliderMax = parseFloat(sharedSlider.max);
+    if (
+      (!Number.isFinite(sliderMin) || kw >= sliderMin) &&
+      (!Number.isFinite(sliderMax) || kw <= sliderMax)
+    ) {
+      sharedSlider.value = String(kw);
+      const sharedOut = $("offgridKwhVal");
+      if (sharedOut)
+        sharedOut.textContent = t("offgridKwhReadout", { kwh: kw });
+    } else {
+      sharedSlider.value = "";
+    }
+  }
+
   if (o.a === 1) $("chemSelect").value = "auto";
   else if (o.ch && CHEM_KEYS.has(o.ch)) $("chemSelect").value = o.ch;
 
@@ -7983,6 +8109,16 @@ function restoreFromShare() {
     }
   }
 
+  // The recipient's persistent note. The status line carries the same fact for a moment,
+  // but the run this link triggers replaces it, so the result must say whose result it is.
+  // It lives inside the results region, so it appears with them.
+  const note = $("sharedResultNote");
+
+  if (note) {
+    note.textContent = t("shareLoaded");
+    note.hidden = false;
+  }
+
   setStatus(t("shareLoaded"));
 
   return true;
@@ -8054,17 +8190,17 @@ function populatePrintSheet(p, inp) {
 
             `${t.pvKw} kW`,
 
-            t.battKwh > 0 ? `${fmt(t.battKwh)} kWh` : "none",
+            t.battKwh > 0 ? `${fmt(t.battKwh)} kWh` : t("resValNoneShort"),
 
             moneyRange(t.costLo, t.costHi),
 
-            `-${t.cutPct}% bill`,
+            t("resValBillPct", { pct: t.cutPct }),
 
-            fmtBillAfter(t.billAfterMonthlyUsd) ?? "n/a",
+            fmtBillAfter(t.billAfterMonthlyUsd) ?? t("resValNa"),
 
             t.paybackYearsLo !== null
               ? fmtPaybackRange(t.paybackYearsLo, t.paybackYearsHi)
-              : "n/a",
+              : t("resValNa"),
           ].join("</td><td>") +
           "</td></tr>",
       )
@@ -8108,7 +8244,6 @@ function populatePrintSheet(p, inp) {
   // `footprintText` returns null when there is no array to describe, and this
   // one site concatenated it straight into the sheet: every battery-only print
   // read "location 21.31, -157.86 - null - grid price $0.44/kWh". A missing
-  // footprint has to read as nothing at all, never as the word null.
   const foot = footprintText(hwEntry?.pvKw ?? p.focus?.pvKw ?? 0);
   const footLine = foot ? foot + " - " : "";
   if (hwEntry) {
@@ -8289,17 +8424,25 @@ function askAdvisor() {
   const instructions = [jev, isSimpleMode() ? t("simpleAdvisorStyle") : null]
     .filter(Boolean)
     .join("\n");
-  if (input)
-    input.value =
-      window.lastSizingBrief + (instructions ? "\n" + instructions : "");
+  // The brief is prompt scaffolding: it is sent to the model, never shown. The
+  // bubble gets one plain sentence the visitor would have typed themselves; the
+  // full brief rides alongside it (see sendChatMsg in chat.js).
+  window.pendingAdvisorPrompt =
+    window.lastSizingBrief + (instructions ? "\n" + instructions : "");
+
+  if (input) input.value = t("advisorAskResult");
 
   if (window.openSizingModal) window.openSizingModal();
 
   if (window.sendChatMsg) window.sendChatMsg();
 }
 
-function copyShareLink() {
-  const btn = $("btnShareResult");
+// `trigger` is the control the visitor actually pressed. V2's third door is a
+// second entry point to this same act, and feedback that lands on a button the
+// visitor did not press reads as a bug, so the confirmation goes where the
+// click did.
+function copyShareLink(trigger) {
+  const btn = trigger && trigger.textContent ? trigger : $("btnShareResult");
 
   const origText = btn ? btn.textContent : " Copy share link";
 
@@ -8402,7 +8545,6 @@ function setupPwaControls() {
   // The install prompt arrives long after first paint, so WHICH control is
   // revealed is a layout decision, not a cosmetic one: showing both reflowed
   // the header CTA row 109px and measured 0.121 CLS on home/mobile. The rule
-  // and the measurement behind it live in ./pwa-install.js.
   const narrowNav =
     typeof window.matchMedia === "function"
       ? window.matchMedia(`(max-width: ${INSTALL_NAV_BREAKPOINT_PX}px)`)
@@ -8455,17 +8597,16 @@ function setupPwaControls() {
     if (!badge) return;
     if (!navigator.onLine) {
       badge.className = "offline-badge";
-      badge.innerHTML = `<span class="offline-dot"></span> Offline Ready`;
+      badge.innerHTML = `<span class="offline-dot"></span> ${t("offlineReady")}`;
       badge.style.display = "inline-flex";
-      badge.title =
-        "Working offline using cached app data & local weather simulation";
+      badge.title = t("offlineBadgeTitle");
     } else {
       if (
         badge.style.display !== "none" &&
         !badge.classList.contains("online-flash")
       ) {
         badge.className = "offline-badge online-flash";
-        badge.innerHTML = `<span class="offline-dot"></span> Back Online`;
+        badge.innerHTML = `<span class="offline-dot"></span> ${t("backOnline")}`;
         setTimeout(() => {
           badge.style.display = "none";
         }, 3000);
@@ -8603,6 +8744,14 @@ async function initSizingUI() {
 
     if (printBtn) printBtn.addEventListener("click", () => window.print());
 
+    // V2's third door: "send this result to someone pricing a system" is the
+    // same act as the share button above, so it calls the same code rather
+    // than growing a second link-building path that could drift from it.
+    const vmSend = $("vmAskSend");
+
+    if (vmSend)
+      vmSend.addEventListener("click", (e) => copyShareLink(e.currentTarget));
+
     // Result detail ladder (Best pick / Compare batteries / All options)
     for (const [id, lvl] of [
       ["lvlBest", "best"],
@@ -8641,11 +8790,8 @@ async function initSizingUI() {
 
       if (elNode)
         elNode.addEventListener("input", () => {
-          // Preserve USD value of tariff when currency switches: convert display
-          // value from old rate to new so $0.42 doesn't become 0.46$ after toggle.
-          // The export rate and generator fuel price are entered in the same
-          // display currency, so they convert identically — otherwise switching
-          // currency silently changes their effective USD value.
+          // Preserve USD value of the tariff when the currency switches: convert the display
+          // value from the old rate so $0.42 does not become 0.46$. The export rate and the
           const convertField = (id) => {
             const node = $(id);
             const curVal = parseFloat(node?.value);
@@ -8744,11 +8890,9 @@ async function initSizingUI() {
     const autoTargetNode = $("autoTarget");
     if (autoTargetNode)
       autoTargetNode.addEventListener("change", () => {
-        // One cut target, two controls: choosing a target in the form must
-        // move the results slider to the same cut (and vice versa), so the
-        // "your target" column, the recommendation and the select can never
-        // disagree after a fresh run. "custom" is read-only state (it only
-        // ever mirrors the slider), so it never drives a run.
+        // One cut target, two controls: choosing a target in the form must move the results
+        // slider to the same cut (and vice versa), so the "your target" column, the
+        // recommendation and the select can never disagree. "custom" is read-only state and
         const pct = CUT_TARGET_PCT[autoTargetNode.value];
         if (pct) {
           customCutFraction = pct / 100;
@@ -8872,13 +9016,9 @@ async function initSizingUI() {
     syncBillSlider();
 
     updateCurrencyUnitLabel(); // bill-slider currency + tariff labels on first paint    // Interface language (auto-detected, user-overridable in the footer).
-    //
-    // AWAITED, deliberately. The dictionary is a deferred dynamic import
-    // (shared/i18n.js), so calling applyI18n() without awaiting would paint the
-    // English defaults and then swap them a moment later — a German or Arabic
-    // visitor would see a flash of the wrong language on first paint. Awaiting
-    // here costs nothing extra: the fetch started at module evaluation and is
-    // already in flight, so this waits for work the browser is doing anyway.
+    // AWAITED, deliberately: the dictionary is a deferred import, so calling
+    // applyI18n() without awaiting would paint English and then swap it — a flash of
+    // the wrong language on first paint. The fetch started at module evaluation, so
     await applyI18n();
 
     applySimpleMode();
@@ -8891,57 +9031,48 @@ async function initSizingUI() {
 
     window.addEventListener("beco:lang", () => {
       repaintRuntimeCopy();
+      // The mode toggle's aria-label names the current mode in the current
+      // language; repaintRuntimeCopy does not own that node, so without this
+      // call the card switched language while the toggle stayed in the old one.
+      applySimpleMode();
     });
 
-    // THE SAME REPAINT, once, immediately — and this is the load-bearing call.
-    //
-    // The dictionary is a deferred dynamic import (shared/i18n.js) and
-    // `translate()` echoes the KEY when it has not landed. Two surfaces are
-    // painted by JS during setup, which runs BEFORE the `await applyI18n()`
-    // above: `updateLoadReadout()` writes the load-mode readout and
-    // `applyUseCase()` writes the use-case blurb. Both therefore painted a raw
-    // key — `readoutBillIncomplete`, `useCaseBillCutBlurb` — and applyI18n
-    // cannot repair them, because it only rewrites `data-i18n` MARKUP and these
-    // two nodes carry none.
-    //
-    // What made it survivable until now is that both surfaces sit inside
-    // #fullControls, which quick mode hides. So the keys were painted, parked
-    // out of sight, and only reached the screen the moment a visitor switched
-    // to manual controls — where they read as "the page printed its own
-    // variable names at me". A hidden defect is still a defect; the only reason
-    // it survived a full cycle is that nothing had walked the journey to the
-    // manual-controls branch and looked.
-    //
-    // Fixing it where it is painted would mean awaiting the dictionary inside
-    // three unrelated setup functions. Re-running the two painters afterwards
-    // costs one extra function call and no network, because the fetch already
-    // finished — and it puts every runtime-painted surface in one owner, so the
-    // next one added is repainted by the same line rather than by luck.
+    // THE SAME REPAINT, once, immediately — the load-bearing call.
+    // The dictionary is a deferred import and translate() echoes the key until it
+    // lands, so updateLoadReadout() and applyUseCase(), painted during setup before
+    // `await applyI18n()` above, showed raw keys; applyI18n() only rewrites
+    // data-i18n MARKUP and cannot repair them. Re-running both painters afterwards
+    // costs one call and no network, and keeps every runtime-painted surface in one
+    // owner.
     repaintRuntimeCopy();
 
-    // Deferred out of the first-result graph. Nothing here runs before a
-    // visitor asks for it: the loader arms the CTA's own pointerdown and
-    // click handlers, and the feature module was already a click-time
-    // import. A module requested at startup lands long before any human
-    // can click, and the browser smoke gate polls for the ready flag
-    // rather than assuming it. Without the loader the CTA is a plain
-    // link — the same fallback the loader's own catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261103u")
+    // Deferred out of the first-result graph: nothing here runs before a visitor asks
+    // for it. The loader arms the CTA's own pointerdown and click handlers, and the
+    // feature module was already a click-time import. Without the loader the CTA is a
+    // plain link — the same fallback the loader's catch takes.
+    import("../shared/translation-suggestion-loader.js?v=20261111b")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261103u"),
+          () => import("../translation-suggestion.js?v=20261111b"),
         );
       })
       .catch(() => {});
 
     updateFuelUnits();
 
-    // A shared link restores its inputs; sizing still requires an explicit
-    // click so opening a link never starts weather or engine work silently.
-    restoreFromShare();
+    // V2's recipient gap: a share link exists to show someone's RESULT.
+    // restoreFromShare() returns true only after the codec accepted the hash and every
+    // input was written, so a malformed or hostile link never reaches run(). `explicit`
+    if (restoreFromShare()) run(false, true);
 
     // Background FX refresh: keeps auto-selected currencies accurate.
+
+    // Paint the provenance line first, from whatever the rates actually are
+    // right now (the built-in table, unless a previous refresh in this page
+    // already succeeded), so the visitor is never shown converted money with
+    // no source and no date while the fetch is in flight.
+    renderFxStatus();
 
     refreshFxRates();
   } catch (err) {
@@ -8972,11 +9103,21 @@ async function refreshFxRates() {
       ...(timeoutSignal ? { signal: timeoutSignal } : {}),
     });
 
-    if (!res.ok) return;
+    if (!res.ok) {
+      fxMeta.live = false;
+      fxMeta.failed = true;
+      renderFxStatus();
+      return;
+    }
 
     const json = await res.json();
 
-    if (!json || json.result !== "success" || !json.rates) return;
+    if (!json || json.result !== "success" || !json.rates) {
+      fxMeta.live = false;
+      fxMeta.failed = true;
+      renderFxStatus();
+      return;
+    }
 
     for (const code of Object.keys(CURRENCIES)) {
       const r = json.rates[code];
@@ -8985,10 +9126,10 @@ async function refreshFxRates() {
     }
 
     fxMeta.asOf = json.time_last_update_utc || new Date().toUTCString();
+    fxMeta.live = true;
+    fxMeta.failed = false;
 
-    const elN = $("fxAsOf");
-
-    if (elN) elN.textContent = t("fxAsOfNote", { asOf: fxMeta.asOf });
+    renderFxStatus();
 
     // fxActive() reads the fxRate INPUT, not the CURRENCIES table — without
     // syncing it, the live fetch changes nothing on screen. Display-currency
@@ -9017,7 +9158,11 @@ async function refreshFxRates() {
 
     if (lastPayload) renderResults(lastPayload);
   } catch {
-    /* offline - static defaults remain */
+    // Offline, blocked, or timed out: the built-in table stays in use, and the
+    // line now says so instead of leaving the visitor to guess.
+    fxMeta.live = false;
+    fxMeta.failed = true;
+    renderFxStatus();
   }
 }
 

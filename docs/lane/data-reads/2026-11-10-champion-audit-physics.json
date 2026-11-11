@@ -1,0 +1,2391 @@
+{
+  "issue": 350,
+  "generated": "2026-11-10T05:16:56.280Z",
+  "head": null,
+  "acceptance": {
+    "COST_DELTA_REQUIRED": 0.03,
+    "SITE_SHARE_REQUIRED": 0.1
+  },
+  "shippedConstants": {
+    "soiling": 0.97,
+    "wiring": 0.98,
+    "mismatch": 0.99,
+    "mppt": 0.98,
+    "gammaPmax": -0.0034,
+    "noct": 45,
+    "etaInverter": 0.94
+  },
+  "soilingTrace": {
+    "city": "Phoenix, USA",
+    "climateAwareOff": {
+      "soiling": 0.97,
+      "soilingFactor": 0.97,
+      "climateAware": false,
+      "annualYieldPerKw": 1776
+    },
+    "climateAwareOn": {
+      "soiling": 0.95,
+      "soilingFactor": 0.95,
+      "climateAware": true,
+      "annualYieldPerKw": 1739
+    },
+    "derivedFromClimateTable": "tropical"
+  },
+  "restoreVerified": true,
+  "ranked": [
+    {
+      "id": "agm.cyclesTo80",
+      "family": "chemistry",
+      "value": 1250,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 6,
+      "share": 1,
+      "maxAbsDelta": 0.256963,
+      "meanAbsDelta": 0.137777,
+      "rebaseEligible": true
+    },
+    {
+      "id": "derate.soiling",
+      "family": "derate",
+      "value": 0.98,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 2,
+      "share": 0.3333,
+      "maxAbsDelta": 0.07139,
+      "meanAbsDelta": 0.015567,
+      "rebaseEligible": true
+    },
+    {
+      "id": "derate.wiring",
+      "family": "derate",
+      "value": 0.99,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 2,
+      "share": 0.3333,
+      "maxAbsDelta": 0.07139,
+      "meanAbsDelta": 0.015567,
+      "rebaseEligible": true
+    },
+    {
+      "id": "derate.mismatch",
+      "family": "derate",
+      "value": 0.995,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 2,
+      "share": 0.3333,
+      "maxAbsDelta": 0.07139,
+      "meanAbsDelta": 0.01342,
+      "rebaseEligible": true
+    },
+    {
+      "id": "derate.mppt",
+      "family": "derate",
+      "value": 0.99,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 2,
+      "share": 0.3333,
+      "maxAbsDelta": 0.07139,
+      "meanAbsDelta": 0.015567,
+      "rebaseEligible": true
+    },
+    {
+      "id": "gammaPmax",
+      "family": "pv-temp",
+      "value": -0.0029,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 2,
+      "share": 0.3333,
+      "maxAbsDelta": 0.07139,
+      "meanAbsDelta": 0.014465,
+      "rebaseEligible": true
+    },
+    {
+      "id": "noct",
+      "family": "pv-temp",
+      "value": 42,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 2,
+      "share": 0.3333,
+      "maxAbsDelta": 0.07139,
+      "meanAbsDelta": 0.012587,
+      "rebaseEligible": true
+    },
+    {
+      "id": "etaInverter",
+      "family": "inverter",
+      "value": 0.97,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 4,
+      "share": 0.6667,
+      "maxAbsDelta": 0.07139,
+      "meanAbsDelta": 0.024554,
+      "rebaseEligible": true
+    },
+    {
+      "id": "lfp.roundTrip",
+      "family": "chemistry",
+      "value": 0.95,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 2,
+      "share": 0.3333,
+      "maxAbsDelta": 0.07139,
+      "meanAbsDelta": 0.021264,
+      "rebaseEligible": true
+    },
+    {
+      "id": "derate.soiling",
+      "family": "derate",
+      "value": 0.91,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 6,
+      "share": 1,
+      "maxAbsDelta": 0.064466,
+      "meanAbsDelta": 0.040593,
+      "rebaseEligible": true
+    },
+    {
+      "id": "derate.wiring",
+      "family": "derate",
+      "value": 0.95,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 3,
+      "share": 0.5,
+      "maxAbsDelta": 0.056645,
+      "meanAbsDelta": 0.022519,
+      "rebaseEligible": true
+    },
+    {
+      "id": "derate.mismatch",
+      "family": "derate",
+      "value": 0.97,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 1,
+      "share": 0.1667,
+      "maxAbsDelta": 0.056645,
+      "meanAbsDelta": 0.016559,
+      "rebaseEligible": true
+    },
+    {
+      "id": "derate.mppt",
+      "family": "derate",
+      "value": 0.95,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 3,
+      "share": 0.5,
+      "maxAbsDelta": 0.056645,
+      "meanAbsDelta": 0.022519,
+      "rebaseEligible": true
+    },
+    {
+      "id": "gammaPmax",
+      "family": "pv-temp",
+      "value": -0.004,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 1,
+      "share": 0.1667,
+      "maxAbsDelta": 0.056645,
+      "meanAbsDelta": 0.011531,
+      "rebaseEligible": true
+    },
+    {
+      "id": "noct",
+      "family": "pv-temp",
+      "value": 48,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 1,
+      "share": 0.1667,
+      "maxAbsDelta": 0.056645,
+      "meanAbsDelta": 0.00931,
+      "rebaseEligible": true
+    },
+    {
+      "id": "etaInverter",
+      "family": "inverter",
+      "value": 0.92,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 1,
+      "share": 0.1667,
+      "maxAbsDelta": 0.056645,
+      "meanAbsDelta": 0.016559,
+      "rebaseEligible": true
+    },
+    {
+      "id": "lfp.roundTrip",
+      "family": "chemistry",
+      "value": 0.9,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 1,
+      "share": 0.1667,
+      "maxAbsDelta": 0.056645,
+      "meanAbsDelta": 0.013334,
+      "rebaseEligible": true
+    },
+    {
+      "id": "lfp.cyclesTo80",
+      "family": "chemistry",
+      "value": 4000,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 0,
+      "share": 0,
+      "maxAbsDelta": 0,
+      "meanAbsDelta": 0,
+      "rebaseEligible": false
+    },
+    {
+      "id": "lfp.cyclesTo80",
+      "family": "chemistry",
+      "value": 8000,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 0,
+      "share": 0,
+      "maxAbsDelta": 0,
+      "meanAbsDelta": 0,
+      "rebaseEligible": false
+    },
+    {
+      "id": "lfp.usableDod",
+      "family": "chemistry",
+      "value": 0.5,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 0,
+      "share": 0,
+      "maxAbsDelta": 0,
+      "meanAbsDelta": 0,
+      "rebaseEligible": false
+    },
+    {
+      "id": "naion.cyclesTo80",
+      "family": "chemistry",
+      "value": 15000,
+      "cases": 12,
+      "sites": 6,
+      "sitesOverThreshold": 0,
+      "share": 0,
+      "maxAbsDelta": 0,
+      "meanAbsDelta": 0,
+      "rebaseEligible": false
+    }
+  ],
+  "sweeps": [
+    {
+      "id": "derate.soiling",
+      "family": "derate",
+      "value": 0.91,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 6,
+        "share": 1,
+        "maxAbsDelta": 0.064466,
+        "meanAbsDelta": 0.040593,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.91,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.91,
+          "cost": 2630,
+          "delta": 0.053264
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.91,
+          "cost": 4855,
+          "delta": 0.060507
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.91,
+          "cost": 2915,
+          "delta": 0.023166
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.91,
+          "cost": 3880,
+          "delta": 0.056645
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.91,
+          "cost": 2295,
+          "delta": 0.038932
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.91,
+          "cost": 13064,
+          "delta": 0.05253
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.91,
+          "cost": 5013,
+          "delta": 0.044157
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.91,
+          "cost": 14349,
+          "delta": 0.064466
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.91,
+          "cost": 5385,
+          "delta": 0.050937
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.91,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.91,
+          "cost": 2869,
+          "delta": 0.042515
+        }
+      ]
+    },
+    {
+      "id": "derate.soiling",
+      "family": "derate",
+      "value": 0.98,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 2,
+        "share": 0.3333,
+        "maxAbsDelta": 0.07139,
+        "meanAbsDelta": 0.015567,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.98,
+          "cost": 3473,
+          "delta": -0.07139
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.98,
+          "cost": 2482,
+          "delta": -0.006007
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.98,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.98,
+          "cost": 2793,
+          "delta": -0.019656
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.98,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.98,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.98,
+          "cost": 12195,
+          "delta": -0.017483
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.98,
+          "cost": 4747,
+          "delta": -0.011248
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.98,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.98,
+          "cost": 5088,
+          "delta": -0.007026
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.98,
+          "cost": 4328,
+          "delta": -0.053989
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.98,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "derate.wiring",
+      "family": "derate",
+      "value": 0.95,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 3,
+        "share": 0.5,
+        "maxAbsDelta": 0.056645,
+        "meanAbsDelta": 0.022519,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2566,
+          "delta": 0.027633
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 4759,
+          "delta": 0.039537
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 3880,
+          "delta": 0.056645
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2256,
+          "delta": 0.021277
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 12630,
+          "delta": 0.017564
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 4903,
+          "delta": 0.021246
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 13914,
+          "delta": 0.032196
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 5258,
+          "delta": 0.026151
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2829,
+          "delta": 0.02798
+        }
+      ]
+    },
+    {
+      "id": "derate.wiring",
+      "family": "derate",
+      "value": 0.99,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 2,
+        "share": 0.3333,
+        "maxAbsDelta": 0.07139,
+        "meanAbsDelta": 0.015567,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 3473,
+          "delta": -0.07139
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 2482,
+          "delta": -0.006007
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 2793,
+          "delta": -0.019656
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 12195,
+          "delta": -0.017483
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 4747,
+          "delta": -0.011248
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 5088,
+          "delta": -0.007026
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 4328,
+          "delta": -0.053989
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "derate.mismatch",
+      "family": "derate",
+      "value": 0.97,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 1,
+        "share": 0.1667,
+        "maxAbsDelta": 0.056645,
+        "meanAbsDelta": 0.016559,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 2566,
+          "delta": 0.027633
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 3880,
+          "delta": 0.056645
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 2236,
+          "delta": 0.012223
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 12630,
+          "delta": 0.017564
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 4903,
+          "delta": 0.021246
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 13697,
+          "delta": 0.016098
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 5223,
+          "delta": 0.019321
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 2829,
+          "delta": 0.02798
+        }
+      ]
+    },
+    {
+      "id": "derate.mismatch",
+      "family": "derate",
+      "value": 0.995,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 2,
+        "share": 0.3333,
+        "maxAbsDelta": 0.07139,
+        "meanAbsDelta": 0.01342,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.995,
+          "cost": 3473,
+          "delta": -0.07139
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.995,
+          "cost": 2516,
+          "delta": 0.007609
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.995,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.995,
+          "cost": 2793,
+          "delta": -0.019656
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.995,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.995,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.995,
+          "cost": 12412,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.995,
+          "cost": 4771,
+          "delta": -0.006249
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.995,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.995,
+          "cost": 5113,
+          "delta": -0.002147
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.995,
+          "cost": 4328,
+          "delta": -0.053989
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.995,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "derate.mppt",
+      "family": "derate",
+      "value": 0.95,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 3,
+        "share": 0.5,
+        "maxAbsDelta": 0.056645,
+        "meanAbsDelta": 0.022519,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2566,
+          "delta": 0.027633
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 4759,
+          "delta": 0.039537
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 3880,
+          "delta": 0.056645
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2256,
+          "delta": 0.021277
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 12630,
+          "delta": 0.017564
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 4903,
+          "delta": 0.021246
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 13914,
+          "delta": 0.032196
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 5258,
+          "delta": 0.026151
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2829,
+          "delta": 0.02798
+        }
+      ]
+    },
+    {
+      "id": "derate.mppt",
+      "family": "derate",
+      "value": 0.99,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 2,
+        "share": 0.3333,
+        "maxAbsDelta": 0.07139,
+        "meanAbsDelta": 0.015567,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 3473,
+          "delta": -0.07139
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 2482,
+          "delta": -0.006007
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 2793,
+          "delta": -0.019656
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 12195,
+          "delta": -0.017483
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 4747,
+          "delta": -0.011248
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 5088,
+          "delta": -0.007026
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.99,
+          "cost": 4328,
+          "delta": -0.053989
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.99,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "gammaPmax",
+      "family": "pv-temp",
+      "value": -0.004,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 1,
+        "share": 0.1667,
+        "maxAbsDelta": 0.056645,
+        "meanAbsDelta": 0.011531,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": -0.004,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": -0.004,
+          "cost": 2542,
+          "delta": 0.018022
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": -0.004,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": -0.004,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": -0.004,
+          "cost": 3880,
+          "delta": 0.056645
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": -0.004,
+          "cost": 2223,
+          "delta": 0.006338
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": -0.004,
+          "cost": 12195,
+          "delta": -0.017483
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": -0.004,
+          "cost": 4771,
+          "delta": -0.006249
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": -0.004,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": -0.004,
+          "cost": 5095,
+          "delta": -0.00566
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": -0.004,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": -0.004,
+          "cost": 2829,
+          "delta": 0.02798
+        }
+      ]
+    },
+    {
+      "id": "gammaPmax",
+      "family": "pv-temp",
+      "value": -0.0029,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 2,
+        "share": 0.3333,
+        "maxAbsDelta": 0.07139,
+        "meanAbsDelta": 0.014465,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": -0.0029,
+          "cost": 3473,
+          "delta": -0.07139
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": -0.0029,
+          "cost": 2482,
+          "delta": -0.006007
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": -0.0029,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": -0.0029,
+          "cost": 2793,
+          "delta": -0.019656
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": -0.0029,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": -0.0029,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": -0.0029,
+          "cost": 12412,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": -0.0029,
+          "cost": 4801,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": -0.0029,
+          "cost": 13697,
+          "delta": 0.016098
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": -0.0029,
+          "cost": 5157,
+          "delta": 0.00644
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": -0.0029,
+          "cost": 4328,
+          "delta": -0.053989
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": -0.0029,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "noct",
+      "family": "pv-temp",
+      "value": 42,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 2,
+        "share": 0.3333,
+        "maxAbsDelta": 0.07139,
+        "meanAbsDelta": 0.012587,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 42,
+          "cost": 3473,
+          "delta": -0.07139
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 42,
+          "cost": 2482,
+          "delta": -0.006007
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 42,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 42,
+          "cost": 2793,
+          "delta": -0.019656
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 42,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 42,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 42,
+          "cost": 12412,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 42,
+          "cost": 4801,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 42,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 42,
+          "cost": 5124,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 42,
+          "cost": 4328,
+          "delta": -0.053989
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 42,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "noct",
+      "family": "pv-temp",
+      "value": 48,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 1,
+        "share": 0.1667,
+        "maxAbsDelta": 0.056645,
+        "meanAbsDelta": 0.00931,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 48,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 48,
+          "cost": 2542,
+          "delta": 0.018022
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 48,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 48,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 48,
+          "cost": 3880,
+          "delta": 0.056645
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 48,
+          "cost": 2223,
+          "delta": 0.006338
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 48,
+          "cost": 12412,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 48,
+          "cost": 4801,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 48,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 48,
+          "cost": 5138,
+          "delta": 0.002732
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 48,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 48,
+          "cost": 2829,
+          "delta": 0.02798
+        }
+      ]
+    },
+    {
+      "id": "etaInverter",
+      "family": "inverter",
+      "value": 0.92,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 1,
+        "share": 0.1667,
+        "maxAbsDelta": 0.056645,
+        "meanAbsDelta": 0.016559,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.92,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.92,
+          "cost": 2566,
+          "delta": 0.027633
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.92,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.92,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.92,
+          "cost": 3880,
+          "delta": 0.056645
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.92,
+          "cost": 2236,
+          "delta": 0.012223
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.92,
+          "cost": 12630,
+          "delta": 0.017564
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.92,
+          "cost": 4903,
+          "delta": 0.021246
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.92,
+          "cost": 13697,
+          "delta": 0.016098
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.92,
+          "cost": 5223,
+          "delta": 0.019321
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.92,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.92,
+          "cost": 2829,
+          "delta": 0.02798
+        }
+      ]
+    },
+    {
+      "id": "etaInverter",
+      "family": "inverter",
+      "value": 0.97,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 4,
+        "share": 0.6667,
+        "maxAbsDelta": 0.07139,
+        "meanAbsDelta": 0.024554,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 3473,
+          "delta": -0.07139
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 2446,
+          "delta": -0.020425
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 2762,
+          "delta": -0.030537
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 2227,
+          "delta": 0.008148
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 11978,
+          "delta": -0.034966
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 4671,
+          "delta": -0.027078
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 13204,
+          "delta": -0.020475
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 5055,
+          "delta": -0.013466
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.97,
+          "cost": 4328,
+          "delta": -0.053989
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.97,
+          "cost": 2713,
+          "delta": -0.014172
+        }
+      ]
+    },
+    {
+      "id": "lfp.cyclesTo80",
+      "family": "chemistry",
+      "value": 4000,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 0,
+        "share": 0,
+        "maxAbsDelta": 0,
+        "meanAbsDelta": 0,
+        "rebaseEligible": false
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 4000,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 4000,
+          "cost": 2497,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 4000,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 4000,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 4000,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 4000,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 4000,
+          "cost": 12412,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 4000,
+          "cost": 4801,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 4000,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 4000,
+          "cost": 5124,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 4000,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 4000,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "lfp.cyclesTo80",
+      "family": "chemistry",
+      "value": 8000,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 0,
+        "share": 0,
+        "maxAbsDelta": 0,
+        "meanAbsDelta": 0,
+        "rebaseEligible": false
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 8000,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 8000,
+          "cost": 2497,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 8000,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 8000,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 8000,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 8000,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 8000,
+          "cost": 12412,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 8000,
+          "cost": 4801,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 8000,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 8000,
+          "cost": 5124,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 8000,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 8000,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "lfp.usableDod",
+      "family": "chemistry",
+      "value": 0.5,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 0,
+        "share": 0,
+        "maxAbsDelta": 0,
+        "meanAbsDelta": 0,
+        "rebaseEligible": false
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.5,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.5,
+          "cost": 2497,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.5,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.5,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.5,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.5,
+          "cost": 2209,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.5,
+          "cost": 12412,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.5,
+          "cost": 4801,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.5,
+          "cost": 13480,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.5,
+          "cost": 5124,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.5,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.5,
+          "cost": 2752,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "lfp.roundTrip",
+      "family": "chemistry",
+      "value": 0.9,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 1,
+        "share": 0.1667,
+        "maxAbsDelta": 0.056645,
+        "meanAbsDelta": 0.013334,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.9,
+          "cost": 3740,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.9,
+          "cost": 2512,
+          "delta": 0.006007
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.9,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.9,
+          "cost": 2849,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.9,
+          "cost": 3880,
+          "delta": 0.056645
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.9,
+          "cost": 2236,
+          "delta": 0.012223
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.9,
+          "cost": 12630,
+          "delta": 0.017564
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.9,
+          "cost": 4851,
+          "delta": 0.010414
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.9,
+          "cost": 13697,
+          "delta": 0.016098
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.9,
+          "cost": 5191,
+          "delta": 0.013076
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.9,
+          "cost": 4575,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.9,
+          "cost": 2829,
+          "delta": 0.02798
+        }
+      ]
+    },
+    {
+      "id": "lfp.roundTrip",
+      "family": "chemistry",
+      "value": 0.95,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 2,
+        "share": 0.3333,
+        "maxAbsDelta": 0.07139,
+        "meanAbsDelta": 0.021264,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 3473,
+          "delta": -0.07139
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2470,
+          "delta": -0.010813
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 4578,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2793,
+          "delta": -0.019656
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 3672,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2227,
+          "delta": 0.008148
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 12043,
+          "delta": -0.029729
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 4716,
+          "delta": -0.017705
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 13263,
+          "delta": -0.016098
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 5055,
+          "delta": -0.013466
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 0.95,
+          "cost": 4328,
+          "delta": -0.053989
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 0.95,
+          "cost": 2713,
+          "delta": -0.014172
+        }
+      ]
+    },
+    {
+      "id": "naion.cyclesTo80",
+      "family": "chemistry",
+      "value": 15000,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 0,
+        "share": 0,
+        "maxAbsDelta": 0,
+        "meanAbsDelta": 0,
+        "rebaseEligible": false
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 15000,
+          "cost": 4193,
+          "delta": 0
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 15000,
+          "cost": 2828,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 15000,
+          "cost": 5117,
+          "delta": 0
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 15000,
+          "cost": 3211,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 15000,
+          "cost": 4290,
+          "delta": 0
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 15000,
+          "cost": 2484,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 15000,
+          "cost": 13108,
+          "delta": 0
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 15000,
+          "cost": 5160,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 15000,
+          "cost": 14165,
+          "delta": 0
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 15000,
+          "cost": 5521,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 15000,
+          "cost": 5005,
+          "delta": 0
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 15000,
+          "cost": 3070,
+          "delta": 0
+        }
+      ]
+    },
+    {
+      "id": "agm.cyclesTo80",
+      "family": "chemistry",
+      "value": 1250,
+      "summary": {
+        "cases": 12,
+        "sites": 6,
+        "sitesOverThreshold": 6,
+        "share": 1,
+        "maxAbsDelta": 0.256963,
+        "meanAbsDelta": 0.137777,
+        "rebaseEligible": true
+      },
+      "rows": [
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "offgrid",
+          "value": 1250,
+          "cost": 7143,
+          "delta": -0.181224
+        },
+        {
+          "site": "Nairobi, Kenya",
+          "mode": "billcut",
+          "value": 1250,
+          "cost": 4750,
+          "delta": -0.242062
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "offgrid",
+          "value": 1250,
+          "cost": 8283,
+          "delta": -0.15081
+        },
+        {
+          "site": "Honolulu, USA",
+          "mode": "billcut",
+          "value": 1250,
+          "cost": 5069,
+          "delta": -0.256963
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "offgrid",
+          "value": 1250,
+          "cost": 6458,
+          "delta": -0.17003
+        },
+        {
+          "site": "Phoenix, USA",
+          "mode": "billcut",
+          "value": 1250,
+          "cost": 3964,
+          "delta": -0.186538
+        },
+        {
+          "site": "London, UK",
+          "mode": "offgrid",
+          "value": 1250,
+          "cost": 16815,
+          "delta": -0.015976
+        },
+        {
+          "site": "London, UK",
+          "mode": "billcut",
+          "value": 1250,
+          "cost": 7269,
+          "delta": -0.039635
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "offgrid",
+          "value": 1250,
+          "cost": 17779,
+          "delta": -0.038869
+        },
+        {
+          "site": "Berlin, Germany",
+          "mode": "billcut",
+          "value": 1250,
+          "cost": 7787,
+          "delta": -0.051638
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "offgrid",
+          "value": 1250,
+          "cost": 7585,
+          "delta": -0.161322
+        },
+        {
+          "site": "Delhi, India",
+          "mode": "billcut",
+          "value": 1250,
+          "cost": 4888,
+          "delta": -0.158257
+        }
+      ]
+    }
+  ]
+}

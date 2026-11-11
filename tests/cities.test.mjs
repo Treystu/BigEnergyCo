@@ -530,3 +530,56 @@ test("typing a city resolves hands-free after the 2s auto-resolve cadence", asyn
     setGeocodeFetchImpl(null);
   }
 });
+
+// D5 (tracker #145): the visitor's location label must name the place they
+// asked about. A Nominatim row with no `name` falls back to its `display_name`,
+// whose first comma piece can be a hamlet the visitor never asked about
+// ("Montello, Phoenix, ..."), so a Phoenix run came back labelled Montello. The
+// structured city field is the place's own name; with no city-level field and
+// no row name, the label is the text the visitor typed.
+test("a stray display_name piece never becomes the visitor's location label", async () => {
+  const out = await lookupCityOnline("Phoenix", async () => ({
+    ok: true,
+    json: async () => [
+      {
+        display_name:
+          "Montello, Phoenix, Maricopa County, Arizona, United States",
+        lat: "33.45",
+        lon: "-112.07",
+        address: { country_code: "us", state: "Arizona" },
+      },
+    ],
+  }));
+  assert.equal(out.name, "Phoenix");
+});
+
+test("the structured city name wins over a matched-feature name", async () => {
+  const out = await lookupCityOnline("Phoenix", async () => ({
+    ok: true,
+    json: async () => [
+      {
+        name: "Montello",
+        lat: "33.45",
+        lon: "-112.07",
+        address: { country_code: "us", state: "Arizona", city: "Phoenix" },
+      },
+    ],
+  }));
+  assert.equal(out.name, "Phoenix");
+  assert.equal(out.r, "Arizona");
+});
+
+test("a named row keeps the geocoder's name so abbreviations still resolve", async () => {
+  const out = await lookupCityOnline("nyc", async () => ({
+    ok: true,
+    json: async () => [
+      {
+        name: "New York",
+        lat: "40.71",
+        lon: "-74.01",
+        address: { country_code: "us", state: "New York" },
+      },
+    ],
+  }));
+  assert.equal(out.name, "New York", "nyc must land as New York, not nyc");
+});

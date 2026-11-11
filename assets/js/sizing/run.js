@@ -28,34 +28,35 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261103u";
+} from "./engine.js?v=20261111b";
 
 import {
   isUseCaseId,
   deriveLegacy,
   useCaseForLegacy,
   loadsFor,
+  hardwareForRun,
   sizingTierFor,
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261103u";
-import { memoizeSimulate } from "./sim-cache.js?v=20261103u";
+} from "./usecases.js?v=20261111b";
+import { memoizeSimulate } from "./sim-cache.js?v=20261111b";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261103u";
-import { buildFrontier } from "./frontier.js?v=20261103u";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261103u";
-import { climateSummary } from "./climate.js?v=20261103u";
+} from "./nasa.js?v=20261111b";
+import { buildFrontier } from "./frontier.js?v=20261111b";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261111b";
+import { climateSummary } from "./climate.js?v=20261111b";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261103u";
+} from "./pricing.js?v=20261111b";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -66,7 +67,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261103u";
+} from "./money.js?v=20261111b";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -110,7 +111,13 @@ const VALID_AUTO_TIERS = new Set(["tier100", "tier99", "tier95"]);
  * candidate entries carry chemLabel/chemistry/replacementsHorizon. agmRef is
  * the lead-acid reference entry (savings indicator only, never a candidate).
  */
-export function bestPickReason(winner, allEntries, meanT, agmRef = null) {
+// The reason ships twice: as English prose (`bestReason`, the payload contract
+// every existing consumer reads) and as the structured facts behind it
+// (`bestReasonParts`), so the renderer can rebuild the same sentences in the
+// visitor's language instead of showing an English wall under a Spanish
+// headline (#365). Both are pure and computed from the same walk, so they
+// cannot disagree.
+function bestPickReasonParts(winner, allEntries, meanT, agmRef = null) {
   if (!winner) return null;
   const others = allEntries.filter(
     (a) =>
@@ -127,45 +134,74 @@ export function bestPickReason(winner, allEntries, meanT, agmRef = null) {
             1000,
         ) / 10
       : null;
-  const ahead =
-    gapPct !== null ? ` — about ${gapPct}% ahead of ${runnerUp.chemLabel}` : "";
-  const cold = isColdSite(meanT);
-  let why;
-  if (winner.chemistry === "naion") {
-    const lfp = others.find((a) => a.chemistry === "lfp");
-    const lfpCheaper =
-      lfp &&
-      Number.isFinite(lfp.lifetimeCostMid) &&
-      lfp.lifetimeCostMid < winner.lifetimeCostMid;
-    why =
-      `${winner.chemLabel} is the recommendation${ahead}: no thermal runaway, and it charges down to −20 °C where standard LFP must sit idle below freezing.` +
-      (lfpCheaper
-        ? ` LFP is cheaper on paper here, but inside the margin where safety decides it.`
-        : ` It also won on true 20-year cost.`) +
-      (cold
-        ? ` Your winters freeze — LFP would need a heated enclosure here.`
-        : ``);
-  } else if (winner.chemistry === "lfp") {
-    why =
-      `${winner.chemLabel} wins on money here${ahead} — genuinely cheaper by enough to choose it on cost.` +
-      (cold
-        ? ` Cold-site warning: it must live indoors or heated, and never charge below 0 °C (32 °F) or the bank is permanently damaged.`
-        : ` It uses most of its nameplate every day with a long cycle life.`);
-  } else {
-    why = `At this load and target, ${winner.chemLabel} wins on first cost${ahead} — but expect ~${winner.replacementsHorizon} bank swaps over 20 years, already counted in every figure above.`;
-  }
-  const tail =
-    others.length >= 2
-      ? " The ranking shifts with climate, tariffs, and how much work you do yourself — check the other options before deciding."
-      : others.length === 1
-        ? " The ranking shifts with climate, tariffs, and how much work you do yourself — weigh the runner-up before deciding."
-        : " No other chemistry produced a practical system at this site and load.";
-  const agmLine =
+  const lfp = others.find((a) => a.chemistry === "lfp");
+  const lfpCheaper = !!(
+    lfp &&
+    Number.isFinite(lfp.lifetimeCostMid) &&
+    lfp.lifetimeCostMid < winner.lifetimeCostMid
+  );
+  const agmSwaps =
     agmRef &&
     agmRef.solvable &&
     Number.isFinite(agmRef.lifetimeCostMid) &&
     Number.isFinite(agmRef.replacementsHorizon)
-      ? ` For reference, a lead-acid bank for the same job needs ~${agmRef.replacementsHorizon} swaps over 20 years — shown only so you can see what you are saving; it is never recommended.`
+      ? agmRef.replacementsHorizon
+      : null;
+  return {
+    kind:
+      winner.chemistry === "naion"
+        ? "naion"
+        : winner.chemistry === "lfp"
+          ? "lfp"
+          : "other",
+    chem: winner.chemLabel,
+    gapPct,
+    runnerUpChem: runnerUp ? runnerUp.chemLabel : null,
+    lfpCheaper,
+    cold: isColdSite(meanT),
+    alternatives: others.length,
+    swaps: Number.isFinite(winner.replacementsHorizon)
+      ? winner.replacementsHorizon
+      : null,
+    agmSwaps,
+  };
+}
+
+export function bestPickReason(winner, allEntries, meanT, agmRef = null) {
+  const parts = bestPickReasonParts(winner, allEntries, meanT, agmRef);
+  if (!parts) return null;
+  const ahead =
+    parts.gapPct !== null
+      ? ` — about ${parts.gapPct}% ahead of ${parts.runnerUpChem}`
+      : "";
+  let why;
+  if (parts.kind === "naion") {
+    why =
+      `${parts.chem} is the recommendation${ahead}: no thermal runaway, and it charges down to −20 °C where standard LFP must sit idle below freezing.` +
+      (parts.lfpCheaper
+        ? ` LFP is cheaper on paper here, but inside the margin where safety decides it.`
+        : ` It also won on true 20-year cost.`) +
+      (parts.cold
+        ? ` Your winters freeze — LFP would need a heated enclosure here.`
+        : ``);
+  } else if (parts.kind === "lfp") {
+    why =
+      `${parts.chem} wins on money here${ahead} — genuinely cheaper by enough to choose it on cost.` +
+      (parts.cold
+        ? ` Cold-site warning: it must live indoors or heated, and never charge below 0 °C (32 °F) or the bank is permanently damaged.`
+        : ` It uses most of its nameplate every day with a long cycle life.`);
+  } else {
+    why = `At this load and target, ${parts.chem} wins on first cost${ahead} — but expect ~${parts.swaps} bank swaps over 20 years, already counted in every figure above.`;
+  }
+  const tail =
+    parts.alternatives >= 2
+      ? " The ranking shifts with climate, tariffs, and how much work you do yourself — check the other options before deciding."
+      : parts.alternatives === 1
+        ? " The ranking shifts with climate, tariffs, and how much work you do yourself — weigh the runner-up before deciding."
+        : " No other chemistry produced a practical system at this site and load.";
+  const agmLine =
+    parts.agmSwaps !== null
+      ? ` For reference, a lead-acid bank for the same job needs ~${parts.agmSwaps} swaps over 20 years — shown only so you can see what you are saving; it is never recommended.`
       : "";
   return `${why}${tail}${agmLine}`;
 }
@@ -308,7 +344,7 @@ async function fetchWeatherWithFallback(opts) {
     return await fetchWeatherDefault(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261103u");
+      await import("./profiles.js?v=20261111b");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {
@@ -774,7 +810,9 @@ async function runSizingUncached(msg, deps = {}) {
       bestPriceCallout =
         `Best 20-year price for this exact hardware: standard sizing with ` +
         `${replacementsHorizon} replacement(s) over 20 years (counted above).`;
-      bestPriceCalloutI18n = null;
+      bestPriceCalloutI18n = oversizeCalloutI18n("exact_hardware_swaps", {
+        replacements: replacementsHorizon,
+      });
       oversizeSavingsUsd = null;
       oversizedBattKwh = sizing.battKwh;
     }
@@ -1912,6 +1950,12 @@ async function runSizingUncached(msg, deps = {}) {
               patch.agmReference,
             )
           : null;
+        patch.bestReasonParts = bestPickReasonParts(
+          customBest,
+          customEntries,
+          meanTempC,
+          patch.agmReference,
+        );
         patch.focus = customBest
           ? focusFor(customBest.chemistry, customBest)
           : null;
@@ -2106,6 +2150,13 @@ async function runSizingUncached(msg, deps = {}) {
       payload.auto = auto;
       payload.autoFallback = autoFallback;
       payload.effectiveTargetId = effectiveTarget;
+      payload.autoNoteParts = {
+        kind: hardwareConfig === "battery" ? "battery" : "gridtie",
+        effective: effectiveTarget,
+        requested: repTargetId,
+        fallback: !!autoFallback,
+        names: auto.map((a) => a.chemLabel),
+      };
       payload.autoNote = autoFallback
         ? `${(hardwareConfig === "battery" ? BATTERY_TARGET_BASIS : TARGET_BASIS)[repTargetId]} isn't reachable within the sizes this tool searches at this site, so the cards below show ${(hardwareConfig === "battery" ? BATTERY_TARGET_BASIS : TARGET_BASIS)[effectiveTarget]} instead — the curve shows how far this location can actually get.`
         : autoNoteFor(
@@ -2209,6 +2260,19 @@ async function runSizingUncached(msg, deps = {}) {
             payload.agmReference,
           )
         : bestPickReason(fallbackBest, auto, meanTempC, payload.agmReference);
+      payload.bestReasonParts = sliderBest
+        ? bestPickReasonParts(
+            sliderBest,
+            customEntries,
+            meanTempC,
+            payload.agmReference,
+          )
+        : bestPickReasonParts(
+            fallbackBest,
+            auto,
+            meanTempC,
+            payload.agmReference,
+          );
       payload.focus = payload.best
         ? focusFor(payload.best.chemistry, payload.best)
         : null;
@@ -2485,6 +2549,13 @@ async function runSizingUncached(msg, deps = {}) {
     payload.auto = auto;
     payload.autoFallback = autoFallback;
     payload.effectiveTierId = effectiveTier;
+    payload.autoNoteParts = {
+      kind: "offgrid",
+      effective: effectiveTier,
+      requested: repTierId,
+      fallback: !!autoFallback,
+      names: auto.map((a) => a.chemLabel),
+    };
     payload.autoNote = autoFallback
       ? `${TIER_BASIS[repTierId]} is out of reach within the sizes this tool searches at this site, so the cards below show ${TIER_BASIS[effectiveTier]} instead — the largest system this tool can size here still leaves some hours unserved.`
       : autoNoteFor(auto, TIER_BASIS[effectiveTier]);
@@ -2543,6 +2614,12 @@ async function runSizingUncached(msg, deps = {}) {
     payload.agmReference = agmReference;
     payload.best = ogWinner;
     payload.bestReason = bestPickReason(
+      ogWinner,
+      auto,
+      meanTempC,
+      agmReference,
+    );
+    payload.bestReasonParts = bestPickReasonParts(
       ogWinner,
       auto,
       meanTempC,
@@ -3007,8 +3084,7 @@ export async function runSizing(msg, deps = {}) {
     // shape the renderer expects; battery-only is the cheapest honest one,
     // and its numbers are never shown for this use case.
     forwarded.mode = legacy.mode === "portable" ? "gridtie" : legacy.mode;
-    forwarded.hardwareConfig =
-      legacy.hardwareConfig === null ? "battery" : legacy.hardwareConfig;
+    forwarded.hardwareConfig = hardwareForRun(useCaseId, msg.hardwareConfig);
     // The load each use case is SIZED on is part of its definition. Backup
     // answers to the essentials (at a zero-unmet-hours budget), portable to
     // the devices. Sizing either on the household load would hand the outage

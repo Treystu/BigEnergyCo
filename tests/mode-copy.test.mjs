@@ -240,8 +240,10 @@ test("the in-sentence best-value range is translated, with the same placeholders
 
 test("the levelized-cost row is named for what it measures in each mode", () => {
   assert.match(ui, /function powerCostRow\(entry, tariff\)/);
-  assert.match(ui, /\[\"Your power cost\", lcoe \+ gridRate\(tariff\)\]/);
-  assert.match(ui, /\"Cost per shifted kWh\"/);
+  // The labels are locale keys now (#365); the arithmetic is still pinned,
+  // so a key swap cannot quietly move a figure.
+  assert.match(ui, /\[t\("resRowPowerCost"\), lcoe \+ gridRate\(tariff\)\]/);
+  assert.match(ui, /t\("resValShiftedRate"/);
   // One owner: no call site may go back to printing the LCOE as "your power
   // cost", which put a figure five times below the tariff beside "never
   // breaks even" and a money bar that says it does not cut what you pay.

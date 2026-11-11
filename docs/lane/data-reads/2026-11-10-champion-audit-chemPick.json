@@ -1,0 +1,827 @@
+{
+  "issue": 349,
+  "generated": "2026-11-10T06:26:10.771Z",
+  "head": null,
+  "acceptance": {
+    "REGRET_CUT_REQUIRED": 0.2,
+    "PICK_SHARE_BAND": 0.1,
+    "CHAMPION_MARGIN": 0.1,
+    "MARGINS": [0, 0.05, 0.1, 0.15, 0.2]
+  },
+  "summary": {
+    "cases": 24,
+    "validity": {
+      "allReplaysAgree": true,
+      "disagreements": 0
+    },
+    "gapPctDistribution": {
+      "min": 8.61,
+      "median": 17.028,
+      "max": 22.64,
+      "lfpCheaperCases": 24,
+      "naCheaperCases": 0,
+      "lfpCheaperByMoreThan10": 21
+    },
+    "marginDecidedCases": 3,
+    "coldSites": 0,
+    "stats": [
+      {
+        "margin": 0,
+        "cases": 24,
+        "naPicks": 0,
+        "naShare": 0,
+        "meanRegret": 0
+      },
+      {
+        "margin": 0.05,
+        "cases": 24,
+        "naPicks": 0,
+        "naShare": 0,
+        "meanRegret": 0
+      },
+      {
+        "margin": 0.1,
+        "cases": 24,
+        "naPicks": 3,
+        "naShare": 0.125,
+        "meanRegret": 0.012067
+      },
+      {
+        "margin": 0.15,
+        "cases": 24,
+        "naPicks": 7,
+        "naShare": 0.2917,
+        "meanRegret": 0.036505
+      },
+      {
+        "margin": 0.2,
+        "cases": 24,
+        "naPicks": 21,
+        "naShare": 0.875,
+        "meanRegret": 0.163206
+      }
+    ],
+    "alternatives": [
+      {
+        "margin": 0,
+        "cases": 24,
+        "naPicks": 0,
+        "naShare": 0,
+        "meanRegret": 0,
+        "regretCut": 1,
+        "shareDriftPp": -12.5
+      },
+      {
+        "margin": 0.05,
+        "cases": 24,
+        "naPicks": 0,
+        "naShare": 0,
+        "meanRegret": 0,
+        "regretCut": 1,
+        "shareDriftPp": -12.5
+      },
+      {
+        "margin": 0.15,
+        "cases": 24,
+        "naPicks": 7,
+        "naShare": 0.2917,
+        "meanRegret": 0.036505,
+        "regretCut": -2.0251926742355186,
+        "shareDriftPp": 16.67
+      },
+      {
+        "margin": 0.2,
+        "cases": 24,
+        "naPicks": 21,
+        "naShare": 0.875,
+        "meanRegret": 0.163206,
+        "regretCut": -12.524985497638186,
+        "shareDriftPp": 75
+      }
+    ],
+    "marginChangeQualifies": false,
+    "qualifyingMargins": []
+  },
+  "rows": [
+    {
+      "city": "Nairobi, Kenya",
+      "mode": "gridtie",
+      "dailyKwh": 15,
+      "meanTempC": 21,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 4733,
+      "lfpCost": 3673,
+      "gapPct": 22.396,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "lfp"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0
+      }
+    },
+    {
+      "city": "Nairobi, Kenya",
+      "mode": "gridtie",
+      "dailyKwh": 30,
+      "meanTempC": 21,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 9097,
+      "lfpCost": 7368,
+      "gapPct": 19.006,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.234663
+      }
+    },
+    {
+      "city": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyKwh": 15,
+      "meanTempC": 21,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 6965,
+      "lfpCost": 5408,
+      "gapPct": 22.355,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "lfp"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0
+      }
+    },
+    {
+      "city": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyKwh": 30,
+      "meanTempC": 21,
+      "cold": false,
+      "target": "tier100",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 13501,
+      "lfpCost": 11052,
+      "gapPct": 18.139,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.221589
+      }
+    },
+    {
+      "city": "Honolulu, USA",
+      "mode": "gridtie",
+      "dailyKwh": 15,
+      "meanTempC": 26,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 5446,
+      "lfpCost": 4213,
+      "gapPct": 22.64,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "lfp"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0
+      }
+    },
+    {
+      "city": "Honolulu, USA",
+      "mode": "gridtie",
+      "dailyKwh": 30,
+      "meanTempC": 26,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 10456,
+      "lfpCost": 8448,
+      "gapPct": 19.204,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.237689
+      }
+    },
+    {
+      "city": "Honolulu, USA",
+      "mode": "offgrid",
+      "dailyKwh": 15,
+      "meanTempC": 26,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 8057,
+      "lfpCost": 6573,
+      "gapPct": 18.419,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.225772
+      }
+    },
+    {
+      "city": "Honolulu, USA",
+      "mode": "offgrid",
+      "dailyKwh": 30,
+      "meanTempC": 26,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 15838,
+      "lfpCost": 13145,
+      "gapPct": 17.003,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.204869
+      }
+    },
+    {
+      "city": "Phoenix, USA",
+      "mode": "gridtie",
+      "dailyKwh": 15,
+      "meanTempC": 23,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 4039,
+      "lfpCost": 3273,
+      "gapPct": 18.965,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.234036
+      }
+    },
+    {
+      "city": "Phoenix, USA",
+      "mode": "gridtie",
+      "dailyKwh": 30,
+      "meanTempC": 23,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 7908,
+      "lfpCost": 6387,
+      "gapPct": 19.234,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.23814
+      }
+    },
+    {
+      "city": "Phoenix, USA",
+      "mode": "offgrid",
+      "dailyKwh": 15,
+      "meanTempC": 23,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 6336,
+      "lfpCost": 5203,
+      "gapPct": 17.882,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.217759
+      }
+    },
+    {
+      "city": "Phoenix, USA",
+      "mode": "offgrid",
+      "dailyKwh": 30,
+      "meanTempC": 23,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 12521,
+      "lfpCost": 10267,
+      "gapPct": 18.002,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.219538
+      }
+    },
+    {
+      "city": "London, UK",
+      "mode": "gridtie",
+      "dailyKwh": 15,
+      "meanTempC": 11,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 6440,
+      "lfpCost": 5601,
+      "gapPct": 13.028,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "naion",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0.149795,
+        "0.2": 0.149795
+      }
+    },
+    {
+      "city": "London, UK",
+      "mode": "gridtie",
+      "dailyKwh": 30,
+      "meanTempC": 11,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 12734,
+      "lfpCost": 11061,
+      "gapPct": 13.138,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "naion",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0.151252,
+        "0.2": 0.151252
+      }
+    },
+    {
+      "city": "London, UK",
+      "mode": "offgrid",
+      "dailyKwh": 15,
+      "meanTempC": 11,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 14751,
+      "lfpCost": 13481,
+      "gapPct": 8.61,
+      "shippedPick": "naion",
+      "marginDecided": true,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "naion",
+        "0.15": "naion",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0.094207,
+        "0.15": 0.094207,
+        "0.2": 0.094207
+      }
+    },
+    {
+      "city": "London, UK",
+      "mode": "offgrid",
+      "dailyKwh": 30,
+      "meanTempC": 11,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 48414,
+      "lfpCost": 40736,
+      "gapPct": 15.859,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.188482
+      }
+    },
+    {
+      "city": "Berlin, Germany",
+      "mode": "gridtie",
+      "dailyKwh": 15,
+      "meanTempC": 10,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 6854,
+      "lfpCost": 6010,
+      "gapPct": 12.314,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "naion",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0.140433,
+        "0.2": 0.140433
+      }
+    },
+    {
+      "city": "Berlin, Germany",
+      "mode": "gridtie",
+      "dailyKwh": 30,
+      "meanTempC": 10,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 13689,
+      "lfpCost": 11955,
+      "gapPct": 12.667,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "naion",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0.145044,
+        "0.2": 0.145044
+      }
+    },
+    {
+      "city": "Berlin, Germany",
+      "mode": "offgrid",
+      "dailyKwh": 15,
+      "meanTempC": 10,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 16164,
+      "lfpCost": 14693,
+      "gapPct": 9.1,
+      "shippedPick": "naion",
+      "marginDecided": true,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "naion",
+        "0.15": "naion",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0.100116,
+        "0.15": 0.100116,
+        "0.2": 0.100116
+      }
+    },
+    {
+      "city": "Berlin, Germany",
+      "mode": "offgrid",
+      "dailyKwh": 30,
+      "meanTempC": 10,
+      "cold": false,
+      "target": "tier95",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 25176,
+      "lfpCost": 22986,
+      "gapPct": 8.699,
+      "shippedPick": "naion",
+      "marginDecided": true,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "naion",
+        "0.15": "naion",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0.095275,
+        "0.15": 0.095275,
+        "0.2": 0.095275
+      }
+    },
+    {
+      "city": "Delhi, India",
+      "mode": "gridtie",
+      "dailyKwh": 15,
+      "meanTempC": 25,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 4751,
+      "lfpCost": 3942,
+      "gapPct": 17.028,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.205226
+      }
+    },
+    {
+      "city": "Delhi, India",
+      "mode": "gridtie",
+      "dailyKwh": 30,
+      "meanTempC": 25,
+      "cold": false,
+      "target": "cut80",
+      "targetMatchCount": 2,
+      "ambiguousTarget": true,
+      "naCost": 9123,
+      "lfpCost": 7622,
+      "gapPct": 16.453,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.19693
+      }
+    },
+    {
+      "city": "Delhi, India",
+      "mode": "offgrid",
+      "dailyKwh": 15,
+      "meanTempC": 25,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 7153,
+      "lfpCost": 5829,
+      "gapPct": 18.51,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.22714
+      }
+    },
+    {
+      "city": "Delhi, India",
+      "mode": "offgrid",
+      "dailyKwh": 30,
+      "meanTempC": 25,
+      "cold": false,
+      "target": "tier99",
+      "targetMatchCount": 1,
+      "ambiguousTarget": false,
+      "naCost": 14156,
+      "lfpCost": 11906,
+      "gapPct": 15.894,
+      "shippedPick": "lfp",
+      "marginDecided": false,
+      "shippedReplayAgrees": true,
+      "picks": {
+        "0": "lfp",
+        "0.05": "lfp",
+        "0.1": "lfp",
+        "0.15": "lfp",
+        "0.2": "naion"
+      },
+      "regrets": {
+        "0": 0,
+        "0.05": 0,
+        "0.1": 0,
+        "0.15": 0,
+        "0.2": 0.18898
+      }
+    }
+  ]
+}

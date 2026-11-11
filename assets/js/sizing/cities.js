@@ -2,9 +2,9 @@
 // offline; country partitions provide millions of additional place/coordinate
 // pairs and are lazy-loaded on demand — only the countries a query or a GPS
 // fix names are ever fetched, never the whole world at once.
-import { usStateCode, US_STATES } from "./pricing.js?v=20261103u";
+import { usStateCode, US_STATES } from "./pricing.js?v=20261111b";
 // One owner of the coordinate precision, shared with the weather egress.
-import { roundCoords } from "../shared/coords.js?v=20261103u";
+import { roundCoords } from "../shared/coords.js?v=20261111b";
 
 export const CITY_CATALOG = [
   ["Honolulu", "United States", "Hawaii", 21.31, -157.86],
@@ -310,8 +310,37 @@ export async function lookupCityOnline(query, fetchImpl) {
       Math.abs(lon) > 180
     )
       return null;
+    const addr = row.address || {};
+    // The visitor's label must name the place they asked about, never a
+    // stray OSM feature. `row.name` is the name of whichever feature matched
+    // first - a hamlet, a school, a mis-tagged node - so a Phoenix search can
+    // come back labelled with a village nobody in the run has heard of. The
+    // structured address fields are the place's own city-level names; when
+    // those are empty the label is the text the visitor typed, and only a
+    // coordinate pair falls through to the geocoder's own name.
+    const typed = String(q || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 80);
+    const structured =
+      addr.city ||
+      addr.town ||
+      addr.village ||
+      addr.municipality ||
+      addr.hamlet ||
+      "";
+    const coordinates = /^-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?$/.test(typed);
+    // The typed text is the label only when the row offers no name of its own;
+    // `display_name`'s first comma piece is the last resort, never a stand-in
+    // for a place name, because that piece can be a hamlet the visitor never
+    // asked about ("Montello, Phoenix, ...").
+    const geocoderName = row.name || "";
+    const displayFirst = (row.display_name || "").split(",")[0] || "";
     return {
-      name: row.name || row.display_name.split(",")[0],
+      name:
+        structured ||
+        geocoderName ||
+        (typed && !coordinates ? typed : displayFirst),
       country:
         row.address?.country_code?.toUpperCase() || row.address?.country || "",
       r:
@@ -483,7 +512,7 @@ export async function loadCountryCities(
       : null;
     try {
       const response = await fetchImpl(
-        `./assets/js/sizing/city-data/${cc}.json?v=20261103u`,
+        `./assets/js/sizing/city-data/${cc}.json?v=20261111b`,
         { cache: "force-cache", ...(ctrl ? { signal: ctrl.signal } : {}) },
       );
       if (!response.ok) return [];

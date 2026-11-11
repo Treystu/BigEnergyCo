@@ -557,19 +557,47 @@ test("All Options: strictly excludes AGM, compares capacity tiers relative to ba
   assert.match(uiJs, /label:\s*"High Resilience"/);
   assert.match(uiJs, /label:\s*"Maximum Independence"/);
 
-  // Verify delta calculation format
-  const fmtDelta = (val, prefix = "$") => {
-    if (Math.abs(val) < 1) return "Baseline";
-    return val > 0
-      ? `+${prefix}${Math.round(val).toLocaleString()}`
-      : `\u2212${prefix}${Math.abs(Math.round(val)).toLocaleString()}`;
+  // Verify delta calculation format. The baseline card used to render
+  // "(Baseline kW)" / "(Baseline kWh)" because a zero delta returned the bare
+  // word "Baseline" and the row appended its own unit. A zero delta now says
+  // nothing, and the unit travels inside the helper.
+  assert.match(
+    uiJs,
+    /const deltaSuffix = \(val, unit = "", prefix = "", digits = 0\)/,
+  );
+  assert.ok(
+    !/\(\$\{fmtDelta\(|fmtDelta/.test(uiJs),
+    "no row may append a unit to a zero-delta placeholder",
+  );
+  const deltaSuffix = (val, unit = "", prefix = "", digits = 0) => {
+    const step = 10 ** digits;
+    const magnitudeAbs = Math.round(Math.abs(val) * step) / step;
+    if (magnitudeAbs === 0) return "";
+    const magnitude = `${prefix}${
+      digits ? magnitudeAbs.toFixed(digits) : magnitudeAbs.toLocaleString()
+    }`;
+    return ` (${val > 0 ? "+" : "\u2212"}${magnitude}${unit ? ` ${unit}` : ""})`;
   };
 
-  assert.equal(fmtDelta(0), "Baseline");
-  assert.equal(fmtDelta(1200), "+$1,200");
-  assert.equal(fmtDelta(-500), "\u2212$500");
-  assert.equal(fmtDelta(4.5, ""), "+5");
-  assert.equal(fmtDelta(-3.2, ""), "\u22123");
+  assert.equal(
+    deltaSuffix(0, "kW"),
+    "",
+    "baseline says nothing, not 'Baseline kW'",
+  );
+  assert.equal(deltaSuffix(1200, "", "$"), " (+$1,200)");
+  assert.equal(deltaSuffix(-500, "", "$"), " (\u2212$500)");
+  assert.equal(deltaSuffix(1.2, "kW"), " (+1 kW)");
+  assert.equal(deltaSuffix(-3.2, "kWh"), " (\u22123 kWh)");
+  assert.equal(
+    deltaSuffix(0.4, "d"),
+    "",
+    "a sub-unit delta still reads as none",
+  );
+  assert.equal(
+    deltaSuffix(0.2, "d", "", 1),
+    " (+0.2 d)",
+    "autonomy carries tenths: 0.2 days is 4.8 hours, not nothing",
+  );
 });
 
 test("DOM Parity: autoTargetRow exists and interactive controls are wired in JS", async () => {
@@ -729,26 +757,27 @@ test("Benchmark city hub: reassurance callout clarifies worldwide capability", (
 
 test("Solar Orientation & Tilt Guide: renderSunPath produces intuitive array tilt and seasonal sun rays", () => {
   const uiJs = fs.readFileSync("assets/js/sizing/ui.js", "utf8");
-  assert.match(
-    uiJs,
-    /Solar Orientation &amp; Array Tilt Guide/i,
-    "Sun path renderer must provide plain-language Solar Orientation & Array Tilt Guide",
-  );
-  assert.match(
-    uiJs,
-    /Compass Heading/i,
-    "Sun path metrics must include compass heading indicator",
-  );
-  assert.match(
-    uiJs,
-    /Year-Round Fixed/i,
-    "Sun path metrics must include year-round fixed tilt indicator",
-  );
-  assert.match(
-    uiJs,
-    /Winter Boost/i,
-    "Sun path metrics must include winter boost tilt indicator",
-  );
+  // The guide's wording lives in the locale copy (#365), so each pin is two
+  // halves: the renderer must emit the key, and English must still say it.
+  const copy = fs.readFileSync("assets/js/shared/result-copy.js", "utf8");
+  const pins = [
+    [/t\("resTiltHeader"/, /Solar Orientation & Array Tilt Guide/],
+    [/t\("resTiltCompassTitle"\)/, /Compass Heading/],
+    [/t\("resTiltYearRoundTitle"\)/, /Year-Round Fixed Tilt/],
+    [/t\("resTiltWinterTitle"\)/, /Winter Boost Tilt/],
+  ];
+  for (const [rendered, english] of pins) {
+    assert.match(
+      uiJs,
+      rendered,
+      `sun path renderer must render ${rendered.source}`,
+    );
+    assert.match(
+      copy,
+      english,
+      `English copy must still carry ${english.source}`,
+    );
+  }
   assert.match(
     uiJs,
     /sun-path-takeaway/i,

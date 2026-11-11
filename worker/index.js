@@ -355,6 +355,14 @@ const ALLOWED_ORIGINS = new Set([
   // Keep this exact, not a wildcard: preview origins must be explicitly
   // trusted rather than granting CORS to arbitrary Pages deployments.
   "https://staging-bca832d.bigenergyco.pages.dev",
+  // The named aliases, not just one hashed preview: the deploy workflow ships
+  // the staging branch alias, and `bigenergyco-prod` is the rollback target the
+  // lane verifies against. Measured 2026-11-10: neither was trusted, so the
+  // advisor's cross-origin call was blocked there while the worker itself was
+  // healthy (200, version 2.1) - the staging surface could not show a working
+  // advisor at all, which is the one thing a pre-promotion check must see.
+  "https://staging.bigenergyco.pages.dev",
+  "https://bigenergyco-prod.pages.dev",
   "https://freeoffgridcalculator.com",
   "https://www.freeoffgridcalculator.com",
   "https://sovereign-communication.github.io",

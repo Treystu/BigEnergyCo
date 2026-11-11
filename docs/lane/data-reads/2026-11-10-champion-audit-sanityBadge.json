@@ -1,0 +1,71 @@
+{
+  "issue": 358,
+  "generated": "2026-11-10T06:34:07.018Z",
+  "head": null,
+  "thresholds": {
+    "flagPlausibleMax": 0.3,
+    "flagRedFlagMin": 1.5,
+    "flagImpossibleConfidence": 0.6,
+    "passPlausibleMin": 0.6,
+    "passRedFlagMax": 1
+  },
+  "summary": {
+    "surface": {
+      "gridPoints": 3131,
+      "levels": {
+        "pass": 451,
+        "flag": 2081,
+        "uncertain": 599
+      },
+      "shares": {
+        "pass": 0.144,
+        "flag": 0.6646,
+        "uncertain": 0.1913
+      },
+      "plausibleAxis": {
+        "flagAtOrBelow": 0.3,
+        "passAtOrAbove": 0.6,
+        "silentWidth": 0.3,
+        "silentShareOfAxis": 0.3,
+        "pValuesEverFlagged": 101,
+        "pValuesEverPassing": 41,
+        "pValuesEverSilent": 70,
+        "passPossibleShare": 0.144
+      },
+      "boundaries": {
+        "p=0.30 flags": true,
+        "p=0.31 silent": true,
+        "p=0.60 passes": true,
+        "p=0.59 silent": true,
+        "redFlag=1.5 flags": true,
+        "redFlag=1.4 silent": true,
+        "redFlag=1.0 passes": true,
+        "redFlag=1.01 silent": true,
+        "impossible@0.6 flags": true,
+        "impossible@0.59 silent": true
+      },
+      "asymmetry": {
+        "anyFlagWins": true,
+        "impossibleNeverPasses": true,
+        "missingPlausibleIsNull": true,
+        "unavailableIsNull": true
+      }
+    },
+    "corpus": {
+      "sound": 36,
+      "broken": 180
+    },
+    "acceptance": {
+      "SOUND_FLAG_MAX": 0.05,
+      "BROKEN_PASS_MAX": 0.05
+    },
+    "measurableOffline": {
+      "decisionSurface": true,
+      "soundFlagRate": false,
+      "brokenPassRate": false
+    },
+    "missingIngredient": "the model's answers: the worker asks jev-latest over /api/jev and records no probe outputs in the repo",
+    "thresholdsFrozen": 5
+  },
+  "corpusPath": "docs/lane/data-reads/2026-11-10-champion-audit-sanityCorpus.json"
+}

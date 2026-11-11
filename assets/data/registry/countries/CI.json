@@ -1,0 +1,104 @@
+{
+  "iso": "CI",
+  "name": "Côte d’Ivoire",
+  "values": {
+    "currency": {
+      "code": "XOF",
+      "grade": "A",
+      "source": "iso_4217",
+      "retrieved": "2026-11-08",
+      "review_by": "2027-11-08"
+    },
+    "tariff": {
+      "unknown": true,
+      "note": "No verified retail tariff for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "fixed_charge": {
+      "unknown": true,
+      "note": "No verified fixed charge for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "export_regime": {
+      "unknown": true,
+      "note": "No cited policy read for CI yet; D-10 keeps export rules unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "legality_gridtie": {
+      "unknown": true,
+      "note": "No cited policy read for CI yet; D-10 keeps grid-tie legality unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "legality_offgrid": {
+      "unknown": true,
+      "note": "No cited policy read for CI yet; D-10 keeps off-grid legality unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "legality_battery_only": {
+      "unknown": true,
+      "note": "No cited policy read for CI yet; D-10 keeps battery-only legality unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "legality_portable": {
+      "unknown": true,
+      "note": "No cited policy read for CI yet; D-10 keeps portable-system legality unclaimed, so this is an explicit unknown (R-DATA-02).",
+      "review_by": "2027-05-08"
+    },
+    "turnkey_benchmark": {
+      "unknown": true,
+      "note": "No verified turnkey price benchmark for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "hardware_landed_factor": {
+      "unknown": true,
+      "note": "No verified landed hardware factor for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "electrician_rate": {
+      "unknown": true,
+      "note": "No verified electrician labour rate for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "permit_fees": {
+      "unknown": true,
+      "note": "No verified permit fees for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "lease_available": {
+      "unknown": true,
+      "note": "No verified lease availability for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "lease_term_years": {
+      "unknown": true,
+      "note": "No verified lease term for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "lease_buyout_pct": {
+      "unknown": true,
+      "note": "No verified lease buyout share for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "inflation_rate": {
+      "unknown": true,
+      "note": "No verified electricity price inflation for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "real_discount_rate": {
+      "unknown": true,
+      "note": "No verified real discount rate for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "pv_degradation_d1": {
+      "unknown": true,
+      "note": "No verified first-year PV degradation for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    },
+    "pv_degradation_ann": {
+      "unknown": true,
+      "note": "No verified annual PV degradation for CI yet; an explicit unknown (R-DATA-02) rather than a guess.",
+      "review_by": "2027-11-08"
+    }
+  },
+  "regions": {}
+}

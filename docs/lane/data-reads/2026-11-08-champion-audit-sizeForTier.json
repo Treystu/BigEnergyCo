@@ -1,0 +1,247 @@
+{
+  "issue": 346,
+  "mechanism": "sizeForTier",
+  "generated": "2026-11-08T17:10:20.106Z",
+  "lattice": {
+    "pvStep": 0.5,
+    "pvMax": 30,
+    "battStep": 1,
+    "battMax": 200,
+    "evaluationsPerCase": 12000
+  },
+  "acceptance": {
+    "regretLimit": 0.02,
+    "corpusFraction": 0.05,
+    "casesMeasured": 9,
+    "casesOverLimit": 0,
+    "shareOverLimit": 0,
+    "maxRegret": 0
+  },
+  "verdict": "NO CHANGE - champion regret is inside the 2% margin on the corpus, so the truncation windows stay",
+  "cases": [
+    {
+      "city": "Honolulu, USA",
+      "kwhPerDay": 10,
+      "chemistry": "lfp",
+      "tier": "tier99",
+      "tierBudgetHours": 87.6,
+      "champion": {
+        "pvKw": 3.5,
+        "battKwh": 7,
+        "lifetimeCostUsd": 4474,
+        "meetsConstraint": true,
+        "ms": 76
+      },
+      "control": {
+        "pvKw": 3.5,
+        "battKwh": 7,
+        "lifetimeCostUsd": 4474,
+        "evaluations": 12000,
+        "ms": 803
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    },
+    {
+      "city": "Phoenix, USA",
+      "kwhPerDay": 20,
+      "chemistry": "lfp",
+      "tier": "tier100",
+      "tierBudgetHours": 0,
+      "champion": {
+        "pvKw": 8,
+        "battKwh": 14,
+        "lifetimeCostUsd": 7214,
+        "meetsConstraint": true,
+        "ms": 199
+      },
+      "control": {
+        "pvKw": 8,
+        "battKwh": 14,
+        "lifetimeCostUsd": 7214,
+        "evaluations": 12000,
+        "ms": 854
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    },
+    {
+      "city": "London, UK",
+      "kwhPerDay": 10,
+      "chemistry": "lfp",
+      "tier": "tier99",
+      "tierBudgetHours": 87.6,
+      "champion": {
+        "pvKw": 16,
+        "battKwh": 13,
+        "lifetimeCostUsd": 8936,
+        "meetsConstraint": true,
+        "ms": 88
+      },
+      "control": {
+        "pvKw": 16,
+        "battKwh": 13,
+        "lifetimeCostUsd": 8936,
+        "evaluations": 12000,
+        "ms": 859
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    },
+    {
+      "city": "Berlin, Germany",
+      "kwhPerDay": 8,
+      "chemistry": "naion",
+      "tier": "tier95",
+      "tierBudgetHours": 438,
+      "champion": {
+        "pvKw": 10.5,
+        "battKwh": 13,
+        "lifetimeCostUsd": 6779,
+        "meetsConstraint": true,
+        "ms": 83
+      },
+      "control": {
+        "pvKw": 10.5,
+        "battKwh": 13,
+        "lifetimeCostUsd": 6779,
+        "evaluations": 12000,
+        "ms": 894
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    },
+    {
+      "city": "Nairobi, Kenya",
+      "kwhPerDay": 5,
+      "chemistry": "lfp",
+      "tier": "tier95",
+      "tierBudgetHours": 438,
+      "champion": {
+        "pvKw": 1.5,
+        "battKwh": 4,
+        "lifetimeCostUsd": 1991,
+        "meetsConstraint": true,
+        "ms": 20
+      },
+      "control": {
+        "pvKw": 1.5,
+        "battKwh": 4,
+        "lifetimeCostUsd": 1991,
+        "evaluations": 12000,
+        "ms": 889
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    },
+    {
+      "city": "Delhi, India",
+      "kwhPerDay": 15,
+      "chemistry": "lfp",
+      "tier": "tier100",
+      "tierBudgetHours": 0,
+      "champion": {
+        "pvKw": 6.5,
+        "battKwh": 21,
+        "lifetimeCostUsd": 6076,
+        "meetsConstraint": true,
+        "ms": 89
+      },
+      "control": {
+        "pvKw": 6.5,
+        "battKwh": 21,
+        "lifetimeCostUsd": 6076,
+        "evaluations": 12000,
+        "ms": 872
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    },
+    {
+      "city": "Sydney, Australia",
+      "kwhPerDay": 12,
+      "chemistry": "lfp",
+      "tier": "tier99",
+      "tierBudgetHours": 87.6,
+      "champion": {
+        "pvKw": 6,
+        "battKwh": 17,
+        "lifetimeCostUsd": 5542,
+        "meetsConstraint": true,
+        "ms": 68
+      },
+      "control": {
+        "pvKw": 6,
+        "battKwh": 17,
+        "lifetimeCostUsd": 5542,
+        "evaluations": 12000,
+        "ms": 882
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    },
+    {
+      "city": "Oslo, Norway",
+      "kwhPerDay": 10,
+      "chemistry": "lfp",
+      "tier": "tier99",
+      "note": "champion returned null - no feasible point inside the envelope",
+      "championMs": 988
+    },
+    {
+      "city": "Mexico City, Mexico",
+      "kwhPerDay": 6,
+      "chemistry": "naion",
+      "tier": "tier99",
+      "tierBudgetHours": 87.6,
+      "champion": {
+        "pvKw": 2,
+        "battKwh": 11,
+        "lifetimeCostUsd": 2648,
+        "meetsConstraint": true,
+        "ms": 32
+      },
+      "control": {
+        "pvKw": 2,
+        "battKwh": 11,
+        "lifetimeCostUsd": 2648,
+        "evaluations": 12000,
+        "ms": 869
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    },
+    {
+      "city": "Cairo, Egypt",
+      "kwhPerDay": 18,
+      "chemistry": "lfp",
+      "tier": "tier95",
+      "tierBudgetHours": 438,
+      "champion": {
+        "pvKw": 5.5,
+        "battKwh": 24,
+        "lifetimeCostUsd": 6224,
+        "meetsConstraint": true,
+        "ms": 92
+      },
+      "control": {
+        "pvKw": 5.5,
+        "battKwh": 24,
+        "lifetimeCostUsd": 6224,
+        "evaluations": 12000,
+        "ms": 944
+      },
+      "regret": 0,
+      "regretUsd": 0,
+      "samePoint": true
+    }
+  ]
+}

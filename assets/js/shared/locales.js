@@ -3,11 +3,13 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261103u";
+import { HOME_COPY } from "./home-copy.js?v=20261111b";
+import { RESULT_COPY } from "./result-copy.js?v=20261111b";
 
 export const LOCALES = {
   en: {
     ...HOME_COPY.en,
+    ...RESULT_COPY.en,
     sizingFor: "What are you sizing for?",
     goalCutBill: "Cut My Electric Bill",
     goalOffgrid: "Off-grid / Backup",
@@ -52,7 +54,7 @@ export const LOCALES = {
     ctaStart: "Start a Free Estimate",
     pickCity: "Pick a city (or use 📍 My location) so we know your sunshine.",
     shareLoaded:
-      "Shared setup loaded. Review the inputs, then click Size My System to calculate.",
+      "This is the result someone shared with you, sized from their location and usage. Change any input to price your own system.",
     invalidShare:
       "This share link could not be read — it may have been cut short when it was copied. Ignore it and set up your own estimate below.",
     customCoordsLocation: "Using custom coordinates ({lat}, {lon}).",
@@ -98,6 +100,28 @@ export const LOCALES = {
       "Enter your monthly bill amount to see the daily energy estimate.",
     readoutKwhEmpty: "Enter a daily kWh figure.",
     readoutKwhReady: "Using {kwh} kWh/day directly.",
+    // -- Comprehension glosses (E13/V4): first-use plain words for the four
+    // jargon families a first-timer meets, the fit label on each preset, and the
+    // line above the result tabs. Keyed in every locale; nothing here is prose
+    // the translator has to guess at.
+    glossKwhDay:
+      "kWh/day means kilowatt-hours a day — the unit your power bill uses. A typical US home uses about 30.",
+    glossTier:
+      "The target is the share of the year you run without the grid: 99% leaves about a day a year on the generator, 100% never needs one.",
+    ladderIntro:
+      "Three views of one result: Best pick is the system we would build, Compare batteries puts the chemistries side by side, All options is the full table.",
+    includesNote:
+      "What the two costs include: the first cost buys hardware and install once; the 20-year figure also pays replacements, fuel and upkeep.",
+    presetWho: "Quick presets — pick who it is for:",
+    presetCabin: "Weekend cabin — lights, phone, small fridge",
+    presetVan: "Camper van — two people off-grid",
+    presetHome: "Standard home — the typical starting point",
+    presetHomestead: "Homestead — a family, all electric",
+    presetBackup: "Critical backup — essentials in an outage",
+    presetClear: "Clear all",
+    tierOption100: "100% — never see a generator",
+    tierOption99: "99% — generator about a day a year",
+    tierOption95: "95% — generator now and then",
     lvlBest: "Best pick",
     lvlCompare: "Compare batteries",
     lvlMatrix: "All options",
@@ -105,6 +129,31 @@ export const LOCALES = {
     manualModeHint: "— adjust everything",
     simpleModeLabel: "Simple mode",
     simpleModeHint: "just the key numbers",
+    simpleSolar: "Solar",
+    simpleBattery: "Battery",
+    simpleFirstCost: "First cost",
+    simplePanels: "about {panels} panels",
+    simpleKwhUsable: "{kwh} kWh usable",
+    simpleKwhInstalled:
+      "about {kwh} kWh installed (nameplate size; usable is what you can draw)",
+    simpleWhatItDoes: "What it does",
+    simpleYearCovered: "{pct}% of the year covered",
+    simpleBillCut: "cuts about {pct}% off your bill",
+    simplePeakShift:
+      "shifts about {pct}% of peak hours onto the battery — your bill is unchanged",
+    simpleSaved: "Saved over 20 years",
+    simpleNoPayback: "does not pay back in 20 years",
+    simplePayback: "Payback",
+    simpleModeTechnical: "Technical mode",
+    simpleModeAria: "{mode} enabled",
+    simpleHintFeedIn: "({unit}/kWh, optional — grid-tie only)",
+    simpleHintFixed: "({unit}/mo, optional)",
+    analysisFullBill: "Full bill-cut analysis",
+    analysisFullSystem: "Full system analysis",
+    offlineReady: "Offline Ready",
+    backOnline: "Back Online",
+    offlineBadgeTitle:
+      "Working offline using cached app data & local weather simulation",
     mapDrawAction: "Draw this area on an optional map",
     matrixScroll: "Scrollable comparison table",
     bomPanelTitle: "Your hardware list — what this system is made of",
@@ -139,7 +188,7 @@ export const LOCALES = {
     simpleAskAdvisor: "Ask the AI advisor (plain words)",
     sanityOk: "Independently sanity-checked ✓ — physics plausible",
     sanityFlag:
-      "⚠ An independent AI check flags this result as physically implausible —",
+      "⚠ An independent AI check doubts these numbers are physically possible. It can be wrong, and it never changes your result.",
     sanityAskAdvisor: "ask the advisor why",
     sanityUncertain:
       "Sanity check inconclusive — the independent AI check could not reach a confident verdict on these inputs",
@@ -159,6 +208,11 @@ export const LOCALES = {
     advisorPlaceholder:
       "Ask about cell specs, Sodium-ion vs LFP, freight costs...",
     advisorSend: "Send",
+    advisorAskResult: "Explain this result to me.",
+    valueMomentAskLead: "If this saved you a call or a quote:",
+    valueMomentAskChipIn: "chip in",
+    valueMomentAskWorked: "tell me it worked",
+    valueMomentAskSend: "send this result to someone pricing a system",
     advisorClose: "Close AI advisor",
     advisorBusyRetry: " The free AI engine is busy — retrying in {secs}s…",
     advisorNoReply: " No reply received. Please try again.",
@@ -439,15 +493,22 @@ export const LOCALES = {
     useCasePortableBlurb:
       "A power station for a van, a boat or a campsite. No roof, no grid, no tariff.",
     metricBillCut: "of your bill removed over 20 years",
+    metricBillCutReserve:
+      "of your bill removed over 20 years, with {pct}% of the battery kept in reserve",
     metricTouOffset: "of your peak-window energy run by the battery",
     metricOutageCoverage:
       "of power cuts your essentials ride out for the full target",
     metricReserveTradeoff: "what holding a reserve costs, in savings and hours",
     metricGridIndependence: "of the year running with no grid at all",
     metricPortableRuntime: "of days the station runs your devices all day",
-    statusWorks: "Works",
-    statusPartial: "Partly",
-    statusNotHere: "Does not work here",
+    // The verdict lead, in plain words. The six verdict sentences used to open
+    // with a bare label ("Partly: 99% of the year runs"), which read as a
+    // category stamp on top of a sentence and, for the not-here case, argued
+    // with its own sentence ("Does not work here: this removes 45% of your
+    // bill"). One short sentence, then the measurement.
+    verdictLeadWorks: "This one works here.",
+    verdictLeadPartial: "This one gets most of the way there.",
+    verdictLeadNotHere: "This one falls short here.",
     useCaseOutcomeTitle: "Your result: {useCase}",
     useCaseVerdictFooter:
       "{useCase} — measured from this location's own hourly weather, not an estimate.",
@@ -470,20 +531,19 @@ export const LOCALES = {
     generatorRuntime0: "0% \u2014 never",
     generatorRuntime1: "1% \u2014 a few days a year",
     generatorRuntime2: "2%+ \u2014 fine when needed",
-    verdictBillCut:
-      "{status}: this system removes {pct}% of your bill over 20 years.",
+    verdictBillCut: "This system removes {pct}% of your bill over 20 years.",
     verdictTou:
-      "{status}: the battery covers {pct}% of your peak-window energy, worth about {saving} over 20 years against a {cost} battery. Your peak-to-off-peak spread here is {spread} per kWh.",
+      "The battery covers {pct}% of your peak-window energy, worth about {saving} over 20 years against a {cost} battery. Your peak-to-off-peak spread here is {spread} per kWh.",
     verdictBackup:
-      "{status}: your essentials run for the full {targetHours} hours in {pct}% of the power cuts we simulated (typical night: {hours} hours).",
+      "Your essentials run for the full {targetHours} hours in {pct}% of the power cuts we simulated (typical night: {hours} hours).",
     verdictReserve:
-      "{status}: holding that reserve costs {pct}% of your bill savings and buys {coverHours} hours of cover.",
+      "Holding that reserve costs {pct}% of your bill savings and buys {coverHours} hours of cover.",
     verdictReserveNoBattery:
       "There is nothing to hold a reserve in: the cheapest system for this goal carries no battery at all.",
     verdictOffGrid:
-      "{status}: {pct}% of the year runs with no grid — {unmetHours} hours short in the worst year, {autonomy} days of autonomy.",
+      "{pct}% of the year runs with no grid — {unmetHours} hours short in the worst year, {autonomy} days of autonomy (how long the battery alone runs your essentials).",
     verdictPortable:
-      "{status}: your station runs a full day on {days} of {trips} days here, and one charge lasts {runtime} hours.",
+      "Your station runs a full day on {days} of {trips} days here, and one charge lasts {runtime} hours.",
     cityLabel: "Where is this system going?",
     loadLabel: "How much power do you use?",
     loadAppliances: "Let me pick my appliances",
@@ -619,7 +679,14 @@ export const LOCALES = {
     worstMonthNote:
       "Darkest month: {month} — about {avg} kWh/m²/day of average sun. Size for this month, not the yearly average, or the system will fall short on gray weeks.",
     bomSelectedSystem: "Selected system",
-    fxAsOfNote: "Live rates as of {asOf}.",
+    fxSourceStatic:
+      "Rate source: open.er-api.com. No live rate loaded, so these are built-in estimates.",
+    fxSourceLive:
+      "Rate source: open.er-api.com, as of {asOf} — that date is the exchange rate’s; the weather figures are five years of hourly history.",
+    fxSourceStale:
+      "Rate source: open.er-api.com, last updated {asOf} ({days} days ago). Check the rate before relying on it.",
+    fxSourceFailed:
+      "Rate source: open.er-api.com. The live refresh failed, so these are built-in estimates.",
     advisorIntakeBillLabel: "Monthly Electric Bill ($ USD):",
     advisorIntakeKwhLabel: "Daily Energy Consumption (kWh / day):",
     advisorIntakeBillPh: "e.g. 400",
@@ -628,9 +695,26 @@ export const LOCALES = {
       "An oversized {battKwh} kWh battery avoids replacements and costs {savings} less over 20 years.",
     engineSwapsCheaper:
       "Standard sizing with {replacements} replacements costs {savings} less over 20 years than oversizing.",
+    engineZeroSwapSolarOnly:
+      "Best 20-year price: solar-only setup has zero battery swap or degradation costs.",
+    engineZeroSwapNatural:
+      "Best 20-year price: battery bank naturally outlasts the 20-year horizon with zero replacements.",
+    engineStrategyOffSwaps:
+      "Oversize strategy off: the engine's direct pick — {replacements} bank swap(s) over 20 years are counted in the lifetime cost.",
+    engineStrategyOffNoSwaps:
+      "Oversize strategy off: the engine's direct pick — the bank already lasts the full 20-year horizon with zero swaps.",
+    engineSwapsCheaperNoFigures:
+      "Best 20-year price: standard sizing with battery replacements is cheaper over 20 years than paying upfront to oversize.",
+    engineZeroSwapBeyondSearch:
+      "Best 20-year price: standard sizing with battery replacements is the practical pick — a zero-swap bank is beyond the sizes this tool searches.",
+    engineStandardSizingCheapest:
+      "Best 20-year price: standard sizing is cheaper over 20 years than paying upfront to oversize.",
+    engineExactHardwareSwaps:
+      "Best 20-year price for this exact hardware: standard sizing with {replacements} replacement(s) over 20 years (counted above).",
   },
   es: {
     ...HOME_COPY.es,
+    ...RESULT_COPY.es,
     sizingFor: "¿Qué estás dimensionando?",
     goalCutBill: "Reducir mi factura eléctrica",
     goalOffgrid: "Aislado / Respaldo",
@@ -677,7 +761,7 @@ export const LOCALES = {
     pickCity:
       "Elige una ciudad (o usa 📍 Mi ubicación) para que sepamos tu insolación.",
     shareLoaded:
-      "Configuración compartida cargada. Revisa los datos y pulsa Dimensionar mi sistema para calcular.",
+      "Este es el resultado que alguien compartió contigo, calculado con su ubicación y su consumo. Cambia cualquier dato para calcular tu propio sistema.",
     invalidShare:
       "No se pudo leer este enlace compartido: puede que se haya cortado al copiarlo. Ignóralo y prepara tu propia estimación más abajo.",
     customCoordsLocation: "Usando coordenadas personalizadas ({lat}, {lon}).",
@@ -730,6 +814,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Una estación de energía para furgoneta, barco o campamento. Sin tejado, sin red, sin tarifa.",
     metricBillCut: "de tu factura eliminada en 20 años",
+    metricBillCutReserve:
+      "de tu factura eliminada en 20 años, con el {pct}% de la batería en reserva",
     metricTouOffset: "de tu energía en horas punta cubierta por la batería",
     metricOutageCoverage:
       "de los apagones que lo esencial aguanta el tiempo completo",
@@ -737,9 +823,9 @@ export const LOCALES = {
     metricGridIndependence: "del año funcionando sin red",
     metricPortableRuntime:
       "de los días que la estación alimenta tus dispositivos todo el día",
-    statusWorks: "Funciona",
-    statusPartial: "En parte",
-    statusNotHere: "Aquí no funciona",
+    verdictLeadWorks: "Este funciona aquí.",
+    verdictLeadPartial: "Este llega casi hasta el final.",
+    verdictLeadNotHere: "Este se queda corto aquí.",
     useCaseOutcomeTitle: "Tu resultado: {useCase}",
     useCaseVerdictFooter:
       "{useCase}: medido con el clima horario de esta ubicación, no es una estimación.",
@@ -763,20 +849,19 @@ export const LOCALES = {
     generatorRuntime0: "0% \u2014 nunca",
     generatorRuntime1: "1% \u2014 unos d\u00edas al a\u00f1o",
     generatorRuntime2: "2%+ \u2014 sin problema cuando haga falta",
-    verdictBillCut:
-      "{status}: este sistema elimina el {pct}% de tu factura en 20 años.",
+    verdictBillCut: "Este sistema elimina el {pct}% de tu factura en 20 años.",
     verdictTou:
-      "{status}: la batería cubre el {pct}% de tu energía en horas punta, unos {saving} en 20 años frente a una batería de {cost}. Aquí la diferencia entre punta y valle es de {spread} por kWh.",
+      "La batería cubre el {pct}% de tu energía en horas punta, unos {saving} en 20 años frente a una batería de {cost}. Aquí la diferencia entre punta y valle es de {spread} por kWh.",
     verdictBackup:
-      "{status}: lo esencial aguanta las {targetHours} horas completas en el {pct}% de los apagones que simulamos (noche típica: {hours} horas).",
+      "Lo esencial aguanta las {targetHours} horas completas en el {pct}% de los apagones que simulamos (noche típica: {hours} horas).",
     verdictReserve:
-      "{status}: guardar esa reserva cuesta el {pct}% de tu ahorro y compra {coverHours} horas de cobertura.",
+      "Guardar esa reserva cuesta el {pct}% de tu ahorro y compra {coverHours} horas de cobertura.",
     verdictReserveNoBattery:
       "No hay nada donde guardar una reserva: el sistema más barato para este objetivo no lleva batería.",
     verdictOffGrid:
-      "{status}: el {pct}% del año funciona sin red, con {unmetHours} horas de déficit en el peor año y {autonomy} días de autonomía.",
+      "El {pct}% del año funciona sin red, con {unmetHours} horas de déficit en el peor año y {autonomy} días de autonomía (cuánto tiempo la batería sola mantiene lo esencial).",
     verdictPortable:
-      "{status}: tu estación alimenta tus dispositivos todo el día en {days} de {trips} días aquí, y una carga dura {runtime} horas.",
+      "Tu estación alimenta tus dispositivos todo el día en {days} de {trips} días aquí, y una carga dura {runtime} horas.",
     cityLabel: "¿Dónde se instalará el sistema?",
     loadLabel: "¿Cuánta energía consumes?",
     loadAppliances: "Elijo mis electrodomésticos",
@@ -799,6 +884,25 @@ export const LOCALES = {
     chemLabel: "Química de la batería:",
     tariffNote:
       "Precio estimado para {label} — cámbialo arriba si conoces tu tarifa.",
+    // -- Glosas de comprensión (E13/V4): palabras llanas en el primer uso.
+    glossKwhDay:
+      "kWh/día significa kilovatios-hora al día: la unidad de tu factura. Una casa típica de EE. UU. usa unos 30.",
+    glossTier:
+      "El objetivo es la parte del año sin red: el 99% deja un día al año con el generador, el 100% nunca lo necesita.",
+    ladderIntro:
+      "Tres vistas del mismo resultado: Mejor opción es el sistema que instalaríamos, Comparar baterías compara las químicas y Todas las opciones es la tabla completa.",
+    includesNote:
+      "Qué incluye cada costo: el primero paga equipo e instalación una vez; la cifra a 20 años también cubre reemplazos, combustible y mantenimiento.",
+    presetWho: "Ajustes rápidos: elige para quién es:",
+    presetCabin: "Cabaña de fin de semana: luces, teléfono, nevera pequeña",
+    presetVan: "Furgoneta camper: dos personas sin red",
+    presetHome: "Casa estándar: el punto de partida típico",
+    presetHomestead: "Finca: una familia, todo eléctrico",
+    presetBackup: "Respaldo crítico: lo esencial en un corte",
+    presetClear: "Borrar todo",
+    tierOption100: "100% — nunca ver un generador",
+    tierOption99: "99% — generador alrededor de un día al año",
+    tierOption95: "95% — generador de vez en cuando",
     lvlBest: "Mejor opción",
     lvlCompare: "Comparar baterías",
     lvlMatrix: "Todas las opciones",
@@ -806,6 +910,31 @@ export const LOCALES = {
     manualModeHint: "— ajústalo todo",
     simpleModeLabel: "Modo simple",
     simpleModeHint: "solo los números clave",
+    simpleSolar: "Solar",
+    simpleBattery: "Batería",
+    simpleFirstCost: "Coste inicial",
+    simplePanels: "unos {panels} paneles",
+    simpleKwhUsable: "{kwh} kWh utilizables",
+    simpleKwhInstalled:
+      "unos {kwh} kWh instalados (tamaño de placa; lo utilizable es lo que puedes sacar)",
+    simpleWhatItDoes: "Qué hace",
+    simpleYearCovered: "{pct}% del año cubierto",
+    simpleBillCut: "recorta cerca de un {pct}% de tu factura",
+    simplePeakShift:
+      "desplaza cerca de un {pct}% de las horas punta a la batería — tu factura no cambia",
+    simpleSaved: "Ahorrado en 20 años",
+    simpleNoPayback: "no se amortiza en 20 años",
+    simplePayback: "Amortización",
+    simpleModeTechnical: "Modo técnico",
+    simpleModeAria: "{mode} activado",
+    simpleHintFeedIn: "({unit}/kWh, opcional — solo con conexión a red)",
+    simpleHintFixed: "({unit}/mes, opcional)",
+    analysisFullBill: "Análisis completo del recorte de factura",
+    analysisFullSystem: "Análisis completo del sistema",
+    offlineReady: "Listo sin conexión",
+    backOnline: "De nuevo en línea",
+    offlineBadgeTitle:
+      "Funciona sin conexión con datos de la app en caché y simulación meteorológica local",
     mapDrawAction: "Dibuja esta zona en un mapa opcional",
     matrixScroll: "Tabla comparativa con desplazamiento",
     bomPanelTitle: "Tu lista de hardware — de qué está hecho este sistema",
@@ -841,7 +970,7 @@ export const LOCALES = {
     simpleAskAdvisor: "Pregunta al asistente de IA (en palabras simples)",
     sanityOk: "Verificado de forma independiente ✓ — físicamente plausible",
     sanityFlag:
-      "⚠ Una verificación de IA independiente marca este resultado como físicamente implausible —",
+      "⚠ Una verificación de IA independiente duda que estas cifras sean físicamente posibles. Puede equivocarse y nunca cambia tu resultado.",
     sanityAskAdvisor: "pregunta al asistente por qué",
     sanityUncertain:
       "Verificación no concluyente — la comprobación independiente de IA no alcanzó un veredicto seguro sobre estas entradas",
@@ -861,6 +990,12 @@ export const LOCALES = {
     advisorPlaceholder:
       "Pregunta sobre celdas, sodio-ion frente a LFP, costes de transporte...",
     advisorSend: "Enviar",
+    advisorAskResult: "Explica este resultado.",
+    valueMomentAskLead: "Si esto te ahorró una llamada o un presupuesto:",
+    valueMomentAskChipIn: "colaborar",
+    valueMomentAskWorked: "cuéntame si te sirvió",
+    valueMomentAskSend:
+      "envía este resultado a alguien que esté cotizando un sistema",
     advisorClose: "Cerrar asesor de IA",
     advisorBusyRetry:
       " El motor gratuito de IA está ocupado; reintentando en {secs}s…",
@@ -1261,7 +1396,14 @@ export const LOCALES = {
     worstMonthNote:
       "Mes más oscuro: {month} — unos {avg} kWh/m²/día de sol medio. Dimensiona para este mes, no para la media anual, o el sistema se quedará corto en semanas grises.",
     bomSelectedSystem: "Sistema seleccionado",
-    fxAsOfNote: "Tipos en vivo a fecha de {asOf}.",
+    fxSourceStatic:
+      "Fuente del tipo de cambio: open.er-api.com. No se cargó ningún tipo en vivo, así que son estimaciones integradas.",
+    fxSourceLive:
+      "Fuente del tipo de cambio: open.er-api.com, a fecha de {asOf} — esa fecha es la del tipo de cambio; la meteorología son cinco años de historial horario.",
+    fxSourceStale:
+      "Fuente del tipo de cambio: open.er-api.com, última actualización {asOf} (hace {days} días). Comprueba el tipo antes de fiarte de él.",
+    fxSourceFailed:
+      "Fuente del tipo de cambio: open.er-api.com. La actualización en vivo falló, así que son estimaciones integradas.",
     advisorIntakeBillLabel: "Factura eléctrica mensual ($ USD):",
     advisorIntakeKwhLabel: "Consumo energético diario (kWh / día):",
     advisorIntakeBillPh: "p. ej. 400",
@@ -1270,9 +1412,26 @@ export const LOCALES = {
       "Una batería de {battKwh} kWh evita reemplazos y cuesta {savings} menos en 20 años.",
     engineSwapsCheaper:
       "El tamaño estándar con {replacements} reemplazos cuesta {savings} menos en 20 años que uno mayor.",
+    engineZeroSwapSolarOnly:
+      "Mejor precio a 20 años: una instalación solo solar no tiene costes de sustitución ni degradación de batería.",
+    engineZeroSwapNatural:
+      "Mejor precio a 20 años: el banco de baterías supera naturalmente el horizonte de 20 años sin sustituciones.",
+    engineStrategyOffSwaps:
+      "Estrategia de sobredimensionado desactivada: la elección directa del motor — {replacements} sustitución(es) de batería en 20 años se cuentan en el coste total.",
+    engineStrategyOffNoSwaps:
+      "Estrategia de sobredimensionado desactivada: la elección directa del motor — el banco ya dura los 20 años completos sin sustituciones.",
+    engineSwapsCheaperNoFigures:
+      "Mejor precio a 20 años: el tamaño estándar con sustituciones de batería cuesta menos en 20 años que pagar por adelantado para sobredimensionar.",
+    engineZeroSwapBeyondSearch:
+      "Mejor precio a 20 años: el tamaño estándar con sustituciones de batería es la opción práctica — un banco sin sustituciones supera los tamaños que busca esta herramienta.",
+    engineStandardSizingCheapest:
+      "Mejor precio a 20 años: el tamaño estándar cuesta menos en 20 años que pagar por adelantado para sobredimensionar.",
+    engineExactHardwareSwaps:
+      "Mejor precio a 20 años para este equipo exacto: tamaño estándar con {replacements} sustitución(es) en 20 años (contadas arriba).",
   },
   pt: {
     ...HOME_COPY.pt,
+    ...RESULT_COPY.pt,
     sizingFor: "O que você está dimensionando?",
     goalCutBill: "Reduzir minha conta de luz",
     goalOffgrid: "Isolado / Backup",
@@ -1338,6 +1497,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Uma estação de energia para van, barco ou acampamento. Sem telhado, sem rede, sem tarifa.",
     metricBillCut: "da sua conta eliminada em 20 anos",
+    metricBillCutReserve:
+      "da sua conta eliminada em 20 anos, com {pct}% da bateria em reserva",
     metricTouOffset: "da sua energia nas horas de pico coberta pela bateria",
     metricOutageCoverage:
       "dos apagões que o essencial atravessa pelo tempo todo",
@@ -1345,9 +1506,9 @@ export const LOCALES = {
     metricGridIndependence: "do ano funcionando sem rede nenhuma",
     metricPortableRuntime:
       "dos dias em que a estação alimenta seus aparelhos o dia todo",
-    statusWorks: "Funciona",
-    statusPartial: "Em parte",
-    statusNotHere: "Aqui não funciona",
+    verdictLeadWorks: "Este funciona aqui.",
+    verdictLeadPartial: "Este chega quase até ao fim.",
+    verdictLeadNotHere: "Este fica aquém aqui.",
     useCaseOutcomeTitle: "Seu resultado: {useCase}",
     useCaseVerdictFooter:
       "{useCase}: medido com o clima horário deste local — não é uma estimativa.",
@@ -1371,20 +1532,19 @@ export const LOCALES = {
     generatorRuntime0: "0% — nunca",
     generatorRuntime1: "1% — alguns dias por ano",
     generatorRuntime2: "2%+ — sem problema quando necessário",
-    verdictBillCut:
-      "{status}: este sistema elimina {pct}% da sua conta em 20 anos.",
+    verdictBillCut: "Este sistema elimina {pct}% da sua conta em 20 anos.",
     verdictTou:
-      "{status}: a bateria cobre {pct}% da sua energia nas horas de pico, valendo cerca de {saving} em 20 anos contra uma bateria de {cost}. A diferença entre pico e fora do pico aqui é de {spread} por kWh.",
+      "A bateria cobre {pct}% da sua energia nas horas de pico, valendo cerca de {saving} em 20 anos contra uma bateria de {cost}. A diferença entre pico e fora do pico aqui é de {spread} por kWh.",
     verdictBackup:
-      "{status}: o essencial funciona as {targetHours} horas completas em {pct}% dos apagões que simulamos (noite típica: {hours} horas).",
+      "O essencial funciona as {targetHours} horas completas em {pct}% dos apagões que simulamos (noite típica: {hours} horas).",
     verdictReserve:
-      "{status}: guardar essa reserva custa {pct}% da sua economia e compra {coverHours} horas de cobertura.",
+      "Guardar essa reserva custa {pct}% da sua economia e compra {coverHours} horas de cobertura.",
     verdictReserveNoBattery:
       "Não há onde guardar uma reserva: o sistema mais barato para esse objetivo não tem bateria nenhuma.",
     verdictOffGrid:
-      "{status}: {pct}% do ano funciona sem rede — faltam {unmetHours} horas no pior ano, com {autonomy} dias de autonomia.",
+      "{pct}% do ano funciona sem rede — faltam {unmetHours} horas no pior ano, com {autonomy} dias de autonomia (quanto tempo a bateria sozinha atende o essencial).",
     verdictPortable:
-      "{status}: sua estação alimenta seus aparelhos o dia todo em {days} de {trips} dias aqui, e uma carga dura {runtime} horas.",
+      "Sua estação alimenta seus aparelhos o dia todo em {days} de {trips} dias aqui, e uma carga dura {runtime} horas.",
     cityLabel: "Onde o sistema será instalado?",
     loadLabel: "Quanta energia você consome?",
     loadAppliances: "Escolho meus eletrodomésticos",
@@ -1409,7 +1569,7 @@ export const LOCALES = {
     pickCity:
       "Escolha uma cidade (ou use 📍 Minha localização) para sabermos sua insolação.",
     shareLoaded:
-      "Configuração compartilhada carregada. Confira os dados e clique em Dimensionar meu sistema para calcular.",
+      "Este é o resultado que alguém compartilhou com você, calculado com a localização e o consumo dessa pessoa. Altere qualquer dado para calcular o seu próprio sistema.",
     invalidShare:
       "Não foi possível ler este link compartilhado — ele pode ter sido cortado na cópia. Ignore-o e monte sua própria estimativa abaixo.",
     customCoordsLocation: "Usando coordenadas personalizadas ({lat}, {lon}).",
@@ -1446,6 +1606,25 @@ export const LOCALES = {
       "A {tariff}/kWh, este uso custa cerca de {annual} por ano em energia da rede. Os valores de retorno abaixo comparam o custo do sistema com esse gasto.",
     tariffSpendFixed:
       " Isso inclui {fixed}/mês em encargos fixos que o solar não reduz.",
+    // -- Glosas de compreensão (E13/V4): palavras simples no primeiro uso.
+    glossKwhDay:
+      "kWh/dia significa quilowatts-hora por dia — a unidade da sua conta. Uma casa típica nos EUA usa cerca de 30.",
+    glossTier:
+      "A meta é a parte do ano sem rede: 99% deixa um dia por ano no gerador, 100% nunca precisa dele.",
+    ladderIntro:
+      "Três visões do mesmo resultado: Melhor escolha é o sistema que instalaríamos, Comparar baterias compara as químicas e Todas as opções é a tabela completa.",
+    includesNote:
+      "O que cada custo inclui: o primeiro paga equipamento e instalação uma vez; o valor de 20 anos também cobre substituições, combustível e manutenção.",
+    presetWho: "Predefinições rápidas — escolha para quem é:",
+    presetCabin: "Cabana de fim de semana — luzes, celular, geladeira pequena",
+    presetVan: "Van camper — duas pessoas sem rede",
+    presetHome: "Casa padrão — o ponto de partida típico",
+    presetHomestead: "Sítio — uma família, tudo elétrico",
+    presetBackup: "Backup crítico — o essencial numa queda",
+    presetClear: "Limpar tudo",
+    tierOption100: "100% — nunca ver um gerador",
+    tierOption99: "99% — gerador cerca de um dia por ano",
+    tierOption95: "95% — gerador de vez em quando",
     lvlBest: "Melhor escolha",
     lvlCompare: "Comparar baterias",
     lvlMatrix: "Todas as opções",
@@ -1453,6 +1632,31 @@ export const LOCALES = {
     manualModeHint: "— ajusta tudo",
     simpleModeLabel: "Modo simples",
     simpleModeHint: "só os números-chave",
+    simpleSolar: "Solar",
+    simpleBattery: "Bateria",
+    simpleFirstCost: "Custo inicial",
+    simplePanels: "cerca de {panels} painéis",
+    simpleKwhUsable: "{kwh} kWh utilizáveis",
+    simpleKwhInstalled:
+      "cerca de {kwh} kWh instalados (tamaño de placa; lo utilizável es lo que puedes usar)",
+    simpleWhatItDoes: "O que faz",
+    simpleYearCovered: "{pct}% do ano coberto",
+    simpleBillCut: "reduz cerca de {pct}% da sua conta",
+    simplePeakShift:
+      "desloca cerca de {pct}% das horas de ponta para a bateria — a sua conta não muda",
+    simpleSaved: "Poupado em 20 anos",
+    simpleNoPayback: "não se paga em 20 anos",
+    simplePayback: "Retorno",
+    simpleModeTechnical: "Modo técnico",
+    simpleModeAria: "{mode} ativado",
+    simpleHintFeedIn: "({unit}/kWh, opcional — apenas com ligação à rede)",
+    simpleHintFixed: "({unit}/mês, opcional)",
+    analysisFullBill: "Análise completa da redução da conta",
+    analysisFullSystem: "Análise completa do sistema",
+    offlineReady: "Pronto sem ligação",
+    backOnline: "De novo online",
+    offlineBadgeTitle:
+      "Funciona offline com dados da app em cache e simulação meteorológica local",
     mapDrawAction: "Desenhe esta zona num mapa opcional",
     matrixScroll: "Tabela comparativa com deslocamento",
     bomPanelTitle: "Sua lista de hardware — do que este sistema é feito",
@@ -1488,7 +1692,7 @@ export const LOCALES = {
     simpleAskAdvisor: "Pergunte ao assistente de IA (em palavras simples)",
     sanityOk: "Verificado de forma independente ✓ — fisicamente plausível",
     sanityFlag:
-      "⚠ Uma verificação de IA independente marca este resultado como fisicamente implausível —",
+      "⚠ Uma verificação de IA independente duvida que estes números sejam fisicamente possíveis. Pode estar enganada e nunca altera o seu resultado.",
     sanityAskAdvisor: "pergunte ao assistente por quê",
     sanityUncertain:
       "Verificação inconclusiva — a verificação independente de IA não alcançou um veredito confiável sobre estas entradas",
@@ -1508,6 +1712,12 @@ export const LOCALES = {
     advisorPlaceholder:
       "Pergunte sobre células, sódio-ion versus LFP, custos de frete...",
     advisorSend: "Enviar",
+    advisorAskResult: "Explica este resultado.",
+    valueMomentAskLead: "Se isto te poupou uma chamada ou um orçamento:",
+    valueMomentAskChipIn: "contribuir",
+    valueMomentAskWorked: "conta-me se funcionou",
+    valueMomentAskSend:
+      "envia este resultado a alguém que esteja a orçamentar um sistema",
     advisorClose: "Fechar consultor de IA",
     advisorBusyRetry:
       " O motor gratuito de IA está ocupado — a tentar novamente em {secs}s…",
@@ -1894,7 +2104,14 @@ export const LOCALES = {
     worstMonthNote:
       "Mês mais escuro: {month} — cerca de {avg} kWh/m²/dia de sol médio. Dimensione para este mês, não para a média anual, ou o sistema ficará aquém em semanas cinzentas.",
     bomSelectedSystem: "Sistema selecionado",
-    fxAsOfNote: "Câmbio ao vivo em {asOf}.",
+    fxSourceStatic:
+      "Fonte da taxa de câmbio: open.er-api.com. Nenhuma taxa ao vivo foi carregada, então estes são valores estimados incorporados.",
+    fxSourceLive:
+      "Fonte da taxa de câmbio: open.er-api.com, em {asOf} — esta data é a da taxa de câmbio; a meteorologia são cinco anos de histórico horário.",
+    fxSourceStale:
+      "Fonte da taxa de câmbio: open.er-api.com, última atualização {asOf} (há {days} dias). Confirme a taxa antes de confiar nela.",
+    fxSourceFailed:
+      "Fonte da taxa de câmbio: open.er-api.com. A atualização ao vivo falhou, então estes são valores estimados incorporados.",
     advisorIntakeBillLabel: "Conta mensal de energia ($ USD):",
     advisorIntakeKwhLabel: "Consumo diário de energia (kWh / dia):",
     advisorIntakeBillPh: "ex. 400",
@@ -1903,9 +2120,26 @@ export const LOCALES = {
       "Uma bateria de {battKwh} kWh evita trocas e custa {savings} menos em 20 anos.",
     engineSwapsCheaper:
       "O tamanho padrão com {replacements} trocas custa {savings} menos em 20 anos que um maior.",
+    engineZeroSwapSolarOnly:
+      "Melhor preço em 20 anos: uma instalação só solar não tem custos de troca nem de degradação da bateria.",
+    engineZeroSwapNatural:
+      "Melhor preço em 20 anos: o banco de baterias dura naturalmente o horizonte de 20 anos sem trocas.",
+    engineStrategyOffSwaps:
+      "Estratégia de sobredimensionamento desativada: a escolha direta do motor — {replacements} troca(s) de bateria em 20 anos são contadas no custo total.",
+    engineStrategyOffNoSwaps:
+      "Estratégia de sobredimensionamento desativada: a escolha direta do motor — o banco já dura os 20 anos completos sem trocas.",
+    engineSwapsCheaperNoFigures:
+      "Melhor preço em 20 anos: o tamanho padrão com trocas de bateria custa menos em 20 anos do que pagar adiantado para sobredimensionar.",
+    engineZeroSwapBeyondSearch:
+      "Melhor preço em 20 anos: o tamanho padrão com trocas de bateria é a escolha prática — um banco sem trocas excede os tamanhos que esta ferramenta pesquisa.",
+    engineStandardSizingCheapest:
+      "Melhor preço em 20 anos: o tamanho padrão custa menos em 20 anos do que pagar adiantado para sobredimensionar.",
+    engineExactHardwareSwaps:
+      "Melhor preço em 20 anos para este equipamento exato: tamanho padrão com {replacements} troca(s) em 20 anos (contadas acima).",
   },
   fr: {
     ...HOME_COPY.fr,
+    ...RESULT_COPY.fr,
     sizingFor: "Que dimensionnez-vous ?",
     goalCutBill: "Réduire ma facture d'électricité",
     goalOffgrid: "Autonome / Secours",
@@ -1969,6 +2203,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Une station d'énergie pour un van, un bateau ou un camp-site. Pas de toit, pas de réseau, pas de tarif.",
     metricBillCut: "de votre facture supprimée sur 20 ans",
+    metricBillCutReserve:
+      "de votre facture supprimée sur 20 ans, avec {pct}% de la batterie gardés en réserve",
     metricTouOffset:
       "de votre énergie en heures pleines couverte par la batterie",
     metricOutageCoverage:
@@ -1977,9 +2213,9 @@ export const LOCALES = {
     metricGridIndependence: "de l'année fonctionnant sans aucun réseau",
     metricPortableRuntime:
       "des jours où la station alimente vos appareils toute la journée",
-    statusWorks: "Fonctionne",
-    statusPartial: "En partie",
-    statusNotHere: "Ne fonctionne pas ici",
+    verdictLeadWorks: "Celui-ci fonctionne ici.",
+    verdictLeadPartial: "Celui-ci y arrive presque.",
+    verdictLeadNotHere: "Celui-ci reste insuffisant ici.",
     useCaseOutcomeTitle: "Votre résultat : {useCase}",
     useCaseVerdictFooter:
       "{useCase} : mesuré avec la météo horaire de ce lieu — pas une estimation.",
@@ -2005,20 +2241,19 @@ export const LOCALES = {
     generatorRuntime0: "0% — jamais",
     generatorRuntime1: "1% — quelques jours par an",
     generatorRuntime2: "2%+ — sans problème si besoin",
-    verdictBillCut:
-      "{status} : ce système supprime {pct}% de votre facture sur 20 ans.",
+    verdictBillCut: "Ce système supprime {pct}% de votre facture sur 20 ans.",
     verdictTou:
-      "{status} : la batterie couvre {pct}% de votre énergie en heures pleines, soit environ {saving} sur 20 ans face à une batterie de {cost}. L'écart entre pointe et creux ici est de {spread} par kWh.",
+      "La batterie couvre {pct}% de votre énergie en heures pleines, soit environ {saving} sur 20 ans face à une batterie de {cost}. L'écart entre pointe et creux ici est de {spread} par kWh.",
     verdictBackup:
-      "{status} : l'essentiel tient les {targetHours} heures complètes dans {pct}% des coupures que nous avons simulées (nuit typique : {hours} heures).",
+      "L'essentiel tient les {targetHours} heures complètes dans {pct}% des coupures que nous avons simulées (nuit typique : {hours} heures).",
     verdictReserve:
-      "{status} : garder cette réserve coûte {pct}% de vos économies et achète {coverHours} heures de couverture.",
+      "Garder cette réserve coûte {pct}% de vos économies et achète {coverHours} heures de couverture.",
     verdictReserveNoBattery:
       "Il n'y a rien où garder une réserve : le système le moins cher pour cet objectif ne comporte aucune batterie.",
     verdictOffGrid:
-      "{status} : {pct}% de l'année fonctionne sans réseau — {unmetHours} heures manquantes la pire année, {autonomy} jours d'autonomie.",
+      "{pct}% de l'année fonctionne sans réseau — {unmetHours} heures manquantes la pire année, {autonomy} jours d'autonomie (combien de temps la batterie seule fait tourner l'essentiel).",
     verdictPortable:
-      "{status} : votre station alimente vos appareils toute la journée sur {days} jours sur {trips} ici, et une charge dure {runtime} heures.",
+      "Votre station alimente vos appareils toute la journée sur {days} jours sur {trips} ici, et une charge dure {runtime} heures.",
     cityLabel: "Où sera installé le système ?",
     loadLabel: "Quelle est votre consommation ?",
     loadAppliances: "Je choisis mes appareils",
@@ -2045,7 +2280,7 @@ export const LOCALES = {
     pickCity:
       "Choisissez une ville (ou utilisez 📍 Ma position) pour connaître votre ensoleillement.",
     shareLoaded:
-      "Configuration partagée chargée. Vérifiez les entrées, puis cliquez sur Dimensionner pour calculer.",
+      "Voici le résultat que quelqu’un a partagé avec vous, calculé à partir de sa position et de sa consommation. Modifiez une entrée pour évaluer votre propre système.",
     invalidShare:
       "Ce lien partagé n’a pas pu être lu — il a peut-être été tronqué en le copiant. Ignorez-le et faites votre propre estimation ci-dessous.",
     customCoordsLocation:
@@ -2084,6 +2319,25 @@ export const LOCALES = {
       "À {tariff}/kWh, cet usage coûte environ {annual} par an en électricité du réseau. Les délais de retour ci-dessous comparent le coût du système à cette dépense.",
     tariffSpendFixed:
       " Dont {fixed}/mois de charges fixes que le solaire ne réduit pas.",
+    // -- Gloses de compréhension (E13/V4) : des mots simples au premier usage.
+    glossKwhDay:
+      "kWh/jour, ce sont des kilowattheures par jour : l'unité de votre facture. Un foyer américain typique en utilise environ 30.",
+    glossTier:
+      "La cible est la part de l'année sans réseau : 99% laisse un jour par an sur le groupe, 100% n'en a jamais besoin.",
+    ladderIntro:
+      "Trois vues du même résultat : Meilleur choix est le système que nous installerions, Comparer les batteries compare les chimies, Toutes les options est le tableau complet.",
+    includesNote:
+      "Ce que chaque coût comprend : le premier paie le matériel et l'installation une fois ; le chiffre à 20 ans couvre aussi remplacements, carburant et entretien.",
+    presetWho: "Préréglages rapides — choisissez pour qui :",
+    presetCabin: "Cabane de week-end — lumières, téléphone, petit frigo",
+    presetVan: "Van aménagé — deux personnes hors réseau",
+    presetHome: "Maison standard — le point de départ typique",
+    presetHomestead: "Ferme — une famille, tout électrique",
+    presetBackup: "Secours critique — l'essentiel pendant une coupure",
+    presetClear: "Tout effacer",
+    tierOption100: "100% — jamais de groupe",
+    tierOption99: "99% — groupe environ un jour par an",
+    tierOption95: "95% — groupe de temps en temps",
     lvlBest: "Meilleur choix",
     lvlCompare: "Comparer les batteries",
     lvlMatrix: "Toutes les options",
@@ -2091,6 +2345,31 @@ export const LOCALES = {
     manualModeHint: "— tout ajuster",
     simpleModeLabel: "Mode simple",
     simpleModeHint: "juste les chiffres clés",
+    simpleSolar: "Solaire",
+    simpleBattery: "Batterie",
+    simpleFirstCost: "Coût initial",
+    simplePanels: "environ {panels} panneaux",
+    simpleKwhUsable: "{kwh} kWh utilisables",
+    simpleKwhInstalled:
+      "environ {kwh} kWh installés (taille nominale ; l'utilisable est ce que vous pouvez tirer)",
+    simpleWhatItDoes: "Ce que cela fait",
+    simpleYearCovered: "{pct} % de l'année couverte",
+    simpleBillCut: "réduit d'environ {pct} % votre facture",
+    simplePeakShift:
+      "décale environ {pct} % des heures pleines vers la batterie — votre facture reste inchangée",
+    simpleSaved: "Économisé sur 20 ans",
+    simpleNoPayback: "pas rentabilisé en 20 ans",
+    simplePayback: "Rentabilité",
+    simpleModeTechnical: "Mode technique",
+    simpleModeAria: "{mode} activé",
+    simpleHintFeedIn: "({unit}/kWh, facultatif — réseau raccordé uniquement)",
+    simpleHintFixed: "({unit}/mois, facultatif)",
+    analysisFullBill: "Analyse complète de la réduction de facture",
+    analysisFullSystem: "Analyse complète du système",
+    offlineReady: "Prêt hors ligne",
+    backOnline: "De nouveau en ligne",
+    offlineBadgeTitle:
+      "Fonctionne hors ligne avec les données de l'app en cache et la simulation météo locale",
     mapDrawAction: "Dessinez cette zone sur une carte facultative",
     matrixScroll: "Tableau comparatif à faire défiler",
     bomPanelTitle: "Votre liste de matériel — de quoi ce système est composé",
@@ -2127,7 +2406,7 @@ export const LOCALES = {
     simpleAskAdvisor: "Demandez au conseiller IA (en mots simples)",
     sanityOk: "Vérifié de façon indépendante ✓ — physiquement plausible",
     sanityFlag:
-      "⚠ Une vérification IA indépendante signale ce résultat comme physiquement implausible —",
+      "⚠ Une vérification IA indépendante doute que ces chiffres soient physiquement réalisables. Elle peut se tromper et ne change jamais votre résultat.",
     sanityAskAdvisor: "demandez au conseiller pourquoi",
     sanityUncertain:
       "Vérification non concluante — le contrôle indépendant par IA n'a pas atteint de verdict fiable sur ces entrées",
@@ -2147,6 +2426,11 @@ export const LOCALES = {
     advisorPlaceholder:
       "Questions sur les cellules, sodium-ion vs LFP, fret...",
     advisorSend: "Envoyer",
+    advisorAskResult: "Explique-moi ce résultat.",
+    valueMomentAskLead: "Si cela vous a évité un appel ou un devis :",
+    valueMomentAskChipIn: "faire un don",
+    valueMomentAskWorked: "dites-moi si ça a marché",
+    valueMomentAskSend: "envoyez ce résultat à quelqu’un qui demande un devis",
     advisorClose: "Fermer le conseiller IA",
     advisorBusyRetry:
       " Le moteur IA gratuit est occupé — nouvelle tentative dans {secs}s…",
@@ -2540,7 +2824,14 @@ export const LOCALES = {
     worstMonthNote:
       "Mois le plus sombre : {month} — environ {avg} kWh/m²/jour de soleil moyen. Dimensionnez pour ce mois, pas pour la moyenne annuelle, sinon le système manquera lors des semaines grises.",
     bomSelectedSystem: "Système sélectionné",
-    fxAsOfNote: "Taux en cours au {asOf}.",
+    fxSourceStatic:
+      "Source du taux de change : open.er-api.com. Aucun taux en direct n'a été chargé, ce sont donc des estimations intégrées.",
+    fxSourceLive:
+      "Source du taux de change : open.er-api.com, au {asOf} — cette date est celle du taux de change ; la météo couvre cinq ans d’historique horaire.",
+    fxSourceStale:
+      "Source du taux de change : open.er-api.com, dernière mise à jour le {asOf} (il y a {days} jours). Vérifiez le taux avant de vous y fier.",
+    fxSourceFailed:
+      "Source du taux de change : open.er-api.com. L'actualisation en direct a échoué, ce sont donc des estimations intégrées.",
     advisorIntakeBillLabel: "Facture d'électricité mensuelle ($ USD) :",
     advisorIntakeKwhLabel: "Consommation d'énergie quotidienne (kWh / jour) :",
     advisorIntakeBillPh: "p. ex. 400",
@@ -2549,9 +2840,26 @@ export const LOCALES = {
       "Une batterie de {battKwh} kWh évite les remplacements et coûte {savings} de moins sur 20 ans.",
     engineSwapsCheaper:
       "Le format standard avec {replacements} remplacements coûte {savings} de moins sur 20 ans qu'un format supérieur.",
+    engineZeroSwapSolarOnly:
+      "Meilleur prix sur 20 ans : une installation solaire seule n'a aucun coût de remplacement ni de dégradation de batterie.",
+    engineZeroSwapNatural:
+      "Meilleur prix sur 20 ans : le parc de batteries dépasse naturellement l'horizon de 20 ans, sans aucun remplacement.",
+    engineStrategyOffSwaps:
+      "Stratégie de surdimensionnement désactivée : le choix direct du moteur — {replacements} remplacement(s) de batterie sur 20 ans sont comptés dans le coût total.",
+    engineStrategyOffNoSwaps:
+      "Stratégie de surdimensionnement désactivée : le choix direct du moteur — le parc tient déjà l'horizon complet de 20 ans sans aucun remplacement.",
+    engineSwapsCheaperNoFigures:
+      "Meilleur prix sur 20 ans : le dimensionnement standard avec remplacements de batteries coûte moins cher sur 20 ans que de payer d'avance pour surdimensionner.",
+    engineZeroSwapBeyondSearch:
+      "Meilleur prix sur 20 ans : le dimensionnement standard avec remplacements de batteries est le choix pratique — un parc sans remplacement dépasse les tailles que cet outil recherche.",
+    engineStandardSizingCheapest:
+      "Meilleur prix sur 20 ans : le dimensionnement standard coûte moins cher sur 20 ans que de payer d'avance pour surdimensionner.",
+    engineExactHardwareSwaps:
+      "Meilleur prix sur 20 ans pour ce matériel exact : dimensionnement standard avec {replacements} remplacement(s) sur 20 ans (comptés ci-dessus).",
   },
   de: {
     ...HOME_COPY.de,
+    ...RESULT_COPY.de,
     sizingFor: "Was möchten Sie dimensionieren?",
     goalCutBill: "Meine Stromrechnung senken",
     goalOffgrid: "Insel / Notstrom",
@@ -2599,7 +2907,7 @@ export const LOCALES = {
     pickCity:
       "Wähle eine Stadt oder nutze 📍 deinen Standort für die Sonnendaten.",
     shareLoaded:
-      "Geteilte Einstellungen geladen. Prüfe die Eingaben und klicke dann auf System dimensionieren.",
+      "Das ist das Ergebnis, das jemand mit dir geteilt hat — berechnet aus dessen Standort und Verbrauch. Ändere eine Eingabe, um dein eigenes System zu schätzen.",
     invalidShare:
       "Dieser geteilte Link ließ sich nicht lesen — beim Kopieren wurde er vielleicht abgeschnitten. Ignoriere ihn und stell unten deine eigene Schätzung auf.",
     customCoordsLocation: "Eigene Koordinaten verwendet ({lat}, {lon}).",
@@ -2666,6 +2974,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Eine Stromstation für Wohnmobil, Boot oder Campingplatz. Kein Dach, kein Netz, kein Tarif.",
     metricBillCut: "deiner Rechnung, über 20 Jahre eingespart",
+    metricBillCutReserve:
+      "deiner Rechnung, über 20 Jahre eingespart, mit {pct}% der Batterie als Reserve",
     metricTouOffset:
       "deiner Energie in den Spitzenstunden, die die Batterie deckt",
     metricOutageCoverage:
@@ -2674,9 +2984,9 @@ export const LOCALES = {
     metricGridIndependence: "des Jahres ganz ohne Netz",
     metricPortableRuntime:
       "der Tage, an denen die Station deine Geräte den ganzen Tag versorgt",
-    statusWorks: "Funktioniert",
-    statusPartial: "Teilweise",
-    statusNotHere: "Funktioniert hier nicht",
+    verdictLeadWorks: "Diese Variante funktioniert hier.",
+    verdictLeadPartial: "Diese Variante kommt fast hin.",
+    verdictLeadNotHere: "Diese Variante reicht hier nicht.",
     useCaseOutcomeTitle: "Dein Ergebnis: {useCase}",
     useCaseVerdictFooter:
       "{useCase}: gemessen mit dem stündlichen Wetter dieses Ortes — keine Schätzung.",
@@ -2699,20 +3009,19 @@ export const LOCALES = {
     generatorRuntime0: "0% — nie",
     generatorRuntime1: "1% — wenige Tage im Jahr",
     generatorRuntime2: "2%+ — bei Bedarf kein Problem",
-    verdictBillCut:
-      "{status}: Dieses System spart {pct}% deiner Rechnung über 20 Jahre.",
+    verdictBillCut: "Dieses System spart {pct}% deiner Rechnung über 20 Jahre.",
     verdictTou:
-      "{status}: Die Batterie deckt {pct}% deiner Energie in den Spitzenstunden, rund {saving} über 20 Jahre gegen eine {cost}-Batterie. Der Abstand zwischen Spitze und Tal beträgt hier {spread} pro kWh.",
+      "Die Batterie deckt {pct}% deiner Energie in den Spitzenstunden, rund {saving} über 20 Jahre gegen eine {cost}-Batterie. Der Abstand zwischen Spitze und Tal beträgt hier {spread} pro kWh.",
     verdictBackup:
-      "{status}: Dein Nötigstes läuft die vollen {targetHours} Stunden in {pct}% der simulierten Stromausfälle (typische Nacht: {hours} Stunden).",
+      "Dein Nötigstes läuft die vollen {targetHours} Stunden in {pct}% der simulierten Stromausfälle (typische Nacht: {hours} Stunden).",
     verdictReserve:
-      "{status}: Dieser Reserve kostet dich {pct}% deiner Ersparnis und bringt {coverHours} Stunden Deckung.",
+      "Dieser Reserve kostet dich {pct}% deiner Ersparnis und bringt {coverHours} Stunden Deckung.",
     verdictReserveNoBattery:
       "Es gibt nichts, worin eine Reserve stecken könnte: das billigste System für dieses Ziel hat gar keine Batterie.",
     verdictOffGrid:
-      "{status}: {pct}% des Jahres laufen ganz ohne Netz — {unmetHours} Stunden fehlen im schlechtesten Jahr, {autonomy} Tage Autonomie.",
+      "{pct}% des Jahres laufen ganz ohne Netz — {unmetHours} Stunden fehlen im schlechtesten Jahr, {autonomy} Tage Autonomie (wie lange die Batterie allein das Nötigste versorgt).",
     verdictPortable:
-      "{status}: Deine Station versorgt deine Geräte hier an {days} von {trips} Tagen den ganzen Tag, und eine Ladung reicht {runtime} Stunden.",
+      "Deine Station versorgt deine Geräte hier an {days} von {trips} Tagen den ganzen Tag, und eine Ladung reicht {runtime} Stunden.",
     chemLabel: "Batteriechemie:",
     // Added with the English key. German was the one locale that never
     // received this note at all: it lived only in the translated
@@ -2729,6 +3038,25 @@ export const LOCALES = {
     runBtn: "☀️ System dimensionieren (5-Jahres-Simulation)",
     langLabel: "Sprache",
     suggestTranslationFix: "Übersetzungskorrektur vorschlagen",
+    // -- Verständnis-Glossen (E13/V4): einfache Worte beim ersten Gebrauch.
+    glossKwhDay:
+      "kWh/Tag heißt Kilowattstunden pro Tag — die Einheit Ihrer Rechnung. Ein typischer US-Haushalt braucht etwa 30.",
+    glossTier:
+      "Das Ziel ist der Anteil des Jahres ohne Netz: 99% lässt einen Tag pro Jahr für den Generator, 100% braucht ihn nie.",
+    ladderIntro:
+      "Drei Ansichten eines Ergebnisses: Beste Wahl ist das System, das wir bauen würden, Batterien vergleichen stellt die Chemien nebeneinander, Alle Optionen ist die vollständige Tabelle.",
+    includesNote:
+      "Was die beiden Kosten enthalten: der erste Preis zahlt Hardware und Installation einmal; die 20-Jahres-Zahl deckt auch Ersatz, Brennstoff und Wartung.",
+    presetWho: "Schnellvorlagen — wählen Sie, für wen:",
+    presetCabin: "Wochenendhütte — Licht, Telefon, kleiner Kühlschrank",
+    presetVan: "Camper-Van — zwei Personen ohne Netz",
+    presetHome: "Standardhaus — der typische Ausgangspunkt",
+    presetHomestead: "Hof — eine Familie, alles elektrisch",
+    presetBackup: "Kritische Versorgung — das Nötigste bei Stromausfall",
+    presetClear: "Alles löschen",
+    tierOption100: "100% — nie ein Generator",
+    tierOption99: "99% — Generator etwa einen Tag pro Jahr",
+    tierOption95: "95% — Generator hin und wieder",
     lvlBest: "Beste Wahl",
     lvlCompare: "Batterien vergleichen",
     lvlMatrix: "Alle Optionen",
@@ -2736,6 +3064,31 @@ export const LOCALES = {
     manualModeHint: "— alles anpassen",
     simpleModeLabel: "Einfacher Modus",
     simpleModeHint: "nur die Kernzahlen",
+    simpleSolar: "Solar",
+    simpleBattery: "Batterie",
+    simpleFirstCost: "Anfangskosten",
+    simplePanels: "etwa {panels} Module",
+    simpleKwhUsable: "{kwh} kWh nutzbar",
+    simpleKwhInstalled:
+      "etwa {kwh} kWh installiert (Nennkapazität; nutzbar ist, was Sie entnehmen können)",
+    simpleWhatItDoes: "Was es bewirkt",
+    simpleYearCovered: "{pct} % des Jahres abgedeckt",
+    simpleBillCut: "senkt die Rechnung um etwa {pct} %",
+    simplePeakShift:
+      "verschiebt etwa {pct} % der Spitzenstunden in die Batterie — die Rechnung bleibt gleich",
+    simpleSaved: "Über 20 Jahre gespart",
+    simpleNoPayback: "amortisiert sich nicht in 20 Jahren",
+    simplePayback: "Amortisation",
+    simpleModeTechnical: "Technischer Modus",
+    simpleModeAria: "{mode} aktiviert",
+    simpleHintFeedIn: "({unit}/kWh, optional — nur bei Netzanschluss)",
+    simpleHintFixed: "({unit}/Monat, optional)",
+    analysisFullBill: "Vollständige Analyse der Rechnungssenkung",
+    analysisFullSystem: "Vollständige Systemanalyse",
+    offlineReady: "Offline bereit",
+    backOnline: "Wieder online",
+    offlineBadgeTitle:
+      "Arbeitet offline mit zwischengespeicherten App-Daten und lokaler Wettersimulation",
     mapDrawAction: "Diesen Bereich optional auf einer Karte zeichnen",
     matrixScroll: "Vergleichstabelle zum Scrollen",
     bomPanelTitle: "Deine Hardware-Liste — woraus dieses System besteht",
@@ -2769,7 +3122,7 @@ export const LOCALES = {
     simpleAskAdvisor: "Fragen Sie den KI-Berater (in einfachen Worten)",
     sanityOk: "Unabhängig geprüft ✓ — physikalisch plausibel",
     sanityFlag:
-      "⚠ Eine unabhängige KI-Prüfung markiert dieses Ergebnis als physikalisch unplausibel —",
+      "⚠ Eine unabhängige KI-Prüfung bezweifelt, dass diese Zahlen technisch möglich sind. Sie kann sich irren und ändert dein Ergebnis nie.",
     sanityAskAdvisor: "fragen Sie den Berater warum",
     sanityUncertain:
       "Prüfung unentschieden — die unabhängige KI-Prüfung erreichte für diese Eingaben kein eindeutiges Urteil",
@@ -2789,6 +3142,13 @@ export const LOCALES = {
     advisorPlaceholder:
       "Fragen zu Zellen, Natrium-Ion vs. LFP, Frachtkosten...",
     advisorSend: "Senden",
+    advisorAskResult: "Erkläre mir dieses Ergebnis.",
+    valueMomentAskLead:
+      "Wenn dir das ein Gespräch oder ein Angebot erspart hat:",
+    valueMomentAskChipIn: "etwas beitragen",
+    valueMomentAskWorked: "sag mir, ob es geklappt hat",
+    valueMomentAskSend:
+      "schick dieses Ergebnis jemandem, der gerade ein Angebot einholt",
     advisorClose: "KI-Berater schließen",
     advisorBusyRetry:
       " Die kostenlose KI ist ausgelastet — erneuter Versuch in {secs}s…",
@@ -3178,7 +3538,14 @@ export const LOCALES = {
     worstMonthNote:
       "Dunkelster Monat: {month} — etwa {avg} kWh/m²/Tag durchschnittliche Sonne. Plane für diesen Monat, nicht für den Jahresdurchschnitt, sonst reicht das System in grauen Wochen nicht.",
     bomSelectedSystem: "Ausgewähltes System",
-    fxAsOfNote: "Live-Kurse Stand {asOf}.",
+    fxSourceStatic:
+      "Kursquelle: open.er-api.com. Es wurde kein Live-Kurs geladen, daher sind dies eingebaute Schätzwerte.",
+    fxSourceLive:
+      "Kursquelle: open.er-api.com, Stand {asOf} — dieses Datum ist das des Wechselkurses; die Wetterdaten umfassen fünf Jahre stündlicher Werte.",
+    fxSourceStale:
+      "Kursquelle: open.er-api.com, zuletzt aktualisiert am {asOf} (vor {days} Tagen). Prüfen Sie den Kurs, bevor Sie sich darauf verlassen.",
+    fxSourceFailed:
+      "Kursquelle: open.er-api.com. Die Live-Aktualisierung ist fehlgeschlagen, daher sind dies eingebaute Schätzwerte.",
     advisorIntakeBillLabel: "Monatliche Stromrechnung ($ USD):",
     advisorIntakeKwhLabel: "Täglicher Energieverbrauch (kWh / Tag):",
     advisorIntakeBillPh: "z. B. 400",
@@ -3187,8 +3554,25 @@ export const LOCALES = {
       "Ein {battKwh}-kWh-Akku vermeidet Ersatz und kostet in 20 Jahren {savings} weniger.",
     engineSwapsCheaper:
       "Die Standardgröße mit {replacements} Akkuwechseln kostet in 20 Jahren {savings} weniger als Übergröße.",
+    engineZeroSwapSolarOnly:
+      "Bester 20-Jahres-Preis: eine reine Solaranlage hat keine Batteriewechsel- oder Degradationskosten.",
+    engineZeroSwapNatural:
+      "Bester 20-Jahres-Preis: der Batteriespeicher überdauert den 20-Jahres-Horizont von selbst ohne Wechsel.",
+    engineStrategyOffSwaps:
+      "Übergrößen-Strategie aus: die direkte Wahl der Engine — {replacements} Batteriewechsel über 20 Jahre sind in den Lebenszykluskosten enthalten.",
+    engineStrategyOffNoSwaps:
+      "Übergrößen-Strategie aus: die direkte Wahl der Engine — der Speicher hält bereits die vollen 20 Jahre ohne Wechsel.",
+    engineSwapsCheaperNoFigures:
+      "Bester 20-Jahres-Preis: die Standardgröße mit Batteriewechseln ist über 20 Jahre günstiger als der Vorabkauf einer Übergröße.",
+    engineZeroSwapBeyondSearch:
+      "Bester 20-Jahres-Preis: die Standardgröße mit Batteriewechseln ist die praktische Wahl — ein Speicher ohne Wechsel liegt jenseits der Größen, die dieses Tool sucht.",
+    engineStandardSizingCheapest:
+      "Bester 20-Jahres-Preis: die Standardgröße ist über 20 Jahre günstiger als der Vorabkauf einer Übergröße.",
+    engineExactHardwareSwaps:
+      "Bester 20-Jahres-Preis für genau diese Hardware: Standardgröße mit {replacements} Wechsel(n) über 20 Jahre (oben gezählt).",
   },
   nl: {
+    ...RESULT_COPY.nl,
     sizingFor: "Waar dimensionneert u voor?",
     goalCutBill: "Mijn energierekening verlagen",
     goalOffgrid: "Off-grid / Noodstroom",
@@ -3234,7 +3618,7 @@ export const LOCALES = {
     pickCity:
       "Kies een stad (of gebruik 📍 Mijn locatie) zodat we uw zonneschijn kennen.",
     shareLoaded:
-      "Gedeelde configuratie geladen. Controleer de invoer en klik op Systeem dimensioneren om te berekenen.",
+      "Dit is het resultaat dat iemand met u heeft gedeeld, berekend met diens locatie en verbruik. Wijzig een invoer om uw eigen systeem te berekenen.",
     invalidShare:
       "Deze deellink kon niet worden gelezen — mogelijk is hij ingekort bij het kopiëren. Negeer hem en stel hieronder uw eigen berekening samen.",
     customCoordsLocation: "Aangepaste coördinaten in gebruik ({lat}, {lon}).",
@@ -3283,6 +3667,25 @@ export const LOCALES = {
       "Voer uw maandelijkse rekeningbedrag in om de dagelijkse energieschatting te zien.",
     readoutKwhEmpty: "Voer een dagelijks kWh-getal in.",
     readoutKwhReady: "{kwh} kWh/dag wordt direct gebruikt.",
+    // -- Begripsglossen (E13/V4): gewone woorden bij het eerste gebruik.
+    glossKwhDay:
+      "kWh/dag betekent kilowattuur per dag — de eenheid van je rekening. Een typisch Amerikaans huishouden gebruikt ongeveer 30.",
+    glossTier:
+      "Het doel is het deel van het jaar zonder net: 99% laat één dag per jaar op de generator, 100% heeft hem nooit nodig.",
+    ladderIntro:
+      "Drie weergaven van één resultaat: Beste keuze is het systeem dat we zouden bouwen, Batterijen vergelijken zet de chemieën naast elkaar, Alle opties is de volledige tabel.",
+    includesNote:
+      "Wat de twee kosten bevatten: de eerste prijs betaalt hardware en installatie één keer; het 20-jaarbedrag dekt ook vervanging, brandstof en onderhoud.",
+    presetWho: "Snelkeuzes — kies voor wie:",
+    presetCabin: "Weekendhuisje — licht, telefoon, kleine koelkast",
+    presetVan: "Camperbus — twee personen off-grid",
+    presetHome: "Standaardwoning — het typische startpunt",
+    presetHomestead: "Boerderij — een gezin, alles elektrisch",
+    presetBackup: "Kritieke back-up — het essentiële bij een storing",
+    presetClear: "Alles wissen",
+    tierOption100: "100% — nooit een generator",
+    tierOption99: "99% — generator ongeveer één dag per jaar",
+    tierOption95: "95% — generator af en toe",
     lvlBest: "Beste keuze",
     lvlCompare: "Accu's vergelijken",
     lvlMatrix: "Alle opties",
@@ -3290,6 +3693,31 @@ export const LOCALES = {
     manualModeHint: "— alles aanpassen",
     simpleModeLabel: "Eenvoudige modus",
     simpleModeHint: "alleen de kerncijfers",
+    simpleSolar: "Zon",
+    simpleBattery: "Accu",
+    simpleFirstCost: "Initiële kosten",
+    simplePanels: "ongeveer {panels} panelen",
+    simpleKwhUsable: "{kwh} kWh bruikbaar",
+    simpleKwhInstalled:
+      "ongeveer {kwh} kWh geïnstalleerd (naamplaatwaarde; bruikbaar is wat je kunt gebruiken)",
+    simpleWhatItDoes: "Wat het doet",
+    simpleYearCovered: "{pct}% van het jaar gedekt",
+    simpleBillCut: "verlaagt je rekening met ongeveer {pct}%",
+    simplePeakShift:
+      "verschuift ongeveer {pct}% van de piekuren naar de accu — je rekening blijft gelijk",
+    simpleSaved: "Bespaard over 20 jaar",
+    simpleNoPayback: "verdient zich niet terug in 20 jaar",
+    simplePayback: "Terugverdientijd",
+    simpleModeTechnical: "Technische modus",
+    simpleModeAria: "{mode} ingeschakeld",
+    simpleHintFeedIn: "({unit}/kWh, optioneel — alleen netgekoppeld)",
+    simpleHintFixed: "({unit}/maand, optioneel)",
+    analysisFullBill: "Volledige analyse van rekeningverlaging",
+    analysisFullSystem: "Volledige systeemanalyse",
+    offlineReady: "Offline gereed",
+    backOnline: "Weer online",
+    offlineBadgeTitle:
+      "Werkt offline met gecachte app-gegevens en lokale weersimulatie",
     mapDrawAction: "Teken dit gebied optioneel op een kaart",
     matrixScroll: "Vergelijkingstabel om door te scrollen",
     bomPanelTitle: "Uw hardwarelijst — waaruit dit systeem bestaat",
@@ -3325,7 +3753,7 @@ export const LOCALES = {
     simpleAskAdvisor: "Vraag de AI-adviseur (in gewone woorden)",
     sanityOk: "Onafhankelijk gecontroleerd ✓ — fysisch plausibel",
     sanityFlag:
-      "⚠ Een onafhankelijke AI-controle markeert dit resultaat als fysisch onwaarschijnlijk —",
+      "⚠ Een onafhankelijke AI-controle betwijfelt of deze cijfers technisch haalbaar zijn. Die kan ernaast zitten en verandert je resultaat nooit.",
     sanityAskAdvisor: "vraag de adviseur waarom",
     sanityUncertain:
       "Controle zonder duidelijke uitslag — de onafhankelijke AI-controle kon bij deze invoer geen zeker oordeel vellen",
@@ -3345,6 +3773,12 @@ export const LOCALES = {
     advisorPlaceholder:
       "Vraag over celspecificaties, natrium-ion vs LFP, transportkosten...",
     advisorSend: "Verzenden",
+    advisorAskResult: "Leg dit resultaat aan me uit.",
+    valueMomentAskLead: "Als dit je een telefoontje of een offerte bespaarde:",
+    valueMomentAskChipIn: "een bijdrage doen",
+    valueMomentAskWorked: "laat me weten of het werkte",
+    valueMomentAskSend:
+      "stuur dit resultaat naar iemand die een systeem laat offreren",
     advisorClose: "AI-adviseur sluiten",
     advisorBusyRetry:
       " De gratis AI-engine is bezet — opnieuw proberen over {secs}s…",
@@ -3559,6 +3993,8 @@ export const LOCALES = {
     useCasePortableBlurb:
       "Een powerstation voor een bus, een boot of een kampeerplek. Geen dak, geen net, geen tarief.",
     metricBillCut: "van uw rekening weggenomen over 20 jaar",
+    metricBillCutReserve:
+      "van uw rekening weggenomen over 20 jaar, met {pct}% van de accu als reserve",
     metricTouOffset: "van uw piekuren-energie door de accu geleverd",
     metricOutageCoverage:
       "van de stroomuitvallen die uw essentiële apparaten volledig doorstaan",
@@ -3567,9 +4003,9 @@ export const LOCALES = {
     metricGridIndependence: "van het jaar volledig zonder net gedraaid",
     metricPortableRuntime:
       "van de dagen dat het station uw apparaten de hele dag laat draaien",
-    statusWorks: "Werkt",
-    statusPartial: "Gedeeltelijk",
-    statusNotHere: "Werkt hier niet",
+    verdictLeadWorks: "Deze werkt hier.",
+    verdictLeadPartial: "Deze komt bijna helemaal.",
+    verdictLeadNotHere: "Deze schiet hier tekort.",
     useCaseOutcomeTitle: "Uw resultaat: {useCase}",
     useCaseVerdictFooter:
       "{useCase} — gemeten aan het eigen uurlijkse weer van deze locatie, geen schatting.",
@@ -3589,19 +4025,19 @@ export const LOCALES = {
     portableBankLabel: "Bruikbare grootte van het powerstation (kWh)",
     portableShoreLabel: "Ik kan opladen via het net of een voertuig",
     verdictBillCut:
-      "{status}: dit systeem neemt {pct}% van uw rekening weg over 20 jaar.",
+      "Dit systeem neemt {pct}% van uw rekening weg over 20 jaar.",
     verdictTou:
-      "{status}: de accu dekt {pct}% van uw piekuren-energie, ongeveer {saving} waard over 20 jaar tegen een accu van {cost}. Uw piek-dalverschil is hier {spread} per kWh.",
+      "De accu dekt {pct}% van uw piekuren-energie, ongeveer {saving} waard over 20 jaar tegen een accu van {cost}. Uw piek-dalverschil is hier {spread} per kWh.",
     verdictBackup:
-      "{status}: uw essentiële apparaten draaien de volle {targetHours} uur in {pct}% van de gesimuleerde stroomuitvallen (typische nacht: {hours} uur).",
+      "Uw essentiële apparaten draaien de volle {targetHours} uur in {pct}% van de gesimuleerde stroomuitvallen (typische nacht: {hours} uur).",
     verdictReserve:
-      "{status}: het aanhouden van die reserve kost {pct}% van uw rekeningsbesparing en levert {coverHours} uur dekking op.",
+      "Het aanhouden van die reserve kost {pct}% van uw rekeningsbesparing en levert {coverHours} uur dekking op.",
     verdictReserveNoBattery:
       "Er is niets om een reserve in aan te houden: het goedkoopste systeem voor dit doel heeft helemaal geen accu.",
     verdictOffGrid:
-      "{status}: {pct}% van het jaar draait zonder net — {unmetHours} uur tekort in het slechtste jaar, {autonomy} dagen autonomie.",
+      "{pct}% van het jaar draait zonder net — {unmetHours} uur tekort in het slechtste jaar, {autonomy} dagen autonomie (hoe lang de batterij alleen het essentiële draait).",
     verdictPortable:
-      "{status}: uw station draait een volle dag op {days} van {trips} dagen hier, en één lading gaat {runtime} uur mee.",
+      "Uw station draait een volle dag op {days} van {trips} dagen hier, en één lading gaat {runtime} uur mee.",
     cityLabel: "Waar komt dit systeem?",
     loadLabel: "Hoeveel stroom verbruikt u?",
     loadAppliances: "Ik kies mijn apparaten",
@@ -3753,13 +4189,14 @@ export const LOCALES = {
       "Wat verandert de accu aan uw kosten over 20 jaar? (cumulatieve kosten)",
     cumCostTitleSolar:
       "Wat bespaart zonne-energie werkelijk? (cumulatieve kosten over 20 jaar)",
+    supportSectionTitle: "Dit hulpmiddel steunen",
     donationIntro:
-      "Deze dienst is en blijft gratis. Als u er baat bij had en wilt bijdragen aan de kosten van AI en hosting, vindt u hier hoe.",
+      "Als dit u een telefoontje, een offerte of een middag zoeken bespaarde, kunt u bijdragen aan de weerdata en de hosting. Gratis blijft het sowieso voor iedereen.",
     donationNotTaxDeductible: "niet aftrekbaar van de belasting",
     donationRecipientPrefix: "Bijdragen gaan rechtstreeks naar",
     donationRecipientSuffix: "persoonlijk.",
     donationTerms:
-      "Lees dit voordat u iets overmaakt. Bijdragen zijn vrijwillige giften aan een persoon, geen betaling voor een dienst. Ze zijn niet aftrekbaar van de belasting — dit is geen liefdadigheidsinstelling of geregistreerde non-profitorganisatie. Ze kopen niets: geen voorrang, functies, persoonlijk advies, supportverplichting of gegarandeerde beschikbaarheid van deze site. Iedereen krijgt precies hetzelfde gratis hulpmiddel, ongeacht of men bijdraagt. Stuur geen geld dat u nodig heeft. Als u professionele technische hulp wilde betalen, besteed het dan aan een erkende lokale engineer of elektricien; dat is een betere besteding.",
+      "Vrijwillige gift aan één persoon, geen betaling voor een dienst. Het koopt geen voorrang, functies of support, en het is niet aftrekbaar van de belasting — dit is geen goed doel. Iedereen krijgt hetzelfde gratis hulpmiddel, met of zonder bijdrage.",
     donationTermsPrefix:
       "Elke bijdrage die u kiest te sturen, is een vrijwillige gift aan een persoon. Het is",
     donationTermsSuffix:
@@ -3769,8 +4206,9 @@ export const LOCALES = {
     electricityRateLabel:
       "Elektriciteitsprijs bij u thuis (bepaalt uw rekening- en terugverdientijdschatting) - uw prijs per kWh ($):",
     emailSupportExpectations:
-      "Dit is één persoon die e-mail in zijn eigen tijd beantwoordt, als gunst — geen helpdesk. Ik lees wat ik kan en antwoord wanneer ik daartoe in staat ben, maar ik kan geen antwoord of termijn beloven. Alles wat ik terugstuur is een vriendelijke mening voor uw eigen verdere onderzoek, geen professioneel technisch, elektrisch of financieel advies, en schept geen professionele relatie of verplichting. Praat voor alles wat u echt wilt bouwen, inschakelen of waar u echt geld aan wilt uitgeven met een erkende elektricien of engineer in uw omgeving.",
-    emailWelcome: "U kunt me mailen:",
+      "Het is één persoon die in zijn eigen tijd leest, dus een antwoord kan even duren. Wat ik terugstuur is een vriendelijke mening voor uw eigen onderzoek, geen professioneel advies op het gebied van techniek, elektra of financiën. Praat voor alles wat u echt gaat bouwen, aansluiten of betalen met een erkende elektricien of engineer bij u in de buurt.",
+    emailTitle: "Iets mee gebouwd — of een getal gevonden dat er niet klopt?",
+    emailWelcome: "Mail me in beide gevallen:",
     endplateSpec:
       "Eindplaten met schotelveren zorgen voor gelijkmatige compressie (ongeveer 3.000 N). Fabrikanten noemen voordelen voor de levensduur; specifieke winst moet als niet-geverifieerd worden beschouwd.",
     estimateMethodDisclaimer:
@@ -3788,7 +4226,7 @@ export const LOCALES = {
     footerHeatmap: "Wereldkaart",
     footerTerms: "Voorwaarden",
     footerWarranty:
-      "Deze site wordt gratis en zonder enige garantie verstrekt, expliciet noch impliciet. Schattingen zijn uitsluitend educatief en kunnen onjuist zijn. Werken met accu's, hoge DC-stromen en netbedrading kan brand, ernstig letsel of overlijden veroorzaken — u bent verantwoordelijk voor uw veiligheid, uw keuzes en naleving van lokale elektrische voorschriften. Laat alles vóór de bouw controleren door een erkende vakman. - Blog - Wereldwijde benchmarks - Wereldkaart - Over - Voorwaarden - Support - lucasballek@gmail.com",
+      "Deze site wordt gratis en zonder enige garantie verstrekt, expliciet noch impliciet. Schattingen zijn uitsluitend educatief en kunnen onjuist zijn. Werken met accu's, hoge DC-stromen en netbedrading kan brand, ernstig letsel of overlijden veroorzaken — u bent verantwoordelijk voor uw veiligheid, uw keuzes en naleving van lokale elektrische voorschriften. Laat alles vóór de bouw controleren door een erkende vakman.",
     freeToolDisclaimer:
       "Kort gezegd: dit is een gratis educatief hulpmiddel dat grove schattingen maakt, door één persoon wordt beheerd en zonder enige garantie wordt aangeboden.",
     fxRateHelp:
@@ -3921,7 +4359,14 @@ export const LOCALES = {
     worstMonthNote:
       "Donkerste maand: {month} — ongeveer {avg} kWh/m²/dag gemiddelde zon. Dimensioneer voor deze maand, niet voor het jaargemiddelde, anders schiet het systeem tekort in grijze weken.",
     bomSelectedSystem: "Geselecteerd systeem",
-    fxAsOfNote: "Live koersen per {asOf}.",
+    fxSourceStatic:
+      "Bron van de wisselkoers: open.er-api.com. Er is geen live koers geladen, dus dit zijn ingebouwde schattingen.",
+    fxSourceLive:
+      "Bron van de wisselkoers: open.er-api.com, per {asOf} — deze datum is die van de wisselkoers; de weercijfers beslaan vijf jaar uurgegevens.",
+    fxSourceStale:
+      "Bron van de wisselkoers: open.er-api.com, laatst bijgewerkt op {asOf} ({days} dagen geleden). Controleer de koers voordat u erop vertrouwt.",
+    fxSourceFailed:
+      "Bron van de wisselkoers: open.er-api.com. Het verversen van de live koers is mislukt, dus dit zijn ingebouwde schattingen.",
     advisorIntakeBillLabel: "Maandelijkse energierekening ($ USD):",
     advisorIntakeKwhLabel: "Dagelijks energieverbruik (kWh / dag):",
     advisorIntakeBillPh: "bijv. 400",
@@ -3930,9 +4375,26 @@ export const LOCALES = {
       "Een accu van {battKwh} kWh voorkomt vervanging en kost {savings} minder in 20 jaar.",
     engineSwapsCheaper:
       "Standaard met {replacements} accuwissels kost {savings} minder in 20 jaar dan groter.",
+    engineZeroSwapSolarOnly:
+      "Beste 20-jaarsprijs: een installatie met alleen zonnepanelen heeft geen batterijvervangings- of degradatiekosten.",
+    engineZeroSwapNatural:
+      "Beste 20-jaarsprijs: het batterijpakket overleeft de 20-jaarshorizon vanzelf zonder vervangingen.",
+    engineStrategyOffSwaps:
+      "Vergrotingsstrategie uit: de directe keuze van de engine — {replacements} batterijvervanging(en) over 20 jaar zijn in de levensduurkosten meegerekend.",
+    engineStrategyOffNoSwaps:
+      "Vergrotingsstrategie uit: de directe keuze van de engine — het pakket gaat al de volledige 20 jaar mee zonder vervangingen.",
+    engineSwapsCheaperNoFigures:
+      "Beste 20-jaarsprijs: standaardformaat met batterijvervangingen is over 20 jaar goedkoper dan vooraf betalen voor vergroting.",
+    engineZeroSwapBeyondSearch:
+      "Beste 20-jaarsprijs: standaardformaat met batterijvervangingen is de praktische keuze — een pakket zonder vervangingen valt buiten de formaten die dit hulpmiddel zoekt.",
+    engineStandardSizingCheapest:
+      "Beste 20-jaarsprijs: standaardformaat is over 20 jaar goedkoper dan vooraf betalen voor vergroting.",
+    engineExactHardwareSwaps:
+      "Beste 20-jaarsprijs voor precies deze hardware: standaardformaat met {replacements} vervanging(en) over 20 jaar (hierboven geteld).",
   },
   ar: {
     ...HOME_COPY.ar,
+    ...RESULT_COPY.ar,
     rtl: true,
     sizingFor: "ما الذي تحدد حجمه؟",
     goalCutBill: "تقليل فاتورة الكهرباء",
@@ -3995,15 +4457,17 @@ export const LOCALES = {
     useCasePortableBlurb:
       "محطة طاقة لشاحنة أو قارب أو مخيم. بلا سطح، بلا شبكة، بلا تعرفة.",
     metricBillCut: "من فاتورتك يزيلها النظام على مدى 20 عامًا",
+    metricBillCutReserve:
+      "من فاتورتك يزيلها النظام على مدى 20 عامًا، مع إبقاء {pct}% من البطارية احتياطيًا",
     metricTouOffset: "من طاقتك في ساعات الذروة تغطيها البطارية",
     metricOutageCoverage:
       "من انقطاعات الكهرباء التي تصمد الأساسيات خلالها طوال المدة المطلوبة",
     metricReserveTradeoff: "تكلفة الاحتفاظ بالهامش، بالوفورات والساعات",
     metricGridIndependence: "من السنة تعمل بلا شبكة إطلاقًا",
     metricPortableRuntime: "من الأيام التي تغذّي فيها المحطة أجهزتك طوال اليوم",
-    statusWorks: "ينجح",
-    statusPartial: "جزئيًا",
-    statusNotHere: "لا ينجح هنا",
+    verdictLeadWorks: "هذا يعمل هنا.",
+    verdictLeadPartial: "هذا ينجح إلى حد كبير.",
+    verdictLeadNotHere: "هذا لا يكفي هنا.",
     useCaseOutcomeTitle: "نتيجتك: {useCase}",
     useCaseVerdictFooter:
       "{useCase}: قِيست باستخدام الطقس الساعي لهذا الموقع، وليست تقديرًا.",
@@ -4026,20 +4490,19 @@ export const LOCALES = {
     generatorRuntime0: "0% \u2014 أبداً",
     generatorRuntime1: "1% \u2014 بضعة أيام في السنة",
     generatorRuntime2: "2%+ \u2014 لا مشكلة عند الحاجة",
-    verdictBillCut:
-      "{status}: يزيل هذا النظام {pct}% من فاتورتك على مدى 20 عامًا.",
+    verdictBillCut: "يزيل هذا النظام {pct}% من فاتورتك على مدى 20 عامًا.",
     verdictTou:
-      "{status}: تغطي البطارية {pct}% من طاقتك في ساعات الذروة، بقيمة نحو {saving} على مدى 20 عامًا مقابل بطارية تكلف {cost}. الفارق بين الذروة وخارج الذروة هنا {spread} لكل ك.و.س.",
+      "تغطي البطارية {pct}% من طاقتك في ساعات الذروة، بقيمة نحو {saving} على مدى 20 عامًا مقابل بطارية تكلف {cost}. الفارق بين الذروة وخارج الذروة هنا {spread} لكل ك.و.س.",
     verdictBackup:
-      "{status}: تعمل أساسياتك كاملة الساعات {targetHours} في {pct}% من انقطاعات الكهرباء التي حاكيناها (ليلة نموذجية: {hours} ساعات).",
+      "تعمل أساسياتك كاملة الساعات {targetHours} في {pct}% من انقطاعات الكهرباء التي حاكيناها (ليلة نموذجية: {hours} ساعات).",
     verdictReserve:
-      "{status}: الاحتفاظ بهذا الهامش يكلفك {pct}% من وفورك ويشتري {coverHours} ساعة من التغطية.",
+      "الاحتفاظ بهذا الهامش يكلفك {pct}% من وفورك ويشتري {coverHours} ساعة من التغطية.",
     verdictReserveNoBattery:
       "لا يوجد مكان للاحتفاظ بهامش: أرخص نظام لهذا الهدف لا يحمل بطارية إطلاقًا.",
     verdictOffGrid:
-      "{status}: {pct}% من السنة تعمل بلا شبكة — تنقص {unmetHours} ساعة في أسوأ عام، مع {autonomy} يومًا من الاستقلالية.",
+      "{pct}% من السنة تعمل بلا شبكة — تنقص {unmetHours} ساعة في أسوأ عام، مع {autonomy} يومًا من الاستقلالية (المدة التي تشغّل فيها البطارية وحدها الأساسيات).",
     verdictPortable:
-      "{status}: تغذّي محطتك أجهزتك طوال اليوم في {days} يومًا من {trips} يومًا هنا، وشحنة واحدة تدوم {runtime} ساعة.",
+      "تغذّي محطتك أجهزتك طوال اليوم في {days} يومًا من {trips} يومًا هنا، وشحنة واحدة تدوم {runtime} ساعة.",
     cityLabel: "أين سيُركَّب النظام؟",
     loadLabel: "كم تستهلك من الطاقة؟",
     loadAppliances: "أختار أجهزتي الكهربائية",
@@ -4062,7 +4525,7 @@ export const LOCALES = {
     tariffNote: "سعر تقديري لـ {label} — غيّره أعلاه إذا كنت تعرف تعريفتك.",
     pickCity: "اختر مدينة (أو استخدم 📍 موقعي) لمعرفة إشعاعك الشمسي.",
     shareLoaded:
-      "تم تحميل الإعدادات المشتركة. راجع المدخلات ثم اضغط احسب نظامي لبدء الحساب.",
+      "هذه نتيجة شاركها معك شخص آخر، محسوبة من موقعه واستهلاكه. غيّر أي إدخال لتقدير نظامك الخاص.",
     invalidShare:
       "تعذّرت قراءة رابط المشاركة — ربما قُطع عند نسخه. تجاهله واضبط تقديرك الخاص أدناه.",
     customCoordsLocation: "يجري استخدام الإحداثيات المخصصة ({lat}, {lon}).",
@@ -4097,6 +4560,25 @@ export const LOCALES = {
       "بسعر {tariff}/كيلوواط/ساعة، يكلفك هذا الاستخدام حوالي {annual} سنويًا من كهرباء الشبكة. أرقام الاسترداد أدناه تقارن تكلفة النظام بهذا الإنفاق.",
     tariffSpendFixed:
       " ويشمل ذلك {fixed}/شهريًا في رسوم ثابتة لا تخفضها الطاقة الشمسية.",
+    // -- شروح الفهم (E13/V4): كلمات بسيطة عند أول استخدام.
+    glossKwhDay:
+      "كيلوواط ساعة/يوم تعني كيلوواط-ساعة في اليوم — وحدة فاتورتك. يستهلك منزل أمريكي نموذجي نحو 30.",
+    glossTier:
+      "الهدف هو حصة السنة دون شبكة: 99% تترك يومًا في السنة على المولد، و100% لا يحتاجه أبدًا.",
+    ladderIntro:
+      "ثلاثة عروض لنتيجة واحدة: الاختيار الأفضل هو النظام الذي سنبنيه، ومقارنة البطاريات تضع الكيمياءات جنبًا إلى جنب، وكل الخيارات هو الجدول الكامل.",
+    includesNote:
+      "ما تشمله التكلفتان: الأولى تدفع العتاد والتركيب مرة واحدة؛ ورقم العشرين سنة يغطي أيضًا الاستبدال والوقود والصيانة.",
+    presetWho: "إعدادات سريعة — اختر لمن:",
+    presetCabin: "كوخ نهاية الأسبوع — إضاءة وهاتف وثلاجة صغيرة",
+    presetVan: "فان تخييم — شخصان بلا شبكة",
+    presetHome: "منزل عادي — نقطة البداية المعتادة",
+    presetHomestead: "مزرعة — عائلة وكل شيء كهربائي",
+    presetBackup: "نسخة احتياطية حرجة — الأساسيات أثناء انقطاع",
+    presetClear: "مسح الكل",
+    tierOption100: "100% — دون مولد أبدًا",
+    tierOption99: "99% — المولد نحو يوم في السنة",
+    tierOption95: "95% — المولد من وقت لآخر",
     lvlBest: "الاختيار الأفضل",
     lvlCompare: "مقارنة البطاريات",
     lvlMatrix: "كل الخيارات",
@@ -4104,6 +4586,31 @@ export const LOCALES = {
     manualModeHint: "— اضبط كل شيء",
     simpleModeLabel: "الوضع المبسط",
     simpleModeHint: "الأرقام الأساسية فقط",
+    simpleSolar: "شمسي",
+    simpleBattery: "بطارية",
+    simpleFirstCost: "التكلفة الأولية",
+    simplePanels: "حوالي {panels} لوحًا",
+    simpleKwhUsable: "{kwh} كيلوواط ساعة قابلة للاستخدام",
+    simpleKwhInstalled:
+      "حوالي {kwh} كيلوواط ساعة مركّبة (سعة اللوحة؛ المتاح هو ما يمكنك سحبه)",
+    simpleWhatItDoes: "ماذا يفعل",
+    simpleYearCovered: "{pct}% من السنة مغطاة",
+    simpleBillCut: "يقلّل فاتورتك بنحو {pct}%",
+    simplePeakShift:
+      "ينقل نحو {pct}% من ساعات الذروة إلى البطارية — فاتورتك لا تتغيّر",
+    simpleSaved: "موفَّر على مدى 20 عامًا",
+    simpleNoPayback: "لا يُسترد خلال 20 عامًا",
+    simplePayback: "فترة الاسترداد",
+    simpleModeTechnical: "الوضع التقني",
+    simpleModeAria: "{mode} مفعّل",
+    simpleHintFeedIn: "({unit}/كيلوواط ساعة، اختياري — متصل بالشبكة فقط)",
+    simpleHintFixed: "({unit}/شهر، اختياري)",
+    analysisFullBill: "تحليل كامل لتخفيض الفاتورة",
+    analysisFullSystem: "تحليل كامل للنظام",
+    offlineReady: "جاهز دون اتصال",
+    backOnline: "عاد الاتصال",
+    offlineBadgeTitle:
+      "يعمل دون اتصال ببيانات التطبيق المخزّنة ومحاكاة الطقس المحلية",
     mapDrawAction: "ارسم هذه المنطقة على خريطة اختيارية",
     matrixScroll: "جدول مقارنة قابل للتمرير",
     bomPanelTitle: "قائمة المعدات الخاصة بك — مم يتكون هذا النظام",
@@ -4138,7 +4645,7 @@ export const LOCALES = {
     simpleAskAdvisor: "اسأل مستشار الذكاء الاصطناعي (بكلمات بسيطة)",
     sanityOk: "تم التحقق بشكل مستقل ✓ — معقول فيزيائيًا",
     sanityFlag:
-      "⚠ تشير مراجعة ذكاء اصطناعي مستقلة إلى أن هذه النتيجة غير معقولة فيزيائيًا —",
+      "⚠ يشك فحص مستقل بالذكاء الاصطناعي في أن تكون هذه الأرقام ممكنة فيزيائيًا. قد يكون مخطئًا ولا يغيّر نتيجتك أبدًا.",
     sanityAskAdvisor: "اسأل المستشار لماذا",
     sanityUncertain:
       "التحقق غير حاسم — لم يتمكن الفحص المستقل بالذكاء الاصطناعي من الوصول إلى حكم واثق بشأن هذه المدخلات",
@@ -4158,6 +4665,11 @@ export const LOCALES = {
     advisorPlaceholder:
       "اسأل عن الخلايا، أيوني الصوديوم مقابل LFP، تكلفة الشحن...",
     advisorSend: "إرسال",
+    advisorAskResult: "اشرح لي هذه النتيجة.",
+    valueMomentAskLead: "إذا وفّر عليك هذا مكالمة أو عرض سعر:",
+    valueMomentAskChipIn: "المساهمة",
+    valueMomentAskWorked: "أخبرني إن نجح الأمر",
+    valueMomentAskSend: "أرسل هذه النتيجة لمن يطلب عرض سعر لنظام",
     advisorClose: "إغلاق مستشار الذكاء الاصطناعي",
     advisorBusyRetry:
       " محرك الذكاء الاصطناعي المجاني مشغول — إعادة المحاولة خلال {secs}s…",
@@ -4520,7 +5032,14 @@ export const LOCALES = {
     worstMonthNote:
       "الأشهر الأكثر عتمة: {month} — نحو {avg} كيلوواط ساعة/م²/يوم من الشمس المتوسطة. صمّم لهذا الشهر، لا للمتوسط السنوي، وإلا لن يكفِ النظام في الأسابيع الغائمة.",
     bomSelectedSystem: "النظام المحدد",
-    fxAsOfNote: "أسعار مباشرة حتى {asOf}.",
+    fxSourceStatic:
+      "مصدر سعر الصرف: open.er-api.com. لم يتم تحميل سعر مباشر، لذا هذه تقديرات مدمجة.",
+    fxSourceLive:
+      "مصدر سعر الصرف: open.er-api.com، بتاريخ {asOf} — هذا التاريخ هو تاريخ سعر الصرف؛ بيانات الطقس تغطي خمس سنوات من السجلات الساعية.",
+    fxSourceStale:
+      "مصدر سعر الصرف: open.er-api.com، آخر تحديث {asOf} (قبل {days} يومًا). تحقّق من السعر قبل الاعتماد عليه.",
+    fxSourceFailed:
+      "مصدر سعر الصرف: open.er-api.com. فشل التحديث المباشر، لذا هذه تقديرات مدمجة.",
     advisorIntakeBillLabel: "فاتورة الكهرباء الشهرية ($ دولار أمريكي):",
     advisorIntakeKwhLabel: "استهلاك الطاقة اليومي (كيلوواط ساعة / اليوم):",
     advisorIntakeBillPh: "مثال: 400",
@@ -4529,5 +5048,21 @@ export const LOCALES = {
       "بطارية {battKwh} ك.و.س تتجنب الاستبدال وتكلف {savings} أقل خلال 20 عامًا.",
     engineSwapsCheaper:
       "الحجم القياسي مع {replacements} استبدال يكلف {savings} أقل خلال 20 عامًا من الحجم الأكبر.",
+    engineZeroSwapSolarOnly:
+      "أفضل سعر على 20 عامًا: النظام الشمسي وحده لا يتكبد تكاليف استبدال أو تدهور للبطارية.",
+    engineZeroSwapNatural:
+      "أفضل سعر على 20 عامًا: بنك البطاريات يدوم طبيعيًا طوال أفق العشرين عامًا دون أي استبدال.",
+    engineStrategyOffSwaps:
+      "استراتيجية التكبير معطلة: اختيار المحرك المباشر — تُحتسب {replacements} عمليات استبدال للبطارية خلال 20 عامًا ضمن التكلفة الإجمالية.",
+    engineStrategyOffNoSwaps:
+      "استراتيجية التكبير معطلة: اختيار المحرك المباشر — البنك يدوم بالفعل طوال العشرين عامًا دون أي استبدال.",
+    engineSwapsCheaperNoFigures:
+      "أفضل سعر على 20 عامًا: الحجم القياسي مع استبدال البطاريات أرخص على 20 عامًا من الدفع مقدمًا للتكبير.",
+    engineZeroSwapBeyondSearch:
+      "أفضل سعر على 20 عامًا: الحجم القياسي مع استبدال البطاريات هو الخيار العملي — بنك بلا استبدال يتجاوز الأحجام التي يبحث عنها هذا البرنامج.",
+    engineStandardSizingCheapest:
+      "أفضل سعر على 20 عامًا: الحجم القياسي أرخص على 20 عامًا من الدفع مقدمًا للتكبير.",
+    engineExactHardwareSwaps:
+      "أفضل سعر على 20 عامًا لهذه المعدات تحديدًا: الحجم القياسي مع {replacements} استبدال خلال 20 عامًا (محتسبة أعلاه).",
   },
 };

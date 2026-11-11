@@ -1,0 +1,15 @@
+{
+  "status": "ok",
+  "service": "BigEnergyCo Cloudflare Worker API",
+  "version": "2.1",
+  "model": "openai/gpt-oss-120b",
+  "promptVersion": "2026-09a",
+  "jevSanity": true,
+  "rateLimits": {
+    "perIpPerMinute": 8,
+    "perIpPerDay": 150,
+    "globalPerDay": 3000,
+    "maxMessageChars": 4000,
+    "maxBodyBytes": 20000
+  }
+}

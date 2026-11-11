@@ -39,10 +39,19 @@ function cliList() {
 
 test("MANIFEST SIZE: the deploy contract stays within its known envelope", () => {
   const n = deployList().length;
-  // 391 at time of writing (352 + 18 heatmap PNGs + 8 new heatmap/data files + 13 others).
-  // A drop means the enumeration broke; a big jump means something unreviewed
-  // entered the allowlist dirs.
-  assert.ok(n >= 380 && n <= 420, `deploy list = ${n}, expected ~391`);
+  // 720 at time of writing: 500 before the data registry's country rows landed
+  // (P2.3, R-DATA-02), plus 220 - one file per country the calculator can
+  // resolve, each carrying its cited currency and an explicit unknown for every
+  // value nobody has read at a primary source yet. They are reviewed as data,
+  // not as code: the schema is the guard (scripts/build-registry.mjs), and
+  // tests/registry-coverage.test.mjs pins coverage, determinism and that no
+  // seeded row claims a number.
+  //
+  // The band is deliberately narrow: a drop means the enumeration broke, and a
+  // jump means something unreviewed entered the allowlist dirs. Widening it is
+  // a review decision, so the reason is recorded here rather than the number
+  // simply floated upward.
+  assert.ok(n >= 700 && n <= 740, `deploy list = ${n}, expected ~720`);
 });
 test("MANIFEST CONTENT: every file it names is git-tracked", () => {
   const tracked = trackedFiles();

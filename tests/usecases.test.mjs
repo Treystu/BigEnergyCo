@@ -25,6 +25,7 @@ import {
   normaliseOutageTarget,
   outcomeFor,
 } from "../assets/js/sizing/usecases.js";
+import { LOCALES } from "../assets/js/shared/locales.js";
 import { FACET_EVIDENCE } from "../scripts/lib/jev-facet-evidence.mjs";
 import {
   buildE1kw,
@@ -292,6 +293,51 @@ test("outcomeFor never invents an outcome for an unknown use case", () => {
   });
   assert.equal(o.metricId, "grid_independence_pct");
   assert.equal(o.measured, true);
+});
+
+test("the bill-cut label states the reserve basis both numbers rest on", () => {
+  // Measured in the browser 2026-11-08: the chip read −81% (the system with its
+  // whole bank available) while the outcome card beside it read 76% (the same
+  // system with the visitor's 20% reserve held back). Neither label said which
+  // basis it quoted, so the card looked self-contradictory. The label now says
+  // it whenever a reserve is held, and the chip says it quotes the full bank.
+  const withReserve = outcomeFor("billcut", {
+    billCutPct: 76,
+    reservePct: 0.2,
+    measured: true,
+  });
+  assert.equal(withReserve.labelKey, "metricBillCutReserve");
+  assert.equal(withReserve.value, 76);
+
+  const noReserve = outcomeFor("billcut", {
+    billCutPct: 81,
+    reservePct: 0,
+    measured: true,
+  });
+  assert.equal(noReserve.labelKey, "metricBillCut");
+
+  // Only the bill-cut case has a reserve-qualified twin; every other metric
+  // keeps its own label even on a run that holds a reserve.
+  for (const id of USE_CASE_IDS.filter((x) => x !== "billcut")) {
+    const o = outcomeFor(id, { reservePct: 0.2, measured: true });
+    assert.notEqual(o.labelKey, "metricBillCutReserve", id);
+  }
+
+  // Parity is checked by check-i18n, but a key only `en` carries would fall
+  // back silently, so the placeholder is pinned here in every locale.
+  for (const [lang, dict] of Object.entries(LOCALES)) {
+    assert.equal(typeof dict.metricBillCutReserve, "string", lang);
+    assert.match(dict.metricBillCutReserve, /\{pct\}/, lang);
+  }
+
+  // The chip's side of the reconciliation, pinned in source because it is
+  // rendered copy rather than a registry value.
+  const uiJs = fs.readFileSync("assets/js/sizing/ui.js", "utf8");
+  assert.match(
+    uiJs,
+    /reserveHeldPct > 0\s*\?\s*t\("resBillCutNoReserve"\)\s*:\s*t\("resBillCutChip"\)/,
+    "the chip must state the reserve basis through its locale keys, never an English literal",
+  );
 });
 
 test("an unmeasured run reports 'not measured' rather than a verdict", () => {

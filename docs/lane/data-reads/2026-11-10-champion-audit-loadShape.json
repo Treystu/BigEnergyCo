@@ -1,0 +1,1445 @@
+{
+  "issue": 351,
+  "generated": "2026-11-10T04:58:04.452Z",
+  "head": null,
+  "acceptance": {
+    "COST_DELTA_REQUIRED": 0.02,
+    "PERSONA_SHARE_REQUIRED": 0.25,
+    "ENERGY_MATCH_REQUIRED": 0.05
+  },
+  "shippedDefault": "flat",
+  "summary": {
+    "blockStart": {
+      "cases": 32,
+      "personas": 8,
+      "personasShifted": 8,
+      "share": 1,
+      "meanDelta": 0.01722,
+      "minDelta": -0.269561,
+      "maxDelta": 0.287879,
+      "maxEnergyError": 0,
+      "qualifies": true
+    },
+    "dutyAware": {
+      "cases": 32,
+      "personas": 8,
+      "personasShifted": 7,
+      "share": 0.875,
+      "meanDelta": 0.024921,
+      "minDelta": -0.179302,
+      "maxDelta": 0.2482,
+      "maxEnergyError": 0,
+      "qualifies": true
+    }
+  },
+  "rows": [
+    {
+      "personal": "cabin-basics @ Nairobi, Kenya (offgrid)",
+      "persona": "cabin-basics",
+      "site": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyWh": 1920,
+      "peakWindowWh": {
+        "flat": 400,
+        "blockStart": 200,
+        "dutyAware": 408.3
+      },
+      "maxHourWh": {
+        "flat": 80,
+        "blockStart": 175,
+        "dutyAware": 121.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 1,
+          "battKwh": 2,
+          "cost": 831
+        },
+        "blockStart": {
+          "pvKw": 1,
+          "battKwh": 2,
+          "cost": 831
+        },
+        "dutyAware": {
+          "pvKw": 1,
+          "battKwh": 1,
+          "cost": 682
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0,
+        "dutyAware": -0.179302
+      },
+      "ms": 44
+    },
+    {
+      "personal": "cabin-basics @ Nairobi, Kenya (billcut)",
+      "persona": "cabin-basics",
+      "site": "Nairobi, Kenya",
+      "mode": "billcut",
+      "dailyWh": 1920,
+      "peakWindowWh": {
+        "flat": 400,
+        "blockStart": 200,
+        "dutyAware": 408.3
+      },
+      "maxHourWh": {
+        "flat": 80,
+        "blockStart": 175,
+        "dutyAware": 121.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 0.36,
+          "battKwh": 1,
+          "cost": 340
+        },
+        "blockStart": {
+          "pvKw": 0.36,
+          "battKwh": 1,
+          "cost": 340
+        },
+        "dutyAware": {
+          "pvKw": 0.36,
+          "battKwh": 1,
+          "cost": 340
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "ms": 249
+    },
+    {
+      "personal": "cabin-basics @ London, UK (offgrid)",
+      "persona": "cabin-basics",
+      "site": "London, UK",
+      "mode": "offgrid",
+      "dailyWh": 1920,
+      "peakWindowWh": {
+        "flat": 400,
+        "blockStart": 200,
+        "dutyAware": 408.3
+      },
+      "maxHourWh": {
+        "flat": 80,
+        "blockStart": 175,
+        "dutyAware": 121.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 3.5,
+          "battKwh": 2,
+          "cost": 1826
+        },
+        "blockStart": {
+          "pvKw": 3,
+          "battKwh": 2,
+          "cost": 1609
+        },
+        "dutyAware": {
+          "pvKw": 3.5,
+          "battKwh": 2,
+          "cost": 1826
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.118839,
+        "dutyAware": 0
+      },
+      "ms": 41
+    },
+    {
+      "personal": "cabin-basics @ London, UK (billcut)",
+      "persona": "cabin-basics",
+      "site": "London, UK",
+      "mode": "billcut",
+      "dailyWh": 1920,
+      "peakWindowWh": {
+        "flat": 400,
+        "blockStart": 200,
+        "dutyAware": 408.3
+      },
+      "maxHourWh": {
+        "flat": 80,
+        "blockStart": 175,
+        "dutyAware": 121.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 1.22,
+          "battKwh": 1,
+          "cost": 683
+        },
+        "blockStart": {
+          "pvKw": 1.22,
+          "battKwh": 1,
+          "cost": 683
+        },
+        "dutyAware": {
+          "pvKw": 1.04,
+          "battKwh": 1,
+          "cost": 605
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0,
+        "dutyAware": -0.114202
+      },
+      "ms": 252
+    },
+    {
+      "personal": "family-ac @ Nairobi, Kenya (offgrid)",
+      "persona": "family-ac",
+      "site": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyWh": 9780,
+      "peakWindowWh": {
+        "flat": 2037.5,
+        "blockStart": 4030,
+        "dutyAware": 2138.3
+      },
+      "maxHourWh": {
+        "flat": 407.5,
+        "blockStart": 1275,
+        "dutyAware": 666.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493
+        },
+        "blockStart": {
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493
+        },
+        "dutyAware": {
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "ms": 92
+    },
+    {
+      "personal": "family-ac @ Nairobi, Kenya (billcut)",
+      "persona": "family-ac",
+      "site": "Nairobi, Kenya",
+      "mode": "billcut",
+      "dailyWh": 9780,
+      "peakWindowWh": {
+        "flat": 2037.5,
+        "blockStart": 4030,
+        "dutyAware": 2138.3
+      },
+      "maxHourWh": {
+        "flat": 407.5,
+        "blockStart": 1275,
+        "dutyAware": 666.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 1.98,
+          "battKwh": 4,
+          "cost": 1650
+        },
+        "blockStart": {
+          "pvKw": 1.92,
+          "battKwh": 5,
+          "cost": 1769
+        },
+        "dutyAware": {
+          "pvKw": 1.92,
+          "battKwh": 4,
+          "cost": 1620
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.072121,
+        "dutyAware": -0.018182
+      },
+      "ms": 264
+    },
+    {
+      "personal": "family-ac @ London, UK (offgrid)",
+      "persona": "family-ac",
+      "site": "London, UK",
+      "mode": "offgrid",
+      "dailyWh": 9780,
+      "peakWindowWh": {
+        "flat": 2037.5,
+        "blockStart": 4030,
+        "dutyAware": 2138.3
+      },
+      "maxHourWh": {
+        "flat": 407.5,
+        "blockStart": 1275,
+        "dutyAware": 666.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 15.5,
+          "battKwh": 8,
+          "cost": 7956
+        },
+        "blockStart": {
+          "pvKw": 17,
+          "battKwh": 7,
+          "cost": 8455
+        },
+        "dutyAware": {
+          "pvKw": 16,
+          "battKwh": 8,
+          "cost": 8173
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.06272,
+        "dutyAware": 0.027275
+      },
+      "ms": 189
+    },
+    {
+      "personal": "family-ac @ London, UK (billcut)",
+      "persona": "family-ac",
+      "site": "London, UK",
+      "mode": "billcut",
+      "dailyWh": 9780,
+      "peakWindowWh": {
+        "flat": 2037.5,
+        "blockStart": 4030,
+        "dutyAware": 2138.3
+      },
+      "maxHourWh": {
+        "flat": 407.5,
+        "blockStart": 1275,
+        "dutyAware": 666.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 5.43,
+          "battKwh": 5,
+          "cost": 3123
+        },
+        "blockStart": {
+          "pvKw": 5.43,
+          "battKwh": 4,
+          "cost": 2971
+        },
+        "dutyAware": {
+          "pvKw": 5.43,
+          "battKwh": 5,
+          "cost": 3123
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.048671,
+        "dutyAware": 0
+      },
+      "ms": 286
+    },
+    {
+      "personal": "hot-climate-windows @ Nairobi, Kenya (offgrid)",
+      "persona": "hot-climate-windows",
+      "site": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyWh": 7840,
+      "peakWindowWh": {
+        "flat": 1633.3,
+        "blockStart": 3370,
+        "dutyAware": 1828.3
+      },
+      "maxHourWh": {
+        "flat": 326.7,
+        "blockStart": 1050,
+        "dutyAware": 441.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 2.5,
+          "battKwh": 5,
+          "cost": 2078
+        },
+        "blockStart": {
+          "pvKw": 2.5,
+          "battKwh": 5,
+          "cost": 2078
+        },
+        "dutyAware": {
+          "pvKw": 2.5,
+          "battKwh": 5,
+          "cost": 2078
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "ms": 81
+    },
+    {
+      "personal": "hot-climate-windows @ Nairobi, Kenya (billcut)",
+      "persona": "hot-climate-windows",
+      "site": "Nairobi, Kenya",
+      "mode": "billcut",
+      "dailyWh": 7840,
+      "peakWindowWh": {
+        "flat": 1633.3,
+        "blockStart": 3370,
+        "dutyAware": 1828.3
+      },
+      "maxHourWh": {
+        "flat": 326.7,
+        "blockStart": 1050,
+        "dutyAware": 441.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 1.45,
+          "battKwh": 4,
+          "cost": 1371
+        },
+        "blockStart": {
+          "pvKw": 1.61,
+          "battKwh": 4,
+          "cost": 1453
+        },
+        "dutyAware": {
+          "pvKw": 1.45,
+          "battKwh": 4,
+          "cost": 1371
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.05981,
+        "dutyAware": 0
+      },
+      "ms": 293
+    },
+    {
+      "personal": "hot-climate-windows @ London, UK (offgrid)",
+      "persona": "hot-climate-windows",
+      "site": "London, UK",
+      "mode": "offgrid",
+      "dailyWh": 7840,
+      "peakWindowWh": {
+        "flat": 1633.3,
+        "blockStart": 3370,
+        "dutyAware": 1828.3
+      },
+      "maxHourWh": {
+        "flat": 326.7,
+        "blockStart": 1050,
+        "dutyAware": 441.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 12.5,
+          "battKwh": 7,
+          "cost": 6500
+        },
+        "blockStart": {
+          "pvKw": 13.5,
+          "battKwh": 6,
+          "cost": 6782
+        },
+        "dutyAware": {
+          "pvKw": 13,
+          "battKwh": 7,
+          "cost": 6717
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.043385,
+        "dutyAware": 0.033385
+      },
+      "ms": 165
+    },
+    {
+      "personal": "hot-climate-windows @ London, UK (billcut)",
+      "persona": "hot-climate-windows",
+      "site": "London, UK",
+      "mode": "billcut",
+      "dailyWh": 7840,
+      "peakWindowWh": {
+        "flat": 1633.3,
+        "blockStart": 3370,
+        "dutyAware": 1828.3
+      },
+      "maxHourWh": {
+        "flat": 326.7,
+        "blockStart": 1050,
+        "dutyAware": 441.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 4.46,
+          "battKwh": 4,
+          "cost": 2547
+        },
+        "blockStart": {
+          "pvKw": 4.26,
+          "battKwh": 4,
+          "cost": 2462
+        },
+        "dutyAware": {
+          "pvKw": 4.51,
+          "battKwh": 4,
+          "cost": 2572
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.033373,
+        "dutyAware": 0.009815
+      },
+      "ms": 263
+    },
+    {
+      "personal": "cold-climate-heatpump @ Nairobi, Kenya (offgrid)",
+      "persona": "cold-climate-heatpump",
+      "site": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyWh": 11880,
+      "peakWindowWh": {
+        "flat": 2475,
+        "blockStart": 450,
+        "dutyAware": 2658.3
+      },
+      "maxHourWh": {
+        "flat": 495,
+        "blockStart": 1375,
+        "dutyAware": 601.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 3.5,
+          "battKwh": 8,
+          "cost": 3057
+        },
+        "blockStart": {
+          "pvKw": 3.5,
+          "battKwh": 4,
+          "cost": 2462
+        },
+        "dutyAware": {
+          "pvKw": 3.5,
+          "battKwh": 8,
+          "cost": 3057
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.194635,
+        "dutyAware": 0
+      },
+      "ms": 91
+    },
+    {
+      "personal": "cold-climate-heatpump @ Nairobi, Kenya (billcut)",
+      "persona": "cold-climate-heatpump",
+      "site": "Nairobi, Kenya",
+      "mode": "billcut",
+      "dailyWh": 11880,
+      "peakWindowWh": {
+        "flat": 2475,
+        "blockStart": 450,
+        "dutyAware": 2658.3
+      },
+      "maxHourWh": {
+        "flat": 495,
+        "blockStart": 1375,
+        "dutyAware": 601.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 2.32,
+          "battKwh": 5,
+          "cost": 1981
+        },
+        "blockStart": {
+          "pvKw": 2.16,
+          "battKwh": 2,
+          "cost": 1447
+        },
+        "dutyAware": {
+          "pvKw": 2.32,
+          "battKwh": 5,
+          "cost": 1981
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.269561,
+        "dutyAware": 0
+      },
+      "ms": 276
+    },
+    {
+      "personal": "cold-climate-heatpump @ London, UK (offgrid)",
+      "persona": "cold-climate-heatpump",
+      "site": "London, UK",
+      "mode": "offgrid",
+      "dailyWh": 11880,
+      "peakWindowWh": {
+        "flat": 2475,
+        "blockStart": 450,
+        "dutyAware": 2658.3
+      },
+      "maxHourWh": {
+        "flat": 495,
+        "blockStart": 1375,
+        "dutyAware": 601.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 19,
+          "battKwh": 10,
+          "cost": 9782
+        },
+        "blockStart": {
+          "pvKw": 16,
+          "battKwh": 10,
+          "cost": 8479
+        },
+        "dutyAware": {
+          "pvKw": 19,
+          "battKwh": 10,
+          "cost": 9782
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.133204,
+        "dutyAware": 0
+      },
+      "ms": 234
+    },
+    {
+      "personal": "cold-climate-heatpump @ London, UK (billcut)",
+      "persona": "cold-climate-heatpump",
+      "site": "London, UK",
+      "mode": "billcut",
+      "dailyWh": 11880,
+      "peakWindowWh": {
+        "flat": 2475,
+        "blockStart": 450,
+        "dutyAware": 2658.3
+      },
+      "maxHourWh": {
+        "flat": 495,
+        "blockStart": 1375,
+        "dutyAware": 601.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 6.63,
+          "battKwh": 6,
+          "cost": 3795
+        },
+        "blockStart": {
+          "pvKw": 6.66,
+          "battKwh": 2,
+          "cost": 3198
+        },
+        "dutyAware": {
+          "pvKw": 6.64,
+          "battKwh": 6,
+          "cost": 3802
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.157312,
+        "dutyAware": 0.001845
+      },
+      "ms": 327
+    },
+    {
+      "personal": "remote-work @ Nairobi, Kenya (offgrid)",
+      "persona": "remote-work",
+      "site": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyWh": 3765,
+      "peakWindowWh": {
+        "flat": 784.4,
+        "blockStart": 445,
+        "dutyAware": 653.3
+      },
+      "maxHourWh": {
+        "flat": 156.9,
+        "blockStart": 390,
+        "dutyAware": 331.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 1,
+          "battKwh": 3,
+          "cost": 980
+        },
+        "blockStart": {
+          "pvKw": 1,
+          "battKwh": 2,
+          "cost": 831
+        },
+        "dutyAware": {
+          "pvKw": 1,
+          "battKwh": 2,
+          "cost": 831
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.152041,
+        "dutyAware": -0.152041
+      },
+      "ms": 55
+    },
+    {
+      "personal": "remote-work @ Nairobi, Kenya (billcut)",
+      "persona": "remote-work",
+      "site": "Nairobi, Kenya",
+      "mode": "billcut",
+      "dailyWh": 3765,
+      "peakWindowWh": {
+        "flat": 784.4,
+        "blockStart": 445,
+        "dutyAware": 653.3
+      },
+      "maxHourWh": {
+        "flat": 156.9,
+        "blockStart": 390,
+        "dutyAware": 331.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 0.72,
+          "battKwh": 2,
+          "cost": 680
+        },
+        "blockStart": {
+          "pvKw": 0.72,
+          "battKwh": 2,
+          "cost": 680
+        },
+        "dutyAware": {
+          "pvKw": 0.96,
+          "battKwh": 1,
+          "cost": 660
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0,
+        "dutyAware": -0.029412
+      },
+      "ms": 441
+    },
+    {
+      "personal": "remote-work @ London, UK (offgrid)",
+      "persona": "remote-work",
+      "site": "London, UK",
+      "mode": "offgrid",
+      "dailyWh": 3765,
+      "peakWindowWh": {
+        "flat": 784.4,
+        "blockStart": 445,
+        "dutyAware": 653.3
+      },
+      "maxHourWh": {
+        "flat": 156.9,
+        "blockStart": 390,
+        "dutyAware": 331.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 6,
+          "battKwh": 4,
+          "cost": 3218
+        },
+        "blockStart": {
+          "pvKw": 5.5,
+          "battKwh": 4,
+          "cost": 3000
+        },
+        "dutyAware": {
+          "pvKw": 6,
+          "battKwh": 3,
+          "cost": 3065
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.067744,
+        "dutyAware": -0.047545
+      },
+      "ms": 139
+    },
+    {
+      "personal": "remote-work @ London, UK (billcut)",
+      "persona": "remote-work",
+      "site": "London, UK",
+      "mode": "billcut",
+      "dailyWh": 3765,
+      "peakWindowWh": {
+        "flat": 784.4,
+        "blockStart": 445,
+        "dutyAware": 653.3
+      },
+      "maxHourWh": {
+        "flat": 156.9,
+        "blockStart": 390,
+        "dutyAware": 331.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 2.06,
+          "battKwh": 2,
+          "cost": 1200
+        },
+        "blockStart": {
+          "pvKw": 2.06,
+          "battKwh": 2,
+          "cost": 1198
+        },
+        "dutyAware": {
+          "pvKw": 2.06,
+          "battKwh": 2,
+          "cost": 1198
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": -0.001667,
+        "dutyAware": -0.001667
+      },
+      "ms": 484
+    },
+    {
+      "personal": "kitchen-heavy @ Nairobi, Kenya (offgrid)",
+      "persona": "kitchen-heavy",
+      "site": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyWh": 4521,
+      "peakWindowWh": {
+        "flat": 941.9,
+        "blockStart": 2470,
+        "dutyAware": 2678.3
+      },
+      "maxHourWh": {
+        "flat": 188.4,
+        "blockStart": 1840,
+        "dutyAware": 1881.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 1.5,
+          "battKwh": 3,
+          "cost": 1247
+        },
+        "blockStart": {
+          "pvKw": 1.5,
+          "battKwh": 4,
+          "cost": 1395
+        },
+        "dutyAware": {
+          "pvKw": 1.5,
+          "battKwh": 4,
+          "cost": 1395
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.118685,
+        "dutyAware": 0.118685
+      },
+      "ms": 104
+    },
+    {
+      "personal": "kitchen-heavy @ Nairobi, Kenya (billcut)",
+      "persona": "kitchen-heavy",
+      "site": "Nairobi, Kenya",
+      "mode": "billcut",
+      "dailyWh": 4521,
+      "peakWindowWh": {
+        "flat": 941.9,
+        "blockStart": 2470,
+        "dutyAware": 2678.3
+      },
+      "maxHourWh": {
+        "flat": 188.4,
+        "blockStart": 1840,
+        "dutyAware": 1881.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 0.96,
+          "battKwh": 2,
+          "cost": 809
+        },
+        "blockStart": {
+          "pvKw": 0.96,
+          "battKwh": 3,
+          "cost": 958
+        },
+        "dutyAware": {
+          "pvKw": 0.96,
+          "battKwh": 3,
+          "cost": 958
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.184178,
+        "dutyAware": 0.184178
+      },
+      "ms": 409
+    },
+    {
+      "personal": "kitchen-heavy @ London, UK (offgrid)",
+      "persona": "kitchen-heavy",
+      "site": "London, UK",
+      "mode": "offgrid",
+      "dailyWh": 4521,
+      "peakWindowWh": {
+        "flat": 941.9,
+        "blockStart": 2470,
+        "dutyAware": 2678.3
+      },
+      "maxHourWh": {
+        "flat": 188.4,
+        "blockStart": 1840,
+        "dutyAware": 1881.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 7.5,
+          "battKwh": 4,
+          "cost": 3869
+        },
+        "blockStart": {
+          "pvKw": 7.5,
+          "battKwh": 5,
+          "cost": 4022
+        },
+        "dutyAware": {
+          "pvKw": 7.5,
+          "battKwh": 4,
+          "cost": 3869
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.039545,
+        "dutyAware": 0
+      },
+      "ms": 161
+    },
+    {
+      "personal": "kitchen-heavy @ London, UK (billcut)",
+      "persona": "kitchen-heavy",
+      "site": "London, UK",
+      "mode": "billcut",
+      "dailyWh": 4521,
+      "peakWindowWh": {
+        "flat": 941.9,
+        "blockStart": 2470,
+        "dutyAware": 2678.3
+      },
+      "maxHourWh": {
+        "flat": 188.4,
+        "blockStart": 1840,
+        "dutyAware": 1881.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 2.76,
+          "battKwh": 2,
+          "cost": 1503
+        },
+        "blockStart": {
+          "pvKw": 2.76,
+          "battKwh": 3,
+          "cost": 1655
+        },
+        "dutyAware": {
+          "pvKw": 2.64,
+          "battKwh": 3,
+          "cost": 1604
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.101131,
+        "dutyAware": 0.067199
+      },
+      "ms": 425
+    },
+    {
+      "personal": "homestead-water @ Nairobi, Kenya (offgrid)",
+      "persona": "homestead-water",
+      "site": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyWh": 3040,
+      "peakWindowWh": {
+        "flat": 633.3,
+        "blockStart": 370,
+        "dutyAware": 828.3
+      },
+      "maxHourWh": {
+        "flat": 126.7,
+        "blockStart": 935,
+        "dutyAware": 241.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 1,
+          "battKwh": 2,
+          "cost": 831
+        },
+        "blockStart": {
+          "pvKw": 1,
+          "battKwh": 3,
+          "cost": 980
+        },
+        "dutyAware": {
+          "pvKw": 1,
+          "battKwh": 3,
+          "cost": 980
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.179302,
+        "dutyAware": 0.179302
+      },
+      "ms": 69
+    },
+    {
+      "personal": "homestead-water @ Nairobi, Kenya (billcut)",
+      "persona": "homestead-water",
+      "site": "Nairobi, Kenya",
+      "mode": "billcut",
+      "dailyWh": 3040,
+      "peakWindowWh": {
+        "flat": 633.3,
+        "blockStart": 370,
+        "dutyAware": 828.3
+      },
+      "maxHourWh": {
+        "flat": 126.7,
+        "blockStart": 935,
+        "dutyAware": 241.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 0.56,
+          "battKwh": 2,
+          "cost": 594
+        },
+        "blockStart": {
+          "pvKw": 0.6,
+          "battKwh": 3,
+          "cost": 765
+        },
+        "dutyAware": {
+          "pvKw": 0.56,
+          "battKwh": 2,
+          "cost": 594
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.287879,
+        "dutyAware": 0
+      },
+      "ms": 436
+    },
+    {
+      "personal": "homestead-water @ London, UK (offgrid)",
+      "persona": "homestead-water",
+      "site": "London, UK",
+      "mode": "offgrid",
+      "dailyWh": 3040,
+      "peakWindowWh": {
+        "flat": 633.3,
+        "blockStart": 370,
+        "dutyAware": 828.3
+      },
+      "maxHourWh": {
+        "flat": 126.7,
+        "blockStart": 935,
+        "dutyAware": 241.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 5,
+          "battKwh": 3,
+          "cost": 2630
+        },
+        "blockStart": {
+          "pvKw": 4.5,
+          "battKwh": 5,
+          "cost": 2719
+        },
+        "dutyAware": {
+          "pvKw": 5,
+          "battKwh": 3,
+          "cost": 2630
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.03384,
+        "dutyAware": 0
+      },
+      "ms": 103
+    },
+    {
+      "personal": "homestead-water @ London, UK (billcut)",
+      "persona": "homestead-water",
+      "site": "London, UK",
+      "mode": "billcut",
+      "dailyWh": 3040,
+      "peakWindowWh": {
+        "flat": 633.3,
+        "blockStart": 370,
+        "dutyAware": 828.3
+      },
+      "maxHourWh": {
+        "flat": 126.7,
+        "blockStart": 935,
+        "dutyAware": 241.7
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 1.64,
+          "battKwh": 2,
+          "cost": 1019
+        },
+        "blockStart": {
+          "pvKw": 1.69,
+          "battKwh": 3,
+          "cost": 1191
+        },
+        "dutyAware": {
+          "pvKw": 1.64,
+          "battKwh": 2,
+          "cost": 1019
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.168793,
+        "dutyAware": 0
+      },
+      "ms": 450
+    },
+    {
+      "personal": "ev-and-pool @ Nairobi, Kenya (offgrid)",
+      "persona": "ev-and-pool",
+      "site": "Nairobi, Kenya",
+      "mode": "offgrid",
+      "dailyWh": 14730,
+      "peakWindowWh": {
+        "flat": 3068.8,
+        "blockStart": 430,
+        "dutyAware": 1471.7
+      },
+      "maxHourWh": {
+        "flat": 613.8,
+        "blockStart": 1570,
+        "dutyAware": 1778.3
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 4,
+          "battKwh": 9,
+          "cost": 3473
+        },
+        "blockStart": {
+          "pvKw": 4.5,
+          "battKwh": 11,
+          "cost": 4037
+        },
+        "dutyAware": {
+          "pvKw": 4.5,
+          "battKwh": 13,
+          "cost": 4335
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.162396,
+        "dutyAware": 0.2482
+      },
+      "ms": 267
+    },
+    {
+      "personal": "ev-and-pool @ Nairobi, Kenya (billcut)",
+      "persona": "ev-and-pool",
+      "site": "Nairobi, Kenya",
+      "mode": "billcut",
+      "dailyWh": 14730,
+      "peakWindowWh": {
+        "flat": 3068.8,
+        "blockStart": 430,
+        "dutyAware": 1471.7
+      },
+      "maxHourWh": {
+        "flat": 613.8,
+        "blockStart": 1570,
+        "dutyAware": 1778.3
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 2.96,
+          "battKwh": 6,
+          "cost": 2470
+        },
+        "blockStart": {
+          "pvKw": 2.76,
+          "battKwh": 8,
+          "cost": 2660
+        },
+        "dutyAware": {
+          "pvKw": 2.86,
+          "battKwh": 10,
+          "cost": 3013
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.076923,
+        "dutyAware": 0.219838
+      },
+      "ms": 419
+    },
+    {
+      "personal": "ev-and-pool @ London, UK (offgrid)",
+      "persona": "ev-and-pool",
+      "site": "London, UK",
+      "mode": "offgrid",
+      "dailyWh": 14730,
+      "peakWindowWh": {
+        "flat": 3068.8,
+        "blockStart": 430,
+        "dutyAware": 1471.7
+      },
+      "maxHourWh": {
+        "flat": 613.8,
+        "blockStart": 1570,
+        "dutyAware": 1778.3
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 23.5,
+          "battKwh": 12,
+          "cost": 12043
+        },
+        "blockStart": {
+          "pvKw": 25.5,
+          "battKwh": 12,
+          "cost": 12912
+        },
+        "dutyAware": {
+          "pvKw": 26,
+          "battKwh": 13,
+          "cost": 13281
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.072158,
+        "dutyAware": 0.102798
+      },
+      "ms": 486
+    },
+    {
+      "personal": "ev-and-pool @ London, UK (billcut)",
+      "persona": "ev-and-pool",
+      "site": "London, UK",
+      "mode": "billcut",
+      "dailyWh": 14730,
+      "peakWindowWh": {
+        "flat": 3068.8,
+        "blockStart": 430,
+        "dutyAware": 1471.7
+      },
+      "maxHourWh": {
+        "flat": 613.8,
+        "blockStart": 1570,
+        "dutyAware": 1778.3
+      },
+      "energyError": {
+        "flat": 0,
+        "blockStart": 0,
+        "dutyAware": 0
+      },
+      "cost": {
+        "flat": {
+          "pvKw": 7.99,
+          "battKwh": 8,
+          "cost": 4691
+        },
+        "blockStart": {
+          "pvKw": 7.99,
+          "battKwh": 10,
+          "cost": 4997
+        },
+        "dutyAware": {
+          "pvKw": 8.17,
+          "battKwh": 12,
+          "cost": 5382
+        }
+      },
+      "deltaVsChampion": {
+        "blockStart": 0.065231,
+        "dutyAware": 0.147303
+      },
+      "ms": 423
+    }
+  ]
+}

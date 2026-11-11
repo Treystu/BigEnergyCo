@@ -1,0 +1,1027 @@
+{
+  "issue": 349,
+  "mechanism": "pickBest",
+  "generated": "2026-11-10T02:35:39.895Z",
+  "corpus": {
+    "cities": 10,
+    "loads": [8, 20],
+    "target": 0.8
+  },
+  "acceptance": {
+    "regretCutRequired": 0.2,
+    "sodiumShareTolerancePp": 10,
+    "championMargin": 0.1,
+    "marginsTested": [0, 0.05, 0.1, 0.15, 0.2]
+  },
+  "findings": {
+    "pickBestIgnoresMeanTempC": true,
+    "note": "pickBest(entries, meanTempC) never reads meanTempC; isColdSite is used only for the 'why' sentence, so the cold-weather rationale does not move the decision"
+  },
+  "summary": {
+    "cases": 20,
+    "marginDecisiveShare": 0.1,
+    "lfpEdge": {
+      "min": -1.009695,
+      "median": 0.180072,
+      "max": 0.238514,
+      "casesInsideChampionMargin": 4
+    },
+    "rows": [
+      {
+        "margin": 0,
+        "cases": 20,
+        "sodiumShare": 0.1,
+        "meanRegret": 0,
+        "meanRegretUsd": 0,
+        "marginDecisiveCases": 0
+      },
+      {
+        "margin": 0.05,
+        "cases": 20,
+        "sodiumShare": 0.2,
+        "meanRegret": 0.0022956351899612384,
+        "meanRegretUsd": 11.15,
+        "marginDecisiveCases": 2
+      },
+      {
+        "margin": 0.1,
+        "cases": 20,
+        "sodiumShare": 0.2,
+        "meanRegret": 0.0022956351899612384,
+        "meanRegretUsd": 11.15,
+        "marginDecisiveCases": 2
+      },
+      {
+        "margin": 0.15,
+        "cases": 20,
+        "sodiumShare": 0.4,
+        "meanRegret": 0.033196715149755675,
+        "meanRegretUsd": 179,
+        "marginDecisiveCases": 6
+      },
+      {
+        "margin": 0.2,
+        "cases": 20,
+        "sodiumShare": 0.7,
+        "meanRegret": 0.10017281757384744,
+        "meanRegretUsd": 447.55,
+        "marginDecisiveCases": 12
+      }
+    ],
+    "qualifying": [
+      {
+        "margin": 0,
+        "cases": 20,
+        "sodiumShare": 0.1,
+        "meanRegret": 0,
+        "meanRegretUsd": 0,
+        "marginDecisiveCases": 0
+      }
+    ],
+    "verdict": "CHALLENGER QUALIFIES - margin 0% cuts mean regret by >= 20% while holding sodium's pick share within 10 pp"
+  },
+  "verdict": "CHALLENGER QUALIFIES - margin 0% cuts mean regret by >= 20% while holding sodium's pick share within 10 pp",
+  "reading": "margin 0% clears both clauses exactly at the 10 pp boundary, and it buys its win by removing the sodium-first intent the share guard exists to protect - the absolute gain is the champion row's meanRegretUsd. Whether that trade is acceptable is the owner's call, not a numeric one: the programme's rule can say 'qualifies' here without that meaning 'ship it'.",
+  "cases": [
+    {
+      "city": "Nairobi, Kenya",
+      "kwhPerDay": 8,
+      "meanTempC": 20.54,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 1.45,
+          "battKwh": 11,
+          "lifetimeCostUsd": 2569
+        },
+        "lfp": {
+          "pvKw": 1.45,
+          "battKwh": 4,
+          "lifetimeCostUsd": 1966
+        }
+      },
+      "lfpEdge": 0.234722,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1966
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1966
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1966
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1966
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1966
+        }
+      ]
+    },
+    {
+      "city": "Nairobi, Kenya",
+      "kwhPerDay": 20,
+      "meanTempC": 20.54,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 3.64,
+          "battKwh": 13,
+          "lifetimeCostUsd": 6179
+        },
+        "lfp": {
+          "pvKw": 3.64,
+          "battKwh": 10,
+          "lifetimeCostUsd": 4917
+        }
+      },
+      "lfpEdge": 0.20424,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4917
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4917
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4917
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4917
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4917
+        }
+      ]
+    },
+    {
+      "city": "Honolulu, USA",
+      "kwhPerDay": 8,
+      "meanTempC": 25.61,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 1.45,
+          "battKwh": 11,
+          "lifetimeCostUsd": 2960
+        },
+        "lfp": {
+          "pvKw": 1.45,
+          "battKwh": 4,
+          "lifetimeCostUsd": 2254
+        }
+      },
+      "lfpEdge": 0.238514,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2254
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2254
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2254
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2254
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2254
+        }
+      ]
+    },
+    {
+      "city": "Honolulu, USA",
+      "kwhPerDay": 20,
+      "meanTempC": 25.61,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 3.64,
+          "battKwh": 13,
+          "lifetimeCostUsd": 7108
+        },
+        "lfp": {
+          "pvKw": 3.64,
+          "battKwh": 10,
+          "lifetimeCostUsd": 5638
+        }
+      },
+      "lfpEdge": 0.206809,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5638
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5638
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5638
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5638
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5638
+        }
+      ]
+    },
+    {
+      "city": "Phoenix, USA",
+      "kwhPerDay": 8,
+      "meanTempC": 23.45,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 1.61,
+          "battKwh": 11,
+          "lifetimeCostUsd": 2318
+        },
+        "lfp": {
+          "pvKw": 1.61,
+          "battKwh": 9,
+          "lifetimeCostUsd": 1919
+        }
+      },
+      "lfpEdge": 0.172131,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1919
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1919
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1919
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 1919
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 2318
+        }
+      ]
+    },
+    {
+      "city": "Phoenix, USA",
+      "kwhPerDay": 20,
+      "meanTempC": 23.45,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 3.79,
+          "battKwh": 25,
+          "lifetimeCostUsd": 5327
+        },
+        "lfp": {
+          "pvKw": 3.79,
+          "battKwh": 20,
+          "lifetimeCostUsd": 4356
+        }
+      },
+      "lfpEdge": 0.182279,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4356
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4356
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4356
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4356
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 5327
+        }
+      ]
+    },
+    {
+      "city": "London, UK",
+      "kwhPerDay": 8,
+      "meanTempC": 11.4,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 4.46,
+          "battKwh": 5,
+          "lifetimeCostUsd": 3579
+        },
+        "lfp": {
+          "pvKw": 4.26,
+          "battKwh": 8,
+          "lifetimeCostUsd": 3073
+        }
+      },
+      "lfpEdge": 0.14138,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 3073
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 3073
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 3073
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 3579
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 3579
+        }
+      ]
+    },
+    {
+      "city": "London, UK",
+      "kwhPerDay": 20,
+      "meanTempC": 11.4,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 10.81,
+          "battKwh": 24,
+          "lifetimeCostUsd": 8639
+        },
+        "lfp": {
+          "pvKw": 10.62,
+          "battKwh": 18,
+          "lifetimeCostUsd": 7361
+        }
+      },
+      "lfpEdge": 0.147934,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 7361
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 7361
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 7361
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 8639
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 8639
+        }
+      ]
+    },
+    {
+      "city": "Berlin, Germany",
+      "kwhPerDay": 8,
+      "meanTempC": 10.44,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 4.64,
+          "battKwh": 10,
+          "lifetimeCostUsd": 3722
+        },
+        "lfp": {
+          "pvKw": 4.58,
+          "battKwh": 8,
+          "lifetimeCostUsd": 3262
+        }
+      },
+      "lfpEdge": 0.123589,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 3262
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 3262
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 3262
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 3722
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 3722
+        }
+      ]
+    },
+    {
+      "city": "Berlin, Germany",
+      "kwhPerDay": 20,
+      "meanTempC": 10.44,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 11.61,
+          "battKwh": 24,
+          "lifetimeCostUsd": 9136
+        },
+        "lfp": {
+          "pvKw": 11.52,
+          "battKwh": 19,
+          "lifetimeCostUsd": 8023
+        }
+      },
+      "lfpEdge": 0.121826,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 8023
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 8023
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 8023
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 9136
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 9136
+        }
+      ]
+    },
+    {
+      "city": "Delhi, India",
+      "kwhPerDay": 8,
+      "meanTempC": 24.84,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 1.92,
+          "battKwh": 11,
+          "lifetimeCostUsd": 2595
+        },
+        "lfp": {
+          "pvKw": 1.92,
+          "battKwh": 4,
+          "lifetimeCostUsd": 2041
+        }
+      },
+      "lfpEdge": 0.213487,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2041
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2041
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2041
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2041
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2041
+        }
+      ]
+    },
+    {
+      "city": "Delhi, India",
+      "kwhPerDay": 20,
+      "meanTempC": 24.84,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 4.73,
+          "battKwh": 13,
+          "lifetimeCostUsd": 6226
+        },
+        "lfp": {
+          "pvKw": 4.64,
+          "battKwh": 20,
+          "lifetimeCostUsd": 5023
+        }
+      },
+      "lfpEdge": 0.193222,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5023
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5023
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5023
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5023
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 6226
+        }
+      ]
+    },
+    {
+      "city": "Sydney, Australia",
+      "kwhPerDay": 8,
+      "meanTempC": 19.36,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 1.92,
+          "battKwh": 11,
+          "lifetimeCostUsd": 2795
+        },
+        "lfp": {
+          "pvKw": 1.92,
+          "battKwh": 8,
+          "lifetimeCostUsd": 2181
+        }
+      },
+      "lfpEdge": 0.219678,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2181
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2181
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2181
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2181
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2181
+        }
+      ]
+    },
+    {
+      "city": "Sydney, Australia",
+      "kwhPerDay": 20,
+      "meanTempC": 19.36,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 4.8,
+          "battKwh": 13,
+          "lifetimeCostUsd": 6729
+        },
+        "lfp": {
+          "pvKw": 4.73,
+          "battKwh": 20,
+          "lifetimeCostUsd": 5416
+        }
+      },
+      "lfpEdge": 0.195126,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5416
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5416
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5416
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 5416
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 6729
+        }
+      ]
+    },
+    {
+      "city": "Cairo, Egypt",
+      "kwhPerDay": 8,
+      "meanTempC": 22.54,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 1.61,
+          "battKwh": 11,
+          "lifetimeCostUsd": 2535
+        },
+        "lfp": {
+          "pvKw": 1.61,
+          "battKwh": 9,
+          "lifetimeCostUsd": 2100
+        }
+      },
+      "lfpEdge": 0.171598,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2100
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2100
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2100
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2100
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 2535
+        }
+      ]
+    },
+    {
+      "city": "Cairo, Egypt",
+      "kwhPerDay": 20,
+      "meanTempC": 22.54,
+      "cold": false,
+      "sized": {
+        "naion": {
+          "pvKw": 3.79,
+          "battKwh": 25,
+          "lifetimeCostUsd": 5831
+        },
+        "lfp": {
+          "pvKw": 3.79,
+          "battKwh": 20,
+          "lifetimeCostUsd": 4781
+        }
+      },
+      "lfpEdge": 0.180072,
+      "championChemistry": "lfp",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4781
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4781
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4781
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 4781
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 5831
+        }
+      ]
+    },
+    {
+      "city": "Oslo, Norway",
+      "kwhPerDay": 8,
+      "meanTempC": 6.07,
+      "cold": true,
+      "sized": {
+        "naion": {
+          "pvKw": 7.3,
+          "battKwh": 9,
+          "lifetimeCostUsd": 4632
+        },
+        "lfp": {
+          "pvKw": 13.96,
+          "battKwh": 7,
+          "lifetimeCostUsd": 7119
+        }
+      },
+      "lfpEdge": -0.536917,
+      "championChemistry": "naion",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 4632
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 4632
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 4632
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 4632
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 4632
+        }
+      ]
+    },
+    {
+      "city": "Oslo, Norway",
+      "kwhPerDay": 20,
+      "meanTempC": 6.07,
+      "cold": true,
+      "sized": {
+        "naion": {
+          "pvKw": 18.24,
+          "battKwh": 23,
+          "lifetimeCostUsd": 11655
+        },
+        "lfp": {
+          "pvKw": 30,
+          "battKwh": 69,
+          "lifetimeCostUsd": 23423
+        }
+      },
+      "lfpEdge": -1.009695,
+      "championChemistry": "naion",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 11655
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 11655
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 11655
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 11655
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 11655
+        }
+      ]
+    },
+    {
+      "city": "Toronto, Canada",
+      "kwhPerDay": 8,
+      "meanTempC": 9.75,
+      "cold": true,
+      "sized": {
+        "naion": {
+          "pvKw": 2.62,
+          "battKwh": 10,
+          "lifetimeCostUsd": 2588
+        },
+        "lfp": {
+          "pvKw": 3.45,
+          "battKwh": 8,
+          "lifetimeCostUsd": 2544
+        }
+      },
+      "lfpEdge": 0.017002,
+      "championChemistry": "naion",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 2544
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 2588
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 2588
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 2588
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 2588
+        }
+      ]
+    },
+    {
+      "city": "Toronto, Canada",
+      "kwhPerDay": 20,
+      "meanTempC": 9.75,
+      "cold": true,
+      "sized": {
+        "naion": {
+          "pvKw": 6.46,
+          "battKwh": 25,
+          "lifetimeCostUsd": 6434
+        },
+        "lfp": {
+          "pvKw": 8.71,
+          "battKwh": 19,
+          "lifetimeCostUsd": 6255
+        }
+      },
+      "lfpEdge": 0.027821,
+      "championChemistry": "naion",
+      "picks": [
+        {
+          "margin": 0,
+          "chemistry": "lfp",
+          "lifetimeCostUsd": 6255
+        },
+        {
+          "margin": 0.05,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 6434
+        },
+        {
+          "margin": 0.1,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 6434
+        },
+        {
+          "margin": 0.15,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 6434
+        },
+        {
+          "margin": 0.2,
+          "chemistry": "naion",
+          "lifetimeCostUsd": 6434
+        }
+      ]
+    }
+  ]
+}

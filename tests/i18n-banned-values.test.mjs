@@ -103,6 +103,12 @@ test("BANNED: reintroducing any known-bad value makes the gate fail", () => {
     join(ROOT, "assets", "js", "shared", "home-copy.js"),
     join(sandbox, "home-copy.js"),
   );
+  // The result-surface sentences are spread in from their own table (#365), so
+  // the sandbox needs it too or the import fails before any gate can run.
+  cpSync(
+    join(ROOT, "assets", "js", "shared", "result-copy.js"),
+    join(sandbox, "result-copy.js"),
+  );
   const script = `
     import { LOCALES } from "./locales.js";
     const langs = Object.keys(LOCALES);

@@ -1,0 +1,3263 @@
+{
+  "issue": 357,
+  "generated": "2026-11-10T05:39:39.342Z",
+  "head": null,
+  "profileYear": 2025,
+  "offlineProfileCount": 66,
+  "liveComparisonPossible": false,
+  "liveComparisonBlocker": "No NASA POWER series exists in the repo, offline or cached; OFFLINE_PROFILES are month x hour means and every offline run (including test fixtures) builds its series from them with synthesizeFromProfile. The issue's live-vs-fallback sizing comparison therefore has no second series to read.",
+  "structure": {
+    "allMonthsIdenticalWithin": true,
+    "everyCityAtMost12Shapes": true,
+    "cities": [
+      {
+        "city": "Honolulu, USA",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3662,
+        "maxDailyGhi": 7156,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Los Angeles, USA",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2777,
+        "maxDailyGhi": 8203,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Phoenix, USA",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3143,
+        "maxDailyGhi": 8397,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Denver, USA",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2361,
+        "maxDailyGhi": 7037,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Chicago, USA",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 1252,
+        "maxDailyGhi": 6323,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Miami, USA",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3464,
+        "maxDailyGhi": 6689,
+        "interannualVariance": 0
+      },
+      {
+        "city": "New York, USA",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 1761,
+        "maxDailyGhi": 6045,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Toronto, Canada",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 1176,
+        "maxDailyGhi": 6447,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Mexico City, Mexico",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4127,
+        "maxDailyGhi": 7604,
+        "interannualVariance": 0
+      },
+      {
+        "city": "San Juan, Puerto Rico",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4512,
+        "maxDailyGhi": 6311,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Santo Domingo, Dominican Rep.",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4575,
+        "maxDailyGhi": 6423,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Guatemala City, Guatemala",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4509,
+        "maxDailyGhi": 6193,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Panama City, Panama",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3810,
+        "maxDailyGhi": 5910,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Havana, Cuba",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3559,
+        "maxDailyGhi": 7063,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Port-au-Prince, Haiti",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4429,
+        "maxDailyGhi": 6888,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Bogotá, Colombia",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4030,
+        "maxDailyGhi": 5006,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Lima, Peru",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2427,
+        "maxDailyGhi": 6773,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Cusco, Peru",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4104,
+        "maxDailyGhi": 5340,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Santiago, Chile",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2423,
+        "maxDailyGhi": 9024,
+        "interannualVariance": 0
+      },
+      {
+        "city": "São Paulo, Brazil",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3019,
+        "maxDailyGhi": 5942,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Buenos Aires, Argentina",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2486,
+        "maxDailyGhi": 7715,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Quito, Ecuador",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 11,
+        "longestIdenticalDayRun": 61,
+        "minDailyGhi": 3451,
+        "maxDailyGhi": 4967,
+        "interannualVariance": 0
+      },
+      {
+        "city": "La Paz, Bolivia",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 5036,
+        "maxDailyGhi": 6482,
+        "interannualVariance": 0
+      },
+      {
+        "city": "London, UK",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 664,
+        "maxDailyGhi": 5928,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Paris, France",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 866,
+        "maxDailyGhi": 6416,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Madrid, Spain",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 1560,
+        "maxDailyGhi": 7872,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Rome, Italy",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 1734,
+        "maxDailyGhi": 7863,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Berlin, Germany",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 598,
+        "maxDailyGhi": 5554,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Warsaw, Poland",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 448,
+        "maxDailyGhi": 5524,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Athens, Greece",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2097,
+        "maxDailyGhi": 7993,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Oslo, Norway",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 221,
+        "maxDailyGhi": 5798,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Casablanca, Morocco",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2513,
+        "maxDailyGhi": 7422,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Cairo, Egypt",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3297,
+        "maxDailyGhi": 8028,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Accra, Ghana",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3906,
+        "maxDailyGhi": 5236,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Lagos, Nigeria",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 11,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3638,
+        "maxDailyGhi": 5069,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Nairobi, Kenya",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4506,
+        "maxDailyGhi": 7387,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Johannesburg, South Africa",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3854,
+        "maxDailyGhi": 6555,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Dakar, Senegal",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4431,
+        "maxDailyGhi": 6737,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Bamako, Mali",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 5085,
+        "maxDailyGhi": 6421,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Ouagadougou, Burkina Faso",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 5067,
+        "maxDailyGhi": 6348,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Addis Ababa, Ethiopia",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4420,
+        "maxDailyGhi": 7001,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Kinshasa, DR Congo",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3701,
+        "maxDailyGhi": 4720,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Antananarivo, Madagascar",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4099,
+        "maxDailyGhi": 6894,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Istanbul, Türkiye",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 1429,
+        "maxDailyGhi": 7586,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Dubai, UAE",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3303,
+        "maxDailyGhi": 7071,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Tashkent, Uzbekistan",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 1296,
+        "maxDailyGhi": 7630,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Karachi, Pakistan",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4205,
+        "maxDailyGhi": 7199,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Delhi, India",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2949,
+        "maxDailyGhi": 6663,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Mumbai, India",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3559,
+        "maxDailyGhi": 6751,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Colombo, Sri Lanka",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4393,
+        "maxDailyGhi": 6433,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Dhaka, Bangladesh",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3223,
+        "maxDailyGhi": 5235,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Kathmandu, Nepal",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 11,
+        "longestIdenticalDayRun": 61,
+        "minDailyGhi": 3812,
+        "maxDailyGhi": 5667,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Bangkok, Thailand",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4409,
+        "maxDailyGhi": 5779,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Ho Chi Minh City, Vietnam",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4243,
+        "maxDailyGhi": 5856,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Jakarta, Indonesia",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4013,
+        "maxDailyGhi": 4914,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Phnom Penh, Cambodia",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 4401,
+        "maxDailyGhi": 5601,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Manila, Philippines",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3410,
+        "maxDailyGhi": 6801,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Hong Kong",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3349,
+        "maxDailyGhi": 5087,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Taipei, Taiwan",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2105,
+        "maxDailyGhi": 6424,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Seoul, South Korea",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2118,
+        "maxDailyGhi": 5178,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Tokyo, Japan",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2377,
+        "maxDailyGhi": 6019,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Suva, Fiji",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3653,
+        "maxDailyGhi": 5945,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Papeete, French Polynesia",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 3876,
+        "maxDailyGhi": 6751,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Perth, Australia",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2692,
+        "maxDailyGhi": 8823,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Sydney, Australia",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2445,
+        "maxDailyGhi": 6841,
+        "interannualVariance": 0
+      },
+      {
+        "city": "Auckland, New Zealand",
+        "hours": 8760,
+        "days": 365,
+        "distinctDailyProfiles": 12,
+        "longestIdenticalDayRun": 31,
+        "minDailyGhi": 2093,
+        "maxDailyGhi": 6969,
+        "interannualVariance": 0
+      }
+    ]
+  },
+  "tiers": [
+    {
+      "city": "Honolulu, USA",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 3205,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 3205,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2747,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Los Angeles, USA",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 2840,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 2840,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2426,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Phoenix, USA",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2633,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2633,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2286,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Denver, USA",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 6,
+          "battKwh": 7,
+          "cost": 3462,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3255,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4.5,
+          "battKwh": 6,
+          "cost": 2701,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Chicago, USA",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        }
+      ]
+    },
+    {
+      "city": "Miami, USA",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2633,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2426,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2079,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "New York, USA",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 7,
+          "battKwh": 7,
+          "cost": 3877,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 6,
+          "battKwh": 8,
+          "cost": 3602,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 3048,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Toronto, Canada",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        }
+      ]
+    },
+    {
+      "city": "Mexico City, Mexico",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2652,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2415,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 7,
+          "cost": 2178,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "San Juan, Puerto Rico",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2686,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2686,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2531,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Santo Domingo, Dominican Rep.",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2686,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2686,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2264,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Guatemala City, Guatemala",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2415,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2273,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2273,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Panama City, Panama",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2953,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2797,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2531,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Havana, Cuba",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 3219,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2953,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2686,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Port-au-Prince, Haiti",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2686,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2686,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2264,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Bogotá, Colombia",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2897,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2897,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2621,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Lima, Peru",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3860,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 3603,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4,
+          "battKwh": 6,
+          "cost": 2942,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Cusco, Peru",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2701,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2543,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2543,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Santiago, Chile",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 4440,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 4440,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4,
+          "battKwh": 6,
+          "cost": 3625,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "São Paulo, Brazil",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 4124,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 3808,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 3309,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Buenos Aires, Argentina",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 4440,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 4440,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4.5,
+          "battKwh": 6,
+          "cost": 3941,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Quito, Ecuador",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 6,
+          "cost": 3077,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4,
+          "battKwh": 6,
+          "cost": 3077,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2810,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "La Paz, Bolivia",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 2.5,
+          "battKwh": 7,
+          "cost": 2434,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 2.5,
+          "battKwh": 7,
+          "cost": 2434,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2277,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "London, UK",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 18,
+          "battKwh": 8,
+          "cost": 9042,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 16,
+          "battKwh": 9,
+          "cost": 8326,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 11.5,
+          "battKwh": 7,
+          "cost": 6065,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Paris, France",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 13.5,
+          "battKwh": 8,
+          "cost": 7104,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 12.5,
+          "battKwh": 7,
+          "cost": 6515,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 10,
+          "battKwh": 7,
+          "cost": 5428,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Madrid, Spain",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 8,
+          "battKwh": 7,
+          "cost": 4486,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 7,
+          "battKwh": 7,
+          "cost": 4051,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3400,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Rome, Italy",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 7,
+          "battKwh": 7,
+          "cost": 4095,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 7,
+          "battKwh": 7,
+          "cost": 4095,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3444,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Berlin, Germany",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 19.5,
+          "battKwh": 8,
+          "cost": 9744,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 18,
+          "battKwh": 8,
+          "cost": 9093,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 14,
+          "battKwh": 7,
+          "cost": 7196,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Warsaw, Poland",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 25.5,
+          "battKwh": 8,
+          "cost": 12183,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 22.5,
+          "battKwh": 9,
+          "cost": 11018,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 15,
+          "battKwh": 7,
+          "cost": 7483,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Athens, Greece",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 6,
+          "battKwh": 7,
+          "cost": 3661,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5.5,
+          "battKwh": 8,
+          "cost": 3594,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4.5,
+          "battKwh": 6,
+          "cost": 2859,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Oslo, Norway",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": null,
+          "battKwh": null,
+          "cost": null,
+          "scenario": null
+        }
+      ]
+    },
+    {
+      "city": "Casablanca, Morocco",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 3708,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 3442,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2760,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Cairo, Egypt",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 3046,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 3046,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2647,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Accra, Ghana",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2760,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2760,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Lagos, Nigeria",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2894,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2747,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2480,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Nairobi, Kenya",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2226,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Johannesburg, South Africa",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2848,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2848,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2441,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Dakar, Senegal",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2642,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2642,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2226,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Bamako, Mali",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2642,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2226,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Ouagadougou, Burkina Faso",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2642,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2226,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Addis Ababa, Ethiopia",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2642,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2226,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Kinshasa, DR Congo",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2909,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2760,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2493,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Antananarivo, Madagascar",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 8,
+          "cost": 2791,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2642,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2226,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Istanbul, Türkiye",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 8.5,
+          "battKwh": 7,
+          "cost": 5400,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 7.5,
+          "battKwh": 8,
+          "cost": 5035,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 6,
+          "battKwh": 7,
+          "cost": 4117,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Dubai, UAE",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2674,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 8,
+          "cost": 2591,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2106,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Tashkent, Uzbekistan",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 9,
+          "battKwh": 7,
+          "cost": 4847,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 8.5,
+          "battKwh": 8,
+          "cost": 4763,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3326,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Karachi, Pakistan",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2684,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2437,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2300,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Delhi, India",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 3178,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 3178,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2547,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Mumbai, India",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2931,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 8,
+          "cost": 2820,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2437,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Colombo, Sri Lanka",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2437,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2300,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 2.5,
+          "battKwh": 6,
+          "cost": 2054,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Dhaka, Bangladesh",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2931,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2931,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2547,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Kathmandu, Nepal",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2684,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2684,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2300,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Bangkok, Thailand",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2357,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2357,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2223,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Ho Chi Minh City, Vietnam",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2489,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2133,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2133,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Jakarta, Indonesia",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2608,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2371,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2236,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Phnom Penh, Cambodia",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3,
+          "battKwh": 7,
+          "cost": 2357,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2223,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2223,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Manila, Philippines",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2960,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2713,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2326,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Hong Kong",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2400,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 2400,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 6,
+          "cost": 2086,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Taipei, Taiwan",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 6,
+          "battKwh": 7,
+          "cost": 3190,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 2993,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 5,
+          "battKwh": 6,
+          "cost": 2678,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Seoul, South Korea",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 6,
+          "battKwh": 7,
+          "cost": 3492,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3284,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 2870,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Tokyo, Japan",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3284,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 3077,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4.5,
+          "battKwh": 6,
+          "cost": 2726,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Suva, Fiji",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2770,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2770,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2374,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Papeete, French Polynesia",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2457,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 3,
+          "battKwh": 8,
+          "cost": 2374,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3,
+          "battKwh": 6,
+          "cost": 2106,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Perth, Australia",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 3481,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 3244,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 3.5,
+          "battKwh": 7,
+          "cost": 2770,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Sydney, Australia",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3718,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5,
+          "battKwh": 7,
+          "cost": 3481,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4,
+          "battKwh": 7,
+          "cost": 3007,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    },
+    {
+      "city": "Auckland, New Zealand",
+      "tiers": [
+        {
+          "tier": "tier100",
+          "maxUnmetHoursPerYear": 0,
+          "pvKw": 6,
+          "battKwh": 7,
+          "cost": 3955,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier99",
+          "maxUnmetHoursPerYear": 87.6,
+          "pvKw": 5.5,
+          "battKwh": 7,
+          "cost": 3718,
+          "scenario": "zero_swap_natural"
+        },
+        {
+          "tier": "tier95",
+          "maxUnmetHoursPerYear": 438,
+          "pvKw": 4.5,
+          "battKwh": 7,
+          "cost": 3244,
+          "scenario": "zero_swap_natural"
+        }
+      ]
+    }
+  ],
+  "tierSpread": {
+    "cases": 63,
+    "medianTier100VsTier95Battery": 0.142857
+  },
+  "darkMonthProbe": {
+    "note": "SENSITIVITY PROBE, not weather: the darkest mean month scaled to 70% GHI. Bounds what a darker-than-average real month would do to a tier100 battery.",
+    "cases": [
+      {
+        "city": "Honolulu, USA",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Los Angeles, USA",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4.5,
+        "darkMonthPvKw": 6.5
+      },
+      {
+        "city": "Phoenix, USA",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 6
+      },
+      {
+        "city": "Denver, USA",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 6,
+        "darkMonthPvKw": 7.5
+      },
+      {
+        "city": "Chicago, USA",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": null,
+        "darkMonthBattKwh": null,
+        "battDelta": null,
+        "baselinePvKw": null,
+        "darkMonthPvKw": null
+      },
+      {
+        "city": "Miami, USA",
+        "darkMonth": 1,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "New York, USA",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 7,
+        "darkMonthPvKw": 9.5
+      },
+      {
+        "city": "Toronto, Canada",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": null,
+        "darkMonthBattKwh": null,
+        "battDelta": null,
+        "baselinePvKw": null,
+        "darkMonthPvKw": null
+      },
+      {
+        "city": "Mexico City, Mexico",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "San Juan, Puerto Rico",
+        "darkMonth": 1,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Santo Domingo, Dominican Rep.",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4
+      },
+      {
+        "city": "Guatemala City, Guatemala",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4
+      },
+      {
+        "city": "Panama City, Panama",
+        "darkMonth": 11,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Havana, Cuba",
+        "darkMonth": 1,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "Port-au-Prince, Haiti",
+        "darkMonth": 10,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Bogotá, Colombia",
+        "darkMonth": 2,
+        "scale": 0.7,
+        "baselineBattKwh": 6,
+        "darkMonthBattKwh": 6,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Lima, Peru",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 5.5,
+        "darkMonthPvKw": 7.5
+      },
+      {
+        "city": "Cusco, Peru",
+        "darkMonth": 3,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 6,
+        "battDelta": -0.142857,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Santiago, Chile",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 5,
+        "darkMonthPvKw": 7.5
+      },
+      {
+        "city": "São Paulo, Brazil",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4.5,
+        "darkMonthPvKw": 6
+      },
+      {
+        "city": "Buenos Aires, Argentina",
+        "darkMonth": 7,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 5,
+        "darkMonthPvKw": 7
+      },
+      {
+        "city": "Quito, Ecuador",
+        "darkMonth": 3,
+        "scale": 0.7,
+        "baselineBattKwh": 6,
+        "darkMonthBattKwh": 6,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "La Paz, Bolivia",
+        "darkMonth": 3,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 2.5,
+        "darkMonthPvKw": 3.5
+      },
+      {
+        "city": "London, UK",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 8,
+        "darkMonthBattKwh": 9,
+        "battDelta": 0.125,
+        "baselinePvKw": 18,
+        "darkMonthPvKw": 25
+      },
+      {
+        "city": "Paris, France",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 8,
+        "darkMonthBattKwh": 8,
+        "battDelta": 0,
+        "baselinePvKw": 13.5,
+        "darkMonthPvKw": 19.5
+      },
+      {
+        "city": "Madrid, Spain",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 8,
+        "darkMonthPvKw": 11
+      },
+      {
+        "city": "Rome, Italy",
+        "darkMonth": 1,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 7,
+        "darkMonthPvKw": 10
+      },
+      {
+        "city": "Berlin, Germany",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 8,
+        "darkMonthBattKwh": 8,
+        "battDelta": 0,
+        "baselinePvKw": 19.5,
+        "darkMonthPvKw": 27.5
+      },
+      {
+        "city": "Warsaw, Poland",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 8,
+        "darkMonthBattKwh": 61,
+        "battDelta": 6.625,
+        "baselinePvKw": 25.5,
+        "darkMonthPvKw": 30
+      },
+      {
+        "city": "Athens, Greece",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 6,
+        "darkMonthPvKw": 8.5
+      },
+      {
+        "city": "Oslo, Norway",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": null,
+        "darkMonthBattKwh": null,
+        "battDelta": null,
+        "baselinePvKw": null,
+        "darkMonthPvKw": null
+      },
+      {
+        "city": "Casablanca, Morocco",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 5,
+        "darkMonthPvKw": 7
+      },
+      {
+        "city": "Cairo, Egypt",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "Accra, Ghana",
+        "darkMonth": 8,
+        "scale": 0.7,
+        "baselineBattKwh": 6,
+        "darkMonthBattKwh": 6,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Lagos, Nigeria",
+        "darkMonth": 7,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 6,
+        "battDelta": -0.142857,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Nairobi, Kenya",
+        "darkMonth": 7,
+        "scale": 0.7,
+        "baselineBattKwh": 6,
+        "darkMonthBattKwh": 6,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4
+      },
+      {
+        "city": "Johannesburg, South Africa",
+        "darkMonth": 4,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Dakar, Senegal",
+        "darkMonth": 11,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Bamako, Mali",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4
+      },
+      {
+        "city": "Ouagadougou, Burkina Faso",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4
+      },
+      {
+        "city": "Addis Ababa, Ethiopia",
+        "darkMonth": 8,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4
+      },
+      {
+        "city": "Kinshasa, DR Congo",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 6,
+        "battDelta": -0.142857,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Antananarivo, Madagascar",
+        "darkMonth": 7,
+        "scale": 0.7,
+        "baselineBattKwh": 8,
+        "darkMonthBattKwh": 7,
+        "battDelta": -0.125,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Istanbul, Türkiye",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 8.5,
+        "darkMonthPvKw": 12
+      },
+      {
+        "city": "Dubai, UAE",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "Tashkent, Uzbekistan",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 9,
+        "darkMonthPvKw": 13
+      },
+      {
+        "city": "Karachi, Pakistan",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Delhi, India",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4.5,
+        "darkMonthPvKw": 6
+      },
+      {
+        "city": "Mumbai, India",
+        "darkMonth": 9,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "Colombo, Sri Lanka",
+        "darkMonth": 1,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 6,
+        "battDelta": -0.142857,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Dhaka, Bangladesh",
+        "darkMonth": 1,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "Kathmandu, Nepal",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Bangkok, Thailand",
+        "darkMonth": 11,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Ho Chi Minh City, Vietnam",
+        "darkMonth": 11,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Jakarta, Indonesia",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 8,
+        "battDelta": 0.142857,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Phnom Penh, Cambodia",
+        "darkMonth": 9,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 6,
+        "battDelta": -0.142857,
+        "baselinePvKw": 3,
+        "darkMonthPvKw": 4.5
+      },
+      {
+        "city": "Manila, Philippines",
+        "darkMonth": 7,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 6,
+        "battDelta": -0.142857,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "Hong Kong",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 4,
+        "darkMonthPvKw": 5.5
+      },
+      {
+        "city": "Taipei, Taiwan",
+        "darkMonth": 2,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 6,
+        "darkMonthPvKw": 8.5
+      },
+      {
+        "city": "Seoul, South Korea",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 6,
+        "darkMonthPvKw": 8
+      },
+      {
+        "city": "Tokyo, Japan",
+        "darkMonth": 12,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 5.5,
+        "darkMonthPvKw": 7.5
+      },
+      {
+        "city": "Suva, Fiji",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Papeete, French Polynesia",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 3.5,
+        "darkMonthPvKw": 5
+      },
+      {
+        "city": "Perth, Australia",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 5,
+        "darkMonthPvKw": 6.5
+      },
+      {
+        "city": "Sydney, Australia",
+        "darkMonth": 5,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 5.5,
+        "darkMonthPvKw": 7.5
+      },
+      {
+        "city": "Auckland, New Zealand",
+        "darkMonth": 6,
+        "scale": 0.7,
+        "baselineBattKwh": 7,
+        "darkMonthBattKwh": 7,
+        "battDelta": 0,
+        "baselinePvKw": 6,
+        "darkMonthPvKw": 8.5
+      }
+    ],
+    "medianBattDelta": 0,
+    "maxBattDelta": 6.625,
+    "citiesOver10pct": 3
+  }
+}
