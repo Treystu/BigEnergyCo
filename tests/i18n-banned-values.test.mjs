@@ -103,11 +103,16 @@ test("BANNED: reintroducing any known-bad value makes the gate fail", () => {
     join(ROOT, "assets", "js", "shared", "home-copy.js"),
     join(sandbox, "home-copy.js"),
   );
-  // The result-surface sentences are spread in from their own table (#365), so
-  // the sandbox needs it too or the import fails before any gate can run.
+  // The result-surface sentences and the tilt-guide family are spread in from
+  // their own tables (#365), so the sandbox needs both or the import fails
+  // before any gate can run.
   cpSync(
     join(ROOT, "assets", "js", "shared", "result-copy.js"),
     join(sandbox, "result-copy.js"),
+  );
+  cpSync(
+    join(ROOT, "assets", "js", "shared", "tilt-copy.js"),
+    join(sandbox, "tilt-copy.js"),
   );
   const script = `
     import { LOCALES } from "./locales.js";
