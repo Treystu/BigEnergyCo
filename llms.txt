@@ -31,6 +31,8 @@
 - The Netherlands ends net metering in 2027: https://freeoffgridcalculator.com/blog/salderingsregeling-stopt-2027/
 - Eskom's fixed charge and what it does to solar payback: https://freeoffgridcalculator.com/blog/eskom-fixed-charge-solar-2027/
 - Deducción IRPF autoconsumo 2026 (Spain): https://freeoffgridcalculator.com/blog/deduccion-irpf-autoconsumo-2026/
+- Giá điện 5 bậc 2026 (Vietnam): https://freeoffgridcalculator.com/blog/gia-dien-5-bac-2026/
+- Program AFM baterii 2026 (Romania): https://freeoffgridcalculator.com/blog/program-afm-baterii-2026/
 - Dotacja na magazyn energii (Poland, PME 2): https://freeoffgridcalculator.com/blog/dotacja-magazyn-energii-2026/
 
 ## Cite honestly
