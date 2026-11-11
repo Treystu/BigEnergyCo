@@ -6,7 +6,14 @@
     <description>Educational guides, chemistry comparisons, and engineering insights for DIY and off-grid solar and battery storage systems worldwide. Nothing for sale.</description>
     <language>en</language>
     <atom:link href="https://freeoffgridcalculator.com/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Wed, 15 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Eskom's Fixed Charge and Solar: 2027 Payback Math</title>
+      <link>https://freeoffgridcalculator.com/blog/eskom-fixed-charge-solar-2027/</link>
+      <guid isPermaLink="true">https://freeoffgridcalculator.com/blog/eskom-fixed-charge-solar-2027/</guid>
+      <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
+      <description>NERSA decides Eskom's 2027 tariff structure on 26 November. A worked example in rand shows why a heavier fixed line trims the value of every self-consumed kWh.</description>
+    </item>
     <item>
       <title>Hawaii Solar Scams: What the State's 2026 Warning Means for You</title>
       <link>https://freeoffgridcalculator.com/blog/hawaii-solar-scams-2026-warning/</link>
