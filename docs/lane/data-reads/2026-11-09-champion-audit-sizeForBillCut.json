@@ -1,7 +1,7 @@
 {
   "issue": 347,
   "mechanism": "sizeForBillCut",
-  "generated": "2026-11-10T02:00:33.260Z",
+  "generated": "2026-11-11T10:55:57.929Z",
   "lattice": {
     "pvFloor": 0.05,
     "pvControlStep": 0.25,
@@ -14,15 +14,15 @@
     "regretLimit": 0.02,
     "labelLimitPp": 0.5,
     "casesMeasured": 8,
-    "casesOverRegret": 1,
+    "casesOverRegret": 0,
     "casesOverLabel": 0,
-    "maxRegret": 0.051899,
-    "maxSearchRegret": 0.051899,
-    "maxLabelMismatchPp": 0.4468,
-    "maxTargetOvershootPp": 1.739,
+    "maxRegret": 0.019262,
+    "maxSearchRegret": 0.019262,
+    "maxLabelMismatchPp": 0.4222,
+    "maxTargetOvershootPp": 0.1044,
     "maxTargetShortfallPp": 0
   },
-  "verdict": "CHALLENGER QUALIFIES - a corpus case exceeds the 2% regret or 0.5 pp label margin, so a finer/exact search is in scope",
+  "verdict": "NO CHANGE - champion regret and label mismatch are inside the stated margins on the corpus, so the shipped search and its labels stay",
   "cases": [
     {
       "city": "Honolulu, USA",
@@ -36,7 +36,7 @@
         "lifetimeCostUsd": 1821,
         "oversizeScenario": "swaps_cheaper",
         "meetsConstraint": true,
-        "ms": 84
+        "ms": 99
       },
       "championSearchOnly": {
         "pvKw": 1.32,
@@ -49,7 +49,7 @@
         "battKwh": 2,
         "lifetimeCostUsd": 2083,
         "evaluations": 12120,
-        "ms": 719
+        "ms": 775
       },
       "rendered": {
         "metric": "bill-cut",
@@ -71,17 +71,17 @@
       "regime": "import-only",
       "minFraction": 0.95,
       "champion": {
-        "pvKw": 5.67,
+        "pvKw": 5.65,
         "battKwh": 26,
-        "lifetimeCostUsd": 5967,
+        "lifetimeCostUsd": 5962,
         "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 49
+        "ms": 57
       },
       "championSearchOnly": {
-        "pvKw": 5.67,
+        "pvKw": 5.65,
         "battKwh": 26,
-        "lifetimeCostUsd": 5967,
+        "lifetimeCostUsd": 5962,
         "meetsConstraint": true
       },
       "control": {
@@ -89,19 +89,19 @@
         "battKwh": 13,
         "lifetimeCostUsd": 6023,
         "evaluations": 12120,
-        "ms": 773
+        "ms": 846
       },
       "rendered": {
         "metric": "bill-cut",
-        "fraction": 0.950432,
+        "fraction": 0.950019,
         "pct": 95,
         "target": 0.95,
-        "mismatchPp": -0.0432,
-        "targetOffsetPp": 0.0432
+        "mismatchPp": -0.0019,
+        "targetOffsetPp": 0.0019
       },
-      "regret": -0.009298,
-      "regretUsd": -56,
-      "searchRegret": -0.009298,
+      "regret": -0.010128,
+      "regretUsd": -61,
+      "searchRegret": -0.010128,
       "samePoint": false
     },
     {
@@ -113,17 +113,17 @@
       "tariff": 0.3,
       "exportRate": 0.3,
       "champion": {
-        "pvKw": 2.98,
+        "pvKw": 2.92,
         "battKwh": 0,
-        "lifetimeCostUsd": 1294,
+        "lifetimeCostUsd": 1271,
         "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 64
+        "ms": 68
       },
       "championSearchOnly": {
-        "pvKw": 2.98,
+        "pvKw": 2.92,
         "battKwh": 0,
-        "lifetimeCostUsd": 1294,
+        "lifetimeCostUsd": 1271,
         "meetsConstraint": true
       },
       "control": {
@@ -131,19 +131,19 @@
         "battKwh": 0,
         "lifetimeCostUsd": 1325,
         "evaluations": 12120,
-        "ms": 713
+        "ms": 807
       },
       "rendered": {
         "metric": "bill-cut",
-        "fraction": 0.814468,
-        "pct": 81,
+        "fraction": 0.80002,
+        "pct": 80,
         "target": 0.8,
-        "mismatchPp": -0.4468,
-        "targetOffsetPp": 1.4468
+        "mismatchPp": -0.002,
+        "targetOffsetPp": 0.002
       },
-      "regret": -0.023396,
-      "regretUsd": -31,
-      "searchRegret": -0.023396,
+      "regret": -0.040755,
+      "regretUsd": -54,
+      "searchRegret": -0.040755,
       "samePoint": false
     },
     {
@@ -155,17 +155,17 @@
       "tariff": 0.32,
       "exportRate": 0.08,
       "champion": {
-        "pvKw": 7.64,
+        "pvKw": 7.57,
         "battKwh": 0,
-        "lifetimeCostUsd": 3321,
+        "lifetimeCostUsd": 3288,
         "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 61
+        "ms": 72
       },
       "championSearchOnly": {
-        "pvKw": 7.64,
+        "pvKw": 7.57,
         "battKwh": 0,
-        "lifetimeCostUsd": 3321,
+        "lifetimeCostUsd": 3288,
         "meetsConstraint": true
       },
       "control": {
@@ -173,19 +173,19 @@
         "battKwh": 0,
         "lifetimeCostUsd": 3389,
         "evaluations": 12120,
-        "ms": 881
+        "ms": 829
       },
       "rendered": {
         "metric": "bill-cut",
-        "fraction": 0.956451,
-        "pct": 96,
+        "fraction": 0.950109,
+        "pct": 95,
         "target": 0.95,
-        "mismatchPp": 0.3549,
-        "targetOffsetPp": 0.6451
+        "mismatchPp": -0.0109,
+        "targetOffsetPp": 0.0109
       },
-      "regret": -0.020065,
-      "regretUsd": -68,
-      "searchRegret": -0.020065,
+      "regret": -0.029802,
+      "regretUsd": -101,
+      "searchRegret": -0.029802,
       "samePoint": false
     },
     {
@@ -197,17 +197,17 @@
       "tariff": 0.12,
       "exportRate": 0.12,
       "champion": {
-        "pvKw": 4.96,
+        "pvKw": 4.89,
         "battKwh": 0,
-        "lifetimeCostUsd": 2451,
+        "lifetimeCostUsd": 2416,
         "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 93
+        "ms": 73
       },
       "championSearchOnly": {
-        "pvKw": 4.96,
+        "pvKw": 4.89,
         "battKwh": 0,
-        "lifetimeCostUsd": 2451,
+        "lifetimeCostUsd": 2416,
         "meetsConstraint": true
       },
       "control": {
@@ -215,19 +215,19 @@
         "battKwh": 0,
         "lifetimeCostUsd": 2493,
         "evaluations": 12120,
-        "ms": 985
+        "ms": 875
       },
       "rendered": {
         "metric": "bill-cut",
-        "fraction": 1.21739,
-        "pct": 122,
+        "fraction": 1.200098,
+        "pct": 120,
         "target": 1.2,
-        "mismatchPp": 0.261,
-        "targetOffsetPp": 1.739
+        "mismatchPp": -0.0098,
+        "targetOffsetPp": 0.0098
       },
-      "regret": -0.016847,
-      "regretUsd": -42,
-      "searchRegret": -0.016847,
+      "regret": -0.030886,
+      "regretUsd": -77,
+      "searchRegret": -0.030886,
       "samePoint": false
     },
     {
@@ -239,17 +239,17 @@
       "tariff": 0.2,
       "exportRate": 0,
       "champion": {
-        "pvKw": 1.45,
+        "pvKw": 1.34,
         "battKwh": 4,
-        "lifetimeCostUsd": 1966,
+        "lifetimeCostUsd": 1905,
         "oversizeScenario": "swaps_cheaper",
         "meetsConstraint": true,
-        "ms": 86
+        "ms": 65
       },
       "championSearchOnly": {
-        "pvKw": 1.45,
+        "pvKw": 1.34,
         "battKwh": 4,
-        "lifetimeCostUsd": 1966,
+        "lifetimeCostUsd": 1905,
         "meetsConstraint": true
       },
       "control": {
@@ -257,19 +257,19 @@
         "battKwh": 7,
         "lifetimeCostUsd": 1869,
         "evaluations": 12120,
-        "ms": 1003
+        "ms": 847
       },
       "rendered": {
         "metric": "physical-surplus",
-        "fraction": 1,
+        "fraction": 0.995976,
         "pct": 100,
         "target": 1.2,
-        "mismatchPp": 0,
+        "mismatchPp": 0.4024,
         "targetOffsetPp": null
       },
-      "regret": 0.051899,
-      "regretUsd": 97,
-      "searchRegret": 0.051899,
+      "regret": 0.019262,
+      "regretUsd": 36,
+      "searchRegret": 0.019262,
       "samePoint": false
     },
     {
@@ -285,7 +285,7 @@
         "lifetimeCostUsd": 476,
         "oversizeScenario": "swaps_cheaper",
         "meetsConstraint": true,
-        "ms": 14
+        "ms": 23
       },
       "championSearchOnly": {
         "pvKw": 0,
@@ -298,7 +298,7 @@
         "battKwh": 1,
         "lifetimeCostUsd": 476,
         "evaluations": 101,
-        "ms": 3
+        "ms": 4
       },
       "rendered": {
         "metric": "peak-offset",
@@ -326,7 +326,7 @@
         "lifetimeCostUsd": 425,
         "oversizeScenario": "swaps_cheaper",
         "meetsConstraint": true,
-        "ms": 4
+        "ms": 5
       },
       "championSearchOnly": {
         "pvKw": 0,
@@ -339,7 +339,7 @@
         "battKwh": 1,
         "lifetimeCostUsd": 425,
         "evaluations": 101,
-        "ms": 3
+        "ms": 4
       },
       "rendered": {
         "metric": "peak-offset",

@@ -55,11 +55,12 @@ test("#348: the zero-swap target uses the 20-year horizon, not the series window
 });
 
 test("#348: Nairobi - the challenger reaches the lattice's zero-swap optimum", () => {
-  // The published #347 receipt's one breach. The shipped search sells 1.45 kW
-  // / 4 kWh at $1,964 with one replacement; the lattice's cheapest feasible
-  // point is 1.55 kW / 7 kWh at $1,869 with none. The shipped adoption block
-  // adopts nothing here, so the visitor is told swaps are cheaper when the
-  // numbers say otherwise.
+  // The published #347 receipt's one breach. The lattice's cheapest feasible
+  // point is 1.55 kW / 7 kWh at $1,869 with no replacement; the shipped search
+  // returns 1.34 kW / 4 kWh at $1,904 with one, because the row loop ranks rows
+  // on a 0.25 kW bracket and never prices row 7 at its true boundary (#374).
+  // The shipped adoption block adopts nothing here, so the visitor is told
+  // swaps are cheaper when the numbers say otherwise.
   const row = measureBillCutCase({
     city: "Nairobi, Kenya",
     kwhPerDay: 5,
@@ -90,7 +91,11 @@ test("#348: Nairobi - the challenger reaches the lattice's zero-swap optimum", (
     row.oracle.cost,
     "challenger must match the lattice",
   );
-  assert.equal(row.challengerVsChampion, -0.048371);
+  // Re-derived 2026-11-11 with #374's fine pricing of the returned system: the
+  // champion moved from $1,964 to $1,904, so the challenger's edge over it
+  // narrows from -4.84% to -1.94%. The rule under test is unchanged - the
+  // challenger still beats the champion and still matches the oracle.
+  assert.equal(row.challengerVsChampion, -0.019412);
 });
 
 test("#348: summarize applies the issue's rule as written", () => {

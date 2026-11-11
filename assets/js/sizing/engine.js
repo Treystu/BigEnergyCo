@@ -1126,6 +1126,18 @@ export function sizeForBillCut({
     return { total: life.total, replacements };
   };
 
+  // #374: the row loop keeps its coarse 0.25 kW bracket, but the system that
+  // is actually RETURNED must be priced at its true boundary. `hi` is the
+  // upper end of the bracket, so a 0.25 kW tolerance priced the delivered
+  // system up to 0.25 kW of PV (and its inverter share) above the feasible
+  // boundary: measured 2026-11-11, Nairobi f=1.20 reported 1.46 kW / 4 kWh at
+  // $1,967 when the same row's true boundary is 1.34 kW / $1,904 - a 3.2%
+  // mispricing of the answer the visitor is shown. Refining every row instead
+  // was tried first and rejected: it reorders rows enough to stop the #155
+  // oversize adoption from firing at all on the no-swap fixture, which is a
+  // behaviour change the lane has no evidence to make. So: coarse ranking,
+  // fine answer.
+  const PV_SEARCH_TOL = 0.01;
   let best = null;
   for (let b = 0; b <= battMax; b += battStep) {
     if (pvMax === 0) {
@@ -1177,7 +1189,7 @@ export function sizeForBillCut({
       let lo = 0.05,
         hi = Math.min(pvMax, best.pvKw + 2);
       if (!meets(evaluate(hi, b))) continue;
-      while (hi - lo > 0.25) {
+      while (hi - lo > PV_SEARCH_TOL) {
         const mid = (lo + hi) / 2;
         if (meets(evaluate(mid, b))) hi = mid;
         else lo = mid;
