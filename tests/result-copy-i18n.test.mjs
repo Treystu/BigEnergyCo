@@ -13,6 +13,7 @@ import path from "node:path";
 import { LOCALES } from "../assets/js/shared/locales.js";
 import { RESULT_COPY } from "../assets/js/shared/result-copy.js";
 import { translate } from "../assets/js/shared/i18n.js";
+import { TILT_COPY } from "../assets/js/shared/tilt-copy.js";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const UI = readFileSync(path.join(ROOT, "assets/js/sizing/ui.js"), "utf8");
@@ -179,4 +180,54 @@ test("every basis id the payload can name has a phrase in every locale", () => {
       );
     }
   }
+});
+
+// The tilt-guide family (#365 second pass): the two noon labels drawn inside the
+// sun-path SVG, the winter-tilt gloss, the daylight title, the best-pick suffix
+// and the two site-specific tilt takeaways. Same contract as RESULT_COPY: every
+// locale carries every string with its placeholders, and no locale ships the
+// English sentence verbatim.
+test("every locale carries every tilt-guide string, placeholders intact", () => {
+  const keys = Object.keys(TILT_COPY.en);
+  assert.ok(keys.length >= 9, `expected the family, got ${keys.length}`);
+  for (const lang of LANGS) {
+    for (const key of keys) {
+      const value = LOCALES[lang][key];
+      assert.equal(
+        typeof value,
+        "string",
+        `${lang}.${key} is missing - the tilt guide would fall back to English`,
+      );
+      assert.deepEqual(
+        placeholders(value),
+        placeholders(TILT_COPY.en[key]),
+        `${lang}.${key} does not carry the same placeholders as English`,
+      );
+      if (lang !== "en" && TILT_COPY.en[key].length >= 24)
+        assert.notEqual(
+          value,
+          TILT_COPY.en[key],
+          `${lang}.${key} is the English sentence, untranslated`,
+        );
+    }
+  }
+});
+
+test("the tilt guide renders through the copy table, not bare literals", () => {
+  const banned = [
+    "Summer Noon: ",
+    "Winter Noon: ",
+    "Sheds snow &amp; captures low winter midday sun",
+    "Daylight &amp; Seasonal Swing",
+    '" — cheapest compared"',
+    '" — safest pick"',
+    "Sun path for ${compassShort}",
+  ];
+  for (const phrase of banned)
+    assert.ok(
+      !UI.includes(phrase),
+      `ui.js still emits the bare English literal: ${phrase}`,
+    );
+  for (const key of Object.keys(TILT_COPY.en))
+    assert.ok(UI.includes(`"${key}"`), `ui.js never renders ${key}`);
 });
