@@ -100,11 +100,11 @@ function readEnKeys() {
     path.join(ROOT, "assets/js/shared/locales.js"),
     "utf8",
   );
-  // The result-surface sentences live in their own single-source table (#365),
-  // spread into `en` at module load, so the static scan above cannot see them.
-  const resultSrc = fs.readFileSync(
-    path.join(ROOT, "assets/js/shared/result-copy.js"),
-    "utf8",
+  // The result-surface sentences and the tilt-guide family live in their own
+  // single-source tables (#365), spread into `en` at module load, so the static
+  // scan above cannot see them. Both tables use the same `en: {` block shape.
+  const copyTables = ["result-copy.js", "tilt-copy.js"].map((name) =>
+    fs.readFileSync(path.join(ROOT, "assets/js/shared", name), "utf8"),
   );
   const keys = new Set();
   let depth = 0;
@@ -119,16 +119,18 @@ function readEnKeys() {
       if (k) keys.add(k[1]);
     }
   }
-  let inResultEn = false;
-  let rDepth = 0;
-  for (const line of resultSrc.split(/\r?\n/)) {
-    if (/^  en: \{$/.test(line)) inResultEn = true;
-    else if (/^  \w+: \{$/.test(line) && rDepth === 1) inResultEn = false;
-    rDepth +=
-      (line.match(/\{/g) || []).length - (line.match(/\}/g) || []).length;
-    if (inResultEn && rDepth >= 2) {
-      const k = line.match(/^    (\w+):/);
-      if (k) keys.add(k[1]);
+  for (const resultSrc of copyTables) {
+    let inResultEn = false;
+    let rDepth = 0;
+    for (const line of resultSrc.split(/\r?\n/)) {
+      if (/^  en: \{$/.test(line)) inResultEn = true;
+      else if (/^  \w+: \{$/.test(line) && rDepth === 1) inResultEn = false;
+      rDepth +=
+        (line.match(/\{/g) || []).length - (line.match(/\}/g) || []).length;
+      if (inResultEn && rDepth >= 2) {
+        const k = line.match(/^    (\w+):/);
+        if (k) keys.add(k[1]);
+      }
     }
   }
   return keys;

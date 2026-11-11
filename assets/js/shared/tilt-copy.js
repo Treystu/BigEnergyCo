@@ -105,12 +105,10 @@ export const TILT_COPY = {
       "Op hoge breedte ({lat}°) brengt de winter poolnacht (0 u direct zonlicht). Een steil veld (~{tilt}°) schuift sneeuw weg en vangt de lage stralen — plat zou ~{loss}% van de jaaropbrengst verliezen, dus nauwkeurig monteren loont hier echt, met voldoende accureserve.",
   },
   ar: {
-    resSunPathTitle:
-      "مسار الشمس للألواح المواجهة لـ {compass} بميل ~{tilt}°",
+    resSunPathTitle: "مسار الشمس للألواح المواجهة لـ {compass} بميل ~{tilt}°",
     resSunPathSummerNoon: "☀️ ظهيرة الصيف: {deg}° ({h} ساعة)",
     resSunPathWinterNoon: "❄️ ظهيرة الشتاء: {deg}° ({h} ساعة)",
-    resSunPathSnowNote:
-      "يزيل الثلج ويلتقط شمس الظهيرة المنخفضة في الشتاء",
+    resSunPathSnowNote: "يزيل الثلج ويلتقط شمس الظهيرة المنخفضة في الشتاء",
     resSunPathDaylightTitle: "☀️ ساعات النهار وتغيّر الفصول",
     resBestCheapest: " — الأرخص بين الخيارات المقارنة",
     resBestSafest: " — الخيار الأكثر أمانًا",
