@@ -757,26 +757,27 @@ test("Benchmark city hub: reassurance callout clarifies worldwide capability", (
 
 test("Solar Orientation & Tilt Guide: renderSunPath produces intuitive array tilt and seasonal sun rays", () => {
   const uiJs = fs.readFileSync("assets/js/sizing/ui.js", "utf8");
-  assert.match(
-    uiJs,
-    /Solar Orientation &amp; Array Tilt Guide/i,
-    "Sun path renderer must provide plain-language Solar Orientation & Array Tilt Guide",
-  );
-  assert.match(
-    uiJs,
-    /Compass Heading/i,
-    "Sun path metrics must include compass heading indicator",
-  );
-  assert.match(
-    uiJs,
-    /Year-Round Fixed/i,
-    "Sun path metrics must include year-round fixed tilt indicator",
-  );
-  assert.match(
-    uiJs,
-    /Winter Boost/i,
-    "Sun path metrics must include winter boost tilt indicator",
-  );
+  // The guide's wording lives in the locale copy (#365), so each pin is two
+  // halves: the renderer must emit the key, and English must still say it.
+  const copy = fs.readFileSync("assets/js/shared/result-copy.js", "utf8");
+  const pins = [
+    [/t\("resTiltHeader"/, /Solar Orientation & Array Tilt Guide/],
+    [/t\("resTiltCompassTitle"\)/, /Compass Heading/],
+    [/t\("resTiltYearRoundTitle"\)/, /Year-Round Fixed Tilt/],
+    [/t\("resTiltWinterTitle"\)/, /Winter Boost Tilt/],
+  ];
+  for (const [rendered, english] of pins) {
+    assert.match(
+      uiJs,
+      rendered,
+      `sun path renderer must render ${rendered.source}`,
+    );
+    assert.match(
+      copy,
+      english,
+      `English copy must still carry ${english.source}`,
+    );
+  }
   assert.match(
     uiJs,
     /sun-path-takeaway/i,

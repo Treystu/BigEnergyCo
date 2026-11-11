@@ -217,6 +217,8 @@ export const RESULT_COPY = {
       'Here a flat roof forfeits about {loss}% of the annual harvest versus the optimal ~{tilt}° tilt — roughly {extra} to make up the difference. Precision is forgiving, though: within ±10° of optimal you keep nearly all of it, so "close" is genuinely good enough on most roofs. Our simulation already assumes the recommended tilt when sizing your array and battery.',
     resTiltCompassSouth: "True South (180°)",
     resTiltCompassNorth: "True North (0°)",
+    resTiltCompassTitle: "🧭 Compass Heading",
+    resTiltWinterTitle: "❄️ Winter Boost Tilt",
   },
   es: {
     resBasisCut10: "un recorte de factura de ~10% en horas punta",
@@ -428,6 +430,8 @@ export const RESULT_COPY = {
       'Aquí un tejado plano pierde cerca del {loss}% de la cosecha anual frente a la inclinación óptima de ~{tilt}° — más o menos {extra} para compensar. La precisión es tolerante: dentro de ±10° de lo óptimo conservas casi todo, así que "cerca" basta de sobra en la mayoría de tejados. Nuestra simulación ya asume la inclinación recomendada al dimensionar tu campo solar y tu batería.',
     resTiltCompassSouth: "Sur verdadero (180°)",
     resTiltCompassNorth: "Norte verdadero (0°)",
+    resTiltCompassTitle: "🧭 Rumbo de la brújula",
+    resTiltWinterTitle: "❄️ Inclinación extra de invierno",
   },
   pt: {
     resBasisCut10: "um corte na conta de ~10% em horas de ponta",
@@ -638,6 +642,8 @@ export const RESULT_COPY = {
       'Aqui um telhado plano perde cerca de {loss}% da colheita anual face à inclinação ideal de ~{tilt}° — mais ou menos {extra} para compensar. A precisão é tolerante: dentro de ±10° do ideal conserva quase tudo, por isso "perto" chega bem na maioria dos telhados. A nossa simulação já assume a inclinação recomendada ao dimensionar o seu arranjo e a sua bateria.',
     resTiltCompassSouth: "Sul verdadeiro (180°)",
     resTiltCompassNorth: "Norte verdadeiro (0°)",
+    resTiltCompassTitle: "🧭 Rumo da bússola",
+    resTiltWinterTitle: "❄️ Inclinação extra de inverno",
   },
   fr: {
     resBasisCut10: "une baisse de facture de ~10% en heures de pointe",
@@ -849,6 +855,8 @@ export const RESULT_COPY = {
       "Ici, un toit plat perd environ {loss}% de la récolte annuelle par rapport à l'inclinaison optimale de ~{tilt}° — soit à peu près {extra} pour compenser. La précision reste tolérante : à ±10° de l'optimum vous conservez presque tout, donc « proche » suffit largement sur la plupart des toits. Notre simulation suppose déjà l'inclinaison recommandée pour dimensionner votre champ et votre batterie.",
     resTiltCompassSouth: "Plein sud (180°)",
     resTiltCompassNorth: "Plein nord (0°)",
+    resTiltCompassTitle: "🧭 Cap de la boussole",
+    resTiltWinterTitle: "❄️ Inclinaison renforcée d'hiver",
   },
   de: {
     resBasisCut10: "eine Rechnungssenkung von ~10% in Spitzenstunden",
@@ -1058,6 +1066,8 @@ export const RESULT_COPY = {
       "Ein Flachdach verliert hier etwa {loss}% der Jahresernte gegenüber der optimalen Neigung von ~{tilt}° — rund {extra} zum Ausgleich. Die Genauigkeit ist nachsichtig: innerhalb von ±10° um das Optimum bleibt fast alles erhalten, „ungefähr“ reicht auf den meisten Dächern also gut aus. Unsere Simulation setzt die empfohlene Neigung bei der Auslegung von Feld und Batterie bereits voraus.",
     resTiltCompassSouth: "Echt Süd (180°)",
     resTiltCompassNorth: "Echt Nord (0°)",
+    resTiltCompassTitle: "🧭 Kompassrichtung",
+    resTiltWinterTitle: "❄️ Zusätzliche Winterneigung",
   },
   nl: {
     resBasisCut10: "een rekeningverlaging van ~10% in piekuren",
@@ -1267,6 +1277,8 @@ export const RESULT_COPY = {
       'Een plat dak verliest hier ongeveer {loss}% van de jaaropbrengst ten opzichte van de optimale helling van ~{tilt}° — ruwweg {extra} om dat te compenseren. Precisie is vergevingsgezind: binnen ±10° van het optimum behoud je bijna alles, dus "ongeveer" is op de meeste daken ruim voldoende. Onze simulatie gaat bij het dimensioneren al uit van de aanbevolen helling.',
     resTiltCompassSouth: "Echt zuid (180°)",
     resTiltCompassNorth: "Echt noord (0°)",
+    resTiltCompassTitle: "🧭 Kompasrichting",
+    resTiltWinterTitle: "❄️ Extra winterhelling",
   },
   ar: {
     resBasisCut10: "خفض للفاتورة بنحو 10% في ساعات الذروة",
@@ -1468,5 +1480,7 @@ export const RESULT_COPY = {
       "هنا يفقد السطح المستوي نحو {loss}% من الحصاد السنوي مقابل الميل الأمثل ~{tilt}° — أي ما يعادل {extra} لتعويض الفرق. الدقة متسامحة: ضمن ±10° من الأمثل تحتفظ بمعظم الإنتاج، لذا «قريب» يكفي تمامًا على معظم الأسطح. ومحاكاتنا تفترض أصلًا الميل الموصى به عند تحديد حجم المنظومة والبطارية.",
     resTiltCompassSouth: "الجنوب الحقيقي (180°)",
     resTiltCompassNorth: "الشمال الحقيقي (0°)",
+    resTiltCompassTitle: "🧭 اتجاه البوصلة",
+    resTiltWinterTitle: "❄️ ميل إضافي للشتاء",
   },
 };

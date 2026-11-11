@@ -16,6 +16,7 @@ import {
   systemForPaths,
   HORIZON_YEARS,
 } from "../assets/js/sizing/paths.js";
+import { RESULT_COPY } from "../assets/js/shared/result-copy.js";
 
 const src = readFileSync(
   new URL("../assets/js/sizing/ui.js", import.meta.url),
@@ -29,11 +30,20 @@ if (start < 0 || end < 0 || end <= start) {
 const code = src
   .slice(start, end)
   .replace("export function turnkeyQuoteText(", "function turnkeyQuoteText(");
+// The sentence is now assembled through the shipped translator, so the bridge
+// has to supply the real English copy rather than a stub: a test asserting on
+// a placeholder-free stub would pass while the page printed a raw {variable}.
+export const tEn = (key, vars = {}) =>
+  String(RESULT_COPY.en[key] ?? key).replace(/\{(\w+)\}/g, (m, k) =>
+    vars[k] === undefined ? m : String(vars[k]),
+  );
+
 const bridge = new Function(
   "PATHS_HORIZON_YEARS",
+  "t",
   `${code}; return turnkeyQuoteText;`,
 );
-export const turnkeyQuoteText = bridge(HORIZON_YEARS);
+export const turnkeyQuoteText = bridge(HORIZON_YEARS, tEn);
 
 export const money = (u) => "$" + Math.round(u).toLocaleString();
 export const moneyRange = (lo, hi) => money(lo) + "–" + money(hi);

@@ -2163,7 +2163,7 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
 
     <div class="sun-path-grid">
       <div class="sun-path-metric">
-        <div class="sun-path-metric-title">\uD83E\uDDED Compass Heading</div>
+        <div class="sun-path-metric-title">${t("resTiltCompassTitle")}</div>
         <div class="sun-path-metric-val" style="color:var(--primary-accent);">${compassShort}</div>
         <div class="sun-path-metric-sub">${headingDetail}</div>
       </div>
@@ -2173,7 +2173,7 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
         <div class="sun-path-metric-sub">${t("resTiltYearRoundSub")}</div>
       </div>
       <div class="sun-path-metric">
-        <div class="sun-path-metric-title">\u2744\uFE0F Winter Boost Tilt</div>
+        <div class="sun-path-metric-title">${t("resTiltWinterTitle")}</div>
         <div class="sun-path-metric-val" style="color:#7dd3fc;">~${wtrTilt}\u00B0</div>
         <div class="sun-path-metric-sub">Sheds snow &amp; captures low winter midday sun</div>
       </div>
