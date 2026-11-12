@@ -451,7 +451,13 @@ else ok("index.html: every reader-visible prose block has a locale hook");
 // the Netherlands audience (top-5 traffic country), not unkeyed English.
 // 446 -> 485 (2026-10-16): the salderingsregeling-stopt-2027 post body itself
 // carries 39 Dutch prose blocks — same deliberate exception, first Dutch post.
-const PROSE_CEILING = 485;
+// 485 -> 510 (2026-11-11, measured reason): the Australia STC post (#380) adds
+// its own 24 visible prose blocks — English by the same product decision as
+// every other article here — plus one card excerpt on the hub. The raise is the
+// 25-block delta at the read that landed it (check-i18n reported 510/485), not
+// headroom: the constant tracks the corpus, and the English article bodies
+// remain the tracked gap this item is about.
+const PROSE_CEILING = 510;
 if (proseFindings.length > PROSE_CEILING) {
   fail(
     `${proseFindings.length} visible prose block(s) on a translated page carry no i18n hook ` +

@@ -49,6 +49,7 @@ export const ALLOWLIST = [
   "blog/eskom-fixed-charge-solar-2027/index.html",
   "blog/deduccion-irpf-autoconsumo-2026/index.html",
   "blog/gia-dien-5-bac-2026/index.html",
+  "blog/stc-deeming-period-2027-australia/index.html",
   "blog/program-afm-baterii-2026/index.html",
   "blog/dotacja-magazyn-energii-2026/index.html",
   "about/index.html",
