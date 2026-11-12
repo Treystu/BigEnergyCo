@@ -457,7 +457,14 @@ else ok("index.html: every reader-visible prose block has a locale hook");
 // 25-block delta at the read that landed it (check-i18n reported 510/485), not
 // headroom: the constant tracks the corpus, and the English article bodies
 // remain the tracked gap this item is about.
-const PROSE_CEILING = 510;
+// 510 -> 546 (2026-11-12, measured reason): the Brazil post (#379) adds 36
+// visible prose blocks - its own body plus one hub card excerpt - in pt-BR, a
+// language the product has no runtime string table for, so every block counts
+// unkeyed. The raise is the exact 36-block delta at the read that landed it
+// (check-i18n reported 546/510), following the same rule as the two earlier
+// raises; the ceiling tracks the corpus and still flags any block added without
+// this deliberate step.
+const PROSE_CEILING = 546;
 if (proseFindings.length > PROSE_CEILING) {
   fail(
     `${proseFindings.length} visible prose block(s) on a translated page carry no i18n hook ` +
