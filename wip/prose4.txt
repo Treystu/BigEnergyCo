@@ -1,0 +1,212 @@
+#### Q0 5293-5303
+/**
+ * THE INSTALLER-vs-DIRECT SENTENCE, priced instead of guessed.
+ *
+ * It used to price "a typical installer quote" as a MULTIPLE of the hardware
+ * estimate (10x cheapest, 5x dearest) plus a flat hookup figure — invented at the
+ * point of display, so the gap measured what each side counted rather than price,
+ * which is what D-01 §6.4 forbids (R-PATH-03). Both paths now come from ONE priced
+ * model over ONE system, which also removes the old negative-saving wording
+ * structurally. With no priced comparison the sentence degrades to the hardware
+ * cost and points at the panel.
+ */
+#### Q1 4290-4299
+// The FX provenance line (P1.4, F-10), rendered on every load including the
+// offline one: "no source and no date" was the defect. data-i18n stays set for the
+// static and failed wordings so a later applyI18n() re-translates them, and is
+// removed for live and stale because those carry a date the static key cannot
+// express.
+/**
+ * The rate's own date in plain words: the provider's raw RFC-822 string printed
+ * as-is read as a date from the wrong window (the V1 defect), so it is formatted as
+ * a plain date and the locale sentence says whose date it is.
+ */
+#### Q2 7020-7027
+ * Cumulative 20-year cost chart: three running sums for the recommended system
+ * — amber stayed-on-grid spend, emerald the system's own cost (capex + labor +
+ * swaps; it ends exactly on the card's "Total 20-year cost"), slate the residual
+ * bills net of feed-in credit (negative under net metering). Amber is a literal
+ * STACK of emerald + slate + saving, so each slice is visible inside it. Red fills
+ * where amber sits below the with-solar stack; a lower panel bars the running
+ * difference and an HTML callout carries the headline.
+ */
+#### Q3 5862-5868
+// ── Selected system ─────────────────────────────────────────────────────────
+// One system drives everything below the run (charts, hardware list, export
+// figures, share link, print); it falls back to the recommendation.
+// ── Jev sanity check ────────────────────────────────────────────────────────
+// One probe per distinct result state, cached by state fingerprint. A confident
+// "impossible" verdict on deterministic output means a rescale/merge bug, so the
+// response is one full engine re-run; a flag on the re-run renders as-is.
+#### Q4 9077-9083
+    // THE SAME REPAINT, once, immediately — the load-bearing call.
+    // The dictionary is a deferred import and translate() echoes the key until it
+    // lands, so updateLoadReadout() and applyUseCase(), painted during setup before
+    // `await applyI18n()` above, showed raw keys; applyI18n() only rewrites
+    // data-i18n MARKUP and cannot repair them. Re-running both painters afterwards
+    // costs one call and no network, and keeps every runtime-painted surface in one
+    // owner.
+#### Q5 336-341
+// ── Worker reply deadline ───────────────────────────────────────────────────
+// A worker that never replies must surface an honest retryable error instead of
+// hanging on "running…" (reproduced live through the share-restore auto-run). The
+// watch lives in run-coordinator.js, armed by begin() and retired by settle() inside
+// flushPendingRun(), so a stale token reports nothing. The three-minute bound is
+// fixed so public URLs cannot weaken the recovery timer.
+#### Q6 69-75
+// THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
+//
+// LAZY, measured: paths.js as a static import was fetched and parsed before the
+// first result card — 10,310 B of the metric for a section that renders after the
+// result. Both surfaces that read the model render inside ONE await after it
+// resolves, so the page never shows a guessed quote and then corrects it, which is
+// the defect D-01 exists to remove.
+#### Q7 4246-4252
+/**
+ * The levelized-cost row, named for what it measures. `lcoeUsdPerKwh` is the
+ * system's cost per kWh it serves — most of the bill with panels, so "your power
+ * cost" is honest. A battery-only run only MOVES energy still bought at the tariff,
+ * so the same number is the cost of each shifted kWh; called "your power cost" it
+ * read five times below the grid rate on a card saying the system never breaks even.
+ */
+#### Q8 2447-2451
+  // Which currency, in order of authority: (1) the country, when the location carries
+  // one — every city partition records its ISO 3166-1 code, so this is a lookup;
+  // (2) the tariff box, which is GEOGRAPHIC and spans countries its label does not
+  // speak for ("United Kingdom / Ireland" gave Dublin pounds). The box decides the
+  // TARIFF either way; only the currency is overridden.
+#### Q9 1566-1572
+/**
+ * Repaint every surface whose text comes from the dictionary but whose node is
+ * built by JS rather than data-i18n markup. Single owner, called after applyI18n()
+ * on first paint and once per beco:lang change: the first stops a key showing, the
+ * second stops two languages showing at once. Both re-run existing painters, so a
+ * surface cannot drift from the code that fills it.
+ */
+#### Q10 597-601
+// Background weather prefetch, fired the moment a location resolves so the ~2 MB pull
+// overlaps form-filling. It runs INSIDE the sizing worker, whose in-flight dedupe
+// guarantees one network pull even when a run starts mid-prefetch, and the warmed
+// memo lands where runSizing looks. Deduped here too (WARMED_SITES); errors are
+// silent because the run path owns the fallback story.
+#### Q11 3500-3504
+// ── Unified selection hub ───────────────────────────────────────────────────
+// One selection drives every chart: the curve's blue dot, the SOC + savings charts,
+// the hardware list and the granular icon panel. Slider drags only move a highlight
+// through CACHED points; release commits the nearest cached system. The single
+// on-demand worker lookup reconciles in the background.
+#### Q12 413-417
+// ── Unified curve selection state ───────────────────────────────────────────
+// One curve, one selection. curvePreview is the slider drag-preview (highlight only,
+// worker untouched); the committed selection lives in selectedKey / adoptedEntry /
+// frontierSelected. focusFirst: grid-tie auto mode, where the granular focus panel
+// REPLACES the matrix and the recommendation card.
+#### Q13 366-370
+  // If inputs changed, preserve their newer status: a queued replacement is retried
+  // against a fresh worker, otherwise the timed-out sequence retires.
+  // abandon() and not invalidate() — the worker is terminated so no reply is coming,
+  // and a busy channel would swallow the next click, leaving "click Size My System
+  // to try again" above a button that cannot be retried.
+#### Q14 5384-5390
+/**
+ * THE COMPARISON PANEL: four priced routes to the SAME system, side by side. It never
+ * computes — every figure is read out of the model purchasePaths priced, so no card
+ * can disagree with the ELI5 sentence above it. The panel owns presentation and the
+ * instrument toggle: a PPA buys ENERGY, a lease rents the SYSTEM, which genuinely
+ * changes the price (R-PATH-02).
+ */
+#### Q15 3180-3184
+  // Auto grid-tie: the recommendation follows the bill-cut slider, and the worker
+  // re-derives the banner and focus from the custom target column, so the headline
+  // savings describe the visitor's CURRENT cut. An explicitly null best means nothing
+  // solves at this cut: retire the stale recommendation NOW rather than leaving the
+  // previous target's system on screen.
+#### Q16 4681-4685
+  // A battery-only run builds no panels, so its tiers scale the battery alone. Feeding
+  // the clamped basePvKw in presented a 12 kW array as the visitor's own system and
+  // priced it with that array's panels, so the Current Selection baseline quoted a
+  // different price for the same system. baseInvKw mirrors the engine's inverter
+  // basis (never below the load peak).
+#### Q17 706-710
+// Simple mode's single results surface: same payload and same selected entry as the
+// technical cards, so the numbers cannot diverge.
+// ── Use cases: the one vocabulary the visitor sees ──────────────────────────
+// Everything below reads usecases.js; nothing else defines a use case. The six
+// blocks in index.html are shown or hidden from the registry's own inputsFor.
+#### Q18 5617-5621
+/** Compact column labels for the matrix header. */
+// The auto-card note, rebuilt in the visitor's language (#365): the payload still
+// ships the English autoNote, and the parts beside it name the chemistries and the
+// basis id. One literal per target id, never concatenated — the key-existence gate
+// scans for literal translate calls and would not see a built key.
+#### Q19 750-756
+/**
+ * The ONE writer of the bill-cut row's visibility. The decision is pure
+ * (mode-chrome.js) and reads CURRENT state — goal, on-screen result, use case — so
+ * every state change re-syncs and no caller can leave a stale write behind. Before
+ * this function the render wrote the row from the last result's mode and nothing
+ * re-hid it on a goal switch.
+ */
+#### Q20 7029-7037
+/**
+ * AUTO-comparison chart: one panel, each bank drawn against ITS OWN nameplate —
+ * same-job systems deliver similar energy, so the honest difference is the reserve
+ * each chemistry carries.
+ */
+/**
+ * SOC reliability chart for ONE selected system: the same daily min/max band
+ * machinery as the multi-tier chart, from the entry's nameplate bands.
+ */
+#### Q21 329-333
+// The worker runs one full sizing at a time and cannot be preempted: a new run
+// requested mid-flight collapses into a single trailing run instead of queueing stale
+// engine work behind the slider. run-coordinator.js owns that state — busy, the
+// retiring sequence, the collapsed request — and every reply is released through
+// flushPendingRun().
+#### Q22 3989-3993
+      // Weather progress from the worker: chunk-level counts drive the
+      // determinate bar; the resolved signal moves the stepper onto the
+      // simulation stage. Gated on the same seq/epoch staleness checks as
+      // payloads, so superseded runs can never paint the current pipeline.
+      // Progress never holds or frees the worker.
+#### Q23 7805-7809
+// Everything below the run that must follow the SELECTED system (charts,
+// hardware list, export figures, share link, print sheet, matrix highlight).
+// Called from renderResults on a full run and straight from curve-point/
+// matrix-cell clicks so a selection change is instant — all of this data is
+// already sitting in the cached payload.
+#### Q24 1240-1244
+// Infeasibility banner: surfaces a structural (mode × hardware × target) reason above
+// the cards so visitors know WHY nothing solved and what to change, and hides itself
+// the moment a payload without a reason arrives.
+// The code-to-copy mapping is owned by infeasible-copy.js and the copy by locales.js;
+// what is left here is the rendering.
+#### Q25 2508-2512
+// One owner for the results region: hidden until a successful render, so
+// old numbers can never masquerade as fresh after a failed or invalid run.
+// The infeasible banner explains why that region is empty, so it is retracted
+// with it — otherwise a reason from an earlier run keeps explaining a result
+// area that is no longer on screen.
+#### Q26 1277-1281
+// The label for a cell or tier that produced no system: the reviewed copy when
+// the code has it, and the caller's own honest note otherwise. Defined at
+// module scope on purpose — renderTierCards shadows the translate helper with
+// its own loop variable, so a copy lookup written inside that scope would be
+// calling the tier object.
+#### Q27 4600-4603
+          // These figures come from this tab's own nameplate/DoD model, not from the site
+          // simulation; the flag stops the lead-acid comparison from subtracting a modelled
+          // figure from a simulated one — the cross-model delta that produced "lead-acid
+          // ~€X less" beside a card showing lead-acid far dearer.
+#### Q28 3361-3364
+    // Single writer: the goal buttons never touch systemGoal. They select a CASE and
+    // let applyUseCase derive the enum, so button and chooser cannot drift. Choosing
+    // by mode, not label: backup and offgrid share the mode and backup sizes the
+    // essentials only, so defaulting a mode switch onto it would silently resize.
+#### Q29 5467-5472
+/**
+ * BOTH surfaces that read the priced comparison, in the order that makes them
+ * agree: the panel prices, the sentence quotes the result. Awaited because the
+ * model loads lazily (loadPaths) — nothing paints until it is in hand. A generation
+ * counter, not a lock: a late resolve from a superseded system must not repaint.
+ */

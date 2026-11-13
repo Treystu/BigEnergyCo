@@ -1,0 +1,226 @@
+#### P0 5298-5314
+/**
+ * THE INSTALLER-vs-DIRECT SENTENCE, priced instead of guessed.
+ *
+ * This used to price "a typical installer quote" as a MULTIPLE of the hardware
+ * estimate — 10x the cheapest build, 5x the dearest — and then add a flat
+ * $1,500-$3,000 for the electrician's final hookup. Both numbers were invented
+ * at the point of display, so the gap between "hire an installer" and "buy the
+ * parts yourself" was a difference in what each side counted rather than a
+ * difference in price. That is precisely the claim D-01 §6.4 forbids
+ * (R-PATH-03), and it is why the two paths now come out of ONE priced model
+ * over ONE system: the turnkey path's all-in band (parts, labour, permits and
+ * the installer's margin already inside it) against the self-purchase path's
+ * all-in band (the SAME parts, plus paid labour, permits and interconnection).
+ *
+ * With no priced comparison available the sentence degrades to the hardware
+ * cost and points at the panel, instead of inventing a band.
+ */
+#### P1 69-83
+// THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
+//
+// LAZY, and the measurement is why. It used to be a static import, on the
+// reasoning that the ELI5 card's installer-vs-direct sentence and the
+// comparison panel both read it on first paint. The browser says otherwise:
+// paths.js is fetched and parsed BEFORE the first result card renders, and the
+// plan's own js_to_first_result budget read 201,806 B against a 204,800 B cap
+// on the tree that shipped this — 2,994 B of headroom, of which paths.js was
+// 10,310 B. A pricing model nobody can see yet was sitting on the critical
+// path for a section that renders after the result does.
+//
+// window in which the page shows a guessed quote and then corrects it — which
+// was the exact defect D-01 exists to remove. The module resolves in a few
+// milliseconds from cache and the whole comparison appears at once, priced by
+// one owner.
+#### P2 4291-4306
+// The FX provenance line (P1.4, F-10). Rendered on every load, including the
+// offline one, because "no source and no date" was the defect: a visitor whose
+// money was converted at the built-in fallback table had nothing on screen
+// saying so, and a live rate aged silently until the next page load.
+//
+// The data-i18n attribute is kept in step with the state rather than left
+// alone. For the static and failed wordings it stays set, so a later
+// applyI18n() re-translates the right sentence. For live and stale it is
+// removed, because those carry a date the static key cannot express - and an
+// applyI18n() that reverted them to "no live rate loaded" would be stating
+// something false about a rate that did load.
+/**
+ * The rate's own date, in plain words.
+ *
+ * format it as a plain date, and let the locale sentence say whose date it is.
+ */
+#### P3 371-381
+  // If inputs changed, preserve their newer status. A queued replacement is
+  // retried against a fresh worker; otherwise retire the timed-out sequence
+  // and leave recovery to the visitor. Every branch releases through the
+  // same funnel.
+  //
+  // ever coming; invalidate() leaves the channel BUSY (correctly, for the
+  // pre-calculation edit path, where a run really is still running), and a busy
+  // channel sends the visitor's next click straight into the collapse branch
+  // where it returns without starting anything. The page then says "click Size
+  // My System to try again" above a button that cannot be retried, which is the
+  // exact failure the deadline exists to end.
+#### P4 5479-5491
+/**
+ * BOTH surfaces that read the priced comparison, in the order that guarantees
+ * they agree: the panel prices, the sentence quotes the result. Two call sites
+ * (a fresh result, a selection change) plus the instrument toggle above.
+ *
+ * Awaited, because the model is loaded lazily (see loadPaths). The await is
+ * the whole point and not a convenience: the two surfaces are painted INSIDE
+ * it, one after the other, from one priced result. The alternative — rendering
+ * the sentence without a price and correcting it a moment later — is the
+ * "two different turnkey numbers on one screen" defect D-01 exists to remove,
+ * so nothing here paints until the model is in hand.
+ *
+ */
+#### P5 7039-7048
+ * Cumulative 20-year cost chart — the headline money story, drawn as three
+ * running sums for the recommended system:
+ *   - amber line:   cumulative grid spend if you had stayed on the grid
+ *   - emerald line: cumulative cost of the SYSTEM alone (capex + first labor
+ *                   + every swap) — it ends exactly on the recommendation's
+ *                   "Total 20-year cost" figure, so chart and card agree.
+ *   - slate line:   the residual grid cost (the bills you still pay, net of
+ *                   the feed-in credit on surplus) — it goes NEGATIVE under
+ *                   net metering, when the credit out-earns the bill.
+ */
+#### P6 5881-5888
+// ── Selected system ─────────────────────────────────────────────────────────
+// One system drives everything below the run (charts, hardware list, export
+// figures, share link, print). This resolves whichever the visitor picked
+// last; it falls back to the recommendation.
+// ── Jev sanity check ───────────────────────────────────────────────────────────
+// our deterministic engine's output would mean a rescale/merge bug — so the
+// on-the-spot response is one full engine re-run (deterministic self-heal);
+// a flag on the re-run renders as-is (refinedPayloads guards the loop).
+#### P7 5634-5642
+/** Compact column labels for the matrix header. */
+// The auto-card note, rebuilt in the visitor's language (#365). The engine
+// still ships the English `autoNote` string as the payload contract; the parts
+// beside it name the chemistries and the basis id so the sentence can be
+// rendered in the visitor's own language.
+// One literal per target id, switched here rather than built by string
+// concatenation: the key-existence gate scans for literal translate calls, and
+// a concatenated key would be invisible to it - exactly how an untranslated
+// sentence ships silently.
+#### P8 9099-9105
+    // THE SAME REPAINT, once, immediately — and this is the load-bearing call.
+    //
+    // Fixing it where it is painted would mean awaiting the dictionary inside
+    // three unrelated setup functions. Re-running the two painters afterwards
+    // costs one extra function call and no network, because the fetch already
+    // finished — and it puts every runtime-painted surface in one owner, so the
+    // next one added is repainted by the same line rather than by luck.
+#### P9 1570-1579
+/**
+ * Repaint every surface whose text comes from the dictionary but whose node is
+ * built by JS rather than by `data-i18n` markup.
+ *
+ * This is the single owner of that class, and it is called from two places that
+ * must agree: once after `applyI18n()` resolves on first paint, and once per
+ * `beco:lang` change. The second call is what stops the page from showing two
+ * languages at once; the first is what stops it from showing a key at all.
+ *
+ */
+#### P10 341-346
+// ── Worker reply deadline ────────────────────────────────────────────────
+// A worker that never replies (challenge-tainted load, dead worker, lost
+// begin(), retired by settle() inside the single flushPendingRun() funnel,
+// so a fired callback whose token is no longer current belongs to a run
+// already answered and reports nothing. Every run uses the fixed three-minute
+// bound so visitors and public URLs cannot weaken the recovery timer.
+#### P11 4607-4611
+          // These figures come from this tab's own nameplate/DoD model, not
+          // from the site simulation. The flag keeps the lead-acid comparison
+          // from subtracting a modelled figure from a simulated one — that
+          // cross-model delta is what produced "lead-acid ~€X less" next to a
+          // comparison card showing lead-acid an order of magnitude dearer.
+#### P12 8166-8170
+  // The recipient's persistent note. The status line below carries the same
+  // fact for a moment, but the run this link triggers replaces it with its own
+  // progress, so the result itself must say whose result it is (found by the
+  // 2026-11-07 cold recipient drive, where the note was gone in under a
+  // second). It lives inside the results region, so it appears with them.
+#### P13 4681-4685
+  // `basePvKw` is clamped to >= 1 so the tier ratios always have a PV axis to
+  // scale, which means it is never 0 — a battery-only baseline therefore looks
+  // like a "6 kW Solar" array that this mode never builds. Key the labels off
+  // the selection's own pvKw so a no-panel run describes itself honestly; the
+  // clamp is left alone because tier costs are derived from it.
+#### P14 3363-3367
+    // Single writer: the goal buttons never touch systemGoal. They select a
+    // CASE and let applyUseCase derive the enum from it, so the highlighted
+    // button and the six-case chooser cannot drift apart. The comparison is
+    // and offgrid share the mode, and backup sizes the essentials only, so
+    // defaulting a mode switch onto it would silently resize the system.
+#### P15 3586-3590
+// The drag preview's projection of the slider's % onto the curve; the budget
+// thumb rides along (unpinned — pinning is commit-time only) so the pair, the
+// card and the label move together at every input. A budget the visitor has
+// already chosen is NOT unpinned by a cut preview: it stays where they put it,
+// which is the whole point of the two controls being independent.
+#### P16 7224-7228
+      // Through the dictionary: appended as a literal this sentence changed
+      // language halfway through ("… rund 2.6-mal so viel wie zuvor.
+      // Best-value range: ~$255.00–$543.00 (41.9–100%).") on every non-English
+      // run, because _frontierChart.frontierVerdict() is composed from keys and this tail
+      // was not. English output is byte-identical to before.
+#### P17 7587-7591
+  // Called on EVERY payload, with null when this combo is solvable. Guarding
+  // the call instead (as this once did) makes the clear branch below dead
+  // code: the banner for an earlier infeasible combo then outlives the run
+  // that replaced it, so a visitor who switches back to a workable setup
+  // keeps reading "solar-only can't do this" over a page that solved fine.
+#### P18 5395-5402
+/**
+ * THE COMPARISON PANEL: four priced routes to the SAME system, side by side.
+ *
+ * The panel never computes. Every figure below is read out of the model that
+ * `purchasePaths` priced, so a card cannot disagree with the ELI5 sentence
+ * above it or with the ranking that explains why the cheapest one is cheapest.
+ * genuinely changes the price, which is R-PATH-02.
+ */
+#### P19 451-455
+// `t` is shared/i18n.js's translate (imported above), which delegates the
+// placeholder contract to shared/interpolate.js. This file used to carry its
+// own lookup-then-substitute loop; it agreed with i18n.js by luck rather than
+// by construction, and the same "$200" replacer bug had to be found and fixed
+// in both. One owner now, so a fix to substitution lands once.
+#### P20 3005-3009
+  // With no panels there is nothing generated, so this target moves WHEN power
+  // is drawn instead of selling back a share of the bill. Same control, same
+  // number, honest label. The label's data-i18n hook is kept in step with the
+  // wording so a later language switch re-translates the matching variant
+  // instead of silently snapping back to the bill-cut string.
+#### P21 473-477
+// ── Staged loading pipeline ───────────────────────────────────────────────
+// Data loading must be legible: a determinate stepper (City → Weather →
+// Simulating → Rendering) with a live per-chunk weather bar and elapsed
+// seconds. Weather chunk progress comes through the worker; simulation
+// length is unknowable up front, so its bar is indeterminate by design.
+#### P22 8950-8954
+        // One cut target, two controls: choosing a target in the form must
+        // move the results slider to the same cut (and vice versa), so the
+        // "your target" column, the recommendation and the select can never
+        // disagree after a fresh run. "custom" is read-only state (it only
+        // ever mirrors the slider), so it never drives a run.
+#### P23 7071-7075
+// Adopting a curve point is THE selection primitive for curve clicks,
+// curve clicks and slider commits alike: the clicked point already carries
+// its full analysis in the cached payload, so every downstream panel follows
+// it immediately — no engine re-run. Only its SOC capture bands arrive a
+// moment later from a tiny background slice (the 1 record lookup).
+#### P24 5377-5381
+  // The gap is installer MINUS self-purchase, so the sentence compares the
+  // route it has just described against the installer's price. The word
+  // follows the sign: two registry prices cannot produce a negative number
+  // described as a saving, which is how the old midpoint arithmetic printed
+  // "-$300 below a typical quote" for a system that cost MORE.
+#### P25 4360-4364
+// REMOVED 2026-10-05: renderAutoCards (232 lines) was UNREACHABLE shipped
+// weight — a leftover renderer for the auto-chemistry ladder card, replaced
+// by renderBestPick/renderBatteryComparison, and called from nothing but
+// itself. Removing it is where the four-path module's bytes came from;
+// nothing a visitor loads executed a line of it.
