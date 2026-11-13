@@ -670,9 +670,13 @@ test("promote wraps the verifier in the shared cap, not a hardcoded one", () => 
   const src = read("scripts/promote.mjs");
   // Scoped to the block that launches the verifier: other subprocesses in this
   // file legitimately carry their own, unrelated timeouts.
+  // The window has to be wide enough to still contain the `timeout:` line after
+  // the block grows comment lines explaining WHY stderr is inherited (#361), so
+  // it is sized for the call plus its documentation rather than a byte count
+  // that a comment can silently push the assertion out of.
   const block = src
     .slice(src.indexOf('"scripts/verify-staging.mjs"'))
-    .slice(0, 800);
+    .slice(0, 1400);
   assert.ok(block.length > 100, "expected to find the verifier invocation");
   assert.match(
     block,

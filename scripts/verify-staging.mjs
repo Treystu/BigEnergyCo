@@ -64,6 +64,10 @@ import {
 import { ALLOWLIST } from "./lib/deploy-manifest.mjs";
 import { exitWhenDrained } from "./lib/graceful-exit.mjs";
 import { canonicalizeHtml } from "./lib/platform-rewrites.mjs";
+import {
+  resolveStagingBase,
+  stagingOriginRefusal,
+} from "./lib/staging-origin.mjs";
 import { addTranslationSuggestionToPage } from "./lib/translation-suggestion.mjs";
 import {
   artifactStamp,
@@ -81,10 +85,19 @@ const arg = (name, fallback = null) => {
 const JSON_MODE = process.argv.includes("--json");
 const SKIP_BROWSER = process.argv.includes("--no-browser");
 const WAIT_SECONDS = Number(arg("--wait", "0")) || 0;
-const BASE = (arg("--base") || process.env.STAGING_BASE || "").trim();
-const BASE_URL =
-  BASE || "https://sovereign-communication.github.io/BigEnergyCo/";
-const base = BASE_URL.endsWith("/") ? BASE_URL : BASE_URL + "/";
+// The origin is NAMED, never assumed (#361). A default that answers 404 made
+// every run of this gate report a failure about the wrong thing; the refusal is
+// a verdict with the candidates and their last read, not a crash. It happens
+// before anything touches the network, so exiting here is safe.
+const ORIGIN = resolveStagingBase({
+  explicit: arg("--base"),
+  env: process.env.STAGING_BASE,
+});
+if (!ORIGIN.ok) {
+  console.error(stagingOriginRefusal(ORIGIN, "VERIFY"));
+  process.exit(2);
+}
+const base = ORIGIN.base;
 
 const SURFACES = ["gh-pages", "cloudflare", "local"];
 const SURFACE_ARG = arg("--surface", null);
@@ -136,6 +149,21 @@ const recordRetry = (step, { attempt, text }) => {
   notes.push(note);
   if (!JSON_MODE) console.log(`VERIFY NOTE  ${note}`);
 };
+// Liveness. In JSON mode the report is the only thing on stdout, and promote
+// buffers this child's output until it exits - so an operator watched a working
+// run look exactly like a hang for up to twenty minutes (recorded, unexplained,
+// in docs/lane/PROMOTION-PREP-2026-11-07.md section 2). Progress therefore goes
+// to stderr in JSON mode, where nothing parses it.
+const progress = (msg) => {
+  if (JSON_MODE) process.stderr.write(`VERIFY ${msg}\n`);
+  else console.log(`VERIFY      ${msg}`);
+};
+// First line before any work: "which origin, how long may this take" is the
+// pair an operator needs to tell a slow run from a stuck one.
+progress(
+  `base ${base} (${ORIGIN.source}), surface ${SURFACE}, budget ${Math.round(BUDGET_MS / 1000)}s`,
+);
+
 const record = (name, ok, detail = "") => {
   results.push({ name, ok, detail });
   if (!ok) failures.push(`${name}${detail ? ` — ${detail}` : ""}`);
@@ -543,6 +571,9 @@ if (SKIP_BROWSER) {
 } else {
   if (!JSON_MODE)
     console.log(`VERIFY       real-browser smoke against ${base} ...`);
+  progress(
+    `parity ${parity.filter((p) => p.state === "match").length}/${parity.length} matched; starting the real-browser smoke`,
+  );
   try {
     // Retried ONLY when the smoke's own output names a transport error. Every
     // gate inside the smoke re-runs on the retry, so a real regression fails

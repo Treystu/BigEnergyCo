@@ -15,9 +15,11 @@ on:
   workflow_dispatch:
     inputs:
       base:
-        description: Staging base URL to verify
+        # No default on purpose. The old default was the retired org origin, which
+        # answers 404, so this gate failed for a reason unrelated to the artifact
+        # under test. Which origin is authoritative is an owner call - #361.
+        description: Staging base URL to verify (required - no default)
         required: false
-        default: https://sovereign-communication.github.io/BigEnergyCo/
 
 concurrency:
   group: verify-staging
@@ -47,8 +49,13 @@ jobs:
       # functional half of the verification runs here too.
       - name: Verify the deployed staging artifact
         run: |
+          # A dispatch names its origin. A workflow_run has a derivable one: this
+          # job fires on the GitHub Pages deploy, so the artifact it produced is
+          # that repository's Pages origin - a derivation from the trigger, not
+          # an assumption. Both replace the retired default that answered 404,
+          # which made this gate fail for a reason unrelated to the artifact.
           node scripts/verify-staging.mjs \
-            --base "${{ github.event.inputs.base || 'https://sovereign-communication.github.io/BigEnergyCo/' }}" \
+            --base "${{ github.event.inputs.base || format('https://{0}.github.io/BigEnergyCo/', github.repository_owner) }}" \
             --wait 240
 
       - name: Upload artifacts on failure

@@ -13,16 +13,37 @@
 //   node scripts/check-staging-drift.mjs --json     # machine-readable
 //
 // Exit codes: 0 = in sync (or unavoidable-network failure in --json mode),
-// 1 = drift detected (or hard failure).
+// 1 = drift detected (or hard failure), 2 = no staging origin named (refused).
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, rmSync } from "node:fs";
 import { join, posix, resolve } from "node:path";
 
-const PAGES_BASE =
-  process.env.STAGING_BASE ||
-  "https://sovereign-communication.github.io/BigEnergyCo/";
+import {
+  resolveStagingBase,
+  stagingOriginRefusal,
+} from "./lib/staging-origin.mjs";
+
 const JSON_MODE = process.argv.includes("--json");
+
+// The origin is NAMED, never assumed (#361). This script defaulted to
+// https://sovereign-communication.github.io/BigEnergyCo/, which has answered
+// HTTP 404 since the repository moved - so a default run reported "staging lags
+// main" about a host that serves nothing, which is an alarm about the alarm and
+// not a statement about staging. Which origin counts as staging is an owner
+// call (PROMOTION-PREP 2026-11-07 section 4, P3), so this refuses by name
+// rather than guess. Exit 2 is "could not verify": never a drift verdict.
+const DRIFT_ORIGIN = resolveStagingBase({ env: process.env.STAGING_BASE });
+if (!DRIFT_ORIGIN.ok) {
+  const error = stagingOriginRefusal(DRIFT_ORIGIN, "STAGE DRIFT");
+  if (JSON_MODE)
+    console.log(
+      JSON.stringify({ inSync: false, refused: true, error }, null, 2),
+    );
+  else console.error(error);
+  process.exit(2);
+}
+const PAGES_BASE = DRIFT_ORIGIN.base;
 
 let failures = 0;
 const results = [];

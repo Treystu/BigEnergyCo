@@ -61,6 +61,10 @@ import {
 } from "./lib/api-target.mjs";
 import { runNpx } from "./lib/npx.mjs";
 import {
+  resolveStagingBase,
+  stagingOriginRefusal,
+} from "./lib/staging-origin.mjs";
+import {
   artifactStamp,
   parseDeployments,
   releaseRecord,
@@ -84,11 +88,13 @@ const SKIP_BROWSER = flag("--no-browser");
 const ASSUME_AUTH = flag("--assume-auth");
 const SKIP_HISTORY = flag("--no-cloudflare-history");
 
-const STAGING_BASE = (
-  arg("--base") ||
-  process.env.STAGING_BASE ||
-  "https://sovereign-communication.github.io/BigEnergyCo/"
-).replace(/\/?$/, "/");
+// No assumed origin (#361): an unnamed one is a refusal that names the
+// candidates, not a silent 404 reported four times as a staging failure.
+const STAGING_ORIGIN = resolveStagingBase({
+  explicit: arg("--base"),
+  env: process.env.STAGING_BASE,
+});
+const STAGING_BASE = STAGING_ORIGIN.ok ? STAGING_ORIGIN.base : null;
 const BRAND_BASE = (
   arg("--brand") || "https://freeoffgridcalculator.com/"
 ).replace(/\/?$/, "/");
@@ -428,6 +434,14 @@ async function main() {
       `PROMOTE      rollback artifact declares stamp ${stamp} and passed its build gates`,
     );
   } else {
+    // Promote mode is the one mode that needs an origin, so the refusal lands
+    // here rather than at import time: a rollback does not verify staging.
+    if (!STAGING_ORIGIN.ok)
+      fatal(
+        2,
+        "no staging origin was named — this tool does not guess which origin 'staging' means (#361)",
+        stagingOriginRefusal(STAGING_ORIGIN, "PROMOTE"),
+      );
     const verifyArgs = [
       "scripts/verify-staging.mjs",
       "--base",
@@ -439,7 +453,9 @@ async function main() {
       try {
         const out = execFileSync(process.execPath, verifyArgs, {
           encoding: "utf8",
-          stdio: ["ignore", "pipe", "pipe"],
+          // stderr INHERITED: the verifier reports liveness there in JSON
+          // mode, and capturing it made a working run look like a hang.
+          stdio: ["ignore", "pipe", "inherit"],
           // The verifier enforces its OWN total budget, so it returns a verdict
           // before this cap. Reaching the cap means something outside its
           // control hung, and that is reported as such rather than as a
