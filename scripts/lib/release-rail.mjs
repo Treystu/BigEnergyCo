@@ -57,9 +57,9 @@ export function circleCiVerifyVerdict({ sha, payload }) {
       reason: `the status payload is for ${String(payload.sha).slice(0, 7)}, not ${sha.slice(0, 7)}`,
     };
 
-  const entries = (Array.isArray(payload.statuses) ? payload.statuses : []).filter(
-    (entry) => entry && entry.context === CIRCLECI_VERIFY_CONTEXT,
-  );
+  const entries = (
+    Array.isArray(payload.statuses) ? payload.statuses : []
+  ).filter((entry) => entry && entry.context === CIRCLECI_VERIFY_CONTEXT);
   if (entries.length === 0)
     return {
       ok: false,
