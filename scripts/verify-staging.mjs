@@ -82,9 +82,6 @@ const JSON_MODE = process.argv.includes("--json");
 const SKIP_BROWSER = process.argv.includes("--no-browser");
 const WAIT_SECONDS = Number(arg("--wait", "0")) || 0;
 const BASE = (arg("--base") || process.env.STAGING_BASE || "").trim();
-const BASE_URL =
-  BASE || "https://sovereign-communication.github.io/BigEnergyCo/";
-const base = BASE_URL.endsWith("/") ? BASE_URL : BASE_URL + "/";
 
 const SURFACES = ["gh-pages", "cloudflare", "local"];
 const SURFACE_ARG = arg("--surface", null);
@@ -95,6 +92,26 @@ if (SURFACE_ARG && !SURFACES.includes(SURFACE_ARG)) {
   );
   process.exit(2);
 }
+
+// No default origin, on purpose. The default used to be
+// https://sovereign-communication.github.io/BigEnergyCo/, dead since the
+// repository moved (HTTP 404, 9,115 B, read 2026-11-13), so every default run
+// reported parity failures about a host that serves nothing (#361). Two live
+// candidates exist and naming one is an owner call, so this verifier refuses
+// rather than choose. Exit 2 is "could not verify": never a verdict on staging.
+if (!BASE) {
+  console.error(
+    "FAIL no staging origin named — pass --base <url> or set STAGING_BASE. " +
+      "Candidates, not chosen here: https://staging.bigenergyco.pages.dev/ and " +
+      "https://treystu.github.io/BigEnergyCo/ (both 200, same 125,986-byte home " +
+      "document, read 2026-11-13). The retired default " +
+      "https://sovereign-communication.github.io/BigEnergyCo/ answers 404.",
+  );
+  process.exit(2);
+}
+
+const BASE_URL = BASE;
+const base = BASE_URL.endsWith("/") ? BASE_URL : BASE_URL + "/";
 const SURFACE = SURFACE_ARG || surfaceFor(base);
 const CONCURRENCY = 8;
 // The TOTAL wall clock this verification may take, retries included, and the

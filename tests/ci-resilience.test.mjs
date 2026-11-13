@@ -647,9 +647,14 @@ test("daily static check survives the Cloudflare bot challenge", () => {
       // below fail loudly if a real probe host is missing.
     }
   }
+  assert.match(
+    yml,
+    /vars\.STAGING_BASE/,
+    "the content probe takes its challenge-free Pages origin from the named variable",
+  );
   assert.ok(
-    hosts.has("sovereign-communication.github.io"),
-    "content drift is detected from the challenge-free Pages origin",
+    !hosts.has("sovereign-communication.github.io"),
+    "the retired origin answers 404 (read 2026-11-13) and is not a probe target; issue #361",
   );
   assert.ok(
     hosts.has("freeoffgridcalculator.com"),

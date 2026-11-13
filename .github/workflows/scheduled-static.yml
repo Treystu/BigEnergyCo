@@ -22,9 +22,16 @@ jobs:
         run: |
           # Cloudflare's managed challenge answers every non-browser probe of
           # the custom domain (Cf-Mitigated: challenge, HTTP 403 interstitial),
-          # so the content assertion runs against the GitHub Pages origin,
-          # which serves the identical deployed build without the challenge.
-          html="$(curl -fsS "https://sovereign-communication.github.io/BigEnergyCo/?static=$(date +%s)")"
+          # so the content assertion needs a challenge-free Pages origin. That
+          # origin is named by repository variable, never hard-coded: the former
+          # value answers HTTP 404 since the repository moved (read 2026-11-13),
+          # so this check was judging a host that serves nothing (#361).
+          base="${{ vars.STAGING_BASE }}"
+          if [ -z "$base" ]; then
+            echo "::error::No staging origin named. Set the STAGING_BASE repository variable; the content assertion needs a challenge-free Pages origin. See issue #361."
+            exit 1
+          fi
+          html="$(curl -fsS "${base%/}/?static=$(date +%s)")"
           echo "$html" | grep -q "assets/js/sizing/ui.js?v=[0-9a-z]*" || (echo "entry module token missing" && exit 1)
 
       - name: Custom domain is up (a challenge interstitial is "up", not drift)

@@ -15,9 +15,9 @@ on:
   workflow_dispatch:
     inputs:
       base:
-        description: Staging base URL to verify
+        description: Staging base URL to verify (falls back to the STAGING_BASE repository variable)
         required: false
-        default: https://sovereign-communication.github.io/BigEnergyCo/
+        default: ""
 
 concurrency:
   group: verify-staging
@@ -43,12 +43,26 @@ jobs:
         with:
           node-version: 22
 
+      # The origin is not hard-coded. Its former default
+      # (the old org's GitHub Pages URL) answers HTTP 404 since the repository
+      # moved (read 2026-11-13), so this gate was reporting staging failures
+      # about a host that serves nothing (#361). Naming the origin is an owner
+      # decision, so the job refuses by name until one is set.
+      - name: Require a named staging origin
+        run: |
+          base="${{ github.event.inputs.base || vars.STAGING_BASE }}"
+          if [ -z "$base" ]; then
+            echo "::error::No staging origin named. Set the STAGING_BASE repository variable (Settings > Secrets and variables > Actions > Variables) or pass the base input. The retired default answers HTTP 404; see issue #361."
+            exit 1
+          fi
+          echo "STAGING_BASE=$base" >> "$GITHUB_ENV"
+
       # Chrome ships on the runner (same assumption as the web-smoke job), so the
       # functional half of the verification runs here too.
       - name: Verify the deployed staging artifact
         run: |
           node scripts/verify-staging.mjs \
-            --base "${{ github.event.inputs.base || 'https://sovereign-communication.github.io/BigEnergyCo/' }}" \
+            --base "$STAGING_BASE" \
             --wait 240
 
       - name: Upload artifacts on failure

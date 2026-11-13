@@ -84,11 +84,24 @@ const SKIP_BROWSER = flag("--no-browser");
 const ASSUME_AUTH = flag("--assume-auth");
 const SKIP_HISTORY = flag("--no-cloudflare-history");
 
-const STAGING_BASE = (
+// The staging origin is NOT guessed here. This used to default to
+// https://sovereign-communication.github.io/BigEnergyCo/, which the repository's
+// move left dead: re-read 2026-11-13 it answers HTTP 404 with GitHub's 9,115-byte
+// "site not found" page, so every default run refused promotion for a reason that
+// had nothing to do with staging (#361). Two live candidates exist
+// (staging.bigenergyco.pages.dev and treystu.github.io/BigEnergyCo/) and which one
+// "staging" means is an owner call, so this tool names neither: it requires the
+// origin to be stated, and main() refuses, early and by name, when it is not.
+const STAGING_BASE_RAW = (
   arg("--base") ||
   process.env.STAGING_BASE ||
-  "https://sovereign-communication.github.io/BigEnergyCo/"
-).replace(/\/?$/, "/");
+  ""
+).trim();
+// Normalising an empty string would turn it into "/", which reads as present and
+// sends the verifier a URL it cannot parse. No origin stays no origin.
+const STAGING_BASE = STAGING_BASE_RAW
+  ? STAGING_BASE_RAW.replace(/\/?$/, "/")
+  : "";
 const BRAND_BASE = (
   arg("--brand") || "https://freeoffgridcalculator.com/"
 ).replace(/\/?$/, "/");
@@ -273,6 +286,20 @@ const stampOf = async (base) => {
   }
 };
 async function main() {
+  // Refuse before anything else: no origin, no run. A default that points at a
+  // host which does not serve is how a green verdict gets pointed at the wrong
+  // artifact, and naming the origin is the owner's call (#361), not the tool's.
+  if (!STAGING_BASE)
+    fatal(
+      2,
+      "no staging origin named, and this tool will not guess one",
+      "pass --base <url> or set STAGING_BASE. Read 2026-11-13: " +
+        "https://staging.bigenergyco.pages.dev/ and https://treystu.github.io/BigEnergyCo/ " +
+        "both answer 200 with the same 125,986-byte home document; the retired default " +
+        "https://sovereign-communication.github.io/BigEnergyCo/ answers 404. " +
+        "Choosing between the two live candidates is an owner decision, so this run stops here.",
+    );
+
   // The verifier must be able to finish INSIDE this process's own subprocess
   // cap, retries and all — otherwise a slow failure gets killed at the cap and
   // reported as a timeout instead of as a refused promote. lib/budgets.mjs owns

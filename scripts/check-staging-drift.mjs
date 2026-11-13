@@ -19,10 +19,28 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, rmSync } from "node:fs";
 import { join, posix, resolve } from "node:path";
 
-const PAGES_BASE =
-  process.env.STAGING_BASE ||
-  "https://sovereign-communication.github.io/BigEnergyCo/";
 const JSON_MODE = process.argv.includes("--json");
+
+// The origin is required, not defaulted. The old default
+// (https://sovereign-communication.github.io/BigEnergyCo/) has answered HTTP 404
+// since the repository moved (read 2026-11-13, 9,115 B), so a default run raised
+// "STAGING LAGS main" about a host that serves nothing — an alarm about the alarm,
+// not about staging (#361). Naming the origin is an owner call; this script
+// refuses rather than pick one.
+const PAGES_BASE = (process.env.STAGING_BASE || "").trim();
+
+if (!PAGES_BASE) {
+  const error =
+    "no staging origin named - set STAGING_BASE. The retired default " +
+    "(https://sovereign-communication.github.io/BigEnergyCo/) answers HTTP 404 " +
+    "(read 2026-11-13), so there is no honest default to fall back to. " +
+    "Candidates, not chosen here: https://staging.bigenergyco.pages.dev/ and " +
+    "https://treystu.github.io/BigEnergyCo/.";
+  if (JSON_MODE)
+    console.log(JSON.stringify({ inSync: false, failures: 1, error }, null, 2));
+  else console.error(`STAGE DRIFT ${error}`);
+  process.exit(1);
+}
 
 let failures = 0;
 const results = [];
