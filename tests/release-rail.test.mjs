@@ -93,7 +93,10 @@ test("an empty Actions run list is reported as the mirror, not as missing eviden
   assert.match(reason, /ci\/circleci: verify/);
   assert.doesNotMatch(reason, /^no post-merge main Jev run exists/);
   // A non-empty list is not this case, and says so.
-  assert.match(emptyActionsRunsReason({ sha, runs: [{}] }), /1 run\(s\) returned/);
+  assert.match(
+    emptyActionsRunsReason({ sha, runs: [{}] }),
+    /1 run\(s\) returned/,
+  );
 });
 
 test("promote's release gate reads the rail as its own leg", () => {
