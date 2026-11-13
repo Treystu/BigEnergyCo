@@ -51,6 +51,8 @@ export const ALLOWLIST = [
   "blog/gia-dien-5-bac-2026/index.html",
   "blog/stc-deeming-period-2027-australia/index.html",
   "blog/fio-b-75-2027-brasil/index.html",
+  "blog/bangladesh-solar-net-metering-2026/index.html",
+  "blog/pm-surya-ghar-2026-india/index.html",
   "blog/program-afm-baterii-2026/index.html",
   "blog/dotacja-magazyn-energii-2026/index.html",
   "about/index.html",

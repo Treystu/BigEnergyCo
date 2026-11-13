@@ -464,7 +464,15 @@ else ok("index.html: every reader-visible prose block has a locale hook");
 // (check-i18n reported 546/510), following the same rule as the two earlier
 // raises; the ceiling tracks the corpus and still flags any block added without
 // this deliberate step.
-const PROSE_CEILING = 546;
+// 546 -> 630 (2026-11-13, measured reason): the Bangladesh post (#378) and the
+// India PM Surya Ghar post (#381) add their own bodies plus one hub card each.
+// The raise is the exact 84-block delta at the read that landed them
+// (check-i18n reported 630/546), not headroom: both articles are unkeyed prose
+// by the same product decision as every other article here - the India page
+// carries a Hindi key-points block inside an English article, which the
+// dictionary does not cover - and the English article bodies remain the tracked
+// gap this ceiling is about.
+const PROSE_CEILING = 630;
 if (proseFindings.length > PROSE_CEILING) {
   fail(
     `${proseFindings.length} visible prose block(s) on a translated page carry no i18n hook ` +
