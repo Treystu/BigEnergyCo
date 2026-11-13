@@ -36,6 +36,8 @@
 - Fio B 75% em 2027 (Brasil): https://freeoffgridcalculator.com/blog/fio-b-75-2027-brasil/
 - Program AFM baterii 2026 (Romania): https://freeoffgridcalculator.com/blog/program-afm-baterii-2026/
 - Dotacja na magazyn energii (Poland, PME 2): https://freeoffgridcalculator.com/blog/dotacja-magazyn-energii-2026/
+- নেট মিটারিং ২০২৬ (Bangladesh): https://freeoffgridcalculator.com/blog/bangladesh-net-metering-2026/
+- PM सूर्य घर 2026 (India, HI/EN): https://freeoffgridcalculator.com/blog/india-pm-surya-ghar-2026/
 
 ## Cite honestly
 - Costs are ranges (landed-DIY vs budget-retail), never single prices.
