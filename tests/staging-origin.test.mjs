@@ -5,6 +5,8 @@
 // nothing to do with the artifact under test. These tests pin the refusal and
 // the fact that it carries the candidates rather than a default.
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import test from "node:test";
 
 import {
@@ -65,4 +67,35 @@ test("STAGING ORIGIN: a non-URL is refused rather than fetched", () => {
     assert.equal(r.reason, "invalid", bad);
     assert.match(stagingOriginRefusal(r, "VERIFY"), /REFUSED \(2\)/);
   }
+});
+
+test("STAGING ORIGIN: no script in the drift chain still carries the retired default", () => {
+  // #361's third site: promote.mjs, verify-staging.mjs and check-staging-drift.mjs
+  // all defaulted to the same host that answers 404. A fix that leaves one of
+  // them defaulting re-introduces the false alarm on that path.
+  const read = (p) => readFileSync(join(process.cwd(), p), "utf8");
+  for (const file of [
+    "scripts/promote.mjs",
+    "scripts/verify-staging.mjs",
+    "scripts/check-staging-drift.mjs",
+  ]) {
+    const source = read(file);
+    assert.ok(
+      !source.includes(`"${RETIRED_STAGING_DEFAULT}"`),
+      `${file} must not carry the retired origin as a default`,
+    );
+    assert.match(source, /staging-origin\.mjs/, `${file} reads the one owner`);
+  }
+});
+
+test("STAGING ORIGIN: the scheduled smoke names its origin instead of inheriting a guess", () => {
+  const yml = readFileSync(
+    join(process.cwd(), ".github", "workflows", "scheduled-smoke.yml"),
+    "utf8",
+  );
+  assert.match(
+    yml,
+    /STAGING_BASE: \$\{\{ vars\.STAGING_BASE \}\}/,
+    "the drift step takes its origin from the named repository variable",
+  );
 });

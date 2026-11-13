@@ -30,6 +30,13 @@ jobs:
       - name: Staging-drift check (Pages vs main)
         # Fails when the queued Pages deploy lags main — the signal that a
         # staging smoke would silently verify a STALE build.
+        #
+        # The origin is supplied by configuration, not guessed (#361): the
+        # script's retired default answers 404, so a missing variable is a named
+        # refusal (exit 2) rather than body of false drift alarms. Set the
+        # repository variable STAGING_BASE to the origin the owner names.
+        env:
+          STAGING_BASE: ${{ vars.STAGING_BASE }}
         run: node scripts/check-staging-drift.mjs
 
       - name: Live sanity sweep
