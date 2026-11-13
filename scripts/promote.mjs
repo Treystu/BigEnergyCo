@@ -64,6 +64,10 @@ import {
   resolveStagingBase,
   stagingOriginRefusal,
 } from "./lib/staging-origin.mjs";
+  CIRCLECI_VERIFY_CONTEXT,
+  circleCiVerifyVerdict,
+  emptyActionsRunsReason,
+} from "./lib/release-rail.mjs";
 import {
   artifactStamp,
   parseDeployments,
@@ -203,7 +207,7 @@ const git = (args) =>
     stdio: ["ignore", "pipe", "pipe"],
   }).trim();
 
-function requireMainJevRelease(sha) {
+function requireReleaseGate(sha) {
   let repository;
   try {
     repository =
@@ -225,6 +229,35 @@ function requireMainJevRelease(sha) {
         timeout: 30000,
       }),
     );
+
+  // ── leg 1: the rail ────────────────────────────────────────────────────────
+  // This used to be the Actions run list alone, which is the mirror, not the
+  // rail: the ruleset requires the single context `ci/circleci: verify` and the
+  // lane reads exactly that. A gate that asks Actions whether a CircleCI-gated
+  // repository is green can only ever answer about the wrong system (#384).
+  let railPayload;
+  try {
+    railPayload = api(`repos/${repository}/commits/${sha}/status`);
+  } catch (e) {
+    fatal(
+      2,
+      "cannot read the repository rail status for this SHA",
+      "Authenticate GitHub CLI and retry; production promotion is fail-closed. " +
+        String(e.stderr || e.message).slice(0, 240),
+    );
+  }
+  const rail = circleCiVerifyVerdict({ sha, payload: railPayload });
+  if (!rail.ok)
+    fatal(2, "the repository rail is not green on this SHA", rail.reason);
+  say(
+    `PROMOTE      rail green: ${CIRCLECI_VERIFY_CONTEXT} on ${sha.slice(0, 7)}`,
+  );
+
+  // ── leg 2: Jev evidence ────────────────────────────────────────────────────
+  // CircleCI phase 1 runs the verification battery and no Jev job by design
+  // (.circleci/config.yml), so Jev evidence still comes from the Actions
+  // record. It is a separate leg with a separate source, and its refusals name
+  // which system failed.
   let runs;
   try {
     runs = api(
@@ -239,7 +272,12 @@ function requireMainJevRelease(sha) {
     );
   }
   const run = latestMainPushRun(runs, sha);
-  if (!run) fatal(2, "no post-merge main Jev run exists for this SHA", sha);
+  if (!run)
+    fatal(
+      2,
+      "the Jev evidence leg has no run for this SHA",
+      emptyActionsRunsReason({ sha, runs }),
+    );
 
   let jobs;
   try {
@@ -632,7 +670,7 @@ async function main() {
 
   // A rollback restores a previously released version. Forward promotions
   // require the full post-merge Jev gate on this exact main staging SHA.
-  if (!TO_SHA) requireMainJevRelease(head);
+  if (!TO_SHA) requireReleaseGate(head);
 
   // ── 6. build + deploy the artifact ───────────────────────────────────────
   if (!TO_SHA) {
