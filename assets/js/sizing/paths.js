@@ -743,11 +743,23 @@ function normaliseSystem(system) {
 export function systemForPaths(entry, ctx = {}) {
   const e = entry || {};
   const num = (v) => (Number.isFinite(v) ? v : null);
+  // #401 (Cure A, X3): the run computes the residual bill and the bill cut, but
+  // they live in different places per run shape — a matrix cell carries both
+  // itself, the selected best entry does not always, and the payload carries
+  // the annual grid spend at its top level. Reading only the entry left
+  // `billCutPct` and the residual null on the driven run, so all four pay cards
+  // printed "Unknown" for quantities the same page stated in prose. The seam
+  // now accepts each quantity from the run's payload too, in a stated order,
+  // and still reports null (never a guessed 0) when no source carries it.
+  const annual = (monthly, exportAnnual) =>
+    num(monthly) !== null ? monthly * 12 + (num(exportAnnual) ?? 0) : null;
   const residual =
     num(ctx.annualResidualBillsUsd) ??
-    (num(e.billAfterMonthlyUsd) !== null
-      ? e.billAfterMonthlyUsd * 12 + (num(e.exportValueAnnualUsd) || 0)
-      : null);
+    annual(e.billAfterMonthlyUsd, e.exportValueAnnualUsd) ??
+    annual(
+      ctx.billAfterMonthlyUsd ?? e.billAfterMonthlyUsd,
+      ctx.exportValueAnnualUsd ?? e.exportValueAnnualUsd,
+    );
   return {
     pvKw: Math.max(0, num(e.pvKw) || 0),
     battKwh: Math.max(0, num(e.battKwh) || 0),
@@ -756,7 +768,7 @@ export function systemForPaths(entry, ctx = {}) {
     batteryLifeYears: num(e.batteryLifeYears) ?? num(ctx.batteryLifeYears),
     annualBaselineBillsUsd: num(ctx.annualBaselineBillsUsd),
     annualResidualBillsUsd: residual,
-    billCutPct: num(e.cutPct),
+    billCutPct: num(ctx.billCutPct) ?? num(e.cutPct) ?? num(e.billCutPct),
     tariff: num(e.tariff) ?? num(ctx.tariff),
   };
 }
