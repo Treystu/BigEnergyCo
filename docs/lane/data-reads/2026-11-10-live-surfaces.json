@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T20:46:05.964Z",
+  "generated": "2026-11-14T00:44:27.993Z",
   "method": "HTTP GET of each surface, no cache, redirects not followed; sha256 of the response body",
   "surfaces": {
     "prod": {
@@ -11,7 +11,7 @@
       "stamp": "20261103u",
       "mitigated": null,
       "server": "cloudflare",
-      "timestamp": "2026-11-10T20:46:01.666Z"
+      "timestamp": "2026-11-14T00:44:21.217Z"
     },
     "staging": {
       "name": "staging",
@@ -22,7 +22,7 @@
       "stamp": "20261103u",
       "mitigated": null,
       "server": "cloudflare",
-      "timestamp": "2026-11-10T20:46:02.133Z"
+      "timestamp": "2026-11-14T00:44:22.404Z"
     },
     "ghPages": {
       "name": "ghPages",
@@ -33,7 +33,7 @@
       "stamp": "20261103u",
       "mitigated": null,
       "server": "GitHub.com",
-      "timestamp": "2026-11-10T20:46:02.518Z"
+      "timestamp": "2026-11-14T00:44:22.981Z"
     },
     "ghPagesPromoteDefault": {
       "name": "ghPagesPromoteDefault",
@@ -44,7 +44,7 @@
       "stamp": null,
       "mitigated": null,
       "server": "GitHub.com",
-      "timestamp": "2026-11-10T20:46:02.983Z"
+      "timestamp": "2026-11-14T00:44:23.512Z"
     },
     "rollbackTarget": {
       "name": "rollbackTarget",
@@ -55,18 +55,18 @@
       "stamp": "20261025b",
       "mitigated": null,
       "server": "cloudflare",
-      "timestamp": "2026-11-10T20:46:03.456Z"
+      "timestamp": "2026-11-14T00:44:23.966Z"
     },
     "brand": {
       "name": "brand",
       "url": "https://freeoffgridcalculator.com/",
       "status": 403,
       "bytes": 5520,
-      "sha256": "7c7818d68039dbc46d46755f276ad6c46b99072e52c8ae5f6b73d10caa7d68f3",
+      "sha256": "10654c8a61ae8b3b241bd6fcf1333f7440cb7f143a2511ed3457d9dc6a2908e2",
       "stamp": null,
       "mitigated": "challenge",
       "server": "cloudflare",
-      "timestamp": "2026-11-10T20:46:03.858Z"
+      "timestamp": "2026-11-14T00:44:25.147Z"
     },
     "api": {
       "name": "api",
@@ -77,7 +77,7 @@
       "stamp": null,
       "mitigated": null,
       "server": "cloudflare",
-      "timestamp": "2026-11-10T20:46:04.206Z"
+      "timestamp": "2026-11-14T00:44:25.540Z"
     }
   },
   "parity": {
