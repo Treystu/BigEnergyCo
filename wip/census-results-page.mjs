@@ -175,6 +175,7 @@ const censusScript = `(() => {
             upfront: card ? txt(card.querySelector(".paths-upfront")) : null,
             cheapest20: card ? txt(card.querySelector(".paths-total")) : null,
             sizefromOutcome: (outcome || "").slice(0, 160),
+            cardText: (txt(byId("bestPickWrap")) || "").slice(0, 600),
             rows,
           };
         })(),

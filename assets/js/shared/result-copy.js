@@ -135,7 +135,9 @@ export const RESULT_COPY = {
       "Cumulative 20-year cost comparison renders here after you run a sizing.",
     resBomPanelWatts: "Panel wattage you'd buy (W):",
     resHowCalculated: "How this was calculated",
-    resCardCostToBuy: "Cost to buy",
+    resCardCostToBuy: "Parts only (ex-factory to retail)",
+    resCardCostToBuyNote:
+      "Components and shipping only — before fitting, permits and labour. The installed range for the same system is in the four ways to pay below.",
     resCardCostBuyable: "Cost as a parts list",
     resLblTariffBasis: "Tariff basis",
     resLblUseCase: "Use case",
@@ -172,7 +174,7 @@ export const RESULT_COPY = {
     resValNa: "n/a",
     resChipSolar: "solar",
     resChipBattery: "battery",
-    resChipUpfront: "up-front",
+    resChipUpfront: "parts, up-front",
     resRowPowerCost: "Your power cost",
     resRowShiftedKwh: "Cost per shifted kWh",
     resValShiftedRate:
@@ -353,7 +355,9 @@ export const RESULT_COPY = {
       "La comparación de coste acumulado a 20 años se dibuja aquí después de dimensionar.",
     resBomPanelWatts: "Potencia del panel que comprarías (W):",
     resHowCalculated: "Cómo se calculó",
-    resCardCostToBuy: "Coste de compra",
+    resCardCostToBuy: "Solo piezas (fábrica a minorista)",
+    resCardCostToBuyNote:
+      "Solo componentes y envío, antes de montaje, permisos y mano de obra. La horquilla instalada del mismo sistema está en las cuatro formas de pagar de abajo.",
     resCardCostBuyable: "Coste como lista de piezas",
     resLblTariffBasis: "Base tarifaria",
     resLblUseCase: "Caso de uso",
@@ -390,7 +394,7 @@ export const RESULT_COPY = {
     resValNa: "n/d",
     resChipSolar: "solar",
     resChipBattery: "batería",
-    resChipUpfront: "al contado",
+    resChipUpfront: "piezas, al contado",
     resRowPowerCost: "Tu coste de energía",
     resRowShiftedKwh: "Coste por kWh desplazado",
     resValShiftedRate:
@@ -573,7 +577,9 @@ export const RESULT_COPY = {
       "A comparação de custo acumulado em 20 anos é desenhada aqui depois de dimensionar.",
     resBomPanelWatts: "Potência do painel que você compraria (W):",
     resHowCalculated: "Como isso foi calculado",
-    resCardCostToBuy: "Custo de compra",
+    resCardCostToBuy: "Só peças (fábrica a varejo)",
+    resCardCostToBuyNote:
+      "Apenas componentes e frete, antes de instalação, licenças e mão de obra. A faixa instalada do mesmo sistema está nas quatro formas de pagar abaixo.",
     resCardCostBuyable: "Custo como lista de peças",
     resLblTariffBasis: "Base tarifária",
     resLblUseCase: "Caso de uso",
@@ -610,7 +616,7 @@ export const RESULT_COPY = {
     resValNa: "n/d",
     resChipSolar: "solar",
     resChipBattery: "bateria",
-    resChipUpfront: "à vista",
+    resChipUpfront: "peças, à vista",
     resRowPowerCost: "Seu custo de energia",
     resRowShiftedKwh: "Custo por kWh deslocado",
     resValShiftedRate:
@@ -793,7 +799,9 @@ export const RESULT_COPY = {
       "La comparaison du coût cumulé sur 20 ans s'affiche ici après un dimensionnement.",
     resBomPanelWatts: "Puissance du panneau que vous achèteriez (W) :",
     resHowCalculated: "Comment ce calcul a été fait",
-    resCardCostToBuy: "Coût d'achat",
+    resCardCostToBuy: "Pièces seulement (usine à détail)",
+    resCardCostToBuyNote:
+      "Composants et transport uniquement, avant pose, permis et main-d'œuvre. La fourchette installée du même système figure dans les quatre façons de payer ci-dessous.",
     resCardCostBuyable: "Coût en liste de pièces",
     resLblTariffBasis: "Base tarifaire",
     resLblUseCase: "Cas d'usage",
@@ -830,7 +838,7 @@ export const RESULT_COPY = {
     resValNa: "n/d",
     resChipSolar: "solaire",
     resChipBattery: "batterie",
-    resChipUpfront: "au comptant",
+    resChipUpfront: "pièces, au comptant",
     resRowPowerCost: "Votre coût de l'énergie",
     resRowShiftedKwh: "Coût par kWh déplacé",
     resValShiftedRate:
@@ -1011,7 +1019,9 @@ export const RESULT_COPY = {
       "Der Vergleich der Gesamtkosten über 20 Jahre erscheint hier nach der Dimensionierung.",
     resBomPanelWatts: "Panel-Leistung, die Sie kaufen würden (W):",
     resHowCalculated: "Wie das berechnet wurde",
-    resCardCostToBuy: "Kaufpreis",
+    resCardCostToBuy: "Nur Teile (ab Werk bis Einzelhandel)",
+    resCardCostToBuyNote:
+      "Nur Komponenten und Versand — vor Montage, Genehmigungen und Arbeit. Die installierte Spanne desselben Systems steht bei den vier Zahlungswegen unten.",
     resCardCostBuyable: "Kosten als Teileliste",
     resLblTariffBasis: "Tarifbasis",
     resLblUseCase: "Anwendungsfall",
@@ -1048,7 +1058,7 @@ export const RESULT_COPY = {
     resValNa: "k. A.",
     resChipSolar: "Solar",
     resChipBattery: "Batterie",
-    resChipUpfront: "einmalig",
+    resChipUpfront: "Teile, einmalig",
     resRowPowerCost: "Ihre Energiekosten",
     resRowShiftedKwh: "Kosten je verschobener kWh",
     resValShiftedRate:
@@ -1230,7 +1240,9 @@ export const RESULT_COPY = {
       "De vergelijking van de totale kosten over 20 jaar verschijnt hier nadat je hebt doorgerekend.",
     resBomPanelWatts: "Paneelvermogen dat je zou kopen (W):",
     resHowCalculated: "Hoe dit is berekend",
-    resCardCostToBuy: "Aankoopkosten",
+    resCardCostToBuy: "Alleen onderdelen (fabriek tot winkel)",
+    resCardCostToBuyNote:
+      "Alleen componenten en verzending — vóór montage, vergunningen en arbeid. De geïnstalleerde band van hetzelfde systeem staat bij de vier betaalwijzen hieronder.",
     resCardCostBuyable: "Kosten als onderdelenlijst",
     resLblTariffBasis: "Tariefbasis",
     resLblUseCase: "Gebruiksscenario",
@@ -1267,7 +1279,7 @@ export const RESULT_COPY = {
     resValNa: "n.v.t.",
     resChipSolar: "zon",
     resChipBattery: "accu",
-    resChipUpfront: "ineens",
+    resChipUpfront: "onderdelen, ineens",
     resRowPowerCost: "Uw energiekosten",
     resRowShiftedKwh: "Kosten per verschoven kWh",
     resValShiftedRate:
@@ -1441,7 +1453,9 @@ export const RESULT_COPY = {
       "تظهر هنا مقارنة التكلفة التراكمية خلال 20 سنة بعد تشغيل الحساب.",
     resBomPanelWatts: "قدرة اللوح التي ستشتريها (واط):",
     resHowCalculated: "كيف تم حساب هذا",
-    resCardCostToBuy: "تكلفة الشراء",
+    resCardCostToBuy: "المكونات فقط (من المصنع إلى التجزئة)",
+    resCardCostToBuyNote:
+      "المكونات والشحن فقط، قبل التركيب والتراخيص وأجرة العمل. نطاق التكلفة المُركَّبة للنظام نفسه موجود في طرق الدفع الأربع أدناه.",
     resCardCostBuyable: "التكلفة كقائمة قطع",
     resLblTariffBasis: "أساس التعريفة",
     resLblUseCase: "حالة الاستخدام",
@@ -1477,7 +1491,7 @@ export const RESULT_COPY = {
     resValNa: "غير متاح",
     resChipSolar: "شمسية",
     resChipBattery: "بطارية",
-    resChipUpfront: "دفعة واحدة",
+    resChipUpfront: "المكونات، دفعة واحدة",
     resRowPowerCost: "تكلفة طاقتك",
     resRowShiftedKwh: "التكلفة لكل كيلوواط ساعة مُنقولة",
     resValShiftedRate:
