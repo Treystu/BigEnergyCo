@@ -1,6 +1,6 @@
-import { installTranslationSuggestionLoader } from "./shared/translation-suggestion-loader.js?v=20261114o";
+import { installTranslationSuggestionLoader } from "./shared/translation-suggestion-loader.js?v=20261114q";
 
 installTranslationSuggestionLoader(
   document.querySelector("[data-translation-suggestion]"),
-  () => import("./translation-suggestion.js?v=20261114o"),
+  () => import("./translation-suggestion.js?v=20261114q"),
 );
