@@ -538,9 +538,15 @@ function weakerGrade(a, b) {
 }
 
 /** Midpoint of a [low, mid, high] triple; a malformed entry reads 0. */
+// #354: the registry's numbers are bands (lo, mid, hi). The presented ranking
+// is the mid-band one; `BAND.mid` lets priceAllPaths replay the same pricing at
+// the ends so the output can say whether the winner survives the band it came
+// from. Single-threaded and synchronous by construction (workers included).
+const BAND = { mid: 1 };
+
 export function bandMid(triple) {
   if (!Array.isArray(triple)) return 0;
-  const m = triple[1];
+  const m = triple[BAND.mid];
   return Number.isFinite(m) ? m : 0;
 }
 
@@ -644,6 +650,29 @@ export function priceAllPaths(system, ctx = {}) {
     .sort((a, b) => a.spend20 - b.spend20 || a.year0 - b.year0)
     .map((p) => p.id);
 
+  // Same pricing, same rules, at the two ends of every band the registry
+  // declares. The audit found the winner flips within-band on 53.3% of corpus
+  // cases, so the presentation carries the tie instead of projecting confidence
+  // the data does not have.
+  const orderAtBand = (index) => {
+    BAND.mid = index;
+    try {
+      return PATH_IDS.map((id) =>
+        priceOne(id, sys, ctx, region, registry, legality),
+      )
+        .filter((p) => p.available)
+        .sort((a, b) => a.spend20 - b.spend20 || a.year0 - b.year0)
+        .map((p) => p.id);
+    } finally {
+      BAND.mid = 1;
+    }
+  };
+  const orderLo = orderAtBand(0);
+  const orderHi = orderAtBand(2);
+  const winners = new Set(
+    [order, orderLo, orderHi].filter((o) => o.length).map((o) => o[0]),
+  );
+
   return {
     system: sys,
     region,
@@ -666,6 +695,14 @@ export function priceAllPaths(system, ctx = {}) {
     },
     ranking: order,
     cheapest: order.length ? order[0] : null,
+    // R-PATH: the ranking and the band it came from, together.
+    rankingBand: {
+      lo: orderLo,
+      hi: orderHi,
+      // True when the cheapest path is not the same at mid, lo and hi.
+      flips: winners.size > 1,
+      winners: [...winners],
+    },
     rankingExplained: explainRanking(paths, order),
   };
 }
