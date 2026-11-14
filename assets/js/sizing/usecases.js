@@ -394,6 +394,23 @@ export function useCaseForLegacy({ mode, hardwareConfig }) {
   return "billcut";
 }
 
+/**
+ * #352: every use case whose legacy pair is this one.
+ *
+ * A legacy (mode, hardwareConfig) pair cannot express backup or reserve — they
+ * share their pairs with bill-cut and offgrid — so restoring from the pair
+ * silently re-interprets those visitors. This reports the ambiguity instead of
+ * hiding it, so the boundary can say the case was inferred rather than chosen.
+ * One candidate means the pair identifies the case exactly.
+ */
+export function legacyCandidates({ mode, hardwareConfig }) {
+  const hw = hardwareConfig ?? null;
+  return USE_CASE_IDS.filter((id) => {
+    const l = useCase(id).legacy;
+    return l.mode === mode && (l.hardwareConfig ?? null) === hw;
+  });
+}
+
 /** Normalise an incoming reserve share: null/NaN/absurd input means "off". */
 export function normaliseReservePct(pct) {
   if (!Number.isFinite(pct) || pct <= 0) return 0;

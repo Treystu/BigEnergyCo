@@ -28,36 +28,37 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261114d";
+} from "./engine.js?v=20261114e";
 
 import {
   isUseCaseId,
   deriveLegacy,
   useCaseForLegacy,
+  legacyCandidates,
   loadsFor,
   hardwareForRun,
   sizingTierFor,
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261114d";
-import { memoizeSimulate } from "./sim-cache.js?v=20261114d";
+} from "./usecases.js?v=20261114e";
+import { memoizeSimulate } from "./sim-cache.js?v=20261114e";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261114d";
-import { buildFrontier } from "./frontier.js?v=20261114d";
-import { buyablePrice } from "./bom.js?v=20261114d";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114d";
-import { climateSummary } from "./climate.js?v=20261114d";
+} from "./nasa.js?v=20261114e";
+import { buildFrontier } from "./frontier.js?v=20261114e";
+import { buyablePrice } from "./bom.js?v=20261114e";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114e";
+import { climateSummary } from "./climate.js?v=20261114e";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261114d";
+} from "./pricing.js?v=20261114e";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -68,7 +69,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261114d";
+} from "./money.js?v=20261114e";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -345,7 +346,7 @@ async function fetchWeatherWithFallback(opts) {
     return await fetchWeatherDefault(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261114d");
+      await import("./profiles.js?v=20261114e");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {
@@ -3147,6 +3148,21 @@ export async function runSizing(msg, deps = {}) {
   const ctx = payload.__useCaseContext;
   if (ctx) delete payload.__useCaseContext;
   payload.useCase = useCaseId;
+  // #352: a legacy pair cannot express backup or reserve, so a restore through
+  // it re-interprets those visitors. The boundary says the case was inferred
+  // and names the alternatives instead of letting the substitution pass as a
+  // choice the visitor made.
+  if (!explicit) {
+    const candidates = legacyCandidates({
+      mode: msg && msg.mode,
+      hardwareConfig: msg && msg.hardwareConfig,
+    });
+    payload.caseInferred = {
+      from: "legacy",
+      candidates,
+      ambiguous: candidates.length > 1,
+    };
+  }
   payload.useCaseOutcome = ctx ? measureUseCase(useCaseId, payload, ctx) : null;
   return payload;
 }
