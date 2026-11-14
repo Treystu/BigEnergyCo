@@ -68,3 +68,19 @@ test("the up-front chip says parts too, so the app bar cannot mislead either", (
     );
   }
 });
+
+test("the all-in row names its basket, not just the horizon", () => {
+  // "All-in over 20 yrs (system + bills)" on the parts basket sat beside the cost
+  // table's installed total; "system" there meant the parts figure. The row now
+  // says parts, in every locale, for both the plain and the credit variant.
+  const parts = /part|Teil|pièce|piez|peç|pec|onderde|مكون/i;
+  for (const loc of LOCALES) {
+    const dict = RESULT_COPY[loc];
+    assert.match(dict.resLblAllIn, parts, `${loc}: resLblAllIn`);
+    assert.match(
+      dict.resLblAllInMinusCredit,
+      parts,
+      `${loc}: resLblAllInMinusCredit`,
+    );
+  }
+});
