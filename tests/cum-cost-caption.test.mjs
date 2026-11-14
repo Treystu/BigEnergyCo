@@ -96,7 +96,12 @@ test("a no-panel run's caption never says solar", () => {
     /solar/i,
     `a panel-free caption must not name the sun: ${text}`,
   );
-  assert.match(text, /The emerald line is the system's own cost/);
+  // #401: the emerald band is the installed ROUTE's cost now, and the sentence
+  // names the basket and the card it matches. It still must not say "solar".
+  assert.match(
+    text,
+    /The emerald line is the recommended route's own installed cost/,
+  );
   // The locale strings carry no leading whitespace, so the sentences have to be
   // joined — appending them ran them together ("(~$65,237.00).The emerald…").
   assert.doesNotMatch(text, /\.\S/, `sentences ran together: ${text}`);
@@ -124,13 +129,19 @@ test("a negative 20-year gap is stated as a cost, never as pocket money", () => 
   assert.match(text, /it does not pay for itself here/i);
 });
 
-test("the same series WITH panels keeps the solar wording and the saving", () => {
+test("the same series WITH panels keeps the installed-route wording and the saving", () => {
   const { bd, text } = caption(withPanelsSeries(), {
     pvKw: 8,
     chemLabel: "LFP",
   });
   assert.ok(bd.saved > 0, `fixture really has a positive gap (${bd.saved})`);
-  assert.match(text, /The emerald line is the solar system's own cost/);
+  // #401: the emerald band names the installed basket and the card it matches;
+  // the stack sentence still speaks of the bills left after solar, which is
+  // what those bills are.
+  assert.match(
+    text,
+    /The emerald line is the recommended route's own installed cost/,
+  );
   assert.match(text, /smaller bills that remain after solar/);
   assert.match(text, new RegExp(`puts \\$${Math.round(bd.saved)} back`), text);
   assert.doesNotMatch(text, /MORE than staying on the grid/);

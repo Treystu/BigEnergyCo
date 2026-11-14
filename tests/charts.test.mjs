@@ -37,6 +37,9 @@ const SEAMS = [
   "drawSunStrip",
   "findWorstStreak",
   "cumCostCaptionText",
+  // #401: the chart's emerald band takes the winning route's own spend curve,
+  // so its endpoint is that route's card total by construction.
+  "canonicalCumCostSeries",
 ];
 const PALETTE = ["TIER_COLORS", "TIER_NAMES"];
 

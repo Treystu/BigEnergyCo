@@ -211,14 +211,21 @@ test("the 2026-10-25 back-translation pass's control targets stay meaning-comple
   // COPIES; these pins hold the SHIPPED strings those copies were made from,
   // so the same three corruption classes cannot reach a visitor unnoticed.
   // Figure-drop targets: each label keeps the figure the seeds stripped.
+  // #401 moved these captions from naming the results row to naming the
+  // installed basket; the figure they carry is now the {systemTotal}
+  // placeholder, so THAT is what a figure-drop seed would strip, and these pins
+  // hold it together with the phrase that says which basket it is.
   assert.match(
     LOCALES.es.cumCostCaptionOwnCostNoPanels,
-    /“Coste total a 20 años”/,
+    /coste instalado de la ruta recomendada \(~\{systemTotal\}\)/,
   );
-  assert.match(LOCALES.pt.cumCostCaptionOwnCost, /“Custo total em 20 anos”/);
+  assert.match(
+    LOCALES.pt.cumCostCaptionOwnCost,
+    /custo instalado da rota recomendada \(~\{systemTotal\}\)/,
+  );
   assert.match(
     LOCALES.nl.cumCostCaptionOwnCost,
-    /“Totale kosten over 20 jaar”/,
+    /geïnstalleerde kostprijs van de aanbevolen route \(~\{systemTotal\}\)/,
   );
   assert.match(LOCALES.ar.cumSavingsHeadline, /20 عامًا/);
   assert.match(LOCALES.de.uiInitFailed, /Strg\+F5/);
