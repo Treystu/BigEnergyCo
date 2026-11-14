@@ -38,6 +38,7 @@
 - Dotacja na magazyn energii (Poland, PME 2): https://freeoffgridcalculator.com/blog/dotacja-magazyn-energii-2026/
 - Net metering Bangladesh 2026 (bn-BD): https://freeoffgridcalculator.com/blog/net-metering-bangladesh-2026/
 - PM Surya Ghar two years on (India, hi-IN): https://freeoffgridcalculator.com/blog/pm-surya-ghar-do-saal-baad-2026/
+- Solarspitzengesetz and negative prices (Germany, de-DE): https://freeoffgridcalculator.com/blog/solarspitzengesetz-2026-negative-preise/
 
 ## Cite honestly
 - Costs are ranges (landed-DIY vs budget-retail), never single prices.
