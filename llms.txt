@@ -39,6 +39,7 @@
 - Net metering Bangladesh 2026 (bn-BD): https://freeoffgridcalculator.com/blog/net-metering-bangladesh-2026/
 - PM Surya Ghar two years on (India, hi-IN): https://freeoffgridcalculator.com/blog/pm-surya-ghar-do-saal-baad-2026/
 - Solarspitzengesetz and negative prices (Germany, de-DE): https://freeoffgridcalculator.com/blog/solarspitzengesetz-2026-negative-preise/
+- NERSA's 26 November 2026 tariff decision (South Africa, en-ZA): https://freeoffgridcalculator.com/blog/nersa-tariff-decision-26-november-2026/
 
 ## Cite honestly
 - Costs are ranges (landed-DIY vs budget-retail), never single prices.
