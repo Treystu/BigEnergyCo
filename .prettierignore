@@ -24,3 +24,8 @@ assets/vendor/leaflet/
 .abacusai/
 # Env templates: no parser (no extension), nothing to format.
 .env.example
+# Preserved provenance (the 42-file reconciliation, PR #383): session tooling,
+# post builders, receipts and read-only API captures, kept byte-for-byte as the
+# sessions recorded them. Reformatting preserved evidence would rewrite the
+# record it exists to carry, and none of it is imported by the product.
+wip/

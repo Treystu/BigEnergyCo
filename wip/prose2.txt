@@ -1,0 +1,320 @@
+#### B62 lines 4076-4080
+          return;
+
+        mergeReSlice(ev.data.result);
+      } else if (ev.data?.type === "error") {
+        // A failed slice frees the channel like a finished one; a trailing
+#### B63 lines 7987-7991
+      if (sized && sized.length) o.t = sized;
+    }
+
+    history.replaceState(null, "", SHARE_PREFIX + b64urlEncode(o));
+  } catch {
+#### B64 lines 2576-2580
+          }
+          const corners = rotatedRectangleCorners(
+            roofMapFirstCorner,
+            roofMapSecondCorner,
+            [lat, lon],
+#### B65 lines 1326-1330
+function setLoadPanel() {
+  const mode = $("loadMode").value;
+
+  $("panelAppliances").style.display = mode === "appliances" ? "block" : "none";
+
+#### B66 lines 7494-7500
+
+  renderMoneyBar(p);
+
+  const hasAuto = !!(p.auto && p.auto.length);
+  // Router mode: auto vs fixed-chemistry is a payload SHAPE distinction
+  const isAutoMode = Array.isArray(p.auto);
+
+#### B67 lines 3926-3930
+    slider.value = String(Math.min(hi, Math.max(lo, Math.round(next))));
+  syncBudgetLabel();
+}
+
+function syncBudgetLabel() {
+#### B68 lines 3163-3166
+      }
+    }
+  } else if (
+    "customTarget" in result &&
+#### B69 lines 1263-1266
+  // rendered — so "why did nothing solve?" reaches assistive tech too.
+  const live = $("infeasibleLive");
+  if (!reason) {
+    banner.style.display = "none";
+#### B70 lines 5827-5830
+              cell.pvKw > 0
+                ? t("resValBillPct", { pct: cell.cutPct })
+                : t("resValPeakOffsetPct", { pct: cell.cutPct });
+          const pvText = t("resValPvKw", { kw: cell.pvKw });
+#### B71 lines 6579-6582
+  const readout = $("genReadout");
+  const applyBtn = $("btnApplyGenRate");
+  if (!readout || !applyBtn) return;
+  const rate = genRateUsd();
+#### B72 lines 8460-8463
+function askAdvisor() {
+  if (!window.lastSizingBrief) return;
+
+  const input = document.getElementById("chatInput");
+#### B73 lines 1305-1308
+
+// Auto-mode basis submenus: which reliability tier / bill-cut target the
+
+// three chemistry cards represent. Visible only when chemistry = Auto.
+#### B74 lines 4191-4194
+  if (rate < 1e-4 || rate > 1e6) return null;
+
+  return { rate, code };
+}
+#### B75 lines 7911-7914
+
+      la: Math.round(inp.latitude * 100) / 100,
+
+      lo: Math.round(inp.longitude * 100) / 100,
+#### B76 lines 1237-1240
+  );
+  bomBtn.addEventListener("click", downloadBomCsv);
+  actions.appendChild(bomBtn);
+  card.appendChild(actions);
+#### B77 lines 9459-9462
+
+#### B78 lines 322-325
+let resolvedCountry = null; // picks the price registry
+
+// The exact system the visitor just clicked on the price curve. Adopting it
+// is instant (its full analysis rides along in the cached frontier point);
+#### B79 lines 4977-4980
+    if (!isSelected) {
+      btn.addEventListener("click", () => {
+        if (t.isBaseline) {
+          adoptedEntry = {
+#### B80 lines 8615-8618
+    );
+    if (btnH) btnH.style.display = next.header;
+    if (btnM) btnM.style.display = next.drawer;
+  };
+#### B81 lines 3587-3590
+// thumb rides along (unpinned — pinning is commit-time only) so the pair, the
+// card and the label move together at every input. A budget the visitor has
+// already chosen is NOT unpinned by a cut preview: it stays where they put it,
+// which is the whole point of the two controls being independent.
+#### B82 lines 451-454
+// `t` is shared/i18n.js's translate (imported above), which delegates the
+// placeholder contract to shared/interpolate.js. This file used to carry its
+// own lookup-then-substitute loop; it agreed with i18n.js by luck rather than
+// by construction, and the same "$200" replacer bug had to be found and fixed
+#### B83 lines 5440-5443
+        (c.endOfTerm
+          ? `<dt>${escapeHtml(t("pathsRowEndOfTerm"))}</dt><dd>${escapeHtml(t(c.endOfTerm.noteKey, { years: c.endOfTerm.termYears, buyoutPct: Math.round(c.endOfTerm.buyoutPct * 100) }))}</dd>`
+          : "") +
+        `</dl>` +
+#### B84 lines 8762-8765
+    const fixedVal = $("fixedChargeVal");
+    if (fixedVal)
+      fixedVal.addEventListener("input", () => {
+        syncBillSlider();
+#### B85 lines 8204-8207
+    rows = p.auto
+      .filter((t) => t.solvable)
+      .map(
+        (t) =>
+#### B86 lines 3063-3066
+  });
+
+  slider.addEventListener("change", () => {
+    // The slider, the form select and the sizing input are ONE control in
+#### B87 lines 9323-9326
+
+#### B88 lines 3878-3881
+// can sit off-lattice). Shown whenever the curve is drawable, any mode.
+function curveReady() {
+  const p = lastPayload;
+  return !!(
+#### B89 lines 2485-2490
+  const host = input ? input.closest(".form-group") : null;
+  if (host) host.appendChild(note);
+  note.id = "tariffNote";
+
+  syncBillSlider();
+
+#### B90 lines 7689-7692
+    `I sized a system with your calculator for the selected site (the advisor does not receive exact coordinates), ` +
+    `${inp.dailyKwh.toFixed(1)} kWh/day from ${inp.basis}, ${p.chemistry === "auto" ? "AUTO chemistry comparison" : p.chemistry.toUpperCase()}` +
+    `${p.auto && p.auto.length ? ` (${p.autoNote})` : ""}, ` +
+    `${isGT ? "staying connected to the grid (no export" + (inp.exportRate ? ", feed-in credit entered)" : ")") : "fully off-grid"}:\n${selectedLine}${recLine}${frontierLine}${briefLines.join("\n")}\n` +
+#### B91 lines 2750-2753
+
+      // The tariff is entered in the DISPLAY currency; the engine prices
+
+      // everything internally in USD, so convert once here (local ÷ units
+#### B92 lines 61-64
+// The country -> currency table. Static, not lazy: it is consulted the moment
+// a location resolves, so a dynamic import would only add a round trip to the
+// one path that must not wait. Its 11.5 KB is data, and the first-load budget
+// below records the deliberate trade.
+#### B93 lines 3981-3984
+
+    runWorker.onmessage = (ev) => {
+      // A timed-out/failed worker may have a message already queued while a
+      // replacement worker is starting. Old instances no longer own UI state.
+#### B94 lines 305-308
+let billUserNominal = null;
+let billSliderDisplayValue = null;
+
+// Bill-cut slider (1–150%): the replacement for the old 60/80/95 dropdown.
+#### B95 lines 2996-2999
+// arbitrary cut the results slider holds. One decision, two controls; the
+// target policy itself is single-owner in shared/cut-targets.js.
+
+function syncCutLabel() {
+#### B96 lines 6795-6798
+
+    appendRows(card, rows);
+
+    if (t.bestPriceCallout) {
+#### B97 lines 3996-3999
+        if (
+          ev.data.seq === runChannel.latestSeq &&
+          ev.data.epoch === payloadEpoch
+        ) {
+#### B98 lines 1050-1053
+    metric: t(o.labelKey),
+    pct: round(o.unit === "tradeoff" ? m.reserveSavingsLostPct : o.value),
+    hours: round(m.backupHoursP50 ?? m.reserveCoverHours),
+    targetHours: round(m.backupTargetHours ?? m.outageTargetHours),
+#### B99 lines 3320-3323
+    // but do not replace the result or fetch weather until the explicit size
+    // button is clicked.
+    markPrecalcDirty();
+  });
+#### B100 lines 2317-2320
+
+  currencyTouched = false;
+
+  // Location selection only fills the pre-calc inputs. Weather is fetched
+#### B101 lines 7568-7571
+    const box = $("tierResults");
+
+    if (box) {
+      box.innerHTML = "";
+#### B102 lines 8657-8660
+      badge.className = "offline-badge";
+      badge.innerHTML = `<span class="offline-dot"></span> ${t("offlineReady")}`;
+      badge.style.display = "inline-flex";
+      badge.title = t("offlineBadgeTitle");
+#### B103 lines 457-460
+// -- Appliance library -------------------------------------------------------
+
+// w = watts WHILE RUNNING. duty:true items (fridges, ACs, pumps) only run a
+
+#### B104 lines 960-964
+      "div",
+      {
+        style: "font-size:1.35rem;font-weight:800;color:var(--primary-accent)",
+      },
+      value,
+#### B105 lines 5445-5447
+        (driver
+          ? `<p class="paths-why">${escapeHtml(whyText(driver))}</p>`
+          : "") +
+#### B106 lines 1549-1551
+      offOut.textContent = t("offgridKwhReadout", { kwh: clampedKwh });
+    if (kwhInput) kwhInput.value = String(clampedKwh);
+  }
+#### B107 lines 8114-8116
+    };
+    selectedKey = "focus";
+  } else if (
+#### B108 lines 9261-9263
+    checkReady();
+  }
+}
+#### B109 lines 317-319
+// of the module state because setCoords() resets the cache long before this
+// file's first function definition \u2014 a `let` further down would be a temporal
+// dead zone waiting for someone to wire up a new caller.
+#### B110 lines 418-420
+let sliceBusy = false;
+let pendingSlice = null; // { focusPvKw, focusBattKwh, focusChemistry }
+
+#### B111 lines 3151-3153
+  if ("agmReference" in result) p.agmReference = result.agmReference;
+  if (result.cells && p.matrix && p.matrix.cells)
+    Object.assign(p.matrix.cells, result.cells);
+#### B112 lines 288-290
+let coordDebounceTimer = null;
+// Every user location choice gets a generation. Background GPS refinements
+// carry their original generation and may only pin while it remains current.
+#### B113 lines 2966-2968
+}
+
+// A finished worker run hands back to the latest superseding request, if any.
+#### B114 lines 6086-6088
+    e.pvKw > 0 ? `${e.pvKw} kW` : t("resValNoPv"),
+  ]);
+  rows.push([
+#### B115 lines 7859-7861
+    _charts.drawAutoChart(p);
+  } else if (
+    !hasAuto &&
+#### B116 lines 8311-8313
+      peakLoadW: hwEntry.peakLoadW || (p.focus && p.focus.peakLoadW) || 0,
+      peakIsAverage: p.peakIsAverage !== false,
+      meanTempC: (p.assumptions && p.assumptions.meanTempC) ?? null,
+#### B117 lines 409-411
+// flash status, or scroll — the screen already shows the rescaled numbers.
+let lastRunQuiet = false;
+
+#### B118 lines 6642-6644
+  const selNow = resolveSelected(p);
+  const noPanels = p.mode === "gridtie" && !!selNow && !(selNow.pvKw > 0);
+  moneyBar.textContent =
+#### B119 lines 6779-6781
+    }
+
+    if (Number.isFinite(t.lcoeUsdPerKwh)) {
+#### B120 lines 224-226
+  if (!input || !note) return;
+  const area = parseFloat(input.value);
+  if (!Number.isFinite(area) || area <= 0) {
+#### B121 lines 3096-3098
+// the payload is untouched by a customCut edit, so this is a few simulations,
+// not a full engine run — and the response only re-renders the matrix table.
+function requestIncrementalCut(
+#### B122 lines 3295-3297
+    const rate = displayRate();
+    if (Number.isFinite(bill) && rate > 0)
+      billAnchorKwh = kwhFromBill(bill, rate);
+#### B123 lines 4212-4214
+    return sym + Math.round(local).toLocaleString() + " " + fx.code;
+  }
+}
+#### B124 lines 8965-8967
+    // Quick / Manual mode: quick hides advanced inputs but always leaves the
+    // explicit sizing button available; it never runs from location alone.
+
+#### B125 lines 374-376
+  // same funnel.
+  //
+  // ever coming; invalidate() leaves the channel BUSY (correctly, for the
+#### B126 lines 4099-4101
+          // visitor sees how far the pipeline got.
+          if (ev.data.stream !== "slice") pipelineStop(false);
+        }
+#### B127 lines 4756-4758
+      batteryLifeYears: baseSwaps > 0 ? 20 / (baseSwaps + 1) : 20,
+      firstLaborUsd: baseLife.firstLabor,
+    });
+#### B128 lines 8041-8043
+
+  $("dailyKwhInput").value = String(kw);
+
+#### B129 lines 9046-9048
+    if (latEl) latEl.addEventListener("input", onCoordChange);
+    if (lonEl) lonEl.addEventListener("input", onCoordChange);
+

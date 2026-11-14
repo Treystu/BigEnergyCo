@@ -54,12 +54,15 @@ test("#348: the zero-swap target uses the 20-year horizon, not the series window
   );
 });
 
-test("#348: Nairobi - the challenger reaches the lattice's zero-swap optimum", () => {
-  // The published #347 receipt's one breach. The shipped search sells 1.45 kW
-  // / 4 kWh at $1,964 with one replacement; the lattice's cheapest feasible
-  // point is 1.55 kW / 7 kWh at $1,869 with none. The shipped adoption block
-  // adopts nothing here, so the visitor is told swaps are cheaper when the
-  // numbers say otherwise.
+test("#347/#348: Nairobi - the search itself reaches the lattice's zero-swap optimum", () => {
+  // The published #347 receipt's one breach, re-measured after the cure. The
+  // search used to sell 1.45 kW / 4 kWh at $1,966 with one bank replacement
+  // while the lattice's cheapest feasible point was 1.55 kW / 7 kWh at $1,869
+  // with none: lifetime cost is discontinuous in PV because a board that cycles
+  // slightly less drops a whole replacement, and the search only ever priced
+  // the minimum feasible PV per battery row. It now walks that cliff, so the
+  // shipped pick is itself a zero-swap system and the adoption block has
+  // nothing to rescue.
   const row = measureBillCutCase({
     city: "Nairobi, Kenya",
     kwhPerDay: 5,
@@ -71,26 +74,26 @@ test("#348: Nairobi - the challenger reaches the lattice's zero-swap optimum", (
   });
 
   assert.equal(
+    row.neverOversize.replacements,
+    0,
+    "the search must land on a zero-swap system",
+  );
+  assert.equal(row.champion.battKwh, 7);
+  assert.equal(
     row.adoptionFired,
     false,
-    "shipped rule must still adopt nothing",
+    "nothing is left for adoption to repair",
   );
-  assert.equal(row.screenSkipped, true, "this is the screen-skip defect");
-  assert.equal(
-    row.neverOversize.replacements,
-    1,
-    "pre-adoption pick needs a swap",
+  assert.equal(row.screenSkipped, false, "no cheaper bank is left unadopted");
+  assert.ok(
+    row.champion.cost <= row.oracle.cost,
+    `champion $${row.champion.cost} must not cost more than the lattice's $${row.oracle.cost}`,
   );
-
-  assert.equal(row.directZeroSwap.adopted, true);
-  assert.equal(row.directZeroSwap.battKwh, 7);
-  assert.equal(row.directZeroSwap.pvKw, 1.55);
-  assert.equal(
-    row.directZeroSwap.cost,
-    row.oracle.cost,
-    "challenger must match the lattice",
+  assert.ok(
+    Math.abs(row.championRegret) <= 0.02,
+    `regret ${row.championRegret} must sit inside the 2% margin`,
   );
-  assert.equal(row.challengerVsChampion, -0.048371);
+  assert.equal(row.directZeroSwap.reason, "already_zero_swap");
 });
 
 test("#348: summarize applies the issue's rule as written", () => {

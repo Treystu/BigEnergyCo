@@ -1,0 +1,227 @@
+Tu resultado: Desconectarte por completo de la red eléctrica
+99%
+del año funcionando sin red
+
+Este llega casi hasta el final. El 99% del año funciona sin red, con 82 horas de déficit en el peor año y 1.4 días de autonomía (cuánto tiempo la batería sola mantiene lo esencial).
+
+Desconectarte por completo de la red eléctrica: medido con el clima horario de esta ubicación, no es una estimación.
+
+Tres vistas del mismo resultado: Mejor opción es el sistema que instalaríamos, Comparar baterías compara las químicas y Todas las opciones es la tabla completa.
+
+Mejor opción
+Comparar baterías
+Todas las opciones
+Recomendado: la opción de menor coste real, priorizando seguridad
+LFP (LiFePO4): 8 kW solar + 27 kWh de batería
+Campo solar
+8 kW
+Batería (útil)
+27 kWh — ~33.8 nominales
+Huella
+15 × 550 W de panel · unos 40 m² de tejado o suelo
+Coste de compra
+~$2,704.00–$9,550.00
+Cambios de batería en 20 años
+Ninguno en 20 años
+Coste total a 20 años
+~$7,075.00 — la más barata de las comparadas
+Autonomía de la batería
+~1.4 días de reserva sin sol
+Horas sin cubrir
+82 h/año · hueco más largo 15 h
+Se paga solo
+Año 8
+Tu coste de energía
+$0.05/kWh (red $0.14/kWh)
+
+LFP (LiFePO4) gana en dinero aquí — unas 25.9% por delante de Sodium-Ion: es genuinamente más barato por suficiente margen para elegirlo por coste. Aprovecha casi toda su potencia nominal cada día y tiene una vida de ciclos larga. El orden cambia con el clima, las tarifas y cuánto trabajo haces tú: sopesa el segundo antes de decidir. Como referencia, una batería de plomo-ácido para el mismo trabajo necesita ~8 recambios en 20 años; se muestra solo para que veas lo que te ahorras y nunca se recomienda.
+
+Sodium-Ion y LFP (LiFePO4) dimensionados para 99% fiabilidad — generador solo como respaldo raro. Usa las pestañas de arriba para comparar cada opción lado a lado.
+
+A $0.14/kWh, este consumo cuesta unos $993.00 al año en electricidad de red. Las cifras de amortización abajo comparan el coste del sistema contra ese gasto.
+
+Qué incluye cada costo: el primero paga equipo e instalación una vez; la cifra a 20 años también cubre reemplazos, combustible y mantenimiento.
+
+📖 Cómo es realmente este sistema en la vida real (en lenguaje sencillo)
+🌞 EL CAMPO SOLAR
+~15 paneles estándar de tejado o suelo (550 W cada uno). Necesita unos 40 m² (~431 pies²) de espacio sin sombra. En un día despejado recoge unos 36 kWh de electricidad gratis.
+🔋 EL BANCO DE BATERÍAS
+27 kWh útiles (~33.8 kWh en total). Eso da ~1.4 días completos de consumo normal sin nada de sol. En tamaño físico son unos 7 módulos de batería de rack estándar, más o menos como ordenadores de sobremesa pequeños.
+⚡ EL INVERSOR (EL CEREBRO DEL SISTEMA)
+Un inversor/cargador híbrido de pared (~3 a 6 kW continuos). Convierte en silencio la corriente continua del sol y de las baterías en corriente alterna limpia para tus enchufes. Suministra la corriente doméstica estándar de 120 V.
+💰 PRECIO MAYORISTA FRENTE A PRESUPUESTO LLAVE EN MANO
+El hardware de este sistema cuesta ~$2,704.00–$9,550.00. Un instalador llave en mano presupuesta $28,870.00–$53,780.00 todo incluido por exactamente este campo solar. Comprar las mismas piezas tú mismo y pagar a un electricista autorizado por la conexión queda cerca de $15,545.00–$31,616.00 — $17,863.00 más barato que el precio del instalador. A 20 años, con permisos, incentivos y cada cambio de banco incluidos, las cuatro vías se comparan más abajo.
+Cuatro formas de pagar este mismo sistema
+
+Un sistema, una sola definición, veinte años. La diferencia entre estas tarjetas es de precio, no de qué incluye cada una.
+
+Vía de terceros: 
+PPA (compras la energía)
+Alquiler (alquilas el sistema)
+Instalador, llave en mano
+
+$28,870.00–$53,780.00
+
+No hay ninguna referencia publicada de instaladores para UNITED STATES. La banda de coste instalado que se muestra se deriva de nuestros bloques regionales y tiene grado D, así que tómala como una banda de planificación, no como un estudio de este mercado.
+
+Coste a 20 años $48,500.00
+
+Incentivos
+No tenemos un incentivo verificado para tu región.
+Ahorro en la factura
+Desconocido
+Equilibrio
+No dentro de 20 años
+Neto a 20 años
+Desconocido
+Titularidad
+Eres propietario desde el primer día.
+
+QUÉ INCLUYE ESTE PRECIO
+
+Piezas, mano de obra y permisos, ya instalados
+El proveedor mantiene y sustituye batería e inversor
+Incentivos, si te corresponden
+
+Tú compras las piezas sale $21,423.00 menos que Instalador, llave en mano en 20 años, sobre todo por el precio inicial $17,863.00. Ningún elemento explica por sí solo toda la diferencia.
+
+Alquiler o PPA
+MÁS BARATO
+
+$0.00–$3,942.00
+
+No hay ninguna referencia publicada de instaladores para UNITED STATES. La banda de coste instalado que se muestra se deriva de nuestros bloques regionales y tiene grado D, así que tómala como una banda de planificación, no como un estudio de este mercado.
+
+Coste a 20 años $20,004.00
+
+Incentivos
+El proveedor se los queda: no eres propietario de nada.
+Ahorro en la factura
+Desconocido
+Equilibrio
+Año 1
+Neto a 20 años
+Desconocido
+Titularidad
+El proveedor es el propietario y lo mantiene.
+Al final
+En el año 25 el contrato sigue vigente, así que no se incluye ninguna compra. Pasados los 20 años seguirías debiendo pagos.
+
+QUÉ INCLUYE ESTE PRECIO
+
+Sin compra de hardware al inicio
+El proveedor mantiene y sustituye batería e inversor
+Los incentivos van al proveedor, no a ti
+La decisión al final del contrato está incluida en el precio
+
+Alquiler o PPA sale $7,073.00 menos que Tú compras las piezas en 20 años, sobre todo por el precio inicial $21,557.00.
+
+Tú compras las piezas
+
+$15,545.00–$31,616.00
+
+No hay ninguna referencia publicada de instaladores para UNITED STATES. La banda de coste instalado que se muestra se deriva de nuestros bloques regionales y tiene grado D, así que tómala como una banda de planificación, no como un estudio de este mercado.
+
+Coste a 20 años $27,077.00
+
+Incentivos
+No tenemos un incentivo verificado para tu región.
+Ahorro en la factura
+Desconocido
+Equilibrio
+No dentro de 20 años
+Neto a 20 años
+Desconocido
+Titularidad
+Eres propietario una vez instalado.
+
+QUÉ INCLUYE ESTE PRECIO
+
+El hardware que compras tú
+Un electricista con licencia hace la instalación
+Permisos, inspección y conexión a la red
+Tú gestionas y pagas las sustituciones de baterías
+Incentivos, si te corresponden
+
+Alquiler o PPA sale $7,073.00 menos que Tú compras las piezas en 20 años, sobre todo por el precio inicial $21,557.00.
+
+Tú lo montas, un electricista lo conecta
+
+No se ofrece aquí: no pudimos verificar si puedes montar tu propio panel.
+
+Todas las cifras provienen de un único registro de precios regional con fuente indicada y grado de confianza. El hardware es tu propia estimación; la mano de obra, los permisos, los incentivos y las sustituciones son datos del registro. Nada de esto es una oferta de un vendedor.
+
+¿Hasta dónde llega tu dinero?
+
+Todos los sistemas posibles en tu ubicación, del más barato al más caro. La línea es el mejor resultado que puede comprar cada presupuesto, para que veas de un vistazo si tu objetivo aquí es fácil, caro o inalcanzable.
+
+Cubrir cerca del 90.5% de tu energía cuesta unos $3,565.00. El último tramo hasta la independencia total es donde se va el dinero: unos $563.00 por cada punto adicional, frente a $47.00 antes. Rango óptimo: ~$597.00–$3,565.00 (27.1–90.5%).
+
+0%
+25%
+50%
+75%
+100%
+$0.00
+$2,500.00
+$5,000.00
+$7,500.00
+$10,000.00
+$597.00–$3,565.00
+8 kW + 27 kWh · 99.3% · $6,224.00
+Coste inicial del sistema
+Parte de tu energía cubierta, sin generador
+El sistema más barato que alcanza cada nivel
+Mismos sistemas: de piezas para montar por cuenta propia a sistemas completos entregados al por menor.
+Rango óptimo — cada punto extra sigue barato
+Opción seleccionada — haz clic en cualquier punto para elegirla
+Ver todos los puntos en una tabla
+📐 Guía de orientación solar e inclinación (33.5°N)
+Inclinación óptima todo el año: ~30°
+Ground / Horizon
+🧭 Facing Sur
+~30° Tilt
+☀️ Mediodía de verano: 80° (14.2 h)
+❄️ Mediodía de invierno: 33° (9.8 h)
+🧭 Rumbo de la brújula
+Sur
+Orientado al sur (180°) hacia el ecuador
+📐 Inclinación fija todo el año
+~30°
+Ángulo óptimo de una vez para tejados fijos
+❄️ Inclinación extra de invierno
+~48°
+Evacúa la nieve y capta el bajo sol de mediodía en invierno
+☀️ Horas de luz y oscilación estacional
+14.2h ➔ 9.8h
+El sol baja 47° entre el mediodía de verano y el de invierno
+💰 El valor del ángulo correcto
+−12%
+What a flat roof forfeits here — it takes ~11 flat panels to match 10 at ~30°
+💡 ¿Cuánto importa de verdad el ángulo? Aquí un tejado plano pierde cerca del 12% de la cosecha anual frente a la inclinación óptima de ~30° — más o menos 1 panel(es) extra por cada 10 para compensar. La precisión es tolerante: dentro de ±10° de lo óptimo conservas casi todo, así que "cerca" basta de sobra en la mayoría de tejados. Nuestra simulación ya asume la inclinación recomendada al dimensionar tu campo solar y tu batería.
+Niveles de carga de batería y confiabilidad anual (5 años de clima real)
+5 años completos
+Peor mes
++
+−
+
+Cada franja representa un día: arriba muestra la carga máxima y abajo la descarga más profunda, según datos satelitales de 2021 a 2025. La línea roja marca una batería vacía; allí la red suministra energía, así que no hay apagón. Las franjas altas y uniformes indican que la energía solar y la batería están cubriendo el consumo. La franja ámbar muestra la producción solar diaria (kWh por kW de panel); sus bajadas coinciden con los mínimos de carga de las baterías.
+
+¿Cuánto te ahorra realmente la energía solar? (coste acumulado en 20 años)
++~$12,781.00 ahorrados en 20 años
+Se amortiza en el año 8; cada año posterior ahorra dinero · ~7,255 kWh/año servidos por el sol en vez de la red.
+Red sin energía solar: $19,856.00
+Sistema solar: $7,075.00
+
+Coste acumulado a 20 años del sistema recomendado (LFP (LiFePO4)): la línea ámbar es lo que pagas a la compañía si sigues conectado a la red ($19,856.00). La línea esmeralda es el coste propio del sistema solar (~$7,075.00), y coincide con la fila “Coste total a 20 años” de este sistema. La cifra ámbar es una pila — el sistema, luego las facturas menores que quedan tras lo solar (~$0.00), luego tu ahorro — así que este sistema te devuelve $12,781.00 en los 20 años. El sistema ha recuperado su coste en el año 8 — cada año posterior devuelve ~$983.00 a tu bolsillo. Ahorro total en 20 años: ~$12,781.00. Las barras inferiores son tu posición neta: rojas hasta el punto de equilibrio y luego en ascenso.
+
+Tu lista de hardware — de qué está hecho este sistema
+Cómo se calculó
+
+No se incluyen incentivos ni subvenciones: estos son costes sin subvención. Se supone que el precio de la electricidad no cambia en 20 años: no se proyectan subidas.
+
+Preguntar al asesor de IA sobre este resultado
+Copiar enlace para compartir
+Imprimir / guardar PDF
+
+Si esto te ahorró una llamada o un presupuesto: colaborar · cuéntame si te sirvió · envía este resultado a alguien que esté cotizando un sistema
