@@ -2010,10 +2010,3 @@ html:not([data-results-more]) .results-demoted {
   font-weight: 800;
   color: var(--primary-accent);
 }
-
-.results-more .results-more-note {
-  margin: 0.5rem 0 0;
-  font-size: 0.86rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}

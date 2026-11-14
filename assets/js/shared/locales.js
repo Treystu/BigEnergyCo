@@ -160,8 +160,6 @@ export const LOCALES = {
     matrixScroll: "Scrollable comparison table",
     bomPanelTitle: "Your hardware list — what this system is made of",
     resultsMoreSummary: "More detail: the charts, the workings and the options",
-    resultsMoreNote:
-      "Everything below is the same run, shown in full. Nothing here changes the figures above — open it when you want the curve, the frontier or the line-by-line assumptions.",
     genSummary: "I run a generator — what does its power really cost?",
     genApply: "Use this as my electricity price",
 
@@ -953,8 +951,6 @@ export const LOCALES = {
     bomPanelTitle: "Tu lista de hardware — de qué está hecho este sistema",
     resultsMoreSummary:
       "Más detalle: los gráficos, los cálculos y las opciones",
-    resultsMoreNote:
-      "Todo lo de abajo es el mismo cálculo, mostrado entero. Nada aquí cambia las cifras de arriba: ábrelo cuando quieras ver la curva, la frontera o los supuestos línea por línea.",
     genSummary: "Uso un generador — ¿cuánto cuesta realmente su energía?",
     genApply: "Usar esto como mi precio de electricidad",
 
@@ -1683,8 +1679,6 @@ export const LOCALES = {
     matrixScroll: "Tabela comparativa com deslocamento",
     bomPanelTitle: "Sua lista de hardware — do que este sistema é feito",
     resultsMoreSummary: "Mais detalhe: os gráficos, os cálculos e as opções",
-    resultsMoreNote:
-      "Tudo abaixo é o mesmo cálculo, mostrado por inteiro. Nada aqui muda os números acima: abra quando quiser ver a curva, a fronteira ou as premissas linha por linha.",
     genSummary: "Uso um gerador — quanto custa de verdade a energia dele?",
     genApply: "Usar isto como meu preço de eletricidade",
 
@@ -2405,8 +2399,6 @@ export const LOCALES = {
     bomPanelTitle: "Votre liste de matériel — de quoi ce système est composé",
     resultsMoreSummary:
       "Plus de détail : les graphiques, les calculs et les options",
-    resultsMoreNote:
-      "Tout ce qui suit est le même calcul, montré en entier. Rien ici ne change les chiffres ci-dessus : ouvrez-le pour voir la courbe, la frontière ou les hypothèses ligne par ligne.",
     genSummary:
       "J'utilise un générateur — combien coûte vraiment son électricité ?",
     genApply: "Utiliser ceci comme mon prix de l'électricité",
@@ -3133,8 +3125,6 @@ export const LOCALES = {
     bomPanelTitle: "Deine Hardware-Liste — woraus dieses System besteht",
     resultsMoreSummary:
       "Mehr Details: die Diagramme, die Rechnung und die Optionen",
-    resultsMoreNote:
-      "Alles unten ist dieselbe Berechnung, vollständig gezeigt. Nichts davon ändert die Zahlen oben — öffne es, wenn du die Kurve, die Grenzkurve oder die Annahmen Zeile für Zeile sehen willst.",
     genSummary: "Ich habe einen Generator — was kostet sein Strom wirklich?",
     genApply: "Als meinen Strompreis übernehmen",
     socChartTitle:
@@ -3770,8 +3760,6 @@ export const LOCALES = {
     matrixScroll: "Vergelijkingstabel om door te scrollen",
     bomPanelTitle: "Uw hardwarelijst — waaruit dit systeem bestaat",
     resultsMoreSummary: "Meer detail: de grafieken, de berekening en de opties",
-    resultsMoreNote:
-      "Alles hieronder is dezelfde berekening, volledig weergegeven. Niets ervan verandert de cijfers hierboven — open het als u de curve, de grens of de aannames regel voor regel wilt zien.",
     genSummary: "Ik heb een generator — wat kost zijn stroom echt?",
     genApply: "Gebruik dit als mijn stroomprijs",
 
@@ -4672,8 +4660,6 @@ export const LOCALES = {
     matrixScroll: "جدول مقارنة قابل للتمرير",
     bomPanelTitle: "قائمة المعدات الخاصة بك — مم يتكون هذا النظام",
     resultsMoreSummary: "مزيد من التفاصيل: الرسوم البيانية والحسابات والخيارات",
-    resultsMoreNote:
-      "كل ما أدناه هو الحساب نفسه معروضًا كاملًا. لا شيء فيه يغيّر الأرقام أعلاه — افتحه عندما تريد رؤية المنحنى أو الحدود أو الافتراضات سطرًا بسطر.",
     genSummary: "أستخدم مولدا — كم تبلغ التكلفة الحقيقية للكهرباء منه؟",
     genApply: "استخدم هذا كسعر الكهرباء لدي",
 
