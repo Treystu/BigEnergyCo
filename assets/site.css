@@ -1987,3 +1987,26 @@ footer {
   font-size: 0.78rem;
   color: var(--text-muted);
 }
+
+/* #403 Cure C: ONE disclosure for everything that is not the outcome card,
+   the cost table, or the actions. The blocks keep their own ids and their own
+   inline display rules (the renderers still own those); this only wins while
+   the disclosure is closed, so nothing has to be moved in the DOM and no chart
+   is drawn into a container that has been torn out of the tree. */
+html:not([data-results-more]) .results-demoted {
+  display: none !important;
+}
+
+.results-more {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-glow);
+  border-radius: 10px;
+  background: rgba(0, 230, 153, 0.04);
+}
+
+.results-more > summary {
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--primary-accent);
+}

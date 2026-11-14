@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261115a" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261115a" />
+    <link rel="preload" href="./assets/site.css?v=20261115c" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261115c" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261115a" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261115c" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -2225,7 +2225,7 @@
 
                 <p
                   id="ladderIntro"
-                  class="uc-note"
+                  class="uc-note results-demoted"
                   data-i18n="ladderIntro"
                   hidden
                 >
@@ -2236,6 +2236,7 @@
 
                 <div
                   id="resultLadder"
+                  class="results-demoted"
                   style="display: none; margin-bottom: 1rem"
                   role="tablist"
                   aria-label="Result detail level"
@@ -2274,7 +2275,7 @@
 
                 <div
                   id="eli5Summary"
-                  class="eli5-card"
+                  class="eli5-card results-demoted"
                   style="display: none"
                   aria-live="polite"
                 ></div>
@@ -2283,6 +2284,7 @@
 
                 <div
                   id="moneyBar"
+                  class="results-demoted"
                   style="
                     display: none;
                     margin-bottom: 1rem;
@@ -2299,6 +2301,7 @@
                Follows every chart's selection; renders from cached data. -->
                 <div
                   id="focusPanel"
+                  class="results-demoted"
                   style="
                     display: none;
                     margin-bottom: 1rem;
@@ -2331,6 +2334,7 @@
 
                 <div
                   id="tierResults"
+                  class="results-demoted"
                   style="
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -2355,6 +2359,7 @@
                 <!-- Dedicated Plain-English Translation (ELI5) Container -->
                 <div
                   id="eli5CardWrap"
+                  class="results-demoted"
                   style="display: none; margin-top: 1.25rem"
                 ></div>
 
@@ -2364,10 +2369,18 @@
                   style="display: none; margin-top: 1.25rem"
                 ></div>
 
+                <!-- #403 Cure C: one disclosure governs every demoted block. -->
+                <details id="resultsMore" class="results-more">
+                  <summary data-i18n="resultsMoreSummary">
+                    More detail: the charts, the workings and the options
+                  </summary>
+                </details>
+
                 <!-- Plausibility frontier: what every budget buys, cheapest first. -->
 
                 <div
                   id="frontierWrap"
+                  class="results-demoted"
                   style="display: none; margin-top: 1.5rem"
                 >
                   <div
@@ -2468,6 +2481,7 @@
 
                 <div
                   id="socChartWrap"
+                  class="results-demoted"
                   style="display: none; margin-top: 1.25rem"
                 >
                   <div
@@ -2561,6 +2575,7 @@
 
                 <div
                   id="cumCostChartWrap"
+                  class="results-demoted"
                   style="display: none; margin-top: 1.25rem"
                 >
                   <div
@@ -3624,15 +3639,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261115a"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261115c"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261115a"
+      src="./assets/js/turnstile-client.js?v=20261115c"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261115a"></script>
+    <script defer src="./assets/js/chat.js?v=20261115c"></script>
   </body>
 </html>
 
