@@ -1,7 +1,7 @@
 {
   "issue": 347,
   "mechanism": "sizeForBillCut",
-  "generated": "2026-11-11T10:25:51.046Z",
+  "generated": "2026-11-14T00:20:29.239Z",
   "lattice": {
     "pvFloor": 0.05,
     "pvControlStep": 0.25,
@@ -14,15 +14,15 @@
     "regretLimit": 0.02,
     "labelLimitPp": 0.5,
     "casesMeasured": 8,
-    "casesOverRegret": 1,
+    "casesOverRegret": 0,
     "casesOverLabel": 0,
-    "maxRegret": 0.051899,
-    "maxSearchRegret": 0.051899,
+    "maxRegret": 0,
+    "maxSearchRegret": 0,
     "maxLabelMismatchPp": 0.4468,
     "maxTargetOvershootPp": 1.739,
     "maxTargetShortfallPp": 0
   },
-  "verdict": "CHALLENGER QUALIFIES - a corpus case exceeds the 2% regret or 0.5 pp label margin, so a finer/exact search is in scope",
+  "verdict": "NO CHANGE - champion regret and label mismatch are inside the stated margins on the corpus, so the shipped search and its labels stay",
   "cases": [
     {
       "city": "Honolulu, USA",
@@ -36,7 +36,7 @@
         "lifetimeCostUsd": 1821,
         "oversizeScenario": "swaps_cheaper",
         "meetsConstraint": true,
-        "ms": 107
+        "ms": 127
       },
       "championSearchOnly": {
         "pvKw": 1.32,
@@ -49,7 +49,7 @@
         "battKwh": 2,
         "lifetimeCostUsd": 2083,
         "evaluations": 12120,
-        "ms": 817
+        "ms": 935
       },
       "rendered": {
         "metric": "bill-cut",
@@ -76,7 +76,7 @@
         "lifetimeCostUsd": 5967,
         "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 58
+        "ms": 73
       },
       "championSearchOnly": {
         "pvKw": 5.67,
@@ -89,7 +89,7 @@
         "battKwh": 13,
         "lifetimeCostUsd": 6023,
         "evaluations": 12120,
-        "ms": 857
+        "ms": 949
       },
       "rendered": {
         "metric": "bill-cut",
@@ -118,7 +118,7 @@
         "lifetimeCostUsd": 1294,
         "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 71
+        "ms": 86
       },
       "championSearchOnly": {
         "pvKw": 2.98,
@@ -131,7 +131,7 @@
         "battKwh": 0,
         "lifetimeCostUsd": 1325,
         "evaluations": 12120,
-        "ms": 889
+        "ms": 1049
       },
       "rendered": {
         "metric": "bill-cut",
@@ -160,7 +160,7 @@
         "lifetimeCostUsd": 3321,
         "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 106
+        "ms": 83
       },
       "championSearchOnly": {
         "pvKw": 7.64,
@@ -173,7 +173,7 @@
         "battKwh": 0,
         "lifetimeCostUsd": 3389,
         "evaluations": 12120,
-        "ms": 1240
+        "ms": 954
       },
       "rendered": {
         "metric": "bill-cut",
@@ -202,7 +202,7 @@
         "lifetimeCostUsd": 2451,
         "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 100
+        "ms": 75
       },
       "championSearchOnly": {
         "pvKw": 4.96,
@@ -215,7 +215,7 @@
         "battKwh": 0,
         "lifetimeCostUsd": 2493,
         "evaluations": 12120,
-        "ms": 1172
+        "ms": 868
       },
       "rendered": {
         "metric": "bill-cut",
@@ -239,17 +239,17 @@
       "tariff": 0.2,
       "exportRate": 0,
       "champion": {
-        "pvKw": 1.45,
-        "battKwh": 4,
-        "lifetimeCostUsd": 1966,
-        "oversizeScenario": "swaps_cheaper",
+        "pvKw": 1.51,
+        "battKwh": 7,
+        "lifetimeCostUsd": 1847,
+        "oversizeScenario": "zero_swap_natural",
         "meetsConstraint": true,
-        "ms": 111
+        "ms": 68
       },
       "championSearchOnly": {
-        "pvKw": 1.45,
-        "battKwh": 4,
-        "lifetimeCostUsd": 1966,
+        "pvKw": 1.51,
+        "battKwh": 7,
+        "lifetimeCostUsd": 1847,
         "meetsConstraint": true
       },
       "control": {
@@ -257,7 +257,7 @@
         "battKwh": 7,
         "lifetimeCostUsd": 1869,
         "evaluations": 12120,
-        "ms": 1180
+        "ms": 856
       },
       "rendered": {
         "metric": "physical-surplus",
@@ -267,9 +267,9 @@
         "mismatchPp": 0,
         "targetOffsetPp": null
       },
-      "regret": 0.051899,
-      "regretUsd": 97,
-      "searchRegret": 0.051899,
+      "regret": -0.011771,
+      "regretUsd": -22,
+      "searchRegret": -0.011771,
       "samePoint": false
     },
     {
@@ -285,7 +285,7 @@
         "lifetimeCostUsd": 476,
         "oversizeScenario": "swaps_cheaper",
         "meetsConstraint": true,
-        "ms": 25
+        "ms": 15
       },
       "championSearchOnly": {
         "pvKw": 0,
@@ -298,7 +298,7 @@
         "battKwh": 1,
         "lifetimeCostUsd": 476,
         "evaluations": 101,
-        "ms": 7
+        "ms": 4
       },
       "rendered": {
         "metric": "peak-offset",
@@ -326,7 +326,7 @@
         "lifetimeCostUsd": 425,
         "oversizeScenario": "swaps_cheaper",
         "meetsConstraint": true,
-        "ms": 8
+        "ms": 6
       },
       "championSearchOnly": {
         "pvKw": 0,
@@ -339,7 +339,7 @@
         "battKwh": 1,
         "lifetimeCostUsd": 425,
         "evaluations": 101,
-        "ms": 7
+        "ms": 4
       },
       "rendered": {
         "metric": "peak-offset",

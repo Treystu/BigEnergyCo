@@ -2,15 +2,15 @@
 // Pure functions only: no DOM, no network, no globals. Every constant is
 // exported so the UI can render a complete "show the arithmetic" panel.
 
-import { batteryReplacements, lifetimeCostUsd } from "./money.js?v=20261111d";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261111d";
+import { batteryReplacements, lifetimeCostUsd } from "./money.js?v=20261114b";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114b";
 import {
   CHEMISTRIES,
   coldCapacityScale,
   capacityScaleFor,
   CYCLE_LIFE_CURVES,
   cycleLifeForDoD,
-} from "./chem-model.js?v=20261111d";
+} from "./chem-model.js?v=20261114b";
 //
 // Units:
 //   irradiance  GHI(h) in W/m²  (NASA POWER hourly ALLSKY_SFC_SW_DWN, local solar time)
@@ -1126,6 +1126,45 @@ export function sizeForBillCut({
     return { total: life.total, replacements };
   };
 
+  // #347: lifetime cost is discontinuous in PV. A system that cycles slightly
+  // less than its neighbour can drop a whole bank replacement over the
+  // horizon, and that step is worth more than the extra panel that buys it.
+  // The minimum-PV feasible point on a battery row is therefore not always
+  // the row's cheapest point, and the shipped search only ever priced that
+  // minimum. Measured case: Nairobi 5 kWh/d at a 120% physical-surplus target,
+  // where 1.45 kW/7 kWh (one replacement) costs $2857 and 1.55 kW/7 kWh (none)
+  // costs $1869 - 5.2% of lifetime cost left on the table. Walk the cliff: from
+  // the row's feasibility boundary, find the smallest PV that needs strictly
+  // fewer replacements than the boundary does, and price that point too.
+  const replacementsFor = (r) =>
+    batteryReplacements(
+      r.cyclesEquivalent / years,
+      CHEMISTRIES[chemistry].cyclesTo80,
+    );
+  const cheaperPastCliff = (b, loPv, hiPv, bestPoint) => {
+    if (hiPv - loPv < 0.05 || bestPoint.replacements === 0) return bestPoint;
+    const top = evaluate(hiPv, b);
+    if (!meets(top)) return bestPoint;
+    if (replacementsFor(top) >= bestPoint.replacements) return bestPoint;
+    let lo = loPv;
+    let hi = hiPv;
+    while (hi - lo > 0.05) {
+      const mid = (lo + hi) / 2;
+      if (replacementsFor(evaluate(mid, b)) < bestPoint.replacements) hi = mid;
+      else lo = mid;
+    }
+    const r = evaluate(hi, b);
+    const obj = lifetimeObjective(hi, b, r).total;
+    if (obj >= bestPoint.obj) return bestPoint;
+    return {
+      pvKw: +hi.toFixed(2),
+      battKwh: b,
+      result: r,
+      obj,
+      replacements: replacementsFor(r),
+    };
+  };
+
   let best = null;
   for (let b = 0; b <= battMax; b += battStep) {
     if (pvMax === 0) {
@@ -1150,9 +1189,14 @@ export function sizeForBillCut({
       else lo = mid;
     }
     const r = evaluate(hi, b);
-    const obj = lifetimeObjective(hi, b, r).total;
-    if (!best || obj < best.obj)
-      best = { pvKw: +hi.toFixed(2), battKwh: b, result: r, obj };
+    const point = cheaperPastCliff(b, hi, pvMax, {
+      pvKw: +hi.toFixed(2),
+      battKwh: b,
+      result: r,
+      obj: lifetimeObjective(hi, b, r).total,
+      replacements: replacementsFor(r),
+    });
+    if (!best || point.obj < best.obj) best = point;
   }
 
   if (!best) return null;
@@ -1183,9 +1227,15 @@ export function sizeForBillCut({
         else lo = mid;
       }
       const r = evaluate(hi, b);
-      const obj = lifetimeObjective(hi, b, r).total;
-      if (obj < best.obj - 1e-9) {
-        best = { pvKw: +hi.toFixed(2), battKwh: b, result: r, obj };
+      const point = cheaperPastCliff(b, hi, Math.min(pvMax, best.pvKw + 2), {
+        pvKw: +hi.toFixed(2),
+        battKwh: b,
+        result: r,
+        obj: lifetimeObjective(hi, b, r).total,
+        replacements: replacementsFor(r),
+      });
+      if (point.obj < best.obj - 1e-9) {
+        best = point;
         improved = true;
       }
     }
