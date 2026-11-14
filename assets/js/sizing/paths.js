@@ -795,6 +795,9 @@ function newPath(id, registry) {
     incentiveEntries: [],
     incentiveNoteKey: null,
     spend20: 0,
+    // Years 0-20 of this route's own spend, under the same definition as
+    // spend20 (#401 X1). Null until finish() prices the path.
+    spendByYear: null,
     residualBills20: null,
     baselineBills20: null,
     net20: null,
@@ -1014,6 +1017,31 @@ function addOwnerRecurring(p, sys, registry, year0) {
 }
 
 /**
+ * THE ROUTE'S OWN CUMULATIVE SPEND CURVE — the chart's definition (#401 X1).
+ *
+ * The cumulative-cost chart used to plot the engine's series (system plus every
+ * grid bill it still pays) while the pay cards printed `spend20` (year0 -
+ * incentives + recurring, bills excluded). Two baskets, one label, two numbers
+ * on one page.
+ *
+ * This curve is built from the SAME fields as `spend20` and its last point IS
+ * `spend20` by construction, so the chart can plot a route's curve whose
+ * endpoint cannot disagree with that route's card. Year 0 carries the up-front
+ * cost net of incentives; years 1-20 add that year's recurring cost. Grid bills
+ * are not in it — they are reported separately as `residualBills20`.
+ */
+export function routeSpendCurve(p) {
+  const first = Math.round(p.year0 - p.incentives);
+  const out = [first];
+  let cum = first;
+  for (let y = 0; y < HORIZON_YEARS; y++) {
+    cum += Math.round(p.recurringByYear[y] || 0);
+    out.push(cum);
+  }
+  return out;
+}
+
+/**
  * The shared tail: the definitions every path reports (R-PATH-07).
  *
  * 20-year system spend = year-0 - incentives + every recurring cost inside the
@@ -1027,7 +1055,11 @@ function finish(p, sys) {
   p.year0High = Math.round(Math.max(p.year0Low, p.year0High));
   p.recurringByYear = p.recurringByYear.map((v) => Math.round(v));
   p.recurringTotal = p.recurringByYear.reduce((a, v) => a + v, 0);
-  p.spend20 = Math.round(p.year0 - p.incentives + p.recurringTotal);
+  // #401 X1: spend20 is the CURVE's endpoint, not a second arithmetic that can
+  // drift from it. One number, one derivation, so a chart drawn from
+  // spendByYear ends where the card says it ends.
+  p.spendByYear = routeSpendCurve(p);
+  p.spend20 = p.spendByYear[p.spendByYear.length - 1];
   p.residualBills20 =
     sys.annualResidualBillsUsd === null
       ? null
