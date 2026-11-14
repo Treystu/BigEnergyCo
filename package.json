@@ -59,7 +59,7 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
-    "@trigger.dev/build": "4.8.3",
+    "@trigger.dev/build": "4.8.4",
     "@types/node": "^26.6.6",
     "axe-core": "4.14.0",
     "chrome-launcher": "1.2.3",
@@ -68,6 +68,6 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "@trigger.dev/sdk": "4.8.3"
+    "@trigger.dev/sdk": "4.8.4"
   }
 }
