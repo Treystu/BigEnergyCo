@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261115g";
+import { APPLIANCES } from "./appliances.js?v=20261116a";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261115g";
+} from "./pwa-install.js?v=20261116a";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261115g";
+} from "./usecases.js?v=20261116a";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261115g";
+} from "./run-coordinator.js?v=20261116a";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261115g";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261115g";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261115g";
+} from "./mode-chrome.js?v=20261116a";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261116a";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261116a";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261115g";
+} from "./location-picker.js?v=20261116a";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261115g";
+} from "./pricing.js?v=20261116a";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261115g";
+import { currencyForCountry } from "./country-currency.js?v=20261116a";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261115g";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261116a";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +83,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261115g").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261116a").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261115g";
+} from "./lead-acid.js?v=20261116a";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261115g";
+} from "./bom.js?v=20261116a";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261115g";
+import { BOM_ITEMS } from "../shared/content.js?v=20261116a";
 
 import {
   applyI18n,
@@ -111,18 +111,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261115g";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261115g";
-import { byId as $, el } from "../shared/dom.js?v=20261115g";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261115g";
+} from "../shared/i18n.js?v=20261116a";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261116a";
+import { byId as $, el } from "../shared/dom.js?v=20261116a";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261116a";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261115g";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261115g";
+} from "../shared/simple-mode.js?v=20261116a";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261116a";
 import {
   advisorJevContext,
   interpretSanity,
@@ -130,29 +130,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261115g";
+} from "./validate.js?v=20261116a";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261115g";
+} from "../shared/cut-targets.js?v=20261116a";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261115g";
+} from "./share-codec.js?v=20261116a";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261115g";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261115g";
+} from "./infeasible-copy.js?v=20261116a";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261116a";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261115g";
+} from "./fuel-units.js?v=20261116a";
 
 import {
   createLeafletProvider,
@@ -160,18 +160,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261115g";
+} from "./map-provider.js?v=20261116a";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261115g";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261115g";
+} from "./wizard.js?v=20261116a";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261116a";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261115g";
+} from "./budget-span.js?v=20261116a";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -183,10 +183,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261115g"),
-      import("./charts.js?v=20261115g"),
-      import("./frontier-chart.js?v=20261115g"),
-      import("./rescale.js?v=20261115g"),
+      import("./engine.js?v=20261116a"),
+      import("./charts.js?v=20261116a"),
+      import("./frontier-chart.js?v=20261116a"),
+      import("./rescale.js?v=20261116a"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -254,9 +254,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261115g";
+} from "./money.js?v=20261116a";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261115g";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261116a";
 
 let worker = null;
 
@@ -3957,7 +3957,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261115g",
+      "./assets/js/sizing/sizing-worker.js?v=20261116a",
       {
         type: "module",
       },
@@ -5111,6 +5111,17 @@ function renderBestPick(p) {
     );
     return;
   }
+  paintBestPickCard(p, wrap);
+}
+
+/**
+ * The recommendation card itself, split out of renderBestPick so the four priced
+ * routes can repaint it once they know the installed break-even. The split is
+ * load-bearing: renderBestPick also clears `tierResults`, which a LATER render
+ * step fills, so repainting the card after the paths resolve must not go through
+ * renderBestPick or it would wipe a matrix it does not rebuild.
+ */
+function paintBestPickCard(p, wrap) {
   const b = p.best;
   const isGT = p.mode === "gridtie";
   const solvablePool = (p.auto || []).filter(
@@ -5231,10 +5242,23 @@ function renderBestPick(p) {
       ]);
   }
   if (p.tariff && typeof b.trueBreakEvenYear === "number") {
+    // Every row above prices the PARTS basket, so this one says so. On its own
+    // the card showed "Pays for itself: Year 3" while the four ways to pay
+    // showed Year 6 for the same installed system: one system, two paybacks, one
+    // label. Both are true of their own basket, so the card prints both, each
+    // named, instead of choosing which answer the reader sees.
     rows.push([
       t("resCardPaysForItself"),
       t("resValYear", { n: b.trueBreakEvenYear }),
     ]);
+    const installedYear = installedBreakEvenYear(p, b);
+    if (installedYear !== null)
+      rows.push([
+        t("resCardPaysInstalled"),
+        installedYear === "never"
+          ? t("resRowNever")
+          : t("resValYear", { n: installedYear }),
+      ]);
     if (b.replacementsHorizon > 0 && b.paybackYearsLo !== null) {
       rows.push([
         t("resCardFirstCostAlone"),
@@ -5295,6 +5319,29 @@ function renderBestPick(p) {
     ),
   );
   wrap.appendChild(card);
+}
+
+/**
+ * The installed route's break-even, read from the same priced model the four ways
+ * to pay show, or null until that model has priced this system.
+ *
+ * The card's rows are the parts basket ($2,996 of hardware, ~3 years); the route
+ * that installs the same system with an electrician and permits is $8,862 and
+ * takes ~6. Returning null means "no row yet" - never a number recomputed here,
+ * because a second derivation of one figure is how the card and the panel came
+ * to disagree in the first place.
+ */
+function installedBreakEvenYear(p, b) {
+  const priced = p && p.pathsPriced;
+  if (!priced || p.pathsPricedFor !== `${b.pvKw}|${b.battKwh}`) return null;
+  const route =
+    priced.by && priced.by.selfpurchase && priced.by.selfpurchase.available
+      ? priced.by.selfpurchase
+      : priced.cheapest;
+  if (!route || route.available === false) return null;
+  return typeof route.breakEvenYear === "number"
+    ? route.breakEvenYear
+    : "never";
 }
 
 /** Renders the Plain-English ELI5 breakdown into its dedicated container. */
@@ -5567,6 +5614,14 @@ async function renderPathSurfaces(p) {
   // paths module resolves).
   if (paths) {
     p.pathsPriced = paths;
+    p.pathsPricedFor = `${sys.pvKw}|${sys.battKwh}`;
+    // The recommendation card prints the installed payback only once the routes
+    // are priced; repaint the card (not renderBestPick, which owns the matrix).
+    const bp = $("bestPickWrap");
+    if (bp && p.best) {
+      bp.innerHTML = "";
+      paintBestPickCard(p, bp);
+    }
     _charts.drawCumCostChart(p, sys);
   }
   renderEli5Section(p, sys, paths);
@@ -9199,11 +9254,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261115g")
+    import("../shared/translation-suggestion-loader.js?v=20261116a")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261115g"),
+          () => import("../translation-suggestion.js?v=20261116a"),
         );
       })
       .catch(() => {});
