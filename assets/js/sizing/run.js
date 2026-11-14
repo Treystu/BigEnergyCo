@@ -28,7 +28,7 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261114b";
+} from "./engine.js?v=20261114c";
 
 import {
   isUseCaseId,
@@ -40,24 +40,24 @@ import {
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261114b";
-import { memoizeSimulate } from "./sim-cache.js?v=20261114b";
+} from "./usecases.js?v=20261114c";
+import { memoizeSimulate } from "./sim-cache.js?v=20261114c";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261114b";
-import { buildFrontier } from "./frontier.js?v=20261114b";
-import { buyablePrice } from "./bom.js?v=20261114b";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114b";
-import { climateSummary } from "./climate.js?v=20261114b";
+} from "./nasa.js?v=20261114c";
+import { buildFrontier } from "./frontier.js?v=20261114c";
+import { buyablePrice } from "./bom.js?v=20261114c";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114c";
+import { climateSummary } from "./climate.js?v=20261114c";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261114b";
+} from "./pricing.js?v=20261114c";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -68,7 +68,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261114b";
+} from "./money.js?v=20261114c";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -345,7 +345,7 @@ async function fetchWeatherWithFallback(opts) {
     return await fetchWeatherDefault(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261114b");
+      await import("./profiles.js?v=20261114c");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {
@@ -1738,6 +1738,17 @@ async function runSizingUncached(msg, deps = {}) {
       // payload to render the infeasibility banner and to suppress the
       // broken savings panel.
       unreachableReason,
+      // #355: which tariff layer fired, in the output it prices. The measured
+      // boundary deltas move payback by more than a year and flip the winner
+      // on most of the grid, so the layer is labeled rather than left implicit.
+      tariffEstimate: {
+        layer: region.layer || "unknown",
+        label: region.label,
+        rate: region.rate,
+        currency: region.currency || null,
+        laborFactor: laborF,
+        landedFactor: landedF,
+      },
       pricing: {
         basisLabel: "ex-factory China through PowMr-class budget retail",
         source: "cell market indications → PowMr public catalog, Aug 2026",

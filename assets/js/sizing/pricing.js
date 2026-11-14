@@ -859,6 +859,10 @@ export function estimateTariff(lat, lon, region, country) {
       rate: +(state.cents / 100).toFixed(4),
       label: `${state.name}, United States`,
       currency: "USD",
+      // #355: the layer that fired is part of the estimate, not a detail of
+      // how it was computed — a boundary delta that moves payback more than a
+      // year has to be visible in the output that inherits it.
+      layer: "us-state",
       laborF: 1.5,
       landedF: 1.05,
       state: st,
@@ -878,6 +882,7 @@ export function estimateTariff(lat, lon, region, country) {
       rate: 0.13,
       label: "Canada",
       currency: "CAD",
+      layer: "canada",
       laborF: 1.5,
       landedF: 1.1,
     };
@@ -887,6 +892,7 @@ export function estimateTariff(lat, lon, region, country) {
       rate: 0.28,
       label: "global average",
       currency: null,
+      layer: "global-avg",
       laborF: 1,
       landedF: 1.1,
     };
@@ -898,6 +904,7 @@ export function estimateTariff(lat, lon, region, country) {
         rate: t.rate,
         label: t.label,
         currency: t.currency || null,
+        layer: "latlon-box",
         laborF: t.laborF,
         landedF: t.landedF,
       };
@@ -907,6 +914,7 @@ export function estimateTariff(lat, lon, region, country) {
     rate: 0.28,
     label: "global average",
     currency: null,
+    layer: "global-avg",
     laborF: 1,
     landedF: 1.1,
   };

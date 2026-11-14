@@ -137,6 +137,9 @@ export const RESULT_COPY = {
     resHowCalculated: "How this was calculated",
     resCardCostToBuy: "Cost to buy",
     resCardCostBuyable: "Cost as a parts list",
+    resLblTariffBasis: "Tariff basis",
+    resValTariffGlobal:
+      "global average — no local table matched, enter your own rate",
     resCardSwapsAdd: "Swaps + labor add",
     resCardNoSwaps: "None in 20 years",
     resCardNoSolar: "None (Solar-only)",
@@ -349,6 +352,9 @@ export const RESULT_COPY = {
     resHowCalculated: "Cómo se calculó",
     resCardCostToBuy: "Coste de compra",
     resCardCostBuyable: "Coste como lista de piezas",
+    resLblTariffBasis: "Base tarifaria",
+    resValTariffGlobal:
+      "promedio global — ninguna tabla local coincide, introduce tu tarifa",
     resCardSwapsAdd: "Cambios + mano de obra",
     resCardNoSwaps: "Ninguno en 20 años",
     resCardNoSolar: "Ninguno (solo solar)",
@@ -563,6 +569,9 @@ export const RESULT_COPY = {
     resHowCalculated: "Como isso foi calculado",
     resCardCostToBuy: "Custo de compra",
     resCardCostBuyable: "Custo como lista de peças",
+    resLblTariffBasis: "Base tarifária",
+    resValTariffGlobal:
+      "média global — nenhuma tabela local correspondeu, informe sua tarifa",
     resCardSwapsAdd: "Trocas + mão de obra",
     resCardNoSwaps: "Nenhuma em 20 anos",
     resCardNoSolar: "Nenhum (só solar)",
@@ -777,6 +786,9 @@ export const RESULT_COPY = {
     resHowCalculated: "Comment ce calcul a été fait",
     resCardCostToBuy: "Coût d'achat",
     resCardCostBuyable: "Coût en liste de pièces",
+    resLblTariffBasis: "Base tarifaire",
+    resValTariffGlobal:
+      "moyenne mondiale — aucune table locale ne correspond, saisissez votre tarif",
     resCardSwapsAdd: "Remplacements + main-d'œuvre",
     resCardNoSwaps: "Aucun en 20 ans",
     resCardNoSolar: "Aucun (solaire seul)",
@@ -989,6 +1001,9 @@ export const RESULT_COPY = {
     resHowCalculated: "Wie das berechnet wurde",
     resCardCostToBuy: "Kaufpreis",
     resCardCostBuyable: "Kosten als Teileliste",
+    resLblTariffBasis: "Tarifbasis",
+    resValTariffGlobal:
+      "globaler Durchschnitt — keine lokale Tabelle passt, eigenen Tarif eingeben",
     resCardSwapsAdd: "Wechsel + Arbeitszeit",
     resCardNoSwaps: "Keine in 20 Jahren",
     resCardNoSolar: "Keine (nur Solar)",
@@ -1202,6 +1217,9 @@ export const RESULT_COPY = {
     resHowCalculated: "Hoe dit is berekend",
     resCardCostToBuy: "Aankoopkosten",
     resCardCostBuyable: "Kosten als onderdelenlijst",
+    resLblTariffBasis: "Tariefbasis",
+    resValTariffGlobal:
+      "wereldwijd gemiddelde — geen lokale tabel gevonden, voer uw eigen tarief in",
     resCardSwapsAdd: "Wissels + arbeid",
     resCardNoSwaps: "Geen in 20 jaar",
     resCardNoSolar: "Geen (alleen zon)",
@@ -1407,6 +1425,8 @@ export const RESULT_COPY = {
     resHowCalculated: "كيف تم حساب هذا",
     resCardCostToBuy: "تكلفة الشراء",
     resCardCostBuyable: "التكلفة كقائمة قطع",
+    resLblTariffBasis: "أساس التعريفة",
+    resValTariffGlobal: "متوسط عالمي — لا يوجد جدول محلي مطابق، أدخل تعريفتك",
     resCardSwapsAdd: "الاستبدال + أجرة العمل",
     resCardNoSwaps: "لا شيء خلال 20 سنة",
     resCardNoSolar: "لا شيء (شمسية فقط)",

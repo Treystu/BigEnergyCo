@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261114b";
+import { APPLIANCES } from "./appliances.js?v=20261114c";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261114b";
+} from "./pwa-install.js?v=20261114c";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261114b";
+} from "./usecases.js?v=20261114c";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261114b";
+} from "./run-coordinator.js?v=20261114c";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261114b";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261114b";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261114b";
+} from "./mode-chrome.js?v=20261114c";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261114c";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261114c";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261114b";
+} from "./location-picker.js?v=20261114c";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261114b";
+} from "./pricing.js?v=20261114c";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261114b";
+import { currencyForCountry } from "./country-currency.js?v=20261114c";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261114b";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261114c";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +83,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261114b").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261114c").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261114b";
+} from "./lead-acid.js?v=20261114c";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261114b";
+} from "./bom.js?v=20261114c";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261114b";
+import { BOM_ITEMS } from "../shared/content.js?v=20261114c";
 
 import {
   applyI18n,
@@ -111,18 +111,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261114b";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261114b";
-import { byId as $, el } from "../shared/dom.js?v=20261114b";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261114b";
+} from "../shared/i18n.js?v=20261114c";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261114c";
+import { byId as $, el } from "../shared/dom.js?v=20261114c";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261114c";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261114b";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261114b";
+} from "../shared/simple-mode.js?v=20261114c";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261114c";
 import {
   advisorJevContext,
   interpretSanity,
@@ -130,29 +130,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261114b";
+} from "./validate.js?v=20261114c";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261114b";
+} from "../shared/cut-targets.js?v=20261114c";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261114b";
+} from "./share-codec.js?v=20261114c";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261114b";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261114b";
+} from "./infeasible-copy.js?v=20261114c";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261114c";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261114b";
+} from "./fuel-units.js?v=20261114c";
 
 import {
   createLeafletProvider,
@@ -160,18 +160,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261114b";
+} from "./map-provider.js?v=20261114c";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261114b";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261114b";
+} from "./wizard.js?v=20261114c";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261114c";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261114b";
+} from "./budget-span.js?v=20261114c";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -183,10 +183,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261114b"),
-      import("./charts.js?v=20261114b"),
-      import("./frontier-chart.js?v=20261114b"),
-      import("./rescale.js?v=20261114b"),
+      import("./engine.js?v=20261114c"),
+      import("./charts.js?v=20261114c"),
+      import("./frontier-chart.js?v=20261114c"),
+      import("./rescale.js?v=20261114c"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -254,9 +254,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261114b";
+} from "./money.js?v=20261114c";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261114b";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261114c";
 
 let worker = null;
 
@@ -3957,7 +3957,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261114b",
+      "./assets/js/sizing/sizing-worker.js?v=20261114c",
       {
         type: "module",
       },
@@ -5162,6 +5162,19 @@ function renderBestPick(p) {
   // next to the range instead of only implied by the parts list.
   if (Number.isFinite(b.costBuyableUsd))
     rows.push([t("resCardCostBuyable"), money(b.costBuyableUsd)]);
+  // #355: the tariff layer that priced this result is labeled in the result,
+  // because the measured boundary deltas move payback by more than a year and
+  // flip the winner on most of the grid. The global fallback says so plainly
+  // and points at the input that makes it exact.
+  const te = p && p.assumptions && p.assumptions.tariffEstimate;
+  if (te) {
+    rows.push([
+      t("resLblTariffBasis"),
+      te.layer === "global-avg"
+        ? t("resValTariffGlobal")
+        : `${te.label} · ${te.rate} ${te.currency || "US$/kWh"}`,
+    ]);
+  }
   rows.push([
     t("resLblBatterySwaps"),
     b.replacementsHorizon > 0
@@ -9063,11 +9076,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261114b")
+    import("../shared/translation-suggestion-loader.js?v=20261114c")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261114b"),
+          () => import("../translation-suggestion.js?v=20261114c"),
         );
       })
       .catch(() => {});
