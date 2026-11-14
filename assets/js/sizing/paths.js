@@ -1320,6 +1320,53 @@ export function explainRanking(paths, order = null) {
 }
 
 /**
+ * WHICH COMPARISON SENTENCE GOES ON WHICH CARD (#402 / Cure B, X4).
+ *
+ * `explainRanking` explains each ADJACENT pair in the ranking. The renderer used
+ * to search that list with `.find(r => r.cheaper === id || r.dearer === id)`, so
+ * a sentence appeared on BOTH cards of its pair, and a card that sat between two
+ * pairs always showed the first one it matched - the cheapest card's sentence
+ * repeated under cards the pair did not lead with. One pair, one sentence, on
+ * the cheaper card that sentence names.
+ *
+ * Returned as a row per card rather than a lookup the caller remembers to do,
+ * so "a card with no pair" is an explicit null and not a missing key.
+ */
+export function pairLinesFor(cards, explained = []) {
+  const byCheaper = new Map();
+  for (const row of explained || []) {
+    if (!row || !row.cheaper) continue;
+    if (!byCheaper.has(row.cheaper)) byCheaper.set(row.cheaper, row);
+  }
+  return (cards || []).map((c) => ({
+    id: c.id,
+    pair: c.available ? byCheaper.get(c.id) || null : null,
+  }));
+}
+
+/**
+ * THE INCENTIVE DIFFERENCE, IN THE SAME WORDS ON EVERY CARD (#402 / Cure B, X5).
+ *
+ * The same system read "$1,000", "$3,203" and "the provider keeps them" on
+ * three cards with no on-page reason. The reason exists in the registry - each
+ * incentive names the routes that may claim it - it just never reached the
+ * reader.
+ *
+ * One block, identical everywhere it is printed, so a reader comparing cards is
+ * comparing one explanation rather than three phrasings. Each line names the
+ * route, the amount that route shows and which incentive produced it, which is
+ * what "why does this differ" needs.
+ */
+export function incentiveBasisRows(cards) {
+  return (cards || [])
+    .filter((c) => c.available)
+    .map((c) => ({
+      id: c.id,
+      text: `${c.labelText}: ${c.incentivesText}${c.incentiveLabels && c.incentiveLabels.length ? ` (${c.incentiveLabels.join(", ")})` : ""}`,
+    }));
+}
+
+/**
  * The four cards in the shape the renderer consumes, so the UI never
  * re-derives a number. Every value here came out of `priceAllPaths`.
  */
@@ -1383,6 +1430,10 @@ export function describePaths(result, moneyFn, tFn = (k) => k) {
       id: p.id,
       available: true,
       labelKey: LABEL_KEYS[p.id] || "pathsUnavailable",
+      // #402 / Cure B (X5): the card carries the name of its own incentive so
+      // the shared basis block can say which incentive produced its number.
+      labelText: tr(LABEL_KEYS[p.id] || "pathsUnavailable"),
+      incentiveLabels: p.incentiveEntries.map((e) => tr(e.labelKey)),
       year0Text: moneyFn(p.year0),
       year0RangeText:
         p.year0Low === p.year0 && p.year0High === p.year0

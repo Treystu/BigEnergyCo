@@ -94,6 +94,28 @@ const censusScript = `(() => {
     // coverage, which is a DIFFERENT quantity from the cards' 20-year installed
     // total. The census records what the panel actually says so that claim is
     // checked rather than asserted.
+    // #402 / Cure B: the comparison sentences and the incentive basis as the
+    // page actually renders them - which card carries which pair, how many
+    // times each sentence appears, and whether the basis block is identical
+    // everywhere it is printed.
+    paths: {
+      cards: [...all("#pathsPanel .paths-card")].map((card) => ({
+        title: txt(card.querySelector("h4")),
+        why: txt(card.querySelector(".paths-why")),
+        pair: (() => {
+          const w = card.querySelector(".paths-why");
+          return w
+            ? [
+                w.getAttribute("data-pair-cheaper"),
+                w.getAttribute("data-pair-dearer"),
+              ]
+            : null;
+        })(),
+        basis: [...card.querySelectorAll("[data-incentive-basis-list] li")].map(
+          (li) => txt(li),
+        ),
+      })),
+    },
     frontier: {
       shown: !!byId("frontierWrap") && byId("frontierWrap").style.display !== "none",
       verdict: txt(byId("frontierVerdict")),
