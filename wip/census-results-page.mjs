@@ -143,6 +143,22 @@ async function main() {
       });
       writeFileSync(OUT.replace(/\.png$/, "-cards.png"), Buffer.from(cards.data, "base64"));
     }
+    // …and the cumulative-cost chart, because #401's claim is about ITS
+    // endpoint agreeing with the cheapest card's total.
+    const chartBox = await evaluate(`(() => {
+      const host = document.getElementById("cumCostChartWrap");
+      if (!host) return null;
+      const r = host.getBoundingClientRect();
+      return { x: Math.max(0, r.x + window.scrollX), y: Math.max(0, r.y + window.scrollY), width: r.width, height: r.height };
+    })()`);
+    if (chartBox && chartBox.width > 0 && chartBox.height > 0) {
+      const chart = await send("Page.captureScreenshot", {
+        format: "png",
+        clip: { ...chartBox, scale: 1 },
+        captureBeyondViewport: true,
+      });
+      writeFileSync(OUT.replace(/\.png$/, "-chart.png"), Buffer.from(chart.data, "base64"));
+    }
     console.log(JSON.stringify(census, null, 2));
     console.log(`\nSHOT ${OUT}`);
   } finally {

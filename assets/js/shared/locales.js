@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261114j";
-import { RESULT_COPY } from "./result-copy.js?v=20261114j";
-import { TILT_COPY } from "./tilt-copy.js?v=20261114j";
+import { HOME_COPY } from "./home-copy.js?v=20261114m";
+import { RESULT_COPY } from "./result-copy.js?v=20261114m";
+import { TILT_COPY } from "./tilt-copy.js?v=20261114m";
 
 export const LOCALES = {
   en: {
@@ -387,9 +387,9 @@ export const LOCALES = {
     cumCostCaptionHead:
       "Running 20-year cost for the {which} system ({label}): the amber line is what you pay the utility if you stay on the grid ({gridTotal}).",
     cumCostCaptionOwnCost:
-      "The emerald line is the solar system's own cost (~{systemTotal}), matching the “Total 20-year cost” row for this system.",
+      "The emerald line is the recommended route's own installed cost (~{systemTotal}) — parts, the electrician, permits and upkeep, bills not included — matching the cheapest pay card below.",
     cumCostCaptionOwnCostNoPanels:
-      "The emerald line is the system's own cost (~{systemTotal}), matching the “Total 20-year cost” row for this system.",
+      "The emerald line is the recommended route's own installed cost (~{systemTotal}), bills not included — matching the cheapest pay card below.",
     cumCostCaptionStack:
       "The amber figure is a stack — the system, then the smaller bills that remain after solar (~{residualBills}), then your saving — so this system puts {saved} back in your pocket over the 20 years.",
     cumCostCaptionStackNoPanels:
@@ -1188,9 +1188,9 @@ export const LOCALES = {
     cumCostCaptionHead:
       "Coste acumulado a 20 años del sistema {which} ({label}): la línea ámbar es lo que pagas a la compañía si sigues conectado a la red ({gridTotal}).",
     cumCostCaptionOwnCost:
-      "La línea esmeralda es el coste propio del sistema solar (~{systemTotal}), y coincide con la fila “Coste total a 20 años” de este sistema.",
+      "La línea esmeralda es el coste instalado de la ruta recomendada (~{systemTotal}) — piezas, electricista, permisos y mantenimiento, sin facturas — y coincide con la tarjeta de pago más barata de abajo.",
     cumCostCaptionOwnCostNoPanels:
-      "La línea esmeralda es el coste propio del sistema (~{systemTotal}), y coincide con la fila “Coste total a 20 años” de este sistema.",
+      "La línea esmeralda es el coste instalado de la ruta recomendada (~{systemTotal}), sin facturas, y coincide con la tarjeta de pago más barata de abajo.",
     cumCostCaptionStack:
       "La cifra ámbar es una pila — el sistema, luego las facturas menores que quedan tras lo solar (~{residualBills}), luego tu ahorro — así que este sistema te devuelve {saved} en los 20 años.",
     cumCostCaptionStackNoPanels:
@@ -1906,9 +1906,9 @@ export const LOCALES = {
     cumCostCaptionHead:
       "Custo acumulado em 20 anos do sistema {which} ({label}): a linha âmbar é o que você paga à distribuidora se continuar na rede ({gridTotal}).",
     cumCostCaptionOwnCost:
-      "A linha esmeralda é o custo próprio do sistema solar (~{systemTotal}), igual à linha “Custo total em 20 anos” deste sistema.",
+      "A linha esmeralda é o custo instalado da rota recomendada (~{systemTotal}) — peças, eletricista, licenças e manutenção, sem faturas — e coincide com o cartão de pagamento mais barato abaixo.",
     cumCostCaptionOwnCostNoPanels:
-      "A linha esmeralda é o custo próprio do sistema (~{systemTotal}), igual à linha “Custo total em 20 anos” deste sistema.",
+      "A linha esmeralda é o custo instalado da rota recomendada (~{systemTotal}), sem faturas, e coincide com o cartão de pagamento mais barato abaixo.",
     cumCostCaptionStack:
       "O valor âmbar é uma pilha — o sistema, depois as contas menores que sobram depois do solar (~{residualBills}), depois a sua economia — então este sistema devolve {saved} ao seu bolso nos 20 anos.",
     cumCostCaptionStackNoPanels:
@@ -2625,9 +2625,9 @@ export const LOCALES = {
     cumCostCaptionHead:
       "Coût cumulé sur 20 ans du système {which} ({label}) : la ligne ambre est ce que vous payez au réseau si vous restez raccordé ({gridTotal}).",
     cumCostCaptionOwnCost:
-      "La ligne émeraude est le coût propre du système solaire (~{systemTotal}), identique à la ligne « Coût total sur 20 ans » de ce système.",
+      "La ligne émeraude est le coût installé de la formule recommandée (~{systemTotal}) — pièces, électricien, autorisations et entretien, hors factures — et correspond à la carte de paiement la moins chère ci-dessous.",
     cumCostCaptionOwnCostNoPanels:
-      "La ligne émeraude est le coût propre du système (~{systemTotal}), identique à la ligne « Coût total sur 20 ans » de ce système.",
+      "La ligne émeraude est le coût installé de la formule recommandée (~{systemTotal}), hors factures, et correspond à la carte de paiement la moins chère ci-dessous.",
     cumCostCaptionStack:
       "Le chiffre ambre est un empilement — le système, puis les factures plus petites qui restent après le solaire (~{residualBills}), puis votre économie — ce système vous rend donc {saved} sur les 20 ans.",
     cumCostCaptionStackNoPanels:
@@ -3350,9 +3350,9 @@ export const LOCALES = {
     cumCostCaptionHead:
       "Kumulierte Kosten über 20 Jahre für das {which} System ({label}): Die amberfarbene Linie ist das, was Sie an den Versorger zahlen, wenn Sie am Netz bleiben ({gridTotal}).",
     cumCostCaptionOwnCost:
-      "Die smaragdgrüne Linie sind die eigentlichen Kosten der Solaranlage (~{systemTotal}) und entsprechen der Zeile “Gesamtkosten über 20 Jahre” für dieses System.",
+      "Die smaragdgrüne Linie sind die installierten Kosten der empfohlenen Variante (~{systemTotal}) — Teile, Elektriker, Genehmigungen und Wartung, ohne Stromrechnungen — und entsprechen der günstigsten Zahlungskarte unten.",
     cumCostCaptionOwnCostNoPanels:
-      "Die smaragdgrüne Linie sind die eigentlichen Kosten des Systems (~{systemTotal}) und entsprechen der Zeile “Gesamtkosten über 20 Jahre” für dieses System.",
+      "Die smaragdgrüne Linie sind die installierten Kosten der empfohlenen Variante (~{systemTotal}), ohne Stromrechnungen, und entsprechen der günstigsten Zahlungskarte unten.",
     cumCostCaptionStack:
       "Der amberfarbene Wert ist ein Stapel — das System, dann die kleineren Rechnungen, die nach der Solaranlage bleiben (~{residualBills}), dann Ihre Ersparnis — dieses System bringt Ihnen über die 20 Jahre also {saved} zurück.",
     cumCostCaptionStackNoPanels:
@@ -3908,9 +3908,9 @@ export const LOCALES = {
     cumCostCaptionHead:
       "Lopende 20-jaarskosten voor het {which}-systeem ({label}): de amberkleurige lijn is wat u aan het energiebedrijf betaalt als u op het net blijft ({gridTotal}).",
     cumCostCaptionOwnCost:
-      "De smaragdgroene lijn is de eigen kostprijs van het zonnesysteem (~{systemTotal}), overeenkomend met de rij “Totale kosten over 20 jaar” voor dit systeem.",
+      "De smaragdgroene lijn is de geïnstalleerde kostprijs van de aanbevolen route (~{systemTotal}) — onderdelen, elektricien, vergunningen en onderhoud, exclusief energierekeningen — en komt overeen met de goedkoopste betaalkaart hieronder.",
     cumCostCaptionOwnCostNoPanels:
-      "De smaragdgroene lijn is de eigen kostprijs van het systeem (~{systemTotal}), overeenkomend met de rij “Totale kosten over 20 jaar” voor dit systeem.",
+      "De smaragdgroene lijn is de geïnstalleerde kostprijs van de aanbevolen route (~{systemTotal}), exclusief energierekeningen, en komt overeen met de goedkoopste betaalkaart hieronder.",
     cumCostCaptionStack:
       "Het amberkleurige cijfer is een stapel — het systeem, dan de kleinere rekeningen die na zonne-energie overblijven (~{residualBills}), dan uw besparing — dus dit systeem stopt {saved} terug in uw zak over de 20 jaar.",
     cumCostCaptionStackNoPanels:
@@ -4865,9 +4865,9 @@ export const LOCALES = {
     cumCostCaptionHead:
       "التكلفة التراكمية على 20 عامًا للنظام {which} ({label}): الخط الكهرماني هو ما تدفعه للشركة إذا بقيت على الشبكة ({gridTotal}).",
     cumCostCaptionOwnCost:
-      "الخط الزمردي هو التكلفة الخاصة بالنظام الشمسي (~{systemTotal})، ويطابق صف “إجمالي التكلفة على 20 عامًا” لهذا النظام.",
+      "الخط الزمردي هو التكلفة المركّبة للخيار الموصى به (~{systemTotal}) — القطع والكهربائي والتصاريح والصيانة، دون فواتير — ويطابق أرخص بطاقة دفع أدناه.",
     cumCostCaptionOwnCostNoPanels:
-      "الخط الزمردي هو التكلفة الخاصة بالنظام (~{systemTotal})، ويطابق صف “إجمالي التكلفة على 20 عامًا” لهذا النظام.",
+      "الخط الزمردي هو التكلفة المركّبة للخيار الموصى به (~{systemTotal})، دون فواتير، ويطابق أرخص بطاقة دفع أدناه.",
     cumCostCaptionStack:
       "الشكل الكهرماني كومة — النظام، ثم الفواتير الأصغر التي تبقى بعد الطاقة الشمسية (~{residualBills})، ثم توفيرك — أي أن هذا النظام يعيد إليك {saved} على مدى 20 عامًا.",
     cumCostCaptionStackNoPanels:

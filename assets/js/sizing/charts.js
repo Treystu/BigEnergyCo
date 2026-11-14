@@ -5,7 +5,7 @@
 // `$` (DOM lookup), `el` (element factory), `t` (i18n), `fmt` (number format),
 // `money` (currency formatter). Chart state (socZoomRange, cachedChartState)
 // lives here as the single owner.
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261114j";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261114m";
 
 // ── injected boundary (set once by ui.js via initCharts) ──────────────────
 let _$;
@@ -555,6 +555,62 @@ export function cumCostCaptionText({
   return parts.join(" ");
 }
 
+/**
+ * #401 (Cure A, X1/X2): the INSTALLED basket is the canonical one.
+ *
+ * The chart used to plot the engine's own-cost curve while the pay cards
+ * printed the installed route's `spend20` — two baskets, and after the labels
+ * were named a reader could still see $3,056 at the chart's endpoint and
+ * $8,862 on the cheapest card for the same system.
+ *
+ * The cure is a substitution, not a second estimate: when the routes have been
+ * priced, the emerald band becomes the recommended route's own `spendByYear`
+ * (whose last point IS its `spend20` by construction, see routeSpendCurve),
+ * and the amber total is rebuilt as that curve plus the bills wedge the engine
+ * already computed. Nothing is re-priced here — one curve is swapped for
+ * another, and the leftover bills are preserved line for line — so the chart's
+ * endpoint, the card's total, and the break-even year now come from one
+ * definition.
+ *
+ * Returns the input untouched when there is no priced route (off-grid shapes,
+ * a failed paths render, or a series of a different length).
+ */
+export function canonicalCumCostSeries(series, p) {
+  const priced = p && p.pathsPriced;
+  const route =
+    priced && priced.by && priced.ranking && priced.ranking.length
+      ? priced.by[priced.ranking[0]]
+      : null;
+  if (!series || !route || !Array.isArray(route.spendByYear)) return series;
+  const nY = Array.isArray(series.grid)
+    ? series.grid.length
+    : series.years || 0;
+  if (!nY || !Array.isArray(series.system) || series.system.length !== nY)
+    return series;
+  // The engine series is indexed by YEAR (point 0 is the end of year 1), while
+  // spendByYear starts at year 0, today's up-front cost. Aligning them is one
+  // slice, and it is the whole difference between the two conventions — a
+  // length check that rejected both shapes was why the first attempt at this
+  // substitution silently left the chart unchanged.
+  const curve = route.spendByYear;
+  const aligned =
+    curve.length === nY
+      ? curve
+      : curve.length === nY + 1
+        ? curve.slice(1)
+        : null;
+  if (!aligned) return series;
+  const bills = series.solar.map((s, i) => s - series.system[i]);
+  const system = aligned.map((v) => Math.round(v));
+  return {
+    ...series,
+    system,
+    solar: system.map((v, i) => v + bills[i]),
+    canonicalPathId: route.id,
+    canonicalSpend20: route.spend20,
+  };
+}
+
 export function drawCumCostChart(p, chosenEntry = null) {
   const wrap = $("cumCostChartWrap");
   const canvas = $("cumCostCanvas");
@@ -607,7 +663,7 @@ export function drawCumCostChart(p, chosenEntry = null) {
     entry?.cumCostSeries?.grid?.length && entry?.cumCostSeries?.solar?.length
       ? entry
       : null;
-  const series = seriesEntry?.cumCostSeries || null;
+  const series = canonicalCumCostSeries(seriesEntry?.cumCostSeries || null, p);
   const panel = savingsPanelState(series, p.tariff, p.unreachableReason);
   if (panel.kind === "infeasible") {
     // Structural no-answer (off-grid + solar-only, etc.). The infeasible
