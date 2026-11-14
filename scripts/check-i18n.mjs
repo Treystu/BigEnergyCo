@@ -482,7 +482,12 @@ else ok("index.html: every reader-visible prose block has a locale hook");
 // visible prose blocks - its own en-ZA body plus one hub card excerpt - so the
 // ceiling moves by the exact delta check-i18n reported at the read that landed
 // it (635/606), the same rule as the six earlier raises.
-const PROSE_CEILING = 635;
+// 635 -> 663 (2026-11-14, measured reason): the Sri Lanka post (#391) adds 28
+// visible prose blocks - its own en-LK body, the Sinhala summary box and one
+// hub card excerpt - so the ceiling moves by the exact delta check-i18n
+// reported at the read that landed it (663/635), the same rule as the seven
+// earlier raises.
+const PROSE_CEILING = 663;
 if (proseFindings.length > PROSE_CEILING) {
   fail(
     `${proseFindings.length} visible prose block(s) on a translated page carry no i18n hook ` +
