@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261114f";
-import { RESULT_COPY } from "./result-copy.js?v=20261114f";
-import { TILT_COPY } from "./tilt-copy.js?v=20261114f";
+import { HOME_COPY } from "./home-copy.js?v=20261114g";
+import { RESULT_COPY } from "./result-copy.js?v=20261114g";
+import { TILT_COPY } from "./tilt-copy.js?v=20261114g";
 
 export const LOCALES = {
   en: {
@@ -573,7 +573,10 @@ export const LOCALES = {
     pathsCheapest: "Cheapest",
     pathsBandTie:
       "Within the regional price bands the cheapest path can change — read this order as a tie.",
-    pathsSpend20: "20-year cost",
+    // #401 X1: the pay card's figure excludes grid bills, so it must not
+    // share a label with the results row above it (`resLblTotalCost`), which
+    // includes them. The basket is named on the label instead.
+    pathsSpend20: "20-year cost (equipment and upkeep)",
     pathsRowIncentives: "Incentives",
     pathsRowBillCut: "Bill cut",
     pathsRowBreakEven: "Break-even",
@@ -1284,7 +1287,7 @@ export const LOCALES = {
     pathsCheapest: "Más barato",
     pathsBandTie:
       "Dentro de las bandas de precios regionales el camino más barato puede cambiar: lee este orden como un empate.",
-    pathsSpend20: "Coste a 20 años",
+    pathsSpend20: "Coste a 20 años (equipo y mantenimiento)",
     pathsRowIncentives: "Incentivos",
     pathsRowBillCut: "Ahorro en la factura",
     pathsRowBreakEven: "Equilibrio",
@@ -1998,7 +2001,7 @@ export const LOCALES = {
     pathsCheapest: "Mais barato",
     pathsBandTie:
       "Dentro das faixas de preço regionais o caminho mais barato pode mudar — leia esta ordem como empate.",
-    pathsSpend20: "Custo em 20 anos",
+    pathsSpend20: "Custo em 20 anos (equipamento e manutenção)",
     pathsRowIncentives: "Incentivos",
     pathsRowBillCut: "Corte na conta",
     pathsRowBreakEven: "Equilíbrio",
@@ -2719,7 +2722,7 @@ export const LOCALES = {
     pathsCheapest: "Le moins cher",
     pathsBandTie:
       "Dans les fourchettes de prix régionales, le chemin le moins cher peut changer — considérez cet ordre comme une égalité.",
-    pathsSpend20: "Coût sur 20 ans",
+    pathsSpend20: "Coût sur 20 ans (matériel et entretien)",
     pathsRowIncentives: "Subventions",
     pathsRowBillCut: "Réduction de facture",
     pathsRowBreakEven: "Rentabilité",
@@ -3438,7 +3441,7 @@ export const LOCALES = {
     pathsCheapest: "Am günstigsten",
     pathsBandTie:
       "Innerhalb der regionalen Preisspannen kann der günstigste Weg wechseln — diese Reihenfolge als Gleichstand lesen.",
-    pathsSpend20: "20-jährige Kosten",
+    pathsSpend20: "20-jährige Kosten (Gerät und Wartung)",
     pathsRowIncentives: "Förderungen",
     pathsRowBillCut: "Rechnungssenkung",
     pathsRowBreakEven: "Amortisation",
@@ -4076,7 +4079,7 @@ export const LOCALES = {
     pathsCheapest: "Goedkoopste",
     pathsBandTie:
       "Binnen de regionale prijsbanden kan het goedkoopste pad wisselen — lees deze volgorde als gelijkspel.",
-    pathsSpend20: "Kosten over 20 jaar",
+    pathsSpend20: "Kosten over 20 jaar (apparatuur en onderhoud)",
     pathsRowIncentives: "Subsidies",
     pathsRowBillCut: "Rekeningsverlaging",
     pathsRowBreakEven: "Terugverdienpunt",
@@ -4949,7 +4952,7 @@ export const LOCALES = {
     pathsCheapest: "الأرخص",
     pathsBandTie:
       "داخل نطاقات الأسعار الإقليمية قد يتغير المسار الأرخص — اعتبر هذا الترتيب تعادلًا.",
-    pathsSpend20: "تكلفة 20 عامًا",
+    pathsSpend20: "تكلفة 20 عامًا (المعدات والصيانة)",
     pathsRowIncentives: "حوافز",
     pathsRowBillCut: "خفض الفاتورة",
     pathsRowBreakEven: "نقطة التعادل",
