@@ -138,6 +138,9 @@ export const RESULT_COPY = {
     resCardCostToBuy: "Cost to buy",
     resCardCostBuyable: "Cost as a parts list",
     resLblTariffBasis: "Tariff basis",
+    resLblUseCase: "Use case",
+    resValUseCaseInferred:
+      "inferred from a saved mode — backup and reserve cannot be recovered from it, so pick the case again for an exact answer",
     resValTariffGlobal:
       "global average — no local table matched, enter your own rate",
     resCardSwapsAdd: "Swaps + labor add",
@@ -353,6 +356,9 @@ export const RESULT_COPY = {
     resCardCostToBuy: "Coste de compra",
     resCardCostBuyable: "Coste como lista de piezas",
     resLblTariffBasis: "Base tarifaria",
+    resLblUseCase: "Caso de uso",
+    resValUseCaseInferred:
+      "inferido de un modo guardado: respaldo y reserva no se recuperan de él, elige el caso otra vez para una respuesta exacta",
     resValTariffGlobal:
       "promedio global — ninguna tabla local coincide, introduce tu tarifa",
     resCardSwapsAdd: "Cambios + mano de obra",
@@ -570,6 +576,9 @@ export const RESULT_COPY = {
     resCardCostToBuy: "Custo de compra",
     resCardCostBuyable: "Custo como lista de peças",
     resLblTariffBasis: "Base tarifária",
+    resLblUseCase: "Caso de uso",
+    resValUseCaseInferred:
+      "inferido de um modo salvo — backup e reserva não se recuperam dele, escolha o caso outra vez para uma resposta exata",
     resValTariffGlobal:
       "média global — nenhuma tabela local correspondeu, informe sua tarifa",
     resCardSwapsAdd: "Trocas + mão de obra",
@@ -787,6 +796,9 @@ export const RESULT_COPY = {
     resCardCostToBuy: "Coût d'achat",
     resCardCostBuyable: "Coût en liste de pièces",
     resLblTariffBasis: "Base tarifaire",
+    resLblUseCase: "Cas d'usage",
+    resValUseCaseInferred:
+      "déduit d'un mode enregistré — secours et réserve n'en sont pas récupérables, choisissez à nouveau le cas pour une réponse exacte",
     resValTariffGlobal:
       "moyenne mondiale — aucune table locale ne correspond, saisissez votre tarif",
     resCardSwapsAdd: "Remplacements + main-d'œuvre",
@@ -1002,6 +1014,9 @@ export const RESULT_COPY = {
     resCardCostToBuy: "Kaufpreis",
     resCardCostBuyable: "Kosten als Teileliste",
     resLblTariffBasis: "Tarifbasis",
+    resLblUseCase: "Anwendungsfall",
+    resValUseCaseInferred:
+      "aus einem gespeicherten Modus abgeleitet — Notstrom und Reserve lassen sich daraus nicht zurückgewinnen, bitte den Fall erneut wählen",
     resValTariffGlobal:
       "globaler Durchschnitt — keine lokale Tabelle passt, eigenen Tarif eingeben",
     resCardSwapsAdd: "Wechsel + Arbeitszeit",
@@ -1218,6 +1233,9 @@ export const RESULT_COPY = {
     resCardCostToBuy: "Aankoopkosten",
     resCardCostBuyable: "Kosten als onderdelenlijst",
     resLblTariffBasis: "Tariefbasis",
+    resLblUseCase: "Gebruiksscenario",
+    resValUseCaseInferred:
+      "afgeleid uit een opgeslagen modus — noodstroom en reserve zijn daaruit niet te herstellen, kies het scenario opnieuw voor een exact antwoord",
     resValTariffGlobal:
       "wereldwijd gemiddelde — geen lokale tabel gevonden, voer uw eigen tarief in",
     resCardSwapsAdd: "Wissels + arbeid",
@@ -1426,6 +1444,9 @@ export const RESULT_COPY = {
     resCardCostToBuy: "تكلفة الشراء",
     resCardCostBuyable: "التكلفة كقائمة قطع",
     resLblTariffBasis: "أساس التعريفة",
+    resLblUseCase: "حالة الاستخدام",
+    resValUseCaseInferred:
+      "مستنتجة من وضع محفوظ — لا يمكن استعادة الاحتياطي والنسخ الاحتياطي منها، اختر الحالة مرة أخرى للحصول على إجابة دقيقة",
     resValTariffGlobal: "متوسط عالمي — لا يوجد جدول محلي مطابق، أدخل تعريفتك",
     resCardSwapsAdd: "الاستبدال + أجرة العمل",
     resCardNoSwaps: "لا شيء خلال 20 سنة",
