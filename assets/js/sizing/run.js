@@ -28,7 +28,7 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261114w";
+} from "./engine.js?v=20261114y";
 
 import {
   isUseCaseId,
@@ -41,24 +41,24 @@ import {
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261114w";
-import { memoizeSimulate } from "./sim-cache.js?v=20261114w";
+} from "./usecases.js?v=20261114y";
+import { memoizeSimulate } from "./sim-cache.js?v=20261114y";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261114w";
-import { buildFrontier } from "./frontier.js?v=20261114w";
-import { buyablePrice } from "./bom.js?v=20261114w";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114w";
-import { climateSummary } from "./climate.js?v=20261114w";
+} from "./nasa.js?v=20261114y";
+import { buildFrontier } from "./frontier.js?v=20261114y";
+import { buyablePrice } from "./bom.js?v=20261114y";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114y";
+import { climateSummary } from "./climate.js?v=20261114y";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261114w";
+} from "./pricing.js?v=20261114y";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -69,7 +69,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261114w";
+} from "./money.js?v=20261114y";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -346,7 +346,7 @@ async function fetchWeatherWithFallback(opts) {
     return await fetchWeatherDefault(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261114w");
+      await import("./profiles.js?v=20261114y");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {

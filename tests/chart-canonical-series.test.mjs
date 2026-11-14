@@ -145,3 +145,48 @@ test("no priced route, or a shape that cannot align: left alone", () => {
   };
   assert.equal(canonicalCumCostSeries(noSystem, { pathsPriced: r }), noSystem);
 });
+
+test("with a published base, the chart's 20-year saving is the card's net", () => {
+  const r = priced();
+  const winner = r.by[r.ranking[0]];
+  // The engine's own float accumulation: the residual is a repeating decimal in
+  // reality, so $247.03/yr over 20 years misses the whole-dollar total by cents.
+  const drift = 247.03;
+  const series = engineSeries(
+    (i) => 3000 + i * 3,
+    (i) => drift * (i + 1),
+  );
+  const base = {
+    horizonYears: HORIZON_YEARS,
+    baselineBills20: BASELINE * HORIZON_YEARS,
+    residualBills20: RESIDUAL * HORIZON_YEARS,
+  };
+  const out = canonicalCumCostSeries(series, { pathsPriced: r, base });
+  // Endpoints are the published totals, not the float accumulation.
+  assert.equal(out.grid[out.grid.length - 1], base.baselineBills20);
+  assert.equal(
+    out.solar[out.solar.length - 1],
+    winner.spend20 + base.residualBills20,
+  );
+  const saved = out.grid[out.grid.length - 1] - out.solar[out.solar.length - 1];
+  assert.equal(saved, winner.net20, "chart gap must equal the card's net");
+  assert.equal(out.canonicalNet20, winner.net20);
+  // Only the horizon endpoint of the bill wedge is pinned; the rest of the
+  // wedge (and the grid line's earlier points) keep the engine's own values.
+  for (let i = 0; i < HORIZON_YEARS - 1; i++)
+    assert.equal(out.grid[i], series.grid[i], `grid year ${i + 1}`);
+});
+
+test("without a base the series keeps the engine's own endpoints", () => {
+  const r = priced();
+  const series = engineSeries(
+    (i) => 3000 + i * 3,
+    (i) => 247.03 * (i + 1),
+  );
+  const out = canonicalCumCostSeries(series, { pathsPriced: r });
+  assert.equal(
+    out.grid[out.grid.length - 1],
+    series.grid[series.grid.length - 1],
+  );
+  assert.equal(out.canonicalNet20, null);
+});
