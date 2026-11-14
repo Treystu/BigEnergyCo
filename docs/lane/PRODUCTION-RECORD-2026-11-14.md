@@ -9,14 +9,14 @@ earlier filing.
 `node scripts/audit-live-surfaces.mjs` (read: that script's own stdout and its
 receipt `docs/lane/data-reads/2026-11-10-live-surfaces.json`, 2026-11-14T00:2xZ):
 
-| surface | status | bytes | stamp | html sha256 |
-| --- | --- | --- | --- | --- |
-| `bigenergyco.pages.dev` (production) | 200 | 125,986 | `20261103u` | `4a6cd5b3d11e` |
-| `staging.bigenergyco.pages.dev` | 200 | 125,986 | `20261103u` | `4a6cd5b3d11e` |
-| `treystu.github.io/BigEnergyCo/` | 200 | 125,986 | `20261103u` | `4a6cd5b3d11e` |
-| `bigenergyco-prod.pages.dev` (fenced rollback target) | 200 | 124,463 | `20261025b` | `258062371d9d` |
-| `freeoffgridcalculator.com` (brand apex) | **403** `cf-mitigated` | 5,520 | — | `10654c8a61ae` |
-| showcase api | 200 | 267 | — | `2927923f9ae5` |
+| surface                                               | status                 | bytes   | stamp       | html sha256    |
+| ----------------------------------------------------- | ---------------------- | ------- | ----------- | -------------- |
+| `bigenergyco.pages.dev` (production)                  | 200                    | 125,986 | `20261103u` | `4a6cd5b3d11e` |
+| `staging.bigenergyco.pages.dev`                       | 200                    | 125,986 | `20261103u` | `4a6cd5b3d11e` |
+| `treystu.github.io/BigEnergyCo/`                      | 200                    | 125,986 | `20261103u` | `4a6cd5b3d11e` |
+| `bigenergyco-prod.pages.dev` (fenced rollback target) | 200                    | 124,463 | `20261025b` | `258062371d9d` |
+| `freeoffgridcalculator.com` (brand apex)              | **403** `cf-mitigated` | 5,520   | —           | `10654c8a61ae` |
+| showcase api                                          | 200                    | 267     | —           | `2927923f9ae5` |
 
 Ten walked paths are byte-identical across the three app surfaces
 (`parity: {"identical":10,"divergent":0,"unobservable":0}`), so production and
