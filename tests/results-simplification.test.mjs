@@ -11,7 +11,10 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const HTML = readFileSync(new URL("../index.html", import.meta.url), "utf8");
-const CSS = readFileSync(new URL("../assets/site.css", import.meta.url), "utf8");
+const CSS = readFileSync(
+  new URL("../assets/site.css", import.meta.url),
+  "utf8",
+);
 
 const DEMOTED = [
   "resultLadder",
@@ -34,10 +37,16 @@ const tagFor = (id) => {
 };
 
 test("one disclosure exists, closed by default, and is labelled", () => {
-  const m = HTML.match(/<details[^>]*id="resultsMore"[^>]*>([\s\S]*?)<\/details>/);
+  const m = HTML.match(
+    /<details[^>]*id="resultsMore"[^>]*>([\s\S]*?)<\/details>/,
+  );
   assert.ok(m, "#resultsMore must be a details element");
   // The `open` ATTRIBUTE, not the word "open" anywhere in the block.
-  assert.doesNotMatch(m[0].slice(0, m[0].indexOf(">")), /\sopen[\s=>]/, "it must start closed");
+  assert.doesNotMatch(
+    m[0].slice(0, m[0].indexOf(">")),
+    /\sopen[\s=>]/,
+    "it must start closed",
+  );
   assert.match(m[1], /<summary[^>]*data-i18n="resultsMoreSummary"/);
   assert.match(m[1], /data-i18n="resultsMoreNote"/);
 });
