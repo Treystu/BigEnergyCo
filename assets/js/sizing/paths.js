@@ -773,6 +773,41 @@ export function systemForPaths(entry, ctx = {}) {
   };
 }
 
+/**
+ * THE CANONICAL BASE QUANTITIES for one run's selected system (#401, item 1).
+ *
+ * Every surface on the results page needs the same handful of numbers: the
+ * system's size and served energy, the visitor's current annual bill, the bill
+ * that remains, the bill cut, the horizon. Before this they were re-derived at
+ * each consumer - the adapter from entry fields, the chart from its own series,
+ * the cards from whatever arrived - and that is how the same label ended up
+ * printing two numbers twice in one session.
+ *
+ * This is a DERIVATION, not a second estimate: it calls the same adapter the
+ * cards call, then publishes the horizon totals beside it so a consumer that
+ * wants "the 20-year baseline" reads one field instead of multiplying by 20
+ * itself. Consumers that need the horizon lengths must use these fields; the
+ * only thing allowed to differ between them is the route.
+ */
+export function canonicalBase(entry, ctx = {}) {
+  const sys = systemForPaths(entry, ctx);
+  const horizon = HORIZON_YEARS;
+  const times = (annual) =>
+    annual === null ? null : Math.round(annual * horizon);
+  return {
+    ...sys,
+    horizonYears: horizon,
+    baselineBills20: times(sys.annualBaselineBillsUsd),
+    residualBills20: times(sys.annualResidualBillsUsd),
+    // What the visitor pays the utility over the horizon either way. Null when
+    // the residual is unknown: a sum with an unknown in it is unknown.
+    netBills20:
+      sys.annualBaselineBillsUsd === null || sys.annualResidualBillsUsd === null
+        ? null
+        : times(sys.annualBaselineBillsUsd - sys.annualResidualBillsUsd),
+  };
+}
+
 function newPath(id, registry) {
   return {
     id,

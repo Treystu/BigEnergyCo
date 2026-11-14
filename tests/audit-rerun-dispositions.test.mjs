@@ -394,6 +394,18 @@ function purchasePathsHarness() {
   const sandbox = {
     pathsApi: {
       systemForPaths: (sys, ctx) => ({ sys, ctx }),
+      // #401 item 1: purchasePaths now derives ONE base-quantity object per
+      // selected system and prices from it. The double mirrors that surface:
+      // the base is the adapter's output plus the horizon totals, which is what
+      // the real canonicalBase returns.
+      canonicalBase: (sys, ctx) => ({
+        ...sys,
+        ...ctx,
+        horizonYears: 20,
+        baselineBills20: null,
+        residualBills20: null,
+        netBills20: null,
+      }),
       priceAllPaths: (s, c) => {
         calls.push({ s, c });
         return { priced: true };
