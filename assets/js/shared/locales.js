@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261114u";
-import { RESULT_COPY } from "./result-copy.js?v=20261114u";
-import { TILT_COPY } from "./tilt-copy.js?v=20261114u";
+import { HOME_COPY } from "./home-copy.js?v=20261114w";
+import { RESULT_COPY } from "./result-copy.js?v=20261114w";
+import { TILT_COPY } from "./tilt-copy.js?v=20261114w";
 
 export const LOCALES = {
   en: {
@@ -1099,9 +1099,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Dentro de los tamaños que busca esta herramienta —hasta {pvMax} kW de paneles y {battMax} kWh de batería— lo máximo que puedes cubrir aquí es cerca del {ceilingPct}%, por unos {ceilingCost}. La buena relación se acaba en el {kneePct}% por unos {kneeCost}. La independencia total no es imposible aquí, pero exige un sistema mucho mayor; un generador o la red casi seguro son la forma más barata de cubrir el resto.",
     frontierMethod:
-      "La curva simula cada combinación de paneles y batería en una malla gruesa con el mismo clima horario de las tarjetas; conserva solo las opciones que ninguna más barata supera. El coste es el de las piezas, antes de mano de obra, permisos ni tasas.",
+      "La curva simula cada combinación de paneles y batería en una malla gruesa con el mismo clima horario de las tarjetas; conserva solo las opciones que ninguna más barata supera. El coste es el de las piezas: punto medio de un sistema montado por cuenta propia, envío y aranceles incluidos, antes de mano de obra, permisos ni tasas.",
     frontierMethodBattery:
-      "La curva simula cada tamaño de batería con el mismo clima horario y las mismas franjas tarifarias de las tarjetas; conserva solo las opciones que ninguna más barata supera. Sin paneles, la curva solo varía la batería. El coste es el de las piezas, antes de mano de obra, permisos ni tasas.",
+      "La curva simula cada tamaño de batería con el mismo clima horario y las mismas franjas tarifarias de las tarjetas; conserva solo las opciones que ninguna más barata supera. Sin paneles, la curva solo varía la batería. El coste es el de las piezas: punto medio de un sistema montado por cuenta propia, envío y aranceles incluidos, antes de mano de obra, permisos ni tasas.",
     chartDailySun: "Producción solar diaria: {peak} kWh por kW de panel",
     costNoSeriesTitle: "No hay datos de ahorro para este resultado",
     costNoSeriesBody:
@@ -1818,9 +1818,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Dentro dos tamanhos que esta ferramenta busca — até {pvMax} kW de painéis e {battMax} kWh de bateria — o máximo que você cobre aqui é cerca de {ceilingPct}%, por uns {ceilingCost}. O bom custo-benefício acaba em {kneePct}% por uns {kneeCost}. A independência total não é impossível aqui, mas exige um sistema bem maior; um gerador ou a rede quase certamente são o jeito mais barato de cobrir o resto.",
     frontierMethod:
-      "A curva simula cada combinação de painéis e bateria numa malha grossa, com o mesmo clima horário dos cartões; mantém só as opções não superadas por outras mais baratas. O custo é o das peças, antes de mão de obra, licenças e taxas.",
+      "A curva simula cada combinação de painéis e bateria numa malha grossa, com o mesmo clima horário dos cartões; mantém só as opções não superadas por outras mais baratas. O custo é o das peças: ponto médio de um sistema montado por conta própria, com frete e impostos de importação, antes de mão de obra, licenças e taxas.",
     frontierMethodBattery:
-      "A curva simula cada tamanho de bateria com o mesmo clima horário e as mesmas janelas tarifárias dos cartões; mantém só as opções não superadas por outras mais baratas. Sem painéis, só varia a bateria. O custo é o das peças, antes de mão de obra, licenças e taxas.",
+      "A curva simula cada tamanho de bateria com o mesmo clima horário e as mesmas janelas tarifárias dos cartões; mantém só as opções não superadas por outras mais baratas. Sem painéis, só varia a bateria. O custo é o das peças: ponto médio de um sistema montado por conta própria, com frete e impostos de importação, antes de mão de obra, licenças e taxas.",
     chartDailySun: "Produção solar diária: {peak} kWh por kW de painel",
     costNoSeriesTitle: "Dados de economia indisponíveis para este resultado",
     costNoSeriesBody:
@@ -2535,9 +2535,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Dans les tailles explorées par cet outil — jusqu'à {pvMax} kW de panneaux et {battMax} kWh de batterie — le maximum que vous pouvez couvrir ici est d'environ {ceilingPct}%, pour environ {ceilingCost}. Le bon rapport s'arrête à {kneePct}% pour environ {kneeCost}. L'indépendance totale n'est pas impossible ici, mais elle demande un système bien plus grand ; un groupe électrogène ou le réseau est presque certainement le moyen le moins cher de couvrir le reste.",
     frontierMethod:
-      "La courbe simule chaque combinaison de panneaux et de batterie sur une grille grossière, avec la météo horaire des cartes, puis ne garde que les options non dépassées par une moins chère. Le prix est celui des pièces, hors main-d'œuvre, permis et frais.",
+      "La courbe simule chaque combinaison de panneaux et de batterie sur une grille grossière, avec la météo horaire des cartes, puis ne garde que les options non dépassées par une moins chère. Le prix est celui des pièces : milieu de la fourchette d'un système à monter soi-même, livraison et droits de douane compris, hors main-d'œuvre, permis et frais.",
     frontierMethodBattery:
-      "La courbe simule chaque taille de batterie avec la météo horaire et les plages tarifaires des cartes ; elle ne garde que les options non dépassées par une moins chère. Sans panneaux, seule la capacité varie. Prix : celui des pièces, hors main-d'œuvre, permis et frais.",
+      "La courbe simule chaque taille de batterie avec la météo horaire et les plages tarifaires des cartes ; elle ne garde que les options non dépassées par une moins chère. Sans panneaux, seule la capacité varie. Prix : celui des pièces — milieu de la fourchette d'un système à monter soi-même, livraison et droits de douane compris — hors main-d'œuvre, permis et frais.",
     chartDailySun:
       "Production solaire quotidienne : {peak} kWh par kW de panneau",
     costNoSeriesTitle: "Données d’économies indisponibles pour ce résultat",
@@ -3258,9 +3258,9 @@ export const LOCALES = {
     frontierVerdictCoveredGrid:
       "Dimensionierung ist hier nicht deine Grenze. Das kleinste praktische System — {pv} kW Panels und {batt} kWh Batterie, etwa {cost} — deckt diesen Verbrauch bereits praktisch vollständig ab. Alles Größere kauft Reserve, keine größere Ersparnis.",
     frontierMethod:
-      "Die Kurve simuliert jede Kombination aus Modulen und Batterie auf einem groben Raster mit denselben stündlichen Wetterdaten wie oben. Sie zeigt nur Systeme, die kein günstigeres System übertrifft. Der Preis ist der der Teile, ohne Arbeit, Genehmigungen und Gebühren.",
+      "Die Kurve simuliert jede Kombination aus Modulen und Batterie auf einem groben Raster mit denselben stündlichen Wetterdaten wie oben. Sie zeigt nur Systeme, die kein günstigeres System übertrifft. Der Preis ist der der Teile: Mitte der Selbstbaukosten inklusive Versand und Einfuhrabgaben, ohne Arbeit, Genehmigungen und Gebühren.",
     frontierMethodBattery:
-      "Die Kurve simuliert jede Batteriegröße mit denselben stündlichen Wetterdaten und Tarifzeiten wie oben. Ohne Module variiert nur der Speicher; gezeigt werden Systeme, die kein günstigeres System übertrifft. Der Preis ist der der Teile, ohne Arbeit, Genehmigungen und Gebühren.",
+      "Die Kurve simuliert jede Batteriegröße mit denselben stündlichen Wetterdaten und Tarifzeiten wie oben. Ohne Module variiert nur der Speicher; gezeigt werden Systeme, die kein günstigeres System übertrifft. Der Preis ist der der Teile: Mitte der Selbstbaukosten inklusive Versand und Einfuhrabgaben, ohne Arbeit, Genehmigungen und Gebühren.",
     chartDailySun: "Täglicher Solarertrag: {peak} kWh je kW Modulleistung",
     costNoSeriesTitle:
       "Für dieses Ergebnis sind keine Einsparungsdaten verfügbar",
@@ -3891,9 +3891,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Binnen de groottes die deze tool doorzoekt — tot {pvMax} kW aan panelen en {battMax} kWh aan accu — kunt u hier maximaal ongeveer {ceilingPct}% dekken, voor rond {ceilingCost}. Goede waarde houdt op bij {kneePct}% voor ongeveer {kneeCost}. Volledige onafhankelijkheid is hier niet onmogelijk, maar vereist een systeem dat veel groter is dan dit, en een generator of een netaansluiting is vrijwel zeker de goedkopere manier om de rest te dekken.",
     frontierMethod:
-      "De curve simuleert elke combinatie van panelen en accu op een grof raster met hetzelfde uurweer als de kaarten. Alleen systemen die geen goedkoper systeem overtreft blijven staan. De prijs is die van de onderdelen, zonder arbeid, vergunningen en leges.",
+      "De curve simuleert elke combinatie van panelen en accu op een grof raster met hetzelfde uurweer als de kaarten. Alleen systemen die geen goedkoper systeem overtreft blijven staan. De prijs is die van de onderdelen: het midden voor zelfbouw inclusief verzending en invoerrechten, zonder arbeid, vergunningen en leges.",
     frontierMethodBattery:
-      "De curve simuleert elke accugrootte met hetzelfde uurweer en dezelfde tariefvensters als de kaarten. Zonder panelen varieert alleen de accu; alleen systemen die geen goedkoper systeem overtreft blijven staan. De prijs is die van de onderdelen, zonder arbeid, vergunningen en leges.",
+      "De curve simuleert elke accugrootte met hetzelfde uurweer en dezelfde tariefvensters als de kaarten. Zonder panelen varieert alleen de accu; alleen systemen die geen goedkoper systeem overtreft blijven staan. De prijs is die van de onderdelen: het midden voor zelfbouw inclusief verzending en invoerrechten, zonder arbeid, vergunningen en leges.",
     // -- Cumulative 20-year cost caption (under the chart canvas) --
     cumCostRecommended: "aanbevolen",
     cumCostSelected: "geselecteerd",
@@ -4780,9 +4780,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "ضمن الأحجام التي تبحثها هذه الأداة — حتى {pvMax} كيلوواط ألواح و{battMax} كيلوواط ساعة بطارية — أقصى ما يمكن تغطيته هنا نحو {ceilingPct}%، بتكلفة قرابة {ceilingCost}. وتنتهي القيمة الجيدة عند {kneePct}% بنحو {kneeCost}. والاستقلال الكامل ليس مستحيلًا هنا، لكنه يحتاج نظامًا أكبر بكثير، وغالبًا يكون مولّد أو اتصال بالشبكة أرخص وسيلة لتغطية الباقي.",
     frontierMethod:
-      "يحاكي المنحنى كل توليفة من الألواح والبطاريات على شبكة خشنة ببيانات الطقس الساعية نفسها أعلاه، ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر هو سعر المكونات، دون أجرة عمل أو تراخيص أو رسوم.",
+      "يحاكي المنحنى كل توليفة من الألواح والبطاريات على شبكة خشنة ببيانات الطقس الساعية نفسها أعلاه، ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر هو سعر المكونات: منتصف تكلفة نظام يُجمّع ذاتيًا مع الشحن والرسوم الجمركية، دون أجرة عمل أو تراخيص أو رسوم.",
     frontierMethodBattery:
-      "يحاكي المنحنى أحجام البطاريات ببيانات الطقس الساعية ونوافذ التعرفة نفسها أعلاه. لا تدخل الألواح هنا، لذا يتغير حجم البطارية وحده؛ ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر هو سعر المكونات، دون أجرة عمل أو تراخيص أو رسوم.",
+      "يحاكي المنحنى أحجام البطاريات ببيانات الطقس الساعية ونوافذ التعرفة نفسها أعلاه. لا تدخل الألواح هنا، لذا يتغير حجم البطارية وحده؛ ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر هو سعر المكونات: منتصف تكلفة نظام يُجمّع ذاتيًا مع الشحن والرسوم الجمركية، دون أجرة عمل أو تراخيص أو رسوم.",
     chartDailySun:
       "الإنتاج الشمسي اليومي: {peak} كيلوواط ساعة لكل كيلوواط من الألواح",
     costNoSeriesTitle: "بيانات التوفير غير متاحة لهذه النتيجة",
