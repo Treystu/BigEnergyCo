@@ -205,7 +205,45 @@ async function main() {
     await new Promise((r) => setTimeout(r, 2500)); // chart + paths paint
 
     const census = await evaluate(censusScript);
+
+    // #403 acceptance: the five-figure test is specified at PHONE width too, so
+    // it is read at a phone viewport rather than assumed to survive the reflow.
+    await send("Emulation.setDeviceMetricsOverride", {
+      width: 390,
+      height: 844,
+      deviceScaleFactor: 1,
+      mobile: true,
+    });
+    await new Promise((r) => setTimeout(r, 1200));
+    const phone = await evaluate(censusScript);
+    const phoneShot = await send("Page.captureScreenshot", {
+      format: "png",
+      captureBeyondViewport: true,
+    });
+    await send("Emulation.clearDeviceMetricsOverride");
+    await new Promise((r) => setTimeout(r, 800));
+
     mkdirSync(dirname(OUT), { recursive: true });
+    writeFileSync(
+      OUT.replace(/\.png$/, "-phone.png"),
+      Buffer.from(phoneShot.data, "base64"),
+    );
+    // A small viewport-only capture: the full-page phone PNG is too large to
+    // look at without downscaling tools this machine does not have, and the
+    // question "does the simplified shape survive at 390px" is answered by the
+    // outcome card and the cost table, so the view is scrolled to them rather
+    // than left at the form.
+    await evaluate(`(() => {
+      const anchor = document.getElementById("resultsRegion");
+      if (anchor) window.scrollTo(0, anchor.getBoundingClientRect().top + window.scrollY);
+      return true;
+    })()`);
+    await new Promise((r) => setTimeout(r, 500));
+    const phoneTop = await send("Page.captureScreenshot", { format: "png" });
+    writeFileSync(
+      OUT.replace(/\.png$/, "-phone-top.png"),
+      Buffer.from(phoneTop.data, "base64"),
+    );
     const shot = await send("Page.captureScreenshot", {
       format: "png",
       captureBeyondViewport: true,
@@ -213,7 +251,7 @@ async function main() {
     writeFileSync(OUT, Buffer.from(shot.data, "base64"));
     writeFileSync(
       OUT.replace(/\.png$/, ".json"),
-      `${JSON.stringify({ base: BASE, at: new Date().toISOString(), census }, null, 2)}\n`,
+      `${JSON.stringify({ base: BASE, at: new Date().toISOString(), census, phone }, null, 2)}\n`,
     );
     // A second, small capture of just the pay-cards block: the full-page PNG is
     // >1 MB and cannot be read back at a glance, and the cards are the surface
