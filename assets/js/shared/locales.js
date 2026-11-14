@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261115a";
-import { RESULT_COPY } from "./result-copy.js?v=20261115a";
-import { TILT_COPY } from "./tilt-copy.js?v=20261115a";
+import { HOME_COPY } from "./home-copy.js?v=20261115b";
+import { RESULT_COPY } from "./result-copy.js?v=20261115b";
+import { TILT_COPY } from "./tilt-copy.js?v=20261115b";
 
 export const LOCALES = {
   en: {
@@ -159,6 +159,9 @@ export const LOCALES = {
     mapDrawAction: "Draw this area on an optional map",
     matrixScroll: "Scrollable comparison table",
     bomPanelTitle: "Your hardware list — what this system is made of",
+    resultsMoreSummary: "More detail: the charts, the workings and the options",
+    resultsMoreNote:
+      "Everything below is the same run, shown in full. Nothing here changes the figures above — open it when you want the curve, the frontier or the line-by-line assumptions.",
     genSummary: "I run a generator — what does its power really cost?",
     genApply: "Use this as my electricity price",
 
@@ -568,6 +571,8 @@ export const LOCALES = {
     pathsLabel_selfpurchase: "You buy the parts",
     pathsLabel_diy: "You mount it, an electrician connects",
     pathsTitle: "Four ways to pay for this same system",
+    pathsSystemLine:
+      "The system being priced: {pv} kW of panels + {batt} kWh of battery",
     pathsSub:
       "One system, one set of definitions, twenty years. The gap between these cards is a gap in price, not a difference in what each one counts.",
     pathsCheapest: "Cheapest",
@@ -946,6 +951,10 @@ export const LOCALES = {
     mapDrawAction: "Dibuja esta zona en un mapa opcional",
     matrixScroll: "Tabla comparativa con desplazamiento",
     bomPanelTitle: "Tu lista de hardware — de qué está hecho este sistema",
+    resultsMoreSummary:
+      "Más detalle: los gráficos, los cálculos y las opciones",
+    resultsMoreNote:
+      "Todo lo de abajo es el mismo cálculo, mostrado entero. Nada aquí cambia las cifras de arriba: ábrelo cuando quieras ver la curva, la frontera o los supuestos línea por línea.",
     genSummary: "Uso un generador — ¿cuánto cuesta realmente su energía?",
     genApply: "Usar esto como mi precio de electricidad",
 
@@ -1282,6 +1291,8 @@ export const LOCALES = {
     pathsLabel_selfpurchase: "Tú compras las piezas",
     pathsLabel_diy: "Tú lo montas, un electricista lo conecta",
     pathsTitle: "Cuatro formas de pagar este mismo sistema",
+    pathsSystemLine:
+      "El sistema que se valora: {pv} kW de paneles + {batt} kWh de batería",
     pathsSub:
       "Un sistema, una sola definición, veinte años. La diferencia entre estas tarjetas es de precio, no de qué incluye cada una.",
     pathsCheapest: "Más barato",
@@ -1671,6 +1682,9 @@ export const LOCALES = {
     mapDrawAction: "Desenhe esta zona num mapa opcional",
     matrixScroll: "Tabela comparativa com deslocamento",
     bomPanelTitle: "Sua lista de hardware — do que este sistema é feito",
+    resultsMoreSummary: "Mais detalhe: os gráficos, os cálculos e as opções",
+    resultsMoreNote:
+      "Tudo abaixo é o mesmo cálculo, mostrado por inteiro. Nada aqui muda os números acima: abra quando quiser ver a curva, a fronteira ou as premissas linha por linha.",
     genSummary: "Uso um gerador — quanto custa de verdade a energia dele?",
     genApply: "Usar isto como meu preço de eletricidade",
 
@@ -1996,6 +2010,8 @@ export const LOCALES = {
     pathsLabel_selfpurchase: "Você compra as peças",
     pathsLabel_diy: "Você monta, um eletricista conecta",
     pathsTitle: "Quatro formas de pagar este mesmo sistema",
+    pathsSystemLine:
+      "O sistema avaliado: {pv} kW de painéis + {batt} kWh de bateria",
     pathsSub:
       "Um sistema, uma única definição, vinte anos. A diferença entre estes cartões é de preço, não do que cada um inclui.",
     pathsCheapest: "Mais barato",
@@ -2387,6 +2403,10 @@ export const LOCALES = {
     mapDrawAction: "Dessinez cette zone sur une carte facultative",
     matrixScroll: "Tableau comparatif à faire défiler",
     bomPanelTitle: "Votre liste de matériel — de quoi ce système est composé",
+    resultsMoreSummary:
+      "Plus de détail : les graphiques, les calculs et les options",
+    resultsMoreNote:
+      "Tout ce qui suit est le même calcul, montré en entier. Rien ici ne change les chiffres ci-dessus : ouvrez-le pour voir la courbe, la frontière ou les hypothèses ligne par ligne.",
     genSummary:
       "J'utilise un générateur — combien coûte vraiment son électricité ?",
     genApply: "Utiliser ceci comme mon prix de l'électricité",
@@ -2717,6 +2737,8 @@ export const LOCALES = {
     pathsLabel_selfpurchase: "Vous achetez les pièces",
     pathsLabel_diy: "Vous montez, un électricien raccorde",
     pathsTitle: "Quatre façons de payer ce même système",
+    pathsSystemLine:
+      "Le système évalué : {pv} kW de panneaux + {batt} kWh de batterie",
     pathsSub:
       "Un système, une seule définition, vingt ans. L'écart entre ces cartes est un écart de prix, pas une différence de ce que chacune compte.",
     pathsCheapest: "Le moins cher",
@@ -3109,6 +3131,10 @@ export const LOCALES = {
     mapDrawAction: "Diesen Bereich optional auf einer Karte zeichnen",
     matrixScroll: "Vergleichstabelle zum Scrollen",
     bomPanelTitle: "Deine Hardware-Liste — woraus dieses System besteht",
+    resultsMoreSummary:
+      "Mehr Details: die Diagramme, die Rechnung und die Optionen",
+    resultsMoreNote:
+      "Alles unten ist dieselbe Berechnung, vollständig gezeigt. Nichts davon ändert die Zahlen oben — öffne es, wenn du die Kurve, die Grenzkurve oder die Annahmen Zeile für Zeile sehen willst.",
     genSummary: "Ich habe einen Generator — was kostet sein Strom wirklich?",
     genApply: "Als meinen Strompreis übernehmen",
     socChartTitle:
@@ -3436,6 +3462,8 @@ export const LOCALES = {
     pathsLabel_selfpurchase: "Sie kaufen die Teile selbst",
     pathsLabel_diy: "Sie montieren, ein Elektriker schließt an",
     pathsTitle: "Vier Wege, dieses selbe System zu bezahlen",
+    pathsSystemLine:
+      "Das bewertete System: {pv} kW Module + {batt} kWh Batterie",
     pathsSub:
       "Ein System, eine Definition, zwanzig Jahre. Der Abstand zwischen diesen Karten ist ein Preisunterschied, kein Unterschied dessen, was jeweils mitgezählt wird.",
     pathsCheapest: "Am günstigsten",
@@ -3741,6 +3769,9 @@ export const LOCALES = {
     mapDrawAction: "Teken dit gebied optioneel op een kaart",
     matrixScroll: "Vergelijkingstabel om door te scrollen",
     bomPanelTitle: "Uw hardwarelijst — waaruit dit systeem bestaat",
+    resultsMoreSummary: "Meer detail: de grafieken, de berekening en de opties",
+    resultsMoreNote:
+      "Alles hieronder is dezelfde berekening, volledig weergegeven. Niets ervan verandert de cijfers hierboven — open het als u de curve, de grens of de aannames regel voor regel wilt zien.",
     genSummary: "Ik heb een generator — wat kost zijn stroom echt?",
     genApply: "Gebruik dit als mijn stroomprijs",
 
@@ -4074,6 +4105,8 @@ export const LOCALES = {
     pathsLabel_selfpurchase: "U koopt de onderdelen",
     pathsLabel_diy: "U monteert, een elektricien sluit aan",
     pathsTitle: "Vier manieren om voor ditzelfde systeem te betalen",
+    pathsSystemLine:
+      "Het beoordeelde systeem: {pv} kW panelen + {batt} kWh accu",
     pathsSub:
       "Eén systeem, één set definities, twintig jaar. Het verschil tussen deze kaarten is een prijsverschil, geen verschil in wat elk meetelt.",
     pathsCheapest: "Goedkoopste",
@@ -4638,6 +4671,9 @@ export const LOCALES = {
     mapDrawAction: "ارسم هذه المنطقة على خريطة اختيارية",
     matrixScroll: "جدول مقارنة قابل للتمرير",
     bomPanelTitle: "قائمة المعدات الخاصة بك — مم يتكون هذا النظام",
+    resultsMoreSummary: "مزيد من التفاصيل: الرسوم البيانية والحسابات والخيارات",
+    resultsMoreNote:
+      "كل ما أدناه هو الحساب نفسه معروضًا كاملًا. لا شيء فيه يغيّر الأرقام أعلاه — افتحه عندما تريد رؤية المنحنى أو الحدود أو الافتراضات سطرًا بسطر.",
     genSummary: "أستخدم مولدا — كم تبلغ التكلفة الحقيقية للكهرباء منه؟",
     genApply: "استخدم هذا كسعر الكهرباء لدي",
 
@@ -4948,6 +4984,8 @@ export const LOCALES = {
     pathsLabel_selfpurchase: "أنت تشتري القطع",
     pathsLabel_diy: "أنت تركّب، وكهربائي يوصّل",
     pathsTitle: "أربع طرق لدفع ثمن النظام نفسه",
+    pathsSystemLine:
+      "النظام الذي يُسعَّر: {pv} كيلوواط من الألواح + {batt} كيلوواط ساعة من البطارية",
     pathsSub:
       "نظام واحد، وتعريف واحد، وعشرون سنة. الفرق بين هذه البطاقات فرق في السعر، لا اختلاف في ما تحسبه كل واحدة.",
     pathsCheapest: "الأرخص",

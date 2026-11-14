@@ -126,6 +126,60 @@ const censusScript = `(() => {
         : [],
       tableText: txt(byId("frontierTable")),
     },
+    // #403 Cure C: the simplified shape as the visitor gets it. Visibility is
+    // measured, not assumed: a demoted block still on screen would mean the
+    // disclosure governs nothing.
+    simplified: (() => {
+      const demoted = [
+        "resultLadder",
+        "ladderIntro",
+        "eli5Summary",
+        "eli5CardWrap",
+        "moneyBar",
+        "focusPanel",
+        "tierResults",
+        "frontierWrap",
+        "socChartWrap",
+        "cumCostChartWrap",
+      ];
+      const shown = (id) => {
+        const el = byId(id);
+        if (!el) return false;
+        const r = el.getBoundingClientRect();
+        return r.width > 0 && r.height > 0;
+      };
+      return {
+        disclosurePresent: !!byId("resultsMore"),
+        disclosureOpen: !!byId("resultsMore") && byId("resultsMore").open,
+        demotedVisible: demoted.filter(shown),
+        // The five figures a non-author reader must be able to take away,
+        // read from the SIMPLIFIED page: the outcome card plus the cost table.
+        // They are all on the cheapest card, which is why the chart's savings
+        // headline can live behind the disclosure and these cannot.
+        five: (() => {
+          // The CHEAPEST card: it carries the tag, and it is the one whose five
+          // figures the reader is meant to leave with.
+          const card =
+            all("#pathsPanel .paths-card-best")[0] ||
+            all("#pathsPanel .paths-card")[0];
+          const rows = {};
+          if (card) {
+            const dts = [...card.querySelectorAll("dl.paths-rows dt")];
+            for (const dt of dts)
+              rows[txt(dt)] = txt(dt.nextElementSibling);
+          }
+          const outcome = txt(byId("useCaseOutcomeWrap"));
+          return {
+            size: txt(all("#pathsPanel .paths-system")[0] || null),
+            cheapestRoute: card ? txt(card.querySelector("h4")) : null,
+            upfront: card ? txt(card.querySelector(".paths-upfront")) : null,
+            cheapest20: card ? txt(card.querySelector(".paths-total")) : null,
+            sizefromOutcome: (outcome || "").slice(0, 160),
+            rows,
+          };
+        })(),
+      };
+    })(),
     unknowns: all("body *")
       .filter((e) => !e.children.length && /Unknown|Desconocid|Unbekannt/i.test(txt(e) || ""))
       .map((e) => ({ where: e.id || e.className || e.tagName, text: txt(e) })),
