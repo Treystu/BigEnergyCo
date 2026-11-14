@@ -470,7 +470,11 @@ else ok("index.html: every reader-visible prose block has a locale hook");
 // raise is the exact 12-block delta at the read that landed it (check-i18n
 // reported 558/546), the same rule as the three earlier raises: the ceiling
 // tracks the corpus and still flags any block added without this step.
-const PROSE_CEILING = 558;
+// 558 -> 574 (2026-11-14, measured reason): the India post (#381) adds 16
+// visible prose blocks - its own hi-IN body plus one hub card excerpt - so the
+// ceiling moves by the exact delta check-i18n reported at the read that landed
+// it (574/558), the same rule as the four earlier raises.
+const PROSE_CEILING = 574;
 if (proseFindings.length > PROSE_CEILING) {
   fail(
     `${proseFindings.length} visible prose block(s) on a translated page carry no i18n hook ` +
