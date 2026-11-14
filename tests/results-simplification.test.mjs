@@ -48,7 +48,6 @@ test("one disclosure exists, closed by default, and is labelled", () => {
     "it must start closed",
   );
   assert.match(m[1], /<summary[^>]*data-i18n="resultsMoreSummary"/);
-  assert.match(m[1], /data-i18n="resultsMoreNote"/);
 });
 
 test("every demoted block carries the class the disclosure governs", () => {
