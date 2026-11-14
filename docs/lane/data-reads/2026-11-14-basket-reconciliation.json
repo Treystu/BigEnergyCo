@@ -1,0 +1,232 @@
+{
+  "at": "2026-11-14T07:23:17.012Z",
+  "note": "Two bases, measured side by side. Engine = parts list (bare cells, budget retail). Paths = installed route (retail hardware with BMS and enclosure, electrician hours, permits). The ratio is the finding; no price is invented here.",
+  "rows": [
+    {
+      "country": "US",
+      "case": "driven (census)",
+      "pvKw": 1.92,
+      "battKwh": 11,
+      "installed": {
+        "year0": 9122,
+        "year0Low": 6174,
+        "year0High": 14471,
+        "hardware": 6302,
+        "labour": 1440,
+        "fees": 1380,
+        "om": 1824,
+        "recurring": 4801,
+        "spend20": 11186,
+        "perW": 3.28,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 13468,
+        "year0Low": 10152,
+        "spend20": 18149
+      },
+      "enginePartsListUsd": 2996,
+      "enginePerW": 1.56
+    },
+    {
+      "country": "US",
+      "case": "3 kW + 8 kWh",
+      "pvKw": 3,
+      "battKwh": 8,
+      "installed": {
+        "year0": 10677,
+        "year0Low": 7308,
+        "year0High": 16624,
+        "hardware": 7685,
+        "labour": 1612,
+        "fees": 1380,
+        "om": 2135,
+        "recurring": 4443,
+        "spend20": 11917,
+        "perW": 2.56,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 15460,
+        "year0Low": 11700,
+        "spend20": 19863
+      },
+      "enginePartsListUsd": null
+    },
+    {
+      "country": "US",
+      "case": "6 kW + 10 kWh",
+      "pvKw": 6,
+      "battKwh": 10,
+      "installed": {
+        "year0": 18081,
+        "year0Low": 12682,
+        "year0High": 27155,
+        "hardware": 14140,
+        "labour": 2561,
+        "fees": 1380,
+        "om": 3616,
+        "recurring": 6870,
+        "spend20": 19527,
+        "perW": 2.36,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 27560,
+        "year0Low": 20880,
+        "spend20": 35330
+      },
+      "enginePartsListUsd": null
+    },
+    {
+      "country": "DE",
+      "case": "driven (census)",
+      "pvKw": 1.92,
+      "battKwh": 11,
+      "installed": {
+        "year0": 6851,
+        "year0Low": 4595,
+        "year0High": 10814,
+        "hardware": 4938,
+        "labour": 963,
+        "fees": 950,
+        "om": 1370,
+        "recurring": 3861,
+        "spend20": 10712,
+        "perW": 2.57,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 10300,
+        "year0Low": 7728,
+        "spend20": 14841
+      },
+      "enginePartsListUsd": 2996
+    },
+    {
+      "country": "DE",
+      "case": "3 kW + 8 kWh",
+      "pvKw": 3,
+      "battKwh": 8,
+      "installed": {
+        "year0": 7988,
+        "year0Low": 5403,
+        "year0High": 12376,
+        "hardware": 5955,
+        "labour": 1083,
+        "fees": 950,
+        "om": 1598,
+        "recurring": 3523,
+        "spend20": 11511,
+        "perW": 1.99,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 11680,
+        "year0Low": 8790,
+        "spend20": 15943
+      },
+      "enginePartsListUsd": null
+    },
+    {
+      "country": "DE",
+      "case": "6 kW + 10 kWh",
+      "pvKw": 6,
+      "battKwh": 10,
+      "installed": {
+        "year0": 13580,
+        "year0Low": 9390,
+        "year0High": 20290,
+        "hardware": 10920,
+        "labour": 1710,
+        "fees": 950,
+        "om": 2716,
+        "recurring": 5450,
+        "spend20": 19030,
+        "perW": 1.82,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 20720,
+        "year0Low": 15600,
+        "spend20": 27590
+      },
+      "enginePartsListUsd": null
+    },
+    {
+      "country": "IN",
+      "case": "driven (census)",
+      "pvKw": 1.92,
+      "battKwh": 11,
+      "installed": {
+        "year0": 5893,
+        "year0Low": 3957,
+        "year0High": 9234,
+        "hardware": 4440,
+        "labour": 763,
+        "fees": 690,
+        "om": 1179,
+        "recurring": 3451,
+        "spend20": 9344,
+        "perW": 2.31,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 9526,
+        "year0Low": 6984,
+        "spend20": 13697
+      },
+      "enginePartsListUsd": 2996
+    },
+    {
+      "country": "IN",
+      "case": "3 kW + 8 kWh",
+      "pvKw": 3,
+      "battKwh": 8,
+      "installed": {
+        "year0": 6881,
+        "year0Low": 4660,
+        "year0High": 10597,
+        "hardware": 5340,
+        "labour": 851,
+        "fees": 690,
+        "om": 1376,
+        "recurring": 3138,
+        "spend20": 10019,
+        "perW": 1.78,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 10780,
+        "year0Low": 7920,
+        "spend20": 14698
+      },
+      "enginePartsListUsd": null
+    },
+    {
+      "country": "IN",
+      "case": "6 kW + 10 kWh",
+      "pvKw": 6,
+      "battKwh": 10,
+      "installed": {
+        "year0": 11798,
+        "year0Low": 8163,
+        "year0High": 17602,
+        "hardware": 9780,
+        "labour": 1328,
+        "fees": 690,
+        "om": 2360,
+        "recurring": 4850,
+        "spend20": 16648,
+        "perW": 1.63,
+        "perKwhBatt": null
+      },
+      "turnkey": {
+        "year0": 19100,
+        "year0Low": 14040,
+        "spend20": 25410
+      },
+      "enginePartsListUsd": null
+    }
+  ]
+}
