@@ -28,7 +28,7 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261114b";
+} from "./engine.js?v=20261114d";
 
 import {
   isUseCaseId,
@@ -40,23 +40,24 @@ import {
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261114b";
-import { memoizeSimulate } from "./sim-cache.js?v=20261114b";
+} from "./usecases.js?v=20261114d";
+import { memoizeSimulate } from "./sim-cache.js?v=20261114d";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261114b";
-import { buildFrontier } from "./frontier.js?v=20261114b";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114b";
-import { climateSummary } from "./climate.js?v=20261114b";
+} from "./nasa.js?v=20261114d";
+import { buildFrontier } from "./frontier.js?v=20261114d";
+import { buyablePrice } from "./bom.js?v=20261114d";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114d";
+import { climateSummary } from "./climate.js?v=20261114d";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261114b";
+} from "./pricing.js?v=20261114d";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -67,7 +68,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261114b";
+} from "./money.js?v=20261114d";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -344,7 +345,7 @@ async function fetchWeatherWithFallback(opts) {
     return await fetchWeatherDefault(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261114b");
+      await import("./profiles.js?v=20261114d");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {
@@ -762,6 +763,22 @@ async function runSizingUncached(msg, deps = {}) {
       landedF,
       Math.max(sizing.pvKw, invMinKw),
     );
+    // #356: the search optimises a continuous system, the shopping list rounds
+    // up; both limbs of the acceptance bar fired (median +17.3%, smallest
+    // quartile +27.9%), so the payload carries the price of the hardware a
+    // builder actually buys next to the simulated number it is compared to.
+    cost.buyable = buyablePrice({
+      pvKw: sizing.pvKw,
+      battUsableKwh: sizing.battKwh,
+      chemistry: chemId,
+      kwhPerDay: dailyKwh,
+      // Default module class: the payload is a run result and does not carry
+      // the UI's panel-size selection, so this prices the same 550 W module
+      // the audit measured with.
+      costPerWpv: costPerWpvMid,
+      costPerKwhBatt: battMidFor(chemId),
+      costPerKwInv: costPerKwInvMid,
+    });
     const life = lifetimeCostUsd({
       capexMidUsd: cost.objectiveMid,
       battKwhUsable: sizing.battKwh,
@@ -999,6 +1016,7 @@ async function runSizingUncached(msg, deps = {}) {
       pvKw: sizing.pvKw,
       battKwh: sizing.battKwh,
       costLo: m.cost.lo,
+      costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
       costHi: m.cost.hi,
       replacementsHorizon: m.replacementsHorizon,
       swapsAndLaborUsd: m.swapsAndLaborUsd,
@@ -1123,6 +1141,7 @@ async function runSizingUncached(msg, deps = {}) {
       battKwh: sizing.battKwh,
       battNameplateKwh: m.battNameplateKwh,
       costLo: m.cost.lo,
+      costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
       costHi: m.cost.hi,
       cutPct: gridtieCutPct(sizing),
       // Net of the feed-in credit (may go negative = net producer paid).
@@ -1298,6 +1317,8 @@ async function runSizingUncached(msg, deps = {}) {
         battKwh: fBatt,
         battNameplateKwh: m.battNameplateKwh,
         costLo: m.cost.lo,
+        costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+        costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
         costHi: m.cost.hi,
         pvCostLo: m.cost.pvCostLo,
         pvCostHi: m.cost.pvCostHi,
@@ -1397,6 +1418,7 @@ async function runSizingUncached(msg, deps = {}) {
       usableDod: chemObj.usableDod,
       socNameplatePct,
       costLo: m.cost.lo,
+      costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
       costHi: m.cost.hi,
       pvCostLo: m.cost.pvCostLo,
       pvCostHi: m.cost.pvCostHi,
@@ -1626,6 +1648,8 @@ async function runSizingUncached(msg, deps = {}) {
         pvKw: pt.pvKw,
         battKwh: pt.battKwh,
         costLo: m.cost.lo,
+        costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+        costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
         costHi: m.cost.hi,
         replacementsHorizon: m.replacementsHorizon,
         swapsAndLaborUsd: m.swapsAndLaborUsd,
@@ -1714,6 +1738,17 @@ async function runSizingUncached(msg, deps = {}) {
       // payload to render the infeasibility banner and to suppress the
       // broken savings panel.
       unreachableReason,
+      // #355: which tariff layer fired, in the output it prices. The measured
+      // boundary deltas move payback by more than a year and flip the winner
+      // on most of the grid, so the layer is labeled rather than left implicit.
+      tariffEstimate: {
+        layer: region.layer || "unknown",
+        label: region.label,
+        rate: region.rate,
+        currency: region.currency || null,
+        laborFactor: laborF,
+        landedFactor: landedF,
+      },
       pricing: {
         basisLabel: "ex-factory China through PowMr-class budget retail",
         source: "cell market indications → PowMr public catalog, Aug 2026",
@@ -2496,6 +2531,9 @@ async function runSizingUncached(msg, deps = {}) {
           battKwh: sizing.battKwh,
           battNameplateKwh: m.battNameplateKwh,
           costLo: m.cost.lo,
+          costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+          costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+          costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
           costHi: m.cost.hi,
           unmetHoursPerYear: +(
             sizing.result.worstYearUnmetHours ??
@@ -2595,6 +2633,7 @@ async function runSizingUncached(msg, deps = {}) {
           battKwh: agmHit.sizing.battKwh,
           battNameplateKwh: mAgm.battNameplateKwh,
           costLo: mAgm.cost.lo,
+          costBuyableUsd: mAgm.cost.buyable ? mAgm.cost.buyable.usd : null,
           costHi: mAgm.cost.hi,
           lifetimeCostMid: mAgm.lifetimeCostMid,
           replacementsHorizon: mAgm.replacementsHorizon,
@@ -2747,6 +2786,7 @@ async function runSizingUncached(msg, deps = {}) {
       usableDod: chem.usableDod,
       socNameplatePct,
       costLo: m.cost.lo,
+      costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
       costHi: m.cost.hi,
       pvCostLo: m.cost.pvCostLo,
       pvCostHi: m.cost.pvCostHi,

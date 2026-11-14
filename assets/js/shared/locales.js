@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261114b";
-import { RESULT_COPY } from "./result-copy.js?v=20261114b";
-import { TILT_COPY } from "./tilt-copy.js?v=20261114b";
+import { HOME_COPY } from "./home-copy.js?v=20261114d";
+import { RESULT_COPY } from "./result-copy.js?v=20261114d";
+import { TILT_COPY } from "./tilt-copy.js?v=20261114d";
 
 export const LOCALES = {
   en: {
@@ -571,6 +571,8 @@ export const LOCALES = {
     pathsSub:
       "One system, one set of definitions, twenty years. The gap between these cards is a gap in price, not a difference in what each one counts.",
     pathsCheapest: "Cheapest",
+    pathsBandTie:
+      "Within the regional price bands the cheapest path can change — read this order as a tie.",
     pathsSpend20: "20-year cost",
     pathsRowIncentives: "Incentives",
     pathsRowBillCut: "Bill cut",
@@ -1280,6 +1282,8 @@ export const LOCALES = {
     pathsSub:
       "Un sistema, una sola definición, veinte años. La diferencia entre estas tarjetas es de precio, no de qué incluye cada una.",
     pathsCheapest: "Más barato",
+    pathsBandTie:
+      "Dentro de las bandas de precios regionales el camino más barato puede cambiar: lee este orden como un empate.",
     pathsSpend20: "Coste a 20 años",
     pathsRowIncentives: "Incentivos",
     pathsRowBillCut: "Ahorro en la factura",
@@ -1992,6 +1996,8 @@ export const LOCALES = {
     pathsSub:
       "Um sistema, uma única definição, vinte anos. A diferença entre estes cartões é de preço, não do que cada um inclui.",
     pathsCheapest: "Mais barato",
+    pathsBandTie:
+      "Dentro das faixas de preço regionais o caminho mais barato pode mudar — leia esta ordem como empate.",
     pathsSpend20: "Custo em 20 anos",
     pathsRowIncentives: "Incentivos",
     pathsRowBillCut: "Corte na conta",
@@ -2711,6 +2717,8 @@ export const LOCALES = {
     pathsSub:
       "Un système, une seule définition, vingt ans. L'écart entre ces cartes est un écart de prix, pas une différence de ce que chacune compte.",
     pathsCheapest: "Le moins cher",
+    pathsBandTie:
+      "Dans les fourchettes de prix régionales, le chemin le moins cher peut changer — considérez cet ordre comme une égalité.",
     pathsSpend20: "Coût sur 20 ans",
     pathsRowIncentives: "Subventions",
     pathsRowBillCut: "Réduction de facture",
@@ -3428,6 +3436,8 @@ export const LOCALES = {
     pathsSub:
       "Ein System, eine Definition, zwanzig Jahre. Der Abstand zwischen diesen Karten ist ein Preisunterschied, kein Unterschied dessen, was jeweils mitgezählt wird.",
     pathsCheapest: "Am günstigsten",
+    pathsBandTie:
+      "Innerhalb der regionalen Preisspannen kann der günstigste Weg wechseln — diese Reihenfolge als Gleichstand lesen.",
     pathsSpend20: "20-jährige Kosten",
     pathsRowIncentives: "Förderungen",
     pathsRowBillCut: "Rechnungssenkung",
@@ -4064,6 +4074,8 @@ export const LOCALES = {
     pathsSub:
       "Eén systeem, één set definities, twintig jaar. Het verschil tussen deze kaarten is een prijsverschil, geen verschil in wat elk meetelt.",
     pathsCheapest: "Goedkoopste",
+    pathsBandTie:
+      "Binnen de regionale prijsbanden kan het goedkoopste pad wisselen — lees deze volgorde als gelijkspel.",
     pathsSpend20: "Kosten over 20 jaar",
     pathsRowIncentives: "Subsidies",
     pathsRowBillCut: "Rekeningsverlaging",
@@ -4935,6 +4947,8 @@ export const LOCALES = {
     pathsSub:
       "نظام واحد، وتعريف واحد، وعشرون سنة. الفرق بين هذه البطاقات فرق في السعر، لا اختلاف في ما تحسبه كل واحدة.",
     pathsCheapest: "الأرخص",
+    pathsBandTie:
+      "داخل نطاقات الأسعار الإقليمية قد يتغير المسار الأرخص — اعتبر هذا الترتيب تعادلًا.",
     pathsSpend20: "تكلفة 20 عامًا",
     pathsRowIncentives: "حوافز",
     pathsRowBillCut: "خفض الفاتورة",
