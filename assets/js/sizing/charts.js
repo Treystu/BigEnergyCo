@@ -5,7 +5,7 @@
 // `$` (DOM lookup), `el` (element factory), `t` (i18n), `fmt` (number format),
 // `money` (currency formatter). Chart state (socZoomRange, cachedChartState)
 // lives here as the single owner.
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261114w";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261114y";
 
 // ── injected boundary (set once by ui.js via initCharts) ──────────────────
 let _$;
@@ -602,12 +602,33 @@ export function canonicalCumCostSeries(series, p) {
   if (!aligned) return series;
   const bills = series.solar.map((s, i) => s - series.system[i]);
   const system = aligned.map((v) => Math.round(v));
+  // #401: the chart's 20-year gap must be the SAME number the card prints. The
+  // engine accumulates its annual bill as a float and rounds only at display;
+  // the card multiplies whole-dollar years by 20, so the two ended $1 apart on
+  // the driven run ($18,319 against $18,318) with no way for a reader to tell
+  // which was right. The published base decides: pin the horizon endpoints to
+  // its totals and let the drawing follow, rather than rounding the headline to
+  // look like the card.
+  const base = p && p.base;
+  const pinBaseline =
+    base && Number.isFinite(base.baselineBills20) ? base.baselineBills20 : null;
+  const pinResidual =
+    base && Number.isFinite(base.residualBills20) ? base.residualBills20 : null;
+  const grid = series.grid.slice();
+  const resid = bills.slice();
+  if (pinBaseline !== null) grid[nY - 1] = pinBaseline;
+  if (pinResidual !== null) resid[nY - 1] = pinResidual;
   return {
     ...series,
     system,
-    solar: system.map((v, i) => v + bills[i]),
+    grid,
+    solar: system.map((v, i) => v + resid[i]),
     canonicalPathId: route.id,
     canonicalSpend20: route.spend20,
+    canonicalNet20:
+      pinBaseline !== null && pinResidual !== null
+        ? pinBaseline - pinResidual - route.spend20
+        : null,
   };
 }
 
