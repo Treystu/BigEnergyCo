@@ -90,6 +90,20 @@ const censusScript = `(() => {
     ],
     chartCaption: txt(byId("cumCostCaption")),
     chartEndpointNote: txt(byId("cumSavingsSub")),
+    // #401 item 1, the frontier consumer: it plots up-front system cost against
+    // coverage, which is a DIFFERENT quantity from the cards' 20-year installed
+    // total. The census records what the panel actually says so that claim is
+    // checked rather than asserted.
+    frontier: {
+      shown: !!byId("frontierWrap") && byId("frontierWrap").style.display !== "none",
+      verdict: txt(byId("frontierVerdict")),
+      note: txt(byId("frontierNote")),
+      method: txt(byId("frontierMethodNote")),
+      axisX: txt(byId("frontierChart"))
+        ? [...all("#frontierChart text")].map((e) => txt(e)).filter(Boolean).slice(0, 40)
+        : [],
+      tableText: txt(byId("frontierTable")),
+    },
     unknowns: all("body *")
       .filter((e) => !e.children.length && /Unknown|Desconocid|Unbekannt/i.test(txt(e) || ""))
       .map((e) => ({ where: e.id || e.className || e.tagName, text: txt(e) })),

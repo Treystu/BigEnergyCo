@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261114s";
-import { RESULT_COPY } from "./result-copy.js?v=20261114s";
-import { TILT_COPY } from "./tilt-copy.js?v=20261114s";
+import { HOME_COPY } from "./home-copy.js?v=20261114w";
+import { RESULT_COPY } from "./result-copy.js?v=20261114w";
+import { TILT_COPY } from "./tilt-copy.js?v=20261114w";
 
 export const LOCALES = {
   en: {
@@ -168,7 +168,7 @@ export const LOCALES = {
     frontierTitle: "How far does your money get you?",
     frontierIntro:
       "Every system we could build at your location, cheapest first. The line is the best result any budget can buy — so you can see at a glance whether your goal here is easy, expensive, or out of reach.",
-    frontierX: "Up-front system cost",
+    frontierX: "Up-front parts cost (DIY)",
     frontierYGrid: "Share of your power bill cut",
     frontierYGridBattery: "Share of your peak hours shifted",
     frontierYOffgrid: "Share of your energy covered, no generator",
@@ -249,8 +249,8 @@ export const LOCALES = {
     // -- Budget slider (unified curve walk) --
     budgetLabel: "Your budget (up-front)",
     frontierTableCaption:
-      "Every point on the curve. Typical cost is the landed do-it-yourself middle; the range spans bare cells to shipped retail.",
-    frontierColCost: "Typical cost",
+      "Every point on the curve. Typical parts cost is the landed do-it-yourself middle, before labour, permits and fees; the range spans bare cells to shipped retail.",
+    frontierColCost: "Typical parts cost",
     frontierColRange: "DIY to retail",
     frontierColCut: "Bill cut",
     frontierColCutBattery: "Peak hours shifted",
@@ -276,7 +276,7 @@ export const LOCALES = {
     frontierLegendCeiling:
       "Best the searched sizes reach — not a limit of physics",
     frontierMarkerOffCurve:
-      "Your option sits right of the curve because the recommendation is picked on true 20-year cost, not today's price — a cheaper bank that needs replacing costs less now and more later.",
+      "Your option sits right of the curve because the recommendation is picked on the parts basket's 20-year cost, not today's price — a cheaper bank that needs replacing costs less now and more later.",
     frontierVerdictSteepGrid:
       "Cutting about {kneePct}% of your bill costs around {kneeCost}. After that it gets expensive fast: roughly {tailCost} for each further percent, against {headCost} before.",
     frontierVerdictTaperingGrid:
@@ -304,9 +304,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Within the sizes this tool searches — up to {pvMax} kW of panels and {battMax} kWh of battery — the most you can cover here is about {ceilingPct}%, for around {ceilingCost}. Good value runs out at {kneePct}% for about {kneeCost}. Full independence is not impossible here, but it needs a system far larger than this, and a generator or a grid connection is almost certainly the cheaper way to cover the rest.",
     frontierMethod:
-      "The curve comes from simulating every panel-and-battery combination on a coarse grid against the same hourly weather as the cards above, then keeping only the systems nothing cheaper beats. Prices use the same landed do-it-yourself middle as every other figure on this page.",
+      "The curve comes from simulating every panel-and-battery combination on a coarse grid against the same hourly weather as the cards above, then keeping only the systems nothing cheaper beats. Prices here are the landed do-it-yourself middle — the parts basket, before labour, permits and fees. The installed totals above add those.",
     frontierMethodBattery:
-      "The curve comes from simulating every battery size on a coarse grid against the same hourly weather and tariff windows as the cards above, then keeping only the systems nothing cheaper beats. Panels are not part of this run, so the curve varies the bank alone. Prices use the same landed do-it-yourself middle as every other figure on this page.",
+      "The curve comes from simulating every battery size on a coarse grid against the same hourly weather and tariff windows as the cards above, then keeping only the systems nothing cheaper beats. Panels are not part of this run, so the curve varies the bank alone. Prices here are the landed do-it-yourself middle — the parts basket, before labour, permits and fees. The installed totals above add those.",
     chartDailySun: "Daily solar output: {peak} kWh per kW of panel",
     costNoSeriesTitle: "Savings data unavailable for this result",
     costNoSeriesBody:
@@ -955,7 +955,7 @@ export const LOCALES = {
     frontierTitle: "¿Hasta dónde llega tu dinero?",
     frontierIntro:
       "Todos los sistemas posibles en tu ubicación, del más barato al más caro. La línea es el mejor resultado que puede comprar cada presupuesto, para que veas de un vistazo si tu objetivo aquí es fácil, caro o inalcanzable.",
-    frontierX: "Coste inicial del sistema",
+    frontierX: "Coste inicial de las piezas (bricolaje)",
     frontierYGrid: "Parte de tu factura eliminada",
     frontierYGridBattery: "Parte de tus horas punta desplazadas",
     frontierYOffgrid: "Parte de tu energía cubierta, sin generador",
@@ -1037,7 +1037,7 @@ export const LOCALES = {
     budgetLabel: "Tu presupuesto (inicial)",
     frontierTableCaption:
       "Cada punto de la curva. Coste típico: punto medio del montaje propio, con envío y aranceles; rango: de celdas sueltas a sistemas completos entregados al por menor.",
-    frontierColCost: "Coste típico",
+    frontierColCost: "Coste típico de las piezas",
     frontierColRange: "Montaje propio → venta minorista",
     frontierColCut: "Factura reducida",
     frontierColCutBattery: "Horas punta desplazadas",
@@ -1071,7 +1071,7 @@ export const LOCALES = {
     frontierLegendCeiling:
       "Lo máximo que alcanzan los tamaños buscados, no un límite físico",
     frontierMarkerOffCurve:
-      "Tu opción queda a la derecha de la curva porque la recomendación se elige por el coste real a 20 años, no por el precio de hoy: un banco más barato que hay que reemplazar cuesta menos ahora y más después.",
+      "Tu opción queda a la derecha de la curva porque la recomendación se elige por el coste a 20 años de las piezas, no por el precio de hoy: un banco más barato que hay que reemplazar cuesta menos ahora y más después.",
     frontierVerdictSteepGrid:
       "Recortar cerca del {kneePct}% de tu factura cuesta unos {kneeCost}. A partir de ahí se encarece rápido: unos {tailCost} por cada punto adicional, frente a {headCost} antes.",
     frontierVerdictTaperingGrid:
@@ -1099,9 +1099,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Dentro de los tamaños que busca esta herramienta —hasta {pvMax} kW de paneles y {battMax} kWh de batería— lo máximo que puedes cubrir aquí es cerca del {ceilingPct}%, por unos {ceilingCost}. La buena relación se acaba en el {kneePct}% por unos {kneeCost}. La independencia total no es imposible aquí, pero exige un sistema mucho mayor; un generador o la red casi seguro son la forma más barata de cubrir el resto.",
     frontierMethod:
-      "La curva simula cada combinación de paneles y batería en una malla gruesa con el mismo clima horario de las tarjetas; conserva solo las opciones que ninguna más barata supera. El coste usa el punto medio de un sistema montado por cuenta propia, con envío y aranceles, como el resto de la página.",
+      "La curva simula cada combinación de paneles y batería en una malla gruesa con el mismo clima horario de las tarjetas; conserva solo las opciones que ninguna más barata supera. El coste es el de las piezas: punto medio de un sistema montado por cuenta propia, envío y aranceles incluidos, antes de mano de obra, permisos ni tasas.",
     frontierMethodBattery:
-      "La curva simula cada tamaño de batería con el mismo clima horario y las mismas franjas tarifarias de las tarjetas; conserva solo las opciones que ninguna más barata supera. Sin paneles, la curva solo varía la batería. El coste usa el punto medio de un sistema montado por cuenta propia, con envío y aranceles, igual que el resto de la página.",
+      "La curva simula cada tamaño de batería con el mismo clima horario y las mismas franjas tarifarias de las tarjetas; conserva solo las opciones que ninguna más barata supera. Sin paneles, la curva solo varía la batería. El coste es el de las piezas: punto medio de un sistema montado por cuenta propia, envío y aranceles incluidos, antes de mano de obra, permisos ni tasas.",
     chartDailySun: "Producción solar diaria: {peak} kWh por kW de panel",
     costNoSeriesTitle: "No hay datos de ahorro para este resultado",
     costNoSeriesBody:
@@ -1680,7 +1680,7 @@ export const LOCALES = {
     frontierTitle: "Até onde vai o seu dinheiro?",
     frontierIntro:
       "Todos os sistemas possíveis na sua localização, do mais barato ao mais caro. A linha é o melhor resultado que cada orçamento consegue comprar — para você ver de relance se o seu objetivo aqui é fácil, caro ou inalcançável.",
-    frontierX: "Custo inicial do sistema",
+    frontierX: "Custo inicial das peças (faça você mesmo)",
     frontierYGrid: "Parte da sua conta de luz cortada",
     frontierYGridBattery: "Parte das suas horas de ponta deslocadas",
     frontierYOffgrid: "Parte da sua energia coberta, sem gerador",
@@ -1762,7 +1762,7 @@ export const LOCALES = {
     budgetLabel: "Seu orçamento (inicial)",
     frontierTableCaption:
       "Cada ponto da curva. Custo típico: ponto médio de um sistema montado por conta própria, com frete e impostos de importação; faixa de células avulsas a sistemas completos entregues no varejo.",
-    frontierColCost: "Custo típico",
+    frontierColCost: "Custo típico das peças",
     frontierColRange: "Montagem própria → varejo",
     frontierColCut: "Conta cortada",
     frontierColCutBattery: "Horas de ponta deslocadas",
@@ -1790,7 +1790,7 @@ export const LOCALES = {
     frontierLegendCeiling:
       "O máximo que os tamanhos buscados atingem, não um limite físico",
     frontierMarkerOffCurve:
-      "Sua opção fica à direita da curva porque a recomendação é escolhida pelo custo real em 20 anos, não pelo preço de hoje: um banco mais barato que precisa ser trocado custa menos agora e mais depois.",
+      "Sua opção fica à direita da curva porque a recomendação é escolhida pelo custo em 20 anos das peças, não pelo preço de hoje: um banco mais barato que precisa ser trocado custa menos agora e mais depois.",
     frontierVerdictSteepGrid:
       "Cortar cerca de {kneePct}% da sua conta custa uns {kneeCost}. Depois disso fica caro rápido: cerca de {tailCost} por ponto adicional, contra {headCost} antes.",
     frontierVerdictTaperingGrid:
@@ -1818,9 +1818,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Dentro dos tamanhos que esta ferramenta busca — até {pvMax} kW de painéis e {battMax} kWh de bateria — o máximo que você cobre aqui é cerca de {ceilingPct}%, por uns {ceilingCost}. O bom custo-benefício acaba em {kneePct}% por uns {kneeCost}. A independência total não é impossível aqui, mas exige um sistema bem maior; um gerador ou a rede quase certamente são o jeito mais barato de cobrir o resto.",
     frontierMethod:
-      "A curva simula cada combinação de painéis e bateria numa malha grossa, com o mesmo clima horário dos cartões; mantém só as opções não superadas por outras mais baratas. O custo é o ponto médio de um sistema montado por conta própria, com frete e impostos de importação, como nos demais valores da página.",
+      "A curva simula cada combinação de painéis e bateria numa malha grossa, com o mesmo clima horário dos cartões; mantém só as opções não superadas por outras mais baratas. O custo é o das peças: ponto médio de um sistema montado por conta própria, com frete e impostos de importação, antes de mão de obra, licenças e taxas.",
     frontierMethodBattery:
-      "A curva simula cada tamanho de bateria com o mesmo clima horário e as mesmas janelas tarifárias dos cartões; mantém só as opções não superadas por outras mais baratas. Sem painéis, só varia a bateria. O custo é o ponto médio de um sistema montado por conta própria, com frete e impostos de importação, como nos demais valores da página.",
+      "A curva simula cada tamanho de bateria com o mesmo clima horário e as mesmas janelas tarifárias dos cartões; mantém só as opções não superadas por outras mais baratas. Sem painéis, só varia a bateria. O custo é o das peças: ponto médio de um sistema montado por conta própria, com frete e impostos de importação, antes de mão de obra, licenças e taxas.",
     chartDailySun: "Produção solar diária: {peak} kWh por kW de painel",
     costNoSeriesTitle: "Dados de economia indisponíveis para este resultado",
     costNoSeriesBody:
@@ -2397,7 +2397,7 @@ export const LOCALES = {
     frontierTitle: "Jusqu'où va votre argent ?",
     frontierIntro:
       "Tous les systèmes possibles chez vous, du moins cher au plus cher. La courbe montre le meilleur résultat que chaque budget peut acheter — pour voir d'un coup d'œil si votre objectif est ici facile, coûteux ou hors d'atteinte.",
-    frontierX: "Coût initial du système",
+    frontierX: "Coût initial des pièces (à monter soi-même)",
     frontierYGrid: "Part de votre facture supprimée",
     frontierYGridBattery: "Part de vos heures pleines décalées",
     frontierYOffgrid: "Part de votre énergie couverte, sans groupe électrogène",
@@ -2478,7 +2478,7 @@ export const LOCALES = {
     budgetLabel: "Votre budget (initial)",
     frontierTableCaption:
       "Chaque point de la courbe. Coût type : milieu de la fourchette d’un système à monter soi-même, livraison et droits de douane compris ; des cellules seules aux systèmes complets livrés au détail.",
-    frontierColCost: "Coût typique",
+    frontierColCost: "Coût typique des pièces",
     frontierColRange: "Montage soi-même → prix de détail",
     frontierColCut: "Facture réduite",
     frontierColCutBattery: "Heures pleines décalées",
@@ -2507,7 +2507,7 @@ export const LOCALES = {
     frontierLegendCeiling:
       "Le maximum atteint par les tailles explorées, pas une limite physique",
     frontierMarkerOffCurve:
-      "Votre option se situe à droite de la courbe car la recommandation est choisie sur le coût réel à 20 ans, pas sur le prix d'aujourd'hui : un parc moins cher à remplacer coûte moins maintenant et plus ensuite.",
+      "Votre option se situe à droite de la courbe car la recommandation est choisie sur le coût à 20 ans des pièces, pas sur le prix d'aujourd'hui : un parc moins cher à remplacer coûte moins maintenant et plus ensuite.",
     frontierVerdictSteepGrid:
       "Supprimer environ {kneePct}% de votre facture coûte autour de {kneeCost}. Ensuite ça grimpe vite : environ {tailCost} par point supplémentaire, contre {headCost} avant.",
     frontierVerdictTaperingGrid:
@@ -2535,9 +2535,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Dans les tailles explorées par cet outil — jusqu'à {pvMax} kW de panneaux et {battMax} kWh de batterie — le maximum que vous pouvez couvrir ici est d'environ {ceilingPct}%, pour environ {ceilingCost}. Le bon rapport s'arrête à {kneePct}% pour environ {kneeCost}. L'indépendance totale n'est pas impossible ici, mais elle demande un système bien plus grand ; un groupe électrogène ou le réseau est presque certainement le moyen le moins cher de couvrir le reste.",
     frontierMethod:
-      "La courbe simule chaque combinaison de panneaux et de batterie sur une grille grossière, avec la météo horaire des cartes, puis ne garde que les options non dépassées par une moins chère. Comme ailleurs sur la page, le prix est au milieu de la fourchette d’un système à monter soi-même, livraison et droits de douane compris.",
+      "La courbe simule chaque combinaison de panneaux et de batterie sur une grille grossière, avec la météo horaire des cartes, puis ne garde que les options non dépassées par une moins chère. Le prix est celui des pièces : milieu de la fourchette d'un système à monter soi-même, livraison et droits de douane compris, hors main-d'œuvre, permis et frais.",
     frontierMethodBattery:
-      "La courbe simule chaque taille de batterie avec la météo horaire et les plages tarifaires des cartes ; elle ne garde que les options non dépassées par une moins chère. Sans panneaux, seule la capacité varie. Prix : milieu de la fourchette d’un système à monter soi-même, livraison et droits de douane compris, comme ailleurs sur la page.",
+      "La courbe simule chaque taille de batterie avec la météo horaire et les plages tarifaires des cartes ; elle ne garde que les options non dépassées par une moins chère. Sans panneaux, seule la capacité varie. Prix : celui des pièces — milieu de la fourchette d'un système à monter soi-même, livraison et droits de douane compris — hors main-d'œuvre, permis et frais.",
     chartDailySun:
       "Production solaire quotidienne : {peak} kWh par kW de panneau",
     costNoSeriesTitle: "Données d’économies indisponibles pour ce résultat",
@@ -3116,7 +3116,7 @@ export const LOCALES = {
     frontierTitle: "Wie weit reicht dein Budget?",
     frontierIntro:
       "Alle Systeme, die wir an deinem Standort bauen könnten, vom günstigsten an. Die Linie ist das beste Ergebnis, das jedes Budget kaufen kann — so siehst du auf einen Blick, ob dein Ziel hier einfach, teuer oder außer Reichweite ist.",
-    frontierX: "Systemkosten zu Beginn",
+    frontierX: "Anfangskosten der Teile (Eigenmontage)",
     frontierYGrid: "Anteil der Rechnung gesenkt",
     frontierYGridBattery: "Anteil der verschobenen Spitzenlaststunden",
     frontierYOffgrid: "Anteil der Energie ohne Generator",
@@ -3198,7 +3198,7 @@ export const LOCALES = {
     budgetLabel: "Dein Budget (zu Beginn)",
     frontierTableCaption:
       "Jeder Kurvenpunkt. Typische Kosten: Mitte der Preisspanne für Selbstbau inklusive Versand und Einfuhrabgaben; von einzelnen Zellen bis zu komplett gelieferten Handelsprodukten.",
-    frontierColCost: "Typische Kosten",
+    frontierColCost: "Typische Teilekosten",
     frontierColRange: "Selbstbau bis Handel",
     frontierColCut: "Rechnung gesenkt",
     frontierColCutBattery: "Verschobene Spitzenlaststunden",
@@ -3226,7 +3226,7 @@ export const LOCALES = {
     frontierLegendCeiling:
       "Bestes in den durchsuchten Größen — keine physikalische Grenze",
     frontierMarkerOffCurve:
-      "Deine Option liegt rechts der Kurve, weil die Empfehlung nach echten 20-Jahres-Kosten gewählt wird, nicht nach dem Preis heute: Eine billigere Bank mit Austausch kostet jetzt weniger und später mehr.",
+      "Deine Option liegt rechts der Kurve, weil die Empfehlung nach den 20-Jahres-Kosten der Teile gewählt wird, nicht nach dem Preis heute: Eine billigere Bank mit Austausch kostet jetzt weniger und später mehr.",
     frontierVerdictSteepGrid:
       "Etwa {kneePct} % deiner Rechnung zu senken kostet rund {kneeCost}. Danach wird es schnell teuer: etwa {tailCost} pro weiterem Prozent, gegenüber {headCost} davor.",
     frontierVerdictTaperingGrid:
@@ -3258,9 +3258,9 @@ export const LOCALES = {
     frontierVerdictCoveredGrid:
       "Dimensionierung ist hier nicht deine Grenze. Das kleinste praktische System — {pv} kW Panels und {batt} kWh Batterie, etwa {cost} — deckt diesen Verbrauch bereits praktisch vollständig ab. Alles Größere kauft Reserve, keine größere Ersparnis.",
     frontierMethod:
-      "Die Kurve simuliert jede Kombination aus Modulen und Batterie auf einem groben Raster mit denselben stündlichen Wetterdaten wie oben. Sie zeigt nur Systeme, die kein günstigeres System übertrifft. Wie alle Seitenwerte nutzt der Preis die Mitte der Selbstbaukosten inklusive Versand und Einfuhrabgaben.",
+      "Die Kurve simuliert jede Kombination aus Modulen und Batterie auf einem groben Raster mit denselben stündlichen Wetterdaten wie oben. Sie zeigt nur Systeme, die kein günstigeres System übertrifft. Der Preis ist der der Teile: Mitte der Selbstbaukosten inklusive Versand und Einfuhrabgaben, ohne Arbeit, Genehmigungen und Gebühren.",
     frontierMethodBattery:
-      "Die Kurve simuliert jede Batteriegröße mit denselben stündlichen Wetterdaten und Tarifzeiten wie oben. Ohne Module variiert nur der Speicher; gezeigt werden Systeme, die kein günstigeres System übertrifft. Der Preis nutzt wie die übrigen Werte die Mitte der Selbstbaukosten inklusive Versand und Einfuhrabgaben.",
+      "Die Kurve simuliert jede Batteriegröße mit denselben stündlichen Wetterdaten und Tarifzeiten wie oben. Ohne Module variiert nur der Speicher; gezeigt werden Systeme, die kein günstigeres System übertrifft. Der Preis ist der der Teile: Mitte der Selbstbaukosten inklusive Versand und Einfuhrabgaben, ohne Arbeit, Genehmigungen und Gebühren.",
     chartDailySun: "Täglicher Solarertrag: {peak} kWh je kW Modulleistung",
     costNoSeriesTitle:
       "Für dieses Ergebnis sind keine Einsparungsdaten verfügbar",
@@ -3750,7 +3750,7 @@ export const LOCALES = {
     frontierTitle: "Hoe ver komt u met uw geld?",
     frontierIntro:
       "Elk systeem dat we op uw locatie konden bouwen, goedkoopste eerst. De lijn is het beste resultaat dat elk budget kan kopen — zo ziet u in één oogopslag of uw doel hier haalbaar, duur of onbereikbaar is.",
-    frontierX: "Aanschafkosten van het systeem",
+    frontierX: "Aanschafkosten van onderdelen (zelf montage)",
     frontierYGrid: "Aandeel van uw energierekening dat vervalt",
     frontierYGridBattery: "Aandeel van uw piekuren dat wordt verschoven",
     frontierYOffgrid: "Aandeel van uw energie gedekt, zonder generator",
@@ -3833,7 +3833,7 @@ export const LOCALES = {
     budgetLabel: "Uw budget (eenmalig vooraf)",
     frontierTableCaption:
       "Elk punt op de curve. Typische kosten: midden van de prijsklasse voor zelfbouw met verzending en invoerrechten; van losse cellen tot complete producten aan huis.",
-    frontierColCost: "Typische kosten",
+    frontierColCost: "Typische onderdelenkosten",
     frontierColRange: "Doe-het-zelf tot winkel",
     frontierColCut: "Rekeningsverlaging",
     frontierColCutBattery: "Piekuren verschoven",
@@ -3863,7 +3863,7 @@ export const LOCALES = {
     frontierLegendCeiling:
       "Beste dat de doorzochte groottes halen — geen natuurkundige grens",
     frontierMarkerOffCurve:
-      "Uw optie staat rechts van de curve omdat de aanbeveling is gekozen op basis van de werkelijke kosten over 20 jaar, niet de prijs van vandaag — een goedkopere accubank die vervangen moet worden kost nu minder en later meer.",
+      "Uw optie staat rechts van de curve omdat de aanbeveling is gekozen op basis van de 20-jaarskosten van de onderdelen, niet de prijs van vandaag — een goedkopere accubank die vervangen moet worden kost nu minder en later meer.",
     frontierVerdictSteepGrid:
       "Ongeveer {kneePct}% van uw rekening verlagen kost rond {kneeCost}. Daarna wordt het snel duur: ongeveer {tailCost} per extra procent, tegen {headCost} daarvoor.",
     frontierVerdictTaperingGrid:
@@ -3891,9 +3891,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "Binnen de groottes die deze tool doorzoekt — tot {pvMax} kW aan panelen en {battMax} kWh aan accu — kunt u hier maximaal ongeveer {ceilingPct}% dekken, voor rond {ceilingCost}. Goede waarde houdt op bij {kneePct}% voor ongeveer {kneeCost}. Volledige onafhankelijkheid is hier niet onmogelijk, maar vereist een systeem dat veel groter is dan dit, en een generator of een netaansluiting is vrijwel zeker de goedkopere manier om de rest te dekken.",
     frontierMethod:
-      "De curve simuleert elke combinatie van panelen en accu op een grof raster met hetzelfde uurweer als de kaarten. Alleen systemen die geen goedkoper systeem overtreft blijven staan. De prijs is, net als elders, het midden voor zelfbouw inclusief verzending en invoerrechten.",
+      "De curve simuleert elke combinatie van panelen en accu op een grof raster met hetzelfde uurweer als de kaarten. Alleen systemen die geen goedkoper systeem overtreft blijven staan. De prijs is die van de onderdelen: het midden voor zelfbouw inclusief verzending en invoerrechten, zonder arbeid, vergunningen en leges.",
     frontierMethodBattery:
-      "De curve simuleert elke accugrootte met hetzelfde uurweer en dezelfde tariefvensters als de kaarten. Zonder panelen varieert alleen de accu; alleen systemen die geen goedkoper systeem overtreft blijven staan. De prijs is, net als elders, het midden voor zelfbouw inclusief verzending en invoerrechten.",
+      "De curve simuleert elke accugrootte met hetzelfde uurweer en dezelfde tariefvensters als de kaarten. Zonder panelen varieert alleen de accu; alleen systemen die geen goedkoper systeem overtreft blijven staan. De prijs is die van de onderdelen: het midden voor zelfbouw inclusief verzending en invoerrechten, zonder arbeid, vergunningen en leges.",
     // -- Cumulative 20-year cost caption (under the chart canvas) --
     cumCostRecommended: "aanbevolen",
     cumCostSelected: "geselecteerd",
@@ -4647,7 +4647,7 @@ export const LOCALES = {
     frontierTitle: "إلى أين يصل مالك؟",
     frontierIntro:
       "كل نظام يمكن بناؤه في موقعك، من الأرخص إلى الأغلى. يمثل الخط أفضل نتيجة يمكن لأي ميزانية شراؤها، لترى بلمحة واحدة هل هدفك هنا سهل أم مكلف أم بعيد المنال.",
-    frontierX: "التكلفة الأولية للنظام",
+    frontierX: "التكلفة الأولية للمكونات (تركيب ذاتي)",
     frontierYGrid: "نسبة فاتورتك المخفّضة",
     frontierYGridBattery: "نسبة ساعات الذروة المنقولة",
     frontierYOffgrid: "نسبة طاقتك المغطّاة دون مولّد",
@@ -4723,7 +4723,7 @@ export const LOCALES = {
     budgetLabel: "ميزانيتك (مقدّمًا)",
     frontierTableCaption:
       "كل نقطة على المنحنى. التكلفة المعتادة منتصف سعر نظام يُجمّع ذاتيًا مع الشحن والرسوم الجمركية؛ من الخلايا المنفردة إلى الأنظمة الكاملة الموصلة من المتجر.",
-    frontierColCost: "التكلفة النموذجية",
+    frontierColCost: "التكلفة النموذجية للمكونات",
     frontierColRange: "تجميع ذاتي إلى سعر التجزئة",
     frontierColCut: "خفض الفاتورة",
     frontierColCutBattery: "ساعات الذروة المنقولة",
@@ -4752,7 +4752,7 @@ export const LOCALES = {
     frontierLegendCeiling:
       "أقصى ما تبلغه الأحجام المبحوثة، وليس حدًا فيزيائيًا",
     frontierMarkerOffCurve:
-      "خيارك يقع يمين المنحنى لأن التوصية تُختار على أساس التكلفة الحقيقية على عشرين عامًا، لا سعر اليوم: مجموعة أرخص تحتاج إلى استبدال تكلف أقل الآن وأكثر لاحقًا.",
+      "خيارك يقع يمين المنحنى لأن التوصية تُختار على أساس تكلفة المكونات على عشرين عامًا، لا سعر اليوم: مجموعة أرخص تحتاج إلى استبدال تكلف أقل الآن وأكثر لاحقًا.",
     frontierVerdictSteepGrid:
       "خفض نحو {kneePct}% من فاتورتك يكلف قرابة {kneeCost}. بعد ذلك ترتفع التكلفة سريعًا: نحو {tailCost} لكل نقطة إضافية، مقابل {headCost} قبلها.",
     frontierVerdictTaperingGrid:
@@ -4780,9 +4780,9 @@ export const LOCALES = {
     frontierVerdictBeyondSweepOffgrid:
       "ضمن الأحجام التي تبحثها هذه الأداة — حتى {pvMax} كيلوواط ألواح و{battMax} كيلوواط ساعة بطارية — أقصى ما يمكن تغطيته هنا نحو {ceilingPct}%، بتكلفة قرابة {ceilingCost}. وتنتهي القيمة الجيدة عند {kneePct}% بنحو {kneeCost}. والاستقلال الكامل ليس مستحيلًا هنا، لكنه يحتاج نظامًا أكبر بكثير، وغالبًا يكون مولّد أو اتصال بالشبكة أرخص وسيلة لتغطية الباقي.",
     frontierMethod:
-      "يحاكي المنحنى كل توليفة من الألواح والبطاريات على شبكة خشنة ببيانات الطقس الساعية نفسها أعلاه، ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر منتصف تكلفة نظام يُجمّع ذاتيًا مع الشحن والرسوم الجمركية، كما في بقية الصفحة.",
+      "يحاكي المنحنى كل توليفة من الألواح والبطاريات على شبكة خشنة ببيانات الطقس الساعية نفسها أعلاه، ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر هو سعر المكونات: منتصف تكلفة نظام يُجمّع ذاتيًا مع الشحن والرسوم الجمركية، دون أجرة عمل أو تراخيص أو رسوم.",
     frontierMethodBattery:
-      "يحاكي المنحنى أحجام البطاريات ببيانات الطقس الساعية ونوافذ التعرفة نفسها أعلاه. لا تدخل الألواح هنا، لذا يتغير حجم البطارية وحده؛ ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر منتصف تكلفة نظام يُجمّع ذاتيًا مع الشحن والرسوم الجمركية، كما في بقية الصفحة.",
+      "يحاكي المنحنى أحجام البطاريات ببيانات الطقس الساعية ونوافذ التعرفة نفسها أعلاه. لا تدخل الألواح هنا، لذا يتغير حجم البطارية وحده؛ ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر هو سعر المكونات: منتصف تكلفة نظام يُجمّع ذاتيًا مع الشحن والرسوم الجمركية، دون أجرة عمل أو تراخيص أو رسوم.",
     chartDailySun:
       "الإنتاج الشمسي اليومي: {peak} كيلوواط ساعة لكل كيلوواط من الألواح",
     costNoSeriesTitle: "بيانات التوفير غير متاحة لهذه النتيجة",
