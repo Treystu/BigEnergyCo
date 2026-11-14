@@ -99,7 +99,6 @@ const head = HEAD.split("eskom-fixed-charge-solar-2027")
     /(name="twitter:description"\s*\n?\s*content=")[^"]*(")/,
     `$1${desc}$2`,
   )
-  .replace(/hreflang="en"/g, 'hreflang="bn-BD"')
   .replace(
     /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
     `<script type="application/ld+json">\n${JSON.stringify(ld, null, 2)}\n    </script>`,
