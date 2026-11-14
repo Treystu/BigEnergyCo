@@ -54,6 +54,40 @@ export const HORIZON_YEARS = 20;
 const BANK_LABOUR_PER_KWH = [12, 21, 30];
 
 /**
+ * THE LABOUR AND FEE MODEL, stated with its grade (#401 item 5).
+ *
+ * The regional rows state where their price bands come from; the labour and fee
+ * columns are built from this model on top of them, and until now its basis was
+ * only legible by reading the arithmetic. It is the weakest input in the whole
+ * file, so it says so here rather than borrowing the price rows' grade.
+ *
+ * grade C = a planning estimate from posted trade rates, not a survey: no
+ * source in this repository measured hours on installed jobs. What would raise
+ * it: a cited hours-per-kW dataset (or the visitor's own quotes) fitting the
+ * three terms below. What would LOWER the card's honesty: presenting these as
+ * quote-grade. `elecRate` itself is a band, so the low end of a path is a cheap
+ * market's rate at the cheap end of the hours model - not a claim that anyone
+ * will be quoted it.
+ */
+export const LABOUR_MODEL = Object.freeze({
+  grade: "C",
+  basis:
+    "electrician rate band x modelled hours: base visit + per kW of PV + per kWh of battery; connection-only for the DIY path",
+  columns: Object.freeze([
+    "elecRate",
+    "elecBaseH",
+    "elecPerKwH",
+    "elecPerKwhH",
+    "connectBaseH",
+    "connectPerKwhH",
+    "permit",
+    "inspection",
+    "interconnection",
+    "diyTools",
+  ]),
+});
+
+/**
  * Degradation (plan §6.4): E_1 = E_sim x (1 - d_1), E_y = E_1 x (1 - d_ann)^(y-1).
  * The defaults are the cited PVWatts values, and they are defaults: nothing
  * presents them as a measurement of the visitor's own array.
@@ -856,6 +890,16 @@ export function canonicalBriefLine(base, route) {
   return line;
 }
 
+/**
+ * A breakdown row for a total that is all-in by construction (the benchmark and
+ * the lease down payment). The labour and fees are inside the number rather
+ * than absent from it, which the `included` list states so no reader - and no
+ * test - mistakes a structural zero for a missing line item.
+ */
+function allIn(usd) {
+  return { hardware: Math.round(usd), labour: 0, fees: 0, tools: 0 };
+}
+
 function newPath(id, registry) {
   return {
     id,
@@ -943,6 +987,15 @@ function priceOne(id, sys, ctx, region, registry, legality) {
         bandEnd(registry.tkInvPerKw, 2),
       ),
     );
+    // #401 item 5: every published total reconstructs from its line items. For
+    // the benchmark the labour and fees are INSIDE the all-in figure rather
+    // than zero-valued line items, so the breakdown says so explicitly instead
+    // of leaving four numbers that silently do not add up to the total.
+    p.parts = {
+      low: allIn(p.year0Low),
+      mid: allIn(p.year0),
+      high: allIn(p.year0High),
+    };
     addOwnerRecurring(p, sys, registry, p.year0);
     p.incentiveEntries = incentivesFor(region, id);
     p.incentives = incentiveValue(p.incentiveEntries, p.year0);
@@ -977,6 +1030,11 @@ function priceOne(id, sys, ctx, region, registry, legality) {
       installed * bandEnd(schedule.terms.downPaymentPct, 2),
     );
     p.hardware = p.year0;
+    p.parts = {
+      low: allIn(p.year0Low),
+      mid: allIn(p.year0),
+      high: allIn(p.year0High),
+    };
     p.recurringByYear = schedule.years;
     // The provider owns and maintains it: no O&M, no inverter swap, no bank
     // replacement on the visitor's account.
@@ -1030,20 +1088,34 @@ function priceOne(id, sys, ctx, region, registry, legality) {
     bandEnd(registry.permit, idx) +
     bandEnd(registry.inspection, idx) +
     bandEnd(registry.interconnection, idx);
-  const toolsMid = id === "diy" ? bandMid(registry.diyTools) : 0;
-  const toolsHigh = id === "diy" ? bandEnd(registry.diyTools, 2) : 0;
 
-  p.hardware = Math.round(hwMid);
-  p.labour = Math.round(labourMid);
-  p.fees = Math.round(fees(1));
-  p.tools = Math.round(toolsMid);
-  p.year0 = p.hardware + p.labour + p.fees + p.tools;
-  p.year0Low = Math.round(
-    hwLow + hours * bandEnd(registry.elecRate, 0) + fees(0),
-  );
-  p.year0High = Math.round(
-    hwHigh + hours * bandEnd(registry.elecRate, 2) + fees(2) + toolsHigh,
-  );
+  // #401 item 5: ONE line-item set per bound, and each total is the sum of its
+  // own bound's items. The low end used to be assembled separately and simply
+  // left the DIY tools allowance out, so the card's cheapest possible build
+  // omitted a cost the mid and high figures included - a band that was narrower
+  // at one end because a line item had been forgotten, not because anything was
+  // cheaper. Building all three the same way makes that unrepresentable.
+  const partsAt = (idx, hw) => ({
+    hardware: Math.round(hw),
+    labour: Math.round(hours * bandEnd(registry.elecRate, idx)),
+    fees: Math.round(fees(idx)),
+    tools: Math.round(id === "diy" ? bandEnd(registry.diyTools, idx) : 0),
+  });
+  const total = (b) => b.hardware + b.labour + b.fees + b.tools;
+  const parts = {
+    low: partsAt(0, hwLow),
+    mid: partsAt(1, hwMid),
+    high: partsAt(2, hwHigh),
+  };
+  p.parts = parts;
+
+  p.hardware = parts.mid.hardware;
+  p.labour = parts.mid.labour;
+  p.fees = parts.mid.fees;
+  p.tools = parts.mid.tools;
+  p.year0 = total(parts.mid);
+  p.year0Low = total(parts.low);
+  p.year0High = total(parts.high);
   addOwnerRecurring(p, sys, registry, p.year0);
   p.incentiveEntries = incentivesFor(region, id);
   p.incentives = incentiveValue(p.incentiveEntries, p.year0);
