@@ -28,7 +28,7 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261114m";
+} from "./engine.js?v=20261114o";
 
 import {
   isUseCaseId,
@@ -41,24 +41,24 @@ import {
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261114m";
-import { memoizeSimulate } from "./sim-cache.js?v=20261114m";
+} from "./usecases.js?v=20261114o";
+import { memoizeSimulate } from "./sim-cache.js?v=20261114o";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261114m";
-import { buildFrontier } from "./frontier.js?v=20261114m";
-import { buyablePrice } from "./bom.js?v=20261114m";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114m";
-import { climateSummary } from "./climate.js?v=20261114m";
+} from "./nasa.js?v=20261114o";
+import { buildFrontier } from "./frontier.js?v=20261114o";
+import { buyablePrice } from "./bom.js?v=20261114o";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114o";
+import { climateSummary } from "./climate.js?v=20261114o";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261114m";
+} from "./pricing.js?v=20261114o";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -69,7 +69,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261114m";
+} from "./money.js?v=20261114o";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -346,7 +346,7 @@ async function fetchWeatherWithFallback(opts) {
     return await fetchWeatherDefault(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261114m");
+      await import("./profiles.js?v=20261114o");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {
@@ -1150,6 +1150,11 @@ async function runSizingUncached(msg, deps = {}) {
         billAfterUsd === null
           ? null
           : Math.round((billAfterUsd - exportVal) / 12),
+
+      // #401: the engine's own annual residual, in whole dollars, so the
+      // adapter's card net and the chart's saving use ONE derivation.
+      residualAnnualUsd:
+        billAfterUsd === null ? null : Math.round(billAfterUsd - exportVal),
       paybackYearsLo:
         savingsUsd !== null
           ? paybackYears(m.cost.lo, savingsUsd + exportVal)
@@ -1436,6 +1441,11 @@ async function runSizingUncached(msg, deps = {}) {
         billAfterUsd === null
           ? null
           : Math.round((billAfterUsd - exportVal) / 12),
+
+      // #401: the engine's own annual residual, in whole dollars, so the
+      // adapter's card net and the chart's saving use ONE derivation.
+      residualAnnualUsd:
+        billAfterUsd === null ? null : Math.round(billAfterUsd - exportVal),
       paybackYearsLo:
         savingsUsd !== null
           ? paybackYears(m.cost.lo, savingsUsd + exportVal)
@@ -1682,6 +1692,11 @@ async function runSizingUncached(msg, deps = {}) {
         d.exportValueAnnualUsd = Math.round(exportV);
         d.billAfterMonthlyUsd =
           billAfter === null ? null : Math.round((billAfter - exportV) / 12);
+        // #401: the frontier detail carries the same un-rounded annual residual
+        // the series is built from, so a card priced off this point cannot
+        // disagree with the chart by a rounding error per year.
+        d.residualAnnualUsd =
+          billAfter === null ? null : Math.round(billAfter - exportV);
         d.cutPct = gridtieCutPct({ pvKw: pt.pvKw, result: pt.result });
         savingsBase =
           billAfter !== null && gridSpend

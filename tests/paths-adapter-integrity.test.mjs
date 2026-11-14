@@ -73,6 +73,36 @@ test("no source carries the residual: null, never a fabricated zero", () => {
   }
 });
 
+test("the engine's own annual residual wins over a monthly reconstruction", () => {
+  // #401 follow-up: the card net was $101 below the chart's saving because the
+  // adapter rebuilt the year from `billAfterMonthlyUsd` (rounded to whole
+  // dollars) AND added the export credit a second time. The run now carries the
+  // engine's own residual, and that is what the adapter must use.
+  const sys = systemForPaths(
+    entry({ billAfterMonthlyUsd: 252, exportValueAnnualUsd: 120 }),
+    {
+      annualBaselineBillsUsd: 1606,
+      annualResidualBillsUsd: 2940,
+      tariff: 0.44,
+    },
+  );
+  assert.equal(sys.annualResidualBillsUsd, 2940);
+  const r = priceAllPaths(sys, { country: "US" });
+  for (const p of r.paths.filter((x) => x.available)) {
+    assert.equal(p.residualBills20, 2940 * HORIZON_YEARS, p.id);
+    assert.equal(p.net20, p.baselineBills20 - 2940 * HORIZON_YEARS - p.spend20);
+  }
+});
+
+test("without that field the monthly reconstruction still applies, unsquared", () => {
+  // The fallback is not deleted: a matrix cell that predates the field, or a
+  // shape with no residual at all, must behave exactly as before.
+  const sys = systemForPaths(entry({ billAfterMonthlyUsd: 100 }), {
+    annualBaselineBillsUsd: 2400,
+  });
+  assert.equal(sys.annualResidualBillsUsd, 100 * 12);
+});
+
 test("the four run shapes each price without a contradicted Unknown", () => {
   // bill-cut, off-grid (no served kWh), battery-only, no-bill (no baseline).
   const shapes = {
