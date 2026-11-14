@@ -48,6 +48,7 @@ import {
   synthesizeFromProfile,
 } from "./nasa.js?v=20261114b";
 import { buildFrontier } from "./frontier.js?v=20261114b";
+import { buyablePrice } from "./bom.js?v=20261114b";
 import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261114b";
 import { climateSummary } from "./climate.js?v=20261114b";
 import {
@@ -762,6 +763,22 @@ async function runSizingUncached(msg, deps = {}) {
       landedF,
       Math.max(sizing.pvKw, invMinKw),
     );
+    // #356: the search optimises a continuous system, the shopping list rounds
+    // up; both limbs of the acceptance bar fired (median +17.3%, smallest
+    // quartile +27.9%), so the payload carries the price of the hardware a
+    // builder actually buys next to the simulated number it is compared to.
+    cost.buyable = buyablePrice({
+      pvKw: sizing.pvKw,
+      battUsableKwh: sizing.battKwh,
+      chemistry: chemId,
+      kwhPerDay: dailyKwh,
+      // Default module class: the payload is a run result and does not carry
+      // the UI's panel-size selection, so this prices the same 550 W module
+      // the audit measured with.
+      costPerWpv: costPerWpvMid,
+      costPerKwhBatt: battMidFor(chemId),
+      costPerKwInv: costPerKwInvMid,
+    });
     const life = lifetimeCostUsd({
       capexMidUsd: cost.objectiveMid,
       battKwhUsable: sizing.battKwh,
@@ -999,6 +1016,7 @@ async function runSizingUncached(msg, deps = {}) {
       pvKw: sizing.pvKw,
       battKwh: sizing.battKwh,
       costLo: m.cost.lo,
+      costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
       costHi: m.cost.hi,
       replacementsHorizon: m.replacementsHorizon,
       swapsAndLaborUsd: m.swapsAndLaborUsd,
@@ -1123,6 +1141,7 @@ async function runSizingUncached(msg, deps = {}) {
       battKwh: sizing.battKwh,
       battNameplateKwh: m.battNameplateKwh,
       costLo: m.cost.lo,
+      costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
       costHi: m.cost.hi,
       cutPct: gridtieCutPct(sizing),
       // Net of the feed-in credit (may go negative = net producer paid).
@@ -1298,6 +1317,8 @@ async function runSizingUncached(msg, deps = {}) {
         battKwh: fBatt,
         battNameplateKwh: m.battNameplateKwh,
         costLo: m.cost.lo,
+        costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+        costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
         costHi: m.cost.hi,
         pvCostLo: m.cost.pvCostLo,
         pvCostHi: m.cost.pvCostHi,
@@ -1397,6 +1418,7 @@ async function runSizingUncached(msg, deps = {}) {
       usableDod: chemObj.usableDod,
       socNameplatePct,
       costLo: m.cost.lo,
+      costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
       costHi: m.cost.hi,
       pvCostLo: m.cost.pvCostLo,
       pvCostHi: m.cost.pvCostHi,
@@ -1626,6 +1648,8 @@ async function runSizingUncached(msg, deps = {}) {
         pvKw: pt.pvKw,
         battKwh: pt.battKwh,
         costLo: m.cost.lo,
+        costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+        costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
         costHi: m.cost.hi,
         replacementsHorizon: m.replacementsHorizon,
         swapsAndLaborUsd: m.swapsAndLaborUsd,
@@ -2496,6 +2520,9 @@ async function runSizingUncached(msg, deps = {}) {
           battKwh: sizing.battKwh,
           battNameplateKwh: m.battNameplateKwh,
           costLo: m.cost.lo,
+          costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+          costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+          costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
           costHi: m.cost.hi,
           unmetHoursPerYear: +(
             sizing.result.worstYearUnmetHours ??
@@ -2595,6 +2622,7 @@ async function runSizingUncached(msg, deps = {}) {
           battKwh: agmHit.sizing.battKwh,
           battNameplateKwh: mAgm.battNameplateKwh,
           costLo: mAgm.cost.lo,
+          costBuyableUsd: mAgm.cost.buyable ? mAgm.cost.buyable.usd : null,
           costHi: mAgm.cost.hi,
           lifetimeCostMid: mAgm.lifetimeCostMid,
           replacementsHorizon: mAgm.replacementsHorizon,
@@ -2747,6 +2775,7 @@ async function runSizingUncached(msg, deps = {}) {
       usableDod: chem.usableDod,
       socNameplatePct,
       costLo: m.cost.lo,
+      costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
       costHi: m.cost.hi,
       pvCostLo: m.cost.pvCostLo,
       pvCostHi: m.cost.pvCostHi,

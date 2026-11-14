@@ -355,3 +355,71 @@ export function buildBom(p) {
     notes,
   };
 }
+
+/**
+ * Price the hardware list a builder would actually have to buy.
+ *
+ * #356 measured the gap between the system the search optimised (continuous
+ * PV kW and battery kWh) and the configuration the shopping list rounds up to,
+ * on the same unit costs: median +17.3%, smallest quartile +27.9%. Both limbs
+ * of the acceptance bar fire, so the payload has to carry the buyable price
+ * next to the simulated one instead of leaving it implicit in the parts list.
+ *
+ * The unit costs are the caller's, and must be the same ones the simulated
+ * cost used (PV per W, battery per USABLE kWh, inverter per kW), with labour
+ * left out of both sides: labour is paid per usable kWh, so folding it in
+ * would price a capacity difference as if it were rounding.
+ */
+export function buyablePrice({
+  pvKw,
+  battUsableKwh,
+  chemistry,
+  kwhPerDay,
+  peakLoadW = null,
+  panelWatts = PANEL_WATTS_DEFAULT,
+  costPerWpv,
+  costPerKwhBatt,
+  costPerKwInv,
+}) {
+  const chem = CHEMISTRIES[chemistry] || CHEMISTRIES.lfp;
+  const battNameplateKwh =
+    battUsableKwh > 0 ? battUsableKwh / chem.usableDod : 0;
+  const bom = buildBom({
+    pvKw,
+    battNameplateKwh,
+    chemistry,
+    // run.js's own fallback when no appliance peak was entered: the daily
+    // mean expressed as an hourly watt figure.
+    peakLoadW: peakLoadW ?? Math.round(((kwhPerDay || 0) * 1000) / 24),
+    peakIsAverage: peakLoadW == null,
+    panelWatts,
+  });
+
+  const panelsKw = bom.panels ? bom.panels.kwActual : 0;
+  // The BOM reports NAMEPLATE capacity; the price is per USABLE kWh, so the
+  // provided capacity is converted before it meets the price (pricing this
+  // nameplate-at-usable would inflate the battery bill by 1/DoD).
+  const providedNameplateKwh = bom.battery ? bom.battery.diy.providedKwh : 0;
+  const providedUsableKwh = providedNameplateKwh * chem.usableDod;
+
+  // The engine costs the inverter on PV kW (Math.max(pvKw, invMinKw)), so the
+  // inverter term is equal on both sides and the delta stays about quantity.
+  const simulatedUsd =
+    pvKw * 1000 * costPerWpv +
+    battUsableKwh * costPerKwhBatt +
+    pvKw * costPerKwInv;
+  const buyableUsd =
+    panelsKw * 1000 * costPerWpv +
+    providedUsableKwh * costPerKwhBatt +
+    pvKw * costPerKwInv;
+
+  return {
+    usd: Math.round(buyableUsd),
+    simulatedUsd: Math.round(simulatedUsd),
+    deltaFraction:
+      simulatedUsd > 0 ? (buyableUsd - simulatedUsd) / simulatedUsd : 0,
+    panelsKw: +panelsKw.toFixed(3),
+    providedUsableKwh: +providedUsableKwh.toFixed(2),
+    inverterKw: bom.inverter ? bom.inverter.recommendedKw : null,
+  };
+}

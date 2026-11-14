@@ -5157,6 +5157,11 @@ function renderBestPick(p) {
   const foot = b.pvKw > 0 ? footprintText(b.pvKw) : null;
   if (foot) rows.push([t("resLblFootprint"), foot]);
   rows.push([t("resCardCostToBuy"), `~${moneyRange(b.costLo, b.costHi)}`]);
+  // #356: the search prices a continuous system; the shopping list rounds up.
+  // Both limbs of the acceptance bar fired, so the buyable price is shown
+  // next to the range instead of only implied by the parts list.
+  if (Number.isFinite(b.costBuyableUsd))
+    rows.push([t("resCardCostBuyable"), money(b.costBuyableUsd)]);
   rows.push([
     t("resLblBatterySwaps"),
     b.replacementsHorizon > 0
@@ -6065,6 +6070,8 @@ function entryDetailRows(p, e) {
     ]);
   }
   rows.push([t("resLblComponentCost"), `~${moneyRange(e.costLo, e.costHi)}`]);
+  if (Number.isFinite(e.costBuyableUsd))
+    rows.push([t("resCardCostBuyable"), money(e.costBuyableUsd)]);
   const baEntry = fmtBillAfter(e.billAfterMonthlyUsd);
   if (baEntry !== null) {
     rows.push([
