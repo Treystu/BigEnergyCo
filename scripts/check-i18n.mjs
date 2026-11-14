@@ -464,7 +464,13 @@ else ok("index.html: every reader-visible prose block has a locale hook");
 // (check-i18n reported 546/510), following the same rule as the two earlier
 // raises; the ceiling tracks the corpus and still flags any block added without
 // this deliberate step.
-const PROSE_CEILING = 546;
+// 546 -> 558 (2026-11-14, measured reason): the Bangladesh post (#378) adds 12
+// visible prose blocks - its own body plus one hub card excerpt - in bn-BD, a
+// language with no runtime string table, so every block counts unkeyed. The
+// raise is the exact 12-block delta at the read that landed it (check-i18n
+// reported 558/546), the same rule as the three earlier raises: the ceiling
+// tracks the corpus and still flags any block added without this step.
+const PROSE_CEILING = 558;
 if (proseFindings.length > PROSE_CEILING) {
   fail(
     `${proseFindings.length} visible prose block(s) on a translated page carry no i18n hook ` +
