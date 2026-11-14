@@ -808,6 +808,54 @@ export function canonicalBase(entry, ctx = {}) {
   };
 }
 
+/**
+ * The advisor brief's canonical sentence (#401 item 1).
+ *
+ * The brief is data handed to a model that is told not to recompute, so a
+ * basket it is given becomes a basket it repeats to the visitor. Before this it
+ * received only the engine's per-entry figures - the parts basket - while the
+ * cards below said "20-year cost (installed, bills not included)", so the
+ * advisor could contradict the page in a sentence the page itself invited.
+ *
+ * Pure and DOM-free so it can be tested: give it the run's base (canonicalBase)
+ * and the winning route, get the line that names both baskets and forbids the
+ * swap. Nulls are said out loud rather than omitted, because a missing figure in
+ * a brief reads as a zero to a model.
+ */
+export function canonicalBriefLine(base, route) {
+  if (!base) return "";
+  const n = (v) => (Number.isFinite(v) ? Math.round(v) : null);
+  const parts = [];
+  // Sizes keep their decimals: rounding 1.92 kW to "2 kW" in a brief the model
+  // is told not to recompute would have it describe a different system.
+  const size = (v) => (Number.isFinite(v) ? +Number(v).toFixed(2) : 0);
+  parts.push(
+    `CANONICAL FIGURES for this run (one source; quote these, do not recompute): ` +
+      `${size(base.pvKw)} kW PV + ${size(base.battKwh)} kWh usable`,
+  );
+  if (n(base.annualBaselineBillsUsd) !== null)
+    parts.push(`current bill ${n(base.annualBaselineBillsUsd)}/yr`);
+  if (n(base.annualResidualBillsUsd) !== null)
+    parts.push(`remaining bill ${n(base.annualResidualBillsUsd)}/yr`);
+  if (Number.isFinite(base.billCutPct))
+    parts.push(`bill cut ${n(base.billCutPct)}%`);
+  if (n(base.baselineBills20) !== null)
+    parts.push(
+      `over ${base.horizonYears} years: baseline ${n(base.baselineBills20)}`,
+    );
+  if (n(base.residualBills20) !== null)
+    parts.push(`remaining ${n(base.residualBills20)}`);
+  let line = `${parts.join("; ")}.`;
+  if (route)
+    line +=
+      ` CHEAPEST INSTALLED ROUTE ("${route.id}"): 20-year cost ${n(route.spend20)} ` +
+      `(equipment, labour, permits and upkeep; grid bills NOT included), ` +
+      `net over 20 years ${n(route.net20)}, break-even year ${route.breakEvenYear ?? "not within 20 years"}.`;
+  line +=
+    " The parts list and the installed total are DIFFERENT baskets: never present the parts figure as the system's 20-year cost, and never add the two together.";
+  return line;
+}
+
 function newPath(id, registry) {
   return {
     id,
