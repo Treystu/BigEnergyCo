@@ -41,6 +41,19 @@ import {
 const SOUND_FLAG_MAX = 0.05;
 const BROKEN_PASS_MAX = 0.05;
 
+// #358's acceptance asks for a SOUND corpus of at least 50 cases. The shape is
+// cities x modes x loads, so the count is 6 per city: the original six gave 36,
+// which is below the issue's own floor and would have left the sound-flag rate
+// measured on an undersized sample. Nine cities give 54.
+//
+// The three added cover climates the original six do not, because the other
+// half of this item is about plausible-BUT-UNUSUAL systems - the cases a
+// threshold frozen on three probes is most likely to false-flag:
+//   Bangkok, Thailand   - hot humid tropical coast
+//   Auckland, New Zealand - southern-hemisphere temperate maritime
+//   Cusco, Peru         - high-altitude tropical (thin air, strong irradiance)
+// Every name must exist in OFFLINE_PROFILES; profileFor() throws otherwise, so
+// this list cannot silently drift away from the profile set.
 const CORPUS = [
   "Nairobi, Kenya",
   "Honolulu, USA",
@@ -48,6 +61,9 @@ const CORPUS = [
   "London, UK",
   "Berlin, Germany",
   "Delhi, India",
+  "Bangkok, Thailand",
+  "Auckland, New Zealand",
+  "Cusco, Peru",
 ];
 const MODES = ["gridtie", "offgrid"];
 const LOADS = [10, 15, 25];
