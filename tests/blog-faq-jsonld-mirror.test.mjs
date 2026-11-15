@@ -36,7 +36,8 @@ test("every blog FAQPage mirrors the FAQ its page shows", () => {
 });
 
 test("the load-shedding questions are only on the load-shedding article", () => {
-  const templateQuestion = "What size solar system do I need for load shedding?";
+  const templateQuestion =
+    "What size solar system do I need for load shedding?";
   const page = "blog/escape-load-shedding/index.html";
   const loader = (p) => readFileSync(join(ROOT, p), "utf8");
   const questions = visibleFaq(loader(page)).map((q) => q.question);

@@ -37,22 +37,24 @@ const BLOG = join(ROOT, "blog");
 
 /** Visible text -> the text a JSON string should carry. */
 export function normalize(text) {
-  return text
-    // Tags are removed with NOTHING, not a space: the FAQ answers wrap words
-    // in <a>, <strong> and <em>, and a space here turns "guide.</a>" into the
-    // "guide ." that made this check report a difference on pages whose text
-    // was identical. Word boundaries survive because the source already has
-    // the spaces around those inline runs.
-    .replace(/<[^>]*>/g, "")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#3[49];/g, "'")
-    .replace(/&[a-z]+;/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  return (
+    text
+      // Tags are removed with NOTHING, not a space: the FAQ answers wrap words
+      // in <a>, <strong> and <em>, and a space here turns "guide.</a>" into the
+      // "guide ." that made this check report a difference on pages whose text
+      // was identical. Word boundaries survive because the source already has
+      // the spaces around those inline runs.
+      .replace(/<[^>]*>/g, "")
+      .replace(/&nbsp;/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#3[49];/g, "'")
+      .replace(/&[a-z]+;/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+  );
 }
 
 /** The <details> FAQ the visitor sees, in document order. */
@@ -129,12 +131,17 @@ export function syncPage(html) {
   const pairs = visibleFaq(html);
   const faqAt = html.search(/"@type":\s*"FAQPage"/);
   if (faqAt < 0) {
-    return { changed: false, html, reason: pairs.length ? "no-faqpage" : "no-faq" };
+    return {
+      changed: false,
+      html,
+      reason: pairs.length ? "no-faqpage" : "no-faq",
+    };
   }
   if (!pairs.length) return { changed: false, html, reason: "no-visible-faq" };
 
   const mainEntityAt = html.indexOf('"mainEntity"', faqAt);
-  if (mainEntityAt < 0) return { changed: false, html, reason: "no-mainentity" };
+  if (mainEntityAt < 0)
+    return { changed: false, html, reason: "no-mainentity" };
   const openAt = html.indexOf("[", mainEntityAt);
   if (openAt < 0) return { changed: false, html, reason: "no-mainentity" };
   const closeAt = matchBracket(html, openAt);
@@ -191,7 +198,9 @@ if (invokedDirectly) {
   }
   for (const f of findings) {
     const rel = f.path.slice(ROOT.length + 1).replace(/\\/g, "/");
-    console.log(`faq-jsonld: ${rel} [${f.reason}] ${f.pairs} visible questions`);
+    console.log(
+      `faq-jsonld: ${rel} [${f.reason}] ${f.pairs} visible questions`,
+    );
   }
   if (check) {
     console.error(
