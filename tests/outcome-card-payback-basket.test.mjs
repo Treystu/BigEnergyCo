@@ -74,3 +74,28 @@ test("the installed row is read from the priced routes, not recomputed", () => {
     "the installed payback is not re-derived from the parts basket",
   );
 });
+
+// The installed row needs the priced routes, which resolve AFTER the first paint,
+// so renderPathSurfaces repaints the card. Ungated, that repaint lands on a card
+// the visitor did not ask for: selecting another system puts the selected-system
+// banner (with its reset button) in the same wrapper, and repainting `p.best`
+// there replaced it while the charts, parts list and priced routes below still
+// described the selected system.
+test("the priced-route repaint never overwrites a selected system's banner", () => {
+  const src = fs.readFileSync("assets/js/sizing/ui.js", "utf8");
+  const at = src.indexOf("p.pathsPricedFor =");
+  assert.notEqual(
+    at,
+    -1,
+    "renderPathSurfaces must record which system the routes priced",
+  );
+  const block = src.slice(at, at + 1200);
+  assert.ok(
+    block.includes("if (bp && p.best && sameSystem(sys, p.best)) {"),
+    "the bestPickWrap repaint must be gated on the selection being the recommendation - otherwise it clobbers the selected-system banner and drops its reset button",
+  );
+  assert.ok(
+    !block.includes("if (bp && p.best) {"),
+    "ungated repaint of the recommendation card is back",
+  );
+});
