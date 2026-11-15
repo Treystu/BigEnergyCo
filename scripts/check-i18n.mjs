@@ -487,7 +487,13 @@ else ok("index.html: every reader-visible prose block has a locale hook");
 // hub card excerpt - so the ceiling moves by the exact delta check-i18n
 // reported at the read that landed it (663/635), the same rule as the seven
 // earlier raises.
-const PROSE_CEILING = 663;
+// 663 -> 666 (2026-11-15, measured reason): the Spanish IRPF guide gains a
+// three-item "Fuentes" list - the primary sources Codex asked for on #373 as
+// its P1. The ceiling moves by the exact delta check-i18n reported at the read
+// that added it (666/663), the same rule as the eight earlier raises. The three
+// blocks are Spanish prose on a Spanish article, unkeyed for the same reason as
+// every other article body here: the nav claims translation, the bodies do not.
+const PROSE_CEILING = 666;
 if (proseFindings.length > PROSE_CEILING) {
   fail(
     `${proseFindings.length} visible prose block(s) on a translated page carry no i18n hook ` +
