@@ -9,6 +9,7 @@ import {
   visibleFaq,
   normalize,
   syncPage,
+  classify,
 } from "../scripts/sync-faq-jsonld.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -27,11 +28,20 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 // its reader is a question in its structured data, word for word.
 
 test("every blog FAQPage mirrors the FAQ its page shows", () => {
-  const drifted = run({ check: true });
+  const { rewrites, errors } = run({ check: true });
+  const rel = (d) => d.path.slice(ROOT.length + 1).replace(/\\/g, "/");
   assert.deepEqual(
-    drifted.map((d) => d.path.slice(ROOT.length + 1).replace(/\\/g, "/")),
+    rewrites.map(rel),
     [],
     "structured data differs from the visible FAQ; run node scripts/sync-faq-jsonld.mjs",
+  );
+  // Codex P2 on #428: a page that lost ONE of the two representations was
+  // reported as `changed: false` and dropped, so a FAQPage that outlived its
+  // visible FAQ passed this gate. It is a mismatch, not a skip.
+  assert.deepEqual(
+    errors.map(rel),
+    [],
+    "a page carries one representation but not the other; a rewrite cannot invent the missing side",
   );
 });
 
@@ -99,4 +109,35 @@ test("a page whose visible FAQ changes is reported, not silently accepted", () =
   const { changed, reason } = syncPage(html);
   assert.equal(changed, true);
   assert.equal(reason, "drifted");
+});
+
+// The two mismatch shapes the mirror cannot repair by rewriting. Both used to
+// return `changed: false` and therefore passed, which made the gate silent on
+// exactly the defect it was built for: structured data that outlived the FAQ it
+// describes, or a FAQ whose structured data went missing.
+test("a visible FAQ with no FAQPage is a failure, not a skip", () => {
+  const html = "<html><body><details><summary>Q?</summary><p>A.</p></details></body></html>";
+  const result = syncPage(html);
+  assert.equal(result.reason, "no-faqpage");
+  assert.equal(classify(result), "error");
+});
+
+test("a FAQPage that outlived its visible FAQ is a failure, not a skip", () => {
+  const html = [
+    "<html><body>",
+    '<script type="application/ld+json">',
+    '{"@graph":[{"@type":"FAQPage","mainEntity":[' +
+      '{"@type":"Question","name":"Q?","acceptedAnswer":{"@type":"Answer","text":"A."}}]}]}',
+    "</script>",
+    "</body></html>",
+  ].join("\n");
+  const result = syncPage(html);
+  assert.equal(result.reason, "no-visible-faq");
+  assert.equal(classify(result), "error");
+});
+
+test("a page with neither representation stays out of scope", () => {
+  const result = syncPage("<html><body>no faq here</body></html>");
+  assert.equal(result.reason, "no-faq");
+  assert.equal(classify(result), "ok");
 });

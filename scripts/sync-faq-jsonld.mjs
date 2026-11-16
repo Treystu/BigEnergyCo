@@ -57,7 +57,28 @@ export function normalize(text) {
   );
 }
 
-/** The <details> FAQ the visitor sees, in document order. */
+/**
+ * A <details> FAQ, and the second shape the blog ships: a `.faq-item` wrapping a
+ * `.faq-question` and a `.faq-answer`. Two articles (the battery-longevity
+ * reference and the sodium-ion comparison) use the second, and a matcher that
+ * only knew the first reported their CORRECT FAQPage as markup with no visible
+ * FAQ - the same class of false positive as the CRLF and inline-tag traps below.
+ * Both shapes are the FAQ the visitor sees, so both are read.
+ */
+function faqItemPairs(html) {
+  const out = [];
+  const re =
+    /<div[^>]*class="faq-item"[^>]*>\s*<div[^>]*class="faq-question"[^>]*>([\s\S]*?)<\/div>\s*<div[^>]*class="faq-answer"[^>]*>([\s\S]*?)<\/div>/gi;
+  let m;
+  while ((m = re.exec(html))) {
+    const question = normalize(m[1]);
+    const answer = normalize(m[2]);
+    if (question && answer) out.push({ question, answer });
+  }
+  return out;
+}
+
+/** The FAQ the visitor sees, in document order, from either shipped shape. */
 export function visibleFaq(html) {
   const out = [];
   const re = /<details\b[^>]*>([\s\S]*?)<\/details>/gi;
@@ -71,7 +92,7 @@ export function visibleFaq(html) {
     const answer = normalize(a[1]);
     if (question && answer) out.push({ question, answer });
   }
-  return out;
+  return out.length ? out : faqItemPairs(html);
 }
 
 /** Index of the ']' that closes the '[' at `open`, ignoring strings. */
@@ -167,9 +188,34 @@ export function pages() {
     .map((d) => join(BLOG, d.name, "index.html"));
 }
 
-/** Run over the tree. Returns the findings, without touching disk when check. */
+/**
+ * A page state the mirror cannot repair by rewriting: one of the two
+ * representations is ABSENT while the other is present, so there is nothing to
+ * copy from. These are failures, not skips - a page whose FAQPage outlived its
+ * visible FAQ is exactly the misleading-markup case this script exists to stop,
+ * and it used to pass silently because `changed` was false.
+ */
+export const MISMATCH_REASONS = new Set([
+  "no-faqpage",
+  "no-visible-faq",
+  "no-mainentity",
+  "unbalanced",
+]);
+
+/** "ok" (nothing to do) | "rewrite" (drifted, repairable) | "error" (mismatch). */
+export function classify(result) {
+  if (result.changed) return "rewrite";
+  return MISMATCH_REASONS.has(result.reason) ? "error" : "ok";
+}
+
+/**
+ * Run over the tree. Returns { rewrites, errors }, without touching disk when
+ * check. A page with NEITHER representation (reason "no-faq") is genuinely out
+ * of scope and stays a skip.
+ */
 export function run({ check }) {
-  const findings = [];
+  const rewrites = [];
+  const errors = [];
   for (const path of pages()) {
     let html;
     try {
@@ -178,12 +224,16 @@ export function run({ check }) {
       continue;
     }
     const result = syncPage(html);
-    if (result.changed) {
-      findings.push({ path, reason: result.reason, pairs: result.pairs });
-      if (!check) writeFileSync(path, result.html);
+    const kind = classify(result);
+    if (kind === "error") {
+      errors.push({ path, reason: result.reason });
+      continue;
     }
+    if (kind !== "rewrite") continue;
+    rewrites.push({ path, reason: result.reason, pairs: result.pairs });
+    if (!check) writeFileSync(path, result.html);
   }
-  return findings;
+  return { rewrites, errors };
 }
 
 const invokedDirectly =
@@ -191,15 +241,20 @@ const invokedDirectly =
 
 if (invokedDirectly) {
   const check = process.argv.includes("--check");
-  const findings = run({ check });
-  if (!findings.length) {
+  const rel = (p) => p.slice(ROOT.length + 1).replace(/\\/g, "/");
+  const { rewrites, errors } = run({ check });
+  if (!rewrites.length && !errors.length) {
     console.log("faq-jsonld: every FAQPage matches the FAQ its page shows");
     process.exit(0);
   }
-  for (const f of findings) {
-    const rel = f.path.slice(ROOT.length + 1).replace(/\\/g, "/");
+  for (const f of rewrites) {
     console.log(
-      `faq-jsonld: ${rel} [${f.reason}] ${f.pairs} visible questions`,
+      `faq-jsonld: ${rel(f.path)} [${f.reason}] ${f.pairs} visible questions`,
+    );
+  }
+  for (const f of errors) {
+    console.log(
+      `faq-jsonld: ${rel(f.path)} [${f.reason}] one representation is missing`,
     );
   }
   if (check) {
@@ -209,5 +264,13 @@ if (invokedDirectly) {
     );
     process.exit(1);
   }
-  console.log(`faq-jsonld: rewrote ${findings.length} page(s)`);
+  console.log(`faq-jsonld: rewrote ${rewrites.length} page(s)`);
+  if (errors.length) {
+    console.error(
+      `faq-jsonld: ${errors.length} page(s) carry one representation and not ` +
+        "the other; a rewrite cannot invent the missing side, so they are " +
+        "reported and the run fails.",
+    );
+    process.exit(1);
+  }
 }
