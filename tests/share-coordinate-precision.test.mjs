@@ -18,8 +18,7 @@ import {
 
 const ui = fs.readFileSync("assets/js/sizing/ui.js", "utf8");
 
-const roundTrip = (state) =>
-  parseShareHash(SHARE_PREFIX + b64urlEncode(state));
+const roundTrip = (state) => parseShareHash(SHARE_PREFIX + b64urlEncode(state));
 
 test("a share link keeps the coordinate to five decimals", () => {
   // Kehena Beach, Pahoa HI - the coordinate from the issue.
