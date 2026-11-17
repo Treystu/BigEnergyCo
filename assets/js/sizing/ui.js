@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261116d";
+import { APPLIANCES } from "./appliances.js?v=20261117a";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261116d";
+} from "./pwa-install.js?v=20261117a";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261116d";
+} from "./usecases.js?v=20261117a";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261116d";
+} from "./run-coordinator.js?v=20261117a";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261116d";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261116d";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261116d";
+} from "./mode-chrome.js?v=20261117a";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261117a";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261117a";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261116d";
+} from "./location-picker.js?v=20261117a";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261116d";
+} from "./pricing.js?v=20261117a";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261116d";
+import { currencyForCountry } from "./country-currency.js?v=20261117a";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261116d";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117a";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +83,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261116d").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261117a").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261116d";
+} from "./lead-acid.js?v=20261117a";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261116d";
+} from "./bom.js?v=20261117a";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261116d";
+import { BOM_ITEMS } from "../shared/content.js?v=20261117a";
 
 import {
   applyI18n,
@@ -111,18 +111,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261116d";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261116d";
-import { byId as $, el } from "../shared/dom.js?v=20261116d";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261116d";
+} from "../shared/i18n.js?v=20261117a";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261117a";
+import { byId as $, el } from "../shared/dom.js?v=20261117a";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261117a";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261116d";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261116d";
+} from "../shared/simple-mode.js?v=20261117a";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261117a";
 import {
   advisorJevContext,
   interpretSanity,
@@ -130,29 +130,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261116d";
+} from "./validate.js?v=20261117a";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261116d";
+} from "../shared/cut-targets.js?v=20261117a";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261116d";
+} from "./share-codec.js?v=20261117a";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261116d";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261116d";
+} from "./infeasible-copy.js?v=20261117a";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261117a";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261116d";
+} from "./fuel-units.js?v=20261117a";
 
 import {
   createLeafletProvider,
@@ -160,18 +160,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261116d";
+} from "./map-provider.js?v=20261117a";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261116d";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261116d";
+} from "./wizard.js?v=20261117a";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261117a";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261116d";
+} from "./budget-span.js?v=20261117a";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -183,10 +183,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261116d"),
-      import("./charts.js?v=20261116d"),
-      import("./frontier-chart.js?v=20261116d"),
-      import("./rescale.js?v=20261116d"),
+      import("./engine.js?v=20261117a"),
+      import("./charts.js?v=20261117a"),
+      import("./frontier-chart.js?v=20261117a"),
+      import("./rescale.js?v=20261117a"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -254,9 +254,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261116d";
+} from "./money.js?v=20261117a";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261116d";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261117a";
 
 let worker = null;
 
@@ -1573,6 +1573,9 @@ function repaintRuntimeCopy() {
   // idempotent and costs nothing.
   setLoadPanel();
   applyUseCase(selectedUseCase(), { silent: true });
+  // #448: the appliance rows are built during setup, before the deferred
+  // dictionary lands, so their watt/hour badges kept the echoed keys.
+  for (const repaint of applianceRepainters) repaint();
   // The results panel is assembled by JS and applyI18n only rewrites data-i18n markup,
   // so switching language left the caption, the tariff line and the frontier verdict in
   // the previous language: one page, two languages. Re-rendering the payload costs
@@ -1638,10 +1641,24 @@ function updateLoadReadout() {
   }
 }
 
+// #448: the appliance picker paints its watt and hours badges from t() while it
+// is being BUILT, and it is built during setup - before the deferred dictionary
+// resolves. translate() echoes the key until then (deliberately: echoing is a
+// signal, not a translation), so every row shipped "apWatts", "apWattsRunning"
+// and "fmtHoursDay" to the visitor while the kWh/day figures beside them were
+// correct. Every other runtime-painted surface is repainted after applyI18n()
+// through repaintRuntimeCopy; the rows were not, and no test could see it
+// because the text is only wrong for the life of a page nobody re-renders.
+// The registry below is how the rows join that repaint without a rebuild: a
+// rebuild would drop the visitor's ticks and quantities, which live in the DOM.
+const applianceRepainters = [];
+
 function renderAppliances() {
   const list = $("applianceList");
 
   list.innerHTML = "";
+
+  applianceRepainters.length = 0;
 
   for (const grp of APPLIANCES) {
     const gEl = el(
@@ -1763,6 +1780,22 @@ function renderAppliances() {
       );
 
       hrsWrap.append(hrs, hrsLabel);
+
+      // Repaint ONLY the copy, never refresh(): refresh would mark a fresh
+      // result stale, and a language switch changes no number on this page.
+      applianceRepainters.push(() => {
+        watts.textContent = it.duty
+          ? t("apWattsRunning", { w: it.w })
+          : t("apWatts", { w: it.w });
+        hrsLabel.textContent = (it.duty ? "runs " : "") + fmtH(it.h);
+        if (cb.checked) {
+          const h = parseFloat(row.dataset.h);
+          const kwh = (it.w * parseInt(row.dataset.qty, 10) * h) / 1000;
+          let txt = t("apKwhDay", { kwh: fmtKwh(kwh) });
+          if (it.duty) txt += t("apAvgW", { w: Math.round((it.w * h) / 24) });
+          sub.textContent = txt;
+        }
+      });
 
       const sub = el(
         "span",
@@ -3957,7 +3990,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261116d",
+      "./assets/js/sizing/sizing-worker.js?v=20261117a",
       {
         type: "module",
       },
@@ -9259,11 +9292,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261116d")
+    import("../shared/translation-suggestion-loader.js?v=20261117a")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261116d"),
+          () => import("../translation-suggestion.js?v=20261117a"),
         );
       })
       .catch(() => {});
