@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261117c";
+import { APPLIANCES } from "./appliances.js?v=20261117d";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261117c";
+} from "./pwa-install.js?v=20261117d";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261117c";
+} from "./usecases.js?v=20261117d";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261117c";
+} from "./run-coordinator.js?v=20261117d";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261117c";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261117c";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261117c";
+} from "./mode-chrome.js?v=20261117d";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261117d";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261117d";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261117c";
+} from "./location-picker.js?v=20261117d";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261117c";
+} from "./pricing.js?v=20261117d";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261117c";
+import { currencyForCountry } from "./country-currency.js?v=20261117d";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117c";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117d";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +83,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261117c").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261117d").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261117c";
+} from "./lead-acid.js?v=20261117d";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261117c";
+} from "./bom.js?v=20261117d";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261117c";
+import { BOM_ITEMS } from "../shared/content.js?v=20261117d";
 
 import {
   applyI18n,
@@ -111,18 +111,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261117c";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261117c";
-import { byId as $, el } from "../shared/dom.js?v=20261117c";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261117c";
+} from "../shared/i18n.js?v=20261117d";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261117d";
+import { byId as $, el } from "../shared/dom.js?v=20261117d";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261117d";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261117c";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261117c";
+} from "../shared/simple-mode.js?v=20261117d";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261117d";
 import {
   advisorJevContext,
   interpretSanity,
@@ -130,29 +130,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261117c";
+} from "./validate.js?v=20261117d";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261117c";
+} from "../shared/cut-targets.js?v=20261117d";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261117c";
+} from "./share-codec.js?v=20261117d";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261117c";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261117c";
+} from "./infeasible-copy.js?v=20261117d";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261117d";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261117c";
+} from "./fuel-units.js?v=20261117d";
 
 import {
   createLeafletProvider,
@@ -160,18 +160,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261117c";
+} from "./map-provider.js?v=20261117d";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261117c";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261117c";
+} from "./wizard.js?v=20261117d";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261117d";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261117c";
+} from "./budget-span.js?v=20261117d";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -183,10 +183,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261117c"),
-      import("./charts.js?v=20261117c"),
-      import("./frontier-chart.js?v=20261117c"),
-      import("./rescale.js?v=20261117c"),
+      import("./engine.js?v=20261117d"),
+      import("./charts.js?v=20261117d"),
+      import("./frontier-chart.js?v=20261117d"),
+      import("./rescale.js?v=20261117d"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -254,9 +254,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261117c";
+} from "./money.js?v=20261117d";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261117c";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261117d";
 
 let worker = null;
 
@@ -3994,7 +3994,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261117c",
+      "./assets/js/sizing/sizing-worker.js?v=20261117d",
       {
         type: "module",
       },
@@ -6411,6 +6411,33 @@ function currentPanelWatts() {
   return Number.isFinite(v) && v >= 50 ? v : PANEL_WATTS_DEFAULT;
 }
 
+// "Prebuilt alternative" has to be an alternative to the bank that was sized:
+// what it provides, and how far that sits from the target. A rack module quoted
+// against a 1.2 kWh off-grid bank provided 5.12 kWh, and the row said only
+// "1 × 5.12 kWh rack modules" — four times the build, with nothing on screen
+// saying so (#446).
+function retailRowText(retail, targetKwh) {
+  if (!retail) return "";
+  const head = `${retail.modules} \u00D7 ${retail.unitLabel}`;
+  const provided = Number(retail.providedKwh) || 0;
+  const target = Number(targetKwh) || 0;
+  if (!(provided > 0) || !(target > 0))
+    return `${head} = ${fmt(provided)} kWh nameplate`;
+  const pct = Math.round(((provided - target) / target) * 100);
+  const fig = `${fmt(provided)} kWh nameplate`;
+  const tail =
+    pct > 5
+      ? `= ${fig}, ${pct}% over the ~${fmt(target)} kWh target`
+      : `= ${fig}, within ${Math.max(0, pct)}% of the ~${fmt(target)} kWh target`;
+  // When one unit is already well past the ask, say which path is honest at
+  // that size rather than letting the visitor assume there is a smaller one.
+  const note =
+    retail.modules === 1 && provided > target * 1.5
+      ? " The smallest prebuilt unit in this voltage class is already this size — at this bank the DIY list is the closer match."
+      : "";
+  return `${head} ${tail}.${note}`;
+}
+
 function buildFocusBom() {
   const p = lastPayload;
   // The hardware list follows the SELECTED system, not just the default pick.
@@ -6506,7 +6533,7 @@ function renderBomPanel() {
         bom.battery.retail
           ? [
               "Prebuilt alternative",
-              `${bom.battery.retail.modules} \u00D7 ${bom.battery.retail.unitLabel}`,
+              retailRowText(bom.battery.retail, f.battNameplateKwh),
             ]
           : null,
         [
@@ -9303,11 +9330,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261117c")
+    import("../shared/translation-suggestion-loader.js?v=20261117d")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261117c"),
+          () => import("../translation-suggestion.js?v=20261117d"),
         );
       })
       .catch(() => {});

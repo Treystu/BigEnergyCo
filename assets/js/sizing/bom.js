@@ -7,8 +7,8 @@
 // Every number here is an EDUCATIONAL estimate with documented assumptions.
 // Real designs must be verified by a licensed electrician or engineer.
 
-import { CHEMISTRIES } from "./chem-model.js?v=20261117c";
-import { POWMR_CATALOG } from "./pricing.js?v=20261117c";
+import { CHEMISTRIES } from "./chem-model.js?v=20261117d";
+import { POWMR_CATALOG } from "./pricing.js?v=20261117d";
 
 // ── Constants (shown in the UI's arithmetic panel) ──────────────────────────
 
@@ -56,6 +56,29 @@ const DIY_CELLS = {
 };
 const AGM_BLOCK = { blockV: 12, blockAh: 200 }; // 12 V × 200 Ah = 2.4 kWh each
 export const RETAIL_MODULE_KWH = 5.12; // PowMr-class 51.2 V rack unit
+
+// Prebuilt formats by bus class, smallest unit first. The 51.2 V rack module is
+// the house-scale answer, not the universal one: quoted against a 1.2 kWh
+// off-grid bank it sells 5.12 kWh — more than four times what the sizing
+// justified — and in a bus the rest of that system does not use (#446). The
+// same shelf carries 12 V 100-200 Ah and 24 V 100-200 Ah prebuilt units, which
+// is what the DIY path already assumes at those voltages.
+const RETAIL_UNITS = {
+  12: [
+    { kwh: 1.28, label: "12 V 100 Ah deep-cycle battery units (BMS included)" },
+    { kwh: 2.56, label: "12 V 200 Ah deep-cycle battery units (BMS included)" },
+  ],
+  24: [
+    { kwh: 2.56, label: "24 V 100 Ah battery units (BMS included)" },
+    { kwh: 5.12, label: "24 V 200 Ah battery units (BMS included)" },
+  ],
+  48: [
+    {
+      kwh: RETAIL_MODULE_KWH,
+      label: `${RETAIL_MODULE_KWH} kWh rack modules (51.2 V, BMS included)`,
+    },
+  ],
+};
 
 // ── Small helpers ────────────────────────────────────────────────────────────
 
@@ -161,20 +184,55 @@ function diyConfig(chemistry, vBatt, nameplateKwh) {
   };
 }
 
-function retailConfig(chemistry, nameplateKwh) {
+/**
+ * The smallest prebuilt configuration that covers `nameplateKwh` in the bus
+ * class the system is wired for — the whole point of an "alternative" is that
+ * it is an alternative to the sized bank, not a larger one.
+ *
+ * Every field the shopping list needs to be honest is returned: the unit format
+ * it picked, how many of them, what those actually provide, and the oversize
+ * ratio. When the smallest unit for the bus is already larger than the ask,
+ * `modules` stays 1 and `oversizeRatio` says by how much, so the caller can
+ * state it instead of leaving a visitor to divide.
+ */
+export function retailConfig(chemistry, nameplateKwh, vBatt = 48) {
+  const target = Math.max(0, Number(nameplateKwh) || 0);
+  const ratio = (provided) =>
+    target > 0 ? +(provided / target).toFixed(2) : null;
   // AGM has no lithium-rack equivalent: quote 12 V blocks, not 51.2 V racks.
   if (chemistry === "agm") {
     const blockKwh = (AGM_BLOCK.blockV * AGM_BLOCK.blockAh) / 1000;
-    const blocks = Math.max(1, Math.ceil(nameplateKwh / blockKwh));
+    const blocks = Math.max(1, Math.ceil(target / blockKwh));
+    const providedKwh = +(blocks * blockKwh).toFixed(2);
     return {
       unitLabel: `12 V ${AGM_BLOCK.blockAh} Ah AGM blocks (no BMS — wire with balancing)`,
       modules: blocks,
+      unitKwh: +blockKwh.toFixed(2),
+      providedKwh,
+      oversizeRatio: ratio(providedKwh),
     };
   }
-  const modules = Math.max(1, Math.ceil(nameplateKwh / RETAIL_MODULE_KWH));
+  const units = RETAIL_UNITS[vBatt] || RETAIL_UNITS[48];
+  // Smallest provided kWh wins; a tie goes to the configuration with fewer
+  // units, so a 5.12 kWh target is one 5.12 kWh unit, not two 2.56 kWh ones.
+  let best = null;
+  for (const unit of units) {
+    const modules = Math.max(1, Math.ceil(target / unit.kwh));
+    const providedKwh = +(modules * unit.kwh).toFixed(2);
+    if (
+      !best ||
+      providedKwh < best.providedKwh - 1e-9 ||
+      (Math.abs(providedKwh - best.providedKwh) < 1e-9 &&
+        modules < best.modules)
+    )
+      best = { unit, modules, providedKwh };
+  }
   return {
-    unitLabel: `${RETAIL_MODULE_KWH} kWh rack modules (51.2 V, BMS included)`,
-    modules,
+    unitLabel: best.unit.label,
+    modules: best.modules,
+    unitKwh: best.unit.kwh,
+    providedKwh: best.providedKwh,
+    oversizeRatio: ratio(best.providedKwh),
   };
 }
 
@@ -301,7 +359,7 @@ export function buildBom(p) {
     : {
         usableDod: chem.usableDod,
         diy: diyConfig(chemistry, volts, p.battNameplateKwh),
-        retail: retailConfig(chemistry, p.battNameplateKwh),
+        retail: retailConfig(chemistry, p.battNameplateKwh, volts),
       };
   if (battery && battery.diy.providedKwh > (p.battNameplateKwh || 0) * 1.25) {
     notes.push(

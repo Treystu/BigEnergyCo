@@ -127,12 +127,16 @@ export function priceDelta({
   // providedKwh field at all. Reading providedKwh off it yields 0 and turns the
   // comparison into "PV plus an inverter" against a full system, which is how
   // the first pass reported retail as 34% CHEAPER than the simulation.
+  // Retail reports providedKwh for the format it actually selected (#446: a
+  // 12 V 1.28 kWh block is not a 5.12 kWh rack). The modules × unit maths stays
+  // only as the fallback for a BOM shape that predates that field.
   const providedNameplateKwh =
     batteryConfig === "diy"
       ? (batt?.providedKwh ?? 0)
-      : chemistry === "agm"
-        ? (batt?.modules ?? 0) * AGM_BLOCK_KWH
-        : (batt?.modules ?? 0) * RETAIL_MODULE_KWH;
+      : (batt?.providedKwh ??
+        (chemistry === "agm"
+          ? (batt?.modules ?? 0) * AGM_BLOCK_KWH
+          : (batt?.modules ?? 0) * RETAIL_MODULE_KWH));
   // `battPerKwh` is a LANDED PRICE PER USABLE kWh (pricing.js:162), and every
   // BOM quantity above is NAMEPLATE. Pricing nameplate at a per-usable price
   // multiplies the battery bill by 1/DoD - 1.25x for LFP, 2x for AGM - which is
