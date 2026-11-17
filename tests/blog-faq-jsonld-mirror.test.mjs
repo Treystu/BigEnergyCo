@@ -116,7 +116,8 @@ test("a page whose visible FAQ changes is reported, not silently accepted", () =
 // exactly the defect it was built for: structured data that outlived the FAQ it
 // describes, or a FAQ whose structured data went missing.
 test("a visible FAQ with no FAQPage is a failure, not a skip", () => {
-  const html = "<html><body><details><summary>Q?</summary><p>A.</p></details></body></html>";
+  const html =
+    "<html><body><details><summary>Q?</summary><p>A.</p></details></body></html>";
   const result = syncPage(html);
   assert.equal(result.reason, "no-faqpage");
   assert.equal(classify(result), "error");
