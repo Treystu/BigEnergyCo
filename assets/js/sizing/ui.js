@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261117a";
+import { APPLIANCES } from "./appliances.js?v=20261117b";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261117a";
+} from "./pwa-install.js?v=20261117b";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261117a";
+} from "./usecases.js?v=20261117b";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261117a";
+} from "./run-coordinator.js?v=20261117b";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261117a";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261117a";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261117a";
+} from "./mode-chrome.js?v=20261117b";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261117b";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261117b";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261117a";
+} from "./location-picker.js?v=20261117b";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261117a";
+} from "./pricing.js?v=20261117b";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261117a";
+import { currencyForCountry } from "./country-currency.js?v=20261117b";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117a";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117b";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +83,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261117a").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261117b").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261117a";
+} from "./lead-acid.js?v=20261117b";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261117a";
+} from "./bom.js?v=20261117b";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261117a";
+import { BOM_ITEMS } from "../shared/content.js?v=20261117b";
 
 import {
   applyI18n,
@@ -111,18 +111,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261117a";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261117a";
-import { byId as $, el } from "../shared/dom.js?v=20261117a";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261117a";
+} from "../shared/i18n.js?v=20261117b";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261117b";
+import { byId as $, el } from "../shared/dom.js?v=20261117b";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261117b";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261117a";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261117a";
+} from "../shared/simple-mode.js?v=20261117b";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261117b";
 import {
   advisorJevContext,
   interpretSanity,
@@ -130,29 +130,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261117a";
+} from "./validate.js?v=20261117b";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261117a";
+} from "../shared/cut-targets.js?v=20261117b";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261117a";
+} from "./share-codec.js?v=20261117b";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261117a";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261117a";
+} from "./infeasible-copy.js?v=20261117b";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261117b";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261117a";
+} from "./fuel-units.js?v=20261117b";
 
 import {
   createLeafletProvider,
@@ -160,18 +160,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261117a";
+} from "./map-provider.js?v=20261117b";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261117a";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261117a";
+} from "./wizard.js?v=20261117b";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261117b";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261117a";
+} from "./budget-span.js?v=20261117b";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -183,10 +183,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261117a"),
-      import("./charts.js?v=20261117a"),
-      import("./frontier-chart.js?v=20261117a"),
-      import("./rescale.js?v=20261117a"),
+      import("./engine.js?v=20261117b"),
+      import("./charts.js?v=20261117b"),
+      import("./frontier-chart.js?v=20261117b"),
+      import("./rescale.js?v=20261117b"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -254,9 +254,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261117a";
+} from "./money.js?v=20261117b";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261117a";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261117b";
 
 let worker = null;
 
@@ -2333,9 +2333,13 @@ function setCoords(lat, lon, label, region, country, skipShareUpdate = false) {
 
   const noteEl = $("locNote");
 
-  if (latEl) latEl.value = Math.round(lat * 100) / 100;
+  // #447: a coordinate written into the fields is what the share hash, the note
+  // and the next reload will carry, so rounding it here to 2 decimals put ~1 km
+  // of ambiguity into a state the visitor can send to somebody else. 5 decimals
+  // is about a metre - more than the map can hit, and still readable.
+  if (latEl) latEl.value = Math.round(lat * 1e5) / 1e5;
 
-  if (lonEl) lonEl.value = Math.round(lon * 100) / 100;
+  if (lonEl) lonEl.value = Math.round(lon * 1e5) / 1e5;
 
   if (noteEl) noteEl.textContent = label;
 
@@ -3990,7 +3994,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261117a",
+      "./assets/js/sizing/sizing-worker.js?v=20261117b",
       {
         type: "module",
       },
@@ -8098,9 +8102,13 @@ function updateShareHash(p, inp) {
     const o = {
       v: 1,
 
-      la: Math.round(inp.latitude * 100) / 100,
+      // #447: the link is the whole point of this state, so it carries the
+      // coordinate the form holds (5 decimals, ~1 m) rather than a 2-decimal
+      // value that lands a kilometre from where the visitor pointed. The codec
+      // validates bounds only, so older 2-decimal links still parse.
+      la: Math.round(inp.latitude * 1e5) / 1e5,
 
-      lo: Math.round(inp.longitude * 100) / 100,
+      lo: Math.round(inp.longitude * 1e5) / 1e5,
 
       kw: Math.round(inp.dailyKwh * 100) / 100,
 
@@ -9216,8 +9224,11 @@ async function initSizingUI() {
           setStatus(t("inputsChanged"));
           if (locNote)
             locNote.textContent = t("customCoordsLocation", {
-              lat: lat.toFixed(2),
-              lon: lon.toFixed(2),
+              // #447: the note states the coordinate the visitor is using; a
+              // 2-decimal note sat next to fields holding more precision and was
+              // the only place the rounding error was visible.
+              lat: Math.round(lat * 1e5) / 1e5,
+              lon: Math.round(lon * 1e5) / 1e5,
             });
           updateShareHash(null, readInputs());
         }, 500);
@@ -9292,11 +9303,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261117a")
+    import("../shared/translation-suggestion-loader.js?v=20261117b")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261117a"),
+          () => import("../translation-suggestion.js?v=20261117b"),
         );
       })
       .catch(() => {});
