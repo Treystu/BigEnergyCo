@@ -37,6 +37,11 @@ const SEAMS = [
   "drawSunStrip",
   "findWorstStreak",
   "cumCostCaptionText",
+  // #445: the zoomed window's calendar labels and the sun strip's window
+  // statistics, both pure so their teeth need no canvas.
+  "dayDateLabel",
+  "sunStripStats",
+  "zoomWindowText",
   // #401: the chart's emerald band takes the winning route's own spend curve,
   // so its endpoint is that route's card total by construction.
   "canonicalCumCostSeries",
@@ -282,7 +287,13 @@ test("rendered chart copy uses each locale for SOC, auto, and cost charts", () =
         " " +
         render(locale, "socCaptionSunStrip");
       assert.equal(getNode("socCaption").textContent, socCaption);
-      assert.ok(texts.includes(render(locale, "chartDailySun", { peak: "4" })));
+      // #445: the strip prints the window's AVERAGE and its best day, so a
+      // single peak can no longer stand in for the window's daily output.
+      assert.ok(
+        texts.includes(
+          render(locale, "chartDailySun", { avg: "4", peak: "4" }),
+        ),
+      );
       assert.ok(
         texts.includes(
           render(locale, "socVerdictGrid", {

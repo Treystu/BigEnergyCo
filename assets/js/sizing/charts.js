@@ -5,7 +5,7 @@
 // `$` (DOM lookup), `el` (element factory), `t` (i18n), `fmt` (number format),
 // `money` (currency formatter). Chart state (socZoomRange, cachedChartState)
 // lives here as the single owner.
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117b";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117c";
 
 // ── injected boundary (set once by ui.js via initCharts) ──────────────────
 let _$;
@@ -85,7 +85,104 @@ export const TIER_NAMES = {
   "auto-lfp": "socTierAutoLfp",
 };
 
-export function drawSunStrip(ctx, pv, X, W, padL, padR, stripH) {
+// ── calendar labels for the zoomed window ────────────────────────────────
+
+// The weather record starts on 1 January of its first year, so day index d is
+// that many days after 1 January — the same mapping renderWorstMonthCaveat
+// already uses for its month name. Day numbers alone ("Day 751") name nothing a
+// visitor can act on: the chart's whole purpose is "which month is my worst",
+// and a month has a name.
+function chartLang() {
+  try {
+    if (typeof document !== "undefined" && document.documentElement?.lang)
+      return document.documentElement.lang;
+  } catch {
+    /* no document: tests, workers */
+  }
+  return "en";
+}
+
+export function dayDateLabel(dayIndex, lang = chartLang()) {
+  const day = Math.max(0, Math.round(Number(dayIndex) || 0));
+  const date = new Date(Date.UTC(2001, 0, 1 + day));
+  const format = (code) =>
+    date.toLocaleDateString(code, {
+      day: "numeric",
+      month: "short",
+      timeZone: "UTC",
+    });
+  try {
+    return format(lang);
+  } catch {
+    // An unknown lang tag throws a RangeError; an English date beats no label.
+    return format("en");
+  }
+}
+
+// The sun strip's two honest figures for the window on screen: what an average
+// day in it yields per kW, and what its best day yielded. The single "peak"
+// number this replaces was the best day of the WHOLE record drawn as if it were
+// the window's daily output — 6.68 kWh/kW/day above a chart whose own stated
+// yield is ~4.98, which reads as an error because it is one: a maximum
+// presented as a typical value.
+export function sunStripStats(
+  pv,
+  start = 0,
+  end = Array.isArray(pv) ? pv.length - 1 : -1,
+) {
+  const lo = Math.max(0, Math.round(Number(start) || 0));
+  const hi = Math.min(
+    Array.isArray(pv) ? pv.length - 1 : -1,
+    Math.round(Number(end) || 0),
+  );
+  let sum = 0,
+    peak = 0,
+    days = 0;
+  for (let i = lo; i <= hi; i++) {
+    const v = Number(pv[i]);
+    if (!Number.isFinite(v)) continue;
+    sum += v;
+    if (v > peak) peak = v;
+    days++;
+  }
+  return {
+    avg: days ? Math.round((sum / days) * 100) / 100 : 0,
+    peak,
+    days,
+  };
+}
+
+// One sentence naming the days AND their calendar dates, so the zoomed view
+// says which month it is showing instead of only its position in the record.
+export function zoomWindowText({
+  start,
+  end,
+  startYear,
+  endYear,
+  lang = chartLang(),
+}) {
+  if (!Number.isFinite(start) || !Number.isFinite(end)) return "";
+  return t("chartZoomWindow", {
+    first: fmt(start + 1),
+    last: fmt(end + 1),
+    from: dayDateLabel(start, lang),
+    to: dayDateLabel(end, lang),
+    startYear: String(startYear ?? ""),
+    endYear: String(endYear ?? ""),
+  });
+}
+
+export function drawSunStrip(
+  ctx,
+  pv,
+  X,
+  W,
+  padL,
+  padR,
+  stripH,
+  windowStart = 0,
+  windowEnd = Array.isArray(pv) ? pv.length - 1 : -1,
+) {
   // Spreading a null/undefined pv throws a TypeError. Nothing to draw without
   // a context and a non-empty series — return early instead of crashing.
   if (!ctx || !Array.isArray(pv) || !pv.length) return;
@@ -132,7 +229,14 @@ export function drawSunStrip(ctx, pv, X, W, padL, padR, stripH) {
   ctx.fillStyle = "#fcd34d";
   ctx.textAlign = "left";
 
-  ctx.fillText(t("chartDailySun", { peak: fmt(pvMax) }), padL + 2, 11);
+  const stats = sunStripStats(pv, windowStart, windowEnd);
+  // maxWidth: a long figure in a long translation must never run off the canvas
+  ctx.fillText(
+    t("chartDailySun", { avg: fmt(stats.avg), peak: fmt(stats.peak) }),
+    padL + 2,
+    11,
+    Math.max(40, W - padL - padR - 4),
+  );
 }
 
 export function drawSocChart(history, chemLabel, hasPv = true) {
@@ -400,7 +504,7 @@ export function drawSocChart(history, chemLabel, hasPv = true) {
 
   const topOffset = stripH + stripGap;
 
-  if (pv) drawSunStrip(ctx, pv, X, W, padL, padR, stripH);
+  if (pv) drawSunStrip(ctx, pv, X, W, padL, padR, stripH, zStart, zEnd);
 
   solvable.forEach((t, idx) => drawBand(t, topOffset + idx * (BAND_H + GAP)));
 
@@ -417,8 +521,8 @@ export function drawSocChart(history, chemLabel, hasPv = true) {
       const x = X(d);
 
       ctx.fillText(
-        t("chartDay", { day: fmt(d + 1) }),
-        Math.min(W - padR - 16, Math.max(padL + 16, x)),
+        dayDateLabel(d),
+        Math.min(W - padR - 20, Math.max(padL + 20, x)),
         H - 2,
       );
     }
@@ -451,6 +555,16 @@ export function drawSocChart(history, chemLabel, hasPv = true) {
     });
     if (gt) caption.textContent += " " + t("socCaptionGridPattern");
     if (pv) caption.textContent += " " + t("socCaptionSunStrip");
+    if (socZoomRange)
+      caption.textContent =
+        zoomWindowText({
+          start: zStart,
+          end: zEnd,
+          startYear: history.startYear,
+          endYear: history.endYear,
+        }) +
+        " " +
+        caption.textContent;
   }
 }
 
@@ -1303,7 +1417,7 @@ export function drawAutoChart(p) {
 
   ctx.restore();
 
-  if (pv) drawSunStrip(ctx, pv, X, W, padL, padR, stripH);
+  if (pv) drawSunStrip(ctx, pv, X, W, padL, padR, stripH, zStart, zEnd);
 
   for (const a of entries) {
     const color = TIER_COLORS[`auto-${a.chemistry}`] || "#888";
@@ -1401,8 +1515,8 @@ export function drawAutoChart(p) {
       const x = X(d);
 
       ctx.fillText(
-        t("chartDay", { day: fmt(d + 1) }),
-        Math.min(W - padR - 16, Math.max(padL + 16, x)),
+        dayDateLabel(d),
+        Math.min(W - padR - 20, Math.max(padL + 20, x)),
         H - 4,
       );
     }
@@ -1488,6 +1602,16 @@ export function drawAutoChart(p) {
         endYear: String(p.history.endYear),
       });
     if (pv) caption.textContent += " " + t("autoSocSunStrip");
+    if (socZoomRange)
+      caption.textContent =
+        zoomWindowText({
+          start: zStart,
+          end: zEnd,
+          startYear: p.history && p.history.startYear,
+          endYear: p.history && p.history.endYear,
+        }) +
+        " " +
+        caption.textContent;
   }
 }
 

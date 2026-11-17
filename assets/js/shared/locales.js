@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261117b";
-import { RESULT_COPY } from "./result-copy.js?v=20261117b";
-import { TILT_COPY } from "./tilt-copy.js?v=20261117b";
+import { HOME_COPY } from "./home-copy.js?v=20261117c";
+import { RESULT_COPY } from "./result-copy.js?v=20261117c";
+import { TILT_COPY } from "./tilt-copy.js?v=20261117c";
 
 export const LOCALES = {
   en: {
@@ -308,7 +308,10 @@ export const LOCALES = {
       "The curve comes from simulating every panel-and-battery combination on a coarse grid against the same hourly weather as the cards above, then keeping only the systems nothing cheaper beats. Prices here are the landed do-it-yourself middle — the parts basket, before labour, permits and fees. The installed totals above add those.",
     frontierMethodBattery:
       "The curve comes from simulating every battery size on a coarse grid against the same hourly weather and tariff windows as the cards above, then keeping only the systems nothing cheaper beats. Panels are not part of this run, so the curve varies the bank alone. Prices here are the landed do-it-yourself middle — the parts basket, before labour, permits and fees. The installed totals above add those.",
-    chartDailySun: "Daily solar output: {peak} kWh per kW of panel",
+    chartDailySun:
+      "Solar per kW of panel: {avg} kWh on an average day, {peak} on the best day",
+    chartZoomWindow:
+      "Zoomed to day {first} to day {last}: {from} to {to}, in the {startYear}–{endYear} weather record.",
     costNoSeriesTitle: "Savings data unavailable for this result",
     costNoSeriesBody:
       "The sizing completed, but this result did not include a comparable 20-year cost series.",
@@ -334,7 +337,6 @@ export const LOCALES = {
       "Lowest: {low}%. Fully charged on {charged} of {total} days; the generator covered {empty} empty-bank days.",
     socVerdictOffgridOne:
       "Lowest: {low}%. Fully charged on {charged} of {total} days; the generator covered one empty-bank day.",
-    chartDay: "Day {day}",
     chartLabelSoc: "Battery charge chart for {chemLabel}.",
     chartLabelCumCost: "Cumulative 20-year cost chart for {system} ({pv}).",
     chartLabelAuto: "Battery charge comparison chart for {systems}.",
@@ -1107,7 +1109,10 @@ export const LOCALES = {
       "La curva simula cada combinación de paneles y batería en una malla gruesa con el mismo clima horario de las tarjetas; conserva solo las opciones que ninguna más barata supera. El coste es el de las piezas: punto medio de un sistema montado por cuenta propia, envío y aranceles incluidos, antes de mano de obra, permisos ni tasas.",
     frontierMethodBattery:
       "La curva simula cada tamaño de batería con el mismo clima horario y las mismas franjas tarifarias de las tarjetas; conserva solo las opciones que ninguna más barata supera. Sin paneles, la curva solo varía la batería. El coste es el de las piezas: punto medio de un sistema montado por cuenta propia, envío y aranceles incluidos, antes de mano de obra, permisos ni tasas.",
-    chartDailySun: "Producción solar diaria: {peak} kWh por kW de panel",
+    chartDailySun:
+      "Solar por kW de panel: {avg} kWh en un día medio, {peak} el mejor día",
+    chartZoomWindow:
+      "Ampliado del día {first} al día {last}: del {from} al {to}, en el registro meteorológico {startYear}–{endYear}.",
     costNoSeriesTitle: "No hay datos de ahorro para este resultado",
     costNoSeriesBody:
       "El cálculo terminó, pero este resultado no incluye una serie de costos comparable a 20 años.",
@@ -1135,7 +1140,6 @@ export const LOCALES = {
       "Mínimo: {low}%. Carga completa en {charged} de {total} días; el generador cubrió {empty} días con la batería vacía.",
     socVerdictOffgridOne:
       "Mínimo: {low}%. Carga completa en {charged} de {total} días; el generador cubrió un día con la batería vacía.",
-    chartDay: "Día {day}",
     chartLabelSoc: "Gráfico de carga de la batería para {chemLabel}.",
     chartLabelCumCost:
       "Gráfico de coste acumulado a 20 años para {system} ({pv}).",
@@ -1829,7 +1833,10 @@ export const LOCALES = {
       "A curva simula cada combinação de painéis e bateria numa malha grossa, com o mesmo clima horário dos cartões; mantém só as opções não superadas por outras mais baratas. O custo é o das peças: ponto médio de um sistema montado por conta própria, com frete e impostos de importação, antes de mão de obra, licenças e taxas.",
     frontierMethodBattery:
       "A curva simula cada tamanho de bateria com o mesmo clima horário e as mesmas janelas tarifárias dos cartões; mantém só as opções não superadas por outras mais baratas. Sem painéis, só varia a bateria. O custo é o das peças: ponto médio de um sistema montado por conta própria, com frete e impostos de importação, antes de mão de obra, licenças e taxas.",
-    chartDailySun: "Produção solar diária: {peak} kWh por kW de painel",
+    chartDailySun:
+      "Solar por kW de painel: {avg} kWh num dia médio, {peak} no melhor dia",
+    chartZoomWindow:
+      "Ampliado do dia {first} ao dia {last}: de {from} a {to}, no registo meteorológico {startYear}–{endYear}.",
     costNoSeriesTitle: "Dados de economia indisponíveis para este resultado",
     costNoSeriesBody:
       "O dimensionamento foi concluído, mas este resultado não inclui uma série de custos comparável de 20 anos.",
@@ -1857,7 +1864,6 @@ export const LOCALES = {
       "Mínimo: {low}%. Carga completa em {charged} de {total} dias; o gerador cobriu {empty} dias com a bateria vazia.",
     socVerdictOffgridOne:
       "Mínimo: {low}%. Carga completa em {charged} de {total} dias; o gerador cobriu um dia com a bateria vazia.",
-    chartDay: "Dia {day}",
     chartLabelSoc: "Gráfico de carga da bateria para {chemLabel}.",
     chartLabelCumCost:
       "Gráfico de custo acumulado de 20 anos para {system} ({pv}).",
@@ -2551,7 +2557,9 @@ export const LOCALES = {
     frontierMethodBattery:
       "La courbe simule chaque taille de batterie avec la météo horaire et les plages tarifaires des cartes ; elle ne garde que les options non dépassées par une moins chère. Sans panneaux, seule la capacité varie. Prix : celui des pièces — milieu de la fourchette d'un système à monter soi-même, livraison et droits de douane compris — hors main-d'œuvre, permis et frais.",
     chartDailySun:
-      "Production solaire quotidienne : {peak} kWh par kW de panneau",
+      "Solaire par kW de panneau : {avg} kWh un jour moyen, {peak} le meilleur jour",
+    chartZoomWindow:
+      "Zoom du jour {first} au jour {last} : du {from} au {to}, dans les relevés météo {startYear}–{endYear}.",
     costNoSeriesTitle: "Données d’économies indisponibles pour ce résultat",
     costNoSeriesBody:
       "Le dimensionnement est terminé, mais ce résultat ne comprend pas de série de coûts comparable sur 20 ans.",
@@ -2579,7 +2587,6 @@ export const LOCALES = {
       "Minimum : {low} %. Charge complète pendant {charged} jours sur {total} ; le générateur a couvert les {empty} jours où la batterie était vide.",
     socVerdictOffgridOne:
       "Minimum : {low} %. Charge complète pendant {charged} jours sur {total} ; le générateur a couvert un jour où la batterie était vide.",
-    chartDay: "Jour {day}",
     chartLabelSoc: "Graphique de charge de la batterie pour {chemLabel}.",
     chartLabelCumCost:
       "Graphique du coût cumulé sur 20 ans pour {system} ({pv}).",
@@ -3277,7 +3284,10 @@ export const LOCALES = {
       "Die Kurve simuliert jede Kombination aus Modulen und Batterie auf einem groben Raster mit denselben stündlichen Wetterdaten wie oben. Sie zeigt nur Systeme, die kein günstigeres System übertrifft. Der Preis ist der der Teile: Mitte der Selbstbaukosten inklusive Versand und Einfuhrabgaben, ohne Arbeit, Genehmigungen und Gebühren.",
     frontierMethodBattery:
       "Die Kurve simuliert jede Batteriegröße mit denselben stündlichen Wetterdaten und Tarifzeiten wie oben. Ohne Module variiert nur der Speicher; gezeigt werden Systeme, die kein günstigeres System übertrifft. Der Preis ist der der Teile: Mitte der Selbstbaukosten inklusive Versand und Einfuhrabgaben, ohne Arbeit, Genehmigungen und Gebühren.",
-    chartDailySun: "Täglicher Solarertrag: {peak} kWh je kW Modulleistung",
+    chartDailySun:
+      "Solar je kW Modulleistung: {avg} kWh an einem durchschnittlichen Tag, {peak} am besten Tag",
+    chartZoomWindow:
+      "Zoom auf Tag {first} bis Tag {last}: {from} bis {to}, aus den Wetterdaten {startYear}–{endYear}.",
     costNoSeriesTitle:
       "Für dieses Ergebnis sind keine Einsparungsdaten verfügbar",
     costNoSeriesBody:
@@ -3306,7 +3316,6 @@ export const LOCALES = {
       "Tiefster Stand: {low} %. An {charged} von {total} Tagen voll geladen; an {empty} Tagen mit leerem Speicher sprang der Generator ein.",
     socVerdictOffgridOne:
       "Tiefster Stand: {low} %. An {charged} von {total} Tagen voll geladen; an einem Tag mit leerem Speicher sprang der Generator ein.",
-    chartDay: "Tag {day}",
     chartLabelSoc: "Batterieladeverlauf für {chemLabel}.",
     chartLabelCumCost:
       "Grafik der kumulierten 20-Jahres-Kosten für {system} ({pv}).",
@@ -4209,8 +4218,10 @@ export const LOCALES = {
     breakerSpec:
       "Onderbrekingsvermogen 20 kA AIC bij 160 V DC. Onderbreekt zeer hoge DC-kortsluitstromen in milliseconden — ontworpen om BMS en bedrading te beschermen.",
     chartBankEmpty: "Accu leeg",
-    chartDailySun: "Dagelijkse zonneopbrengst: {peak} kWh per kW paneel",
-    chartDay: "Dag {day}",
+    chartDailySun:
+      "Zon per kW paneel: {avg} kWh op een gemiddelde dag, {peak} op de beste dag",
+    chartZoomWindow:
+      "Ingezoomd op dag {first} tot dag {last}: {from} tot {to}, uit de weerreeks {startYear}–{endYear}.",
     chartEmpty: "Leeg",
     chatPrivacySummary:
       "Geen registratie, geen advertentiecookies en geen analyseprofiel. Uw chattekst wordt naar de AI-provider gestuurd om een antwoord te genereren en wordt hier niet opgeslagen. Typ er geen gevoelige informatie in.",
@@ -4806,7 +4817,9 @@ export const LOCALES = {
     frontierMethodBattery:
       "يحاكي المنحنى أحجام البطاريات ببيانات الطقس الساعية ونوافذ التعرفة نفسها أعلاه. لا تدخل الألواح هنا، لذا يتغير حجم البطارية وحده؛ ولا يُبقي إلا الأنظمة التي لا يتفوق عليها نظام أرخص. السعر هو سعر المكونات: منتصف تكلفة نظام يُجمّع ذاتيًا مع الشحن والرسوم الجمركية، دون أجرة عمل أو تراخيص أو رسوم.",
     chartDailySun:
-      "الإنتاج الشمسي اليومي: {peak} كيلوواط ساعة لكل كيلوواط من الألواح",
+      "الطاقة الشمسية لكل كيلوواط من الألواح: {avg} كيلوواط ساعة في يوم متوسط، و{peak} في أفضل يوم",
+    chartZoomWindow:
+      "تم التكبير إلى اليوم {first} حتى اليوم {last}: من {from} إلى {to}، ضمن سجل الطقس {startYear}–{endYear}.",
     costNoSeriesTitle: "بيانات التوفير غير متاحة لهذه النتيجة",
     costNoSeriesBody:
       "اكتمل تحديد حجم النظام، لكن هذه النتيجة لا تتضمن سلسلة تكاليف قابلة للمقارنة على مدى 20 عامًا.",
@@ -4833,7 +4846,6 @@ export const LOCALES = {
       "أدنى مستوى: {low}%. شُحنت بالكامل في {charged} من {total} يومًا؛ غطى المولد {empty} يومًا فرغت فيها البطارية.",
     socVerdictOffgridOne:
       "أدنى مستوى: {low}%. شُحنت بالكامل في {charged} من {total} يومًا؛ غطى المولد يومًا واحدًا فرغت فيه البطارية.",
-    chartDay: "اليوم {day}",
     chartLabelSoc: "رسم شحن البطارية لـ {chemLabel}.",
     chartLabelCumCost: "رسم التكلفة التراكمية على 20 عامًا لـ {system} ({pv}).",
     chartLabelAuto: "رسم مقارنة شحن البطارية لـ {systems}.",
