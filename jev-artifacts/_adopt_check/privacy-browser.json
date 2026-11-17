@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "cookieCount": 0,
+  "cookieNames": [],
+  "httpOnlyCount": 0,
+  "visibleToDocument": 0,
+  "localStorageKeys": [],
+  "sessionStorageKeys": [],
+  "requestCount": 90,
+  "thirdPartyOrigins": [
+    "https://nominatim.openstreetmap.org",
+    "https://open.er-api.com"
+  ],
+  "thirdPartyUrls": [
+    "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=1&q=Portland",
+    "https://open.er-api.com/v6/latest/USD"
+  ],
+  "weatherHosts": [],
+  "identifying": [],
+  "coordinateFindings": [],
+  "journeysDriven": [
+    {
+      "name": "city-search",
+      "requests": 2
+    },
+    {
+      "name": "sizing-run",
+      "requests": 3
+    },
+    {
+      "name": "advisor",
+      "requests": 1
+    }
+  ],
+  "measurement": "real browser (CDP) on the staged allowlist build, across 4 journeys: arrival, city search, sizing run, advisor",
+  "turnstile": {
+    "provision": true,
+    "action": "provision",
+    "why": "0 cookies measured, so provisioning Turnstile does not breach Q-15"
+  },
+  "facet_axes": [
+    "privacy"
+  ],
+  "facet_line": "real browser (CDP) on the staged allowlist build over 4 journeys — arrival plus city-search 2, sizing-run 3, advisor 1 — 90 requests total: 0 cookies set (0 HttpOnly, 0 visible to document.cookie), 0 localStorage and 0 sessionStorage keys, 0 request(s) carrying an identifier, 0 carrying a coordinate finer than 0.01 deg; third-party egress https://nominatim.openstreetmap.org, https://open.er-api.com, every origin declared in connect-src. Bot gate: provision. Static companion gate check-privacy.mjs separately proves 0 cookies, no identifier stored or logged, 0.01 deg rounding on the device before every egress, no ad/tracker/affiliate/lead-capture path, advisor egress disclosed on the page, and nothing collected the visitor did not choose to send."
+}

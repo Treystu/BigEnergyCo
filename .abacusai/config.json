@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "strictness": "strict",
+    "allow": [
+      "Bash(cd \"C:\\Users\\SCM\\Documents\\GitHub\\BigEnergyCo\\BigEnergyCo\" && pwd && ls -la)",
+      "Bash(git checkout -b feat/personas 2>&1 && git status)",
+      "Bash(cd \"C:\\Users\\SCM\\Documents\\GitHub\\BigEnergyCo\\BigEnergyCo\" && pwd && ls -la GOOGLE_QUALITY_PLAN.md 2>&1 | head -5)",
+      "Bash(cd \"C:\\Users\\SCM\\Documents\\GitHub\\BigEnergyCo\\BigEnergyCo\" && Get-ChildItem -Force | Select-Object Name | head -20)",
+      "Bash(cd \"C:\\Users\\SCM\\Documents\\GitHub\\BigEnergyCo\\BigEnergyCo\" && node -e \"import('./assets/js/sizing/profiles.js').then(m => { const names = m.OFFLINE_PROFILES.map(p => p.name); console.log('Total cities:', names.length); console.log(names.join('\\n')); })\")",
+      "Bash(cd \"C:\\Users\\SCM\\Documents\\GitHub\\BigEnergyCo\\BigEnergyCo\" && grep -n \"DERATES_DEFAULT\\|coldCapacityScale\\|chargeMinC\" assets/js/sizing/engine.js | head -20)",
+      "Bash(cd \"C:\\Users\\SCM\\Documents\\GitHub\\BigEnergyCo\\BigEnergyCo\" && node -e \"import('./assets/js/sizing/ui.js').then(m => { if (m.APPLIANCE_LIBRARY) { console.log('Found APPLIANCE_LIBRARY with', Object.keys(m.APPLIANCE_LIBRARY).length, 'appliances'); const keys = Object.keys(m.APPLIANCE_LIBRARY).slice(0, 20); console.log('Sample:', keys.join(', ')); } else { console.log('APPLIANCE_LIBRARY not found'); } })\")",
+      "Bash(cd \"C:\\Users\\SCM\\Documents\\GitHub\\BigEnergyCo\\BigEnergyCo\" && grep -E \"^  [a-z]{2}:\" assets/js/shared/locales.js | head -10)",
+      "Bash(cd \"C:\\Users\\SCM\\Documents\\GitHub\\BigEnergyCo\\BigEnergyCo\" && node --test tests/offline.test.mjs 2>&1 | head -20)"
+    ]
+  }
+}
