@@ -43,6 +43,13 @@ const READ_INPUTS = between(
   "function readInputs()",
   "function readPercentInput",
 );
+// #443: readInputs resolves the off-grid load through this function, so the
+// sandbox has to carry the shipped one — a restated copy here would test the
+// restatement.
+const OFFGRID_KWH = between(
+  "export function offgridDailyKwh(",
+  "function readInputs()",
+).replace("export function offgridDailyKwh(", "function offgridDailyKwh(");
 const SET_LEVEL = between("function setLevel(lvl)", "function renderBestPick");
 const SYNC_CUT = between(
   "function syncCutControls(pct)",
@@ -103,7 +110,7 @@ function readInputs(values, overrides = {}) {
   };
   vm.createContext(sandbox);
   vm.runInContext(
-    `${KWH_FROM_BILL}\n${READ_INPUTS}\nthis.readInputs = readInputs;`,
+    `${KWH_FROM_BILL}\n${OFFGRID_KWH}\n${READ_INPUTS}\nthis.readInputs = readInputs;`,
     sandbox,
   );
   return { inputs: sandbox.readInputs(), sandbox };
@@ -207,7 +214,7 @@ test("car6: an unusable load entry yields NaN, so the run refuses it", () => {
   assert.ok(Number.isNaN(inputs.dailyKwh));
 });
 
-test("car6: off-grid prefers its own slider over the shared kWh box", () => {
+test("car6: off-grid in bill mode prefers its own slider over the shared kWh box", () => {
   const { inputs } = readInputs(
     {
       latInput: "21.31",
@@ -242,6 +249,47 @@ test("car6: off-grid prefers its own slider over the shared kWh box", () => {
     { tariff: 0.3 },
   );
   assert.equal(fallback.inputs.dailyKwh, 11);
+});
+
+// #443: the other half of the same rule. In the "kWh/day" mode the advanced
+// entry IS the control on screen, and it is the only one that can hold a
+// fractional load: a step="1" slider snaps 1.2 to 1, so reading the slider
+// first sized and priced 1.2 kWh/day as 1.0 — "$161/yr", "~364 kWh/yr served"
+// and an "at 1 kWh/day" calculation note beside a visitor who typed 1.2.
+test("car6: off-grid in kWh mode sizes the fractional load that was typed", () => {
+  const { inputs } = readInputs(
+    {
+      latInput: "19.39386",
+      lonInput: "-154.93075",
+      loadMode: "kwh",
+      dailyKwhInput: "1.2",
+      offgridKwhSlider: "1", // what the range input snapped 1.2 down to
+      chemSelect: "lfp",
+      systemGoal: "offgrid",
+      autoTier: "tier99",
+      autoTarget: "custom",
+      hardwareConfig: "both",
+    },
+    { tariff: 0.44 },
+  );
+  assert.equal(inputs.dailyKwh, 1.2);
+  // And the entry still falls back to the slider if it is emptied.
+  const cleared = readInputs(
+    {
+      latInput: "19.39386",
+      lonInput: "-154.93075",
+      loadMode: "kwh",
+      dailyKwhInput: "",
+      offgridKwhSlider: "3",
+      chemSelect: "lfp",
+      systemGoal: "offgrid",
+      autoTier: "tier99",
+      autoTarget: "custom",
+      hardwareConfig: "both",
+    },
+    { tariff: 0.44 },
+  );
+  assert.equal(cleared.inputs.dailyKwh, 3);
 });
 
 test("car6: a roof area caps the PV envelope in kW, not in m²", () => {
