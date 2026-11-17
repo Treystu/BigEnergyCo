@@ -333,9 +333,21 @@ test("the method note describes the sweep the run actually performed", () => {
 });
 
 test("a language switch re-renders the results instead of half-translating them", () => {
+  // Assert on the function's STATEMENTS, not on a character budget. The window
+  // was `[\s\S]{0,900}`, so a comment added inside repaintRuntimeCopy could fail
+  // this test without changing what the function does - which is exactly what
+  // happened when the appliance-row repaint (#448) was added to it. Comments and
+  // blank lines are stripped first, so the assertion is about the code.
+  const at = ui.indexOf("function repaintRuntimeCopy()");
+  assert.notEqual(at, -1, "repaintRuntimeCopy must exist");
+  const body = ui
+    .slice(at, ui.indexOf("\nfunction ", at + 1))
+    .replace(/\/\/[^\n]*/g, "")
+    .replace(/\n{2,}/g, "\n");
+  assert.ok(body.length > 0, "repaintRuntimeCopy must have a body");
   assert.match(
-    ui,
-    /function repaintRuntimeCopy\(\) \{[\s\S]{0,900}if \(lastPayload\) renderResults\(lastPayload\);/,
+    body,
+    /if \(lastPayload\) renderResults\(lastPayload\);/,
     "the JS-built results panel must be re-rendered from the payload",
   );
   // …and both call sites must reach it: the language change, and the moment the
