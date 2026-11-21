@@ -79,8 +79,15 @@ The carrier's standing-queue item 1 is partly stale and is corrected here:
 
 ### Push test (oversight ruling 2026-11-20, item 1)
 
-- Attempted in this block on branch `freebuff/ba147e247f65fbd345f4a091` (never `main`):
-  result recorded below on the commit that follows this filing.
+- **PASS.** The filing committed as `b3af8dc` and pushed to the lane branch
+  `freebuff/ba147e247f65fbd345f4a091` (new remote branch created at that SHA) — read: platform connected git
+  push receipt, 2026-11-21T08:58Z. Git write works from this cloud session.
+- First attempt used the platform's default target, which is `main`; GitHub rejected it with GH013
+  "Changes must be made through a pull request" + required check `ci/circleci: verify`. Nothing was written
+  to `main`; this is branch protection working as the repo intends. Every subsequent push names the lane
+  branch explicitly.
+- Consequence for API acts: PR creation is still an API act, and `gh` is unauthenticated here. The cure
+  branch for #444 will carry its PR title/body verbatim in the next STATUS block for oversight to open.
 
 ### WAIT-STATE
 
