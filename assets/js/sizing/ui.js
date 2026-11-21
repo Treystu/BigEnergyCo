@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261117e";
+import { APPLIANCES } from "./appliances.js?v=20261121a";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261117e";
+} from "./pwa-install.js?v=20261121a";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261117e";
+} from "./usecases.js?v=20261121a";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261117e";
+} from "./run-coordinator.js?v=20261121a";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261117e";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261117e";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261117e";
+} from "./mode-chrome.js?v=20261121a";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261121a";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261121a";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261117e";
+} from "./location-picker.js?v=20261121a";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261117e";
+} from "./pricing.js?v=20261121a";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261117e";
+import { currencyForCountry } from "./country-currency.js?v=20261121a";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117e";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261121a";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +83,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261117e").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261121a").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261117e";
+} from "./lead-acid.js?v=20261121a";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261117e";
+} from "./bom.js?v=20261121a";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261117e";
+import { BOM_ITEMS } from "../shared/content.js?v=20261121a";
 
 import {
   applyI18n,
@@ -111,18 +111,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261117e";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261117e";
-import { byId as $, el } from "../shared/dom.js?v=20261117e";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261117e";
+} from "../shared/i18n.js?v=20261121a";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261121a";
+import { byId as $, el } from "../shared/dom.js?v=20261121a";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261121a";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261117e";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261117e";
+} from "../shared/simple-mode.js?v=20261121a";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261121a";
 import {
   advisorJevContext,
   interpretSanity,
@@ -130,29 +130,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261117e";
+} from "./validate.js?v=20261121a";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261117e";
+} from "../shared/cut-targets.js?v=20261121a";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261117e";
+} from "./share-codec.js?v=20261121a";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261117e";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261117e";
+} from "./infeasible-copy.js?v=20261121a";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261121a";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261117e";
+} from "./fuel-units.js?v=20261121a";
 
 import {
   createLeafletProvider,
@@ -160,18 +160,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261117e";
+} from "./map-provider.js?v=20261121a";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261117e";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261117e";
+} from "./wizard.js?v=20261121a";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261121a";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261117e";
+} from "./budget-span.js?v=20261121a";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -183,10 +183,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261117e"),
-      import("./charts.js?v=20261117e"),
-      import("./frontier-chart.js?v=20261117e"),
-      import("./rescale.js?v=20261117e"),
+      import("./engine.js?v=20261121a"),
+      import("./charts.js?v=20261121a"),
+      import("./frontier-chart.js?v=20261121a"),
+      import("./rescale.js?v=20261121a"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -254,9 +254,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261117e";
+} from "./money.js?v=20261121a";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261117e";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261121a";
 
 let worker = null;
 
@@ -279,6 +279,11 @@ let precalcDirty = true;
 let locationResolved = false;
 let coordinatesPending = false;
 let coordDebounceTimer = null;
+// A click that arrives while a coordinate resolve is in flight is a real
+// request, not a dead click (#442). The guard in run() cannot start a run
+// against coordinates it does not have yet, so the ask is remembered here and
+// consumed by the resolve that makes it answerable.
+let queuedRunAfterResolve = false;
 // Every user location choice gets a generation. Background GPS refinements
 // carry their original generation and may only pin while it remains current.
 let locationChoiceGeneration = 0;
@@ -2374,6 +2379,14 @@ function setCoords(lat, lon, label, region, country, skipShareUpdate = false) {
   renderChemTempVisualizer(lat);
 
   if (!skipShareUpdate) updateShareHash(lastPayload, readInputs());
+
+  // A click that arrived during a coordinate resolve is honoured here too: the
+  // visitor picked a place before the resolve landed, so the location is now
+  // answerable and the run they asked for starts (#442).
+  if (queuedRunAfterResolve) {
+    queuedRunAfterResolve = false;
+    run(false, true);
+  }
 }
 
 // Fill the bill-mode tariff from coordinates until the user overrides it.
@@ -2885,6 +2898,16 @@ function readPercentInput(id) {
   return raw / 100;
 }
 
+/**
+ * Whether a run request must wait for an in-flight coordinate resolve instead
+ * of being dropped. Only an EXPLICIT ask is queued: a quiet refresh has nothing
+ * to lose by waiting for the next edit, and a resolve that never lands must not
+ * leave a surprise run armed behind the visitor's back.
+ */
+export function queueRunDuringResolve(explicit, pending) {
+  return explicit === true && pending === true;
+}
+
 function run(quiet = false, explicit = false) {
   if (!runAuthorized && !explicit) return;
   if (precalcDirty && !explicit) return;
@@ -2917,6 +2940,13 @@ function run(quiet = false, explicit = false) {
   ) {
     runChannel.dropPending();
     setResultsHidden(true);
+    // The visitor asked for a run while the coordinates they just typed were
+    // still resolving. Returning silently here is what made the first click a
+    // no-op: the 500 ms resolve then wrote the generic "inputs changed" notice
+    // over "checking those coordinates", so the click left no trace and the
+    // next one worked (#442). Remember the ask and start it on the resolve.
+    if (queueRunDuringResolve(explicit, coordinatesPending))
+      queuedRunAfterResolve = true;
     const invalidCoords =
       Number.isFinite(inp.latitude) &&
       Number.isFinite(inp.longitude) &&
@@ -2951,6 +2981,9 @@ function run(quiet = false, explicit = false) {
   }
 
   precalcDirty = false;
+  // A run is starting, so any earlier click waiting on a resolve has just been
+  // answered by this one. Leaving the flag set would start a second run.
+  queuedRunAfterResolve = false;
 
   // A site/option change invalidates an adopted curve point (its hardware was
   // simulated for the old site and load); a bill-only change keeps it — the
@@ -4020,7 +4053,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261117e",
+      "./assets/js/sizing/sizing-worker.js?v=20261121a",
       {
         type: "module",
       },
@@ -9284,9 +9317,20 @@ async function initSizingUI() {
               lon: Math.round(lon * 1e5) / 1e5,
             });
           updateShareHash(null, readInputs());
+          // The coordinates the visitor clicked for now exist, so the ask that
+          // arrived during the resolve is answerable: start that run instead of
+          // leaving them to click a second time (#442).
+          if (queuedRunAfterResolve) {
+            queuedRunAfterResolve = false;
+            run(false, true);
+          }
         }, 500);
       } else {
         coordinatesPending = false;
+        // No resolve is coming, so nothing may be waiting on one: an armed run
+        // that can never fire would be a worse dead end than the click it was
+        // meant to honour.
+        queuedRunAfterResolve = false;
         setStatus(t("pickCity"));
       }
     };
@@ -9356,11 +9400,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261117e")
+    import("../shared/translation-suggestion-loader.js?v=20261121a")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261117e"),
+          () => import("../translation-suggestion.js?v=20261121a"),
         );
       })
       .catch(() => {});
