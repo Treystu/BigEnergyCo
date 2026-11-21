@@ -1316,16 +1316,48 @@ function updateAutoRows() {
   if (targetRow) targetRow.style.display = "none";
 }
 
+// #444: a load-mode pick must take effect on the interaction the browser
+// actually reports. A <select> fires `input` and then `change`; wiring only
+// `change` meant a pick the browser reported as `input` (the filed symptom: the
+// option "did not take effect", with an error on the click) left every panel on
+// the previous mode, so the advanced kWh/day entry never appeared. Both events
+// now reach ONE idempotent commit. The panels are also looked up defensively:
+// this runs inside the interaction, and a missing node used to throw here, which
+// is an error on the click that leaves the old panel on screen.
+let paintedLoadMode = null;
+
 function setLoadPanel() {
-  const mode = $("loadMode").value;
+  const select = $("loadMode");
+  if (!select) return;
+  const mode = select.value;
 
-  $("panelAppliances").style.display = mode === "appliances" ? "block" : "none";
+  const appliances = $("panelAppliances");
+  if (appliances)
+    appliances.style.display = mode === "appliances" ? "block" : "none";
 
-  $("panelBill").style.display = mode === "bill" ? "block" : "none";
+  const bill = $("panelBill");
+  if (bill) bill.style.display = mode === "bill" ? "block" : "none";
 
-  $("panelKwh").style.display = mode === "kwh" ? "block" : "none";
+  const kwh = $("panelKwh");
+  if (kwh) kwh.style.display = mode === "kwh" ? "block" : "none";
+
+  // The painter owns the record of what is on screen, so every other caller
+  // (share-link restore, use-case presets) keeps the commit's comparison honest.
+  paintedLoadMode = mode;
 
   updateLoadReadout();
+}
+
+/**
+ * The interaction's single entry point: paint first, then mark work dirty only
+ * when the pick actually changed the mode. Both `input` and `change` call it, so
+ * the pair cannot mark the form dirty twice, and neither can be the only event a
+ * browser sends.
+ */
+function commitLoadMode() {
+  const changed = $("loadMode")?.value !== paintedLoadMode;
+  setLoadPanel();
+  if (changed) markPrecalcDirty();
 }
 
 function applianceState() {
@@ -9044,10 +9076,13 @@ async function initSizingUI() {
         markPrecalcDirty();
       });
 
-    $("loadMode").addEventListener("change", () => {
-      setLoadPanel();
-      markPrecalcDirty();
-    });
+    // #444: both events a browser can report a pick with, one idempotent
+    // commit — an `input`-only report still switches the panel.
+    const loadModePick = $("loadMode");
+    if (loadModePick) {
+      loadModePick.addEventListener("input", commitLoadMode);
+      loadModePick.addEventListener("change", commitLoadMode);
+    }
 
     $("dailyKwhInput").addEventListener("input", () => {
       updateLoadReadout();
