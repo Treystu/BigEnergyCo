@@ -115,13 +115,22 @@ test("an off-grid share link sizes the load it names, not the old slider", () =>
   const readStart = ui.indexOf("function readInputs() {");
   const readEnd = ui.indexOf("function readPercentInput", readStart);
   const readInputs = ui.slice(readStart, readEnd);
-  // Off-grid preference order: the slider wins over the numeric input. That
-  // makes the slider a control the share path must write, or the link sizes
-  // whatever load the previous visitor left behind.
+  // Off-grid load has ONE resolution rule (#443): the control that is on
+  // screen wins, and the entry is the only control that can hold a fractional
+  // load — a slider with step="1" snaps 1.2 to 1, which sized and priced a
+  // typed 1.2 kWh/day as 1.0. The share path still writes both (below) so a
+  // restored link cannot leave a stale thumb.
   assert.match(
     readInputs,
-    /offgridKwhSlider"\)\?\.value[\s\S]{0,200}dailyKwhInput"\)\?\.value/,
+    /dailyKwh = offgridDailyKwh\(\s*\$\("dailyKwhInput"\)/,
   );
+  const iEntry = readInputs.indexOf('$("dailyKwhInput")');
+  const iMode = readInputs.indexOf('mode === "kwh",');
+  assert.ok(
+    iEntry > 0 && iMode > iEntry,
+    'readInputs must resolve the off-grid load through offgridDailyKwh(entry, slider, mode === "kwh")',
+  );
+  assert.ok(readInputs.includes("offgridDailyKwh("));
   assert.match(restore, /const sharedSlider = \$\("offgridKwhSlider"\)/);
   assert.match(restore, /sharedSlider\.value = String\(kw\)/);
   assert.match(restore, /else \{\s*sharedSlider\.value = "";\s*\}/);

@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261117d";
+import { APPLIANCES } from "./appliances.js?v=20261117e";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261117d";
+} from "./pwa-install.js?v=20261117e";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261117d";
+} from "./usecases.js?v=20261117e";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261117d";
+} from "./run-coordinator.js?v=20261117e";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261117d";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261117d";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261117d";
+} from "./mode-chrome.js?v=20261117e";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261117e";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261117e";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261117d";
+} from "./location-picker.js?v=20261117e";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261117d";
+} from "./pricing.js?v=20261117e";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261117d";
+import { currencyForCountry } from "./country-currency.js?v=20261117e";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117d";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261117e";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +83,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261117d").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261117e").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261117d";
+} from "./lead-acid.js?v=20261117e";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261117d";
+} from "./bom.js?v=20261117e";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261117d";
+import { BOM_ITEMS } from "../shared/content.js?v=20261117e";
 
 import {
   applyI18n,
@@ -111,18 +111,18 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261117d";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261117d";
-import { byId as $, el } from "../shared/dom.js?v=20261117d";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261117d";
+} from "../shared/i18n.js?v=20261117e";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261117e";
+import { byId as $, el } from "../shared/dom.js?v=20261117e";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261117e";
 import {
   isSimpleMode,
   initSimpleMode,
   setSimpleMode,
   onSimpleModeChange,
   modeLabel,
-} from "../shared/simple-mode.js?v=20261117d";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261117d";
+} from "../shared/simple-mode.js?v=20261117e";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261117e";
 import {
   advisorJevContext,
   interpretSanity,
@@ -130,29 +130,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261117d";
+} from "./validate.js?v=20261117e";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261117d";
+} from "../shared/cut-targets.js?v=20261117e";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261117d";
+} from "./share-codec.js?v=20261117e";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261117d";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261117d";
+} from "./infeasible-copy.js?v=20261117e";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261117e";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261117d";
+} from "./fuel-units.js?v=20261117e";
 
 import {
   createLeafletProvider,
@@ -160,18 +160,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261117d";
+} from "./map-provider.js?v=20261117e";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261117d";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261117d";
+} from "./wizard.js?v=20261117e";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261117e";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261117d";
+} from "./budget-span.js?v=20261117e";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -183,10 +183,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261117d"),
-      import("./charts.js?v=20261117d"),
-      import("./frontier-chart.js?v=20261117d"),
-      import("./rescale.js?v=20261117d"),
+      import("./engine.js?v=20261117e"),
+      import("./charts.js?v=20261117e"),
+      import("./frontier-chart.js?v=20261117e"),
+      import("./rescale.js?v=20261117e"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -254,9 +254,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261117d";
+} from "./money.js?v=20261117e";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261117d";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261117e";
 
 let worker = null;
 
@@ -2693,6 +2693,29 @@ function setQuickMode(on) {
 
 // -- Inputs ? engine ---------------------------------------------------------
 
+/**
+ * The off-grid load's ONE resolution rule: the advanced daily-kWh entry is the
+ * owner, the slider is the coarse fallback.
+ *
+ * The slider steps in whole kWh/day, so a typed 1.2 snapped it to 1; reading
+ * the slider first sized and priced 1.2 kWh/day as 1.0 ("~$161/yr", "~364
+ * kWh/yr served", "at 1 kWh/day"), while the visitor's own entry sat on screen
+ * saying 1.2 (#443). The slider handler writes this field, so the fallback
+ * exists only for a value the entry cannot hold.
+ */
+export function offgridDailyKwh(inputValue, sliderValue, preferEntry = true) {
+  const typed = parseFloat(inputValue);
+  const slider = parseFloat(sliderValue);
+  const hasTyped = Number.isFinite(typed) && typed > 0;
+  const hasSlider = Number.isFinite(slider) && slider > 0;
+  // `preferEntry` is which control is ON SCREEN: the advanced entry in the
+  // "kWh/day" mode, the off-grid slider in every other mode. The hidden one is
+  // filler, so it must never win — that is the share-link lesson (R-4) in the
+  // other direction.
+  if (preferEntry) return hasTyped ? typed : hasSlider ? slider : NaN;
+  return hasSlider ? slider : hasTyped ? typed : NaN;
+}
+
 function readInputs() {
   const lat = parseFloat($("latInput").value);
 
@@ -2718,15 +2741,18 @@ function readInputs() {
     peakSurgeW = ap.peakSurgeW > 0 ? Math.round(ap.peakSurgeW) : null;
     requiresSplitPhase = ap.requiresSplitPhase;
   } else if (isOffgrid) {
-    // For off-grid, energy basis is always daily kWh (from off-grid slider or numeric dailyKwhInput)
-    const offSliderVal = parseFloat($("offgridKwhSlider")?.value);
-    const kwhInputVal = parseFloat($("dailyKwhInput")?.value);
-    dailyKwh =
-      Number.isFinite(offSliderVal) && offSliderVal > 0
-        ? offSliderVal
-        : Number.isFinite(kwhInputVal) && kwhInputVal > 0
-          ? kwhInputVal
-          : NaN;
+    // For off-grid the energy basis is always daily kWh, and the ADVANCED
+    // ENTRY is its owner: the slider steps in whole kWh/day and snaps a typed
+    // 1.2 to 1, so reading it first sized and priced 1.2 kWh/day as 1.0 —
+    // "$161/yr" and "~364 kWh/yr served" beside a visitor who had entered 1.2,
+    // with the "How this was calculated" line stating 1 kWh/day outright
+    // (#443). The slider stays a coarse control that writes this field, never
+    // a second source of truth for the same quantity.
+    dailyKwh = offgridDailyKwh(
+      $("dailyKwhInput")?.value,
+      $("offgridKwhSlider")?.value,
+      mode === "kwh",
+    );
   } else if (mode === "bill") {
     const bill = parseFloat($("billSlider")?.value ?? $("billAmount")?.value);
 
@@ -3994,7 +4020,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261117d",
+      "./assets/js/sizing/sizing-worker.js?v=20261117e",
       {
         type: "module",
       },
@@ -9330,11 +9356,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261117d")
+    import("../shared/translation-suggestion-loader.js?v=20261117e")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261117d"),
+          () => import("../translation-suggestion.js?v=20261117e"),
         );
       })
       .catch(() => {});

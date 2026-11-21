@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261117d";
-import { RESULT_COPY } from "./result-copy.js?v=20261117d";
-import { TILT_COPY } from "./tilt-copy.js?v=20261117d";
+import { HOME_COPY } from "./home-copy.js?v=20261117e";
+import { RESULT_COPY } from "./result-copy.js?v=20261117e";
+import { TILT_COPY } from "./tilt-copy.js?v=20261117e";
 
 export const LOCALES = {
   en: {
