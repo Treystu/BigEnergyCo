@@ -274,6 +274,48 @@ export function setGeocodeFetchImpl(fn) {
   geocodeFetchImpl = fn;
 }
 
+// #447: a query that is nothing but a coordinate pair is a place the visitor
+// POINTED AT, not a name to search for. The forward-search endpoint answers a
+// coordinate with whichever named OSM feature is nearest, and the nearest thing
+// with a name is usually a road — observed: "Kapoho-Kalapana Road" for Kehena
+// Beach, Pahoa, with neither the beach nor the town ever named. A coordinate
+// query therefore takes the REVERSE endpoint and takes its label from the
+// address's own locality fields.
+const COORDINATE_QUERY = /^(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)$/;
+
+/** A query that is only "lat, lon", or null. Same bounds the share link uses. */
+export function parseCoordinateQuery(query) {
+  const match = COORDINATE_QUERY.exec(String(query || "").trim());
+  if (!match) return null;
+  const lat = Number(match[1]);
+  const lon = Number(match[2]);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+  if (Math.abs(lat) > 90 || Math.abs(lon) > 180) return null;
+  return { lat, lon };
+}
+
+/**
+ * The place name an address actually carries. `name` and `display_name`'s first
+ * piece can be a road, so the locality fields are consulted in order and the
+ * last resort is the state or country the address names — never a street.
+ */
+export function localityLabel(address) {
+  const a = address || {};
+  return (
+    a.city ||
+    a.town ||
+    a.village ||
+    a.municipality ||
+    a.hamlet ||
+    a.suburb ||
+    a.neighbourhood ||
+    a.county ||
+    a.state ||
+    a.country ||
+    ""
+  );
+}
+
 export async function lookupCityOnline(query, fetchImpl) {
   const doFetch =
     fetchImpl ?? geocodeFetchImpl ?? ((...a) => globalThis.fetch(...a));
@@ -287,13 +329,22 @@ export async function lookupCityOnline(query, fetchImpl) {
     ? setTimeout(() => ctrl.abort(), CITY_LOOKUP_TIMEOUT_MS)
     : null;
   try {
-    const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=1&q=${encodeURIComponent(q)}`;
+    // A coordinate pair is reverse-geocoded: the forward endpoint treats it as
+    // text and returns the nearest named feature, which is how a beach became a
+    // road (#447). The pair goes out at the egress precision, like every other
+    // request this app makes.
+    const pinned = parseCoordinateQuery(q);
+    const pinnedCoords = pinned ? roundCoords(pinned.lat, pinned.lon) : null;
+    const url = pinnedCoords
+      ? `https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=14&addressdetails=1&lat=${pinnedCoords.lat}&lon=${pinnedCoords.lon}`
+      : `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=1&q=${encodeURIComponent(q)}`;
     const response = await doFetch(url, {
       headers: { Accept: "application/json" },
       ...(ctrl ? { signal: ctrl.signal } : {}),
     });
     if (!response.ok) return null;
-    const row = (await response.json())?.[0];
+    const payload = await response.json();
+    const row = pinnedCoords ? payload : payload?.[0];
     if (!row) return null;
     // A geocoder that names a place but cannot locate it must not resolve. The
     // picker writes these straight into the coordinate boxes and persists them
@@ -301,8 +352,11 @@ export async function lookupCityOnline(query, fetchImpl) {
     // is NaN — one sizes a system for the Gulf of Guinea, the other shows
     // "NaN" boxes and a location the run then refuses. Same bounds the offline
     // partition check applies, so both sources agree on what a coordinate is.
-    const lat = Number(coordCell(row.lat));
-    const lon = Number(coordCell(row.lon));
+    // The visitor's own pair is authoritative for a coordinate query: the
+    // reverse row's coordinate is the feature that was matched, not the point
+    // they asked about.
+    const lat = pinnedCoords ? pinned.lat : Number(coordCell(row.lat));
+    const lon = pinnedCoords ? pinned.lon : Number(coordCell(row.lon));
     if (
       !Number.isFinite(lat) ||
       !Number.isFinite(lon) ||
@@ -329,7 +383,7 @@ export async function lookupCityOnline(query, fetchImpl) {
       addr.municipality ||
       addr.hamlet ||
       "";
-    const coordinates = /^-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?$/.test(typed);
+    const coordinates = Boolean(pinnedCoords);
     // The typed text is the label only when the row offers no name of its own;
     // `display_name`'s first comma piece is the last resort, never a stand-in
     // for a place name, because that piece can be a hamlet the visitor never
@@ -337,10 +391,11 @@ export async function lookupCityOnline(query, fetchImpl) {
     const geocoderName = row.name || "";
     const displayFirst = (row.display_name || "").split(",")[0] || "";
     return {
-      name:
-        structured ||
-        geocoderName ||
-        (typed && !coordinates ? typed : displayFirst),
+      name: coordinates
+        ? localityLabel(addr) || `${lat}, ${lon}`
+        : structured ||
+          geocoderName ||
+          (typed && !coordinates ? typed : displayFirst),
       country:
         row.address?.country_code?.toUpperCase() || row.address?.country || "",
       r:
@@ -385,7 +440,9 @@ export async function lookupCountryOnline(lat, lon, fetchImpl) {
       country:
         row.address?.country_code?.toUpperCase() || row.address?.country || "",
       r: row.address?.state || row.address?.region || "Worldwide",
-      name: row.name || row.address?.city || row.address?.town || "",
+      // Locality first, for the same reason lookupCityOnline does it: the row's
+      // own name is the nearest named feature and can be a road (#447).
+      name: localityLabel(row.address) || row.name || "",
     };
   } catch {
     return null;
