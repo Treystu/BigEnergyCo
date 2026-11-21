@@ -89,14 +89,54 @@ The carrier's standing-queue item 1 is partly stale and is corrected here:
 - Consequence for API acts: PR creation is still an API act, and `gh` is unauthenticated here. The cure
   branch for #444 will carry its PR title/body verbatim in the next STATUS block for oversight to open.
 
+### LIVE DEFECT #444 — drive result, disposition
+
+Reproduction attempted on the rendered tree at `d49bc60` (static serve of this checkout on 0.0.0.0:3000,
+Chromium at 432x898 phone-class width, Manual mode via `#modeManual`; read: full-browser drive,
+2026-11-21T09:0xZ).
+
+- The filed symptom is exactly what clicking the `<option>` element produces: `page.click('option[value="kwh"]')`
+  times out — "locator resolved to `<option value="kwh" data-i18n="loadKwh">I know my kWh/day (advanced)</option>`"
+  and never fires. A closed native `<select>` never dispatches a click to an `<option>`, so a drive that
+  clicks the option reports an error with an unknown outcome. That is the filed observation.
+- The product's own mouse path works: driving the selection through the select's option list (the same
+  `input` + `change` events Chrome fires when a person picks an option) gives value `kwh`, `#panelKwh`
+  `display:block`, `#bill` panel hidden, `#dailyKwhInput` visible at 361x47, zero pageerrors. Re-running the
+  event sequence by hand on the live DOM gave the same result, and a value-setter probe recorded exactly one
+  set and one change — nothing reverts the selection.
+- No handler in the shipped tree can eat a mouse pick: there is no `mousedown`/`pointerdown` listener on any
+  ancestor of `#loadMode` (the only `mousedown` listeners are the chart canvas and the location-picker
+  suggestion buttons, neither an ancestor), no `preventDefault` touches the select, `applyI18n` only writes
+  text when the string differs, and nothing assigns `loadMode.value` except the preset/share-link restore
+  paths (`ui.js` 1968, 8299, 8437).
+
+Disposition: **NOT REPRODUCED on main; parked DECISION-READY, not owner-held.** The cure is not a code change
+until the symptom is shown in a real popup: an authenticated production drive of the same popup, or a human
+mouse check. Production could not be driven from here — freeoffgridcalculator.com answers the Cloudflare
+challenge ("Just a moment…") to this cloud browser, which is the #328 owner-side item, not a site defect.
+
+Intended act for oversight (no gh auth here), verbatim for #444:
+
+> Drive result on main (d49bc60), phone-class Chromium, Manual mode: the filed error reproduces when the
+> probe clicks the `option` element itself — a closed native select never dispatches a click to an option,
+> so that drive cannot observe an outcome. The product path is verified: selecting the advanced option yields
+> loadMode=kwh, the kWh panel opens, and the kWh input is visible and usable (361x47), with no page errors and
+> no handler reverting the value. No ancestor mousedown/pointerdown/preventDefault exists in the shipped tree.
+> Disposition: not reproduced on main; needs one authenticated production drive (this cloud session is held at
+> the Cloudflare challenge, #328) or one human mouse check before any code change. If it reproduces there, the
+> cause lies outside the select's own handlers and the cure belongs to the #434 accessibility pass.
+
 ### WAIT-STATE
 
 - GitHub REST quota: 0/60 on this egress IP, resets 2026-11-21T09:35:51Z. Not waited on; per-issue HTML
   reads carry the census in the meantime. API re-read queued for the next block.
 - CircleCI merge-SHA status on `d49bc60`: pending since 02:12:20Z (reporting gap, not a run). No poll
   loop; tree-identity is the evidence of record.
+- Production drive for #444: blocked at the Cloudflare challenge (#328, owner act). Switched away at the
+  first return check rather than parking the lane on it.
 
 ### Ladder rung
 
-- Rung: evidence filing (this stand-up, with the push test). Next rung target: a merge — #444 cured and
-  landed on its rail.
+- Rungs this block: evidence filing (stand-up + push test, PASSED) and the #444 drive receipts.
+- Next rung target: a merge. Server tree is at `d49bc60` with the lane branch carrying only this ledger;
+  the next code item is the #447 reverse-geocode residue, then Wave 0 (#436 presentation spec).
