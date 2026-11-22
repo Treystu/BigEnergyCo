@@ -139,7 +139,10 @@ test("every locale carries the simplified-interface strings", () => {
   for (const [lang, dict] of Object.entries(LOCALES)) {
     for (const key of keys) {
       assert.equal(typeof dict[key], "string", `${lang}.${key} must exist`);
-      assert.ok(dict[key].trim().length > 0, `${lang}.${key} must not be blank`);
+      assert.ok(
+        dict[key].trim().length > 0,
+        `${lang}.${key} must not be blank`,
+      );
     }
     assert.match(dict.planBasis, /\{size\}/, `${lang}.planBasis keeps {size}`);
     assert.match(

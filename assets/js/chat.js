@@ -996,8 +996,33 @@ function setupEventListeners() {
       scrollToSection("sizing");
     });
 
+  // Owner order 2026-11-22: the home screen is one place field and one action.
+  // What is typed there is handed to the calculator's own field, so there is
+  // one ask and one input, never a second source of truth.
+  var heroPlace = document.getElementById("heroPlace");
+
+  function handOffHeroPlace() {
+    if (!heroPlace) return;
+    var value = heroPlace.value.trim();
+    if (!value) return;
+    var city = document.getElementById("citySearch");
+    if (!city) return;
+    city.value = value;
+    city.dispatchEvent(new Event("input", { bubbles: true }));
+    city.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  if (heroPlace)
+    heroPlace.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter") return;
+      event.preventDefault();
+      handOffHeroPlace();
+      scrollToSection("sizing");
+    });
+
   if (heroSizing)
     heroSizing.addEventListener("click", function () {
+      handOffHeroPlace();
       scrollToSection("sizing");
     });
 

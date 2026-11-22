@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261122d";
-import { RESULT_COPY } from "./result-copy.js?v=20261122d";
-import { TILT_COPY } from "./tilt-copy.js?v=20261122d";
+import { HOME_COPY } from "./home-copy.js?v=20261122e";
+import { RESULT_COPY } from "./result-copy.js?v=20261122e";
+import { TILT_COPY } from "./tilt-copy.js?v=20261122e";
 
 export const LOCALES = {
   en: {
@@ -438,6 +438,20 @@ export const LOCALES = {
     dailyEnergyNeed: "Daily energy need (kWh/day slider)",
     billPerMonth: "/mo",
     simpleHeadline: "At your location, this system gets you {goal}:",
+    heroPlaceholder: "City, town, or postcode",
+    advancedSummary: "Fine-tune the system (optional)",
+    planTitle: "Your plan",
+    planBasis:
+      "Installed price for {size} — hardware, labour, permits and fees, one number set.",
+    planStatSavings: "20-year savings",
+    planStatPayback: "Break-even",
+    planStatBillCut: "Bill cut",
+    planRowHardware: "Hardware",
+    planRowLabour: "Labour",
+    planRowFees: "Permits, fees and tools",
+    planSystemSize: "{pv} kW solar + {batt} kWh battery",
+    planPaybackValue: "Year {year}",
+    planTotalLabel: "Total",
     simpleGoalGrid: "to cut about {pct}% off your bill",
     simpleGoalBattery:
       "to shift about {pct}% of your peak hours onto the battery",
@@ -1245,6 +1259,20 @@ export const LOCALES = {
     dailyEnergyNeed: "Necesidad diaria de energía (control kWh/día)",
     billPerMonth: "/mes",
     simpleHeadline: "En tu ubicación, este sistema consigue {goal}:",
+    heroPlaceholder: "Ciudad, pueblo o código postal",
+    advancedSummary: "Ajustar el sistema (opcional)",
+    planTitle: "Tu plan",
+    planBasis:
+      "Precio instalado para {size} — equipo, mano de obra, permisos y tasas, un único conjunto de cifras.",
+    planStatSavings: "Ahorro a 20 años",
+    planStatPayback: "Punto de equilibrio",
+    planStatBillCut: "Recorte de factura",
+    planRowHardware: "Equipo",
+    planRowLabour: "Mano de obra",
+    planRowFees: "Permisos, tasas y herramientas",
+    planSystemSize: "{pv} kW solar + {batt} kWh de batería",
+    planPaybackValue: "Año {year}",
+    planTotalLabel: "Total",
     simpleGoalGrid: "recortar cerca de un {pct}% de tu factura",
     simpleGoalBattery:
       "desplazar cerca del {pct}% de tus horas punta a la batería",
@@ -1963,6 +1991,20 @@ export const LOCALES = {
     dailyEnergyNeed: "Necessidade diária de energia (controle kWh/dia)",
     billPerMonth: "/mês",
     simpleHeadline: "Na sua localização, este sistema consegue {goal}:",
+    heroPlaceholder: "Cidade, vila ou código postal",
+    advancedSummary: "Ajustar o sistema (opcional)",
+    planTitle: "O seu plano",
+    planBasis:
+      "Preço instalado para {size} — equipamento, mão de obra, licenças e taxas, um único conjunto de valores.",
+    planStatSavings: "Poupança em 20 anos",
+    planStatPayback: "Ponto de equilíbrio",
+    planStatBillCut: "Redução da fatura",
+    planRowHardware: "Equipamento",
+    planRowLabour: "Mão de obra",
+    planRowFees: "Licenças, taxas e ferramentas",
+    planSystemSize: "{pv} kW solar + {batt} kWh de bateria",
+    planPaybackValue: "Ano {year}",
+    planTotalLabel: "Total",
     simpleGoalGrid: "cortar cerca de {pct}% da sua conta",
     simpleGoalBattery:
       "deslocar cerca de {pct}% das suas horas de pico para a bateria",
@@ -2683,6 +2725,20 @@ export const LOCALES = {
     dailyEnergyNeed: "Besoin énergétique quotidien (curseur kWh/jour)",
     billPerMonth: "/mois",
     simpleHeadline: "À votre lieu, ce système vous permet de {goal} :",
+    heroPlaceholder: "Ville, village ou code postal",
+    advancedSummary: "Ajuster le système (facultatif)",
+    planTitle: "Votre plan",
+    planBasis:
+      "Prix installé pour {size} — matériel, main-d’œuvre, permis et frais, un seul jeu de chiffres.",
+    planStatSavings: "Économies sur 20 ans",
+    planStatPayback: "Seuil de rentabilité",
+    planStatBillCut: "Baisse de facture",
+    planRowHardware: "Matériel",
+    planRowLabour: "Main-d’œuvre",
+    planRowFees: "Permis, frais et outils",
+    planSystemSize: "{pv} kW solaire + {batt} kWh de batterie",
+    planPaybackValue: "An {year}",
+    planTotalLabel: "Total",
     simpleGoalGrid: "réduire d'environ {pct}% votre facture",
     simpleGoalBattery:
       "décaler environ {pct}% de vos heures de pointe vers la batterie",
@@ -3406,6 +3462,20 @@ export const LOCALES = {
     dailyEnergyNeed: "Täglicher Energiebedarf (kWh/Tag-Schieber)",
     billPerMonth: "/Mon.",
     simpleHeadline: "An Ihrem Standort bringt Ihnen dieses System {goal}:",
+    heroPlaceholder: "Stadt, Dorf oder Postleitzahl",
+    advancedSummary: "System anpassen (optional)",
+    planTitle: "Ihr Plan",
+    planBasis:
+      "Installierter Preis für {size} — Hardware, Arbeit, Genehmigungen und Gebühren, ein Zahlenwerk.",
+    planStatSavings: "Ersparnis über 20 Jahre",
+    planStatPayback: "Amortisationsjahr",
+    planStatBillCut: "Rechnungsreduktion",
+    planRowHardware: "Hardware",
+    planRowLabour: "Arbeitskosten",
+    planRowFees: "Genehmigungen, Gebühren und Werkzeug",
+    planSystemSize: "{pv} kW Solar + {batt} kWh Speicher",
+    planPaybackValue: "Jahr {year}",
+    planTotalLabel: "Gesamt",
     simpleGoalGrid: "etwa {pct}% Ihrer Rechnung einsparen",
     simpleGoalBattery:
       "etwa {pct}% deiner Spitzenlaststunden in die Batterie zu verlagern",
@@ -3964,6 +4034,20 @@ export const LOCALES = {
     dailyEnergyNeed: "Dagelijkse energiebehoefte (kWh/dag-schuif)",
     billPerMonth: "/mnd",
     simpleHeadline: "Op uw locatie levert dit systeem u {goal}:",
+    heroPlaceholder: "Stad, dorp of postcode",
+    advancedSummary: "Systeem verfijnen (optioneel)",
+    planTitle: "Uw plan",
+    planBasis:
+      "Geïnstalleerde prijs voor {size} — hardware, arbeid, vergunningen en kosten, één getallenreeks.",
+    planStatSavings: "Besparing over 20 jaar",
+    planStatPayback: "Terugverdientijd",
+    planStatBillCut: "Rekeningverlaging",
+    planRowHardware: "Hardware",
+    planRowLabour: "Arbeidskosten",
+    planRowFees: "Vergunningen, kosten en gereedschap",
+    planSystemSize: "{pv} kW zon + {batt} kWh accu",
+    planPaybackValue: "Jaar {year}",
+    planTotalLabel: "Totaal",
     simpleGoalGrid: "om ongeveer {pct}% van uw rekening te besparen",
     simpleGoalBattery:
       "om ongeveer {pct}% van uw piekuren naar de accu te verplaatsen",
@@ -4922,6 +5006,20 @@ export const LOCALES = {
     dailyEnergyNeed: "الحاجة اليومية من الطاقة (منزلق كيلوواط·ساعة/يوم)",
     billPerMonth: "/شهريًا",
     simpleHeadline: "في موقعك، يمنحك هذا النظام {goal}:",
+    heroPlaceholder: "مدينة أو بلدة أو رمز بريدي",
+    advancedSummary: "ضبط النظام (اختياري)",
+    planTitle: "خطتك",
+    planBasis:
+      "السعر المركّب لـ {size} — المعدات والعمالة والتصاريح والرسوم، مجموعة أرقام واحدة.",
+    planStatSavings: "التوفير خلال 20 عامًا",
+    planStatPayback: "نقطة التعادل",
+    planStatBillCut: "خفض الفاتورة",
+    planRowHardware: "المعدات",
+    planRowLabour: "العمالة",
+    planRowFees: "التصاريح والرسوم والأدوات",
+    planSystemSize: "{pv} كيلوواط شمسي + {batt} كيلوواط ساعة بطارية",
+    planPaybackValue: "السنة {year}",
+    planTotalLabel: "الإجمالي",
     simpleGoalGrid: "خفض نحو {pct}% من فاتورتك",
     simpleGoalBattery: "نقل نحو {pct}% من ساعات الذروة إلى البطارية",
     simpleGoalOffgrid: "تغطية منزلك على مدار السنة",

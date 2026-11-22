@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261122d";
+import { APPLIANCES } from "./appliances.js?v=20261122e";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261122d";
+} from "./pwa-install.js?v=20261122e";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261122d";
+} from "./usecases.js?v=20261122e";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261122d";
+} from "./run-coordinator.js?v=20261122e";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261122d";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261122d";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261122d";
+} from "./mode-chrome.js?v=20261122e";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261122e";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261122e";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261122d";
+} from "./location-picker.js?v=20261122e";
 
 import {
   estimateTariff,
@@ -57,14 +57,15 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261122d";
+} from "./pricing.js?v=20261122e";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261122d";
+import { currencyForCountry } from "./country-currency.js?v=20261122e";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261122d";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261122e";
+import { planBreakdown } from "./plan-card.js?v=20261122e";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +84,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261122d").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261122e").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +95,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261122d";
+} from "./lead-acid.js?v=20261122e";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261122d";
+} from "./bom.js?v=20261122e";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261122d";
+import { BOM_ITEMS } from "../shared/content.js?v=20261122e";
 
 import {
   applyI18n,
@@ -111,11 +112,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261122d";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261122d";
-import { byId as $, el } from "../shared/dom.js?v=20261122d";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261122d";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261122d";
+} from "../shared/i18n.js?v=20261122e";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261122e";
+import { byId as $, el } from "../shared/dom.js?v=20261122e";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261122e";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261122e";
 import {
   advisorJevContext,
   interpretSanity,
@@ -123,29 +124,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261122d";
+} from "./validate.js?v=20261122e";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261122d";
+} from "../shared/cut-targets.js?v=20261122e";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261122d";
+} from "./share-codec.js?v=20261122e";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261122d";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261122d";
+} from "./infeasible-copy.js?v=20261122e";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261122e";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261122d";
+} from "./fuel-units.js?v=20261122e";
 
 import {
   createLeafletProvider,
@@ -153,18 +154,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261122d";
+} from "./map-provider.js?v=20261122e";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261122d";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261122d";
+} from "./wizard.js?v=20261122e";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261122e";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261122d";
+} from "./budget-span.js?v=20261122e";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -176,10 +177,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261122d"),
-      import("./charts.js?v=20261122d"),
-      import("./frontier-chart.js?v=20261122d"),
-      import("./rescale.js?v=20261122d"),
+      import("./engine.js?v=20261122e"),
+      import("./charts.js?v=20261122e"),
+      import("./frontier-chart.js?v=20261122e"),
+      import("./rescale.js?v=20261122e"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -247,9 +248,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261122d";
+} from "./money.js?v=20261122e";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261122d";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261122e";
 
 let worker = null;
 
@@ -1196,6 +1197,84 @@ function renderSimpleResults(p) {
 
   wrap.style.display = "block";
   wrap.appendChild(card);
+}
+
+/**
+ * PLAN screen (owner order 2026-11-22): one price, three stats, and a
+ * three-line breakdown that sums to that price by construction.
+ *
+ * Everything here reads the SAME priced route the four-ways table renders
+ * (`p.pathsPriced`, priced once per system by renderPathsSection), so the plan
+ * cannot state a second number set: the total IS the route's year-0 cost, and
+ * the three lines are that route's own parts. The price is never assembled
+ * here — it is summed from the same fields the pay card prints.
+ */
+function renderPlanCard(p, sys, paths) {
+  const wrap = $("planCardWrap");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+  wrap.hidden = true;
+  if (!p || p.unreachableReason || !paths || !paths.cheapest) return;
+  const route = paths.by && paths.by[paths.cheapest];
+  if (!route || !route.available) return;
+
+  // One identity, owned by plan-card.js: the price IS the sum of the three
+  // lines, and that sum must be this route's own year-0 total. A route that
+  // disagrees renders no plan rather than a second number set.
+  const { hardware, labour, feesAndTools, total, consistent } =
+    planBreakdown(route);
+  if (!consistent) return;
+
+  const size = t("planSystemSize", {
+    pv: fmt(sys.pvKw),
+    batt: fmt(sys.battKwh),
+  });
+
+  const card = el("div", { class: "plan-card" });
+  card.appendChild(el("h3", { class: "plan-title" }, t("planTitle")));
+  card.appendChild(el("p", { class: "plan-price" }, money(total)));
+  card.appendChild(el("p", { class: "plan-basis" }, t("planBasis", { size })));
+
+  const stats = el("div", { class: "plan-stats" });
+  const stat = (label, value) => {
+    const box = el("div");
+    box.appendChild(el("div", { class: "plan-stat-label" }, label));
+    box.appendChild(el("div", { class: "plan-stat-value" }, value));
+    stats.appendChild(box);
+  };
+  stat(
+    t("planStatSavings"),
+    Number.isFinite(route.net20) ? money(route.net20) : "\u2014",
+  );
+  stat(
+    t("planStatPayback"),
+    route.breakEvenYear
+      ? t("planPaybackValue", { year: route.breakEvenYear })
+      : "\u2014",
+  );
+  stat(
+    t("planStatBillCut"),
+    Number.isFinite(route.billCutPct)
+      ? `${Math.round(route.billCutPct)}%`
+      : "\u2014",
+  );
+  card.appendChild(stats);
+
+  const rows = el("dl", { class: "plan-breakdown" });
+  const row = (label, value, cls) => {
+    const line = el("div", cls ? { class: cls } : {});
+    line.appendChild(el("dt", {}, label));
+    line.appendChild(el("dd", {}, value));
+    rows.appendChild(line);
+  };
+  row(t("planRowHardware"), money(hardware));
+  row(t("planRowLabour"), money(labour));
+  row(t("planRowFees"), money(feesAndTools));
+  row(t("planTotalLabel"), money(total), "plan-total");
+  card.appendChild(rows);
+
+  wrap.appendChild(card);
+  wrap.hidden = false;
 }
 
 // Infeasibility banner: surfaces a structural (mode × hardware × target) reason above
@@ -4021,7 +4100,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261122d",
+      "./assets/js/sizing/sizing-worker.js?v=20261122e",
       {
         type: "module",
       },
@@ -5679,6 +5758,9 @@ async function renderPathSurfaces(p) {
   if (paths) {
     p.pathsPriced = paths;
     p.pathsPricedFor = `${sys.pvKw}|${sys.battKwh}`;
+    // The PLAN screen reads the route just priced, so it can never disagree
+    // with the pay table beneath it.
+    renderPlanCard(p, sys, paths);
     // The recommendation card prints the installed payback only once the routes
     // are priced; repaint the card (not renderBestPick, which owns the matrix).
     // ONLY when the card IS the recommendation's: a visitor who picked another
@@ -7828,6 +7910,12 @@ async function renderResults(p) {
   // The readable card refreshes with every fresh payload, same as the
   // technical surfaces (#441: unconditional, it is the leading surface).
   renderSimpleResults(p);
+  // A new payload invalidates the priced plan until the routes are re-priced.
+  const planWrap = $("planCardWrap");
+  if (planWrap) {
+    planWrap.innerHTML = "";
+    planWrap.hidden = true;
+  }
 
   // The use case's own metric and verdict, from payload.useCaseOutcome.
   renderUseCaseOutcome(p);
@@ -9362,11 +9450,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261122d")
+    import("../shared/translation-suggestion-loader.js?v=20261122e")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261122d"),
+          () => import("../translation-suggestion.js?v=20261122e"),
         );
       })
       .catch(() => {});
