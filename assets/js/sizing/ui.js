@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261121c";
+import { APPLIANCES } from "./appliances.js?v=20261122b";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261121c";
+} from "./pwa-install.js?v=20261122b";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261121c";
+} from "./usecases.js?v=20261122b";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261121c";
+} from "./run-coordinator.js?v=20261122b";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261121c";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261121c";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261121c";
+} from "./mode-chrome.js?v=20261122b";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261122b";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261122b";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261121c";
+} from "./location-picker.js?v=20261122b";
 
 import {
   estimateTariff,
@@ -57,14 +57,14 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261121c";
+} from "./pricing.js?v=20261122b";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261121c";
+import { currencyForCountry } from "./country-currency.js?v=20261122b";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261121c";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261122b";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -83,7 +83,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261121c").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261122b").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -94,15 +94,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261121c";
+} from "./lead-acid.js?v=20261122b";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261121c";
+} from "./bom.js?v=20261122b";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261121c";
+import { BOM_ITEMS } from "../shared/content.js?v=20261122b";
 
 import {
   applyI18n,
@@ -111,18 +111,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261121c";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261121c";
-import { byId as $, el } from "../shared/dom.js?v=20261121c";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261121c";
-import {
-  isSimpleMode,
-  initSimpleMode,
-  setSimpleMode,
-  onSimpleModeChange,
-  modeLabel,
-} from "../shared/simple-mode.js?v=20261121c";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261121c";
+} from "../shared/i18n.js?v=20261122b";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261122b";
+import { byId as $, el } from "../shared/dom.js?v=20261122b";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261122b";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261122b";
 import {
   advisorJevContext,
   interpretSanity,
@@ -130,29 +123,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261121c";
+} from "./validate.js?v=20261122b";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261121c";
+} from "../shared/cut-targets.js?v=20261122b";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261121c";
+} from "./share-codec.js?v=20261122b";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261121c";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261121c";
+} from "./infeasible-copy.js?v=20261122b";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261122b";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261121c";
+} from "./fuel-units.js?v=20261122b";
 
 import {
   createLeafletProvider,
@@ -160,18 +153,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261121c";
+} from "./map-provider.js?v=20261122b";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261121c";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261121c";
+} from "./wizard.js?v=20261122b";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261122b";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261121c";
+} from "./budget-span.js?v=20261122b";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -183,10 +176,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261121c"),
-      import("./charts.js?v=20261121c"),
-      import("./frontier-chart.js?v=20261121c"),
-      import("./rescale.js?v=20261121c"),
+      import("./engine.js?v=20261122b"),
+      import("./charts.js?v=20261122b"),
+      import("./frontier-chart.js?v=20261122b"),
+      import("./rescale.js?v=20261122b"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -254,9 +247,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261121c";
+} from "./money.js?v=20261122b";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261121c";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261122b";
 
 let worker = null;
 
@@ -266,9 +259,10 @@ let prevFxSnapshot = null; // for tariff display conversion on currency switch
 // Result detail level: "best" | "compare" | "matrix" (auto-chemistry runs only).
 let resultLevel = "best";
 
-// Quick mode shows only the essential inputs; Manual reveals the full form.
-// Both modes require the explicit sizing button before any calculation.
-let quickMode = true;
+// #441: there is no intake mode. The full form is always present (the "all the
+// options" experience), the plain-language result card always leads, and the
+// technical panels sit behind the result disclosures. Nothing here may
+// reintroduce a gate the visitor has to adjudicate before seeing a value.
 // No sizing work is allowed until the visitor explicitly clicks the run button.
 // After the first successful result, pre-calc changes may refresh it quietly.
 let runAuthorized = false;
@@ -625,86 +619,50 @@ function warmSiteWeather(lat, lon) {
   }
 }
 
-function applySimpleMode() {
-  const simpleMode = isSimpleMode();
-  document.documentElement.dataset.displayMode = simpleMode
-    ? "simple"
-    : "technical";
-  const toggle = $("simpleModeToggle");
-  if (toggle) {
-    toggle.checked = simpleMode;
-    toggle.setAttribute(
-      "aria-label",
-      t("simpleModeAria", { mode: modeLabel(simpleMode, t) }),
-    );
-  }
-  // Simple mode swaps the detail panels for one plain-language card: the
-  // wrapper is only ever revealed with fresh content inside, so a stale card
-  // can never masquerade as a fresh result.
+/**
+ * The one readable-results pass (#441). There is no display-mode fork left to
+ * keep in sync, so this is what every result render and every language change
+ * runs: the plain-language card leads, the badge re-mounts from the state cache,
+ * and the jargon glosses are attached to the terms whose explanations exist.
+ *
+ * The technical panels are not removed by this pass — they live behind the
+ * result disclosures, which is where "all the options" is reachable in one
+ * gesture (presentation spec V1, section 5).
+ */
+function applyReadableResults() {
+  // The wrapper is only ever revealed with fresh content inside, so a stale
+  // card can never masquerade as a fresh result.
   const simpleWrap = $("simpleResultsWrap");
   if (simpleWrap) {
     simpleWrap.innerHTML = "";
     simpleWrap.style.display = "none";
-    if (simpleMode && lastPayload) renderSimpleResults(lastPayload);
+    if (lastPayload) renderSimpleResults(lastPayload);
   }
-  // The badge must survive mode toggles in BOTH directions: each surface's
-  // render re-mounts it through the same sanity owner (runSanityCheck), from
-  // the state cache — never a second /api/jev request.
+  // Re-mounted through the same sanity owner (runSanityCheck), from the state
+  // cache — never a second /api/jev request.
   if (lastPayload) runSanityCheck(lastPayload);
   document.querySelectorAll("[data-jargon]").forEach((node) => {
-    if (simpleMode) {
-      // Unknown/typo'd terms stay plain text: explainElement returns false
-      // and no button semantics or handlers are attached to a dead tooltip.
-      const lang = document.documentElement.lang || "en";
-      if (!explainElement(node, node.dataset.jargon, lang)) return;
-      node.setAttribute("role", "button");
-      node.setAttribute("aria-expanded", "false");
-      if (!node.dataset.eli5Wired) {
-        node.dataset.eli5Wired = "true";
-        const toggleExplanation = () => {
-          const open = node.getAttribute("aria-expanded") === "true";
-          node.setAttribute("aria-expanded", String(!open));
-          node.classList.toggle("eli5-open", !open);
-        };
-        node.addEventListener("click", toggleExplanation);
-        node.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            toggleExplanation();
-          }
-        });
+    // Unknown/typo'd terms stay plain text: explainElement returns false and no
+    // button semantics or handlers are attached to a dead tooltip.
+    const lang = document.documentElement.lang || "en";
+    if (!explainElement(node, node.dataset.jargon, lang)) return;
+    node.setAttribute("role", "button");
+    node.setAttribute("aria-expanded", "false");
+    if (node.dataset.eli5Wired) return;
+    node.dataset.eli5Wired = "true";
+    const toggleExplanation = () => {
+      const open = node.getAttribute("aria-expanded") === "true";
+      node.setAttribute("aria-expanded", String(!open));
+      node.classList.toggle("eli5-open", !open);
+    };
+    node.addEventListener("click", toggleExplanation);
+    node.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleExplanation();
       }
-    } else {
-      node.removeAttribute("data-eli5");
-      node.removeAttribute("title");
-      node.removeAttribute("tabindex");
-      node.removeAttribute("role");
-      node.removeAttribute("aria-expanded");
-      node.classList.remove("eli5-open");
-    }
+    });
   });
-}
-
-function setupSimpleMode() {
-  initSimpleMode();
-  const toggle = $("simpleModeToggle");
-  if (!toggle) return;
-  toggle.checked = isSimpleMode();
-  // The module owns the state; this listener only translates DOM events
-  // into setSimpleMode() and re-renders through the subscription below.
-  toggle.addEventListener("change", () => {
-    setSimpleMode(toggle.checked);
-  });
-  onSimpleModeChange((simple) => {
-    if (toggle.checked !== simple) toggle.checked = simple;
-    applySimpleMode();
-    if (simple && lastPayload) {
-      document
-        .getElementById("sizing")
-        .scrollIntoView({ behavior: window.scrollBehavior() });
-    }
-  });
-  applySimpleMode();
 }
 
 // Simple mode's single results surface: same payload and same selected entry as the
@@ -1209,9 +1167,13 @@ function renderSimpleResults(p) {
     t("simpleSeeDetails"),
   );
   details.addEventListener("click", () => {
-    // One state setter; the mode subscription re-renders the whole surface.
-    setSimpleMode(false);
-    $("resultsRegion").scrollIntoView({ behavior: window.scrollBehavior() });
+    // #441: detail is a disclosure, not a mode switch. Open the result
+    // disclosures and land the visitor on them; nothing is hidden behind a
+    // choice they have to make first.
+    const firstDisclosure = document.querySelector("#resultsRegion details");
+    if (firstDisclosure) firstDisclosure.open = true;
+    const region = $("resultsRegion");
+    if (region) region.scrollIntoView({ behavior: window.scrollBehavior() });
   });
   actions.appendChild(details);
   // The advisor is arguably MOST valuable in Simple mode — the visitor chose
@@ -1581,9 +1543,7 @@ function syncBillSlider() {
       bill: fmtBill(value),
       kwh: Math.round(billAnchorKwh),
     };
-    note.textContent = quickMode
-      ? t("quickBillStarts", params)
-      : t("quickBillManual", params);
+    note.textContent = t("quickBillStarts", params);
   }
   updateLoadReadout();
 }
@@ -2362,7 +2322,7 @@ function setCoords(lat, lon, label, region, country, skipShareUpdate = false) {
   if (offgridWrap) offgridWrap.style.display = isOffgrid ? "block" : "none";
 
   const note = $("quickBillNote");
-  if (note && quickMode) note.style.display = "block";
+  if (note) note.style.display = "block";
 
   const latEl = $("latInput");
 
@@ -2691,26 +2651,12 @@ function setupRoofMap() {
   window.addEventListener("beforeunload", closeMap, { once: true });
 }
 
-function setQuickMode(on) {
-  quickMode = on;
-
-  const extras = $("fullControls");
-
-  if (extras) extras.style.display = on ? "none" : "block";
-
-  const precise = $("coordDetails");
-
-  if (precise) precise.style.display = on ? "none" : "block";
-
-  const hint = $("locHint");
-
-  if (hint) hint.style.display = on ? "none" : "block";
-
-  const note = $("quickBillNote");
-
-  if (note)
-    note.style.display = on ? (locationResolved ? "block" : "none") : "none";
-
+/**
+ * #441: the one form. Every control the engine reads is on the surface; nothing
+ * is hidden behind a mode. The goal switch does not change that, so this only
+ * re-applies the goal-dependent visibility (bill slider vs off-grid load).
+ */
+function showAllControls() {
   const isOffgrid = $("systemGoal")
     ? $("systemGoal").value === "offgrid"
     : false;
@@ -2720,16 +2666,6 @@ function setQuickMode(on) {
   if (billWrap) billWrap.style.display = !isOffgrid ? "block" : "none";
 
   if (offgridWrap) offgridWrap.style.display = isOffgrid ? "block" : "none";
-
-  const locBtn = $("btnGeoLocate");
-
-  if (locBtn) {
-    locBtn.classList.toggle("btn-geo-primary", on);
-
-    locBtn.style.width = on ? "100%" : "auto";
-
-    locBtn.style.justifyContent = "center";
-  }
 
   const runBtn = $("btnRunSizing");
 
@@ -3509,7 +3445,7 @@ function setupGoalControls() {
       if (optBill) optBill.textContent = t("dailyEnergyNeed");
     }
     updateAutoRows();
-    setQuickMode(quickMode);
+    showAllControls();
     syncBillSlider();
     // A goal switch changes what the results chrome may show (an off-grid
     // goal has no bill to cut) even when no new result has rendered yet.
@@ -4085,7 +4021,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261121c",
+      "./assets/js/sizing/sizing-worker.js?v=20261122b",
       {
         type: "module",
       },
@@ -6157,9 +6093,13 @@ function runSanityCheck(p) {
   const mount = () => {
     clearSanityBadges();
     if (!sanityCache.interp) return;
-    const container = isSimpleMode()
-      ? $("simpleResultsWrap")
-      : $("resultsRegion");
+    // #441: the readable card leads whenever it holds a result; otherwise the
+    // badge mounts on the results region. No mode decides this any more.
+    const simpleWrap = $("simpleResultsWrap");
+    const container =
+      simpleWrap && simpleWrap.childElementCount
+        ? simpleWrap
+        : $("resultsRegion");
     if (container)
       renderSanityBadge(container, sanityCache.interp, t, askAdvisor);
   };
@@ -7578,11 +7518,6 @@ window.addEventListener("resize", () => {
 function renderEli5Summary(p) {
   const wrap = $("eli5Summary");
   if (!wrap) return;
-  if (!isSimpleMode()) {
-    wrap.style.display = "none";
-    wrap.innerHTML = "";
-    return;
-  }
   const entry = resolveSelected(p) || p.best || p.focus;
   if (!entry) {
     wrap.style.display = "none";
@@ -7890,9 +7825,9 @@ async function renderResults(p) {
 
   renderEli5Summary(p);
 
-  // Simple mode's card refreshes with every fresh payload, same as the
-  // technical surfaces.
-  if (isSimpleMode()) renderSimpleResults(p);
+  // The readable card refreshes with every fresh payload, same as the
+  // technical surfaces (#441: unconditional, it is the leading surface).
+  renderSimpleResults(p);
 
   // The use case's own metric and verdict, from payload.useCaseOutcome.
   renderUseCaseOutcome(p);
@@ -8789,7 +8724,9 @@ function askAdvisor() {
         : null),
     selectedLabel,
   );
-  const instructions = [jev, isSimpleMode() ? t("simpleAdvisorStyle") : null]
+  // The plain-language advisor style is no longer a mode: every brief asks for
+  // it, because the plain explanation is the house voice.
+  const instructions = [jev, t("simpleAdvisorStyle")]
     .filter(Boolean)
     .join("\n");
   // The brief is prompt scaffolding: it is sent to the model, never shown. The
@@ -9024,7 +8961,6 @@ async function initSizingUI() {
     renderCatalogue(PORTABLE_DEVICES, "portableDeviceList", "Port");
     setupUseCaseChooser();
     applyUseCase(selectedUseCase(), { silent: true });
-    setupSimpleMode();
     setupRoofMap();
     setupRoofAreaInput();
     // Demote a stored "result" step: a fresh load has no results to show.
@@ -9274,16 +9210,6 @@ async function initSizingUI() {
         markPrecalcDirty();
       });
 
-    // Quick / Manual mode: quick hides advanced inputs but always leaves the
-    // explicit sizing button available; it never runs from location alone.
-
-    const modeQuick = $("modeQuick");
-    const modeManual = $("modeManual");
-    const applyMode = () =>
-      setQuickMode(modeManual ? !modeManual.checked : true);
-    if (modeQuick) modeQuick.addEventListener("change", applyMode);
-    if (modeManual) modeManual.addEventListener("change", applyMode);
-
     // Goal control + Offgrid slider + Monthly-bill slider + bill-cut slider.
     setupGoalControls();
     setupOffgridControls();
@@ -9396,7 +9322,9 @@ async function initSizingUI() {
 
     setLoadPanel();
 
-    setQuickMode(true); // Quick mode is the default form, not an auto-run
+    // #441: no intake mode to set. The form is the form, and the first run is
+    // still the explicit sizing button (never an auto-run from location).
+    showAllControls();
 
     syncBillSlider();
 
@@ -9406,7 +9334,7 @@ async function initSizingUI() {
     // the wrong language on first paint. The fetch started at module evaluation, so
     await applyI18n();
 
-    applySimpleMode();
+    applyReadableResults();
 
     initLangPicker($("langSelect"));
 
@@ -9416,10 +9344,9 @@ async function initSizingUI() {
 
     window.addEventListener("beco:lang", () => {
       repaintRuntimeCopy();
-      // The mode toggle's aria-label names the current mode in the current
-      // language; repaintRuntimeCopy does not own that node, so without this
-      // call the card switched language while the toggle stayed in the old one.
-      applySimpleMode();
+      // The readable card is runtime-painted copy too: it must re-render in the
+      // new language, or one page shows two languages.
+      applyReadableResults();
     });
 
     // THE SAME REPAINT, once, immediately — the load-bearing call.
@@ -9435,11 +9362,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261121c")
+    import("../shared/translation-suggestion-loader.js?v=20261122b")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261121c"),
+          () => import("../translation-suggestion.js?v=20261122b"),
         );
       })
       .catch(() => {});

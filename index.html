@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261121c" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261121c" />
+    <link rel="preload" href="./assets/site.css?v=20261122b" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261122b" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261121c" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261122b" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -595,119 +595,7 @@
                   </button>
                 </div>
               </div>
-
-              <!-- Quick vs Manual mode. Quick shows the essential inputs;
-               Manual reveals the full form. Both require an explicit run. -->
               <div class="form-group" style="margin-bottom: 0.7rem">
-                <div
-                  id="modeToggleRow"
-                  style="
-                    display: flex;
-                    gap: 1.25rem;
-                    align-items: center;
-                    flex-wrap: wrap;
-                  "
-                >
-                  <span
-                    style="
-                      font-size: 0.85rem;
-                      color: var(--text-muted);
-                      font-weight: 700;
-                    "
-                    >Mode:</span
-                  >
-
-                  <label
-                    style="
-                      display: inline-flex;
-                      align-items: center;
-                      gap: 0.35rem;
-                      cursor: pointer;
-                      font-size: 0.95rem;
-                      font-weight: 700;
-                    "
-                  >
-                    <input
-                      type="radio"
-                      name="modeToggle"
-                      id="modeQuick"
-                      checked
-                      style="
-                        width: auto;
-                        margin: 0;
-                        transform: scale(1.15);
-                        cursor: pointer;
-                      "
-                    />
-                    <span data-i18n="quickSetupTitle">⚡ Quick setup</span>
-                    <span
-                      style="
-                        font-weight: 400;
-                        color: var(--text-muted);
-                        font-size: 0.82rem;
-                      "
-                      data-i18n="quickSetupHint"
-                      >— choose inputs, then click Size My System</span
-                    >
-                  </label>
-
-                  <label
-                    style="
-                      display: inline-flex;
-                      align-items: center;
-                      gap: 0.35rem;
-                      cursor: pointer;
-                      font-size: 0.95rem;
-                      font-weight: 700;
-                    "
-                  >
-                    <input
-                      type="radio"
-                      name="modeToggle"
-                      id="modeManual"
-                      style="
-                        width: auto;
-                        margin: 0;
-                        transform: scale(1.15);
-                        cursor: pointer;
-                      "
-                    />
-                    <span data-i18n="manualModeLabel">Manual</span>
-                    <span
-                      style="
-                        font-weight: 400;
-                        color: var(--text-muted);
-                        font-size: 0.82rem;
-                      "
-                      data-i18n="manualModeHint"
-                      >— adjust everything</span
-                    >
-                  </label>
-                </div>
-
-                <div
-                  class="simple-mode-control"
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 0.55rem;
-                    margin-top: 0.65rem;
-                  "
-                >
-                  <input type="checkbox" id="simpleModeToggle" />
-                  <label
-                    for="simpleModeToggle"
-                    style="margin: 0; font-weight: 700; cursor: pointer"
-                    data-i18n="simpleModeLabel"
-                    >Simple mode</label
-                  >
-                  <span
-                    style="font-size: 0.78rem; color: var(--text-muted)"
-                    data-i18n="simpleModeHint"
-                    >just the key numbers</span
-                  >
-                </div>
-
                 <div
                   id="quickBillNote"
                   style="
@@ -3639,15 +3527,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261121c"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261122b"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261121c"
+      src="./assets/js/turnstile-client.js?v=20261122b"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261121c"></script>
+    <script defer src="./assets/js/chat.js?v=20261122b"></script>
   </body>
 </html>
 

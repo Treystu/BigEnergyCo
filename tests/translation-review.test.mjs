@@ -116,7 +116,6 @@ test("the 2026-10-24 full meaning back-read fixes stay fixed", () => {
   // (docs/jev-completion/TRANSLATION_MEANING_BACKREAD_2026-10-24.md). Each
   // assertion fails if the specific unreadable or wrong string it names comes
   // back — the same contract the reviewed-value pins above carry.
-  assert.equal(LOCALES.nl.quickSetupTitle, "⚡ Snelle installatie");
   for (const [locale, value] of Object.entries({
     es: "☀️ Dimensionar mi sistema (simulación de 5 años)",
     pt: "☀️ Dimensionar meu sistema (simulação de 5 anos)",
@@ -175,10 +174,6 @@ test("the 2026-10-24 full meaning back-read fixes stay fixed", () => {
     );
     assert.ok(LOCALES[locale].locBtn.includes(label));
   }
-  assert.ok(
-    LOCALES.ar.quickSetupHint.includes("احسب نظامي"),
-    "ar.quickSetupHint must quote the button label",
-  );
   assert.ok(
     LOCALES.ar.preciseLocationHelp.includes("احسب نظامي"),
     "ar.preciseLocationHelp must quote the button label",
@@ -245,7 +240,6 @@ test("the 2026-10-25 back-translation pass's control targets stay meaning-comple
   assert.match(LOCALES.ar.pathsGradeNote, /ولا شيء هنا عرض سعر من بائع/);
   // English-passthrough targets: the locale column carries a translation.
   assert.match(LOCALES.es.infeasibleNeedsPanelsBody, /^Nada recarga/);
-  assert.match(LOCALES.pt.quickBillManual, /^Estimativa rápida/);
   assert.match(LOCALES.fr.advisorDegradedRetry, /^Réessayez/);
   assert.equal(LOCALES.de.pathsUnknown, "Unbekannt");
   assert.equal(LOCALES.nl.fxCodeLabel, "Valutacode:");

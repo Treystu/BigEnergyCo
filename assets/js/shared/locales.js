@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261121c";
-import { RESULT_COPY } from "./result-copy.js?v=20261121c";
-import { TILT_COPY } from "./tilt-copy.js?v=20261121c";
+import { HOME_COPY } from "./home-copy.js?v=20261122b";
+import { RESULT_COPY } from "./result-copy.js?v=20261122b";
+import { TILT_COPY } from "./tilt-copy.js?v=20261122b";
 
 export const LOCALES = {
   en: {
@@ -127,10 +127,7 @@ export const LOCALES = {
     lvlBest: "Best pick",
     lvlCompare: "Compare batteries",
     lvlMatrix: "All options",
-    manualModeLabel: "Manual",
-    manualModeHint: "— adjust everything",
     simpleModeLabel: "Simple mode",
-    simpleModeHint: "just the key numbers",
     simpleSolar: "Solar",
     simpleBattery: "Battery",
     simpleFirstCost: "First cost",
@@ -147,7 +144,6 @@ export const LOCALES = {
     simpleNoPayback: "does not pay back in 20 years",
     simplePayback: "Payback",
     simpleModeTechnical: "Technical mode",
-    simpleModeAria: "{mode} enabled",
     simpleHintFeedIn: "({unit}/kWh, optional — grid-tie only)",
     simpleHintFixed: "({unit}/mo, optional)",
     analysisFullBill: "Full bill-cut analysis",
@@ -439,8 +435,6 @@ export const LOCALES = {
     offgridKwhReadout: "~{kwh} kWh/day",
     quickBillStarts:
       "Starts from ~{bill} (≈{kwh} kWh/day). Set your real bill here, choose a location, then click Size My System. The bill-cut slider appears with results.",
-    quickBillManual:
-      "Quick estimate: ~{bill} (starts from ~{kwh} kWh/day) — switch to Manual to change your bill, appliances, or rate.",
     dailyEnergyNeed: "Daily energy need (kWh/day slider)",
     billPerMonth: "/mo",
     simpleHeadline: "At your location, this system gets you {goal}:",
@@ -919,10 +913,7 @@ export const LOCALES = {
     lvlBest: "Mejor opción",
     lvlCompare: "Comparar baterías",
     lvlMatrix: "Todas las opciones",
-    manualModeLabel: "Manual",
-    manualModeHint: "— ajústalo todo",
     simpleModeLabel: "Modo simple",
-    simpleModeHint: "solo los números clave",
     simpleSolar: "Solar",
     simpleBattery: "Batería",
     simpleFirstCost: "Coste inicial",
@@ -939,7 +930,6 @@ export const LOCALES = {
     simpleNoPayback: "no se amortiza en 20 años",
     simplePayback: "Amortización",
     simpleModeTechnical: "Modo técnico",
-    simpleModeAria: "{mode} activado",
     simpleHintFeedIn: "({unit}/kWh, opcional — solo con conexión a red)",
     simpleHintFixed: "({unit}/mes, opcional)",
     analysisFullBill: "Análisis completo del recorte de factura",
@@ -1248,8 +1238,6 @@ export const LOCALES = {
     offgridKwhReadout: "~{kwh} kWh/día",
     quickBillStarts:
       "Empieza desde ~{bill} (≈{kwh} kWh/día). Pon aquí tu factura real, elige una ubicación y pulsa Dimensionar mi sistema. El control de recorte aparece con los resultados.",
-    quickBillManual:
-      "Estimación rápida: ~{bill} (empieza desde ~{kwh} kWh/día) — cambia a Manual para ajustar tu factura, electrodomésticos o tarifa.",
     dailyEnergyNeed: "Necesidad diaria de energía (control kWh/día)",
     billPerMonth: "/mes",
     simpleHeadline: "En tu ubicación, este sistema consigue {goal}:",
@@ -1650,10 +1638,7 @@ export const LOCALES = {
     lvlBest: "Melhor escolha",
     lvlCompare: "Comparar baterias",
     lvlMatrix: "Todas as opções",
-    manualModeLabel: "Manual",
-    manualModeHint: "— ajusta tudo",
     simpleModeLabel: "Modo simples",
-    simpleModeHint: "só os números-chave",
     simpleSolar: "Solar",
     simpleBattery: "Bateria",
     simpleFirstCost: "Custo inicial",
@@ -1670,7 +1655,6 @@ export const LOCALES = {
     simpleNoPayback: "não se paga em 20 anos",
     simplePayback: "Retorno",
     simpleModeTechnical: "Modo técnico",
-    simpleModeAria: "{mode} ativado",
     simpleHintFeedIn: "({unit}/kWh, opcional — apenas com ligação à rede)",
     simpleHintFixed: "({unit}/mês, opcional)",
     analysisFullBill: "Análise completa da redução da conta",
@@ -1970,8 +1954,6 @@ export const LOCALES = {
     offgridKwhReadout: "~{kwh} kWh/dia",
     quickBillStarts:
       "Começa em ~{bill} (≈{kwh} kWh/dia). Coloque aqui sua conta real, escolha uma localização e clique em Dimensionar meu sistema. O controle de corte aparece com os resultados.",
-    quickBillManual:
-      "Estimativa rápida: ~{bill} (começa em ~{kwh} kWh/dia) — mude para Manual para alterar sua conta, eletrodomésticos ou tarifa.",
     dailyEnergyNeed: "Necessidade diária de energia (controle kWh/dia)",
     billPerMonth: "/mês",
     simpleHeadline: "Na sua localização, este sistema consegue {goal}:",
@@ -2371,10 +2353,7 @@ export const LOCALES = {
     lvlBest: "Meilleur choix",
     lvlCompare: "Comparer les batteries",
     lvlMatrix: "Toutes les options",
-    manualModeLabel: "Manuel",
-    manualModeHint: "— tout ajuster",
     simpleModeLabel: "Mode simple",
-    simpleModeHint: "juste les chiffres clés",
     simpleSolar: "Solaire",
     simpleBattery: "Batterie",
     simpleFirstCost: "Coût initial",
@@ -2391,7 +2370,6 @@ export const LOCALES = {
     simpleNoPayback: "pas rentabilisé en 20 ans",
     simplePayback: "Rentabilité",
     simpleModeTechnical: "Mode technique",
-    simpleModeAria: "{mode} activé",
     simpleHintFeedIn: "({unit}/kWh, facultatif — réseau raccordé uniquement)",
     simpleHintFixed: "({unit}/mois, facultatif)",
     analysisFullBill: "Analyse complète de la réduction de facture",
@@ -2694,8 +2672,6 @@ export const LOCALES = {
     offgridKwhReadout: "~{kwh} kWh/jour",
     quickBillStarts:
       "Démarre à ~{bill} (≈{kwh} kWh/jour). Indiquez ici votre vraie facture, choisissez un lieu, puis cliquez sur Dimensionner mon système. Le curseur de réduction apparaît avec les résultats.",
-    quickBillManual:
-      "Estimation rapide : ~{bill} (démarre à ~{kwh} kWh/jour) — passez en Manuel pour changer votre facture, vos appareils ou votre tarif.",
     dailyEnergyNeed: "Besoin énergétique quotidien (curseur kWh/jour)",
     billPerMonth: "/mois",
     simpleHeadline: "À votre lieu, ce système vous permet de {goal} :",
@@ -3098,10 +3074,7 @@ export const LOCALES = {
     lvlBest: "Beste Wahl",
     lvlCompare: "Batterien vergleichen",
     lvlMatrix: "Alle Optionen",
-    manualModeLabel: "Manuell",
-    manualModeHint: "— alles anpassen",
     simpleModeLabel: "Einfacher Modus",
-    simpleModeHint: "nur die Kernzahlen",
     simpleSolar: "Solar",
     simpleBattery: "Batterie",
     simpleFirstCost: "Anfangskosten",
@@ -3118,7 +3091,6 @@ export const LOCALES = {
     simpleNoPayback: "amortisiert sich nicht in 20 Jahren",
     simplePayback: "Amortisation",
     simpleModeTechnical: "Technischer Modus",
-    simpleModeAria: "{mode} aktiviert",
     simpleHintFeedIn: "({unit}/kWh, optional — nur bei Netzanschluss)",
     simpleHintFixed: "({unit}/Monat, optional)",
     analysisFullBill: "Vollständige Analyse der Rechnungssenkung",
@@ -3421,8 +3393,6 @@ export const LOCALES = {
     offgridKwhReadout: "~{kwh} kWh/Tag",
     quickBillStarts:
       "Beginnt bei ~{bill} (≈{kwh} kWh/Tag). Tragen Sie hier Ihre echte Rechnung ein, wählen Sie einen Standort und klicken Sie auf Mein System dimensionieren. Der Spar-Schieber erscheint mit den Ergebnissen.",
-    quickBillManual:
-      "Schnellschätzung: ~{bill} (beginnt bei ~{kwh} kWh/Tag) — wechseln Sie zu Manuell, um Rechnung, Geräte oder Tarif zu ändern.",
     dailyEnergyNeed: "Täglicher Energiebedarf (kWh/Tag-Schieber)",
     billPerMonth: "/Mon.",
     simpleHeadline: "An Ihrem Standort bringt Ihnen dieses System {goal}:",
@@ -3736,10 +3706,7 @@ export const LOCALES = {
     lvlBest: "Beste keuze",
     lvlCompare: "Accu's vergelijken",
     lvlMatrix: "Alle opties",
-    manualModeLabel: "Handmatig",
-    manualModeHint: "— alles aanpassen",
     simpleModeLabel: "Eenvoudige modus",
-    simpleModeHint: "alleen de kerncijfers",
     simpleSolar: "Zon",
     simpleBattery: "Accu",
     simpleFirstCost: "Initiële kosten",
@@ -3756,7 +3723,6 @@ export const LOCALES = {
     simpleNoPayback: "verdient zich niet terug in 20 jaar",
     simplePayback: "Terugverdientijd",
     simpleModeTechnical: "Technische modus",
-    simpleModeAria: "{mode} ingeschakeld",
     simpleHintFeedIn: "({unit}/kWh, optioneel — alleen netgekoppeld)",
     simpleHintFixed: "({unit}/maand, optioneel)",
     analysisFullBill: "Volledige analyse van rekeningverlaging",
@@ -3985,8 +3951,6 @@ export const LOCALES = {
     offgridKwhReadout: "~{kwh} kWh/dag",
     quickBillStarts:
       "Begint bij ~{bill} (≈{kwh} kWh/dag). Stel hier uw echte rekening in, kies een locatie en klik op Systeem dimensioneren. De besparingsschuif verschijnt bij de resultaten.",
-    quickBillManual:
-      "Snelle schatting: ~{bill} (begint bij ~{kwh} kWh/dag) — schakel over naar Handmatig om uw rekening, apparaten of tarief te wijzigen.",
     dailyEnergyNeed: "Dagelijkse energiebehoefte (kWh/dag-schuif)",
     billPerMonth: "/mnd",
     simpleHeadline: "Op uw locatie levert dit systeem u {goal}:",
@@ -4326,8 +4290,6 @@ export const LOCALES = {
       "Waar netstroom duur is — Hawaï, eilanden, grote delen van Europa, Afrika en Zuid-Azië — verdient goed gebouwde zonne-energie met opslag de kosten van de onderdelen vaak in één tot vier jaar terug en draait daarna tientallen jaren bijna gratis. De calculator berekent uw persoonlijke terugverdientijd op basis van uw eigen tarief.",
     preciseLocationHelp:
       "De knop voor precieze locatie vult uw exacte coördinaten in en haalt stroomprijzen op uit de dichtstbijzijnde referentieregio. Typ voor een andere plaats een stad of dorp en druk op Enter of Tab om deze te bepalen. Klik daarna op Systeem dimensioneren.",
-    quickSetupHint: "— kies de invoer en klik daarna op Systeem dimensioneren",
-    quickSetupTitle: "⚡ Snelle installatie",
     rateLimitDisclaimer:
       "Automatiseer of schraap dit hulpmiddel niet en overbelast het niet; één persoon betaalt voor de AI-aanroepen. Er gelden verzoeklimieten en misbruik wordt geblokkeerd.",
     resultEstimateDisclaimer:
@@ -4638,10 +4600,7 @@ export const LOCALES = {
     lvlBest: "الاختيار الأفضل",
     lvlCompare: "مقارنة البطاريات",
     lvlMatrix: "كل الخيارات",
-    manualModeLabel: "يدوي",
-    manualModeHint: "— اضبط كل شيء",
     simpleModeLabel: "الوضع المبسط",
-    simpleModeHint: "الأرقام الأساسية فقط",
     simpleSolar: "شمسي",
     simpleBattery: "بطارية",
     simpleFirstCost: "التكلفة الأولية",
@@ -4658,7 +4617,6 @@ export const LOCALES = {
     simpleNoPayback: "لا يُسترد خلال 20 عامًا",
     simplePayback: "فترة الاسترداد",
     simpleModeTechnical: "الوضع التقني",
-    simpleModeAria: "{mode} مفعّل",
     simpleHintFeedIn: "({unit}/كيلوواط ساعة، اختياري — متصل بالشبكة فقط)",
     simpleHintFixed: "({unit}/شهر، اختياري)",
     analysisFullBill: "تحليل كامل لتخفيض الفاتورة",
@@ -4947,8 +4905,6 @@ export const LOCALES = {
     offgridKwhReadout: "~{kwh} كيلوواط·ساعة/يوم",
     quickBillStarts:
       "يبدأ من ~{bill} (≈{kwh} كيلوواط·ساعة/يوم). ضع فاتورتك الحقيقية هنا، واختر موقعًا، ثم انقر على «حجم نظامي». يظهر منزلق خفض الفاتورة مع النتائج.",
-    quickBillManual:
-      "تقدير سريع: ~{bill} (يبدأ من ~{kwh} كيلوواط·ساعة/يوم) — بدّل إلى اليدوي لتغيير فاتورتك أو أجهزتك أو التعرفة.",
     dailyEnergyNeed: "الحاجة اليومية من الطاقة (منزلق كيلوواط·ساعة/يوم)",
     billPerMonth: "/شهريًا",
     simpleHeadline: "في موقعك، يمنحك هذا النظام {goal}:",

@@ -197,65 +197,42 @@ test("simple view: never renders NaN or missing figures", () => {
   }
 });
 
-// ── Completeness gate with teeth ─────────────────────────────────────────
-// Every selector the Simple mode hides must (a) exist in index.html and
-// (b) be covered by the scoped CSS rule. A selector that matches nothing is
-// dead weight; a hidden block missing from the rule leaks technical detail.
-
-// Charts (#frontierWrap, #socChartWrap, #cumCostChartWrap, #sunPathWrap) and
-// the comparison matrix (#tierResults) deliberately stay VISIBLE in simple
-// mode — visual understanding is the easy part, and the mode must not strip
-// functionality. Only dense text/tables and duplicated figures hide.
-const SIMPLE_HIDE_SELECTORS = [
-  "#resultLadder",
-  "#moneyBar",
-  "#focusPanel",
-  "#bomPanel",
-  "#eli5CardWrap",
-  "#eli5Summary",
-  ".result-actions-row",
-  "#modeToggleRow",
-  "#fullControls",
-  "#coordDetails",
+// ── The readable-results contract (rewritten for #441) ────────────────────
+// This file used to hold the hide-list gate for the Simple-mode display fork:
+// every selector the mode hid had to exist and be covered by the scoped CSS
+// rule. #441 removed the fork, so the invariant that replaces it is the
+// opposite one — nothing may be hidden by a root mode attribute, and every
+// panel that used to be hidden must still exist, reachable through the result
+// disclosures rather than through a mode.
+//
+// The behaviour these tests cover (a plain-language card built from the same
+// payload as the technical panels) is unchanged and is tested above.
+const PREVIOUSLY_MODE_HIDDEN = [
+  'id="resultLadder"',
+  'id="moneyBar"',
+  'id="focusPanel"',
+  'id="bomPanel"',
+  'class="result-actions-row"',
+  'id="fullControls"',
+  'id="coordDetails"',
 ];
 
-function simpleCssText() {
-  const css = fs.readFileSync("assets/site.css", "utf8");
-  const start = css.indexOf('[data-display-mode="simple"]');
-  assert.ok(start > 0, "simple-mode CSS block missing from site.css");
-  const end = css.indexOf("}", css.indexOf("#coordDetails", start));
-  return css.slice(start, end);
-}
-
-test("GATE: simple mode hides only real surfaces, and hides all of them", () => {
+test("GATE: no panel is hidden by a display mode, and every panel survives", () => {
   const html = fs.readFileSync("index.html", "utf8");
-  const css = simpleCssText();
-  const declared = [];
-  for (const sel of SIMPLE_HIDE_SELECTORS) {
-    const idOrClass = sel.startsWith("#")
-      ? `id="${sel.slice(1)}"`
-      : `class="${sel.slice(1)}"`;
-    assert.ok(
-      html.includes(idOrClass),
-      `${sel} is in the hide-list but nothing in index.html carries it — dead selector`,
-    );
-    assert.ok(
-      css.includes(sel),
-      `${sel} exists in the page but simple mode does not hide it — technical detail leak`,
-    );
-    declared.push(sel);
+  const css = fs.readFileSync("assets/site.css", "utf8");
+
+  // The fork's hiding mechanism is gone from the stylesheet entirely.
+  assert.ok(
+    !css.includes("data-display-mode"),
+    "site.css must not hide panels from a root display-mode attribute",
+  );
+  // Nothing in the artifact carries the attribute either.
+  assert.ok(!html.includes("data-display-mode="), "index.html must not set it");
+
+  // Every panel that mode used to hide still exists — detail moved behind the
+  // disclosures, it was not deleted.
+  for (const marker of PREVIOUSLY_MODE_HIDDEN) {
+    assert.ok(html.includes(marker), `${marker} must remain reachable`);
   }
-  // The gate itself must have teeth: every selector in the CSS rule is one
-  // we declared. A rule hiding something NOT in this list would silently
-  // grow the hide surface without review (e.g. a chart, which must stay).
-  const ruleSelectors = [...css.matchAll(/(?:^|,)\s*([^,{]+)\s*(?=,|{)/g)]
-    .map((m) => m[1].trim())
-    .map((s) => s.replace(/^\[data-display-mode="simple"\]\s*/, ""))
-    .filter((s) => s.startsWith("#") || s.startsWith("."));
-  for (const rs of ruleSelectors) {
-    assert.ok(
-      declared.includes(rs),
-      `site.css hides "${rs}" in simple mode but it is not in the reviewed hide-list`,
-    );
-  }
+  assert.match(html, /More detail: the charts, the workings and the options/);
 });

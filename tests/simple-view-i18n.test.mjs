@@ -25,7 +25,6 @@ const KEYS = [
   "simpleNoPayback",
   "simplePayback",
   "simpleModeTechnical",
-  "simpleModeAria",
   "simpleHintFeedIn",
   "simpleHintFixed",
   "analysisFullBill",
@@ -172,20 +171,22 @@ test("the Simple mode label and chrome strings are dictionary lookups", () => {
     "offlineBadgeTitle",
     "simpleHintFeedIn",
     "simpleHintFixed",
-    "simpleModeAria",
   ]) {
     assert.ok(ui.includes(`t("${key}"`), `ui.js does not render ${key}`);
   }
+  // #441: the mode controls are gone, so their labels must not be rendered —
+  // a key wired back into the page would mean the fork came back.
+  assert.ok(!ui.includes('t("simpleModeAria"'));
 });
 
-test("the language switch repaints the Simple mode chrome", () => {
-  // The toggle's aria-label is built from modeLabel(…, t); a beco:lang switch
-  // that only repaints the card leaves that label in the previous language.
+test("the language switch repaints the readable result card", () => {
+  // The card is runtime-painted copy. A beco:lang switch that only repaints the
+  // markup pass leaves the card in the previous language.
   const ui = fs.readFileSync("assets/js/sizing/ui.js", "utf8");
   assert.match(
     ui,
-    /addEventListener\("beco:lang"[\s\S]{0,320}?applySimpleMode\(\)/,
-    "beco:lang must repaint the Simple mode toggle, not only the results",
+    /addEventListener\("beco:lang"[\s\S]{0,320}?applyReadableResults\(\)/,
+    "beco:lang must repaint the readable card, not only the markup copy",
   );
 });
 
