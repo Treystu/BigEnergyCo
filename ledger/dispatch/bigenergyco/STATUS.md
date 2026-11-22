@@ -19,16 +19,17 @@ open item, not filed again.
 
 | Field          | Value                                                      |
 | -------------- | ---------------------------------------------------------- |
-| Main head      | `7551fe52` (PR #460 merged)                                |
+| Main head      | `038d7fd9` (PR #462 merged)                                |
 | Open issues    | 30                                                         |
 | Open lane PRs  | 0                                                          |
 | Other open PRs | 1 — dependabot #455, not lane work                         |
-| Asset stamp    | `20261122c`, SW `beco-v275`                                |
+| Asset stamp    | `20261122d`, SW `beco-v276`                                |
 | Rail evidence  | CircleCI pipeline API, workflow `verify` at the exact head |
 
 Queue state, in the mission's order: LIVE DEFECTS closed (#443/#444/#442/#447 all
 landed). Wave 0 (#436 presentation spec) landed `8ffc1440`. Wave 1: #441 landed
-`d8bc5a23`; #430 landed `7551fe52`; **next is #440** (intake priors
+`d8bc5a23`; #430 landed `7551fe52`; #440's inference core landed `038d7fd9` and
+its rounds UI is the open remainder; **next is #440 items 3-5** (intake priors
 
 - ladder), then #431 (applicability). #430 scope 2-3 (pre-rendered estimate at
   stated defaults, in-browser recalculation) were attached to #440 at filing time
@@ -41,6 +42,12 @@ landed). Wave 0 (#436 presentation spec) landed `8ffc1440`. Wave 1: #441 landed
 - #441 mode-fork removal -> PR #459, squash `d8bc5a23`. Rail `verify:success` at
   `908e537b`. Rendered census: 0 mode controls, no `data-display-mode`, every
   demoted panel display-visible behind the disclosures.
+- #461 lane STATUS + census -> squash `f9023602`. Rail `verify:success` at
+  `f538ad22`.
+- #444 re-verification (row was already CLOSED via #456 `ff18a5b3`): options
+  intact and a load-mode pick commits through the event path on `f9023602`.
+- #440 items 1-2 prior model + fixture suite -> PR #462, squash `038d7fd9`. Rail
+  `verify:success` at `5cff16de`. #440 stays open for items 3-5.
 - #430 location-first intake -> PR #460, squash `7551fe52`. Rail `verify:success`
   at `7717fac6`; #430 CLOSED. Rendered census on the merge candidate:
   `#citySearch` 1204 < goal 1380 < `#billSliderWrap` 1465 < `#fullControls` 1611 <
