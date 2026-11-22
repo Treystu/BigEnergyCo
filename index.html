@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261122f" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261122f" />
+    <link rel="preload" href="./assets/site.css?v=20261122g" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261122g" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261122f" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261122g" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -2165,7 +2165,21 @@
 
                 <div id="useCaseOutcomeWrap" aria-live="polite"></div>
 
-                <div id="simpleResultsWrap" aria-live="polite"></div>
+                <!-- #403 Cure C: the ONE cost table stays on the surface with the
+                     plan; everything else on the result lives behind the single
+                     optional disclosure below, the same pattern the calculator
+                     uses. Filled by renderPathsSection(). -->
+                <div
+                  id="pathsPanel"
+                  style="display: none; margin-top: 0.5rem"
+                ></div>
+
+                <details id="resultsMore" class="results-more">
+                  <summary data-i18n="resultsMoreSummary">
+                    More detail: the charts, the workings and the options
+                  </summary>
+
+                  <div id="simpleResultsWrap" aria-live="polite"></div>
 
                 <p
                   id="ladderIntro"
@@ -2308,17 +2322,6 @@
                 ></div>
 
                 <!-- Four ways to pay for this one system, priced together. -->
-                <div
-                  id="pathsPanel"
-                  style="display: none; margin-top: 1.25rem"
-                ></div>
-
-                <!-- #403 Cure C: one disclosure governs every demoted block. -->
-                <details id="resultsMore" class="results-more">
-                  <summary data-i18n="resultsMoreSummary">
-                    More detail: the charts, the workings and the options
-                  </summary>
-                </details>
 
                 <!-- Plausibility frontier: what every budget buys, cheapest first. -->
 
@@ -2699,6 +2702,8 @@
                   hidden
                 ></p>
 
+                </details>
+
                 <div
                   class="result-actions-row"
                   style="
@@ -2738,6 +2743,26 @@
                     Print / save PDF
                   </button>
                 </div>
+
+                <!-- #439: the human support path, at the value moment. What it
+                     is for, where it goes, and what happens next - never framed
+                     as the advisor's failure. Revealed with the other result
+                     actions by renderResults(). -->
+                <p id="resultSupportPath" class="uc-note" hidden>
+                  <span data-i18n="resultSupportLead"
+                    >Need a hand with your result, a system like this, or the
+                    site itself?</span
+                  >
+                  <a
+                    href="mailto:lucasballek@gmail.com?subject=Help%20with%20my%20result"
+                    data-i18n="resultSupportAction"
+                    >Email Lucas &mdash; a person answers</a
+                  >
+                  <span data-i18n="resultSupportNext"
+                    >He replies within a few days. Nothing is sold, and nothing
+                    is collected.</span
+                  >
+                </p>
 
                 <!-- V2: the ask, at the value moment. One quiet line with three
                   doors - chip in, say it worked, or send it to someone who is
@@ -3583,15 +3608,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261122f"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261122g"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261122f"
+      src="./assets/js/turnstile-client.js?v=20261122g"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261122f"></script>
+    <script defer src="./assets/js/chat.js?v=20261122g"></script>
   </body>
 </html>
 
