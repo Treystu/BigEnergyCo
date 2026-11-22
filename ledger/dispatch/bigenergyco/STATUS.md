@@ -17,21 +17,22 @@ open item, not filed again.
 
 ## Census — 2026-11-22 (read: gh issue/pr list + pipeline API, this session)
 
-| Field            | Value                                                       |
-| ---------------- | ----------------------------------------------------------- |
-| Main head        | `d8bc5a23` (before PR #460 merges)                          |
-| Open issues      | 30                                                          |
-| Open lane PRs    | 1 — #460 (this pass)                                        |
-| Other open PRs   | 1 — dependabot #455, not lane work                          |
-| Asset stamp      | `20261122c`, SW `beco-v275` (subject of PR #460)            |
-| Rail evidence    | CircleCI pipeline API, workflow `verify` at the exact head  |
+| Field          | Value                                                      |
+| -------------- | ---------------------------------------------------------- |
+| Main head      | `d8bc5a23` (before PR #460 merges)                         |
+| Open issues    | 30                                                         |
+| Open lane PRs  | 1 — #460 (this pass)                                       |
+| Other open PRs | 1 — dependabot #455, not lane work                         |
+| Asset stamp    | `20261122c`, SW `beco-v275` (subject of PR #460)           |
+| Rail evidence  | CircleCI pipeline API, workflow `verify` at the exact head |
 
 Queue state, in the mission's order: LIVE DEFECTS closed (#443/#444/#442/#447 all
 landed). Wave 0 (#436 presentation spec) landed `8ffc1440`. Wave 1: #441 landed
 `d8bc5a23`; #430 is the pass in flight (PR #460); **next is #440** (intake priors
-+ ladder), then #431 (applicability). #430 scope 2-3 (pre-rendered estimate at
-stated defaults, in-browser recalculation) were attached to #440 at filing time
-rather than given a second home.
+
+- ladder), then #431 (applicability). #430 scope 2-3 (pre-rendered estimate at
+  stated defaults, in-browser recalculation) were attached to #440 at filing time
+  rather than given a second home.
 
 ## Landing record — 2026-11-22
 
