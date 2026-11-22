@@ -1230,16 +1230,18 @@ function renderPlanCard(p, sys, paths) {
     batt: fmt(sys.battKwh),
   });
 
-  const card = el("div", { class: "plan-card" });
-  card.appendChild(el("h3", { class: "plan-title" }, t("planTitle")));
+  // The card, its stat grid and its row list are the existing result-card
+  // classes, not a parallel style system (presentation spec 2: one card shape).
+  const card = el("div", { class: "simple-results-card" });
+  card.appendChild(el("h3", { class: "simple-headline" }, t("planTitle")));
   card.appendChild(el("p", { class: "plan-price" }, money(total)));
-  card.appendChild(el("p", { class: "plan-basis" }, t("planBasis", { size })));
+  card.appendChild(el("p", { class: "simple-note" }, t("planBasis", { size })));
 
-  const stats = el("div", { class: "plan-stats" });
+  const stats = el("dl", { class: "simple-heroes" });
   const stat = (label, value) => {
     const box = el("div");
-    box.appendChild(el("div", { class: "plan-stat-label" }, label));
-    box.appendChild(el("div", { class: "plan-stat-value" }, value));
+    box.appendChild(el("dt", {}, label));
+    box.appendChild(el("dd", {}, value));
     stats.appendChild(box);
   };
   stat(
@@ -1260,17 +1262,18 @@ function renderPlanCard(p, sys, paths) {
   );
   card.appendChild(stats);
 
-  const rows = el("dl", { class: "plan-breakdown" });
-  const row = (label, value, cls) => {
-    const line = el("div", cls ? { class: cls } : {});
-    line.appendChild(el("dt", {}, label));
-    line.appendChild(el("dd", {}, value));
-    rows.appendChild(line);
+  const rows = el("dl", { class: "paths-rows" });
+  const row = (label, value, strong) => {
+    rows.appendChild(el("dt", {}, label));
+    const dd = el("dd");
+    if (strong) dd.appendChild(el("strong", {}, value));
+    else dd.textContent = value;
+    rows.appendChild(dd);
   };
   row(t("planRowHardware"), money(hardware));
   row(t("planRowLabour"), money(labour));
   row(t("planRowFees"), money(feesAndTools));
-  row(t("planTotalLabel"), money(total), "plan-total");
+  row(t("planTotalLabel"), money(total), true);
   card.appendChild(rows);
 
   wrap.appendChild(card);

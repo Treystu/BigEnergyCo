@@ -1996,120 +1996,18 @@ html:not([data-results-more]) .results-demoted {
   color: var(--primary-accent);
 }
 
-/* ── Simplified interface (owner order 2026-11-22, staging-first) ────────────
-   HOME is one headline, one place field and one action. The hero's tag, intro
-   copy and stat grid stay in the markup (their translation hooks and the spec's
-   R2 evidence record are pinned by the i18n and presentation gates) but do not
-   compete with the ask. Spareness wins where the mock-up and spec differ. */
+/* Simplified interface (owner order 2026-11-22): home is one place field and
+   one action. The plan card and its stat grid reuse the existing result-card,
+   simple-heroes and paths-rows classes, so this file gains almost nothing. */
 .hero-compact .hero-tag,
 .hero-compact .hero-stats-grid,
 .hero-compact > .container > p {
   display: none;
 }
 
-.hero-place {
-  max-width: 32rem;
-  margin: 0 auto 1.25rem;
-}
-
-.hero-place .form-control {
-  width: 100%;
-  font-size: 1.05rem;
-  padding: 0.9rem 1.1rem;
-}
-
-/* The calculator's three questions stay outside this disclosure; everything
-   else is optional depth, closed by default. */
-.advanced-controls {
-  margin: 1.25rem 0 0.5rem;
-  border: 1px solid var(--border-card);
-  border-radius: 12px;
-  padding: 0.85rem 1rem;
-}
-
-.advanced-controls > summary {
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.advanced-controls[open] > summary {
-  margin-bottom: 0.9rem;
-}
-
-/* PLAN screen: one price, three stats, a three-line breakdown that sums to it. */
-.plan-card-wrap {
-  margin: 0 0 1.25rem;
-}
-
-.plan-card {
-  padding: 1.2rem 1.3rem;
-  border: 1px solid var(--border-glow);
-  border-radius: 12px;
-  background: rgba(0, 230, 153, 0.06);
-}
-
-.plan-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 0 0 0.5rem;
-}
-
 .plan-price {
-  font-family: var(--font-mono);
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--primary-accent);
-  line-height: 1.15;
-  margin: 0;
-}
-
-.plan-basis {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 0.35rem 0 1rem;
-  line-height: 1.5;
-}
-
-.plan-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.75rem;
-  margin: 0 0 1rem;
-}
-
-.plan-stat-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-.plan-stat-value {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.plan-breakdown {
-  border-top: 1px solid var(--border-card);
-  padding-top: 0.75rem;
-  margin: 0;
-}
-
-.plan-breakdown div {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  padding: 0.2rem 0;
-}
-
-.plan-breakdown div.plan-total {
-  font-weight: 800;
-  color: var(--text-main);
-  border-top: 1px solid var(--border-card);
-  margin-top: 0.35rem;
-  padding-top: 0.45rem;
+  margin: 0 0 0.35rem;
 }
