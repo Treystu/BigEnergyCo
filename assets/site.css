@@ -1995,3 +1995,19 @@ html:not([data-results-more]) .results-demoted {
   font-weight: 800;
   color: var(--primary-accent);
 }
+
+/* Simplified interface (owner order 2026-11-22): home is one place field and
+   one action. The plan card and its stat grid reuse the existing result-card,
+   simple-heroes and paths-rows classes, so this file gains almost nothing. */
+.hero-compact .hero-tag,
+.hero-compact .hero-stats-grid,
+.hero-compact > .container > p {
+  display: none;
+}
+
+.plan-price {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary-accent);
+  margin: 0 0 0.35rem;
+}

@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261122d" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261122d" />
+    <link rel="preload" href="./assets/site.css?v=20261122f" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261122f" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261122d" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261122f" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -461,7 +461,7 @@
 
       <!-- Hero Section -->
 
-      <section class="hero">
+      <section class="hero hero-compact">
         <div class="container">
           <div class="hero-tag" data-i18n="heroTag">
             🌍 Free for everyone, everywhere • No signup • Nothing for sale
@@ -486,11 +486,26 @@
             <strong>Lucas Ballek</strong>.
           </p>
 
+          <!-- Home: one place field feeding #citySearch, never a second source. -->
+          <div class="hero-place">
+            <label class="sr-only" for="heroPlace" data-i18n="cityLabel"
+              >Where is this system going?</label
+            >
+            <input
+              id="heroPlace"
+              class="form-control"
+              type="search"
+              autocomplete="off"
+              spellcheck="false"
+              data-i18n-placeholder="heroPlaceholder"
+              placeholder="City, town, or postcode"
+            />
+          </div>
+
           <div class="hero-actions">
             <div
               id="btnHeroSizing"
               class="btn btn-primary"
-              style="font-size: 1.1rem; padding: 0.9rem 2rem"
               data-i18n="ctaStart"
               role="button"
               tabindex="0"
@@ -997,877 +1012,901 @@
                 />
               </div>
 
-              <div id="fullControls">
-                <div class="form-group">
-                  <label for="loadMode" data-i18n="loadLabel"
-                    >How much power do you use?</label
-                  >
+              <!-- Optional depth: the three questions stay open, all else lives here. -->
+              <details id="advancedControls" class="advanced-controls">
+                <summary data-i18n="advancedSummary">
+                  Fine-tune the system (optional)
+                </summary>
 
-                  <select id="loadMode" class="form-control">
-                    <option value="appliances" data-i18n="loadAppliances">
-                      Let me pick my appliances
-                    </option>
-
-                    <option
-                      value="bill"
-                      selected
-                      data-i18n="loadBill"
-                      id="optLoadBill"
+                <div id="fullControls">
+                  <div class="form-group">
+                    <label for="loadMode" data-i18n="loadLabel"
+                      >How much power do you use?</label
                     >
-                      I know my monthly electric bill
-                    </option>
 
-                    <option value="kwh" data-i18n="loadKwh">
-                      I know my kWh/day (advanced)
-                    </option>
-                  </select>
+                    <select id="loadMode" class="form-control">
+                      <option value="appliances" data-i18n="loadAppliances">
+                        Let me pick my appliances
+                      </option>
 
-                  <p class="uc-note" data-i18n="glossKwhDay">
-                    kWh/day means kilowatt-hours a day — the unit your power
-                    bill uses. A typical US home uses about 30.
-                  </p>
-                </div>
+                      <option
+                        value="bill"
+                        selected
+                        data-i18n="loadBill"
+                        id="optLoadBill"
+                      >
+                        I know my monthly electric bill
+                      </option>
 
-                <div class="form-group">
-                  <label
-                    for="customRateVal"
-                    data-jargon="tariff"
-                    data-i18n="electricityRateLabel"
-                    >Electricity price where you live
-                    <span class="muted-note"
-                      >(drives your bill estimate and payback)</span
+                      <option value="kwh" data-i18n="loadKwh">
+                        I know my kWh/day (advanced)
+                      </option>
+                    </select>
+
+                    <p class="uc-note" data-i18n="glossKwhDay">
+                      kWh/day means kilowatt-hours a day — the unit your power
+                      bill uses. A typical US home uses about 30.
+                    </p>
+                  </div>
+
+                  <div class="form-group">
+                    <label
+                      for="customRateVal"
+                      data-jargon="tariff"
+                      data-i18n="electricityRateLabel"
+                      >Electricity price where you live
+                      <span class="muted-note"
+                        >(drives your bill estimate and payback)</span
+                      >
+                      - your price per kWh ($):</label
                     >
-                    - your price per kWh ($):</label
-                  >
 
-                  <input
-                    type="number"
-                    id="customRateVal"
-                    class="form-control"
-                    placeholder="e.g. 0.31"
-                    step="0.01"
-                    min="0.01"
-                    aria-describedby="rateError"
-                  />
+                    <input
+                      type="number"
+                      id="customRateVal"
+                      class="form-control"
+                      placeholder="e.g. 0.31"
+                      step="0.01"
+                      min="0.01"
+                      aria-describedby="rateError"
+                    />
 
-                  <!-- Says why a rejected price was rejected, in the visitor's
+                    <!-- Says why a rejected price was rejected, in the visitor's
                     language, wired to the input through aria-describedby. -->
-                  <p id="rateError" class="field-error" role="alert" hidden></p>
+                    <p
+                      id="rateError"
+                      class="field-error"
+                      role="alert"
+                      hidden
+                    ></p>
 
-                  <details
-                    id="genHelper"
-                    style="margin-top: 0.6rem; font-size: 0.85rem"
-                  >
-                    <summary
-                      style="cursor: pointer; color: var(--primary-accent)"
-                      data-i18n="genSummary"
+                    <details
+                      id="genHelper"
+                      style="margin-top: 0.6rem; font-size: 0.85rem"
                     >
-                      I run a generator &mdash; what does its power really cost?
-                    </summary>
+                      <summary
+                        style="cursor: pointer; color: var(--primary-accent)"
+                        data-i18n="genSummary"
+                      >
+                        I run a generator &mdash; what does its power really
+                        cost?
+                      </summary>
 
-                    <div
-                      style="
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 0.75rem;
-                        margin-top: 0.7rem;
-                      "
-                    >
-                      <div class="form-group no-bottom-spacing">
-                        <label for="genFuelType">Fuel:</label>
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: 1fr 1fr;
+                          gap: 0.75rem;
+                          margin-top: 0.7rem;
+                        "
+                      >
+                        <div class="form-group no-bottom-spacing">
+                          <label for="genFuelType">Fuel:</label>
 
-                        <select id="genFuelType" class="form-control">
-                          <option value="petrol" selected>
-                            Petrol / gasoline
-                          </option>
+                          <select id="genFuelType" class="form-control">
+                            <option value="petrol" selected>
+                              Petrol / gasoline
+                            </option>
 
-                          <option value="diesel">Diesel</option>
-                        </select>
+                            <option value="diesel">Diesel</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group no-bottom-spacing">
+                          <label for="genFuelPrice">Price per liter ($):</label>
+
+                          <input
+                            type="number"
+                            id="genFuelPrice"
+                            class="form-control"
+                            placeholder="e.g. 1.20"
+                            step="0.05"
+                            min="0.05"
+                          />
+                        </div>
                       </div>
 
-                      <div class="form-group no-bottom-spacing">
-                        <label for="genFuelPrice">Price per liter ($):</label>
+                      <div
+                        id="genReadout"
+                        style="
+                          margin-top: 0.7rem;
+                          padding: 0.7rem 0.9rem;
+                          background: rgba(0, 230, 153, 0.06);
+                          border: 1px solid var(--border-glow);
+                          border-radius: 8px;
+                          font-size: 0.88rem;
+                          line-height: 1.55;
+                          display: none;
+                        "
+                      ></div>
 
-                        <input
-                          type="number"
-                          id="genFuelPrice"
-                          class="form-control"
-                          placeholder="e.g. 1.20"
-                          step="0.05"
-                          min="0.05"
-                        />
-                      </div>
+                      <button
+                        type="button"
+                        id="btnApplyGenRate"
+                        class="btn btn-secondary"
+                        style="margin-top: 0.7rem; display: none"
+                        data-i18n="genApply"
+                      >
+                        Use this as my electricity price
+                      </button>
+
+                      <p
+                        style="
+                          font-size: 0.72rem;
+                          color: var(--text-muted);
+                          margin-top: 0.6rem;
+                          line-height: 1.5;
+                        "
+                      >
+                        <span data-i18n="generatorAssumption">
+                          Assumes a small genset at typical partial load:
+                          petrol</span
+                        >
+                        &asymp; <span id="genPetrolBurn">0.5</span>
+                        <span id="genBurnUnit">L</span
+                        ><span data-i18n="generatorAssumptionMiddle"
+                          >/kWh, diesel</span
+                        >
+                        &asymp;
+                        <span id="genDieselBurn">0.35</span>
+                        <span id="genBurnUnit2">L</span
+                        ><span data-i18n="generatorAssumptionSuffix"
+                          >/kWh (fuel only &mdash; oil, filters, and engine wear
+                          push the true number higher). If you know your real
+                          $/kWh, type it directly instead.
+                        </span>
+                      </p>
+                    </details>
+
+                    <div style="margin-top: 0.6rem">
+                      <label for="exportRate" data-i18n="feedInCreditLabel"
+                        >Feed-in credit for surplus you can sell
+                        <span class="muted-note"
+                          >($/kWh, optional &mdash; grid-tie only)</span
+                        >:</label
+                      >
+
+                      <input
+                        type="number"
+                        id="exportRate"
+                        class="form-control"
+                        placeholder="e.g. 0.12"
+                        step="0.01"
+                        min="0"
+                      />
                     </div>
 
-                    <div
-                      id="genReadout"
-                      style="
-                        margin-top: 0.7rem;
-                        padding: 0.7rem 0.9rem;
-                        background: rgba(0, 230, 153, 0.06);
-                        border: 1px solid var(--border-glow);
-                        border-radius: 8px;
-                        font-size: 0.88rem;
-                        line-height: 1.55;
-                        display: none;
-                      "
-                    ></div>
+                    <div style="margin-top: 0.6rem">
+                      <label
+                        for="fixedChargeVal"
+                        data-i18n="fixedMonthlyChargeLabel"
+                        >Fixed monthly charge on your bill
+                        <span class="muted-note"
+                          >($/mo, optional &mdash; solar can't cut it)</span
+                        >:</label
+                      >
 
-                    <button
-                      type="button"
-                      id="btnApplyGenRate"
-                      class="btn btn-secondary"
-                      style="margin-top: 0.7rem; display: none"
-                      data-i18n="genApply"
+                      <input
+                        type="number"
+                        id="fixedChargeVal"
+                        class="form-control"
+                        placeholder="e.g. 25"
+                        step="1"
+                        min="0"
+                      />
+                    </div>
+                  </div>
+
+                  <div id="panelAppliances">
+                    <div
+                      class="appliance-presets"
+                      style="
+                        display: flex;
+                        gap: 0.45rem;
+                        flex-wrap: wrap;
+                        margin-bottom: 0.8rem;
+                        align-items: center;
+                      "
                     >
-                      Use this as my electricity price
-                    </button>
+                      <span
+                        style="
+                          font-size: 0.78rem;
+                          font-weight: 700;
+                          color: var(--text-muted);
+                          margin-right: 0.2rem;
+                        "
+                        data-i18n="presetWho"
+                        >Quick presets — pick who it is for:</span
+                      >
+                      <button
+                        type="button"
+                        class="btn btn-outline btn-xs preset-btn preset-button"
+                        data-preset="cabin"
+                      >
+                        🏕️
+                        <span data-i18n="presetCabin"
+                          >Weekend cabin — lights, phone, small fridge</span
+                        >
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline btn-xs preset-btn preset-button"
+                        data-preset="van"
+                      >
+                        🚐
+                        <span data-i18n="presetVan"
+                          >Camper van — two people off-grid</span
+                        >
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline btn-xs preset-btn preset-button"
+                        data-preset="home"
+                      >
+                        🏡
+                        <span data-i18n="presetHome"
+                          >Standard home — the typical starting point</span
+                        >
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline btn-xs preset-btn preset-button"
+                        data-preset="homestead"
+                      >
+                        🏤
+                        <span data-i18n="presetHomestead"
+                          >Homestead — a family, all electric</span
+                        >
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline btn-xs preset-btn preset-button"
+                        data-preset="backup"
+                      >
+                        🔌
+                        <span data-i18n="presetBackup"
+                          >Critical backup — essentials in an outage</span
+                        >
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline btn-xs preset-btn"
+                        data-preset="clear"
+                        style="
+                          padding: 0.3rem 0.65rem;
+                          font-size: 0.78rem;
+                          color: var(--text-muted);
+                        "
+                      >
+                        🧹 <span data-i18n="presetClear">Clear all</span>
+                      </button>
+                    </div>
+
+                    <div id="applianceList"></div>
+
+                    <div id="readoutAppliances" class="input-readout"></div>
+
+                    <p class="uc-note" data-i18n="applianceWattages">
+                      Wattages are typical values &mdash; yours may differ.
+                      Cycling appliances (fridges, freezers, air conditioners,
+                      pumps) only draw power while running: their slider is
+                      <em>hours actually running per day</em>, capped to
+                      realistic compressor time, and each row shows the
+                      resulting 24-hour average. A modern fridge at the default
+                      (100 W running, ~10 h/day) really does use about 1
+                      kWh/day.
+                    </p>
+                  </div>
+
+                  <div id="panelBill" style="display: block">
+                    <div id="readoutBill" class="input-readout"></div>
 
                     <p
                       style="
-                        font-size: 0.72rem;
+                        font-size: 0.78rem;
                         color: var(--text-muted);
-                        margin-top: 0.6rem;
-                        line-height: 1.5;
+                        margin-top: 0.5rem;
                       "
+                      data-i18n="fixedChargeTaxEstimate"
                     >
-                      <span data-i18n="generatorAssumption">
-                        Assumes a small genset at typical partial load:
-                        petrol</span
-                      >
-                      &asymp; <span id="genPetrolBurn">0.5</span>
-                      <span id="genBurnUnit">L</span
-                      ><span data-i18n="generatorAssumptionMiddle"
-                        >/kWh, diesel</span
-                      >
-                      &asymp;
-                      <span id="genDieselBurn">0.35</span>
-                      <span id="genBurnUnit2">L</span
-                      ><span data-i18n="generatorAssumptionSuffix"
-                        >/kWh (fuel only &mdash; oil, filters, and engine wear
-                        push the true number higher). If you know your real
-                        $/kWh, type it directly instead.
-                      </span>
+                      Bills include fixed charges and taxes, so this slightly
+                      overestimates real use &mdash; which is a safe direction
+                      to err.
                     </p>
-                  </details>
-
-                  <div style="margin-top: 0.6rem">
-                    <label for="exportRate" data-i18n="feedInCreditLabel"
-                      >Feed-in credit for surplus you can sell
-                      <span class="muted-note"
-                        >($/kWh, optional &mdash; grid-tie only)</span
-                      >:</label
-                    >
-
-                    <input
-                      type="number"
-                      id="exportRate"
-                      class="form-control"
-                      placeholder="e.g. 0.12"
-                      step="0.01"
-                      min="0"
-                    />
                   </div>
 
-                  <div style="margin-top: 0.6rem">
-                    <label
-                      for="fixedChargeVal"
-                      data-i18n="fixedMonthlyChargeLabel"
-                      >Fixed monthly charge on your bill
-                      <span class="muted-note"
-                        >($/mo, optional &mdash; solar can't cut it)</span
-                      >:</label
-                    >
-
-                    <input
-                      type="number"
-                      id="fixedChargeVal"
-                      class="form-control"
-                      placeholder="e.g. 25"
-                      step="1"
-                      min="0"
-                    />
-                  </div>
-                </div>
-
-                <div id="panelAppliances">
-                  <div
-                    class="appliance-presets"
-                    style="
-                      display: flex;
-                      gap: 0.45rem;
-                      flex-wrap: wrap;
-                      margin-bottom: 0.8rem;
-                      align-items: center;
-                    "
-                  >
-                    <span
-                      style="
-                        font-size: 0.78rem;
-                        font-weight: 700;
-                        color: var(--text-muted);
-                        margin-right: 0.2rem;
-                      "
-                      data-i18n="presetWho"
-                      >Quick presets — pick who it is for:</span
-                    >
-                    <button
-                      type="button"
-                      class="btn btn-outline btn-xs preset-btn preset-button"
-                      data-preset="cabin"
-                    >
-                      🏕️
-                      <span data-i18n="presetCabin"
-                        >Weekend cabin — lights, phone, small fridge</span
+                  <div id="panelKwh" style="display: none">
+                    <div class="form-group">
+                      <label for="dailyKwhInput" data-jargon="kWh"
+                        >Daily energy use (kWh/day):</label
                       >
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline btn-xs preset-btn preset-button"
-                      data-preset="van"
-                    >
-                      🚐
-                      <span data-i18n="presetVan"
-                        >Camper van — two people off-grid</span
-                      >
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline btn-xs preset-btn preset-button"
-                      data-preset="home"
-                    >
-                      🏡
-                      <span data-i18n="presetHome"
-                        >Standard home — the typical starting point</span
-                      >
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline btn-xs preset-btn preset-button"
-                      data-preset="homestead"
-                    >
-                      🏤
-                      <span data-i18n="presetHomestead"
-                        >Homestead — a family, all electric</span
-                      >
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline btn-xs preset-btn preset-button"
-                      data-preset="backup"
-                    >
-                      🔌
-                      <span data-i18n="presetBackup"
-                        >Critical backup — essentials in an outage</span
-                      >
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline btn-xs preset-btn"
-                      data-preset="clear"
-                      style="
-                        padding: 0.3rem 0.65rem;
-                        font-size: 0.78rem;
-                        color: var(--text-muted);
-                      "
-                    >
-                      🧹 <span data-i18n="presetClear">Clear all</span>
-                    </button>
+
+                      <input
+                        type="number"
+                        id="dailyKwhInput"
+                        class="form-control"
+                        value="10"
+                        min="0.5"
+                        max="500"
+                        step="1"
+                      />
+                    </div>
+
+                    <div id="readoutKwh" class="input-readout"></div>
                   </div>
 
-                  <div id="applianceList"></div>
-
-                  <div id="readoutAppliances" class="input-readout"></div>
-
-                  <p class="uc-note" data-i18n="applianceWattages">
-                    Wattages are typical values &mdash; yours may differ.
-                    Cycling appliances (fridges, freezers, air conditioners,
-                    pumps) only draw power while running: their slider is
-                    <em>hours actually running per day</em>, capped to realistic
-                    compressor time, and each row shows the resulting 24-hour
-                    average. A modern fridge at the default (100 W running, ~10
-                    h/day) really does use about 1 kWh/day.
-                  </p>
-                </div>
-
-                <div id="panelBill" style="display: block">
-                  <div id="readoutBill" class="input-readout"></div>
-
-                  <p
-                    style="
-                      font-size: 0.78rem;
-                      color: var(--text-muted);
-                      margin-top: 0.5rem;
-                    "
-                    data-i18n="fixedChargeTaxEstimate"
-                  >
-                    Bills include fixed charges and taxes, so this slightly
-                    overestimates real use &mdash; which is a safe direction to
-                    err.
-                  </p>
-                </div>
-
-                <div id="panelKwh" style="display: none">
-                  <div class="form-group">
-                    <label for="dailyKwhInput" data-jargon="kWh"
-                      >Daily energy use (kWh/day):</label
+                  <div class="form-group" id="useCaseRow" hidden>
+                    <label for="useCase" data-i18n="useCaseLabel"
+                      >What do you want to do?</label
                     >
 
-                    <input
-                      type="number"
-                      id="dailyKwhInput"
-                      class="form-control"
-                      value="10"
-                      min="0.5"
-                      max="500"
-                      step="1"
-                    />
-                  </div>
-
-                  <div id="readoutKwh" class="input-readout"></div>
-                </div>
-
-                <div class="form-group" id="useCaseRow" hidden>
-                  <label for="useCase" data-i18n="useCaseLabel"
-                    >What do you want to do?</label
-                  >
-
-                  <select id="useCase" class="form-control">
-                    <option value="billcut" selected data-i18n="useCaseBillCut">
-                      Cut my electricity bill
-                    </option>
-
-                    <option value="tou" data-i18n="useCaseTou">
-                      Save with a battery on time-of-use rates
-                    </option>
-
-                    <option value="backup" data-i18n="useCaseBackup">
-                      Keep essentials running in a power cut
-                    </option>
-
-                    <option value="reserve" data-i18n="useCaseReserve">
-                      Keep a backup reserve in my battery
-                    </option>
-
-                    <option value="offgrid" data-i18n="useCaseOffGrid">
-                      Go fully off-grid
-                    </option>
-
-                    <option value="portable" data-i18n="useCasePortable">
-                      Portable power (RV, van, boat, camping)
-                    </option>
-                  </select>
-
-                  <p id="useCaseBlurb" class="uc-note"></p>
-                </div>
-
-                <!-- The two legacy enum selects, now derived and never shown. -->
-                <div
-                  class="form-group"
-                  id="systemGoalRow"
-                  style="display: none"
-                >
-                  <label for="systemGoal" data-i18n="goalLabel"
-                    >What outcome are you exploring?</label
-                  >
-
-                  <select id="systemGoal" class="form-control" hidden>
-                    <option value="gridtie" selected>
-                      Cut my bill, stay connected
-                    </option>
-
-                    <option value="offgrid">Power me fully off-grid</option>
-                  </select>
-                </div>
-
-                <div class="form-group" id="hardwareConfigRow" hidden>
-                  <label for="hardwareConfig" data-jargon="inverter"
-                    >Hardware setup:</label
-                  >
-
-                  <select id="hardwareConfig" class="form-control" hidden>
-                    <option value="both" selected>
-                      Solar + Battery (Default)
-                    </option>
-
-                    <option value="solar">
-                      Solar only (Grid-tie credits/metering)
-                    </option>
-
-                    <option value="battery">
-                      Battery only (Peak-hour ToU offset)
-                    </option>
-                  </select>
-                </div>
-
-                <div id="touInputs" hidden>
-                  <div class="form-group">
-                    <label for="touPeakRate" data-i18n="touPeakLabel"
-                      >Your peak price (per kWh)</label
-                    >
-                    <input
-                      type="number"
-                      id="touPeakRate"
-                      class="form-control"
-                      min="0.01"
-                      step="0.01"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="touOffPeakRate" data-i18n="touOffPeakLabel"
-                      >Your off-peak price (per kWh)</label
-                    >
-                    <input
-                      type="number"
-                      id="touOffPeakRate"
-                      class="form-control"
-                      min="0.01"
-                      step="0.01"
-                    />
-                  </div>
-
-                  <p
-                    style="
-                      font-size: 0.78rem;
-                      color: var(--text-muted);
-                      margin-top: 0.4rem;
-                      line-height: 1.5;
-                    "
-                    data-i18n="touDefaultNote"
-                  ></p>
-                </div>
-
-                <div id="backupInputs" hidden>
-                  <div class="form-group">
-                    <label for="essentialLoadList" data-i18n="essentialLabel"
-                      >What must keep running? (pick any)</label
-                    >
-                    <div id="essentialLoadList" class="appliance-presets"></div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="outageTargetHours" data-i18n="outageLabel"
-                      >How long must it last?</label
-                    >
-                    <input
-                      type="number"
-                      id="outageTargetHours"
-                      class="form-control"
-                      min="1"
-                      max="168"
-                      step="1"
-                      value="8"
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="backupSolarRecharge" class="uc-check">
-                      <input type="checkbox" id="backupSolarRecharge" checked />
-                      <span data-i18n="backupRechargeLabel"
-                        >Let the panels recharge it during the outage</span
-                      >
-                    </label>
-                  </div>
-                </div>
-
-                <div id="reserveInputs" hidden>
-                  <div class="form-group">
-                    <label for="reserveSlider" data-i18n="reserveLabel"
-                      >Emergency reserve held in the battery</label
-                    >
-                    <input
-                      type="range"
-                      id="reserveSlider"
-                      min="0"
-                      max="60"
-                      step="5"
-                      value="20"
-                    />
-                    <span id="reserveSliderVal" class="uc-value"></span>
-                  </div>
-                </div>
-
-                <div id="offgridInputs" hidden>
-                  <div class="form-group">
-                    <label
-                      for="generatorRuntime"
-                      data-i18n="generatorRuntimeLabel"
-                      >Generator runtime?</label
-                    >
-                    <select id="generatorRuntime" class="form-control">
-                      <option value="gen0" data-i18n="generatorRuntime0">
-                        0% — never
-                      </option>
+                    <select id="useCase" class="form-control">
                       <option
-                        value="gen1"
+                        value="billcut"
                         selected
-                        data-i18n="generatorRuntime1"
+                        data-i18n="useCaseBillCut"
                       >
-                        1% — a few days a year
+                        Cut my electricity bill
                       </option>
-                      <option value="gen2" data-i18n="generatorRuntime2">
-                        2%+ — fine when needed
+
+                      <option value="tou" data-i18n="useCaseTou">
+                        Save with a battery on time-of-use rates
+                      </option>
+
+                      <option value="backup" data-i18n="useCaseBackup">
+                        Keep essentials running in a power cut
+                      </option>
+
+                      <option value="reserve" data-i18n="useCaseReserve">
+                        Keep a backup reserve in my battery
+                      </option>
+
+                      <option value="offgrid" data-i18n="useCaseOffGrid">
+                        Go fully off-grid
+                      </option>
+
+                      <option value="portable" data-i18n="useCasePortable">
+                        Portable power (RV, van, boat, camping)
+                      </option>
+                    </select>
+
+                    <p id="useCaseBlurb" class="uc-note"></p>
+                  </div>
+
+                  <!-- The two legacy enum selects, now derived and never shown. -->
+                  <div
+                    class="form-group"
+                    id="systemGoalRow"
+                    style="display: none"
+                  >
+                    <label for="systemGoal" data-i18n="goalLabel"
+                      >What outcome are you exploring?</label
+                    >
+
+                    <select id="systemGoal" class="form-control" hidden>
+                      <option value="gridtie" selected>
+                        Cut my bill, stay connected
+                      </option>
+
+                      <option value="offgrid">Power me fully off-grid</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group" id="hardwareConfigRow" hidden>
+                    <label for="hardwareConfig" data-jargon="inverter"
+                      >Hardware setup:</label
+                    >
+
+                    <select id="hardwareConfig" class="form-control" hidden>
+                      <option value="both" selected>
+                        Solar + Battery (Default)
+                      </option>
+
+                      <option value="solar">
+                        Solar only (Grid-tie credits/metering)
+                      </option>
+
+                      <option value="battery">
+                        Battery only (Peak-hour ToU offset)
                       </option>
                     </select>
                   </div>
-                </div>
 
-                <div id="portableInputs" hidden>
-                  <div class="form-group">
-                    <label
-                      for="portableDeviceList"
-                      data-i18n="portableDeviceLabel"
-                      >What are you powering? (pick any)</label
-                    >
-                    <div
-                      id="portableDeviceList"
-                      class="appliance-presets"
-                    ></div>
+                  <div id="touInputs" hidden>
+                    <div class="form-group">
+                      <label for="touPeakRate" data-i18n="touPeakLabel"
+                        >Your peak price (per kWh)</label
+                      >
+                      <input
+                        type="number"
+                        id="touPeakRate"
+                        class="form-control"
+                        min="0.01"
+                        step="0.01"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="touOffPeakRate" data-i18n="touOffPeakLabel"
+                        >Your off-peak price (per kWh)</label
+                      >
+                      <input
+                        type="number"
+                        id="touOffPeakRate"
+                        class="form-control"
+                        min="0.01"
+                        step="0.01"
+                      />
+                    </div>
+
+                    <p
+                      style="
+                        font-size: 0.78rem;
+                        color: var(--text-muted);
+                        margin-top: 0.4rem;
+                        line-height: 1.5;
+                      "
+                      data-i18n="touDefaultNote"
+                    ></p>
                   </div>
 
-                  <div class="form-group">
-                    <label for="portableBankKwh" data-i18n="portableBankLabel"
-                      >Power station usable size (kWh)</label
+                  <div id="backupInputs" hidden>
+                    <div class="form-group">
+                      <label for="essentialLoadList" data-i18n="essentialLabel"
+                        >What must keep running? (pick any)</label
+                      >
+                      <div
+                        id="essentialLoadList"
+                        class="appliance-presets"
+                      ></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="outageTargetHours" data-i18n="outageLabel"
+                        >How long must it last?</label
+                      >
+                      <input
+                        type="number"
+                        id="outageTargetHours"
+                        class="form-control"
+                        min="1"
+                        max="168"
+                        step="1"
+                        value="8"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="backupSolarRecharge" class="uc-check">
+                        <input
+                          type="checkbox"
+                          id="backupSolarRecharge"
+                          checked
+                        />
+                        <span data-i18n="backupRechargeLabel"
+                          >Let the panels recharge it during the outage</span
+                        >
+                      </label>
+                    </div>
+                  </div>
+
+                  <div id="reserveInputs" hidden>
+                    <div class="form-group">
+                      <label for="reserveSlider" data-i18n="reserveLabel"
+                        >Emergency reserve held in the battery</label
+                      >
+                      <input
+                        type="range"
+                        id="reserveSlider"
+                        min="0"
+                        max="60"
+                        step="5"
+                        value="20"
+                      />
+                      <span id="reserveSliderVal" class="uc-value"></span>
+                    </div>
+                  </div>
+
+                  <div id="offgridInputs" hidden>
+                    <div class="form-group">
+                      <label
+                        for="generatorRuntime"
+                        data-i18n="generatorRuntimeLabel"
+                        >Generator runtime?</label
+                      >
+                      <select id="generatorRuntime" class="form-control">
+                        <option value="gen0" data-i18n="generatorRuntime0">
+                          0% — never
+                        </option>
+                        <option
+                          value="gen1"
+                          selected
+                          data-i18n="generatorRuntime1"
+                        >
+                          1% — a few days a year
+                        </option>
+                        <option value="gen2" data-i18n="generatorRuntime2">
+                          2%+ — fine when needed
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div id="portableInputs" hidden>
+                    <div class="form-group">
+                      <label
+                        for="portableDeviceList"
+                        data-i18n="portableDeviceLabel"
+                        >What are you powering? (pick any)</label
+                      >
+                      <div
+                        id="portableDeviceList"
+                        class="appliance-presets"
+                      ></div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="portableBankKwh" data-i18n="portableBankLabel"
+                        >Power station usable size (kWh)</label
+                      >
+                      <input
+                        type="number"
+                        id="portableBankKwh"
+                        class="form-control"
+                        min="0.2"
+                        max="100"
+                        step="0.1"
+                        value="3"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="portableShorePower" class="uc-check">
+                        <input type="checkbox" id="portableShorePower" />
+                        <span data-i18n="portableShoreLabel"
+                          >I can recharge from mains or a vehicle</span
+                        >
+                      </label>
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 0.55rem;
+                      margin: 0.5rem 0 0.8rem;
+                    "
+                  >
+                    <input type="checkbox" id="climateAwareToggle" />
+                    <label
+                      for="climateAwareToggle"
+                      style="margin: 0; font-weight: 700; cursor: pointer"
+                      >Use climate-aware losses</label
+                    >
+                    <span style="font-size: 0.78rem; color: var(--text-muted)"
+                      >dust and cold are estimated from local weather</span
+                    >
+                  </div>
+
+                  <div class="toggle-row">
+                    <input type="checkbox" id="noSwapToggle" />
+                    <label for="noSwapToggle">Show the no-swap option</label>
+                    <span class="toggle-hint"
+                      >compare against the engine's direct pick, with bank swaps
+                      counted instead of avoided by oversizing</span
+                    >
+                  </div>
+
+                  <div
+                    id="worstMonthCaveat"
+                    role="note"
+                    style="
+                      display: none;
+                      margin: 0.5rem 0 0.8rem;
+                      padding: 0.6rem 0.75rem;
+                      border: 1px solid var(--border-card);
+                      border-radius: 8px;
+                      font-size: 0.82rem;
+                      line-height: 1.45;
+                      color: var(--text-muted);
+                    "
+                  ></div>
+
+                  <div
+                    style="
+                      margin: 0.5rem 0 0.8rem;
+                      padding: 0.75rem;
+                      border: 1px solid var(--border-card);
+                      border-radius: 8px;
+                    "
+                  >
+                    <label
+                      for="roofAreaM2"
+                      style="margin-bottom: 0.35rem"
+                      data-i18n="roofAreaLabel"
+                      >Optional roof or yard area (m²)</label
                     >
                     <input
                       type="number"
-                      id="portableBankKwh"
+                      id="roofAreaM2"
                       class="form-control"
-                      min="0.2"
-                      max="100"
-                      step="0.1"
-                      value="3"
+                      min="6"
+                      step="1"
+                      placeholder="e.g. 30"
+                      aria-describedby="roofAreaHint"
                     />
+                    <p
+                      id="roofAreaHint"
+                      style="
+                        font-size: 0.75rem;
+                        color: var(--text-muted);
+                        margin: 0.35rem 0 0;
+                        line-height: 1.45;
+                      "
+                      data-i18n="roofAreaHelp"
+                    >
+                      A rough manual estimate is enough: about 6 m² per 400 W
+                      panel. This only caps the searched solar size; leave it
+                      blank for the normal estimate. Your coordinates are never
+                      stored.
+                    </p>
+                    <p
+                      id="roofAreaCapNote"
+                      style="
+                        font-size: 0.75rem;
+                        margin: 0.35rem 0 0;
+                        line-height: 1.45;
+                        color: var(--text-muted);
+                        display: none;
+                      "
+                    ></p>
                   </div>
 
-                  <div class="form-group">
-                    <label for="portableShorePower" class="uc-check">
-                      <input type="checkbox" id="portableShorePower" />
-                      <span data-i18n="portableShoreLabel"
-                        >I can recharge from mains or a vehicle</span
-                      >
-                    </label>
-                  </div>
-                </div>
-
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 0.55rem;
-                    margin: 0.5rem 0 0.8rem;
-                  "
-                >
-                  <input type="checkbox" id="climateAwareToggle" />
-                  <label
-                    for="climateAwareToggle"
-                    style="margin: 0; font-weight: 700; cursor: pointer"
-                    >Use climate-aware losses</label
-                  >
-                  <span style="font-size: 0.78rem; color: var(--text-muted)"
-                    >dust and cold are estimated from local weather</span
-                  >
-                </div>
-
-                <div class="toggle-row">
-                  <input type="checkbox" id="noSwapToggle" />
-                  <label for="noSwapToggle">Show the no-swap option</label>
-                  <span class="toggle-hint"
-                    >compare against the engine's direct pick, with bank swaps
-                    counted instead of avoided by oversizing</span
-                  >
-                </div>
-
-                <div
-                  id="worstMonthCaveat"
-                  role="note"
-                  style="
-                    display: none;
-                    margin: 0.5rem 0 0.8rem;
-                    padding: 0.6rem 0.75rem;
-                    border: 1px solid var(--border-card);
-                    border-radius: 8px;
-                    font-size: 0.82rem;
-                    line-height: 1.45;
-                    color: var(--text-muted);
-                  "
-                ></div>
-
-                <div
-                  style="
-                    margin: 0.5rem 0 0.8rem;
-                    padding: 0.75rem;
-                    border: 1px solid var(--border-card);
-                    border-radius: 8px;
-                  "
-                >
-                  <label
-                    for="roofAreaM2"
-                    style="margin-bottom: 0.35rem"
-                    data-i18n="roofAreaLabel"
-                    >Optional roof or yard area (m²)</label
-                  >
-                  <input
-                    type="number"
-                    id="roofAreaM2"
-                    class="form-control"
-                    min="6"
-                    step="1"
-                    placeholder="e.g. 30"
-                    aria-describedby="roofAreaHint"
-                  />
-                  <p
-                    id="roofAreaHint"
-                    style="
-                      font-size: 0.75rem;
-                      color: var(--text-muted);
-                      margin: 0.35rem 0 0;
-                      line-height: 1.45;
-                    "
-                    data-i18n="roofAreaHelp"
-                  >
-                    A rough manual estimate is enough: about 6 m² per 400 W
-                    panel. This only caps the searched solar size; leave it
-                    blank for the normal estimate. Your coordinates are never
-                    stored.
-                  </p>
-                  <p
-                    id="roofAreaCapNote"
-                    style="
-                      font-size: 0.75rem;
-                      margin: 0.35rem 0 0;
-                      line-height: 1.45;
-                      color: var(--text-muted);
-                      display: none;
-                    "
-                  ></p>
-                </div>
-
-                <div
-                  style="
-                    margin: 0.5rem 0 0.8rem;
-                    padding: 0.75rem;
-                    border: 1px solid var(--border-card);
-                    border-radius: 8px;
-                  "
-                >
                   <div
-                    style="font-weight: 700; margin-bottom: 0.35rem"
-                    id="deratesHeading"
+                    style="
+                      margin: 0.5rem 0 0.8rem;
+                      padding: 0.75rem;
+                      border: 1px solid var(--border-card);
+                      border-radius: 8px;
+                    "
                   >
-                    Advanced: fine-tune system losses
+                    <div
+                      style="font-weight: 700; margin-bottom: 0.35rem"
+                      id="deratesHeading"
+                    >
+                      Advanced: fine-tune system losses
+                    </div>
+                    <div
+                      class="form-grid-2col"
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 0.5rem 0.75rem;
+                      "
+                    >
+                      <div>
+                        <label for="wiringOverride">Wiring efficiency %</label>
+                        <input
+                          type="number"
+                          id="wiringOverride"
+                          class="form-control"
+                          min="85"
+                          max="100"
+                          step="1"
+                          value="98"
+                          aria-describedby="wiringOverrideHint"
+                        />
+                        <p
+                          id="wiringOverrideHint"
+                          style="
+                            font-size: 0.72rem;
+                            color: var(--text-muted);
+                            margin: 0.25rem 0 0;
+                          "
+                        >
+                          85–100; 98 is typical
+                        </p>
+                      </div>
+                      <div>
+                        <label for="mpptOverride">MPPT efficiency %</label>
+                        <input
+                          type="number"
+                          id="mpptOverride"
+                          class="form-control"
+                          min="90"
+                          max="100"
+                          step="1"
+                          value="98"
+                          aria-describedby="mpptOverrideHint"
+                        />
+                        <p
+                          id="mpptOverrideHint"
+                          style="
+                            font-size: 0.72rem;
+                            color: var(--text-muted);
+                            margin: 0.25rem 0 0;
+                          "
+                        >
+                          90–100; 98 is typical
+                        </p>
+                      </div>
+                    </div>
                   </div>
+
+                  <div class="form-group no-bottom-spacing">
+                    <label
+                      for="chemSelect"
+                      data-i18n="chemLabel"
+                      data-jargon="usableCapacity"
+                      >Battery chemistry:</label
+                    >
+
+                    <select id="chemSelect" class="form-control">
+                      <option value="auto" selected>
+                        Auto &mdash; compare all three chemistries by lifetime
+                        cost
+                      </option>
+
+                      <option value="naion">
+                        Sodium-Ion &mdash; cold-capable, no thermal runaway
+                      </option>
+
+                      <option value="lfp">
+                        LFP (LiFePO4) &mdash; the proven standard
+                      </option>
+
+                      <option value="agm">
+                        Lead-Acid (AGM) &mdash; cheapest upfront, shortest-lived
+                      </option>
+                    </select>
+
+                    <div
+                      id="chemTempVisualizer"
+                      class="chem-temp-wrap"
+                      style="margin-top: 0.75rem"
+                    ></div>
+                  </div>
+
+                  <div
+                    class="form-group"
+                    id="autoTierRow"
+                    style="display: none; margin-bottom: 0"
+                  >
+                    <label for="autoTier" data-i18n="independenceTarget"
+                      >Independence target
+                      <span class="muted-note"
+                        >(applied to all three chemistries)</span
+                      >:</label
+                    >
+
+                    <select id="autoTier" class="form-control">
+                      <option value="tier100" data-i18n="tierOption100">
+                        100% &mdash; never see a generator
+                      </option>
+
+                      <option value="tier99" selected data-i18n="tierOption99">
+                        99% &mdash; generator about a day a year
+                      </option>
+
+                      <option value="tier95" data-i18n="tierOption95">
+                        95% &mdash; generator now and then
+                      </option>
+                    </select>
+
+                    <p class="uc-note" data-i18n="glossTier">
+                      The target is the share of the year you run without the
+                      grid: 99% leaves about a day a year on the generator, 100%
+                      never needs one.
+                    </p>
+                  </div>
+
+                  <div
+                    class="form-group"
+                    id="autoTargetRow"
+                    style="display: none"
+                  >
+                    <label for="autoTarget" data-i18n="billCutTarget"
+                      >Bill-cut target<span class="muted-note"
+                        >&nbsp;&mdash; sets the results slider too</span
+                      >:</label
+                    >
+
+                    <select id="autoTarget" class="form-control">
+                      <!-- These three are exactly the grid-tie columns the engine
+                         sizes (BILL_TARGETS): the recommendation can always
+                         honor the choice. -->
+                      <option value="cut95">95% &mdash; near-zero bill</option>
+
+                      <option value="cut80" selected>
+                        80% &mdash; heavy bill cut (cheapest path)
+                      </option>
+
+                      <option value="cut60">
+                        60% &mdash; daytime solar priority
+                      </option>
+
+                      <!-- Filled in whenever the results slider holds an
+                         arbitrary cut: the two controls are one decision. -->
+                      <option value="custom" hidden disabled>
+                        Custom (from the results slider)
+                      </option>
+                    </select>
+                  </div>
+
                   <div
                     class="form-grid-2col"
                     style="
                       display: grid;
                       grid-template-columns: 1fr 1fr;
-                      gap: 0.5rem 0.75rem;
+                      gap: 1rem;
                     "
                   >
-                    <div>
-                      <label for="wiringOverride">Wiring efficiency %</label>
+                    <div class="form-group">
+                      <label for="fxRate"
+                        >Your currency
+                        <span class="muted-note">(optional)</span>:</label
+                      >
+
                       <input
                         type="number"
-                        id="wiringOverride"
+                        id="fxRate"
                         class="form-control"
-                        min="85"
-                        max="100"
-                        step="1"
-                        value="98"
-                        aria-describedby="wiringOverrideHint"
+                        placeholder="units per $1 USD, e.g. 58 (1 for USD)"
+                        min="0.01"
+                        step="0.01"
+                        aria-describedby="fxRateHint"
                       />
                       <p
-                        id="wiringOverrideHint"
+                        id="fxRateHint"
                         style="
                           font-size: 0.72rem;
                           color: var(--text-muted);
-                          margin: 0.25rem 0 0;
+                          margin: 0.3rem 0 0;
+                          line-height: 1.4;
                         "
+                        data-i18n="fxRateHelp"
                       >
-                        85–100; 98 is typical
+                        How many of your currency equal 1 US dollar. Auto-filled
+                        for your location; change only if you know a different
+                        rate.
                       </p>
                     </div>
-                    <div>
-                      <label for="mpptOverride">MPPT efficiency %</label>
+
+                    <div class="form-group">
+                      <label for="fxCode" data-i18n="fxCodeLabel"
+                        >Currency code:</label
+                      >
+
                       <input
-                        type="number"
-                        id="mpptOverride"
+                        type="text"
+                        id="fxCode"
                         class="form-control"
-                        min="90"
-                        max="100"
-                        step="1"
-                        value="98"
-                        aria-describedby="mpptOverrideHint"
+                        placeholder="e.g. PHP"
+                        maxlength="4"
                       />
-                      <p
-                        id="mpptOverrideHint"
-                        style="
-                          font-size: 0.72rem;
-                          color: var(--text-muted);
-                          margin: 0.25rem 0 0;
-                        "
-                      >
-                        90–100; 98 is typical
-                      </p>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="form-group no-bottom-spacing">
-                  <label
-                    for="chemSelect"
-                    data-i18n="chemLabel"
-                    data-jargon="usableCapacity"
-                    >Battery chemistry:</label
-                  >
-
-                  <select id="chemSelect" class="form-control">
-                    <option value="auto" selected>
-                      Auto &mdash; compare all three chemistries by lifetime
-                      cost
-                    </option>
-
-                    <option value="naion">
-                      Sodium-Ion &mdash; cold-capable, no thermal runaway
-                    </option>
-
-                    <option value="lfp">
-                      LFP (LiFePO4) &mdash; the proven standard
-                    </option>
-
-                    <option value="agm">
-                      Lead-Acid (AGM) &mdash; cheapest upfront, shortest-lived
-                    </option>
-                  </select>
-
-                  <div
-                    id="chemTempVisualizer"
-                    class="chem-temp-wrap"
-                    style="margin-top: 0.75rem"
-                  ></div>
-                </div>
-
-                <div
-                  class="form-group"
-                  id="autoTierRow"
-                  style="display: none; margin-bottom: 0"
-                >
-                  <label for="autoTier" data-i18n="independenceTarget"
-                    >Independence target
-                    <span class="muted-note"
-                      >(applied to all three chemistries)</span
-                    >:</label
-                  >
-
-                  <select id="autoTier" class="form-control">
-                    <option value="tier100" data-i18n="tierOption100">
-                      100% &mdash; never see a generator
-                    </option>
-
-                    <option value="tier99" selected data-i18n="tierOption99">
-                      99% &mdash; generator about a day a year
-                    </option>
-
-                    <option value="tier95" data-i18n="tierOption95">
-                      95% &mdash; generator now and then
-                    </option>
-                  </select>
-
-                  <p class="uc-note" data-i18n="glossTier">
-                    The target is the share of the year you run without the
-                    grid: 99% leaves about a day a year on the generator, 100%
-                    never needs one.
-                  </p>
-                </div>
-
-                <div
-                  class="form-group"
-                  id="autoTargetRow"
-                  style="display: none"
-                >
-                  <label for="autoTarget" data-i18n="billCutTarget"
-                    >Bill-cut target<span class="muted-note"
-                      >&nbsp;&mdash; sets the results slider too</span
-                    >:</label
-                  >
-
-                  <select id="autoTarget" class="form-control">
-                    <!-- These three are exactly the grid-tie columns the engine
-                         sizes (BILL_TARGETS): the recommendation can always
-                         honor the choice. -->
-                    <option value="cut95">95% &mdash; near-zero bill</option>
-
-                    <option value="cut80" selected>
-                      80% &mdash; heavy bill cut (cheapest path)
-                    </option>
-
-                    <option value="cut60">
-                      60% &mdash; daytime solar priority
-                    </option>
-
-                    <!-- Filled in whenever the results slider holds an
-                         arbitrary cut: the two controls are one decision. -->
-                    <option value="custom" hidden disabled>
-                      Custom (from the results slider)
-                    </option>
-                  </select>
-                </div>
-
-                <div
-                  class="form-grid-2col"
-                  style="
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 1rem;
-                  "
-                >
-                  <div class="form-group">
-                    <label for="fxRate"
-                      >Your currency
-                      <span class="muted-note">(optional)</span>:</label
-                    >
-
-                    <input
-                      type="number"
-                      id="fxRate"
-                      class="form-control"
-                      placeholder="units per $1 USD, e.g. 58 (1 for USD)"
-                      min="0.01"
-                      step="0.01"
-                      aria-describedby="fxRateHint"
-                    />
-                    <p
-                      id="fxRateHint"
-                      style="
-                        font-size: 0.72rem;
-                        color: var(--text-muted);
-                        margin: 0.3rem 0 0;
-                        line-height: 1.4;
-                      "
-                      data-i18n="fxRateHelp"
-                    >
-                      How many of your currency equal 1 US dollar. Auto-filled
-                      for your location; change only if you know a different
-                      rate.
-                    </p>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="fxCode" data-i18n="fxCodeLabel"
-                      >Currency code:</label
-                    >
-
-                    <input
-                      type="text"
-                      id="fxCode"
-                      class="form-control"
-                      placeholder="e.g. PHP"
-                      maxlength="4"
-                    />
-
-                    <!-- FX provenance (P1.4, F-10). Never empty: the static
+                      <!-- FX provenance (P1.4, F-10). Never empty: the static
                          wording is the shipped default, so a visitor who never
                          gets a live rate - offline, blocked, or JS still
                          loading - still learns where the rate came from. The
@@ -1875,40 +1914,41 @@
                          lands, and swaps the failure wording if it does not.
                          role="status" so the change is announced rather than
                          only drawn. -->
-                    <p
-                      id="fxAsOf"
-                      role="status"
-                      data-i18n="fxSourceStatic"
-                      style="
-                        font-size: 0.72rem;
-                        color: var(--text-muted);
-                        margin-top: 0.35rem;
-                      "
-                    >
-                      Rate source: open.er-api.com. No live rate loaded, so
-                      these are built-in estimates.
-                    </p>
-                    <!-- V-07: the FX provider's Open Access terms require
+                      <p
+                        id="fxAsOf"
+                        role="status"
+                        data-i18n="fxSourceStatic"
+                        style="
+                          font-size: 0.72rem;
+                          color: var(--text-muted);
+                          margin-top: 0.35rem;
+                        "
+                      >
+                        Rate source: open.er-api.com. No live rate loaded, so
+                        these are built-in estimates.
+                      </p>
+                      <!-- V-07: the FX provider's Open Access terms require
                          attribution and forbid redistribution. This link is
                          the attribution it asks for, shown wherever the rates
                          are used. The rates themselves stay fetched live and
                          are never written into shipped data, which is what
                          keeps us on the permitted side of that term. -->
-                    <p
-                      style="font-size: 0.7rem; margin-top: 0.15rem"
-                      data-provenance-link="open_er_api_fx"
-                    >
-                      <a
-                        href="https://www.exchangerate-api.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style="color: var(--text-muted)"
-                        >Rates By Exchange Rate API</a
+                      <p
+                        style="font-size: 0.7rem; margin-top: 0.15rem"
+                        data-provenance-link="open_er_api_fx"
                       >
-                    </p>
+                        <a
+                          href="https://www.exchangerate-api.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style="color: var(--text-muted)"
+                          >Rates By Exchange Rate API</a
+                        >
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </details>
 
               <button
                 id="btnRunSizing"
@@ -2114,6 +2154,8 @@
                 ></p>
               </div>
               <div id="resultsRegion" hidden>
+                <!-- PLAN: one price, three stats, one breakdown that sums to it. -->
+                <div id="planCardWrap" class="plan-card-wrap" hidden></div>
                 <!-- V2 recipient landing: an opened share link sizes itself,
                   so this reader is looking at someone else's result. The note
                   stays with the result, because the status line that carries
@@ -3541,15 +3583,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261122d"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261122f"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261122d"
+      src="./assets/js/turnstile-client.js?v=20261122f"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261122d"></script>
+    <script defer src="./assets/js/chat.js?v=20261122f"></script>
   </body>
 </html>
 

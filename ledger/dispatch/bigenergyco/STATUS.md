@@ -15,6 +15,26 @@ Filing rule in force: no new issue or dispatch ships until its scope is checked
 against the open set for a second home. Follow-ups are attached to the owning
 open item, not filed again.
 
+## Stand-up block — 2026-11-22 (owner order: simplified interface, staging-first)
+
+Filed with the ack on #429 (comment on issue #429, 2026-11-22). Two-method
+census: `git rev-parse origin/main` plus `gh pr list` / `gh issue list`, and the
+rendered surface read on the local static server.
+
+- Main head `92dbb120`; open issues 30; open lane PRs 0; dependabot #455 the only
+  other open PR.
+- Readiness line: presentation spec landed and binding, intake fork-free and
+  location-led, a driven run reaches rendered results. NOT promoted.
+- ACTIVE BUILD TARGET (owner order 2026-11-22): the stripped interface, three
+  screens — HOME (one headline, one place field, one action), CALCULATOR (Where /
+  Goal / Monthly bill, one action, no modes), PLAN (one price, three stats, a
+  three-line breakdown summing to the price, one number set). Staging-first:
+  land to main -> bigenergyco.pages.dev, NO promotion under this order.
+  `#403` is the results leg; `#432`/`#437`/`#439` remaining scope discharges
+  inside this build's verification.
+- Verification owed on #429: blog census, SEO census, five-figure extraction at
+  phone width. Report STAGING-VERIFIED there.
+
 ## Census — 2026-11-22 (read: gh issue/pr list + pipeline API, this session)
 
 | Field          | Value                                                      |

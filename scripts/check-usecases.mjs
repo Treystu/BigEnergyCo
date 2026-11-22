@@ -103,7 +103,10 @@ else
 // Every use case must also be selectable: a case with no <option> is a case
 // the visitor cannot choose, which is the same failure wearing a different hat.
 const unselectable = UC.USE_CASE_IDS.filter(
-  (id) => !new RegExp(`<option value="${id}"`).test(indexHtml),
+  // Whitespace-tolerant: the artifact is Prettier-formatted, so a longer indent
+  // legitimately puts the value attribute on its own line. The assertion is
+  // unchanged — the option must exist with that value.
+  (id) => !new RegExp(`<option\\s+value="${id}"`).test(indexHtml),
 );
 if (unselectable.length)
   fail(`use cases with no option in the chooser: ${unselectable.join(", ")}`);
