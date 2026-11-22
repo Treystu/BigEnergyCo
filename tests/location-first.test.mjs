@@ -56,7 +56,10 @@ test("#430: the ask states what the location is for, and what it is not", () => 
   for (const [lang, dict] of Object.entries(LOCALES)) {
     const line = dict.locPurposeLine;
     assert.equal(typeof line, "string", `${lang}.locPurposeLine must exist`);
-    assert.ok(line.trim().length > 20, `${lang}.locPurposeLine must say something`);
+    assert.ok(
+      line.trim().length > 20,
+      `${lang}.locPurposeLine must say something`,
+    );
   }
   assert.match(LOCALES.en.locPurposeLine, /prices/i);
   assert.match(LOCALES.en.locPurposeLine, /nothing sold/i);
