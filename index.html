@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261122b" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261122b" />
+    <link rel="preload" href="./assets/site.css?v=20261122c" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261122c" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261122b" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261122c" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -553,61 +553,9 @@
 
           <div class="calc-card">
             <div class="calc-controls">
-              <!-- Primary Goal Selection: Grid-Tie Bill Cutting vs Full Off-grid / Backup -->
-              <div
-                class="form-group goal-segmented-wrap"
-                style="margin-bottom: 0.9rem"
-              >
-                <span
-                  style="
-                    font-size: 0.85rem;
-                    color: var(--text-muted);
-                    font-weight: 700;
-                    display: block;
-                    margin-bottom: 0.4rem;
-                  "
-                  data-i18n="sizingFor"
-                  >What are you sizing for?</span
-                >
-                <div
-                  class="goal-segmented-buttons"
-                  style="
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 0.6rem;
-                  "
-                >
-                  <button
-                    type="button"
-                    id="btnGoalGridtie"
-                    class="btn btn-segmented active goal-mode-control"
-                  >
-                    <span>🏠</span>
-                    <span data-i18n="goalCutBill">Cut My Electric Bill</span>
-                  </button>
-                  <button
-                    type="button"
-                    id="btnGoalOffgrid"
-                    class="btn btn-segmented goal-mode-control"
-                  >
-                    <span>🌲</span>
-                    <span data-i18n="goalOffgrid">Off-grid / Backup</span>
-                  </button>
-                </div>
-              </div>
-              <div class="form-group" style="margin-bottom: 0.7rem">
-                <div
-                  id="quickBillNote"
-                  style="
-                    display: none;
-                    font-size: 0.8rem;
-                    color: var(--text-muted);
-                    margin-top: 0.45rem;
-                    line-height: 1.5;
-                  "
-                ></div>
-              </div>
-
+              <!-- Location-first ask (GQ F1 / #430): the one question that
+               makes every number specific comes before any number is asked
+               for. Presentation spec V1, section 3, intake R1. -->
               <div class="form-group no-bottom-spacing">
                 <div
                   style="
@@ -638,6 +586,15 @@
                     >Works worldwide &bull; any city, town, or coordinates</span
                   >
                 </div>
+
+                <p
+                  class="muted-note"
+                  data-i18n="locPurposeLine"
+                  style="margin: -0.1rem 0 0.55rem; font-size: 0.8rem"
+                >
+                  Your location sets your local prices and weather — no account,
+                  nothing stored, nothing sold.
+                </p>
 
                 <div
                   style="
@@ -841,6 +798,63 @@
                     </div>
                   </div>
                 </details>
+              </div>
+
+              <!-- Goal selection: grid-tie bill cutting vs full off-grid. A
+               control, not an action (spec section 1, rule 2), and it follows
+               the location ask. -->
+              <div
+                class="form-group goal-segmented-wrap"
+                style="margin-bottom: 0.9rem"
+              >
+                <span
+                  style="
+                    font-size: 0.85rem;
+                    color: var(--text-muted);
+                    font-weight: 700;
+                    display: block;
+                    margin-bottom: 0.4rem;
+                  "
+                  data-i18n="sizingFor"
+                  >What are you sizing for?</span
+                >
+                <div
+                  class="goal-segmented-buttons"
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.6rem;
+                  "
+                >
+                  <button
+                    type="button"
+                    id="btnGoalGridtie"
+                    class="btn btn-segmented active goal-mode-control"
+                  >
+                    <span>🏠</span>
+                    <span data-i18n="goalCutBill">Cut My Electric Bill</span>
+                  </button>
+                  <button
+                    type="button"
+                    id="btnGoalOffgrid"
+                    class="btn btn-segmented goal-mode-control"
+                  >
+                    <span>🌲</span>
+                    <span data-i18n="goalOffgrid">Off-grid / Backup</span>
+                  </button>
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom: 0.7rem">
+                <div
+                  id="quickBillNote"
+                  style="
+                    display: none;
+                    font-size: 0.8rem;
+                    color: var(--text-muted);
+                    margin-top: 0.45rem;
+                    line-height: 1.5;
+                  "
+                ></div>
               </div>
 
               <!-- Bill slider: revealed once location is known in auto mode, or in manual mode -->
@@ -3527,15 +3541,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261122b"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261122c"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261122b"
+      src="./assets/js/turnstile-client.js?v=20261122c"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261122b"></script>
+    <script defer src="./assets/js/chat.js?v=20261122c"></script>
   </body>
 </html>
 
