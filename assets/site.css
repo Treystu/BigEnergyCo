@@ -864,28 +864,13 @@ input[type="number"]::-webkit-inner-spin-button {
   text-decoration: none;
 }
 
-/* ── Simple mode: charts and the comparison matrix STAY — visual understanding
-   is the easy part, and the user asked for full functionality with easier
-   descriptions, not fewer answers. Dense text/tables and duplicated figures
-   hide; the plain-language card leads, everything visual follows. Scoped to
-   the root attribute so the regular experience is untouched. */
-[data-display-mode="simple"] #resultLadder,
-[data-display-mode="simple"] #moneyBar,
-[data-display-mode="simple"] #focusPanel,
-[data-display-mode="simple"] #bomPanel,
-[data-display-mode="simple"] #eli5CardWrap,
-[data-display-mode="simple"] #eli5Summary,
-[data-display-mode="simple"] .result-actions-row,
-[data-display-mode="simple"] #modeToggleRow {
-  display: none !important;
-}
-
-/* Simple form: goal + location + the one load slider + Run. The hidden
-   machinery keeps its values — switching back restores everything. */
-[data-display-mode="simple"] #fullControls,
-[data-display-mode="simple"] #coordDetails {
-  display: none !important;
-}
+/* #441: the display-mode fork is gone, so nothing here may hide a panel by
+   mode. The plain-language card leads every result and the technical panels
+   stay reachable behind the result disclosures (presentation spec V1, section
+   5) — hidden by a closed <details>, never by a root attribute. Charts and the
+   comparison matrix were always meant to stay; the ladder, money bar, focus
+   panel, BOM and the result actions were hidden here and are now reachable
+   again, which is what "all the options in one gesture" requires. */
 
 /* The Simple results card. */
 .simple-results-card {

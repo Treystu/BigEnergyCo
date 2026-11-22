@@ -4,8 +4,6 @@ export const HOME_COPY = {
   en: {
     homeIntro:
       "Enter your location and average electric bill. We simulate 5 years of hourly NASA satellite weather to size the exact solar panel array and battery storage you need — with honest 20-year payback, battery replacement cadence, and equipment costs in your local currency.",
-    quickSetupTitle: "⚡ Quick setup",
-    quickSetupHint: "— choose inputs, then click Size My System",
     preciseLocationHelp:
       "The precise-location button fills your exact coordinates and pulls area prices from the nearest reference region. For another place, type a city or town and press Enter or Tab to resolve it. Then click Size My System to calculate.",
     imageryPrivacy:
@@ -110,8 +108,6 @@ export const HOME_COPY = {
   es: {
     homeIntro:
       "Introduce tu ubicación y tu factura eléctrica media. Simulamos 5 años de datos horarios de satélite de NASA para dimensionar exactamente los paneles solares y la batería que necesitas, con una amortización honesta a 20 años, la frecuencia de reemplazo de la batería y el costo de los equipos en tu moneda local.",
-    quickSetupTitle: "⚡ Configuración rápida",
-    quickSetupHint: "— elige los datos y luego pulsa Dimensionar mi sistema",
     preciseLocationHelp:
       "El botón de ubicación precisa completa tus coordenadas exactas y obtiene los precios de la zona de la región de referencia más cercana. Para otro lugar, escribe una ciudad o localidad y pulsa Intro o Tab para seleccionarla. Después, pulsa Dimensionar mi sistema para calcular.",
     imageryPrivacy:
@@ -217,8 +213,6 @@ export const HOME_COPY = {
   pt: {
     homeIntro:
       "Informe sua localização e sua conta média de eletricidade. Simulamos 5 anos de dados horários de satélite da NASA para dimensionar exatamente os painéis solares e a bateria de que você precisa, com retorno honesto em 20 anos, frequência de substituição da bateria e custos dos equipamentos na sua moeda local.",
-    quickSetupTitle: "⚡ Configuração rápida",
-    quickSetupHint: "— escolha os dados e clique em Dimensionar meu sistema",
     preciseLocationHelp:
       "O botão de localização precisa preenche suas coordenadas exatas e consulta os preços da região de referência mais próxima. Para outro lugar, digite uma cidade ou município e pressione Enter ou Tab para selecionar. Depois, clique em Dimensionar meu sistema para calcular.",
     imageryPrivacy:
@@ -324,9 +318,6 @@ export const HOME_COPY = {
   fr: {
     homeIntro:
       "Indiquez votre emplacement et votre facture d’électricité moyenne. Nous simulons 5 ans de données météorologiques horaires par satellite de la NASA pour dimensionner précisément les panneaux solaires et la batterie nécessaires, avec un retour sur investissement honnête sur 20 ans, la fréquence de remplacement de la batterie et le coût du matériel dans votre devise locale.",
-    quickSetupTitle: "⚡ Configuration rapide",
-    quickSetupHint:
-      "— choisissez les données, puis cliquez sur Dimensionner mon système",
     preciseLocationHelp:
       "Le bouton de localisation précise renseigne vos coordonnées exactes et récupère les prix de la région de référence la plus proche. Pour un autre endroit, saisissez une ville ou un village, puis appuyez sur Entrée ou Tab pour le sélectionner. Cliquez ensuite sur Dimensionner mon système pour lancer le calcul.",
     imageryPrivacy:
@@ -433,9 +424,6 @@ export const HOME_COPY = {
   de: {
     homeIntro:
       "Geben Sie Ihren Standort und Ihre durchschnittliche Stromrechnung ein. Wir simulieren 5 Jahre stündlicher NASA-Satellitenwetterdaten, um die passende Größe Ihrer Solarmodule und Batteriespeicher zu berechnen – einschließlich realistischer Amortisation über 20 Jahre, Austauschintervall der Batterie und Gerätekosten in Ihrer Landeswährung.",
-    quickSetupTitle: "⚡ Schnellstart",
-    quickSetupHint:
-      "— Eingaben auswählen und dann System dimensionieren anklicken",
     preciseLocationHelp:
       "Die Schaltfläche für den genauen Standort trägt Ihre Koordinaten ein und ruft die Preise der nächstgelegenen Referenzregion ab. Für einen anderen Ort geben Sie eine Stadt oder einen Ort ein und drücken Enter oder Tab, um den Treffer auszuwählen. Klicken Sie anschließend auf System dimensionieren.",
     imageryPrivacy:
@@ -541,8 +529,6 @@ export const HOME_COPY = {
   ar: {
     homeIntro:
       "أدخل موقعك ومتوسط فاتورة الكهرباء. نحاكي 5 سنوات من بيانات الطقس الساعية عبر الأقمار الصناعية التابعة لناسا لتحديد الحجم الدقيق للألواح الشمسية وتخزين البطارية الذي تحتاج إليه، مع فترة استرداد واقعية على مدى 20 عامًا، وتواتر استبدال البطارية، وتكاليف المعدات بعملتك المحلية.",
-    quickSetupTitle: "⚡ إعداد سريع",
-    quickSetupHint: "— اختر المدخلات، ثم انقر على «احسب نظامي»",
     preciseLocationHelp:
       "يملأ زر تحديد الموقع الدقيق إحداثياتك الفعلية ويجلب أسعار المنطقة من أقرب منطقة مرجعية. لمكان آخر، اكتب اسم مدينة أو بلدة واضغط Enter أو Tab لاختيارها، ثم انقر على «احسب نظامي» لإجراء الحساب.",
     imageryPrivacy:

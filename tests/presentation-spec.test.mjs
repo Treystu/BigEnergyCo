@@ -90,9 +90,12 @@ test("#436: each audited control still exists where the audit measured it", () =
   assert.match(html, /id="btnRunSizing"/);
   // P5 article CTA — recorded as unranked; the wave that promotes it updates this.
   assert.match(article, /class="btn"[^>]*>Run the free simulation</);
-  // F1: the mode fork the audit names is still present until #441 removes it.
-  assert.match(html, /id="modeToggleRow"/);
-  assert.match(html, /id="simpleModeToggle"/);
+  // F1: the audit's finding is about a surface that no longer exists. #441
+  // removed the fork, so the spec's F1 row is now a record of what was taken
+  // out — this assertion keeps that removal from being quietly undone.
+  assert.doesNotMatch(html, /id="modeToggleRow"/);
+  assert.doesNotMatch(html, /id="simpleModeToggle"/);
+  assert.match(spec, /F1[\s\S]{0,200}?\*\*remove\*\* — built by #441/);
 });
 
 test("#436: the settled count is stated, so a second primary cannot be added quietly", () => {

@@ -159,7 +159,7 @@ dispositions.
 
 | #   | Finding                                                                                                                               | Disposition                                  | Reason                                                                                                                                        |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| F1  | Three mode concepts before any answer: `#modeToggleRow` radios (`modeToggle` Automatic/Manual) plus `#simpleModeToggle` "Simple mode" | **remove** (owned by #441)                   | The fork is an adjudication the visitor cannot make before seeing a value.                                                                    |
+| F1  | Three mode concepts before any answer: `#modeToggleRow` radios (`modeToggle` Automatic/Manual) plus `#simpleModeToggle` "Simple mode" | **remove** — built by #441                   | The fork is an adjudication the visitor cannot make before seeing a value.                                                                    |
 | F2  | Goal segmented pair (`btn-segmented active/goal-mode-control`) reads as an action row                                                 | **keep as control**                          | State control; takes control styling, never rank 1. Its `active` state is not a primary.                                                      |
 | F3  | `Use my precise location` carries `btn-geo-primary` while rendering outline                                                           | **rename**                                   | A class name that claims a rank it does not hold is a rank lie; keep the visual emphasis, drop "primary" from the vocabulary.                 |
 | F4  | `Draw this area on an optional map` sits in the intake body                                                                           | **demote**                                   | Optional input; it belongs inside the coordinates disclosure (one gesture away).                                                              |
@@ -177,7 +177,11 @@ dispositions.
 
 ## 8. What each later wave builds to
 
-- **#441 (mode fork)**: F1 is removed; nothing else on this list is in its scope.
+- **#441 (mode fork)**: F1 is removed; nothing else on this list is in its scope. Landed: both controls
+  are out of `index.html`, the `[data-display-mode]` rules are out of `assets/site.css` (so no panel is
+  hidden by a root attribute), the form is unconditional, and the readable card leads every result with
+  the technical panels behind the result disclosures. The persisted mode key is no longer read as a
+  gate; nothing the visitor chose is deleted, it simply stops deciding what they can see.
 - **#430 / #440 / #431 (intake)**: R1/R2/R3 block ranks and P3 as the intake's only
   primary; F4 inside the coordinates disclosure; F10 closed by default.
 - **#432 (typography)**: section 6 roles, F9, F13, F14.
