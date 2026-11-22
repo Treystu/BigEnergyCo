@@ -26,13 +26,12 @@ const LOCALE_IDS = ["en", "es", "pt", "fr", "de", "nl", "ar"];
 // The chrome labels the audit caught rendering English. Each must resolve in
 // every shipped locale and must be hooked in the markup, or the dictionary
 // value never reaches the screen.
-const CHROME_KEYS = [
-  "manualModeLabel",
-  "manualModeHint",
-  "simpleModeLabel",
-  "simpleModeHint",
-  "mapDrawAction",
-];
+//
+// #441 removed the mode controls this list used to cover (manualModeLabel,
+// manualModeHint, simpleModeHint); the keys went with them, so there is no
+// markup hook left to assert. simpleModeLabel survives for the persisted-mode
+// module and is still covered by the dictionary-only checks below.
+const CHROME_KEYS = ["mapDrawAction"];
 
 test("every chrome label exists in all seven locales", () => {
   for (const key of CHROME_KEYS.concat(["matrixScroll"])) {

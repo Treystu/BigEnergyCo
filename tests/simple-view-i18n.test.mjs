@@ -25,7 +25,6 @@ const KEYS = [
   "simpleNoPayback",
   "simplePayback",
   "simpleModeTechnical",
-  "simpleModeAria",
   "simpleHintFeedIn",
   "simpleHintFixed",
   "analysisFullBill",
