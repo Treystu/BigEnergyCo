@@ -88,7 +88,11 @@ const rankOf = (features, id) => order(features).indexOf(id);
 test("#440: every fixture ranks as declared, owner's two places included", () => {
   for (const fixture of FIXTURES) {
     const ranked = rankCases(fixture.features);
-    assert.equal(ranked.length, USE_CASE_IDS.length, `${fixture.name}: all cases`);
+    assert.equal(
+      ranked.length,
+      USE_CASE_IDS.length,
+      `${fixture.name}: all cases`,
+    );
     assert.equal(ranked[0].id, fixture.first, `${fixture.name}: top case`);
     for (const [higher, lower] of fixture.above || []) {
       assert.ok(

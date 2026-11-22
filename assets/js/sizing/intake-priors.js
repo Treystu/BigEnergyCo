@@ -46,7 +46,8 @@ export const PRIOR_FEATURES = [
   },
   {
     id: "touSpread",
-    source: "tariff record: does a time-of-use schedule exist, and how wide is it",
+    source:
+      "tariff record: does a time-of-use schedule exist, and how wide is it",
     grade: "B",
     values: ["none", "narrow", "wide"],
   },
@@ -58,7 +59,8 @@ export const PRIOR_FEATURES = [
   },
   {
     id: "outageExposure",
-    source: "region record: outage frequency (absent where the record is silent)",
+    source:
+      "region record: outage frequency (absent where the record is silent)",
     grade: "C",
     values: ["low", "medium", "high"],
   },
