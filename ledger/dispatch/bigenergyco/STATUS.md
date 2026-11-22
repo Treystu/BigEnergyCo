@@ -57,6 +57,18 @@ its rounds UI is the open remainder; **next is #440 items 3-5** (intake priors
 
 ## Landing record — 2026-11-22
 
+- **STAGED INTERFACE (owner order) -> PR #464, squash `12f027da`.** Rail
+  `verify: success` at `0acecf92` (pipeline `a9a2e2d4`, CircleCI, exact head).
+  Deployed to the staging branch: `staging.bigenergyco.pages.dev`, stamp
+  `20261122f`, SW `beco-v278`, 439 files. Receipts on #429 (comment
+  `7085898649`): 96/96 sitemap URLs 200 (12 previously 404 now live), 26/26 blog
+  pages content-identical, sitemap byte-identical with zero URL changes,
+  index.html canonical/title/description/FAQPage unchanged pre/post, and the
+  five-figure extraction at 390x844 (3.8 kW + 10 kWh; $7,182–$15,399;
+  $14,822; $37,358; Year 5). PLAN card: $10,202 = $8,450 + $952 + $800 exactly.
+  Origin drift (`bigenergyco.pages.dev` is the production-branch alias on
+  `20261103u`; staging is the `staging` branch alias) recorded on #361. NO
+  promotion; production untouched.
 - #436 presentation spec -> PR #458, squash `8ffc1440`. Rail `verify:success` at
   `bd175a09`. Spec is binding for intake ordering and hierarchy.
 - #441 mode-fork removal -> PR #459, squash `d8bc5a23`. Rail `verify:success` at
@@ -77,12 +89,14 @@ its rounds UI is the open remainder; **next is #440 items 3-5** (intake priors
 
 ## Readiness line
 
-Presentation spec landed and binding; intake is fork-free and location-led, and a
-real run from the leading location ask reaches rendered results. NOT promoted: no
-production deploy from these heads, so production still serves the pre-#441
-build. Promotion waits on the D-2026-11-13-008 trigger: rail green (per item),
-Jev vision PASS on the rendered merged shape (not yet re-run), scope flush items
-closed or DECISION-READY (not yet).
+The stripped interface is live on STAGING (`staging.bigenergyco.pages.dev`, stamp
+`20261122f`) and STAGING-VERIFIED on #429: home is one place field and one
+action, the calculator asks three questions with one action and the rest in one
+optional disclosure, and results lead with the one-price plan whose three lines
+sum to it. Blog and SEO censuses are unchanged at zero URL changes. NOT promoted
+under the owner order: production (`freeoffgridcalculator.com`) is untouched and
+`bigenergyco.pages.dev`, the project's production-branch alias, still serves
+`20261103u`. Promotion remains a separate D-2026-11-13-008 step.
 
 ## Known follow-ups (already attached, not re-filed)
 
