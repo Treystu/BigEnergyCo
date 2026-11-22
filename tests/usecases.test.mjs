@@ -159,7 +159,7 @@ test("every declared input control exists in the shipped page", () => {
   for (const id of USE_CASE_IDS)
     assert.match(
       html,
-      new RegExp(`<option value="${id}"`),
+      new RegExp(`<option\\s+value="${id}"`),
       `${id} must be an option in the chooser`,
     );
 });
