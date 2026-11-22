@@ -28,7 +28,10 @@ test("results: one price and one cost table lead, everything else is one disclos
   const actions = at('class="result-actions-row"');
 
   assert.ok(plan < paths, "the plan leads the cost table");
-  assert.ok(paths < more, "the cost table stays on the surface, above the disclosure");
+  assert.ok(
+    paths < more,
+    "the cost table stays on the surface, above the disclosure",
+  );
   assert.ok(more < simple, "the readable card is detail, not a second surface");
   // The one disclosure must actually WRAP the detail blocks: it opens before
   // the readable card and closes before the result actions.
@@ -43,7 +46,9 @@ test("results: one price and one cost table lead, everything else is one disclos
     "exactly one results disclosure",
   );
   // No second surface for the same content: the old parallel wrapper is gone.
-  assert.ok(!html.includes("Cure C: one disclosure governs every demoted block"));
+  assert.ok(
+    !html.includes("Cure C: one disclosure governs every demoted block"),
+  );
 });
 
 test("results: the primary and secondary actions sit outside the disclosure", () => {
@@ -71,7 +76,10 @@ test("#439: the support path is at the value moment, in every locale", () => {
       "resultSupportNext",
     ]) {
       assert.equal(typeof dict[key], "string", `${lang}.${key} must exist`);
-      assert.ok(dict[key].trim().length > 8, `${lang}.${key} must not be blank`);
+      assert.ok(
+        dict[key].trim().length > 8,
+        `${lang}.${key} must not be blank`,
+      );
     }
   }
 });
@@ -83,7 +91,10 @@ test("#439: contact is never framed as the advisor's failure", () => {
     /the AI (failed|did not answer|didn't answer)/i,
   ];
   for (const pattern of banned) {
-    assert.ok(!pattern.test(html), `banned failure framing in index.html: ${pattern}`);
+    assert.ok(
+      !pattern.test(html),
+      `banned failure framing in index.html: ${pattern}`,
+    );
     for (const [lang, dict] of Object.entries(LOCALES)) {
       for (const [key, value] of Object.entries(dict)) {
         if (typeof value !== "string") continue;

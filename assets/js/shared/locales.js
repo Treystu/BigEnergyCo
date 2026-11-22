@@ -4813,8 +4813,7 @@ export const LOCALES = {
     resultSupportLead:
       "هل تحتاج مساعدة في نتيجتك أو في نظام كهذا أو في الموقع نفسه؟",
     resultSupportAction: "راسل لوكاس — يجيب إنسان",
-    resultSupportNext:
-      "يرد خلال أيام قليلة. لا يُباع شيء ولا يُجمع شيء.",
+    resultSupportNext: "يرد خلال أيام قليلة. لا يُباع شيء ولا يُجمع شيء.",
     valueMomentAskChipIn: "المساهمة",
     valueMomentAskWorked: "أخبرني إن نجح الأمر",
     valueMomentAskSend: "أرسل هذه النتيجة لمن يطلب عرض سعر لنظام",
