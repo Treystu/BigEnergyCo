@@ -486,9 +486,7 @@
             <strong>Lucas Ballek</strong>.
           </p>
 
-          <!-- Owner order 2026-11-22: HOME is one headline, one place field and
-               one action. The place typed here IS the calculator's own ask: it
-               is synced into #citySearch, never kept as a second source. -->
+          <!-- Home: one place field feeding #citySearch, never a second source. -->
           <div class="hero-place">
             <label class="sr-only" for="heroPlace" data-i18n="cityLabel"
               >Where is this system going?</label
@@ -1014,11 +1012,7 @@
                 />
               </div>
 
-              <!-- Owner order 2026-11-22: the calculator asks three questions
-                   (where, goal, monthly bill). Every other input still works and
-                   still feeds the same run, but it lives in this one optional
-                   disclosure - closed by default, one concern, and never the
-                   primary action inside it (presentation spec 5). -->
+              <!-- Optional depth: the three questions stay open, all else lives here. -->
               <details id="advancedControls" class="advanced-controls">
                 <summary data-i18n="advancedSummary">
                   Fine-tune the system (optional)
@@ -2160,10 +2154,7 @@
                 ></p>
               </div>
               <div id="resultsRegion" hidden>
-                <!-- Owner order 2026-11-22, PLAN screen: one price, three
-                     stats, one three-line breakdown that sums to the price.
-                     Filled by renderPlanCard() from the same priced route the
-                     pay table reads, so there is one number set. -->
+                <!-- PLAN: one price, three stats, one breakdown that sums to it. -->
                 <div id="planCardWrap" class="plan-card-wrap" hidden></div>
                 <!-- V2 recipient landing: an opened share link sizes itself,
                   so this reader is looking at someone else's result. The note
