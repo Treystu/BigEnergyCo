@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261122b";
-import { RESULT_COPY } from "./result-copy.js?v=20261122b";
-import { TILT_COPY } from "./tilt-copy.js?v=20261122b";
+import { HOME_COPY } from "./home-copy.js?v=20261122c";
+import { RESULT_COPY } from "./result-copy.js?v=20261122c";
+import { TILT_COPY } from "./tilt-copy.js?v=20261122c";
 
 export const LOCALES = {
   en: {
@@ -544,6 +544,8 @@ export const LOCALES = {
     verdictPortable:
       "Your station runs a full day on {days} of {trips} days here, and one charge lasts {runtime} hours.",
     cityLabel: "Where is this system going?",
+    locPurposeLine:
+      "Your location sets your local prices and weather — no account, nothing stored, nothing sold.",
     loadLabel: "How much power do you use?",
     loadAppliances: "Let me pick my appliances",
     loadBill: "I know my monthly electric bill",
@@ -870,6 +872,8 @@ export const LOCALES = {
     verdictPortable:
       "Tu estación alimenta tus dispositivos todo el día en {days} de {trips} días aquí, y una carga dura {runtime} horas.",
     cityLabel: "¿Dónde se instalará el sistema?",
+    locPurposeLine:
+      "Tu ubicación fija los precios y el clima locales: sin cuenta, nada guardado, nada en venta.",
     loadLabel: "¿Cuánta energía consumes?",
     loadAppliances: "Elijo mis electrodomésticos",
     loadBill: "Conozco mi factura mensual de luz",
@@ -1556,6 +1560,8 @@ export const LOCALES = {
     verdictPortable:
       "Sua estação alimenta seus aparelhos o dia todo em {days} de {trips} dias aqui, e uma carga dura {runtime} horas.",
     cityLabel: "Onde o sistema será instalado?",
+    locPurposeLine:
+      "Sua localização define os preços e o clima locais — sem conta, nada guardado, nada à venda.",
     loadLabel: "Quanta energia você consome?",
     loadAppliances: "Escolho meus eletrodomésticos",
     loadBill: "Sei minha conta mensal de luz",
@@ -2267,6 +2273,8 @@ export const LOCALES = {
     verdictPortable:
       "Votre station alimente vos appareils toute la journée sur {days} jours sur {trips} ici, et une charge dure {runtime} heures.",
     cityLabel: "Où sera installé le système ?",
+    locPurposeLine:
+      "Votre position fixe les prix et la météo locaux — sans compte, rien de conservé, rien à vendre.",
     loadLabel: "Quelle est votre consommation ?",
     loadAppliances: "Je choisis mes appareils",
     loadBill: "Je connais ma facture mensuelle",
@@ -3044,6 +3052,8 @@ export const LOCALES = {
     tariffNote:
       "Geschätzter Strompreis für {label} – ändere ihn oben, wenn du deinen Tarif kennst.",
     cityLabel: "Wo wird das System installiert?",
+    locPurposeLine:
+      "Ihr Standort bestimmt die lokalen Preise und das Wetter — kein Konto, nichts gespeichert, nichts zu verkaufen.",
     loadLabel: "Wie viel Strom verbrauchst du?",
     loadAppliances: "Geräte auswählen",
     loadBill: "Monatliche Rechnung",
@@ -4051,6 +4061,8 @@ export const LOCALES = {
     verdictPortable:
       "Uw station draait een volle dag op {days} van {trips} dagen hier, en één lading gaat {runtime} uur mee.",
     cityLabel: "Waar komt dit systeem?",
+    locPurposeLine:
+      "Je locatie bepaalt de lokale prijzen en het weer — geen account, niets opgeslagen, niets te koop.",
     loadLabel: "Hoeveel stroom verbruikt u?",
     loadAppliances: "Ik kies mijn apparaten",
     loadBill: "Ik ken mijn maandelijkse elektriciteitsrekening",
@@ -4522,6 +4534,8 @@ export const LOCALES = {
     verdictPortable:
       "تغذّي محطتك أجهزتك طوال اليوم في {days} يومًا من {trips} يومًا هنا، وشحنة واحدة تدوم {runtime} ساعة.",
     cityLabel: "أين سيُركَّب النظام؟",
+    locPurposeLine:
+      "موقعك يحدد الأسعار المحلية والطقس — بلا حساب، ولا تخزين، ولا بيع.",
     loadLabel: "كم تستهلك من الطاقة؟",
     loadAppliances: "أختار أجهزتي الكهربائية",
     loadBill: "أعرف فاتورتي الشهرية",
