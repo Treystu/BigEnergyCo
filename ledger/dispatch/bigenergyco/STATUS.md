@@ -148,19 +148,57 @@ its rounds UI is the open remainder; **next is #440 items 3-5** (intake priors
   file is now 131,996 normalized; any further hook needs a comment compression in
   the same change.
 
+## Landing record — 2026-11-24 (owner order: ALL THE OLD VISUALS BACK, JUST REFINED)
+
+Filed with the STAGING-RESTORED receipt on #429 (comment 7143378184).
+
+- **#437 detail-locale tail landed.** #473 merged as `d2e9744b`. The glossary
+  explainers now cover all 25 terms in all six non-English locales (the last
+  English group a rendered ES census found), the remaining `explainElement` call
+  passes the page language, and `tests/locale-chrome.test.mjs` pins short+long on
+  every term. Suite 2371/2371 at that head.
+- **Results surface restored.** #474 merged as `7cd81663`; PR head `37217c77`,
+  CircleCI `verify` `success` (workflow `3326e333`, pipeline revision read back as
+  `37217c77`), suite 2373/2373 there and `npm run seo` green on merged main at
+  stamp `20261124p`, SW `beco-v296`. #468's runtime fold and the stylesheet that
+  hid `.results-demoted` are gone; `#pathsPanel`, `#resultsMore` and the frontier
+  are back in their pre-#468 positions, so the readable card, both charts, the
+  frontier and the cost comparison render with the disclosure closed.
+- **One price basis (#401 / 7128520970).** `plan-card.js` now owns a parts
+  identity: the headline is `costBuyableUsd`, its three lines are panels, battery
+  and inverter from `buyablePrice().parts`, and the card renders nothing unless
+  they sum to the headline. Payback is printed per named basket (parts list vs
+  installed route); every entry in the payload carries `costBuyableParts`. The
+  old installed-route plan keys were deleted, not left as dead copy
+  (`check-i18n` names any key nothing renders).
+- **Rendered staging census** (`https://bfd68431.bigenergyco.pages.dev`, 390x844):
+  Fixture 1 ZIP 18255 off-grid 5 kWh/day — `$3,082.00` = `$1,016.00` +
+  `$1,331.00` + `$735.00`, frontier SVG and both charts visible with
+  `detailsOpen: false`, `scrollWidth - 390 = -11`. Fixture 2 ZIP 81082, 80% cut,
+  $150/mo — `$7,114.00`=`$1,652.00` + `$4,150.00`+`$1,312.00`, bill cut `80%`,
+paybacks `Year 6`(parts) /`Year 18`(installed), frontier and charts visible,`scrollWidth - 390 = -11`. `npm run seo` green: no blog/SEO URL change.
+- NOT done: production untouched; #467's truthful-verdict cure unlanded; #437's
+  remaining rendered ES re-drive on this restored surface is the next check, not
+  a claim made here.
+
 ## Readiness line
 
-The stripped interface is live on STAGING (`staging.bigenergyco.pages.dev`, stamp
-`20261124g`) and STAGING-VERIFIED on #429: home is one place field and one
-action, the calculator asks three questions with one action and the rest in one
-optional disclosure, and results lead with the one-price plan whose three lines
-sum to it, followed by the single cost table; every other result block — the
-readable card, the view ladder, the charts, the frontier, the hardware list and
-the workings — sits inside the same optional disclosure, so the result has no
-mode fork. The #439 support path renders beside the result actions. Blog and SEO censuses are unchanged at zero URL changes. NOT promoted
-under the owner order: production (`freeoffgridcalculator.com`) is untouched and
-`bigenergyco.pages.dev`, the project's production-branch alias, still serves
-`20261103u`. Promotion remains a separate D-2026-11-13-008 step.
+The FULL results surface is live on STAGING and STAGING-RESTORED on #429 (stamp
+`20261124p`, SW `beco-v296`, verified on `https://bfd68431.bigenergyco.pages.dev`
+at 390x844). Home is one place field and one action, and the calculator still asks
+the three questions with no mode fork; results now show the complete previous
+experience — the plan card, the readable card, both charts, the frontier curve,
+the hardware list and the four-ways comparison all visible — with one price basis
+(DIY parts cost of goods, three parts lines summing to the headline) and payback
+named per basket. The #439 support path renders beside the result actions. Blog
+and SEO censuses unchanged at zero URL changes. NOT promoted: production
+(`freeoffgridcalculator.com`) is untouched and `bigenergyco.pages.dev`, the
+production-branch alias, still serves `20261103u`. Promotion remains a separate
+D-2026-11-13-008 step.
+
+WAIT-STATE: nothing is waiting on another party. Rung: merge landed (#474 as
+`7cd81663`) with its rendered evidence filed; next rung is the #437 rendered ES
+re-drive on this restored surface, then #442/#444/#447 residue in queue order.
 
 ## Known follow-ups (already attached, not re-filed)
 
