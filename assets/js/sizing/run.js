@@ -28,7 +28,7 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261124h";
+} from "./engine.js?v=20261124i";
 
 import {
   isUseCaseId,
@@ -41,24 +41,24 @@ import {
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261124h";
-import { memoizeSimulate } from "./sim-cache.js?v=20261124h";
+} from "./usecases.js?v=20261124i";
+import { memoizeSimulate } from "./sim-cache.js?v=20261124i";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261124h";
-import { buildFrontier } from "./frontier.js?v=20261124h";
-import { buyablePrice } from "./bom.js?v=20261124h";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261124h";
-import { climateSummary } from "./climate.js?v=20261124h";
+} from "./nasa.js?v=20261124i";
+import { buildFrontier } from "./frontier.js?v=20261124i";
+import { buyablePrice } from "./bom.js?v=20261124i";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261124i";
+import { climateSummary } from "./climate.js?v=20261124i";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261124h";
+} from "./pricing.js?v=20261124i";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -69,7 +69,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261124h";
+} from "./money.js?v=20261124i";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -346,7 +346,7 @@ async function fetchWeatherWithFallback(opts) {
     return await fetchWeatherDefault(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261124h");
+      await import("./profiles.js?v=20261124i");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {
@@ -1735,6 +1735,44 @@ async function runSizingUncached(msg, deps = {}) {
     return payload;
   }
 
+  // #437: the panel paints this sentence from the dictionary; the English text
+  // stays for the payload contract and the engine tests.
+  const capCopy = (() => {
+    if (chemistry === "auto") {
+      const tC = Math.round(meanTempC);
+      const agm = Math.round(effectiveCapacityScale("agm", meanTempC) * 100);
+      return {
+        text: `Capacity model at this site's mean ${tC}°C: LFP 100%, sodium-ion 85% (LFP voltage settings), lead-acid (AGM) about ${agm}% (cold derating where applicable).`,
+        key: "dCapAuto",
+        vars: { t: tC, agm },
+      };
+    }
+    const capChem = chemistry;
+    const scale = effectiveCapacityScale(capChem, meanTempC);
+    const pct = Math.round(scale * 100);
+    const tC = Math.round(meanTempC);
+    if (capChem === "agm" && tC <= 10) {
+      return {
+        text: `Cold site: at a mean ${tC}°C, lead-acid (AGM) is derated to about ${pct}% of nameplate capacity; lithium and sodium are unaffected by cold in this model (they charge more slowly instead).`,
+        key: "dCapAgmCold",
+        vars: { t: tC, pct },
+      };
+    }
+    if (scale < 1) {
+      const name = capChem === "naion" ? "sodium-ion" : capChem.toUpperCase();
+      return {
+        text: `At this site's mean ${tC}°C, ${name} delivers about ${pct}% of nameplate usable capacity (rate/cold scaling).`,
+        key: "dCapScale",
+        vars: { t: tC, name, pct },
+      };
+    }
+    return {
+      text: `Capacity model assumes full nameplate usable capacity at this site's mean ${tC}°C.`,
+      key: "dCapFull",
+      vars: { t: tC },
+    };
+  })();
+
   const basePayload = () =>
     attachUseCaseContext({
       contract: PAYLOAD_CONTRACT,
@@ -1793,28 +1831,9 @@ async function runSizingUncached(msg, deps = {}) {
               )
             : +effectiveCapacityScale(chemistry, meanTempC).toFixed(3),
         meanTempC: Math.round(meanTempC),
-        capacityNote: (() => {
-          if (chemistry === "auto") {
-            const tC = Math.round(meanTempC);
-            const agm = Math.round(
-              effectiveCapacityScale("agm", meanTempC) * 100,
-            );
-            return `Capacity model at this site's mean ${tC}°C: LFP 100%, sodium-ion 85% (LFP voltage settings), lead-acid (AGM) about ${agm}% (cold derating where applicable).`;
-          }
-          const capChem = chemistry;
-          const scale = effectiveCapacityScale(capChem, meanTempC);
-          const pct = Math.round(scale * 100);
-          const tC = Math.round(meanTempC);
-          if (capChem === "agm" && tC <= 10) {
-            return `Cold site: at a mean ${tC}°C, lead-acid (AGM) is derated to about ${pct}% of nameplate capacity; lithium and sodium are unaffected by cold in this model (they charge more slowly instead).`;
-          }
-          if (scale < 1) {
-            const name =
-              capChem === "naion" ? "sodium-ion" : capChem.toUpperCase();
-            return `At this site's mean ${tC}°C, ${name} delivers about ${pct}% of nameplate usable capacity (rate/cold scaling).`;
-          }
-          return `Capacity model assumes full nameplate usable capacity at this site's mean ${tC}°C.`;
-        })(),
+        capacityNote: capCopy.text,
+        capacityKey: capCopy.key,
+        capacityVars: capCopy.vars,
       },
     });
 

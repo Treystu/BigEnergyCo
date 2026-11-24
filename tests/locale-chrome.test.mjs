@@ -244,3 +244,128 @@ test("#437: the four localized posts render the footer they were missing", () =>
     );
   }
 });
+
+// ---- results-detail panel (#437 tail) -------------------------------------
+// The spec tables, the BOS checklist, the plain-language summary, the appliance
+// picker and the methodology paragraph are all built by JS, so a hook cannot
+// reach them: each one must be a key with a painter that calls t(), and the
+// painters must sit on the language-change repaint path.
+const detail = readFileSync(
+  join(ROOT, "assets/js/shared/detail-copy.js"),
+  "utf8",
+);
+const runJs = readFileSync(join(ROOT, "assets/js/sizing/run.js"), "utf8");
+const appliances = readFileSync(
+  join(ROOT, "assets/js/sizing/appliances.js"),
+  "utf8",
+);
+const DRAWERS = ["renderBomPanel", "renderEli5Summary", "retailRowText"];
+
+test("#437: every detail-panel key exists in every locale", () => {
+  const langs = Object.keys(LOCALES);
+  const keys = Object.keys(LOCALES.en).filter((k) =>
+    /^d[A-Z]|^ap[A-Z]/.test(k),
+  );
+  assert.ok(
+    keys.length >= 100,
+    `expected the detail table to be substantive, got ${keys.length}`,
+  );
+  const placeholders = (text) =>
+    [...String(text).matchAll(/\{([A-Za-z0-9_]+)\}/g)].map((m) => m[1]).sort();
+  for (const key of keys) {
+    for (const lang of langs) {
+      const value = LOCALES[lang][key];
+      assert.equal(
+        typeof value,
+        "string",
+        `${lang}.${key} is missing - the detail panel would fall back to English`,
+      );
+      assert.ok(value.trim().length > 0, `${lang}.${key} is empty`);
+      assert.deepEqual(
+        placeholders(value),
+        placeholders(LOCALES.en[key]),
+        `${lang}.${key} does not carry the same placeholders as English`,
+      );
+    }
+  }
+  assert.ok(detail.includes("export const DETAIL_COPY"));
+});
+
+test("#437: no detail drawer still writes its own English", () => {
+  const banned = [
+    "kW of panels",
+    "% less grid energy",
+    "usable depth of discharge",
+    '"System voltage"',
+    '"Your peak demand"',
+    '"Reference unit (only an example)"',
+    '"DC Battery Disconnect"',
+    "Essential Balance-of-System",
+    "In plain language",
+    "Your price per kWh ($)",
+    "None (Solar-only configuration",
+    "None (Battery-only configuration",
+    "Winter steep tilt (critical for off-grid)",
+    "Continuous String of English",
+  ];
+  for (const phrase of banned) {
+    assert.ok(
+      !ui.includes(phrase),
+      `ui.js still emits the bare English literal: ${phrase}`,
+    );
+  }
+  // run.js keeps the English sentence as the payload contract; what matters is
+  // that it also hands the panel a key and the variables that key needs.
+  assert.match(runJs, /key: "dCapAuto"/);
+  assert.match(runJs, /capacityKey: capCopy\.key/);
+  assert.match(runJs, /capacityVars: capCopy\.vars/);
+  for (const fn of DRAWERS) {
+    const at = ui.indexOf(`function ${fn}(`);
+    assert.ok(at > -1, `${fn} must exist`);
+  }
+});
+
+test("#437: the detail drawers paint through t() and repaint on language change", () => {
+  const start = ui.indexOf("function repaintRuntimeCopy()");
+  const body = ui.slice(start, ui.indexOf("\n}\n", start));
+  assert.match(
+    body,
+    /if \(lastPayload\) renderResults\(lastPayload\)/,
+    "a language change must re-render the payload, which re-runs the detail drawers",
+  );
+  const results = ui.indexOf("function renderResults(");
+  assert.ok(results > -1);
+  const resultsBody = ui.slice(results, results + 24000);
+  for (const call of ["renderBomPanel()", "renderEli5Summary("]) {
+    assert.ok(
+      resultsBody.includes(call),
+      `${call} must run inside renderResults so the repaint reaches it`,
+    );
+  }
+  assert.match(ui, /function bomNoteText\(bom\)/);
+  assert.match(ui, /t\(n\.key, n\.vars/);
+});
+
+test("#437: appliance names keep the identity key and gain a display key", () => {
+  const names = [...appliances.matchAll(/n: "([^"]+)",\s*k: "(ap[A-Za-z]+)"/g)];
+  assert.ok(
+    names.length >= 29,
+    `expected every appliance row to carry a display key, found ${names.length}`,
+  );
+  for (const [, name, key] of names) {
+    assert.ok(
+      typeof LOCALES.en[key] === "string",
+      `${name} points at a missing display key ${key}`,
+    );
+    for (const lang of Object.keys(LOCALES)) {
+      assert.equal(
+        typeof LOCALES[lang][key],
+        "string",
+        `${lang}.${key} is missing`,
+      );
+    }
+  }
+  // Lookups stay on the English identity: the row dataset and presets read it.
+  assert.match(ui, /"data-item-name": it\.n/);
+  assert.match(ui, /it\.k \? t\(it\.k\) : it\.n/);
+});

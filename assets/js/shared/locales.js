@@ -3,15 +3,17 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261124h";
-import { RESULT_COPY } from "./result-copy.js?v=20261124h";
-import { TILT_COPY } from "./tilt-copy.js?v=20261124h";
+import { HOME_COPY } from "./home-copy.js?v=20261124i";
+import { RESULT_COPY } from "./result-copy.js?v=20261124i";
+import { TILT_COPY } from "./tilt-copy.js?v=20261124i";
+import { DETAIL_COPY } from "./detail-copy.js?v=20261124i";
 
 export const LOCALES = {
   en: {
     ...HOME_COPY.en,
     ...RESULT_COPY.en,
     ...TILT_COPY.en,
+    ...DETAIL_COPY.en,
     sizingFor: "What are you sizing for?",
     goalCutBill: "Cut My Electric Bill",
     goalOffgrid: "Off-grid / Backup",
@@ -800,6 +802,7 @@ export const LOCALES = {
     ...HOME_COPY.es,
     ...RESULT_COPY.es,
     ...TILT_COPY.es,
+    ...DETAIL_COPY.es,
     sizingFor: "¿Qué estás dimensionando?",
     goalCutBill: "Reducir mi factura eléctrica",
     goalOffgrid: "Aislado / Respaldo",
@@ -1601,6 +1604,7 @@ export const LOCALES = {
     ...HOME_COPY.pt,
     ...RESULT_COPY.pt,
     ...TILT_COPY.pt,
+    ...DETAIL_COPY.pt,
     sizingFor: "O que você está dimensionando?",
     goalCutBill: "Reduzir minha conta de luz",
     goalOffgrid: "Isolado / Backup",
@@ -2391,6 +2395,7 @@ export const LOCALES = {
     ...HOME_COPY.fr,
     ...RESULT_COPY.fr,
     ...TILT_COPY.fr,
+    ...DETAIL_COPY.fr,
     sizingFor: "Que dimensionnez-vous ?",
     goalCutBill: "Réduire ma facture d'électricité",
     goalOffgrid: "Autonome / Secours",
@@ -3197,6 +3202,7 @@ export const LOCALES = {
     ...HOME_COPY.de,
     ...RESULT_COPY.de,
     ...TILT_COPY.de,
+    ...DETAIL_COPY.de,
     sizingFor: "Was möchten Sie dimensionieren?",
     goalCutBill: "Meine Stromrechnung senken",
     goalOffgrid: "Insel / Notstrom",
@@ -3995,6 +4001,7 @@ export const LOCALES = {
   nl: {
     ...RESULT_COPY.nl,
     ...TILT_COPY.nl,
+    ...DETAIL_COPY.nl,
     sizingFor: "Waar dimensionneert u voor?",
     goalCutBill: "Mijn energierekening verlagen",
     goalOffgrid: "Off-grid / Noodstroom",
@@ -4898,6 +4905,7 @@ export const LOCALES = {
     ...HOME_COPY.ar,
     ...RESULT_COPY.ar,
     ...TILT_COPY.ar,
+    ...DETAIL_COPY.ar,
     rtl: true,
     sizingFor: "ما الذي تحدد حجمه؟",
     goalCutBill: "تقليل فاتورة الكهرباء",

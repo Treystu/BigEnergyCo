@@ -250,10 +250,10 @@
     </script>
 
     <!-- Early Hints: critical path; Cloudflare turns these into a 103 when enabled. -->
-    <link rel="preload" href="./assets/site.css?v=20261124h" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261124h" />
+    <link rel="preload" href="./assets/site.css?v=20261124i" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261124i" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261124h" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261124i" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -363,6 +363,7 @@
               class="btn btn-outline btn-xs"
               type="button"
               aria-label="Install BigEnergyCo Web App"
+              data-i18n="dInstallApp"
               style="display: none"
             >
               &#128242; Install App
@@ -408,6 +409,7 @@
             class="btn btn-outline"
             type="button"
             aria-label="Install BigEnergyCo Web App"
+            data-i18n="dInstallAppLong"
             style="
               display: none;
               width: 100%;
@@ -1851,8 +1853,7 @@
                         60% &mdash; daytime solar priority
                       </option>
 
-                      <!-- Filled in whenever the results slider holds an
-                         arbitrary cut: the two controls are one decision. -->
+                      <!-- Shown for an arbitrary cut: one decision, two controls. -->
                       <option
                         value="custom"
                         hidden
@@ -2152,8 +2153,7 @@
               <div id="resultsRegion" hidden>
                 <!-- PLAN: one price, three stats, one breakdown that sums to it. -->
                 <div id="planCardWrap" class="plan-card-wrap" hidden></div>
-                <!-- V2: an opened share link sizes itself, so this reader sees
-                  someone else's result. Filled by restoreFromShare(). -->
+                <!-- V2: an opened share link sizes itself; filled by restoreFromShare(). -->
                 <p id="sharedResultNote" class="vma" role="note" hidden></p>
 
                 <div id="useCaseOutcomeWrap" aria-live="polite"></div>
@@ -2743,8 +2743,7 @@
                   >
                 </p>
 
-                <!-- V2: the ask at the value moment - one line, three doors, revealed
-                  by renderResults() only once a result exists. -->
+                <!-- V2: the ask at the value moment; shown by renderResults(). -->
                 <p id="valueMomentAsk" class="vma" role="note" hidden>
                   <span data-i18n="valueMomentAskLead"
                     >If this saved you a call or a quote:</span
@@ -3099,6 +3098,7 @@
                 class="btn btn-outline legal-trigger"
                 role="button"
                 tabindex="0"
+                data-i18n="dReadTerms"
               >
                 Read full terms &rarr;
               </div>
@@ -3119,6 +3119,7 @@
                 class="btn btn-outline legal-trigger"
                 role="button"
                 tabindex="0"
+                data-i18n="dReadAi"
               >
                 Read AI disclaimer &rarr;
               </div>
@@ -3138,6 +3139,7 @@
                 class="btn btn-outline legal-trigger"
                 role="button"
                 tabindex="0"
+                data-i18n="dReadPrivacy"
               >
                 Read privacy note &rarr;
               </div>
@@ -3618,14 +3620,14 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261124h"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261124i"></script>
 
     <!-- Turnstile client (B1/R-CF-02): harmless with no site key. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261124h"
+      src="./assets/js/turnstile-client.js?v=20261124i"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261124h"></script>
+    <script defer src="./assets/js/chat.js?v=20261124i"></script>
   </body>
 </html>
 

@@ -273,15 +273,8 @@ test("a missing panel footprint can no longer print the word null", () => {
 
 test("the BOS checklist drops its PV items when the build has no PV", () => {
   assert.match(ui, /const hasPv = Boolean\(bom\.panels\)/);
-  assert.match(
-    ui,
-    /\.\.\.\(hasPv\s*\?\s*\[\s*\[\s*\"PV Array Isolator \+ SPD\"/,
-  );
-  assert.match(
-    ui,
-    /hasPv\s*\?\s*\"Common earth ground bonding for panel mounting rails/,
-  );
-  assert.match(ui, /\"Common earth ground bonding for the battery rack/);
+  assert.match(ui, /\.\.\.\(hasPv\s*\?\s*\[\s*\[t\("dBosRowPvIsolator"\)/);
+  assert.match(ui, /t\(hasPv \? "dBosValGroundPv" : "dBosValGroundNoPv"\)/);
 });
 
 test("the tilt guide is not advice about an array the run does not build", () => {

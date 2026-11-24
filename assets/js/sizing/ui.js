@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261124h";
+import { APPLIANCES } from "./appliances.js?v=20261124i";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261124h";
+} from "./pwa-install.js?v=20261124i";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261124h";
+} from "./usecases.js?v=20261124i";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261124h";
+} from "./run-coordinator.js?v=20261124i";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261124h";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261124h";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261124h";
+} from "./mode-chrome.js?v=20261124i";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261124i";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261124i";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261124h";
+} from "./location-picker.js?v=20261124i";
 
 import {
   estimateTariff,
@@ -57,15 +57,15 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261124h";
+} from "./pricing.js?v=20261124i";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261124h";
+import { currencyForCountry } from "./country-currency.js?v=20261124i";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261124h";
-import { planBreakdown } from "./plan-card.js?v=20261124h";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261124i";
+import { planBreakdown } from "./plan-card.js?v=20261124i";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -84,7 +84,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261124h").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261124i").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -95,15 +95,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261124h";
+} from "./lead-acid.js?v=20261124i";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261124h";
+} from "./bom.js?v=20261124i";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261124h";
+import { BOM_ITEMS } from "../shared/content.js?v=20261124i";
 
 import {
   applyI18n,
@@ -112,11 +112,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261124h";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261124h";
-import { byId as $, el } from "../shared/dom.js?v=20261124h";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261124h";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261124h";
+} from "../shared/i18n.js?v=20261124i";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261124i";
+import { byId as $, el } from "../shared/dom.js?v=20261124i";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261124i";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261124i";
 import {
   advisorJevContext,
   interpretSanity,
@@ -124,29 +124,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261124h";
+} from "./validate.js?v=20261124i";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261124h";
+} from "../shared/cut-targets.js?v=20261124i";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261124h";
+} from "./share-codec.js?v=20261124i";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261124h";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261124h";
+} from "./infeasible-copy.js?v=20261124i";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261124i";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261124h";
+} from "./fuel-units.js?v=20261124i";
 
 import {
   createLeafletProvider,
@@ -154,18 +154,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261124h";
+} from "./map-provider.js?v=20261124i";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261124h";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261124h";
+} from "./wizard.js?v=20261124i";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261124i";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261124h";
+} from "./budget-span.js?v=20261124i";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -177,10 +177,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261124h"),
-      import("./charts.js?v=20261124h"),
-      import("./frontier-chart.js?v=20261124h"),
-      import("./rescale.js?v=20261124h"),
+      import("./engine.js?v=20261124i"),
+      import("./charts.js?v=20261124i"),
+      import("./frontier-chart.js?v=20261124i"),
+      import("./rescale.js?v=20261124i"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -248,9 +248,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261124h";
+} from "./money.js?v=20261124i";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261124h";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261124i";
 
 let worker = null;
 
@@ -1782,17 +1782,21 @@ function renderAppliances() {
         style: "width:auto;margin:0;transform:scale(1.2);cursor:pointer;",
       });
 
-      const labelText = it.splitPhase ? `${it.n} ⚡240V` : it.n;
+      // The English name stays the identity key (data-item-name, presets and
+      // lookups all use it); only the visible label comes from the dictionary.
+      const apLabel = () =>
+        (it.k ? t(it.k) : it.n) + (it.splitPhase ? " ⚡240V" : "");
+      const nameText = el("span", {}, apLabel());
       const name = el(
         "label",
         {
           style:
             "flex:1 1 200px;cursor:pointer;font-size:0.92rem;font-weight:500;margin:0;",
         },
-        labelText,
+        "",
       );
 
-      name.prepend(cb);
+      name.append(cb, nameText);
 
       const watts = el(
         "span",
@@ -1872,6 +1876,7 @@ function renderAppliances() {
       // Repaint ONLY the copy, never refresh(): refresh would mark a fresh
       // result stale, and a language switch changes no number on this page.
       applianceRepainters.push(() => {
+        nameText.textContent = apLabel();
         watts.textContent = it.duty
           ? t("apWattsRunning", { w: it.w })
           : t("apWatts", { w: it.w });
@@ -2521,8 +2526,10 @@ function updateCurrencyUnitLabel() {
 
   if (label)
     label.textContent = fx
-      ? `Your price per kWh (${CURRENCIES[fx.code]?.symbol || fx.code}):`
-      : "Your price per kWh ($):";
+      ? t("dPricePerKwh", {
+          sym: CURRENCIES[fx.code]?.symbol || fx.code,
+        })
+      : t("dPricePerKwh", { sym: "$" });
 
   // Feed-in credit is entered in the same display currency as the tariff.
 
@@ -2627,7 +2634,7 @@ function updateGuidedProgress(step = wizard.state.step) {
     location: "1. Location",
     load: "2. What you power",
     tariff: "3. Electricity price",
-    result: "4. Your result",
+    result: t("dStepResult"),
   };
   progress.textContent = labels[step] || labels.location;
   progress.dataset.step = step;
@@ -4113,7 +4120,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261124h",
+      "./assets/js/sizing/sizing-worker.js?v=20261124i",
       {
         type: "module",
       },
@@ -4893,7 +4900,7 @@ function renderRelativeOptions(p, selectedSystem) {
   });
   header.innerHTML = `
     <div style="font-weight: 700; color: var(--primary-accent); font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
-      <span>📊 Capacity Spectrum (Relative to Your Selection)</span>
+      <span>${t("dCapacitySpectrum")}</span>
       <span style="font-size: 0.8rem; font-weight: 600; color: #fff; background: rgba(255,255,255,0.08); padding: 0.15rem 0.5rem; border-radius: 6px;">
         ${
           hasBasePanels
@@ -6544,24 +6551,63 @@ function currentPanelWatts() {
 // saying so (#446).
 function retailRowText(retail, targetKwh) {
   if (!retail) return "";
-  const head = `${retail.modules} \u00D7 ${retail.unitLabel}`;
+  const label = bomRetailLabel(retail);
   const provided = Number(retail.providedKwh) || 0;
   const target = Number(targetKwh) || 0;
-  if (!(provided > 0) || !(target > 0))
-    return `${head} = ${fmt(provided)} kWh nameplate`;
+  const base = {
+    modules: retail.modules,
+    label,
+    kwh: fmt(provided),
+  };
+  if (!(provided > 0) || !(target > 0)) return t("dValRetailHead", base);
   const pct = Math.round(((provided - target) / target) * 100);
-  const fig = `${fmt(provided)} kWh nameplate`;
-  const tail =
+  const text =
     pct > 5
-      ? `= ${fig}, ${pct}% over the ~${fmt(target)} kWh target`
-      : `= ${fig}, within ${Math.max(0, pct)}% of the ~${fmt(target)} kWh target`;
+      ? t("dValRetailOver", { ...base, pct, target: fmt(target) })
+      : t("dValRetailWithin", {
+          ...base,
+          pct: Math.max(0, pct),
+          target: fmt(target),
+        });
   // When one unit is already well past the ask, say which path is honest at
   // that size rather than letting the visitor assume there is a smaller one.
   const note =
-    retail.modules === 1 && provided > target * 1.5
-      ? " The smallest prebuilt unit in this voltage class is already this size — at this bank the DIY list is the closer match."
-      : "";
-  return `${head} ${tail}.${note}`;
+    retail.modules === 1 && provided > target * 1.5 ? t("dValRetailNote") : "";
+  return note ? `${text} ${note}` : text;
+}
+
+// #437: the BOM engine keeps English prose for the CSV export and the engine
+// tests; the panel paints the same facts from the keyed copy beside them.
+function bomDiyLabel(diy) {
+  if (!diy) return "";
+  return diy.labelKey ? t(diy.labelKey, diy.labelVars || {}) : diy.unitLabel;
+}
+
+function bomRetailLabel(retail) {
+  if (!retail) return "";
+  return retail.labelKey
+    ? t(retail.labelKey, retail.labelVars || {})
+    : retail.unitLabel;
+}
+
+function bomControllerSuggestion(controller) {
+  const amps = controller?.suggestionAmps ?? controller?.ampsRequired ?? 0;
+  return amps <= 100
+    ? t("dControllerOne", { amps })
+    : t("dControllerSplit", { n: Math.ceil(amps / 100) });
+}
+
+function bomReferenceUnit(inverter) {
+  if (!inverter) return "";
+  return inverter.referenceKey
+    ? t(inverter.referenceKey, inverter.referenceVars || {})
+    : inverter.referenceUnit;
+}
+
+function bomNoteText(bom) {
+  const keys = bom?.noteKeys;
+  if (!keys || !keys.length) return (bom?.notes || []).join(" ");
+  return keys.map((n) => t(n.key, n.vars || {})).join(" ");
 }
 
 function buildFocusBom() {
@@ -6624,86 +6670,98 @@ function renderBomPanel() {
     body.appendChild(callout);
   }
   if (bom.panels) {
-    section("Panels", [
+    section(t("dSecPanels"), [
       [
-        "Array",
-        `${f.pvKw} kW \u2192 ${bom.panels.count} \u00D7 ${bom.panels.panelWatts} W = ${bom.panels.kwActual} kW`,
+        t("dRowArray"),
+        t("dValArray", {
+          kw: f.pvKw,
+          count: bom.panels.count,
+          watts: bom.panels.panelWatts,
+          actual: bom.panels.kwActual,
+        }),
       ],
-      [
-        "Space needed",
-        `about ${bom.panels.areaM2} m\u00B2 of roof or ground (mounting gaps included)`,
-      ],
+      [t("dRowSpaceNeeded"), t("dValSpace", { area: bom.panels.areaM2 })],
     ]);
   } else {
-    section("Panels", [
-      [
-        "Array",
-        "None (Battery-only configuration \u2014 ToU grid arbitrage / peak-offset)",
-      ],
-    ]);
+    section(t("dSecPanels"), [[t("dRowArray"), t("dValPanelsNone")]]);
   }
   if (bom.voltage && bom.battery) {
     section(
-      "Battery bank",
+      t("dSecBatteryBank"),
       [
         [
-          "System voltage",
-          `${bom.voltage.volts} V \u2014 ${bom.voltage.rationale}`,
+          t("dRowSystemVoltage"),
+          t("dValVoltage", {
+            volts: bom.voltage.volts,
+            kw: bom.inverter.recommendedKw,
+            kwh: (f.battNameplateKwh || 0).toFixed(1),
+          }),
         ],
         bom.battery.diy
           ? [
-              "DIY build",
-              `${bom.battery.diy.unitLabel} \u00D7 ${bom.battery.diy.stringsParallel} parallel string(s) = ${bom.battery.diy.blocksTotal} cells`,
+              t("dRowDiyBuild"),
+              t("dValDiy", {
+                label: bomDiyLabel(bom.battery.diy),
+                strings: bom.battery.diy.stringsParallel,
+                cells: bom.battery.diy.blocksTotal,
+              }),
             ]
           : null,
         bom.battery.retail
           ? [
-              "Prebuilt alternative",
+              t("dRowPrebuilt"),
               retailRowText(bom.battery.retail, f.battNameplateKwh),
             ]
           : null,
         [
-          "Nameplate target",
-          `~${fmt(f.battNameplateKwh)} kWh at ${(bom.battery.usableDod * 100).toFixed(0)}% usable depth of discharge`,
+          t("dRowNameplateTarget"),
+          t("dValNameplate", {
+            kwh: fmt(f.battNameplateKwh),
+            dod: (bom.battery.usableDod * 100).toFixed(0),
+          }),
         ],
       ].filter(Boolean),
     );
   } else {
-    section("Battery bank", [
-      [
-        "Storage",
-        "None (Solar-only configuration \u2014 direct consumption + grid export)",
-      ],
-    ]);
+    section(t("dSecBatteryBank"), [[t("dEli5Storage"), t("dValBatteryNone")]]);
   }
-  section("Inverter", [
-    ["Your peak demand", `~${fmt(bom.inverter.peakLoadKw)} kW at once`],
-    ["Suggested class", `${bom.inverter.recommendedKw} kW continuous minimum`],
-    ["Reference unit (only an example)", bom.inverter.referenceUnit],
-    ["Surge rule", bom.inverter.surgeNote],
+  section(t("dSecInverter"), [
+    [t("dRowPeakDemand"), t("dValPeak", { kw: fmt(bom.inverter.peakLoadKw) })],
+    [
+      t("dRowSuggestedClass"),
+      t("dValSuggested", { kw: bom.inverter.recommendedKw }),
+    ],
+    [t("dRowReferenceUnit"), bomReferenceUnit(bom.inverter)],
+    [t("dRowSurgeRule"), t("dSurgeNote")],
   ]);
   if (bom.controller) {
-    section("Charge controller & protection", [
+    section(t("dSecController"), [
       [
-        "Controller capacity",
-        `${bom.controller.ampsRequired} A total \u2014 ${bom.controller.suggestion}`,
+        t("dRowControllerCapacity"),
+        t("dValController", {
+          amps: bom.controller.ampsRequired,
+          suggestion: bomControllerSuggestion(bom.controller),
+        }),
       ],
-      ["Controller note", bom.controller.note],
+      [t("dRowControllerNote"), t("dControllerNote")],
       [
-        "Main battery fuse/breaker",
-        `${bom.protection.mainFuseAmps} A (bank can pull ~${bom.protection.batteryDischargeAmps} A at full load)`,
+        t("dRowMainFuse"),
+        t("dValMainFuse", {
+          amps: bom.protection.mainFuseAmps,
+          discharge: bom.protection.batteryDischargeAmps,
+        }),
       ],
-      ["PV disconnect", `${bom.protection.pvBreakerAmps} A`],
+      [t("dRowPvDisconnect"), `${bom.protection.pvBreakerAmps} A`],
     ]);
   }
   if (bom.cable) {
     section(
-      "Battery-to-inverter cable (copper)",
+      t("dSecCable"),
       bom.cable.map((c) => [
-        `${c.meters} m run`,
+        t("dRowRun", { meters: c.meters }),
         c.mm2
-          ? `${c.awg} (${c.mm2} mm\u00B2) or larger`
-          : `larger than ${c.awg} \u2014 shorten the run`,
+          ? t("dValCableOk", { awg: c.awg, mm2: c.mm2 })
+          : t("dValCableShort", { awg: c.awg }),
       ]),
     );
   }
@@ -6714,33 +6772,19 @@ function renderBomPanel() {
     const yrTilt = Math.round(absLat * 0.9);
     const wtrTilt = Math.min(70, Math.round(absLat + 15));
     const smrTilt = Math.max(10, Math.round(absLat - 15));
-    section("Array Mounting & Optimal Tilt", [
-      ["Array orientation", `Face ${facing} for maximum annual solar harvest`],
-      ["Year-round fixed tilt", `~${yrTilt}\u00B0 from horizontal`],
-      [
-        "Winter steep tilt (critical for off-grid)",
-        `~${wtrTilt}\u00B0 \u2014 sheds snow & captures low winter sun`,
-      ],
-      ["Summer tilt (optional)", `~${smrTilt}\u00B0`],
-      [
-        "Mounting recommendation",
-        absLat > 40
-          ? "Ground mount strongly recommended for easy snow clearing & seasonal tilt adjustment"
-          : "Roof mount (flush/racked) or ground mount",
-      ],
+    section(t("dSecMounting"), [
+      [t("dRowOrientation"), t(lat >= 0 ? "dValFaceSouth" : "dValFaceNorth")],
+      [t("dRowYearTilt"), t("dValDegrees", { deg: yrTilt })],
+      [t("dRowWinterTilt"), t("dValWinterTilt", { deg: wtrTilt })],
+      [t("dRowSummerTilt"), t("dValDegrees", { deg: smrTilt })],
+      [t("dRowMounting"), t(absLat > 40 ? "dValMountSnow" : "dValMountRoof")],
     ]);
   }
   const bosCard = el("div", {
     class: "bom-card bos-checklist-card",
     style: "margin-bottom:0.8rem;",
   });
-  bosCard.appendChild(
-    el(
-      "h3",
-      {},
-      "\uD83D\uDEE1\uFE0F Essential Balance-of-System (BOS) & Safety Checklist",
-    ),
-  );
+  bosCard.appendChild(el("h3", {}, t("dBosTitle")));
   // A no-panel build ships no PV, so this checklist must not send the visitor
   // shopping for a PV isolator, an SPD "before the charge controller", or
   // grounding for "panel mounting rails" — items the parts list above already
@@ -6748,37 +6792,18 @@ function renderBomPanel() {
   const hasPv = Boolean(bom.panels);
   const bosRows = [
     [
-      "DC Battery Disconnect",
-      `Heavy-duty rotary disconnect switch + Class-T fuse (or DC-rated breaker) sized to ${bom.protection?.mainFuseAmps || 200} A near battery positive terminal.`,
+      t("dBosRowDisconnect"),
+      t("dBosValDisconnect", {
+        amps: bom.protection?.mainFuseAmps || 200,
+      }),
     ],
-    ...(hasPv
-      ? [
-          [
-            "PV Array Isolator + SPD",
-            "DC-rated 2-pole breaker and DC Surge Protective Device (lightning arrestor) before the charge controller.",
-          ],
-        ]
-      : []),
-    [
-      "Battery Shunt / Monitor",
-      "Precision 500 A shunt on main battery negative for exact State-of-Charge (SoC) tracking (voltage alone is inaccurate on lithium).",
-    ],
-    [
-      "Copper Busbars & Cables",
-      "Solid copper busbars for multi-battery paralleling; hydraulic hex crimps with dual-wall adhesive heatshrink on all battery cable lugs.",
-    ],
-    [
-      "Equipment Grounding",
-      hasPv
-        ? "Common earth ground bonding for panel mounting rails, lightning arrestors, and inverter chassis to ground rod."
-        : "Common earth ground bonding for the battery rack, the inverter chassis, and any metal enclosure to a ground rod.",
-    ],
+    ...(hasPv ? [[t("dBosRowPvIsolator"), t("dBosValPvIsolator")]] : []),
+    [t("dBosRowShunt"), t("dBosValShunt")],
+    [t("dBosRowBusbars"), t("dBosValBusbars")],
+    [t("dBosRowGrounding"), t(hasPv ? "dBosValGroundPv" : "dBosValGroundNoPv")],
   ];
   if (window.lastInputs?.requiresSplitPhase) {
-    bosRows.push([
-      "\u26A1 240V Split-Phase Alert",
-      "Your selected appliances (e.g. deep well pump, heat pump, or EV charger) require 240V split-phase (L1 + L2 + N). Ensure your inverter is a native 120/240V split-phase unit or two identical 120V inverters stacked with a communication cable.",
-    ]);
+    bosRows.push(["\u26A1 " + t("dBosRowSplit"), t("dBosValSplit")]);
   }
   appendRows(bosCard, bosRows);
   body.appendChild(bosCard);
@@ -6790,7 +6815,7 @@ function renderBomPanel() {
           style:
             "font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;line-height:1.5;",
         },
-        bom.notes.join(" "),
+        bomNoteText(bom),
       ),
     );
   }
@@ -7643,30 +7668,32 @@ function renderEli5Summary(p) {
     : "";
   const rows = [
     [
-      "Solar",
+      t("dEli5Solar"),
       entry.pvKw > 0
-        ? `${entry.pvKw} kW of panels`
-        : "No panels in this option",
+        ? t("dEli5Panels", { kw: entry.pvKw })
+        : t("dEli5NoPanels"),
       "kW",
     ],
     [
-      "Storage",
+      t("dEli5Storage"),
       entry.battKwh > 0
-        ? `${fmt(entry.battKwh)} kWh usable battery`
-        : "No battery in this option",
+        ? t("dEli5Battery", { kwh: fmt(entry.battKwh) })
+        : t("dEli5NoBattery"),
       "usableCapacity",
     ],
     [
-      "Target",
+      t("dEli5Target"),
       p.mode === "gridtie"
-        ? `${entry.cutPct ?? 0}% less grid energy`
-        : `${Math.round(100 - (entry.unmetHoursPerYear || 0) / 87.6)}% reliability target`,
+        ? t("dEli5Cut", { pct: entry.cutPct ?? 0 })
+        : t("dEli5Reliability", {
+            pct: Math.round(100 - (entry.unmetHoursPerYear || 0) / 87.6),
+          }),
       p.mode === "gridtie" ? "gridTie" : "reliabilityTier",
     ],
   ];
   wrap.style.display = "block";
   wrap.innerHTML = "";
-  wrap.appendChild(el("div", { class: "eli5-title" }, "💡 In plain language"));
+  wrap.appendChild(el("div", { class: "eli5-title" }, t("dEli5Title")));
   const grid = el("div", { class: "eli5-grid" });
   for (const [label, value, term] of rows) {
     const item = el("div", { class: "eli5-item" });
@@ -7961,25 +7988,39 @@ async function renderResults(p) {
 
   const pr = p.pricing || {};
 
-  $("assumpText").textContent =
-    `Data: ${a.source}, hourly ${a.dataYears}. Derates applied: soiling ${(a.derates.soiling * 100).toFixed(0)}%, ` +
-    `wiring ${(a.derates.wiring * 100).toFixed(0)}%, mismatch ${(a.derates.mismatch * 100).toFixed(0)}%, ` +
-    `MPPT ${(a.derates.mppt * 100).toFixed(0)}%. Cell temperature model: NOCT ${a.noctC}°C, ` +
-    `power temperature coefficient ${(a.gammaPerC * 100).toFixed(2)}%/°C. Inverter efficiency ${(a.etaInverter * 100).toFixed(0)}%. ` +
-    `Charging blocked below chemistry's cold limit (LFP 0°C). Load basis: ${inp.basis}. ` +
-    `Costs span ${pr.basisLabel || "ex-factory China to PowMr-class budget retail"} (${pr.source || "cell market indications through PowMr catalog, Aug 2026"}) - ` +
-    `the low end is components before freight/duty/BMS, the high end is shipped retail with BMS and enclosure included. ` +
-    (a.money ? a.money + " " : "") +
-    (a.capacityNote ? a.capacityNote + " " : "") +
-    (fxNote() ? fxNote() + " " : "") +
-    (a.offline
-      ? "OFFLINE MODE: this run used the bundled typical-year profile for " +
-        p.meta.offlineCity +
-        " - a close approximation, not your exact site. Re-run online for five years of point-specific weather. "
-      : "") +
-    (p.tariff
-      ? `Grid spend assumes ${energyRate(p.tariff)} at ${fmtKwh(p.dailyKwh ?? inp.dailyKwh)} kWh/day.`
-      : "No tariff entered, so payback is not shown.");
+  $("assumpText").textContent = [
+    t("dAssumpData", {
+      source: a.source,
+      years: a.dataYears,
+      soiling: (a.derates.soiling * 100).toFixed(0),
+      wiring: (a.derates.wiring * 100).toFixed(0),
+      mismatch: (a.derates.mismatch * 100).toFixed(0),
+      mppt: (a.derates.mppt * 100).toFixed(0),
+    }),
+    t("dAssumpCell", {
+      noct: a.noctC,
+      gamma: (a.gammaPerC * 100).toFixed(2),
+    }),
+    t("dAssumpInverter", { eta: (a.etaInverter * 100).toFixed(0) }),
+    t("dAssumpCold"),
+    t("dAssumpLoad", { basis: inp.basis }),
+    t("dAssumpCosts", {
+      basis: pr.basisLabel || "ex-factory China to PowMr-class budget retail",
+      source:
+        pr.source || "cell market indications through PowMr catalog, Aug 2026",
+    }),
+    a.capacityKey ? t(a.capacityKey, a.capacityVars || {}) : a.capacityNote,
+    fxNote(),
+    a.offline ? t("dAssumpOffline", { city: p.meta.offlineCity }) : "",
+    p.tariff
+      ? t("dAssumpTariff", {
+          rate: energyRate(p.tariff),
+          kwh: fmtKwh(p.dailyKwh ?? inp.dailyKwh),
+        })
+      : t("dAssumpNoTariff"),
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   let briefLines;
 
@@ -9492,11 +9533,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261124h")
+    import("../shared/translation-suggestion-loader.js?v=20261124i")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261124h"),
+          () => import("../translation-suggestion.js?v=20261124i"),
         );
       })
       .catch(() => {});
