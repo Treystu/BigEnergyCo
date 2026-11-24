@@ -189,7 +189,7 @@ export const DETAIL_COPY = {
     dChartGround: "Ground / Horizon",
     dChartFacing: "🧭 Facing {compass}",
     dChartTilt: "~{tilt}° Tilt",
-    dMatrixPick: "Select {row} at {col}: {text}",
+    dMatrixPick: "Select {row} at {col}:",
   },
   es: {
     dAssumpData:
@@ -380,7 +380,7 @@ export const DETAIL_COPY = {
     dChartGround: "Suelo / Horizonte",
     dChartFacing: "🧭 Orientado al {compass}",
     dChartTilt: "~{tilt}° de inclinación",
-    dMatrixPick: "Elegir {row} con {col}: {text}",
+    dMatrixPick: "Elegir {row} con {col}:",
   },
   pt: {
     dAssumpData:
@@ -566,7 +566,7 @@ export const DETAIL_COPY = {
     dChartGround: "Solo / Horizonte",
     dChartFacing: "🧭 Voltado a {compass}",
     dChartTilt: "~{tilt}° de inclinação",
-    dMatrixPick: "Escolher {row} com {col}: {text}",
+    dMatrixPick: "Escolher {row} com {col}:",
   },
   fr: {
     dAssumpData:
@@ -756,7 +756,7 @@ export const DETAIL_COPY = {
     dChartGround: "Sol / Horizon",
     dChartFacing: "🧭 Orienté {compass}",
     dChartTilt: "~{tilt}° d'inclinaison",
-    dMatrixPick: "Choisir {row} avec {col} : {text}",
+    dMatrixPick: "Choisir {row} avec {col} :",
   },
   de: {
     dAssumpData:
@@ -944,7 +944,7 @@ export const DETAIL_COPY = {
     dChartGround: "Boden / Horizont",
     dChartFacing: "🧭 Ausrichtung {compass}",
     dChartTilt: "~{tilt}° Neigung",
-    dMatrixPick: "{row} mit {col} wählen: {text}",
+    dMatrixPick: "{row} mit {col} wählen:",
   },
   nl: {
     dAssumpData:
@@ -1129,7 +1129,7 @@ export const DETAIL_COPY = {
     dChartGround: "Grond / Horizon",
     dChartFacing: "🧭 Gericht op {compass}",
     dChartTilt: "~{tilt}° helling",
-    dMatrixPick: "{row} met {col} kiezen: {text}",
+    dMatrixPick: "{row} met {col} kiezen:",
   },
   ar: {
     dAssumpData:
@@ -1311,6 +1311,6 @@ export const DETAIL_COPY = {
     dChartGround: "الأرض / الأفق",
     dChartFacing: "🧭 باتجاه {compass}",
     dChartTilt: "~{tilt}° ميل",
-    dMatrixPick: "اختيار {row} عند {col}: {text}",
+    dMatrixPick: "اختيار {row} عند {col}:",
   },
 };
