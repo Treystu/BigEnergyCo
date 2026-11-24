@@ -3,10 +3,10 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261124o";
-import { RESULT_COPY } from "./result-copy.js?v=20261124o";
-import { TILT_COPY } from "./tilt-copy.js?v=20261124o";
-import { DETAIL_COPY } from "./detail-copy.js?v=20261124o";
+import { HOME_COPY } from "./home-copy.js?v=20261124p";
+import { RESULT_COPY } from "./result-copy.js?v=20261124p";
+import { TILT_COPY } from "./tilt-copy.js?v=20261124p";
+import { DETAIL_COPY } from "./detail-copy.js?v=20261124p";
 
 export const LOCALES = {
   en: {
@@ -157,7 +157,7 @@ export const LOCALES = {
     mapDrawAction: "Draw this area on an optional map",
     matrixScroll: "Scrollable comparison table",
     bomPanelTitle: "Your hardware list — what this system is made of",
-    resultsMoreSummary: "More detail: the charts, the workings and the options",
+    resultsMoreSummary: "More detail: the workings and the options",
     genSummary: "I run a generator — what does its power really cost?",
     genApply: "Use this as my electricity price",
 
@@ -506,13 +506,15 @@ export const LOCALES = {
     advancedSummary: "Fine-tune the system (optional)",
     planTitle: "Your plan",
     planBasis:
-      "Installed price for {size} — hardware, labour, permits and fees, one number set.",
-    planStatSavings: "20-year savings",
-    planStatPayback: "Break-even",
+      "Parts cost for {size} — panels, battery and inverter, no labour or installation.",
     planStatBillCut: "Bill cut",
-    planRowHardware: "Hardware",
-    planRowLabour: "Labour",
-    planRowFees: "Permits, fees and tools",
+    planRowPanels: "Solar panels",
+    planRowBattery: "Battery bank",
+    planRowInverter: "Inverter",
+    planStatPartsPayback: "Parts-list payback",
+    planStatInstalledPayback: "Installed-route payback",
+    pathsInstalledNote:
+      "Installed-route estimates for comparison: parts, labour, permits and installer margin. They are not the price above.",
     planSystemSize: "{pv} kW solar + {batt} kWh battery",
     planPaybackValue: "Year {year}",
     planTotalLabel: "Total",
@@ -1024,8 +1026,7 @@ export const LOCALES = {
     mapDrawAction: "Dibuja esta zona en un mapa opcional",
     matrixScroll: "Tabla comparativa con desplazamiento",
     bomPanelTitle: "Tu lista de hardware — de qué está hecho este sistema",
-    resultsMoreSummary:
-      "Más detalle: los gráficos, los cálculos y las opciones",
+    resultsMoreSummary: "Más detalle: los cálculos y las opciones",
     genSummary: "Uso un generador — ¿cuánto cuesta realmente su energía?",
     genApply: "Usar esto como mi precio de electricidad",
 
@@ -1393,13 +1394,15 @@ export const LOCALES = {
     advancedSummary: "Ajustar el sistema (opcional)",
     planTitle: "Tu plan",
     planBasis:
-      "Precio instalado para {size} — equipo, mano de obra, permisos y tasas, un único conjunto de cifras.",
-    planStatSavings: "Ahorro a 20 años",
-    planStatPayback: "Punto de equilibrio",
+      "Coste de las piezas para {size} — paneles, batería e inversor, sin mano de obra ni instalación.",
     planStatBillCut: "Recorte de factura",
-    planRowHardware: "Equipo",
-    planRowLabour: "Mano de obra",
-    planRowFees: "Permisos, tasas y herramientas",
+    planRowPanels: "Paneles solares",
+    planRowBattery: "Banco de baterías",
+    planRowInverter: "Inversor",
+    planStatPartsPayback: "Retorno (solo piezas)",
+    planStatInstalledPayback: "Retorno (ruta instalada)",
+    pathsInstalledNote:
+      "Estimaciones de ruta instalada para comparar: piezas, mano de obra, permisos y margen del instalador. No son el precio de arriba.",
     planSystemSize: "{pv} kW solar + {batt} kWh de batería",
     planPaybackValue: "Año {year}",
     planTotalLabel: "Total",
@@ -1831,7 +1834,7 @@ export const LOCALES = {
     mapDrawAction: "Desenhe esta zona num mapa opcional",
     matrixScroll: "Tabela comparativa com deslocamento",
     bomPanelTitle: "Sua lista de hardware — do que este sistema é feito",
-    resultsMoreSummary: "Mais detalhe: os gráficos, os cálculos e as opções",
+    resultsMoreSummary: "Mais detalhe: os cálculos e as opções",
     genSummary: "Uso um gerador — quanto custa de verdade a energia dele?",
     genApply: "Usar isto como meu preço de eletricidade",
 
@@ -2190,13 +2193,15 @@ export const LOCALES = {
     advancedSummary: "Ajustar o sistema (opcional)",
     planTitle: "O seu plano",
     planBasis:
-      "Preço instalado para {size} — equipamento, mão de obra, licenças e taxas, um único conjunto de valores.",
-    planStatSavings: "Poupança em 20 anos",
-    planStatPayback: "Ponto de equilíbrio",
+      "Custo das peças para {size} — painéis, bateria e inversor, sem mão de obra nem instalação.",
     planStatBillCut: "Redução da fatura",
-    planRowHardware: "Equipamento",
-    planRowLabour: "Mão de obra",
-    planRowFees: "Licenças, taxas e ferramentas",
+    planRowPanels: "Painéis solares",
+    planRowBattery: "Banco de baterias",
+    planRowInverter: "Inversor",
+    planStatPartsPayback: "Retorno (só peças)",
+    planStatInstalledPayback: "Retorno (rota instalada)",
+    pathsInstalledNote:
+      "Estimativas de rota instalada para comparar: peças, mão de obra, licenças e margem do instalador. Não são o preço acima.",
     planSystemSize: "{pv} kW solar + {batt} kWh de bateria",
     planPaybackValue: "Ano {year}",
     planTotalLabel: "Total",
@@ -2627,8 +2632,7 @@ export const LOCALES = {
     mapDrawAction: "Dessinez cette zone sur une carte facultative",
     matrixScroll: "Tableau comparatif à faire défiler",
     bomPanelTitle: "Votre liste de matériel — de quoi ce système est composé",
-    resultsMoreSummary:
-      "Plus de détail : les graphiques, les calculs et les options",
+    resultsMoreSummary: "Plus de détail : les calculs et les options",
     genSummary:
       "J'utilise un générateur — combien coûte vraiment son électricité ?",
     genApply: "Utiliser ceci comme mon prix de l'électricité",
@@ -2993,13 +2997,15 @@ export const LOCALES = {
     advancedSummary: "Ajuster le système (facultatif)",
     planTitle: "Votre plan",
     planBasis:
-      "Prix installé pour {size} — matériel, main-d’œuvre, permis et frais, un seul jeu de chiffres.",
-    planStatSavings: "Économies sur 20 ans",
-    planStatPayback: "Seuil de rentabilité",
+      "Coût des pièces pour {size} — panneaux, batterie et onduleur, sans main-d’œuvre ni installation.",
     planStatBillCut: "Baisse de facture",
-    planRowHardware: "Matériel",
-    planRowLabour: "Main-d’œuvre",
-    planRowFees: "Permis, frais et outils",
+    planRowPanels: "Panneaux solaires",
+    planRowBattery: "Parc de batteries",
+    planRowInverter: "Onduleur",
+    planStatPartsPayback: "Retour (pièces seules)",
+    planStatInstalledPayback: "Retour (route installée)",
+    pathsInstalledNote:
+      "Estimations de route installée pour comparer : pièces, main-d’œuvre, permis et marge de l’installateur. Ce n’est pas le prix ci-dessus.",
     planSystemSize: "{pv} kW solaire + {batt} kWh de batterie",
     planPaybackValue: "An {year}",
     planTotalLabel: "Total",
@@ -3433,8 +3439,7 @@ export const LOCALES = {
     mapDrawAction: "Diesen Bereich optional auf einer Karte zeichnen",
     matrixScroll: "Vergleichstabelle zum Scrollen",
     bomPanelTitle: "Deine Hardware-Liste — woraus dieses System besteht",
-    resultsMoreSummary:
-      "Mehr Details: die Diagramme, die Rechnung und die Optionen",
+    resultsMoreSummary: "Mehr Details: die Rechnung und die Optionen",
     genSummary: "Ich habe einen Generator — was kostet sein Strom wirklich?",
     genApply: "Als meinen Strompreis übernehmen",
     socChartTitle:
@@ -3797,13 +3802,15 @@ export const LOCALES = {
     advancedSummary: "System anpassen (optional)",
     planTitle: "Ihr Plan",
     planBasis:
-      "Installierter Preis für {size} — Hardware, Arbeit, Genehmigungen und Gebühren, ein Zahlenwerk.",
-    planStatSavings: "Ersparnis über 20 Jahre",
-    planStatPayback: "Amortisationsjahr",
+      "Teilekosten für {size} — Module, Speicher und Wechselrichter, ohne Arbeit und ohne Installation.",
     planStatBillCut: "Rechnungsreduktion",
-    planRowHardware: "Hardware",
-    planRowLabour: "Arbeitskosten",
-    planRowFees: "Genehmigungen, Gebühren und Werkzeug",
+    planRowPanels: "Solarmodule",
+    planRowBattery: "Batteriespeicher",
+    planRowInverter: "Wechselrichter",
+    planStatPartsPayback: "Amortisation (nur Teile)",
+    planStatInstalledPayback: "Amortisation (installierte Route)",
+    pathsInstalledNote:
+      "Schätzungen für die installierte Route zum Vergleich: Teile, Arbeit, Genehmigungen und Installateurmarge. Sie sind nicht der Preis oben.",
     planSystemSize: "{pv} kW Solar + {batt} kWh Speicher",
     planPaybackValue: "Jahr {year}",
     planTotalLabel: "Gesamt",
@@ -4146,7 +4153,7 @@ export const LOCALES = {
     mapDrawAction: "Teken dit gebied optioneel op een kaart",
     matrixScroll: "Vergelijkingstabel om door te scrollen",
     bomPanelTitle: "Uw hardwarelijst — waaruit dit systeem bestaat",
-    resultsMoreSummary: "Meer detail: de grafieken, de berekening en de opties",
+    resultsMoreSummary: "Meer detail: de berekening en de opties",
     genSummary: "Ik heb een generator — wat kost zijn stroom echt?",
     genApply: "Gebruik dit als mijn stroomprijs",
 
@@ -4434,13 +4441,15 @@ export const LOCALES = {
     advancedSummary: "Systeem verfijnen (optioneel)",
     planTitle: "Uw plan",
     planBasis:
-      "Geïnstalleerde prijs voor {size} — hardware, arbeid, vergunningen en kosten, één getallenreeks.",
-    planStatSavings: "Besparing over 20 jaar",
-    planStatPayback: "Terugverdientijd",
+      "Onderdelenprijs voor {size} — panelen, accu en omvormer, zonder arbeid of installatie.",
     planStatBillCut: "Rekeningverlaging",
-    planRowHardware: "Hardware",
-    planRowLabour: "Arbeidskosten",
-    planRowFees: "Vergunningen, kosten en gereedschap",
+    planRowPanels: "Zonnepanelen",
+    planRowBattery: "Accupakket",
+    planRowInverter: "Omvormer",
+    planStatPartsPayback: "Terugverdientijd (alleen onderdelen)",
+    planStatInstalledPayback: "Terugverdientijd (geïnstalleerd)",
+    pathsInstalledNote:
+      "Schattingen voor de geïnstalleerde route ter vergelijking: onderdelen, arbeid, vergunningen en installateursmarge. Het is niet de prijs hierboven.",
     planSystemSize: "{pv} kW zon + {batt} kWh accu",
     planPaybackValue: "Jaar {year}",
     planTotalLabel: "Totaal",
@@ -5123,7 +5132,7 @@ export const LOCALES = {
     mapDrawAction: "ارسم هذه المنطقة على خريطة اختيارية",
     matrixScroll: "جدول مقارنة قابل للتمرير",
     bomPanelTitle: "قائمة المعدات الخاصة بك — مم يتكون هذا النظام",
-    resultsMoreSummary: "مزيد من التفاصيل: الرسوم البيانية والحسابات والخيارات",
+    resultsMoreSummary: "مزيد من التفاصيل: الحسابات والخيارات",
     genSummary: "أستخدم مولدا — كم تبلغ التكلفة الحقيقية للكهرباء منه؟",
     genApply: "استخدم هذا كسعر الكهرباء لدي",
 
@@ -5469,13 +5478,15 @@ export const LOCALES = {
     advancedSummary: "ضبط النظام (اختياري)",
     planTitle: "خطتك",
     planBasis:
-      "السعر المركّب لـ {size} — المعدات والعمالة والتصاريح والرسوم، مجموعة أرقام واحدة.",
-    planStatSavings: "التوفير خلال 20 عامًا",
-    planStatPayback: "نقطة التعادل",
+      "تكلفة القطع لـ {size} — الألواح والبطارية والعاكس، دون عمالة أو تركيب.",
     planStatBillCut: "خفض الفاتورة",
-    planRowHardware: "المعدات",
-    planRowLabour: "العمالة",
-    planRowFees: "التصاريح والرسوم والأدوات",
+    planRowPanels: "الألواح الشمسية",
+    planRowBattery: "بنك البطاريات",
+    planRowInverter: "العاكس",
+    planStatPartsPayback: "فترة الاسترداد (القطع فقط)",
+    planStatInstalledPayback: "فترة الاسترداد (المسار المركّب)",
+    pathsInstalledNote:
+      "تقديرات للمسار المركّب للمقارنة: القطع والعمالة والتصاريح وهامش المركّب. وهي ليست السعر أعلاه.",
     planSystemSize: "{pv} كيلوواط شمسي + {batt} كيلوواط ساعة بطارية",
     planPaybackValue: "السنة {year}",
     planTotalLabel: "الإجمالي",

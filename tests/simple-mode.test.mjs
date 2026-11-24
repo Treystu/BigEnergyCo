@@ -234,5 +234,5 @@ test("GATE: no panel is hidden by a display mode, and every panel survives", () 
   for (const marker of PREVIOUSLY_MODE_HIDDEN) {
     assert.ok(html.includes(marker), `${marker} must remain reachable`);
   }
-  assert.match(html, /More detail: the charts, the workings and the options/);
+  assert.match(html, /More detail: the workings and the options/);
 });

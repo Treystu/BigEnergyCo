@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261124o";
+import { APPLIANCES } from "./appliances.js?v=20261124p";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261124o";
+} from "./pwa-install.js?v=20261124p";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261124o";
+} from "./usecases.js?v=20261124p";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261124o";
+} from "./run-coordinator.js?v=20261124p";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261124o";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261124o";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261124o";
+} from "./mode-chrome.js?v=20261124p";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261124p";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261124p";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261124o";
+} from "./location-picker.js?v=20261124p";
 
 import {
   estimateTariff,
@@ -57,15 +57,15 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261124o";
+} from "./pricing.js?v=20261124p";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261124o";
+import { currencyForCountry } from "./country-currency.js?v=20261124p";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261124o";
-import { planBreakdown } from "./plan-card.js?v=20261124o";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261124p";
+import { partsBreakdown } from "./plan-card.js?v=20261124p";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -84,7 +84,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261124o").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261124p").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -95,15 +95,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261124o";
+} from "./lead-acid.js?v=20261124p";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261124o";
+} from "./bom.js?v=20261124p";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261124o";
+import { BOM_ITEMS } from "../shared/content.js?v=20261124p";
 
 import {
   applyI18n,
@@ -112,11 +112,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261124o";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261124o";
-import { byId as $, el } from "../shared/dom.js?v=20261124o";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261124o";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261124o";
+} from "../shared/i18n.js?v=20261124p";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261124p";
+import { byId as $, el } from "../shared/dom.js?v=20261124p";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261124p";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261124p";
 import {
   advisorJevContext,
   interpretSanity,
@@ -124,29 +124,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261124o";
+} from "./validate.js?v=20261124p";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261124o";
+} from "../shared/cut-targets.js?v=20261124p";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261124o";
+} from "./share-codec.js?v=20261124p";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261124o";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261124o";
+} from "./infeasible-copy.js?v=20261124p";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261124p";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261124o";
+} from "./fuel-units.js?v=20261124p";
 
 import {
   createLeafletProvider,
@@ -154,18 +154,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261124o";
+} from "./map-provider.js?v=20261124p";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261124o";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261124o";
+} from "./wizard.js?v=20261124p";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261124p";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261124o";
+} from "./budget-span.js?v=20261124p";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -177,10 +177,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261124o"),
-      import("./charts.js?v=20261124o"),
-      import("./frontier-chart.js?v=20261124o"),
-      import("./rescale.js?v=20261124o"),
+      import("./engine.js?v=20261124p"),
+      import("./charts.js?v=20261124p"),
+      import("./frontier-chart.js?v=20261124p"),
+      import("./rescale.js?v=20261124p"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -248,9 +248,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261124o";
+} from "./money.js?v=20261124p";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261124o";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261124p";
 
 let worker = null;
 
@@ -1200,29 +1200,29 @@ function renderSimpleResults(p) {
 }
 
 /**
- * PLAN screen (owner order 2026-11-22): one price, three stats, and a
- * three-line breakdown that sums to that price by construction.
+ * PLAN screen (owner order 2026-11-22, re-based 2026-11-24): one price, three
+ * stats, and a three-line parts breakdown that sums to that price.
  *
- * Everything here reads the SAME priced route the four-ways table renders
- * (`p.pathsPriced`, priced once per system by renderPathsSection), so the plan
- * cannot state a second number set: the total IS the route's year-0 cost, and
- * the three lines are that route's own parts. The price is never assembled
- * here — it is summed from the same fields the pay card prints.
+ * The headline is the system's DIY parts cost of goods — the engine's own
+ * buyable figure (`costBuyableUsd`), which contains no labour, installation
+ * hours or permits. The installed routes are still rendered below as an
+ * explicitly labelled comparison; they never feed this number.
  */
 function renderPlanCard(p, sys, paths) {
   const wrap = $("planCardWrap");
   if (!wrap) return;
   wrap.innerHTML = "";
   wrap.hidden = true;
-  if (!p || p.unreachableReason || !paths || !paths.cheapest) return;
-  const route = paths.by && paths.by[paths.cheapest];
-  if (!route || !route.available) return;
+  if (!p || p.unreachableReason || !sys) return;
+  const route = (paths && paths.by && paths.by[paths.cheapest]) || null;
 
   // One identity, owned by plan-card.js: the price IS the sum of the three
-  // lines, and that sum must be this route's own year-0 total. A route that
-  // disagrees renders no plan rather than a second number set.
-  const { hardware, labour, feesAndTools, total, consistent } =
-    planBreakdown(route);
+  // parts lines, and that sum must be the engineering's canonical parts figure.
+  // A system that disagrees renders no plan rather than a second number set.
+  const { panels, battery, inverter, total, consistent } = partsBreakdown(
+    sys.costBuyableParts,
+    sys.costBuyableUsd,
+  );
   if (!consistent) return;
 
   const size = t("planSystemSize", {
@@ -1237,6 +1237,8 @@ function renderPlanCard(p, sys, paths) {
   card.appendChild(el("p", { class: "plan-price" }, money(total)));
   card.appendChild(el("p", { class: "simple-note" }, t("planBasis", { size })));
 
+  // Named baskets on every payback figure (#401/#402): the parts list and the
+  // installed route are different baskets, so each one says which it is.
   const stats = el("dl", { class: "simple-heroes" });
   const stat = (label, value) => {
     const box = el("div");
@@ -1245,20 +1247,24 @@ function renderPlanCard(p, sys, paths) {
     stats.appendChild(box);
   };
   stat(
-    t("planStatSavings"),
-    Number.isFinite(route.net20) ? money(route.net20) : "\u2014",
+    t("planStatPartsPayback"),
+    sys.trueBreakEvenYear
+      ? t("planPaybackValue", { year: sys.trueBreakEvenYear })
+      : "\u2014",
   );
   stat(
-    t("planStatPayback"),
-    route.breakEvenYear
+    t("planStatInstalledPayback"),
+    route && route.breakEvenYear
       ? t("planPaybackValue", { year: route.breakEvenYear })
       : "\u2014",
   );
   stat(
     t("planStatBillCut"),
-    Number.isFinite(route.billCutPct)
-      ? `${Math.round(route.billCutPct)}%`
-      : "\u2014",
+    Number.isFinite(sys.cutPct)
+      ? `${Math.round(sys.cutPct)}%`
+      : route && Number.isFinite(route.billCutPct)
+        ? `${Math.round(route.billCutPct)}%`
+        : "\u2014",
   );
   card.appendChild(stats);
 
@@ -1270,9 +1276,9 @@ function renderPlanCard(p, sys, paths) {
     else dd.textContent = value;
     rows.appendChild(dd);
   };
-  row(t("planRowHardware"), money(hardware));
-  row(t("planRowLabour"), money(labour));
-  row(t("planRowFees"), money(feesAndTools));
+  row(t("planRowPanels"), money(panels));
+  row(t("planRowBattery"), money(battery));
+  row(t("planRowInverter"), money(inverter));
   row(t("planTotalLabel"), money(total), true);
   card.appendChild(rows);
 
@@ -4120,7 +4126,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261124o",
+      "./assets/js/sizing/sizing-worker.js?v=20261124p",
       {
         type: "module",
       },
@@ -5701,6 +5707,9 @@ function renderPathsSection(p, sys) {
   wrap.innerHTML =
     `<h3 data-i18n="pathsTitle">${escapeHtml(t("pathsTitle"))}</h3>` +
     `<p class="paths-sub" data-i18n="pathsSub">${escapeHtml(t("pathsSub"))}</p>` +
+    // Owner pricing correction 7128520970: these are installed routes, so the
+    // table says so in one line and never reads as a competing headline price.
+    `<p class="paths-installed-note" data-i18n="pathsInstalledNote">${escapeHtml(t("pathsInstalledNote"))}</p>` +
     // #403 Cure C: the simplified page must state WHAT is being priced. The
     // five-figure test asks for the system size, and before this the size lived
     // in the panels and charts that are now behind the disclosure. No data-i18n
@@ -7633,33 +7642,14 @@ window.addEventListener("resize", () => {
   frontierResizeTimer = setTimeout(() => renderFrontierPanel(lastPayload), 180);
 });
 
-// #403 Cure C: the one disclosure that governs every demoted block. The blocks
-// stay in the tree (their renderers own their display rules), so nothing is
-// measured at zero width while hidden - but a chart that was drawn while its
-// container was hidden is a blank rectangle, so opening redraws the two charts
-// rather than trusting that they will sort themselves out.
+// Owner order 2026-11-24: the full results surface is back. Everything (the
+// readable card, the charts, the frontier, the hardware list) renders in its
+// own place; this disclosure only holds the technical workings, so opening it
+// is a convenience, not the difference between a surface and a blank page. The
+// redraw on open stays because a chart drawn while its container was collapsed
+// (a share link restoring into a closed panel) is a blank rectangle.
 (() => {
   const more = $("resultsMore");
-  const host = $("resultsDetailHost");
-
-  // The detail blocks keep their original indentation in the source, because
-  // index.html has a few hundred bytes of budget, not the six kilobytes a
-  // real nesting costs. Fold them in here, once, before any renderer runs.
-  if (more && host) {
-    const actions = document.querySelector(
-      "#resultsRegion .result-actions-row",
-    );
-    let node = more.nextElementSibling;
-
-    while (node && node !== actions) {
-      const next = node.nextElementSibling;
-
-      // P1.6 keeps the assumptions on the surface: each one changes how the
-      // numbers above should be read.
-      if (node.id !== "assumptionDisclosure") host.appendChild(node);
-      node = next;
-    }
-  }
 
   if (!more) return;
 
@@ -9565,11 +9555,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261124o")
+    import("../shared/translation-suggestion-loader.js?v=20261124p")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261124o"),
+          () => import("../translation-suggestion.js?v=20261124p"),
         );
       })
       .catch(() => {});

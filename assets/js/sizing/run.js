@@ -28,7 +28,7 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261124o";
+} from "./engine.js?v=20261124p";
 
 import {
   isUseCaseId,
@@ -41,24 +41,24 @@ import {
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261124o";
-import { memoizeSimulate } from "./sim-cache.js?v=20261124o";
+} from "./usecases.js?v=20261124p";
+import { memoizeSimulate } from "./sim-cache.js?v=20261124p";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261124o";
-import { buildFrontier } from "./frontier.js?v=20261124o";
-import { buyablePrice } from "./bom.js?v=20261124o";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261124o";
-import { climateSummary } from "./climate.js?v=20261124o";
+} from "./nasa.js?v=20261124p";
+import { buildFrontier } from "./frontier.js?v=20261124p";
+import { buyablePrice } from "./bom.js?v=20261124p";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261124p";
+import { climateSummary } from "./climate.js?v=20261124p";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261124o";
+} from "./pricing.js?v=20261124p";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -69,7 +69,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261124o";
+} from "./money.js?v=20261124p";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -346,7 +346,7 @@ async function fetchWeatherWithFallback(opts) {
     return await fetchWeatherDefault(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261124o");
+      await import("./profiles.js?v=20261124p");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {
@@ -1018,6 +1018,7 @@ async function runSizingUncached(msg, deps = {}) {
       battKwh: sizing.battKwh,
       costLo: m.cost.lo,
       costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+      costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
       costHi: m.cost.hi,
       replacementsHorizon: m.replacementsHorizon,
       swapsAndLaborUsd: m.swapsAndLaborUsd,
@@ -1143,6 +1144,7 @@ async function runSizingUncached(msg, deps = {}) {
       battNameplateKwh: m.battNameplateKwh,
       costLo: m.cost.lo,
       costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+      costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
       costHi: m.cost.hi,
       cutPct: gridtieCutPct(sizing),
       // Net of the feed-in credit (may go negative = net producer paid).
@@ -1324,7 +1326,9 @@ async function runSizingUncached(msg, deps = {}) {
         battNameplateKwh: m.battNameplateKwh,
         costLo: m.cost.lo,
         costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+        costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
         costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+        costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
         costHi: m.cost.hi,
         pvCostLo: m.cost.pvCostLo,
         pvCostHi: m.cost.pvCostHi,
@@ -1425,6 +1429,7 @@ async function runSizingUncached(msg, deps = {}) {
       socNameplatePct,
       costLo: m.cost.lo,
       costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+      costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
       costHi: m.cost.hi,
       pvCostLo: m.cost.pvCostLo,
       pvCostHi: m.cost.pvCostHi,
@@ -1660,7 +1665,9 @@ async function runSizingUncached(msg, deps = {}) {
         battKwh: pt.battKwh,
         costLo: m.cost.lo,
         costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+        costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
         costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+        costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
         costHi: m.cost.hi,
         replacementsHorizon: m.replacementsHorizon,
         swapsAndLaborUsd: m.swapsAndLaborUsd,
@@ -2567,8 +2574,11 @@ async function runSizingUncached(msg, deps = {}) {
           battNameplateKwh: m.battNameplateKwh,
           costLo: m.cost.lo,
           costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+          costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
           costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+          costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
           costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+          costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
           costHi: m.cost.hi,
           unmetHoursPerYear: +(
             sizing.result.worstYearUnmetHours ??
@@ -2669,6 +2679,7 @@ async function runSizingUncached(msg, deps = {}) {
           battNameplateKwh: mAgm.battNameplateKwh,
           costLo: mAgm.cost.lo,
           costBuyableUsd: mAgm.cost.buyable ? mAgm.cost.buyable.usd : null,
+          costBuyableParts: mAgm.cost.buyable ? mAgm.cost.buyable.parts : null,
           costHi: mAgm.cost.hi,
           lifetimeCostMid: mAgm.lifetimeCostMid,
           replacementsHorizon: mAgm.replacementsHorizon,
@@ -2822,6 +2833,7 @@ async function runSizingUncached(msg, deps = {}) {
       socNameplatePct,
       costLo: m.cost.lo,
       costBuyableUsd: m.cost.buyable ? m.cost.buyable.usd : null,
+      costBuyableParts: m.cost.buyable ? m.cost.buyable.parts : null,
       costHi: m.cost.hi,
       pvCostLo: m.cost.pvCostLo,
       pvCostHi: m.cost.pvCostHi,

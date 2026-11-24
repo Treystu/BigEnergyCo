@@ -93,7 +93,7 @@ test("#441: every demoted panel still exists, so 'all the options' stays reachab
     assert.ok(html.includes(id), `${id} must remain in the artifact`);
   }
   // The disclosures that make them reachable in one gesture.
-  assert.match(html, /More detail: the charts, the workings and the options/);
+  assert.match(html, /More detail: the workings and the options/);
 });
 
 test("#441: the first run is still the explicit button, never an auto-run", () => {

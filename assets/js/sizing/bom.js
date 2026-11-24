@@ -7,8 +7,8 @@
 // Every number here is an EDUCATIONAL estimate with documented assumptions.
 // Real designs must be verified by a licensed electrician or engineer.
 
-import { CHEMISTRIES } from "./chem-model.js?v=20261124o";
-import { POWMR_CATALOG } from "./pricing.js?v=20261124o";
+import { CHEMISTRIES } from "./chem-model.js?v=20261124p";
+import { POWMR_CATALOG } from "./pricing.js?v=20261124p";
 
 // ── Constants (shown in the UI's arithmetic panel) ──────────────────────────
 
@@ -517,13 +517,20 @@ export function buyablePrice({
     pvKw * 1000 * costPerWpv +
     battUsableKwh * costPerKwhBatt +
     pvKw * costPerKwInv;
-  const buyableUsd =
-    panelsKw * 1000 * costPerWpv +
-    providedUsableKwh * costPerKwhBatt +
-    pvKw * costPerKwInv;
+  // The three parts lines, kept as the same terms the total sums so a plan
+  // card can print a breakdown that cannot disagree with its own headline.
+  const panelsUsd = panelsKw * 1000 * costPerWpv;
+  const batteryUsd = providedUsableKwh * costPerKwhBatt;
+  const inverterUsd = pvKw * costPerKwInv;
+  const buyableUsd = panelsUsd + batteryUsd + inverterUsd;
 
   return {
     usd: Math.round(buyableUsd),
+    parts: {
+      panelsUsd: Math.round(panelsUsd),
+      batteryUsd: Math.round(batteryUsd),
+      inverterUsd: Math.round(inverterUsd),
+    },
     simulatedUsd: Math.round(simulatedUsd),
     deltaFraction:
       simulatedUsd > 0 ? (buyableUsd - simulatedUsd) / simulatedUsd : 0,

@@ -20,40 +20,79 @@ const at = (needle) => {
   return i;
 };
 
-test("results: one price and one cost table lead, everything else is one disclosure", () => {
+test("results: the full surface leads and the disclosure holds only workings", () => {
   const plan = at('id="planCardWrap"');
   const paths = at('id="pathsPanel"');
   const more = at('id="resultsMore"');
   const simple = at('id="simpleResultsWrap"');
-  const actions = at('class="result-actions-row"');
+  const frontier = at('id="frontierWrap"');
+  const ui = readFileSync(join(ROOT, "assets/js/sizing/ui.js"), "utf8");
 
-  assert.ok(plan < paths, "the plan leads the cost table");
+  assert.ok(plan < simple, "the plan leads the readable card");
+  assert.ok(simple < paths, "the readable card is back on the surface");
+  assert.ok(paths < more, "the cost table stays above the disclosure");
   assert.ok(
-    paths < more,
-    "the cost table stays on the surface, above the disclosure",
-  );
-  assert.ok(more < simple, "the readable card is detail, not a second surface");
-  assert.ok(
-    at('id="resultsDetailHost"') < simple,
-    "the disclosure owns its host",
+    frontier > html.lastIndexOf("</details>", frontier),
+    "the frontier is visible, not folded",
   );
   assert.equal(
     (html.match(/id="resultsMore"/g) || []).length,
     1,
     "exactly one results disclosure",
   );
-  // The detail blocks keep their source indentation and ui.js folds them in;
-  // the fold must stop at the actions row so the primary actions stay on the
-  // surface even while the disclosure is closed.
-  const ui = readFileSync(join(ROOT, "assets/js/sizing/ui.js"), "utf8");
-  assert.match(ui, /resultsDetailHost/);
-  assert.match(ui, /#resultsRegion \.result-actions-row/);
+  // Owner order 2026-11-24: nothing is moved into a host at runtime.
+  assert.doesNotMatch(html, /resultsDetailHost/);
+  assert.doesNotMatch(ui, /resultsDetailHost/);
+  // The comparison labels itself an installed-route estimate in every locale.
+  assert.match(ui, /paths-installed-note/);
+  assert.match(ui, /t\("pathsInstalledNote"\)/);
+  for (const [lang, dict] of Object.entries(LOCALES)) {
+    assert.equal(typeof dict.pathsInstalledNote, "string", `${lang} note`);
+  }
 });
 
 test("results: the primary and secondary actions sit outside the disclosure", () => {
-  const host = at('id="resultsDetailHost"');
+  const more = at('id="resultsMore"');
+  const close = html.indexOf("</details>", more);
   const actions = at('class="result-actions-row"');
-  assert.ok(host < actions, "the disclosure is closed before the actions row");
+  assert.ok(close < actions, "the disclosure closes before the actions row");
+});
+
+test("#401: the plan headline is the DIY parts cost, never an installed route", () => {
+  const ui = readFileSync(join(ROOT, "assets/js/sizing/ui.js"), "utf8");
+  const start = ui.indexOf("function renderPlanCard(");
+  assert.ok(start > -1, "renderPlanCard must exist");
+  const body = ui.slice(start, ui.indexOf("\nfunction ", start + 20));
+  assert.match(body, /partsBreakdown\(/, "the card uses the parts identity");
+  assert.match(
+    body,
+    /sys\.costBuyableUsd/,
+    "headline is the buyable parts figure",
+  );
+  assert.match(body, /sys\.costBuyableParts/, "breakdown is the parts basket");
+  for (const key of ["planRowPanels", "planRowBattery", "planRowInverter"]) {
+    assert.ok(body.includes(`t("${key}")`), `the card prints ${key}`);
+  }
+  assert.doesNotMatch(
+    body,
+    /planRowLabour|planRowFees/,
+    "no labour or permit line in the parts headline",
+  );
+  for (const [lang, dict] of Object.entries(LOCALES)) {
+    for (const key of [
+      "planRowPanels",
+      "planRowBattery",
+      "planRowInverter",
+      "planStatPartsPayback",
+      "planStatInstalledPayback",
+    ]) {
+      assert.equal(typeof dict[key], "string", `${lang}.${key} must exist`);
+      assert.ok(
+        dict[key].trim().length > 2,
+        `${lang}.${key} must not be blank`,
+      );
+    }
+  }
 });
 
 test("#439: the support path is at the value moment, in every locale", () => {
