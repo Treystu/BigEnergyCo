@@ -184,6 +184,8 @@ export const DETAIL_COPY = {
     apWorkshopTools: "Workshop tools (table saw / compressor)",
     dValRetailNote:
       "The smallest prebuilt unit in this voltage class is already this size — at this bank the DIY list is the closer match.",
+    dRefModel: "{kw} kW low-frequency split-phase",
+    dRefNote: "48 V · 3× surge · built-in MPPT",
   },
   es: {
     dAssumpData:
@@ -369,6 +371,8 @@ export const DETAIL_COPY = {
     apWorkshopTools: "Herramientas de taller (sierra de mesa / compresor)",
     dValRetailNote:
       "La unidad prefabricada más pequeña de esta clase de tensión ya tiene este tamaño; para este banco, la lista DIY se acerca más.",
+    dRefModel: "{kw} kW de baja frecuencia y fase partida",
+    dRefNote: "48 V · 3× pico · MPPT integrado",
   },
   pt: {
     dAssumpData:
@@ -549,6 +553,8 @@ export const DETAIL_COPY = {
     apWorkshopTools: "Ferramentas de oficina (serra de bancada / compressor)",
     dValRetailNote:
       "A unidade pré-fabricada mais pequena desta classe de tensão já tem este tamanho; para este banco, a lista DIY aproxima-se mais.",
+    dRefModel: "{kw} kW de baixa frequência e fase dividida",
+    dRefNote: "48 V · 3× pico · MPPT integrado",
   },
   fr: {
     dAssumpData:
@@ -733,6 +739,8 @@ export const DETAIL_COPY = {
     apWorkshopTools: "Outillage d'atelier (scie sur table / compresseur)",
     dValRetailNote:
       "La plus petite unité toute faite de cette classe de tension fait déjà cette taille ; pour ce parc, la liste DIY correspond mieux.",
+    dRefModel: "{kw} kW basse fréquence à phase divisée",
+    dRefNote: "48 V · 3× pointe · MPPT intégré",
   },
   de: {
     dAssumpData:
@@ -915,6 +923,8 @@ export const DETAIL_COPY = {
     apWorkshopTools: "Werkstattwerkzeug (Tischkreissäge / Kompressor)",
     dValRetailNote:
       "Die kleinste fertige Einheit dieser Spannungsklasse hat bereits diese Größe — bei dieser Bank passt die Eigenbau-Liste besser.",
+    dRefModel: "{kw} kW Niedrigfrequenz-Split-Phase",
+    dRefNote: "48 V · 3× Anlauf · integrierter MPPT",
   },
   nl: {
     dAssumpData:
@@ -1094,6 +1104,8 @@ export const DETAIL_COPY = {
     apWorkshopTools: "Gereedschap voor de werkplaats (tafelzaag / compressor)",
     dValRetailNote:
       "De kleinste kant-en-klare eenheid in deze spanningsklasse is al zo groot; bij deze bank past de zelfbouwlijst beter.",
+    dRefModel: "{kw} kW laagfrequent split-fase",
+    dRefNote: "48 V · 3× piek · ingebouwde MPPT",
   },
   ar: {
     dAssumpData:
@@ -1270,5 +1282,7 @@ export const DETAIL_COPY = {
     apWorkshopTools: "أدوات ورشة (منشار طاولة / ضاغط هواء)",
     dValRetailNote:
       "أصغر وحدة جاهزة في فئة الجهد هذه بهذا الحجم بالفعل — بالنسبة لهذا البنك، قائمة التركيب الذاتي أقرب.",
+    dRefModel: "{kw} كيلوواط منخفض التردد بطور منقسم",
+    dRefNote: "48 فولت · 3× بدء · MPPT مدمج",
   },
 };

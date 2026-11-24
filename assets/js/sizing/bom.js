@@ -7,8 +7,8 @@
 // Every number here is an EDUCATIONAL estimate with documented assumptions.
 // Real designs must be verified by a licensed electrician or engineer.
 
-import { CHEMISTRIES } from "./chem-model.js?v=20261124j";
-import { POWMR_CATALOG } from "./pricing.js?v=20261124j";
+import { CHEMISTRIES } from "./chem-model.js?v=20261124k";
+import { POWMR_CATALOG } from "./pricing.js?v=20261124k";
 
 // ── Constants (shown in the UI's arithmetic panel) ──────────────────────────
 
@@ -438,9 +438,10 @@ export function buildBom(p) {
         volts === 48
           ? catalogUnit
             ? {
-                model: catalogUnit.model,
+                kw: catalogUnit.kw,
+                modelKey: "dRefModel",
+                noteKey: "dRefNote",
                 price: catalogUnit.priceUsd,
-                note: catalogUnit.note,
                 date: POWMR_CATALOG.checkedDate,
               }
             : { class: POWMR_CATALOG.inverters[0].model.split(" ")[0] }
