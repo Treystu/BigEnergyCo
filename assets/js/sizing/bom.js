@@ -7,8 +7,8 @@
 // Every number here is an EDUCATIONAL estimate with documented assumptions.
 // Real designs must be verified by a licensed electrician or engineer.
 
-import { CHEMISTRIES } from "./chem-model.js?v=20261124h";
-import { POWMR_CATALOG } from "./pricing.js?v=20261124h";
+import { CHEMISTRIES } from "./chem-model.js?v=20261124o";
+import { POWMR_CATALOG } from "./pricing.js?v=20261124o";
 
 // ── Constants (shown in the UI's arithmetic panel) ──────────────────────────
 
@@ -157,6 +157,8 @@ function diyConfig(chemistry, vBatt, nameplateKwh) {
     const strings = Math.max(1, Math.ceil(nameplateKwh / stringKwh));
     return {
       unitLabel: `${series}S strings of 12 V ${AGM_BLOCK.blockAh} Ah AGM blocks`,
+      labelKey: "dDiyAgmLabel",
+      labelVars: { series, ah: AGM_BLOCK.blockAh },
       seriesPerString: series,
       stringsParallel: strings,
       blocksTotal: series * strings,
@@ -176,6 +178,8 @@ function diyConfig(chemistry, vBatt, nameplateKwh) {
   const strings = Math.max(1, Math.ceil(nameplateKwh / effectiveStringKwh));
   return {
     unitLabel: `${series}S strings of ${cells.cellAh} Ah prismatic cells`,
+    labelKey: "dDiyCellsLabel",
+    labelVars: { series, ah: cells.cellAh },
     seriesPerString: series,
     stringsParallel: strings,
     blocksTotal: series * strings,
@@ -206,6 +210,8 @@ export function retailConfig(chemistry, nameplateKwh, vBatt = 48) {
     const providedKwh = +(blocks * blockKwh).toFixed(2);
     return {
       unitLabel: `12 V ${AGM_BLOCK.blockAh} Ah AGM blocks (no BMS — wire with balancing)`,
+      labelKey: "dRetailAgmLabel",
+      labelVars: { ah: AGM_BLOCK.blockAh },
       modules: blocks,
       unitKwh: +blockKwh.toFixed(2),
       providedKwh,
@@ -244,6 +250,7 @@ export function controllerSpec(pvKw, vBatt) {
   const trackers100A = Math.ceil(ampsRequired / 100);
   return {
     ampsRequired,
+    suggestionAmps: nextControllerSize(ampsRequired),
     suggestion:
       ampsRequired <= 100
         ? `one ${nextControllerSize(ampsRequired)} A MPPT controller`
@@ -309,19 +316,32 @@ export function cableGauge(amps, vBatt, meters, meanTempC = null) {
  */
 export function buildBom(p) {
   const notes = [];
+  // The panel paints from noteKeys; notes stays the English contract the
+  // CSV export and the engine tests read.
+  const noteKeys = [];
+  const addNote = (text, key, vars) => {
+    notes.push(text);
+    noteKeys.push({ key, vars });
+  };
   const chem = CHEMISTRIES[p.chemistry] || CHEMISTRIES.lfp;
   const chemistry = p.chemistry in CHEMISTRIES ? p.chemistry : "lfp";
 
   const peakKw = (p.peakLoadW || 0) / 1000;
   const invClassKw = nextInverterSize(Math.max(0.5, peakKw));
   if (p.peakIsAverage) {
-    notes.push(
+    addNote(
       "Inverter sized from AVERAGE load (no appliance peak entered) — real spikes (kettle, fridge start, pump surge) can be several times higher. Enter appliances for an exact peak.",
+      "dNoteAveragePeak",
     );
   }
   if (inverterOverflows(peakKw)) {
-    notes.push(
+    addNote(
       `Peak ${peakKw.toFixed(1)} kW exceeds the largest standard ${INVERTER_STANDARD_KW[INVERTER_STANDARD_KW.length - 1]} kW class — plan multiple stacked units, not one ${invClassKw} kW box.`,
+      "dNotePeakOverMax",
+      {
+        kw: peakKw.toFixed(1),
+        max: INVERTER_STANDARD_KW[INVERTER_STANDARD_KW.length - 1],
+      },
     );
   }
 
@@ -338,20 +358,24 @@ export function buildBom(p) {
     : null;
 
   if (!hasBank)
-    notes.push(
+    addNote(
       "No battery in this system, so voltage, bank layout, and DC protection are omitted.",
+      "dNoteNoBattery",
     );
   if (volts === 12)
-    notes.push(
+    addNote(
       "12 V class: fine for RV-scale loads. Above ~1.5 kW continuous, 24 V or 48 V wastes far less copper.",
+      "dNoteVolts12",
     );
   if (volts === 24)
-    notes.push(
+    addNote(
       "24 V class: the middle road — workable up to about 3.5 kW continuous.",
+      "dNoteVolts24",
     );
   if (volts === 48)
-    notes.push(
+    addNote(
       "48 V class: what any house-scale system uses — lowest current for the same power.",
+      "dNoteVolts48",
     );
 
   const battery = !hasBank
@@ -362,15 +386,23 @@ export function buildBom(p) {
         retail: retailConfig(chemistry, p.battNameplateKwh, volts),
       };
   if (battery && battery.diy.providedKwh > (p.battNameplateKwh || 0) * 1.25) {
-    notes.push(
+    addNote(
       `Banks come in whole strings: the smallest ${battery.diy.unitLabel} build provides ~${battery.diy.providedKwh} kWh for a ${(p.battNameplateKwh || 0).toFixed(1)} kWh ask — the shopping list rounds UP, the simulation did not.`,
+      "dNoteRoundUp",
+      {
+        label: battery.diy.unitLabel,
+        provided: battery.diy.providedKwh,
+        ask: (p.battNameplateKwh || 0).toFixed(1),
+      },
     );
   }
 
   const dischargeAmps = volts ? (invClassKw * 1000) / volts : 0;
   if (volts && fuseOverflows(dischargeAmps * 1.25)) {
-    notes.push(
+    addNote(
       `Full-load battery current (~${Math.ceil(dischargeAmps)} A) exceeds standard fuse ratings — this bank needs parallel strings with per-string protection, designed by an electrician.`,
+      "dNoteFuseOverflow",
+      { amps: Math.ceil(dischargeAmps) },
     );
   }
 
@@ -393,9 +425,27 @@ export function buildBom(p) {
       referenceUnit:
         volts === 48
           ? catalogUnit
-            ? `${catalogUnit.model} (~$${catalogUnit.priceUsd}, ${catalogUnit.note}, ${POWMR_CATALOG.checkedDate})`
+            ? `${catalogUnit.model} (~${catalogUnit.priceUsd}, ${catalogUnit.note}, ${POWMR_CATALOG.checkedDate})`
             : `above the ${POWMR_CATALOG.inverters[0].model.split(" ")[0]} kW reference class — expect multiple stacked units`
           : `no 48 V reference applies here — source a ${volts} V-class inverter/charger for this bank voltage`,
+      referenceKey:
+        volts === 48
+          ? catalogUnit
+            ? "dReferenceUnit"
+            : "dReferenceAbove"
+          : "dReferenceNo48",
+      referenceVars:
+        volts === 48
+          ? catalogUnit
+            ? {
+                kw: catalogUnit.kw,
+                modelKey: "dRefModel",
+                noteKey: "dRefNote",
+                price: catalogUnit.priceUsd,
+                date: POWMR_CATALOG.checkedDate,
+              }
+            : { class: POWMR_CATALOG.inverters[0].model.split(" ")[0] }
+          : { volts },
     },
     controller: hasBank ? controllerSpec(p.pvKw, volts) : null,
     protection: hasBank ? protectionSpec(invClassKw, volts, p.pvKw) : null,
@@ -411,6 +461,7 @@ export function buildBom(p) {
       : null,
     feasibility: panelLayout(p.pvKw, p.panelWatts ?? PANEL_WATTS_DEFAULT),
     notes,
+    noteKeys,
   };
 }
 

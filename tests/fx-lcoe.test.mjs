@@ -131,7 +131,7 @@ test("location changes refresh the display currency in existing results", () => 
   // The money bar, assumptions text and print sheet must convert the tariff
   // into the selected currency rather than printing raw USD.
   assert.match(ui, /tariff: localRate\(p\.tariff\)/);
-  assert.match(ui, /Grid spend assumes \$\{energyRate\(p\.tariff\)\}/);
+  assert.match(ui, /t\("dAssumpTariff", \{\s*rate: energyRate\(p\.tariff\)/);
   assert.match(ui, /grid price \$\{energyRate\(p\.tariff\)\}/);
 });
 

@@ -103,8 +103,9 @@ function readEnKeys() {
   // The result-surface sentences and the tilt-guide family live in their own
   // single-source tables (#365), spread into `en` at module load, so the static
   // scan above cannot see them. Both tables use the same `en: {` block shape.
-  const copyTables = ["result-copy.js", "tilt-copy.js"].map((name) =>
-    fs.readFileSync(path.join(ROOT, "assets/js/shared", name), "utf8"),
+  const copyTables = ["result-copy.js", "tilt-copy.js", "detail-copy.js"].map(
+    (name) =>
+      fs.readFileSync(path.join(ROOT, "assets/js/shared", name), "utf8"),
   );
   const keys = new Set();
   let depth = 0;
