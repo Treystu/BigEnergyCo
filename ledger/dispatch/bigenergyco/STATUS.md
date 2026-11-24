@@ -132,6 +132,14 @@ its rounds UI is the open remainder; **next is #440 items 3-5** (intake priors
   cured string Spanish, plan `$10,202.00` = `$8,450.00` + `$952.00` + `$800.00`,
   savings `$37,358.00` / `Year 5` / `81%`, disclosure present, #439 support path
   visible, `scrollWidth - 390 = -11`, and all four blog URLs serve their footer.
+  Re-driven on the MERGED stamp (`c1704f6a` -> deploy `c8eff1bb`, stamp
+  `20261124h`, SW `beco-v288`): the same ES checks pass unchanged — cured strings
+  Spanish, plan `$10,202.00` summing from `$8,450.00` + `$952.00` + `$800.00`,
+  `$37,358.00` / `Year 5` / `81%`, disclosure openable, support path visible,
+  `scrollWidth - 390 = -12`, four blog footers serving. Sitemap census on the
+  merged stamp: 96 URLs, unchanged set, `npm run seo` green; served sitemap sha
+  `61cbf996c3a3f443` (the `20261122f` baseline file hashed
+  `12717cc9eeba47cf` — same URL set, no rows added or dropped).
   NOT closed: the results-detail panel still paints English (`3.8 kW of panels`,
   `81% less grid energy`, `Your ~80% target`, the system-spec and BOS tables,
   `Install App`) — parked DECISION-READY on #437 as its own dispatch, because it
