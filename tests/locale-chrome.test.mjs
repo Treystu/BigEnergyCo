@@ -416,3 +416,33 @@ test("#437: every jargon term carries its explainer in all six overlay locales",
     "simple-results explainers pass the page language",
   );
 });
+
+test("#437: the sun-path tilt value card is painted from the dictionary", () => {
+  for (const key of ["resTiltValueFlat", "resTiltValueFull"]) {
+    for (const [lang, dict] of Object.entries(LOCALES)) {
+      assert.equal(
+        typeof dict[key],
+        "string",
+        `${lang}.${key} must exist on the results surface`,
+      );
+      assert.ok(
+        dict[key].trim().length > 8,
+        `${lang}.${key} must not be blank`,
+      );
+    }
+    assert.match(LOCALES.en[key], /[a-z]/);
+  }
+  assert.match(LOCALES.en.resTiltValueFlat, /\{panels\}[\s\S]*\{tilt\}/);
+  for (const [lang, dict] of Object.entries(LOCALES)) {
+    assert.match(
+      dict.resTiltValueFlat,
+      /\{panels\}[\s\S]*\{tilt\}/,
+      `${lang}.resTiltValueFlat keeps both placeholders`,
+    );
+  }
+  assert.match(ui, /t\("resTiltValueFlat", \{/);
+  assert.ok(
+    !ui.includes("What a flat roof forfeits here"),
+    "ui.js must not write the English literal any more",
+  );
+});
