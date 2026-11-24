@@ -111,10 +111,39 @@ its rounds UI is the open remainder; **next is #440 items 3-5** (intake priors
   (keys exist in all seven locales). NOT claimed closed; next pass owns the
   painters, the static FAQ/modal headings and a census gate.
 
+- #437 locale chrome (cure + rendered census) -> PR #470, squash `c1704f6a`.
+  Rail `verify:success` at `c277f8c3` (CircleCI workflow `3bd8db66`/
+  `f45bf168`). Local before push: `npm test` 2366/2366, `check-i18n` 100% hook
+  coverage in all seven locales, `seo`, `format:check`, `deploy:check`.
+  Cured: the 22 censused strings (hooks in markup, `syncCutLabel()`,
+  `updateLoadReadout()`, `renderFxStatus()` in `repaintRuntimeCopy()`), then 24
+  more the broader census found (skip link, place hint, coordinate and off-grid
+  labels, derate hint, hardware-mode options, the generator/offline/battery-safe/
+  privacy FAQ headings, all eleven legal headings, the AI modal title), then the
+  hardware-reference price note (`renderBom()` now paints `t(item.scopeKey)` and
+  runs in the repaint list; `partsIndicativeNote` added). Dictionaries 781 -> 806
+  keys; `index.html` normalized 131,996 of 132,000 (paid for by condensing ten
+  head comments, every citation ID kept). The four footer-less localized posts
+  (`deduccion-irpf-autoconsumo-2026`, `dotacja-magazyn-energii-2026`,
+  `gia-dien-5-bac-2026`, `program-afm-baterii-2026`) now render the localized
+  safety line and three links; `tests/locale-chrome.test.mjs` holds 8 gates.
+  Staging deploy `31269307`, alias `staging.bigenergyco.pages.dev`, stamp
+  `20261124g`, SW `beco-v287`. Rendered ES at 390x844 on a clean profile: every
+  cured string Spanish, plan `$10,202.00` = `$8,450.00` + `$952.00` + `$800.00`,
+  savings `$37,358.00` / `Year 5` / `81%`, disclosure present, #439 support path
+  visible, `scrollWidth - 390 = -11`, and all four blog URLs serve their footer.
+  NOT closed: the results-detail panel still paints English (`3.8 kW of panels`,
+  `81% less grid energy`, `Your ~80% target`, the system-spec and BOS tables,
+  `Install App`) — parked DECISION-READY on #437 as its own dispatch, because it
+  is the chart/BOS spec surface, not the intake chrome this pass owned.
+- `index.html` byte budget note: the eager budget is unchanged at 132,000 and the
+  file is now 131,996 normalized; any further hook needs a comment compression in
+  the same change.
+
 ## Readiness line
 
 The stripped interface is live on STAGING (`staging.bigenergyco.pages.dev`, stamp
-`20261124b`) and STAGING-VERIFIED on #429: home is one place field and one
+`20261124g`) and STAGING-VERIFIED on #429: home is one place field and one
 action, the calculator asks three questions with one action and the rest in one
 optional disclosure, and results lead with the one-price plan whose three lines
 sum to it, followed by the single cost table; every other result block — the
