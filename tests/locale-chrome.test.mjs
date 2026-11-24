@@ -446,3 +446,13 @@ test("#437: the sun-path tilt value card is painted from the dictionary", () => 
     "ui.js must not write the English literal any more",
   );
 });
+
+test("#437: the shared-result note is in the language-change repaint list", () => {
+  const start = ui.indexOf("function repaintRuntimeCopy()");
+  const body = ui.slice(start, ui.indexOf("\n}\n", start));
+  assert.match(
+    body,
+    /sharedResultNote[\s\S]*t\("shareLoaded"\)/,
+    "the note is painted before the language is known, so a change must repaint it",
+  );
+});
