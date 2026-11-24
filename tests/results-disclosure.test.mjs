@@ -33,34 +33,40 @@ test("results: one price and one cost table lead, everything else is one disclos
     "the cost table stays on the surface, above the disclosure",
   );
   assert.ok(more < simple, "the readable card is detail, not a second surface");
-  // The one disclosure must actually WRAP the detail blocks: it opens before
-  // the readable card and closes before the result actions.
-  const closeAt = html.lastIndexOf("</details>", actions);
   assert.ok(
-    closeAt > simple,
-    "the disclosure closes after the detail blocks and before the actions",
+    at('id="resultsDetailHost"') < simple,
+    "the disclosure owns its host",
   );
   assert.equal(
     (html.match(/id="resultsMore"/g) || []).length,
     1,
     "exactly one results disclosure",
   );
-  // No second surface for the same content: the old parallel wrapper is gone.
-  assert.ok(
-    !html.includes("Cure C: one disclosure governs every demoted block"),
-  );
+  // The detail blocks keep their source indentation and ui.js folds them in;
+  // the fold must stop at the actions row so the primary actions stay on the
+  // surface even while the disclosure is closed.
+  const ui = readFileSync(join(ROOT, "assets/js/sizing/ui.js"), "utf8");
+  assert.match(ui, /resultsDetailHost/);
+  assert.match(ui, /#resultsRegion \.result-actions-row/);
 });
 
 test("results: the primary and secondary actions sit outside the disclosure", () => {
+  const host = at('id="resultsDetailHost"');
   const actions = at('class="result-actions-row"');
-  const closeAt = html.lastIndexOf("</details>", actions);
-  assert.ok(closeAt < actions, "actions are not inside the closed disclosure");
+  assert.ok(host < actions, "the disclosure is closed before the actions row");
 });
 
 test("#439: the support path is at the value moment, in every locale", () => {
   const support = at('id="resultSupportPath"');
   const actions = at('class="result-actions-row"');
+
   assert.ok(support > actions, "the support path follows the result actions");
+  assert.ok(support < at("</main>"), "and is not folded behind the disclosure");
+  assert.ok(support > actions, "the support path follows the result actions");
+  assert.ok(
+    support < at("</main>"),
+    "the support path is on the surface, not folded behind the disclosure",
+  );
   for (const hook of [
     'data-i18n="resultSupportLead"',
     'data-i18n="resultSupportAction"',

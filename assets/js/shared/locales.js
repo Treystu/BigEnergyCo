@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261122h";
-import { RESULT_COPY } from "./result-copy.js?v=20261122h";
-import { TILT_COPY } from "./tilt-copy.js?v=20261122h";
+import { HOME_COPY } from "./home-copy.js?v=20261124b";
+import { RESULT_COPY } from "./result-copy.js?v=20261124b";
+import { TILT_COPY } from "./tilt-copy.js?v=20261124b";
 
 export const LOCALES = {
   en: {
@@ -212,8 +212,7 @@ export const LOCALES = {
     resultSupportLead:
       "Need a hand with your result, a system like this, or the site itself?",
     resultSupportAction: "Email Lucas — a person answers",
-    resultSupportNext:
-      "He replies within a few days. Nothing is sold, and nothing is collected.",
+    resultSupportNext: "He replies within a few days. Nothing is sold.",
     valueMomentAskChipIn: "chip in",
     valueMomentAskWorked: "tell me it worked",
     valueMomentAskSend: "send this result to someone pricing a system",
@@ -1023,8 +1022,7 @@ export const LOCALES = {
     resultSupportLead:
       "¿Necesitas ayuda con tu resultado, con un sistema como este o con el sitio?",
     resultSupportAction: "Escribe a Lucas — responde una persona",
-    resultSupportNext:
-      "Responde en unos días. No se vende nada y no se recoge nada.",
+    resultSupportNext: "Responde en unos días. No se vende nada.",
     valueMomentAskChipIn: "colaborar",
     valueMomentAskWorked: "cuéntame si te sirvió",
     valueMomentAskSend:
@@ -1768,8 +1766,7 @@ export const LOCALES = {
     resultSupportLead:
       "Precisa de ajuda com o seu resultado, com um sistema como este ou com o site?",
     resultSupportAction: "Escreva ao Lucas — responde uma pessoa",
-    resultSupportNext:
-      "Responde em poucos dias. Nada é vendido e nada é recolhido.",
+    resultSupportNext: "Responde em poucos dias. Nada é vendido.",
     valueMomentAskChipIn: "contribuir",
     valueMomentAskWorked: "conta-me se funcionou",
     valueMomentAskSend:
@@ -2506,8 +2503,7 @@ export const LOCALES = {
     resultSupportLead:
       "Besoin d’aide pour votre résultat, un système comme celui-ci, ou le site ?",
     resultSupportAction: "Écrivez à Lucas — une personne répond",
-    resultSupportNext:
-      "Il répond sous quelques jours. Rien n’est vendu, rien n’est collecté.",
+    resultSupportNext: "Il répond sous quelques jours. Rien n’est vendu.",
     valueMomentAskChipIn: "faire un don",
     valueMomentAskWorked: "dites-moi si ça a marché",
     valueMomentAskSend: "envoyez ce résultat à quelqu’un qui demande un devis",
@@ -3247,7 +3243,7 @@ export const LOCALES = {
       "Brauchen Sie Hilfe mit Ihrem Ergebnis, einem System wie diesem oder der Seite?",
     resultSupportAction: "Schreiben Sie Lucas — ein Mensch antwortet",
     resultSupportNext:
-      "Er antwortet innerhalb weniger Tage. Nichts wird verkauft, nichts erhoben.",
+      "Er antwortet innerhalb weniger Tage. Nichts wird verkauft.",
     valueMomentAskChipIn: "etwas beitragen",
     valueMomentAskWorked: "sag mir, ob es geklappt hat",
     valueMomentAskSend:
@@ -3898,7 +3894,7 @@ export const LOCALES = {
       "Hulp nodig met uw resultaat, een systeem als dit, of de site zelf?",
     resultSupportAction: "Mail Lucas — een mens antwoordt",
     resultSupportNext:
-      "Hij antwoordt binnen enkele dagen. Niets wordt verkocht, niets verzameld.",
+      "Hij antwoordt binnen enkele dagen. Niets wordt verkocht.",
     valueMomentAskChipIn: "een bijdrage doen",
     valueMomentAskWorked: "laat me weten of het werkte",
     valueMomentAskSend:
@@ -4813,7 +4809,7 @@ export const LOCALES = {
     resultSupportLead:
       "هل تحتاج مساعدة في نتيجتك أو في نظام كهذا أو في الموقع نفسه؟",
     resultSupportAction: "راسل لوكاس — يجيب إنسان",
-    resultSupportNext: "يرد خلال أيام قليلة. لا يُباع شيء ولا يُجمع شيء.",
+    resultSupportNext: "يرد خلال أيام قليلة. لا يُباع شيء.",
     valueMomentAskChipIn: "المساهمة",
     valueMomentAskWorked: "أخبرني إن نجح الأمر",
     valueMomentAskSend: "أرسل هذه النتيجة لمن يطلب عرض سعر لنظام",
