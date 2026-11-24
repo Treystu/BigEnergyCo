@@ -220,6 +220,10 @@ export const RESULT_COPY = {
     resTiltYearRoundSub: "Optimal set-and-forget angle for fixed roofs",
     resTiltDaylightSub: "Sun drops {deg}° between summer and winter noon",
     resTiltValueTitle: "💰 Value of the Right Angle",
+    resTiltValueFlat:
+      "What a flat roof forfeits here — it takes ~{panels} flat panels to match 10 at ~{tilt}°",
+    resTiltValueFull:
+      "Flat mounting captures essentially the full harvest at your latitude",
     resTiltTakeawayTitle: "💡 How much does the angle really matter?",
     resTiltExtraPanels: "{n} extra panel(s) per 10",
     resTiltExtraSame: "the same panels tilted properly",
@@ -443,6 +447,10 @@ export const RESULT_COPY = {
     resTiltDaylightSub:
       "El sol baja {deg}° entre el mediodía de verano y el de invierno",
     resTiltValueTitle: "💰 El valor del ángulo correcto",
+    resTiltValueFlat:
+      "Lo que un tejado plano pierde aquí — hacen falta ~{panels} paneles planos para igualar 10 a ~{tilt}°",
+    resTiltValueFull:
+      "El montaje plano captura casi toda la cosecha solar en tu latitud",
     resTiltTakeawayTitle: "💡 ¿Cuánto importa de verdad el ángulo?",
     resTiltExtraPanels: "{n} panel(es) extra por cada 10",
     resTiltExtraSame: "los mismos paneles bien inclinados",
@@ -665,6 +673,10 @@ export const RESULT_COPY = {
     resTiltDaylightSub:
       "O sol desce {deg}° entre o meio-dia de verão e o de inverno",
     resTiltValueTitle: "💰 O valor do ângulo certo",
+    resTiltValueFlat:
+      "O que um telhado plano perde aqui — são precisos ~{panels} painéis planos para igualar 10 a ~{tilt}°",
+    resTiltValueFull:
+      "A montagem plana captura quase toda a colheita solar na sua latitude",
     resTiltTakeawayTitle: "💡 Quanto importa mesmo o ângulo?",
     resTiltExtraPanels: "{n} painel(éis) extra por cada 10",
     resTiltExtraSame: "os mesmos painéis bem inclinados",
@@ -888,6 +900,10 @@ export const RESULT_COPY = {
     resTiltDaylightSub:
       "Le soleil descend de {deg}° entre midi d'été et midi d'hiver",
     resTiltValueTitle: "💰 La valeur du bon angle",
+    resTiltValueFlat:
+      "Ce qu'un toit plat perd ici — il faut ~{panels} panneaux à plat pour égaler 10 à ~{tilt}°",
+    resTiltValueFull:
+      "Un montage à plat capte presque toute la récolte solaire à votre latitude",
     resTiltTakeawayTitle: "💡 Quel est le vrai poids de l'angle ?",
     resTiltExtraPanels: "{n} panneau(x) de plus par 10",
     resTiltExtraSame: "les mêmes panneaux correctement inclinés",
@@ -1109,6 +1125,10 @@ export const RESULT_COPY = {
     resTiltDaylightSub:
       "Die Sonne sinkt um {deg}° zwischen Sommer- und Wintermittag",
     resTiltValueTitle: "💰 Der Wert des richtigen Winkels",
+    resTiltValueFlat:
+      "Was ein Flachdach hier verliert — es braucht ~{panels} flache Module, um 10 bei ~{tilt}° zu erreichen",
+    resTiltValueFull:
+      "Flache Montage bringt auf Ihrer Breite fast den vollen Ertrag",
     resTiltTakeawayTitle: "💡 Wie wichtig ist der Winkel wirklich?",
     resTiltExtraPanels: "{n} zusätzliche(s) Modul(e) je 10",
     resTiltExtraSame: "dieselben Module richtig geneigt",
@@ -1331,6 +1351,10 @@ export const RESULT_COPY = {
     resTiltYearRoundSub: "Optimale hoek in één keer voor vaste daken",
     resTiltDaylightSub: "De zon zakt {deg}° tussen zomer- en wintermiddag",
     resTiltValueTitle: "💰 De waarde van de juiste hoek",
+    resTiltValueFlat:
+      "Wat een plat dak hier verliest — er zijn ~{panels} platte panelen nodig om 10 op ~{tilt}° te evenaren",
+    resTiltValueFull:
+      "Platte montage levert op uw breedte vrijwel de volledige opbrengst",
     resTiltTakeawayTitle: "💡 Hoeveel maakt de hoek echt uit?",
     resTiltExtraPanels: "{n} extra paneel(en) per 10",
     resTiltExtraSame: "dezelfde panelen goed gekanteld",
@@ -1543,6 +1567,10 @@ export const RESULT_COPY = {
     resTiltYearRoundSub: "الزاوية المثلى تُضبط مرة واحدة للأسطح الثابتة",
     resTiltDaylightSub: "تنخفض الشمس {deg}° بين ظهيرة الصيف وظهيرة الشتاء",
     resTiltValueTitle: "💰 قيمة الزاوية الصحيحة",
+    resTiltValueFlat:
+      "ما يخسره السطح المستوي هنا — يلزم نحو {panels} لوحًا مستويًا لمعادلة 10 عند {tilt}°",
+    resTiltValueFull:
+      "التركيب المستوي يحقق تقريبًا كامل الحصاد الشمسي عند خط عرضك",
     resTiltTakeawayTitle: "💡 ما مدى أهمية الزاوية فعلًا؟",
     resTiltExtraPanels: "{n} لوح إضافي لكل 10",
     resTiltExtraSame: "الألواح نفسها بميل صحيح",
