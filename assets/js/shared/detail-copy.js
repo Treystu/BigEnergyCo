@@ -11,20 +11,16 @@ export const DETAIL_COPY = {
       "Data: {source}, hourly {years}. Derates applied: soiling {soiling}%, wiring {wiring}%, mismatch {mismatch}%, MPPT {mppt}%.",
     dAssumpCell:
       "Cell temperature model: NOCT {noct}°C, power temperature coefficient {gamma}%/°C.",
-    dAssumpInverter:
-      "Inverter efficiency {eta}%.",
+    dAssumpInverter: "Inverter efficiency {eta}%.",
     dAssumpCold:
       "Charging is blocked below the chemistry's cold limit (LFP 0 °C).",
-    dAssumpLoad:
-      "Load basis: {basis}.",
+    dAssumpLoad: "Load basis: {basis}.",
     dAssumpCosts:
       "Costs span {basis} ({source}) — the low end is parts before freight, duty and BMS; the high end is shipped retail with BMS and enclosure included.",
     dAssumpOffline:
       "OFFLINE MODE: this run used the bundled typical-year profile for {city} — a close approximation, not your exact site. Re-run online for five years of point-specific weather.",
-    dAssumpTariff:
-      "Grid spend assumes {rate} at {kwh} kWh/day.",
-    dAssumpNoTariff:
-      "No tariff entered, so payback is not shown.",
+    dAssumpTariff: "Grid spend assumes {rate} at {kwh} kWh/day.",
+    dAssumpNoTariff: "No tariff entered, so payback is not shown.",
     dCapAuto:
       "Capacity model at this site's mean {t}°C: LFP 100%, sodium-ion 85% (LFP voltage settings), lead-acid (AGM) about {agm}% (cold derating where applicable).",
     dCapAgmCold:
@@ -39,10 +35,12 @@ export const DETAIL_COPY = {
     dValArray: "{kw} kW → {count} × {watts} W = {actual} kW",
     dRowSpaceNeeded: "Space needed",
     dValSpace: "about {area} m² of roof or ground (mounting gaps included)",
-    dValPanelsNone: "None (battery-only setup — time-of-use arbitrage / peak offset)",
+    dValPanelsNone:
+      "None (battery-only setup — time-of-use arbitrage / peak offset)",
     dSecBatteryBank: "Battery bank",
     dRowSystemVoltage: "System voltage",
-    dValVoltage: "{volts} V — fits a {kw} kW-class inverter and a {kwh} kWh nameplate bank",
+    dValVoltage:
+      "{volts} V — fits a {kw} kW-class inverter and a {kwh} kWh nameplate bank",
     dRowDiyBuild: "DIY build",
     dValDiy: "{label} × {strings} parallel string(s) = {cells} cells",
     dRowPrebuilt: "Prebuilt alternative",
@@ -53,7 +51,8 @@ export const DETAIL_COPY = {
       "{modules} × {label} = {kwh} kWh nameplate, within {pct}% of the ~{target} kWh target",
     dRowNameplateTarget: "Nameplate target",
     dValNameplate: "~{kwh} kWh at {dod}% usable depth of discharge",
-    dValBatteryNone: "None (solar-only setup — direct consumption plus grid export)",
+    dValBatteryNone:
+      "None (solar-only setup — direct consumption plus grid export)",
     dSecInverter: "Inverter",
     dRowPeakDemand: "Your peak demand",
     dValPeak: "~{kw} kW at once",
@@ -120,7 +119,8 @@ export const DETAIL_COPY = {
       "No battery in this system, so voltage, bank layout and DC protection are left out.",
     dNoteVolts12:
       "12 V class: fine for RV-scale loads. Above ~1.5 kW continuous, 24 V or 48 V wastes far less copper.",
-    dNoteVolts24: "24 V class: the middle road — workable to about 3.5 kW continuous.",
+    dNoteVolts24:
+      "24 V class: the middle road — workable to about 3.5 kW continuous.",
     dNoteVolts48:
       "48 V class: what any house-scale system uses — the least current for the same power.",
     dNoteRoundUp:
@@ -131,7 +131,8 @@ export const DETAIL_COPY = {
     dDiyCellsLabel: "{series}S strings of {ah} Ah prismatic cells",
     dRetailAgmLabel: "12 V {ah} Ah AGM blocks (no BMS — wire with balancing)",
     dReferenceUnit: "{model} (~${price}, {note}, {date})",
-    dReferenceAbove: "above the {class} kW reference class — expect several stacked units",
+    dReferenceAbove:
+      "above the {class} kW reference class — expect several stacked units",
     dReferenceNo48:
       "no 48 V reference applies here — source a {volts} V-class inverter/charger for this bank voltage",
     dEli5Title: "💡 In plain language",
@@ -189,18 +190,15 @@ export const DETAIL_COPY = {
       "Datos: {source}, por horas, {years}. Pérdidas aplicadas: suciedad {soiling}%, cableado {wiring}%, desajuste {mismatch}%, MPPT {mppt}%.",
     dAssumpCell:
       "Modelo de temperatura de célula: NOCT {noct}°C, coeficiente de temperatura de potencia {gamma}%/°C.",
-    dAssumpInverter:
-      "Rendimiento del inversor {eta}%.",
+    dAssumpInverter: "Rendimiento del inversor {eta}%.",
     dAssumpCold:
       "La carga se bloquea por debajo del límite de frío de la química (LFP 0 °C).",
-    dAssumpLoad:
-      "Base de la carga: {basis}.",
+    dAssumpLoad: "Base de la carga: {basis}.",
     dAssumpCosts:
       "Los costes van de {basis} ({source}): el extremo bajo son piezas antes de flete, aranceles y BMS; el alto es venta minorista enviada con BMS y carcasa incluidas.",
     dAssumpOffline:
       "MODO SIN CONEXIÓN: este cálculo usó el perfil de año típico incluido para {city}, una aproximación cercana, no tu ubicación exacta. Vuelve a ejecutarlo en línea para cinco años de clima de tu punto.",
-    dAssumpTariff:
-      "El gasto de red supone {rate} a {kwh} kWh/día.",
+    dAssumpTariff: "El gasto de red supone {rate} a {kwh} kWh/día.",
     dAssumpNoTariff:
       "No has introducido tarifa, así que no se muestra la amortización.",
     dCapAuto:
@@ -216,7 +214,8 @@ export const DETAIL_COPY = {
     dValArray: "{kw} kW → {count} × {watts} W = {actual} kW",
     dRowSpaceNeeded: "Espacio necesario",
     dValSpace: "unos {area} m² de tejado o suelo (huecos de montaje incluidos)",
-    dValPanelsNone: "Ninguno (solo batería — arbitraje por franjas horarias / desplazamiento de punta)",
+    dValPanelsNone:
+      "Ninguno (solo batería — arbitraje por franjas horarias / desplazamiento de punta)",
     dSecBatteryBank: "Banco de baterías",
     dRowSystemVoltage: "Tensión del sistema",
     dValVoltage:
@@ -231,7 +230,8 @@ export const DETAIL_COPY = {
       "{modules} × {label} = {kwh} kWh nominales, dentro del {pct}% del objetivo de ~{target} kWh",
     dRowNameplateTarget: "Objetivo nominal",
     dValNameplate: "~{kwh} kWh con {dod}% de profundidad de descarga útil",
-    dValBatteryNone: "Ninguna (solo solar — consumo directo más vertido a la red)",
+    dValBatteryNone:
+      "Ninguna (solo solar — consumo directo más vertido a la red)",
     dSecInverter: "Inversor",
     dRowPeakDemand: "Tu demanda máxima",
     dValPeak: "~{kw} kW a la vez",
@@ -250,7 +250,8 @@ export const DETAIL_COPY = {
     dControllerOne: "un regulador MPPT de {amps} A",
     dControllerSplit: "repartido en {n} × reguladores MPPT de 100 A",
     dRowMainFuse: "Fusible/interruptor principal de batería",
-    dValMainFuse: "{amps} A (el banco puede tirar ~{discharge} A a plena carga)",
+    dValMainFuse:
+      "{amps} A (el banco puede tirar ~{discharge} A a plena carga)",
     dRowPvDisconnect: "Desconexión FV",
     dSecCable: "Cable batería-inversor (cobre)",
     dRowRun: "tramo de {meters} m",
@@ -258,12 +259,16 @@ export const DETAIL_COPY = {
     dValCableShort: "más de {awg} — acorta el tramo",
     dSecMounting: "Montaje del campo solar y mejor inclinación",
     dRowOrientation: "Orientación del campo",
-    dValFaceSouth: "Orientado al sur verdadero (180°) para la máxima cosecha anual",
-    dValFaceNorth: "Orientado al norte verdadero (0°) para la máxima cosecha anual",
+    dValFaceSouth:
+      "Orientado al sur verdadero (180°) para la máxima cosecha anual",
+    dValFaceNorth:
+      "Orientado al norte verdadero (0°) para la máxima cosecha anual",
     dRowYearTilt: "Inclinación fija todo el año",
     dValDegrees: "~{deg}° respecto a la horizontal",
-    dRowWinterTilt: "Inclinación pronunciada de invierno (necesaria fuera de red)",
-    dValWinterTilt: "~{deg}° — evacua la nieve y capta el sol bajo del invierno",
+    dRowWinterTilt:
+      "Inclinación pronunciada de invierno (necesaria fuera de red)",
+    dValWinterTilt:
+      "~{deg}° — evacua la nieve y capta el sol bajo del invierno",
     dRowSummerTilt: "Inclinación de verano (opcional)",
     dRowMounting: "Recomendación de montaje",
     dValMountSnow:
@@ -298,7 +303,8 @@ export const DETAIL_COPY = {
       "Este sistema no lleva batería, así que se omiten la tensión, el diseño del banco y la protección CC.",
     dNoteVolts12:
       "Clase 12 V: vale para cargas de autocaravana. Por encima de ~1,5 kW continuos, 24 V o 48 V desperdician mucho menos cobre.",
-    dNoteVolts24: "Clase 24 V: el término medio — viable hasta unos 3,5 kW continuos.",
+    dNoteVolts24:
+      "Clase 24 V: el término medio — viable hasta unos 3,5 kW continuos.",
     dNoteVolts48:
       "Clase 48 V: lo que usa cualquier sistema de vivienda — la menor corriente para la misma potencia.",
     dNoteRoundUp:
@@ -307,7 +313,8 @@ export const DETAIL_COPY = {
       "La corriente de batería a plena carga (~{amps} A) supera los valores estándar de fusible: este banco necesita hileras en paralelo con protección por hilera, diseñadas por un electricista.",
     dDiyAgmLabel: "{series}S hileras de bloques AGM de 12 V {ah} Ah",
     dDiyCellsLabel: "{series}S hileras de celdas prismáticas de {ah} Ah",
-    dRetailAgmLabel: "Bloques AGM de 12 V {ah} Ah (sin BMS — cablear con equilibrado)",
+    dRetailAgmLabel:
+      "Bloques AGM de 12 V {ah} Ah (sin BMS — cablear con equilibrado)",
     dReferenceUnit: "{model} (~${price}, {note}, {date})",
     dReferenceAbove:
       "por encima de la clase de referencia de {class} kW — cuenta con varias unidades apiladas",
@@ -368,18 +375,15 @@ export const DETAIL_COPY = {
       "Dados: {source}, horários, {years}. Perdas aplicadas: sujidade {soiling}%, cablagem {wiring}%, desajuste {mismatch}%, MPPT {mppt}%.",
     dAssumpCell:
       "Modelo de temperatura da célula: NOCT {noct}°C, coeficiente de temperatura de potência {gamma}%/°C.",
-    dAssumpInverter:
-      "Eficiência do inversor {eta}%.",
+    dAssumpInverter: "Eficiência do inversor {eta}%.",
     dAssumpCold:
       "O carregamento é bloqueado abaixo do limite de frio da química (LFP 0 °C).",
-    dAssumpLoad:
-      "Base da carga: {basis}.",
+    dAssumpLoad: "Base da carga: {basis}.",
     dAssumpCosts:
       "Os custos vão de {basis} ({source}) — o limite baixo são peças antes de frete, direitos e BMS; o alto é retalho enviado com BMS e caixa incluídos.",
     dAssumpOffline:
       "MODO OFFLINE: este cálculo usou o perfil de ano típico incluído para {city} — uma aproximação próxima, não o teu local exato. Repete online para cinco anos de clima do teu ponto.",
-    dAssumpTariff:
-      "O gasto de rede assume {rate} a {kwh} kWh/dia.",
+    dAssumpTariff: "O gasto de rede assume {rate} a {kwh} kWh/dia.",
     dAssumpNoTariff:
       "Não introduziste tarifa, por isso a amortização não é mostrada.",
     dCapAuto:
@@ -394,8 +398,10 @@ export const DETAIL_COPY = {
     dRowArray: "Campo solar",
     dValArray: "{kw} kW → {count} × {watts} W = {actual} kW",
     dRowSpaceNeeded: "Espaço necessário",
-    dValSpace: "cerca de {area} m² de telhado ou solo (folgas de montagem incluídas)",
-    dValPanelsNone: "Nenhum (só bateria — arbitragem por tarifa horária / desvio do pico)",
+    dValSpace:
+      "cerca de {area} m² de telhado ou solo (folgas de montagem incluídas)",
+    dValPanelsNone:
+      "Nenhum (só bateria — arbitragem por tarifa horária / desvio do pico)",
     dSecBatteryBank: "Banco de baterias",
     dRowSystemVoltage: "Tensão do sistema",
     dValVoltage:
@@ -477,7 +483,8 @@ export const DETAIL_COPY = {
       "Este sistema não tem bateria, por isso a tensão, o layout do banco e a proteção CC ficam de fora.",
     dNoteVolts12:
       "Classe 12 V: serve para cargas de autocaravana. Acima de ~1,5 kW contínuos, 24 V ou 48 V desperdiçam muito menos cobre.",
-    dNoteVolts24: "Classe 24 V: o meio-termo — viável até cerca de 3,5 kW contínuos.",
+    dNoteVolts24:
+      "Classe 24 V: o meio-termo — viável até cerca de 3,5 kW contínuos.",
     dNoteVolts48:
       "Classe 48 V: o que qualquer sistema de habitação usa — a menor corrente para a mesma potência.",
     dNoteRoundUp:
@@ -486,7 +493,8 @@ export const DETAIL_COPY = {
       "A corrente de bateria a plena carga (~{amps} A) está acima dos valores padrão de fusível: este banco precisa de séries em paralelo com proteção por série, desenhadas por um eletricista.",
     dDiyAgmLabel: "{series}S séries de blocos AGM de 12 V {ah} Ah",
     dDiyCellsLabel: "{series}S séries de células prismáticas de {ah} Ah",
-    dRetailAgmLabel: "Blocos AGM de 12 V {ah} Ah (sem BMS — cablagem com balanceamento)",
+    dRetailAgmLabel:
+      "Blocos AGM de 12 V {ah} Ah (sem BMS — cablagem com balanceamento)",
     dReferenceUnit: "{model} (~${price}, {note}, {date})",
     dReferenceAbove:
       "acima da classe de referência de {class} kW — conta com várias unidades empilhadas",
@@ -547,18 +555,15 @@ export const DETAIL_COPY = {
       "Données : {source}, horaires, {years}. Pertes appliquées : salissure {soiling}%, câblage {wiring}%, désappariement {mismatch}%, MPPT {mppt}%.",
     dAssumpCell:
       "Modèle de température de cellule : NOCT {noct}°C, coefficient de température de puissance {gamma}%/°C.",
-    dAssumpInverter:
-      "Rendement de l'onduleur {eta}%.",
+    dAssumpInverter: "Rendement de l'onduleur {eta}%.",
     dAssumpCold:
       "La charge est bloquée sous la limite de froid de la chimie (LFP 0 °C).",
-    dAssumpLoad:
-      "Base de la charge : {basis}.",
+    dAssumpLoad: "Base de la charge : {basis}.",
     dAssumpCosts:
       "Les coûts vont de {basis} ({source}) — le bas correspond à des pièces avant fret, droits et BMS ; le haut à du détail livré, BMS et coffret compris.",
     dAssumpOffline:
       "MODE HORS LIGNE : ce calcul a utilisé le profil d'année typique fourni pour {city} — une approximation proche, pas votre site exact. Relancez en ligne pour cinq ans de météo propre à votre point.",
-    dAssumpTariff:
-      "La dépense réseau suppose {rate} à {kwh} kWh/jour.",
+    dAssumpTariff: "La dépense réseau suppose {rate} à {kwh} kWh/jour.",
     dAssumpNoTariff:
       "Aucun tarif saisi, donc le retour sur investissement n'est pas affiché.",
     dCapAuto:
@@ -573,8 +578,10 @@ export const DETAIL_COPY = {
     dRowArray: "Champ solaire",
     dValArray: "{kw} kW → {count} × {watts} W = {actual} kW",
     dRowSpaceNeeded: "Surface nécessaire",
-    dValSpace: "environ {area} m² de toiture ou de sol (écarts de montage compris)",
-    dValPanelsNone: "Aucun (batterie seule — arbitrage heures creuses / décalage de pointe)",
+    dValSpace:
+      "environ {area} m² de toiture ou de sol (écarts de montage compris)",
+    dValPanelsNone:
+      "Aucun (batterie seule — arbitrage heures creuses / décalage de pointe)",
     dSecBatteryBank: "Parc de batteries",
     dRowSystemVoltage: "Tension du système",
     dValVoltage:
@@ -589,7 +596,8 @@ export const DETAIL_COPY = {
       "{modules} × {label} = {kwh} kWh nominaux, à {pct}% de l'objectif de ~{target} kWh",
     dRowNameplateTarget: "Objectif nominal",
     dValNameplate: "~{kwh} kWh à {dod}% de profondeur de décharge utile",
-    dValBatteryNone: "Aucune (solaire seul — autoconsommation plus injection sur le réseau)",
+    dValBatteryNone:
+      "Aucune (solaire seul — autoconsommation plus injection sur le réseau)",
     dSecInverter: "Onduleur",
     dRowPeakDemand: "Votre pointe de consommation",
     dValPeak: "~{kw} kW en même temps",
@@ -608,7 +616,8 @@ export const DETAIL_COPY = {
     dControllerOne: "un régulateur MPPT de {amps} A",
     dControllerSplit: "réparti sur {n} × régulateurs MPPT de 100 A",
     dRowMainFuse: "Fusible/disjoncteur principal de batterie",
-    dValMainFuse: "{amps} A (le parc peut tirer ~{discharge} A à pleine charge)",
+    dValMainFuse:
+      "{amps} A (le parc peut tirer ~{discharge} A à pleine charge)",
     dRowPvDisconnect: "Sectionnement PV",
     dSecCable: "Câble batterie-onduleur (cuivre)",
     dRowRun: "tronçon de {meters} m",
@@ -616,12 +625,14 @@ export const DETAIL_COPY = {
     dValCableShort: "plus gros que {awg} — raccourcissez le tronçon",
     dSecMounting: "Montage du champ solaire et meilleure inclinaison",
     dRowOrientation: "Orientation du champ",
-    dValFaceSouth: "Plein sud vrai (180°) pour la meilleure production annuelle",
+    dValFaceSouth:
+      "Plein sud vrai (180°) pour la meilleure production annuelle",
     dValFaceNorth: "Plein nord vrai (0°) pour la meilleure production annuelle",
     dRowYearTilt: "Inclinaison fixe toute l'année",
     dValDegrees: "~{deg}° par rapport à l'horizontale",
     dRowWinterTilt: "Inclinaison forte d'hiver (indispensable hors réseau)",
-    dValWinterTilt: "~{deg}° — évacue la neige et capte le soleil bas de l'hiver",
+    dValWinterTilt:
+      "~{deg}° — évacue la neige et capte le soleil bas de l'hiver",
     dRowSummerTilt: "Inclinaison d'été (facultative)",
     dRowMounting: "Recommandation de montage",
     dValMountSnow:
@@ -656,7 +667,8 @@ export const DETAIL_COPY = {
       "Ce système n'a pas de batterie : tension, agencement du parc et protection DC sont donc omis.",
     dNoteVolts12:
       "Classe 12 V : correct pour des charges de camping-car. Au-delà de ~1,5 kW en continu, 24 V ou 48 V gaspillent bien moins de cuivre.",
-    dNoteVolts24: "Classe 24 V : le compromis — viable jusqu'à environ 3,5 kW en continu.",
+    dNoteVolts24:
+      "Classe 24 V : le compromis — viable jusqu'à environ 3,5 kW en continu.",
     dNoteVolts48:
       "Classe 48 V : ce qu'utilise toute installation domestique — le moins de courant pour la même puissance.",
     dNoteRoundUp:
@@ -665,7 +677,8 @@ export const DETAIL_COPY = {
       "Le courant batterie à pleine charge (~{amps} A) dépasse les calibres de fusible standard : ce parc exige des branches en parallèle avec protection par branche, conçues par un électricien.",
     dDiyAgmLabel: "{series}S branches de blocs AGM 12 V {ah} Ah",
     dDiyCellsLabel: "{series}S branches de cellules prismatiques {ah} Ah",
-    dRetailAgmLabel: "Blocs AGM 12 V {ah} Ah (sans BMS — câblage avec équilibrage)",
+    dRetailAgmLabel:
+      "Blocs AGM 12 V {ah} Ah (sans BMS — câblage avec équilibrage)",
     dReferenceUnit: "{model} (~${price}, {note}, {date})",
     dReferenceAbove:
       "au-delà de la classe de référence {class} kW — comptez plusieurs unités empilées",
@@ -726,18 +739,15 @@ export const DETAIL_COPY = {
       "Daten: {source}, stündlich, {years}. Angesetzte Verluste: Verschmutzung {soiling}%, Verkabelung {wiring}%, Fehlanpassung {mismatch}%, MPPT {mppt}%.",
     dAssumpCell:
       "Zelltemperaturmodell: NOCT {noct}°C, Leistungstemperaturkoeffizient {gamma}%/°C.",
-    dAssumpInverter:
-      "Wechselrichter-Wirkungsgrad {eta}%.",
+    dAssumpInverter: "Wechselrichter-Wirkungsgrad {eta}%.",
     dAssumpCold:
       "Laden ist unterhalb der Kältegrenze der Chemie gesperrt (LFP 0 °C).",
-    dAssumpLoad:
-      "Lastgrundlage: {basis}.",
+    dAssumpLoad: "Lastgrundlage: {basis}.",
     dAssumpCosts:
       "Die Kosten reichen von {basis} ({source}) — unten Teile vor Fracht, Zoll und BMS, oben versandter Handelspreis inklusive BMS und Gehäuse.",
     dAssumpOffline:
       "OFFLINE-MODUS: Diese Berechnung nutzte das mitgelieferte Regeljahr-Profil für {city} — eine gute Näherung, nicht Ihr genauer Standort. Online erneut ausführen für fünf Jahre standortgenaues Wetter.",
-    dAssumpTariff:
-      "Die Netzausgaben setzen {rate} bei {kwh} kWh/Tag an.",
+    dAssumpTariff: "Die Netzausgaben setzen {rate} bei {kwh} kWh/Tag an.",
     dAssumpNoTariff:
       "Kein Tarif eingegeben, daher wird keine Amortisation gezeigt.",
     dCapAuto:
@@ -753,7 +763,8 @@ export const DETAIL_COPY = {
     dValArray: "{kw} kW → {count} × {watts} W = {actual} kW",
     dRowSpaceNeeded: "Benötigte Fläche",
     dValSpace: "etwa {area} m² Dach oder Boden (Montageabstände eingerechnet)",
-    dValPanelsNone: "Keine (nur Batterie — Tarifzeit-Arbitrage / Spitzenverlagerung)",
+    dValPanelsNone:
+      "Keine (nur Batterie — Tarifzeit-Arbitrage / Spitzenverlagerung)",
     dSecBatteryBank: "Batteriebank",
     dRowSystemVoltage: "Systemspannung",
     dValVoltage:
@@ -768,7 +779,8 @@ export const DETAIL_COPY = {
       "{modules} × {label} = {kwh} kWh Nennkapazität, innerhalb von {pct}% des Ziels von ~{target} kWh",
     dRowNameplateTarget: "Nennkapazitäts-Ziel",
     dValNameplate: "~{kwh} kWh bei {dod}% nutzbarer Entladetiefe",
-    dValBatteryNone: "Keine (nur Solar — Eigenverbrauch plus Einspeisung ins Netz)",
+    dValBatteryNone:
+      "Keine (nur Solar — Eigenverbrauch plus Einspeisung ins Netz)",
     dSecInverter: "Wechselrichter",
     dRowPeakDemand: "Deine Spitzenlast",
     dValPeak: "~{kw} kW gleichzeitig",
@@ -795,8 +807,10 @@ export const DETAIL_COPY = {
     dValCableShort: "dicker als {awg} — verkürze die Strecke",
     dSecMounting: "Montage des Modulfelds und beste Neigung",
     dRowOrientation: "Ausrichtung des Felds",
-    dValFaceSouth: "Nach wahrer Südrichtung (180°) für den höchsten Jahresertrag",
-    dValFaceNorth: "Nach wahrer Nordrichtung (0°) für den höchsten Jahresertrag",
+    dValFaceSouth:
+      "Nach wahrer Südrichtung (180°) für den höchsten Jahresertrag",
+    dValFaceNorth:
+      "Nach wahrer Nordrichtung (0°) für den höchsten Jahresertrag",
     dRowYearTilt: "Feste Neigung übers Jahr",
     dValDegrees: "~{deg}° zur Waagerechten",
     dRowWinterTilt: "Steile Winterneigung (nötig ohne Netz)",
@@ -835,7 +849,8 @@ export const DETAIL_COPY = {
       "Dieses System hat keine Batterie, daher entfallen Spannung, Bankaufbau und DC-Schutz.",
     dNoteVolts12:
       "12-V-Klasse: gut für Wohnmobil-Lasten. Über ~1,5 kW Dauerleistung verschwenden 24 V oder 48 V viel weniger Kupfer.",
-    dNoteVolts24: "24-V-Klasse: der Mittelweg — bis etwa 3,5 kW Dauerleistung machbar.",
+    dNoteVolts24:
+      "24-V-Klasse: der Mittelweg — bis etwa 3,5 kW Dauerleistung machbar.",
     dNoteVolts48:
       "48-V-Klasse: was jedes hausgroße System nutzt — der geringste Strom für dieselbe Leistung.",
     dNoteRoundUp:
@@ -844,7 +859,8 @@ export const DETAIL_COPY = {
       "Der Batteriestrom bei Volllast (~{amps} A) liegt über den Standardsicherungswerten — diese Bank braucht Parallelstränge mit Schutz je Strang, ausgelegt von einer Elektrofachkraft.",
     dDiyAgmLabel: "{series}S Stränge aus 12-V-{ah}-Ah-AGM-Blöcken",
     dDiyCellsLabel: "{series}S Stränge aus {ah}-Ah-prismatischen Zellen",
-    dRetailAgmLabel: "12-V-{ah}-Ah-AGM-Blöcke (kein BMS — mit Balancierung verdrahten)",
+    dRetailAgmLabel:
+      "12-V-{ah}-Ah-AGM-Blöcke (kein BMS — mit Balancierung verdrahten)",
     dReferenceUnit: "{model} (~${price}, {note}, {date})",
     dReferenceAbove:
       "über der Referenzklasse von {class} kW — rechne mit mehreren gestapelten Geräten",
@@ -905,18 +921,15 @@ export const DETAIL_COPY = {
       "Gegevens: {source}, per uur, {years}. Toegepaste verliezen: vervuiling {soiling}%, bedrading {wiring}%, mismatching {mismatch}%, MPPT {mppt}%.",
     dAssumpCell:
       "Celtemperatuurmodel: NOCT {noct}°C, temperatuurcoëfficiënt van het vermogen {gamma}%/°C.",
-    dAssumpInverter:
-      "Rendement van de omvormer {eta}%.",
+    dAssumpInverter: "Rendement van de omvormer {eta}%.",
     dAssumpCold:
       "Laden is geblokkeerd onder de koudelimiet van de chemie (LFP 0 °C).",
-    dAssumpLoad:
-      "Uitgangspunt van de last: {basis}.",
+    dAssumpLoad: "Uitgangspunt van de last: {basis}.",
     dAssumpCosts:
       "De kosten lopen van {basis} ({source}) — de onderkant zijn onderdelen vóór vracht, invoerrechten en BMS; de bovenkant is verzonden retail inclusief BMS en behuizing.",
     dAssumpOffline:
       "OFFLINE MODUS: deze berekening gebruikte het meegeleverde typische-jaarprofiel voor {city} — een goede benadering, niet jouw exacte locatie. Voer opnieuw online uit voor vijf jaar locatiespecifiek weer.",
-    dAssumpTariff:
-      "De netkosten gaan uit van {rate} bij {kwh} kWh/dag.",
+    dAssumpTariff: "De netkosten gaan uit van {rate} bij {kwh} kWh/dag.",
     dAssumpNoTariff:
       "Geen tarief ingevoerd, dus terugverdientijd wordt niet getoond.",
     dCapAuto:
@@ -932,7 +945,8 @@ export const DETAIL_COPY = {
     dValArray: "{kw} kW → {count} × {watts} W = {actual} kW",
     dRowSpaceNeeded: "Benodigde ruimte",
     dValSpace: "ongeveer {area} m² dak of grond (montageruimte inbegrepen)",
-    dValPanelsNone: "Geen (alleen batterij — tariefarbitrage / piekverschuiving)",
+    dValPanelsNone:
+      "Geen (alleen batterij — tariefarbitrage / piekverschuiving)",
     dSecBatteryBank: "Batterijbank",
     dRowSystemVoltage: "Systeemspanning",
     dValVoltage:
@@ -1014,7 +1028,8 @@ export const DETAIL_COPY = {
       "Dit systeem heeft geen batterij, dus spanning, bankopbouw en DC-beveiliging vervallen.",
     dNoteVolts12:
       "12 V-klasse: prima voor camperlasten. Boven ~1,5 kW continu verspillen 24 V of 48 V veel minder koper.",
-    dNoteVolts24: "24 V-klasse: de middenweg — haalbaar tot ongeveer 3,5 kW continu.",
+    dNoteVolts24:
+      "24 V-klasse: de middenweg — haalbaar tot ongeveer 3,5 kW continu.",
     dNoteVolts48:
       "48 V-klasse: wat elk huisformaat systeem gebruikt — de laagste stroom voor hetzelfde vermogen.",
     dNoteRoundUp:
@@ -1023,7 +1038,8 @@ export const DETAIL_COPY = {
       "De batterijstroom bij vollast (~{amps} A) ligt boven standaard zekeringwaarden — deze bank heeft parallelle strengen met beveiliging per streng nodig, ontworpen door een elektricien.",
     dDiyAgmLabel: "{series}S strengen van 12 V {ah} Ah AGM-blokken",
     dDiyCellsLabel: "{series}S strengen van {ah} Ah prismatische cellen",
-    dRetailAgmLabel: "12 V {ah} Ah AGM-blokken (geen BMS — bedraden met balanceren)",
+    dRetailAgmLabel:
+      "12 V {ah} Ah AGM-blokken (geen BMS — bedraden met balanceren)",
     dReferenceUnit: "{model} (~${price}, {note}, {date})",
     dReferenceAbove:
       "boven de referentieklasse van {class} kW — reken op meerdere gestapelde eenheden",
@@ -1084,20 +1100,16 @@ export const DETAIL_COPY = {
       "البيانات: {source}، كل ساعة، {years}. الفاقد المطبّق: الأتربة {soiling}%، التوصيلات {wiring}%، عدم التطابق {mismatch}%، MPPT {mppt}%.",
     dAssumpCell:
       "نموذج حرارة الخلية: NOCT {noct}°م، معامل حرارة القدرة {gamma}%/°م.",
-    dAssumpInverter:
-      "كفاءة العاكس {eta}%.",
-    dAssumpCold:
-      "يُمنع الشحن تحت حد البرودة الخاص بالكيمياء (LFP 0 °م).",
-    dAssumpLoad:
-      "أساس الحمل: {basis}.",
+    dAssumpInverter: "كفاءة العاكس {eta}%.",
+    dAssumpCold: "يُمنع الشحن تحت حد البرودة الخاص بالكيمياء (LFP 0 °م).",
+    dAssumpLoad: "أساس الحمل: {basis}.",
     dAssumpCosts:
       "تتراوح التكاليف بين {basis} ({source}) — الحد الأدنى قطع قبل الشحن والرسوم وBMS، والحد الأعلى تجزئة مشحونة تشمل BMS والغلاف.",
     dAssumpOffline:
       "الوضع دون اتصال: استخدم هذا التشغيل ملف السنة النموذجية المضمّن لـ {city} — تقريب قريب لا موقعك الدقيق. أعد التشغيل متصلًا لخمس سنوات من طقس موقعك.",
     dAssumpTariff:
       "يفترض الإنفاق على الشبكة {rate} عند {kwh} كيلوواط·ساعة/يوم.",
-    dAssumpNoTariff:
-      "لم تُدخل تعريفة، لذا لا تظهر فترة الاسترداد.",
+    dAssumpNoTariff: "لم تُدخل تعريفة، لذا لا تظهر فترة الاسترداد.",
     dCapAuto:
       "نموذج السعة عند متوسط {t}°م في الموقع: LFP 100%، أيون الصوديوم 85% (إعدادات جهد LFP)، الرصاص-حمض (AGM) نحو {agm}% (مع تخفيض البرودة حيث ينطبق).",
     dCapAgmCold:
@@ -1145,7 +1157,8 @@ export const DETAIL_COPY = {
     dControllerOne: "منظم MPPT واحد بقدرة {amps} أمبير",
     dControllerSplit: "موزّع على {n} × منظمات MPPT بسعة 100 أمبير",
     dRowMainFuse: "مصهر/قاطع البطارية الرئيسي",
-    dValMainFuse: "{amps} أمبير (يمكن للبنك سحب ~{discharge} أمبير عند الحمل الكامل)",
+    dValMainFuse:
+      "{amps} أمبير (يمكن للبنك سحب ~{discharge} أمبير عند الحمل الكامل)",
     dRowPvDisconnect: "فصل الكهروضوئية",
     dSecCable: "كابل البطارية إلى العاكس (نحاس)",
     dRowRun: "مسار بطول {meters} م",
@@ -1202,10 +1215,10 @@ export const DETAIL_COPY = {
       "تيار البطارية عند الحمل الكامل (~{amps} أمبير) يتجاوز قيم المصاهر القياسية — يحتاج هذا البنك سلاسل متوازية بحماية لكل سلسلة، يصممها كهربائي.",
     dDiyAgmLabel: "{series}S سلاسل من كتل AGM 12 فولت {ah} أمبير·ساعة",
     dDiyCellsLabel: "{series}S سلاسل من خلايا منشورية {ah} أمبير·ساعة",
-    dRetailAgmLabel: "كتل AGM 12 فولت {ah} أمبير·ساعة (بدون BMS — وصّل مع الموازنة)",
+    dRetailAgmLabel:
+      "كتل AGM 12 فولت {ah} أمبير·ساعة (بدون BMS — وصّل مع الموازنة)",
     dReferenceUnit: "{model} (~${price}، {note}، {date})",
-    dReferenceAbove:
-      "فوق فئة المرجع {class} كيلوواط — توقع عدة وحدات مركّبة",
+    dReferenceAbove: "فوق فئة المرجع {class} كيلوواط — توقع عدة وحدات مركّبة",
     dReferenceNo48:
       "لا ينطبق مرجع 48 فولت هنا — ابحث عن عاكس/شاحن من فئة {volts} فولت لجهد هذا البنك",
     dEli5Title: "💡 بلغة واضحة",
