@@ -224,9 +224,14 @@ test("explainElement falls back to English for missing locale terms", () => {
   const el = fakeEl();
   assert.equal(explainElement(el, "kWh", "xx"), true);
   assert.equal(el.attrs["data-eli5"], JARGON.kWh.long);
-  const partial = fakeEl();
-  assert.equal(explainElement(partial, "BMS", "es"), true);
-  assert.equal(partial.attrs["data-eli5"], JARGON.BMS.long);
+  // A locale with no overlay for a term it DOES know still explains in English.
+  const noOverlay = fakeEl();
+  assert.equal(explainElement(noOverlay, "BMS", "xx"), true);
+  assert.equal(noOverlay.attrs["data-eli5"], JARGON.BMS.long);
+  // The overlay itself is complete, so a real locale never needs that fallback.
+  const es = fakeEl();
+  assert.equal(explainElement(es, "BMS", "es"), true);
+  assert.notEqual(es.attrs["data-eli5"], JARGON.BMS.long);
 });
 
 test("explainElement reports unknown terms so callers skip wiring", () => {
