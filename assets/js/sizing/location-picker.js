@@ -16,8 +16,8 @@ import {
   searchCities,
   shouldAutoResolve,
   typedCityCandidates,
-} from "./cities.js?v=20261124i";
-import { byId, el } from "../shared/dom.js?v=20261124i";
+} from "./cities.js?v=20261124j";
+import { byId, el } from "../shared/dom.js?v=20261124j";
 
 const citySearchDisposers = new WeakMap();
 
