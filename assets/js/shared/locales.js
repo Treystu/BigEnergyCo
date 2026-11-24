@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261124b";
-import { RESULT_COPY } from "./result-copy.js?v=20261124b";
-import { TILT_COPY } from "./tilt-copy.js?v=20261124b";
+import { HOME_COPY } from "./home-copy.js?v=20261124c";
+import { RESULT_COPY } from "./result-copy.js?v=20261124c";
+import { TILT_COPY } from "./tilt-copy.js?v=20261124c";
 
 export const LOCALES = {
   en: {
@@ -213,6 +213,38 @@ export const LOCALES = {
       "Need a hand with your result, a system like this, or the site itself?",
     resultSupportAction: "Email Lucas — a person answers",
     resultSupportNext: "He replies within a few days. Nothing is sold.",
+    heroStatFree: "Free, always — donations optional",
+    heroStatNoSignup: "No signup",
+    heroStatNoAccount: "No account, no email required",
+    heroStatExplore: "Explore realistic bill-cut scenarios, not promises",
+    heroStatEstimates: "Estimates only",
+    heroStatVerify: "Verify with a licensed pro before building",
+    coordsMoreSummary: "More precise option: use your exact/custom coordinates",
+    climateAwareLabel: "Use climate-aware losses",
+    climateAwareHint: "dust and cold are estimated from local weather",
+    noSwapLabel: "Show the no-swap option",
+    noSwapHint:
+      "compare against the engine's direct pick, with bank swaps counted instead of avoided by oversizing",
+    deratesHeading: "Advanced: fine-tune system losses",
+    chemNaionOption: "Sodium-Ion — cold-capable, no thermal runaway",
+    chemLfpOption: "LFP (LiFePO4) — the proven standard",
+    chemAgmOption: "Lead-Acid (AGM) — cheapest upfront, shortest-lived",
+    cutTarget95: "95% — near-zero bill",
+    cutTarget80: "80% — heavy bill cut (cheapest path)",
+    cutTarget60: "60% — daytime solar priority",
+    cutTargetCustom: "Custom (from the results slider)",
+    cutValue: "Cut ~{pct}% of your bill",
+    cutValueOver:
+      "Produce ~{pct}% of your bill — bill gone, sellable surplus is sizeable above 100%",
+    faqAccurateHeading: "How accurate are the estimates?",
+    faqPaybackHeading: "Will a system pay for itself?",
+    faqCostHeading: "What does a system actually cost?",
+    faqEstimatesHeading: "Estimates, not engineering",
+    faqAiHeading: "You are talking to an AI",
+    legalThisIsHeading: "1. What this is",
+    legalMetaLine: "Free tool - no warranty - last updated 1 August 2026",
+    blogFooterSafety:
+      "Provided free, as-is, with no warranty. Estimates are educational only: verify everything with a licensed professional before building.",
     valueMomentAskChipIn: "chip in",
     valueMomentAskWorked: "tell me it worked",
     valueMomentAskSend: "send this result to someone pricing a system",
@@ -1023,6 +1055,40 @@ export const LOCALES = {
       "¿Necesitas ayuda con tu resultado, con un sistema como este o con el sitio?",
     resultSupportAction: "Escribe a Lucas — responde una persona",
     resultSupportNext: "Responde en unos días. No se vende nada.",
+    heroStatFree: "Gratis, siempre — donaciones opcionales",
+    heroStatNoSignup: "Sin registro",
+    heroStatNoAccount: "Sin cuenta y sin correo",
+    heroStatExplore: "Escenarios realistas de ahorro, no promesas",
+    heroStatEstimates: "Solo estimaciones",
+    heroStatVerify: "Verifica con un profesional antes de instalar",
+    coordsMoreSummary: "Opción más precisa: usa tus coordenadas exactas",
+    climateAwareLabel: "Usar pérdidas según el clima",
+    climateAwareHint: "el polvo y el frío se estiman con el clima local",
+    noSwapLabel: "Mostrar la opción sin recambio",
+    noSwapHint:
+      "compárala con la elección directa del motor, contando los recambios de batería en vez de evitarlos sobredimensionando",
+    deratesHeading: "Avanzado: ajustar las pérdidas del sistema",
+    chemNaionOption: "Sodio-ion — resiste el frío, sin fuga térmica",
+    chemLfpOption: "LFP (LiFePO4) — el estándar probado",
+    chemAgmOption:
+      "Plomo-ácido (AGM) — más barato al inicio, el que menos dura",
+    cutTarget95: "95% — factura casi nula",
+    cutTarget80: "80% — recorte fuerte (la vía más barata)",
+    cutTarget60: "60% — prioridad al solar de día",
+    cutTargetCustom: "Personalizado (desde el control de resultados)",
+    cutValue: "Recorta ~{pct}% de tu factura",
+    cutValueOver:
+      "Genera ~{pct}% de tu factura — la factura desaparece y sobra excedente vendible",
+    faqAccurateHeading: "¿Qué precisión tienen las estimaciones?",
+    faqPaybackHeading: "¿Se amortiza un sistema?",
+    faqCostHeading: "¿Cuánto cuesta realmente un sistema?",
+    faqEstimatesHeading: "Estimaciones, no ingeniería",
+    faqAiHeading: "Estás hablando con una IA",
+    legalThisIsHeading: "1. Qué es esto",
+    legalMetaLine:
+      "Herramienta gratuita - sin garantía - actualizada el 1 de agosto de 2026",
+    blogFooterSafety:
+      "Se ofrece gratis y tal cual, sin garantía. Las estimaciones son solo educativas: verifica todo con un profesional autorizado antes de construir.",
     valueMomentAskChipIn: "colaborar",
     valueMomentAskWorked: "cuéntame si te sirvió",
     valueMomentAskSend:
@@ -1767,6 +1833,39 @@ export const LOCALES = {
       "Precisa de ajuda com o seu resultado, com um sistema como este ou com o site?",
     resultSupportAction: "Escreva ao Lucas — responde uma pessoa",
     resultSupportNext: "Responde em poucos dias. Nada é vendido.",
+    heroStatFree: "Grátis, sempre — donativos opcionais",
+    heroStatNoSignup: "Sem registo",
+    heroStatNoAccount: "Sem conta e sem email",
+    heroStatExplore: "Cenários realistas de poupança, não promessas",
+    heroStatEstimates: "Apenas estimativas",
+    heroStatVerify: "Confirma com um profissional antes de instalar",
+    coordsMoreSummary: "Opção mais precisa: usa as tuas coordenadas exatas",
+    climateAwareLabel: "Usar perdas segundo o clima",
+    climateAwareHint: "o pó e o frio são estimados pelo clima local",
+    noSwapLabel: "Mostrar a opção sem substituição",
+    noSwapHint:
+      "compara com a escolha direta do motor, contando as substituições da bateria em vez de as evitar com sobredimensionamento",
+    deratesHeading: "Avançado: afinar as perdas do sistema",
+    chemNaionOption: "Sódio-ião — resiste ao frio, sem fuga térmica",
+    chemLfpOption: "LFP (LiFePO4) — o padrão comprovado",
+    chemAgmOption: "Chumbo-ácido (AGM) — mais barato à partida, dura menos",
+    cutTarget95: "95% — fatura quase nula",
+    cutTarget80: "80% — corte forte (a via mais barata)",
+    cutTarget60: "60% — prioridade ao solar de dia",
+    cutTargetCustom: "Personalizado (do controlo de resultados)",
+    cutValue: "Corta ~{pct}% da tua fatura",
+    cutValueOver:
+      "Produz ~{pct}% da tua fatura — a fatura desaparece e sobra excedente vendável",
+    faqAccurateHeading: "Qual é a precisão das estimativas?",
+    faqPaybackHeading: "Um sistema paga-se a si mesmo?",
+    faqCostHeading: "Quanto custa realmente um sistema?",
+    faqEstimatesHeading: "Estimativas, não engenharia",
+    faqAiHeading: "Estás a falar com uma IA",
+    legalThisIsHeading: "1. O que é isto",
+    legalMetaLine:
+      "Ferramenta gratuita - sem garantia - atualizada a 1 de agosto de 2026",
+    blogFooterSafety:
+      "Oferecido gratuitamente e tal como está, sem garantia. As estimativas são apenas educativas: confirma tudo com um profissional autorizado antes de construir.",
     valueMomentAskChipIn: "contribuir",
     valueMomentAskWorked: "conta-me se funcionou",
     valueMomentAskSend:
@@ -2504,6 +2603,43 @@ export const LOCALES = {
       "Besoin d’aide pour votre résultat, un système comme celui-ci, ou le site ?",
     resultSupportAction: "Écrivez à Lucas — une personne répond",
     resultSupportNext: "Il répond sous quelques jours. Rien n’est vendu.",
+    heroStatFree: "Gratuit, toujours — dons facultatifs",
+    heroStatNoSignup: "Sans inscription",
+    heroStatNoAccount: "Ni compte ni e-mail",
+    heroStatExplore:
+      "Des scénarios réalistes de baisse de facture, pas des promesses",
+    heroStatEstimates: "Estimations seulement",
+    heroStatVerify: "Faites vérifier par un professionnel avant de construire",
+    coordsMoreSummary: "Option plus précise : utilisez vos coordonnées exactes",
+    climateAwareLabel: "Utiliser les pertes selon le climat",
+    climateAwareHint:
+      "la poussière et le froid sont estimés d’après la météo locale",
+    noSwapLabel: "Afficher l’option sans remplacement",
+    noSwapHint:
+      "comparez avec le choix direct du moteur, en comptant les remplacements de batterie au lieu de les éviter par surdimensionnement",
+    deratesHeading: "Avancé : ajuster les pertes du système",
+    chemNaionOption:
+      "Sodium-ion — résiste au froid, sans emballement thermique",
+    chemLfpOption: "LFP (LiFePO4) — la référence éprouvée",
+    chemAgmOption:
+      "Plomb-acide (AGM) — le moins cher au départ, le moins durable",
+    cutTarget95: "95 % — facture quasi nulle",
+    cutTarget80: "80 % — forte baisse (la voie la moins chère)",
+    cutTarget60: "60 % — priorité au solaire de jour",
+    cutTargetCustom: "Personnalisé (depuis le curseur de résultats)",
+    cutValue: "Réduisez ~{pct} % de votre facture",
+    cutValueOver:
+      "Produisez ~{pct} % de votre facture — facture effacée, surplus revendable",
+    faqAccurateHeading: "Quelle est la précision des estimations ?",
+    faqPaybackHeading: "Un système s’amortit-il ?",
+    faqCostHeading: "Combien coûte vraiment un système ?",
+    faqEstimatesHeading: "Des estimations, pas de l’ingénierie",
+    faqAiHeading: "Vous parlez à une IA",
+    legalThisIsHeading: "1. Ce que c’est",
+    legalMetaLine:
+      "Outil gratuit - sans garantie - mis à jour le 1er août 2026",
+    blogFooterSafety:
+      "Fourni gratuitement, en l’état, sans garantie. Les estimations sont éducatives : faites tout vérifier par un professionnel agréé avant de construire.",
     valueMomentAskChipIn: "faire un don",
     valueMomentAskWorked: "dites-moi si ça a marché",
     valueMomentAskSend: "envoyez ce résultat à quelqu’un qui demande un devis",
@@ -3244,6 +3380,41 @@ export const LOCALES = {
     resultSupportAction: "Schreiben Sie Lucas — ein Mensch antwortet",
     resultSupportNext:
       "Er antwortet innerhalb weniger Tage. Nichts wird verkauft.",
+    heroStatFree: "Immer kostenlos — Spenden freiwillig",
+    heroStatNoSignup: "Keine Anmeldung",
+    heroStatNoAccount: "Kein Konto, keine E-Mail",
+    heroStatExplore:
+      "Realistische Szenarien zur Senkung der Rechnung, keine Versprechen",
+    heroStatEstimates: "Nur Schätzungen",
+    heroStatVerify: "Vor dem Bau von einem Fachbetrieb prüfen lassen",
+    coordsMoreSummary: "Genauere Option: eigene Koordinaten verwenden",
+    climateAwareLabel: "Klimaabhängige Verluste verwenden",
+    climateAwareHint: "Staub und Kälte werden aus dem lokalen Wetter geschätzt",
+    noSwapLabel: "Option ohne Austausch anzeigen",
+    noSwapHint:
+      "vergleicht mit der direkten Wahl der Engine, wobei Batterietausch gezählt statt durch Überdimensionierung vermieden wird",
+    deratesHeading: "Erweitert: Systemverluste feinjustieren",
+    chemNaionOption: "Natrium-Ionen — kältefest, kein thermisches Durchgehen",
+    chemLfpOption: "LFP (LiFePO4) — der bewährte Standard",
+    chemAgmOption:
+      "Blei-Säure (AGM) — am billigsten am Anfang, am kurzlebigsten",
+    cutTarget95: "95 % — fast keine Rechnung",
+    cutTarget80: "80 % — starke Senkung (günstigster Weg)",
+    cutTarget60: "60 % — Vorrang für Solar am Tag",
+    cutTargetCustom: "Individuell (aus dem Ergebnisregler)",
+    cutValue: "Rechnung um ~{pct} % senken",
+    cutValueOver:
+      "~{pct} % der Rechnung erzeugen — Rechnung weg, verkaufbarer Überschuss",
+    faqAccurateHeading: "Wie genau sind die Schätzungen?",
+    faqPaybackHeading: "Rechnet sich ein System?",
+    faqCostHeading: "Was kostet ein System wirklich?",
+    faqEstimatesHeading: "Schätzungen, keine Ingenieursleistung",
+    faqAiHeading: "Sie sprechen mit einer KI",
+    legalThisIsHeading: "1. Was das ist",
+    legalMetaLine:
+      "Kostenloses Werkzeug - keine Garantie - Stand 1. August 2026",
+    blogFooterSafety:
+      "Kostenlos und wie besehen, ohne Gewähr. Schätzungen dienen nur der Orientierung – lassen Sie alles vor dem Bau von einem Fachbetrieb prüfen.",
     valueMomentAskChipIn: "etwas beitragen",
     valueMomentAskWorked: "sag mir, ob es geklappt hat",
     valueMomentAskSend:
@@ -3895,6 +4066,39 @@ export const LOCALES = {
     resultSupportAction: "Mail Lucas — een mens antwoordt",
     resultSupportNext:
       "Hij antwoordt binnen enkele dagen. Niets wordt verkocht.",
+    heroStatFree: "Altijd gratis — donaties optioneel",
+    heroStatNoSignup: "Geen aanmelding",
+    heroStatNoAccount: "Geen account, geen e-mail",
+    heroStatExplore:
+      "Realistische scenario's voor een lagere rekening, geen beloftes",
+    heroStatEstimates: "Alleen schattingen",
+    heroStatVerify: "Laat het door een vakman controleren voor je bouwt",
+    coordsMoreSummary: "Nauwkeuriger optie: gebruik je eigen coördinaten",
+    climateAwareLabel: "Klimaatbewuste verliezen gebruiken",
+    climateAwareHint: "stof en kou worden geschat uit het lokale weer",
+    noSwapLabel: "Optie zonder vervanging tonen",
+    noSwapHint:
+      "vergelijkt met de directe keuze van de engine, waarbij batterijvervanging wordt geteld in plaats van vermeden door overdimensioneren",
+    deratesHeading: "Geavanceerd: systeemverliezen fijn afstellen",
+    chemNaionOption: "Natrium-ion — koudbestendig, geen thermal runaway",
+    chemLfpOption: "LFP (LiFePO4) — de bewezen standaard",
+    chemAgmOption: "Lood-zuur (AGM) — goedkoopst vooraf, kortste levensduur",
+    cutTarget95: "95% — bijna geen rekening",
+    cutTarget80: "80% — flinke verlaging (goedkoopste route)",
+    cutTarget60: "60% — voorrang voor zon overdag",
+    cutTargetCustom: "Aangepast (vanuit de resultatenslider)",
+    cutValue: "Verlaag je rekening met ~{pct}%",
+    cutValueOver:
+      "Wek ~{pct}% van je rekening op — rekening weg, verkoopbaar overschot",
+    faqAccurateHeading: "Hoe nauwkeurig zijn de schattingen?",
+    faqPaybackHeading: "Verdient een systeem zichzelf terug?",
+    faqCostHeading: "Wat kost een systeem echt?",
+    faqEstimatesHeading: "Schattingen, geen engineering",
+    faqAiHeading: "Je praat met een AI",
+    legalThisIsHeading: "1. Wat dit is",
+    legalMetaLine: "Gratis tool - geen garantie - bijgewerkt 1 augustus 2026",
+    blogFooterSafety:
+      "Gratis en zo geleverd, zonder garantie. Schattingen zijn alleen educatief: laat alles door een vakman controleren voor je bouwt.",
     valueMomentAskChipIn: "een bijdrage doen",
     valueMomentAskWorked: "laat me weten of het werkte",
     valueMomentAskSend:
@@ -4810,6 +5014,38 @@ export const LOCALES = {
       "هل تحتاج مساعدة في نتيجتك أو في نظام كهذا أو في الموقع نفسه؟",
     resultSupportAction: "راسل لوكاس — يجيب إنسان",
     resultSupportNext: "يرد خلال أيام قليلة. لا يُباع شيء.",
+    heroStatFree: "مجاني دائمًا — التبرعات اختيارية",
+    heroStatNoSignup: "بلا تسجيل",
+    heroStatNoAccount: "بلا حساب وبلا بريد إلكتروني",
+    heroStatExplore: "سيناريوهات واقعية لخفض الفاتورة، لا وعود",
+    heroStatEstimates: "تقديرات فقط",
+    heroStatVerify: "تحقّق مع فني مؤهل قبل التنفيذ",
+    coordsMoreSummary: "خيار أدق: استخدم إحداثياتك الدقيقة",
+    climateAwareLabel: "استخدام الفواقد حسب المناخ",
+    climateAwareHint: "يُقدَّر الغبار والبرد من الطقس المحلي",
+    noSwapLabel: "إظهار خيار بلا استبدال",
+    noSwapHint:
+      "قارنه باختيار المحرك المباشر، مع احتساب استبدال البطارية بدل تجنّبه بالتكبير الزائد",
+    deratesHeading: "متقدم: ضبط فواقد النظام",
+    chemNaionOption: "صوديوم-أيون — يتحمل البرد، بلا هروب حراري",
+    chemLfpOption: "LFP (LiFePO4) — المعيار المُجرَّب",
+    chemAgmOption: "رصاص-حمض (AGM) — الأرخص ابتداءً والأقصر عمرًا",
+    cutTarget95: "95% — فاتورة شبه معدومة",
+    cutTarget80: "80% — خفض كبير (المسار الأرخص)",
+    cutTarget60: "60% — أولوية للشمس نهارًا",
+    cutTargetCustom: "مخصص (من شريط النتائج)",
+    cutValue: "اخفض فاتورتك بنحو {pct}%",
+    cutValueOver:
+      "أنتج نحو {pct}% من فاتورتك — تختفي الفاتورة ويتبقى فائض قابل للبيع",
+    faqAccurateHeading: "ما مدى دقة التقديرات؟",
+    faqPaybackHeading: "هل يسترد النظام تكلفته؟",
+    faqCostHeading: "كم يكلّف النظام فعلاً؟",
+    faqEstimatesHeading: "تقديرات، لا هندسة",
+    faqAiHeading: "أنت تتحدث مع ذكاء اصطناعي",
+    legalThisIsHeading: "1. ما هذا",
+    legalMetaLine: "أداة مجانية - بلا ضمان - محدَّثة في 1 أغسطس 2026",
+    blogFooterSafety:
+      "يُقدَّم مجانًا وكما هو، بلا ضمان. التقديرات تعليمية فقط: تحقّق من كل شيء مع فني مؤهل قبل التنفيذ.",
     valueMomentAskChipIn: "المساهمة",
     valueMomentAskWorked: "أخبرني إن نجح الأمر",
     valueMomentAskSend: "أرسل هذه النتيجة لمن يطلب عرض سعر لنظام",
