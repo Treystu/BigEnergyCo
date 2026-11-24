@@ -23,17 +23,13 @@
       Cut Your Electricity Bill — Free Solar &amp; Battery Calculator
     </title>
 
-    <!-- Google Search Console: active property for freeoffgridcalculator.com.
-         Domain properties verify via DNS TXT in Cloudflare; this HTML tag is
-         the verification method for URL-prefix properties (and a fallback). -->
+    <!-- GSC: verifies URL-prefix properties for freeoffgridcalculator.com. -->
     <meta
       name="google-site-verification"
       content="zVFiMH4WnfvhMHtnivIgDm_-5XtelVgcL709oHh3pWk"
     />
-    <!-- Legacy: verification token of the old pages.dev URL-prefix property.
-         Keep until that property is retired, then remove.
-         Revisit: if the pages.dev property is still verified after
-         2027-01-01, either retire it there or extend this note. -->
+    <!-- Legacy: token for the old pages.dev URL-prefix property; retire it with
+         that property (revisit after 2027-01-01). -->
     <meta
       name="google-site-verification"
       content="iXiF6PQy5IhjMtll2YzS3-amK6BtApSkpdlKM73dSEc"
@@ -88,10 +84,7 @@
       content="https://freeoffgridcalculator.com/assets/og-card.jpg"
     />
 
-    <!-- hreflang is intentionally en + x-default only. The ?lang= variants
-         are client-side translations that canonical to this URL, so Google
-         would discard them as non-indexable hreflang targets. Add a locale
-         hreflang only together with a real indexable, self-canonical URL. -->
+    <!-- hreflang: en + x-default only; ?lang= variants are client-side. -->
     <link
       rel="alternate"
       hreflang="en"
@@ -256,13 +249,11 @@
       }
     </script>
 
-    <!-- Early Hints prep: these two are on every page's critical path. When
-         the zone's Early Hints setting is on, Cloudflare turns them into a
-         103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261124b" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261124b" />
+    <!-- Early Hints: critical path; Cloudflare turns these into a 103 when enabled. -->
+    <link rel="preload" href="./assets/site.css?v=20261124g" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261124g" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261124b" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261124g" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -330,7 +321,9 @@
   </head>
 
   <body>
-    <a class="skip-link" href="#sizing">Skip to calculator</a>
+    <a class="skip-link" href="#sizing" data-i18n="skipToCalculator"
+      >Skip to calculator</a
+    >
     <main id="main-content">
       <!-- Header / Navigation Bar -->
 
@@ -518,29 +511,33 @@
             <div class="stat-card">
               <div class="stat-val">$0</div>
 
-              <div class="stat-label">
+              <div class="stat-label" data-i18n="heroStatFree">
                 Free, always &mdash; donations optional
               </div>
             </div>
 
             <div class="stat-card">
-              <div class="stat-val">No signup</div>
+              <div class="stat-val" data-i18n="heroStatNoSignup">No signup</div>
 
-              <div class="stat-label">No account, no email required</div>
+              <div class="stat-label" data-i18n="heroStatNoAccount">
+                No account, no email required
+              </div>
             </div>
 
             <div class="stat-card">
               <div class="stat-val">50%+</div>
 
-              <div class="stat-label">
+              <div class="stat-label" data-i18n="heroStatExplore">
                 Explore realistic bill-cut scenarios, not promises
               </div>
             </div>
 
             <div class="stat-card">
-              <div class="stat-val">Estimates only</div>
+              <div class="stat-val" data-i18n="heroStatEstimates">
+                Estimates only
+              </div>
 
-              <div class="stat-label">
+              <div class="stat-label" data-i18n="heroStatVerify">
                 Verify with a licensed pro before building
               </div>
             </div>
@@ -568,9 +565,8 @@
 
           <div class="calc-card">
             <div class="calc-controls">
-              <!-- Location-first ask (GQ F1 / #430): the one question that
-               makes every number specific comes before any number is asked
-               for. Presentation spec V1, section 3, intake R1. -->
+              <!-- Location-first (GQ F1 / #430, spec V1 s3 R1): the question
+               that makes every number specific comes first. -->
               <div class="form-group no-bottom-spacing">
                 <div
                   style="
@@ -598,6 +594,7 @@
                       border-radius: 4px;
                       border: 1px solid rgba(0, 230, 153, 0.25);
                     "
+                    data-i18n="placeHintWorldwide"
                     >Works worldwide &bull; any city, town, or coordinates</span
                   >
                 </div>
@@ -759,6 +756,7 @@
                       font-size: 0.8rem;
                       color: var(--text-muted);
                     "
+                    data-i18n="coordsMoreSummary"
                   >
                     More precise option: use your exact/custom coordinates
                   </summary>
@@ -787,7 +785,9 @@
                     "
                   >
                     <div class="form-group no-bottom-spacing">
-                      <label for="latInput">Latitude (&minus;90 to 90):</label>
+                      <label for="latInput" data-i18n="labelLatitude"
+                        >Latitude (&minus;90 to 90):</label
+                      >
 
                       <input
                         type="number"
@@ -799,7 +799,7 @@
                     </div>
 
                     <div class="form-group no-bottom-spacing">
-                      <label for="lonInput"
+                      <label for="lonInput" data-i18n="labelLongitude"
                         >Longitude (&minus;180 to 180):</label
                       >
 
@@ -815,9 +815,7 @@
                 </details>
               </div>
 
-              <!-- Goal selection: grid-tie bill cutting vs full off-grid. A
-               control, not an action (spec section 1, rule 2), and it follows
-               the location ask. -->
+              <!-- Goal: a control, not an action (spec s1 r2), after location. -->
               <div
                 class="form-group goal-segmented-wrap"
                 style="margin-bottom: 0.9rem"
@@ -946,6 +944,7 @@
                       font-size: 0.95rem;
                       margin: 0;
                     "
+                    data-i18n="labelOffgridKwh"
                     >Off-grid power need (kWh/day):</label
                   >
                   <div
@@ -1071,8 +1070,7 @@
                       aria-describedby="rateError"
                     />
 
-                    <!-- Says why a rejected price was rejected, in the visitor's
-                    language, wired to the input through aria-describedby. -->
+                    <!-- Rejection reason, localized, wired via aria-describedby. -->
                     <p
                       id="rateError"
                       class="field-error"
@@ -1418,15 +1416,15 @@
                     >
 
                     <select id="hardwareConfig" class="form-control" hidden>
-                      <option value="both" selected>
+                      <option value="both" selected data-i18n="hwSolarBattery">
                         Solar + Battery (Default)
                       </option>
 
-                      <option value="solar">
+                      <option value="solar" data-i18n="hwSolarOnly">
                         Solar only (Grid-tie credits/metering)
                       </option>
 
-                      <option value="battery">
+                      <option value="battery" data-i18n="hwBatteryOnly">
                         Battery only (Peak-hour ToU offset)
                       </option>
                     </select>
@@ -1602,17 +1600,22 @@
                     <label
                       for="climateAwareToggle"
                       style="margin: 0; font-weight: 700; cursor: pointer"
+                      data-i18n="climateAwareLabel"
                       >Use climate-aware losses</label
                     >
-                    <span style="font-size: 0.78rem; color: var(--text-muted)"
+                    <span
+                      style="font-size: 0.78rem; color: var(--text-muted)"
+                      data-i18n="climateAwareHint"
                       >dust and cold are estimated from local weather</span
                     >
                   </div>
 
                   <div class="toggle-row">
                     <input type="checkbox" id="noSwapToggle" />
-                    <label for="noSwapToggle">Show the no-swap option</label>
-                    <span class="toggle-hint"
+                    <label for="noSwapToggle" data-i18n="noSwapLabel"
+                      >Show the no-swap option</label
+                    >
+                    <span class="toggle-hint" data-i18n="noSwapHint"
                       >compare against the engine's direct pick, with bank swaps
                       counted instead of avoided by oversizing</span
                     >
@@ -1694,6 +1697,7 @@
                     <div
                       style="font-weight: 700; margin-bottom: 0.35rem"
                       id="deratesHeading"
+                      data-i18n="deratesHeading"
                     >
                       Advanced: fine-tune system losses
                     </div>
@@ -1724,6 +1728,7 @@
                             color: var(--text-muted);
                             margin: 0.25rem 0 0;
                           "
+                          data-i18n="derateHintTypical"
                         >
                           85–100; 98 is typical
                         </p>
@@ -1768,15 +1773,15 @@
                         cost
                       </option>
 
-                      <option value="naion">
+                      <option value="naion" data-i18n="chemNaionOption">
                         Sodium-Ion &mdash; cold-capable, no thermal runaway
                       </option>
 
-                      <option value="lfp">
+                      <option value="lfp" data-i18n="chemLfpOption">
                         LFP (LiFePO4) &mdash; the proven standard
                       </option>
 
-                      <option value="agm">
+                      <option value="agm" data-i18n="chemAgmOption">
                         Lead-Acid (AGM) &mdash; cheapest upfront, shortest-lived
                       </option>
                     </select>
@@ -1833,22 +1838,27 @@
                     >
 
                     <select id="autoTarget" class="form-control">
-                      <!-- These three are exactly the grid-tie columns the engine
-                         sizes (BILL_TARGETS): the recommendation can always
-                         honor the choice. -->
-                      <option value="cut95">95% &mdash; near-zero bill</option>
+                      <!-- Exactly the engine's grid-tie BILL_TARGETS columns. -->
+                      <option value="cut95" data-i18n="cutTarget95">
+                        95% &mdash; near-zero bill
+                      </option>
 
-                      <option value="cut80" selected>
+                      <option value="cut80" selected data-i18n="cutTarget80">
                         80% &mdash; heavy bill cut (cheapest path)
                       </option>
 
-                      <option value="cut60">
+                      <option value="cut60" data-i18n="cutTarget60">
                         60% &mdash; daytime solar priority
                       </option>
 
                       <!-- Filled in whenever the results slider holds an
                          arbitrary cut: the two controls are one decision. -->
-                      <option value="custom" hidden disabled>
+                      <option
+                        value="custom"
+                        hidden
+                        disabled
+                        data-i18n="cutTargetCustom"
+                      >
                         Custom (from the results slider)
                       </option>
                     </select>
@@ -1906,14 +1916,7 @@
                         maxlength="4"
                       />
 
-                      <!-- FX provenance (P1.4, F-10). Never empty: the static
-                         wording is the shipped default, so a visitor who never
-                         gets a live rate - offline, blocked, or JS still
-                         loading - still learns where the rate came from. The
-                         sizing UI swaps in the dated wording once a live fetch
-                         lands, and swaps the failure wording if it does not.
-                         role="status" so the change is announced rather than
-                         only drawn. -->
+                      <!-- FX provenance (P1.4, F-10): never empty; role="status" announces the swap. -->
                       <p
                         id="fxAsOf"
                         role="status"
@@ -1927,12 +1930,7 @@
                         Rate source: open.er-api.com. No live rate loaded, so
                         these are built-in estimates.
                       </p>
-                      <!-- V-07: the FX provider's Open Access terms require
-                         attribution and forbid redistribution. This link is
-                         the attribution it asks for, shown wherever the rates
-                         are used. The rates themselves stay fetched live and
-                         are never written into shipped data, which is what
-                         keeps us on the permitted side of that term. -->
+                      <!-- V-07: provider terms require attribution and forbid redistribution. -->
                       <p
                         style="font-size: 0.7rem; margin-top: 0.15rem"
                         data-provenance-link="open_er_api_fx"
@@ -2033,8 +2031,7 @@
             </div>
 
             <div class="results-box">
-              <!-- Bill-cut slider (1–150%), grid-tie only: drives the "your target"
-               matrix column, the curve marker, and every downstream chart. -->
+              <!-- Bill-cut slider (1–150%), grid-tie; drives the target column and charts. -->
               <div
                 id="cutSliderRow"
                 style="
@@ -2096,8 +2093,7 @@
                 </p>
               </div>
 
-              <!-- Budget slider: walks the cached spectrum by up-front cost.
-               Drag previews from cache only; release selects that system. -->
+              <!-- Budget slider: cached spectrum by up-front cost; drag previews from cache. -->
               <div
                 id="budgetSliderRow"
                 style="
@@ -2248,8 +2244,7 @@
                   "
                 ></div>
 
-                <!-- Granular panel: the selected system as icons + big numbers.
-               Follows every chart's selection; renders from cached data. -->
+                <!-- Granular panel: the selected system as icons and numbers. -->
                 <div
                   id="focusPanel"
                   class="results-demoted"
@@ -2748,12 +2743,8 @@
                   >
                 </p>
 
-                <!-- V2: the ask, at the value moment. One quiet line with three
-                  doors - chip in, say it worked, or send it to someone who is
-                  pricing a system. The gratitude moment already existed here;
-                  until now nothing on this card could receive it. Revealed by
-                  renderResults() with the other result actions, never before
-                  a result exists. -->
+                <!-- V2: the ask at the value moment - one line, three doors, revealed
+                  by renderResults() only once a result exists. -->
                 <p id="valueMomentAsk" class="vma" role="note" hidden>
                   <span data-i18n="valueMomentAskLead"
                     >If this saved you a call or a quote:</span
@@ -2817,7 +2808,7 @@
 
               <div class="bom-price">
                 ~$43.50 / cell
-                <span class="muted-small"
+                <span class="muted-small" data-i18n="partsExWorksNote"
                   >(indicative ex-works China, Aug 2026)</span
                 >
               </div>
@@ -2835,7 +2826,7 @@
 
               <div class="bom-price">
                 ~$92.00 / unit
-                <span class="muted-small"
+                <span class="muted-small" data-i18n="partsExWorksNote"
                   >(indicative ex-works China, Aug 2026)</span
                 >
               </div>
@@ -2895,7 +2886,9 @@
 
           <div class="legal-grid">
             <div class="legal-card">
-              <h3>How accurate are the estimates?</h3>
+              <h3 data-i18n="faqAccurateHeading">
+                How accurate are the estimates?
+              </h3>
 
               <p data-i18n="estimateMethodDisclaimer">
                 Every number comes from testable code simulating your exact
@@ -2907,7 +2900,9 @@
             </div>
 
             <div class="legal-card">
-              <h3>Will a system pay for itself?</h3>
+              <h3 data-i18n="faqPaybackHeading">
+                Will a system pay for itself?
+              </h3>
 
               <p data-i18n="paybackClaim">
                 Where grid power is expensive - Hawaii, islands, much of Europe,
@@ -2919,7 +2914,9 @@
             </div>
 
             <div class="legal-card">
-              <h3>What does a system actually cost?</h3>
+              <h3 data-i18n="faqCostHeading">
+                What does a system actually cost?
+              </h3>
 
               <p data-i18n="batteryCostClaim">
                 Battery banks self-built from prismatic cells typically land
@@ -2932,7 +2929,7 @@
 
           <div class="legal-grid" style="margin-top: 1rem">
             <div class="legal-card">
-              <h3>Do I need a generator?</h3>
+              <h3 data-i18n="faqGeneratorHeading">Do I need a generator?</h3>
 
               <p data-i18n="offgridTradeoff">
                 Only if you want near-total independence through weeks of bad
@@ -2943,7 +2940,9 @@
             </div>
 
             <div class="legal-card">
-              <h3>Does it work without internet?</h3>
+              <h3 data-i18n="faqOfflineHeading">
+                Does it work without internet?
+              </h3>
 
               <p data-i18n="offlineFallback">
                 Yes. After your first visit the tool installs itself as an
@@ -2954,7 +2953,9 @@
             </div>
 
             <div class="legal-card">
-              <h3>Is building my own battery safe?</h3>
+              <h3 data-i18n="faqBatterySafeHeading">
+                Is building my own battery safe?
+              </h3>
 
               <p data-i18n="batterySafety">
                 It demands respect: lithium cells store enough energy to start
@@ -3081,7 +3082,9 @@
             </div>
 
             <div class="legal-card">
-              <h3>Estimates, not engineering</h3>
+              <h3 data-i18n="faqEstimatesHeading">
+                Estimates, not engineering
+              </h3>
 
               <p data-i18n="resultEstimateDisclaimer">
                 Output is an automated educational estimate. It is not
@@ -3102,7 +3105,7 @@
             </div>
 
             <div class="legal-card">
-              <h3>You are talking to an AI</h3>
+              <h3 data-i18n="faqAiHeading">You are talking to an AI</h3>
 
               <p data-i18n="advisorIsAi">
                 The advisor is a large language model. It generates
@@ -3122,7 +3125,7 @@
             </div>
 
             <div class="legal-card">
-              <h3>No accounts, no tracking</h3>
+              <h3 data-i18n="faqPrivacyHeading">No accounts, no tracking</h3>
 
               <p data-i18n="chatPrivacySummary">
                 No signup, no cookies for advertising, no analytics profile.
@@ -3385,11 +3388,16 @@
       <div class="modal-card" style="max-width: 700px">
         <div class="modal-header">
           <div>
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff">
+            <h3
+              style="font-size: 1.25rem; font-weight: 800; color: #fff"
+              data-i18n="legalTermsTitle"
+            >
               Terms of Use &amp; Disclaimer
             </h3>
 
-            <span style="font-size: 0.8rem; color: var(--primary-accent)"
+            <span
+              style="font-size: 0.8rem; color: var(--primary-accent)"
+              data-i18n="legalMetaLine"
               >Free tool - no warranty - last updated 1 August 2026</span
             >
           </div>
@@ -3414,7 +3422,9 @@
             font-size: 0.95rem;
           "
         >
-          <h4 class="legal-section-heading">1. What this is</h4>
+          <h4 class="legal-section-heading" data-i18n="legalThisIsHeading">
+            1. What this is
+          </h4>
 
           <p class="paragraph-spacing" data-i18n="operatorDescription">
             This is a free, personal, non-commercial educational tool operated
@@ -3424,7 +3434,7 @@
             for sale and no service is being offered or promised to you.
           </p>
 
-          <h4 class="legal-section-heading">
+          <h4 class="legal-section-heading" data-i18n="legalEstimatesHeading">
             2. Estimates only &mdash; no reliance
           </h4>
 
@@ -3440,7 +3450,9 @@
             energizing anything.
           </p>
 
-          <h4 class="legal-section-heading">3. AI-generated content</h4>
+          <h4 class="legal-section-heading" data-i18n="legalAiHeading2">
+            3. AI-generated content
+          </h4>
 
           <p class="paragraph-spacing" data-i18n="llmDisclaimer">
             You are interacting with a large language model. It produces fluent,
@@ -3449,7 +3461,9 @@
             every output as an unverified starting point.
           </p>
 
-          <h4 class="legal-section-heading">4. Safety</h4>
+          <h4 class="legal-section-heading" data-i18n="legalSafetyHeading">
+            4. Safety
+          </h4>
 
           <p class="paragraph-spacing" data-i18n="electricalSafetyDisclaimer">
             Battery banks, high DC currents, and mains wiring can cause arc
@@ -3461,7 +3475,9 @@
             codes.
           </p>
 
-          <h4 class="legal-section-heading">5. No warranty</h4>
+          <h4 class="legal-section-heading" data-i18n="legalNoWarrantyHeading">
+            5. No warranty
+          </h4>
 
           <p class="paragraph-spacing" data-i18n="siteAsIs">
             THIS SITE AND ITS OUTPUT ARE PROVIDED "AS IS" AND "AS AVAILABLE",
@@ -3472,7 +3488,9 @@
             change or disappear at any time without notice.
           </p>
 
-          <h4 class="legal-section-heading">6. Limitation of liability</h4>
+          <h4 class="legal-section-heading" data-i18n="legalLiabilityHeading">
+            6. Limitation of liability
+          </h4>
 
           <p class="paragraph-spacing" data-i18n="liabilityLimitation">
             To the fullest extent permitted by applicable law, the operator
@@ -3487,7 +3505,9 @@
             fraud.
           </p>
 
-          <h4 class="legal-section-heading">7. Contributions</h4>
+          <h4 class="legal-section-heading" data-i18n="legalContribHeading">
+            7. Contributions
+          </h4>
 
           <p class="paragraph-spacing">
             <span data-i18n="donationTermsPrefix">
@@ -3503,7 +3523,9 @@
             </span>
           </p>
 
-          <h4 class="legal-section-heading">8. Privacy</h4>
+          <h4 class="legal-section-heading" data-i18n="legalPrivacyHeading">
+            8. Privacy
+          </h4>
 
           <p class="paragraph-spacing" data-i18n="advisorPrivacyDisclosure">
             No account is required and no personal details are requested. Text
@@ -3515,7 +3537,9 @@
             prevent abuse.
           </p>
 
-          <h4 class="legal-section-heading">9. Acceptable use</h4>
+          <h4 class="legal-section-heading" data-i18n="legalUseHeading">
+            9. Acceptable use
+          </h4>
 
           <p data-i18n="rateLimitDisclaimer">
             Please don't automate, scrape, or hammer this tool &mdash; it is one
@@ -3534,12 +3558,14 @@
       role="dialog"
       aria-modal="true"
       aria-label="Full system analysis"
+      data-i18n-aria-label="analysisFullSystem"
     >
       <div class="modal-card" style="max-width: 640px">
         <div class="modal-header">
           <h3
             id="systemModalTitle"
             style="font-size: 1.2rem; font-weight: 800; color: #fff; margin: 0"
+            data-i18n="systemModalHeading"
           >
             Full system analysis
           </h3>
@@ -3592,15 +3618,14 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261124b"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261124g"></script>
 
-    <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
-         the advisor posts without a token in that case, exactly as before. -->
+    <!-- Turnstile client (B1/R-CF-02): harmless with no site key. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261124b"
+      src="./assets/js/turnstile-client.js?v=20261124g"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261124b"></script>
+    <script defer src="./assets/js/chat.js?v=20261124g"></script>
   </body>
 </html>
 
