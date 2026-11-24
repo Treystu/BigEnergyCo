@@ -120,14 +120,21 @@ test("#437: every censused string in the markup carries a hook", () => {
 });
 
 test("#437: the AI modal label is translated, not just drawn", () => {
-  assert.match(html, /aria-label="Full system analysis"\s+data-i18n-aria-label="analysisFullSystem"/);
+  assert.match(
+    html,
+    /aria-label="Full system analysis"\s+data-i18n-aria-label="analysisFullSystem"/,
+  );
 });
 
 test("#437: the JS painters are in the language-change repaint list", () => {
   const start = ui.indexOf("function repaintRuntimeCopy()");
   assert.ok(start > 0, "repaintRuntimeCopy must exist");
   const body = ui.slice(start, start + 1400);
-  for (const call of ["updateLoadReadout()", "syncCutLabel()", "renderFxStatus()"]) {
+  for (const call of [
+    "updateLoadReadout()",
+    "syncCutLabel()",
+    "renderFxStatus()",
+  ]) {
     assert.ok(body.includes(call), `repaintRuntimeCopy must call ${call}`);
   }
 });
@@ -156,8 +163,8 @@ test("#437: the four localized posts render the footer they were missing", () =>
     assert.equal(footers.length, 1, `${page} must render exactly one footer`);
     assert.match(footers[0], /data-i18n="blogFooterSafety"/);
     assert.ok(
-      (footers[0].match(/href="mailto:lucasballek@gmail\.com"/g) || []).length ===
-        1,
+      (footers[0].match(/href="mailto:lucasballek@gmail\.com"/g) || [])
+        .length === 1,
       `${page} footer must carry the contact link once`,
     );
   }
