@@ -11,7 +11,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { LOCALES } from "../assets/js/shared/locales.js";
-import { planBreakdown } from "../assets/js/sizing/plan-card.js";
+import { partsBreakdown as planBreakdown } from "../assets/js/sizing/plan-card.js";
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const ui = readFileSync(
@@ -73,47 +73,35 @@ test("CALCULATOR: where, goal, monthly bill, then one action", () => {
   assert.match(html, /<summary data-i18n="advancedSummary">/);
 });
 
-test("PLAN: the one price is the sum of its three lines", () => {
+test("PLAN: the one price is the sum of its three parts lines", () => {
   assert.match(html, /id="planCardWrap"/);
-  assert.match(ui, /planBreakdown\(route\)/);
+  assert.match(ui, /partsBreakdown\(/);
   assert.match(ui, /if \(!consistent\) return;/);
 
-  // The self-purchase route's real shape: three non-empty lines.
-  const self = {
-    hardware: 4200,
-    labour: 1800,
-    fees: 700,
-    tools: 250,
-    year0: 6950,
-  };
-  const b = planBreakdown(self);
-  assert.equal(b.hardware, 4200);
-  assert.equal(b.labour, 1800);
-  assert.equal(b.feesAndTools, 950, "tools ride with the permits");
-  assert.equal(b.total, 6950);
-  assert.equal(b.hardware + b.labour + b.feesAndTools, b.total);
-  assert.equal(b.total, b.year0);
+  // The DIY parts basket: panels, battery, inverter, and nothing else.
+  const parts = { panelsUsd: 4200, batteryUsd: 3100, inverterUsd: 900 };
+  const b = planBreakdown(parts, 8200);
+  assert.equal(b.panels, 4200);
+  assert.equal(b.battery, 3100);
+  assert.equal(b.inverter, 900);
+  assert.equal(b.total, 8200);
+  assert.equal(b.panels + b.battery + b.inverter, b.total);
   assert.equal(b.consistent, true);
 
-  // An all-in benchmark route: the same identity over structural zeros.
-  const turnkey = { hardware: 8800, labour: 0, fees: 0, tools: 0, year0: 8800 };
-  const t2 = planBreakdown(turnkey);
-  assert.equal(t2.total, 8800);
-  assert.equal(t2.consistent, true);
+  // The engine's canonical parts figure is the only number the card may print.
+  assert.equal(planBreakdown(parts, 12345).consistent, false);
 });
 
-test("PLAN: a route whose parts disagree with its total renders no plan", () => {
-  const broken = {
-    hardware: 4200,
-    labour: 1800,
-    fees: 700,
-    tools: 250,
-    year0: 9999,
-  };
-  assert.equal(planBreakdown(broken).consistent, false);
-  assert.equal(planBreakdown({}).consistent, false);
+test("PLAN: a parts basket that disagrees with its total renders no plan", () => {
   assert.equal(
-    planBreakdown({ hardware: 0, labour: 0, fees: 0, tools: 0, year0: 0 })
+    planBreakdown({ panelsUsd: 4200, batteryUsd: 3100, inverterUsd: 900 }, 9999)
+      .consistent,
+    false,
+  );
+  assert.equal(planBreakdown({}, 5000).consistent, false);
+  assert.equal(planBreakdown(undefined, undefined).consistent, false);
+  assert.equal(
+    planBreakdown({ panelsUsd: 0, batteryUsd: 0, inverterUsd: 0 }, 0)
       .consistent,
     false,
     "a zero plan is not a plan",
@@ -126,12 +114,12 @@ test("every locale carries the simplified-interface strings", () => {
     "advancedSummary",
     "planTitle",
     "planBasis",
-    "planStatSavings",
-    "planStatPayback",
+    "planStatPartsPayback",
+    "planStatInstalledPayback",
     "planStatBillCut",
-    "planRowHardware",
-    "planRowLabour",
-    "planRowFees",
+    "planRowPanels",
+    "planRowBattery",
+    "planRowInverter",
     "planTotalLabel",
     "planSystemSize",
     "planPaybackValue",

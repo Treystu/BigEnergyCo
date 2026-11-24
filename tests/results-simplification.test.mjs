@@ -1,11 +1,12 @@
-// #403 Cure C: one disclosure governs everything that is not the outcome, the
-// cost table or the actions.
+// Owner order 2026-11-24 (STAGING-RESTORED): the results surface is the full
+// previous one again. The disclosure still exists, but it holds only the
+// technical workings — the charts, the frontier and the readable card render
+// without opening anything. These pins hold that reversal: no stylesheet rule
+// may hide a results block, and no runtime fold may move one into a host.
 //
-// The shape is a markup property, so it is pinned on the markup: every id that
-// was demoted must carry the class the stylesheet hides, and the stylesheet must
-// actually hide that class while <html> lacks the open attribute. A demoted
-// block that lost the class would come back with nothing failing, which is the
-// silent-regression shape this file exists to stop.
+// Before this order the same file pinned the opposite (the closed disclosure
+// winning over every inline display rule); the reverse is pinned here because
+// the stripped surface is what the owner replaced.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
@@ -50,13 +51,36 @@ test("one disclosure exists, closed by default, and is labelled", () => {
   assert.match(m[1], /<summary[^>]*data-i18n="resultsMoreSummary"/);
 });
 
-test("every demoted block carries the class the disclosure governs", () => {
-  for (const id of DEMOTED)
-    assert.match(
-      tagFor(id),
-      /class="[^"]*results-demoted/,
-      `#${id} must carry results-demoted or it renders outside the disclosure`,
-    );
+test("no stylesheet rule hides a results block any more", () => {
+  for (const id of DEMOTED) tagFor(id);
+  assert.doesNotMatch(
+    CSS,
+    /html:not\(\[data-results-more\]\)\s+\.results-demoted/,
+    "the closed disclosure must not hide the restored surface",
+  );
+  assert.doesNotMatch(
+    CSS,
+    /\.results-demoted\s*\{[^}]*display:\s*none/,
+    "no rule may collapse a results block",
+  );
+});
+
+test("the runtime fold is gone", () => {
+  const UI = readFileSync(
+    new URL("../assets/js/sizing/ui.js", import.meta.url),
+    "utf8",
+  );
+  assert.doesNotMatch(
+    HTML,
+    /resultsDetailHost/,
+    "no detail host in the markup",
+  );
+  assert.doesNotMatch(UI, /resultsDetailHost/, "no runtime fold into a host");
+  assert.doesNotMatch(
+    UI,
+    /#resultsRegion \.result-actions-row/,
+    "nothing walks the DOM to hide the actions row",
+  );
 });
 
 test("the outcome, the cost table and the actions are NOT demoted", () => {
@@ -71,11 +95,18 @@ test("the outcome, the cost table and the actions are NOT demoted", () => {
   }
 });
 
-test("the stylesheet hides demoted blocks while the disclosure is closed", () => {
-  assert.match(
-    CSS,
-    /html:not\(\[data-results-more\]\)\s+\.results-demoted\s*\{[^}]*display:\s*none\s*!important/,
-    "the closed state must win over the renderers' inline display rules",
+test("the frontier and the charts sit outside the disclosure", () => {
+  const more = HTML.indexOf('id="resultsMore"');
+  const frontier = HTML.indexOf('id="frontierWrap"');
+  const cum = HTML.indexOf('id="cumCostChartWrap"');
+  assert.ok(more > 0 && frontier > 0 && cum > 0);
+  assert.ok(
+    frontier > HTML.lastIndexOf("</details>", frontier),
+    "the frontier renders after the disclosure closes, on the surface",
+  );
+  assert.ok(
+    cum > HTML.lastIndexOf("</details>", cum),
+    "the cost chart renders after the disclosure closes, on the surface",
   );
 });
 

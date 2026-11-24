@@ -1700,6 +1700,16 @@ footer {
   line-height: 1.5;
   margin-bottom: 0.7rem;
 }
+.paths-installed-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.9rem;
+  padding: 0.5rem 0.7rem;
+  border-inline-start: 3px solid var(--border-glow);
+  border-radius: 0 6px 6px 0;
+  background: rgba(255, 255, 255, 0.03);
+}
 .paths-instr {
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -1973,14 +1983,10 @@ footer {
   color: var(--text-muted);
 }
 
-/* #403 Cure C: ONE disclosure for everything that is not the outcome card,
-   the cost table, or the actions. The blocks keep their own ids and their own
-   inline display rules (the renderers still own those); this only wins while
-   the disclosure is closed, so nothing has to be moved in the DOM and no chart
-   is drawn into a container that has been torn out of the tree. */
-html:not([data-results-more]) .results-demoted {
-  display: none !important;
-}
+/* #437 owner order 2026-11-24: the results surface is the full one again. The
+   demoted blocks (charts, ladder, frontier, ELI5) are visible without opening a
+   disclosure; their renderers own their own display rules and nothing is folded
+   into a host at runtime. */
 
 .results-more {
   margin-top: 1.5rem;
