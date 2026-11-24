@@ -53,6 +53,7 @@ const CHROME_KEYS = [
   "labelOffgridKwh",
   "derateHintTypical",
   "partsExWorksNote",
+  "partsIndicativeNote",
   "hwSolarBattery",
   "hwSolarOnly",
   "hwBatteryOnly",
@@ -172,6 +173,31 @@ test("#437: the AI modal label is translated, not just drawn", () => {
   assert.match(
     html,
     /aria-label="Full system analysis"\s+data-i18n-aria-label="analysisFullSystem"/,
+  );
+});
+
+test("#437: the hardware reference repaints from the dictionary", () => {
+  const start = ui.indexOf("function repaintRuntimeCopy()");
+  assert.ok(start > -1);
+  const body = ui.slice(start, ui.indexOf("\n}\n", start));
+  assert.match(
+    body,
+    /renderBom\(\)/,
+    "renderBom() paints the BOM scope note from content.js; without it a language change leaves the note in English",
+  );
+  assert.match(
+    ui,
+    /t\(item\.scopeKey\)/,
+    "the scope note must come from the dictionary",
+  );
+  const content = readFileSync(
+    join(ROOT, "assets/js/shared/content.js"),
+    "utf8",
+  );
+  assert.doesNotMatch(
+    content,
+    /scope: "indicative/,
+    "a raw English scope string is a painted string with no key",
   );
 });
 

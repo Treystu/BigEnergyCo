@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261124e";
-import { RESULT_COPY } from "./result-copy.js?v=20261124e";
-import { TILT_COPY } from "./tilt-copy.js?v=20261124e";
+import { HOME_COPY } from "./home-copy.js?v=20261124f";
+import { RESULT_COPY } from "./result-copy.js?v=20261124f";
+import { TILT_COPY } from "./tilt-copy.js?v=20261124f";
 
 export const LOCALES = {
   en: {
@@ -252,6 +252,8 @@ export const LOCALES = {
     labelOffgridKwh: "Off-grid power need (kWh/day):",
     derateHintTypical: "85–100; 98 is typical",
     partsExWorksNote: "(indicative ex-works China, Aug 2026)",
+
+    partsIndicativeNote: "(indicative, Aug 2026)",
     hwSolarBattery: "Solar + Battery (Default)",
     hwSolarOnly: "Solar only (Grid-tie credits/metering)",
     hwBatteryOnly: "Battery only (Peak-hour ToU offset)",
@@ -1121,6 +1123,8 @@ export const LOCALES = {
     labelOffgridKwh: "Necesidad fuera de red (kWh/día):",
     derateHintTypical: "85–100; 98 es lo típico",
     partsExWorksNote: "(indicativo, ex-fábrica China, ago 2026)",
+
+    partsIndicativeNote: "(orientativo, ago 2026)",
     hwSolarBattery: "Solar + batería (predeterminado)",
     hwSolarOnly: "Solo solar (compensación en la red)",
     hwBatteryOnly: "Solo batería (desplazamiento de horas punta)",
@@ -1923,6 +1927,8 @@ export const LOCALES = {
     labelOffgridKwh: "Necessidade fora da rede (kWh/dia):",
     derateHintTypical: "85–100; 98 é o típico",
     partsExWorksNote: "(indicativo, ex-fábrica China, ago 2026)",
+
+    partsIndicativeNote: "(indicativo, ago 2026)",
     hwSolarBattery: "Solar + bateria (predefinido)",
     hwSolarOnly: "Apenas solar (compensação na rede)",
     hwBatteryOnly: "Apenas bateria (desvio de horas de ponta)",
@@ -2722,6 +2728,8 @@ export const LOCALES = {
     labelOffgridKwh: "Besoin hors réseau (kWh/jour) :",
     derateHintTypical: "85–100 ; 98 est la valeur typique",
     partsExWorksNote: "(indicatif, départ usine Chine, août 2026)",
+
+    partsIndicativeNote: "(indicatif, août 2026)",
     hwSolarBattery: "Solaire + batterie (par défaut)",
     hwSolarOnly: "Solaire seul (compensation réseau)",
     hwBatteryOnly: "Batterie seule (décalage heures de pointe)",
@@ -3521,6 +3529,8 @@ export const LOCALES = {
     labelOffgridKwh: "Bedarf ohne Netz (kWh/Tag):",
     derateHintTypical: "85–100; 98 ist typisch",
     partsExWorksNote: "(Richtwert, ab Werk China, Aug. 2026)",
+
+    partsIndicativeNote: "(Richtwert, Aug. 2026)",
     hwSolarBattery: "Solar + Batterie (Standard)",
     hwSolarOnly: "Nur Solar (Netzeinspeisung)",
     hwBatteryOnly: "Nur Batterie (Verschiebung der Spitzenlast)",
@@ -4229,6 +4239,8 @@ export const LOCALES = {
     labelOffgridKwh: "Behoefte off-grid (kWh/dag):",
     derateHintTypical: "85–100; 98 is gebruikelijk",
     partsExWorksNote: "(indicatief, af fabriek China, aug. 2026)",
+
+    partsIndicativeNote: "(indicatief, aug 2026)",
     hwSolarBattery: "Zon + batterij (standaard)",
     hwSolarOnly: "Alleen zon (salderen op het net)",
     hwBatteryOnly: "Alleen batterij (piekuren verschuiven)",
@@ -5200,6 +5212,8 @@ export const LOCALES = {
     labelOffgridKwh: "الحاجة خارج الشبكة (كيلوواط ساعة/يوم):",
     derateHintTypical: "85–100؛ 98 هو المعتاد",
     partsExWorksNote: "(إرشادي، تسليم من المصنع في الصين، أغسطس 2026)",
+
+    partsIndicativeNote: "(إرشادي، أغسطس 2026)",
     hwSolarBattery: "شمسي + بطارية (افتراضي)",
     hwSolarOnly: "شمسي فقط (تعويض على الشبكة)",
     hwBatteryOnly: "بطارية فقط (إزاحة ساعات الذروة)",
