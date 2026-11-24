@@ -2011,3 +2011,10 @@ html:not([data-results-more]) .results-demoted {
   color: var(--primary-accent);
   margin: 0 0 0.35rem;
 }
+
+/* #432: prices align and scan as a column. */
+.plan-price,
+.paths-upfront,
+.paths-total {
+  font-variant-numeric: tabular-nums;
+}

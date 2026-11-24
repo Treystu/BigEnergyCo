@@ -259,10 +259,10 @@
     <!-- Early Hints prep: these two are on every page's critical path. When
          the zone's Early Hints setting is on, Cloudflare turns them into a
          103 response so the browser starts fetching before the HTML lands. -->
-    <link rel="preload" href="./assets/site.css?v=20261122f" as="style" />
-    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261122f" />
+    <link rel="preload" href="./assets/site.css?v=20261124b" as="style" />
+    <link rel="modulepreload" href="./assets/js/sizing/ui.js?v=20261124b" />
 
-    <link rel="stylesheet" href="./assets/site.css?v=20261122f" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261124b" />
 
     <!-- Preconnect to weather, tariff, and geocoding APIs during parsing. -->
     <link rel="preconnect" href="https://power.larc.nasa.gov" crossorigin />
@@ -2156,14 +2156,21 @@
               <div id="resultsRegion" hidden>
                 <!-- PLAN: one price, three stats, one breakdown that sums to it. -->
                 <div id="planCardWrap" class="plan-card-wrap" hidden></div>
-                <!-- V2 recipient landing: an opened share link sizes itself,
-                  so this reader is looking at someone else's result. The note
-                  stays with the result, because the status line that carries
-                  the same fact is replaced by the run's progress within a
-                  second. Filled and revealed by restoreFromShare(). -->
+                <!-- V2: an opened share link sizes itself, so this reader sees
+                  someone else's result. Filled by restoreFromShare(). -->
                 <p id="sharedResultNote" class="vma" role="note" hidden></p>
 
                 <div id="useCaseOutcomeWrap" aria-live="polite"></div>
+
+                <!-- #403: one optional disclosure. -->
+                <div id="pathsPanel" style="display: none"></div>
+
+                <details id="resultsMore" class="results-more">
+                  <summary data-i18n="resultsMoreSummary">
+                    More detail: the charts, the workings and the options
+                  </summary>
+                  <div id="resultsDetailHost"></div>
+                </details>
 
                 <div id="simpleResultsWrap" aria-live="polite"></div>
 
@@ -2308,17 +2315,6 @@
                 ></div>
 
                 <!-- Four ways to pay for this one system, priced together. -->
-                <div
-                  id="pathsPanel"
-                  style="display: none; margin-top: 1.25rem"
-                ></div>
-
-                <!-- #403 Cure C: one disclosure governs every demoted block. -->
-                <details id="resultsMore" class="results-more">
-                  <summary data-i18n="resultsMoreSummary">
-                    More detail: the charts, the workings and the options
-                  </summary>
-                </details>
 
                 <!-- Plausibility frontier: what every budget buys, cheapest first. -->
 
@@ -2688,10 +2684,8 @@
                   </p>
                 </details>
 
-                <!-- P1.6: the three modelling choices a visitor cannot see and
-                  did not make. Visible with every result, not folded into the
-                  collapsed "How this was calculated" block: each one changes
-                  how the numbers above should be read. -->
+                <!-- P1.6: the three modelling choices nobody made and cannot
+                  see each change what the numbers above mean. -->
                 <p
                   id="assumptionDisclosure"
                   class="assumption-disclosure"
@@ -2738,6 +2732,21 @@
                     Print / save PDF
                   </button>
                 </div>
+
+                <p id="resultSupportPath" class="uc-note" hidden>
+                  <span data-i18n="resultSupportLead"
+                    >Need a hand with your result, a system like this, or the
+                    site itself?</span
+                  >
+                  <a
+                    href="mailto:lucasballek@gmail.com?subject=Help%20with%20my%20result"
+                    data-i18n="resultSupportAction"
+                    >Email Lucas &mdash; a person answers</a
+                  >
+                  <span data-i18n="resultSupportNext"
+                    >He replies within a few days. Nothing is sold.</span
+                  >
+                </p>
 
                 <!-- V2: the ask, at the value moment. One quiet line with three
                   doors - chip in, say it worked, or send it to someone who is
@@ -3583,15 +3592,15 @@
 
     <!-- Browser helpers (classic script: advisor + modal globals) -->
 
-    <script type="module" src="./assets/js/sizing/ui.js?v=20261122f"></script>
+    <script type="module" src="./assets/js/sizing/ui.js?v=20261124b"></script>
 
     <!-- Turnstile client (B1/R-CF-02). Harmless with no site key configured;
          the advisor posts without a token in that case, exactly as before. -->
     <script
       type="module"
-      src="./assets/js/turnstile-client.js?v=20261122f"
+      src="./assets/js/turnstile-client.js?v=20261124b"
     ></script>
-    <script defer src="./assets/js/chat.js?v=20261122f"></script>
+    <script defer src="./assets/js/chat.js?v=20261124b"></script>
   </body>
 </html>
 

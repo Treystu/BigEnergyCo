@@ -3,9 +3,9 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261122f";
-import { RESULT_COPY } from "./result-copy.js?v=20261122f";
-import { TILT_COPY } from "./tilt-copy.js?v=20261122f";
+import { HOME_COPY } from "./home-copy.js?v=20261124b";
+import { RESULT_COPY } from "./result-copy.js?v=20261124b";
+import { TILT_COPY } from "./tilt-copy.js?v=20261124b";
 
 export const LOCALES = {
   en: {
@@ -209,6 +209,10 @@ export const LOCALES = {
     advisorSend: "Send",
     advisorAskResult: "Explain this result to me.",
     valueMomentAskLead: "If this saved you a call or a quote:",
+    resultSupportLead:
+      "Need a hand with your result, a system like this, or the site itself?",
+    resultSupportAction: "Email Lucas — a person answers",
+    resultSupportNext: "He replies within a few days. Nothing is sold.",
     valueMomentAskChipIn: "chip in",
     valueMomentAskWorked: "tell me it worked",
     valueMomentAskSend: "send this result to someone pricing a system",
@@ -1015,6 +1019,10 @@ export const LOCALES = {
     advisorSend: "Enviar",
     advisorAskResult: "Explica este resultado.",
     valueMomentAskLead: "Si esto te ahorró una llamada o un presupuesto:",
+    resultSupportLead:
+      "¿Necesitas ayuda con tu resultado, con un sistema como este o con el sitio?",
+    resultSupportAction: "Escribe a Lucas — responde una persona",
+    resultSupportNext: "Responde en unos días. No se vende nada.",
     valueMomentAskChipIn: "colaborar",
     valueMomentAskWorked: "cuéntame si te sirvió",
     valueMomentAskSend:
@@ -1755,6 +1763,10 @@ export const LOCALES = {
     advisorSend: "Enviar",
     advisorAskResult: "Explica este resultado.",
     valueMomentAskLead: "Se isto te poupou uma chamada ou um orçamento:",
+    resultSupportLead:
+      "Precisa de ajuda com o seu resultado, com um sistema como este ou com o site?",
+    resultSupportAction: "Escreva ao Lucas — responde uma pessoa",
+    resultSupportNext: "Responde em poucos dias. Nada é vendido.",
     valueMomentAskChipIn: "contribuir",
     valueMomentAskWorked: "conta-me se funcionou",
     valueMomentAskSend:
@@ -2488,6 +2500,10 @@ export const LOCALES = {
     advisorSend: "Envoyer",
     advisorAskResult: "Explique-moi ce résultat.",
     valueMomentAskLead: "Si cela vous a évité un appel ou un devis :",
+    resultSupportLead:
+      "Besoin d’aide pour votre résultat, un système comme celui-ci, ou le site ?",
+    resultSupportAction: "Écrivez à Lucas — une personne répond",
+    resultSupportNext: "Il répond sous quelques jours. Rien n’est vendu.",
     valueMomentAskChipIn: "faire un don",
     valueMomentAskWorked: "dites-moi si ça a marché",
     valueMomentAskSend: "envoyez ce résultat à quelqu’un qui demande un devis",
@@ -3223,6 +3239,11 @@ export const LOCALES = {
     advisorAskResult: "Erkläre mir dieses Ergebnis.",
     valueMomentAskLead:
       "Wenn dir das ein Gespräch oder ein Angebot erspart hat:",
+    resultSupportLead:
+      "Brauchen Sie Hilfe mit Ihrem Ergebnis, einem System wie diesem oder der Seite?",
+    resultSupportAction: "Schreiben Sie Lucas — ein Mensch antwortet",
+    resultSupportNext:
+      "Er antwortet innerhalb weniger Tage. Nichts wird verkauft.",
     valueMomentAskChipIn: "etwas beitragen",
     valueMomentAskWorked: "sag mir, ob es geklappt hat",
     valueMomentAskSend:
@@ -3869,6 +3890,11 @@ export const LOCALES = {
     advisorSend: "Verzenden",
     advisorAskResult: "Leg dit resultaat aan me uit.",
     valueMomentAskLead: "Als dit je een telefoontje of een offerte bespaarde:",
+    resultSupportLead:
+      "Hulp nodig met uw resultaat, een systeem als dit, of de site zelf?",
+    resultSupportAction: "Mail Lucas — een mens antwoordt",
+    resultSupportNext:
+      "Hij antwoordt binnen enkele dagen. Niets wordt verkocht.",
     valueMomentAskChipIn: "een bijdrage doen",
     valueMomentAskWorked: "laat me weten of het werkte",
     valueMomentAskSend:
@@ -4780,6 +4806,10 @@ export const LOCALES = {
     advisorSend: "إرسال",
     advisorAskResult: "اشرح لي هذه النتيجة.",
     valueMomentAskLead: "إذا وفّر عليك هذا مكالمة أو عرض سعر:",
+    resultSupportLead:
+      "هل تحتاج مساعدة في نتيجتك أو في نظام كهذا أو في الموقع نفسه؟",
+    resultSupportAction: "راسل لوكاس — يجيب إنسان",
+    resultSupportNext: "يرد خلال أيام قليلة. لا يُباع شيء.",
     valueMomentAskChipIn: "المساهمة",
     valueMomentAskWorked: "أخبرني إن نجح الأمر",
     valueMomentAskSend: "أرسل هذه النتيجة لمن يطلب عرض سعر لنظام",
