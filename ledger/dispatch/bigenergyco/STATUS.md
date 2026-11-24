@@ -177,9 +177,28 @@ Filed with the STAGING-RESTORED receipt on #429 (comment 7143378184).
   `detailsOpen: false`, `scrollWidth - 390 = -11`. Fixture 2 ZIP 81082, 80% cut,
   $150/mo — `$7,114.00`=`$1,652.00` + `$4,150.00`+`$1,312.00`, bill cut `80%`,
 paybacks `Year 6`(parts) /`Year 18`(installed), frontier and charts visible,`scrollWidth - 390 = -11`. `npm run seo` green: no blog/SEO URL change.
-- NOT done: production untouched; #467's truthful-verdict cure unlanded; #437's
-  remaining rendered ES re-drive on this restored surface is the next check, not
-  a claim made here.
+- **#437 remainder, two more landings on the restored surface.** #476
+  (`dfbfa98f`) keyed the sun-path tilt value card — the one English string the
+  restore exposed — in all seven locales, verified in ES on the rendered page as
+  `Lo que un tejado plano pierde aquí — hacen falta ~12 paneles planos para
+igualar 10 a ~33°`. #477 (`0bdd2805`) put the shared-result note in the
+  language-change repaint list, because it is painted inside `restoreFromShare()`
+  before the reader's language is applied; verified in ES as `Este es el
+resultado que alguien compartió contigo…` on deploy `4f2e81b5` (390x844,
+  `scrollWidth - 390 = -11`, plan still `$7,114.00` = `$1,652.00` + `$4,150.00` +
+  `$1,312.00`).
+- **ES census on the restored surface (filed on #429, comment 7144294205).** Eleven
+  English groups remain on a Spanish page; one (the share-loaded line) is cured by
+  #477, nine are untouched and are the next dispatch (`Starts from ~$149/mo…`, the
+  tariff-estimate line, `90–100; 98 is typical`, `Ambient Temperature & Battery
+Chemistry Limits`, the three chemistry sentences, `Your currency`), plus the
+  stepper label `4. Your result`. Filed as the #437 remainder, not re-filed.
+- **Correction to an earlier lane claim.** The `Size My System` first-click no-op I
+  reported reproducing on staging was a preview-bridge artifact: an armed
+  capture-phase listener recorded zero click events for the click the page never
+  saw, while a programmatic click runs sizing normally. #442 stays open on its own
+  evidence, not on that observation.
+- NOT done: production untouched; #467's truthful-verdict cure unlanded.
 
 ## Readiness line
 
