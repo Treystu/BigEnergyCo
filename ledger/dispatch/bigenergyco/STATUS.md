@@ -87,13 +87,40 @@ its rounds UI is the open remainder; **next is #440 items 3-5** (intake priors
   a real suggestion-click run to results completes with the plain card leading and
   0 competing primaries.
 
+- #403 results leg + #432/#437/#439 residue on the stripped surface -> PR #468,
+  squash `86d029be`. Rail `verify:success` at `8859598a` (CircleCI workflow API).
+  Local battery before push: `npm test` 2358/2358 (was 2351; +7 in
+  `tests/results-disclosure.test.mjs`), `check-chars`, `seo`, `format:check`,
+  `deploy:check`. Staging deploy `cc6235c3` on the `staging` branch alias, stamp
+  `20261124b`, SW `beco-v282`. Rendered at 390x844: plan `$10,202.00` =
+  `$8,450.00` + `$952.00` + `$800.00`; stats `$37,358.00` / `Year 5` / `81%`;
+  one cost table on the surface and ONE disclosure (closed on arrival, 15 blocks
+  inside, view tabs inside it); #439 support path beside the actions in all seven
+  locales; `scrollWidth - 390 = -11`. `index.html` normalized 131,985 bytes
+  against the unchanged 132,000 budget.
+- Censuses vs the `20261122f` baseline on staging: 96/96 sitemap URLs 200;
+  sitemap sha `12717cc9eeba47cf` identical (zero URL changes); SEO face 96/96
+  unchanged; blog+about content 27/27 byte-identical after normalising the
+  injected suggestion chrome and the `?v=` stamp.
+- ~$3,100 anchor row -> GATE-PARKED DECISION-READY on #401 (receipt attached):
+  `LABOUR_MODEL` is grade C and states no in-repo source measured installed
+  hours; the only priced route is the four-ways set at $10,202, which sums. The
+  plan keeps that one number set.
+- #437 rendered locale census on staging (ES, 390x844) -> 22 visible English
+  strings enumerated on #437 with cause narrowed to the runtime paint path
+  (keys exist in all seven locales). NOT claimed closed; next pass owns the
+  painters, the static FAQ/modal headings and a census gate.
+
 ## Readiness line
 
 The stripped interface is live on STAGING (`staging.bigenergyco.pages.dev`, stamp
-`20261122f`) and STAGING-VERIFIED on #429: home is one place field and one
+`20261124b`) and STAGING-VERIFIED on #429: home is one place field and one
 action, the calculator asks three questions with one action and the rest in one
 optional disclosure, and results lead with the one-price plan whose three lines
-sum to it. Blog and SEO censuses are unchanged at zero URL changes. NOT promoted
+sum to it, followed by the single cost table; every other result block — the
+readable card, the view ladder, the charts, the frontier, the hardware list and
+the workings — sits inside the same optional disclosure, so the result has no
+mode fork. The #439 support path renders beside the result actions. Blog and SEO censuses are unchanged at zero URL changes. NOT promoted
 under the owner order: production (`freeoffgridcalculator.com`) is untouched and
 `bigenergyco.pages.dev`, the project's production-branch alias, still serves
 `20261103u`. Promotion remains a separate D-2026-11-13-008 step.
