@@ -369,3 +369,50 @@ test("#437: appliance names keep the identity key and gain a display key", () =>
   assert.match(ui, /"data-item-name": it\.n/);
   assert.match(ui, /it\.k \? t\(it\.k\) : it\.n/);
 });
+
+test("#437: every jargon term carries its explainer in all six overlay locales", async () => {
+  const { JARGON, JARGON_TERMS, JARGON_LOCALES, jargonEntry } =
+    await import("../assets/js/shared/jargon-dict.js");
+  const langs = Object.keys(JARGON_LOCALES);
+  assert.deepEqual(
+    langs.sort(),
+    ["ar", "de", "es", "fr", "nl", "pt"],
+    "the overlay covers exactly the six non-English locales",
+  );
+  for (const term of JARGON_TERMS) {
+    for (const lang of langs) {
+      const entry = JARGON_LOCALES[lang][term];
+      assert.ok(entry, `${lang}.${term} explainer is missing`);
+      for (const field of ["short", "long"]) {
+        assert.equal(
+          typeof entry[field],
+          "string",
+          `${lang}.${term}.${field} must be a string`,
+        );
+        assert.ok(
+          entry[field].trim().length > 2,
+          `${lang}.${term}.${field} must not be blank`,
+        );
+        assert.ok(
+          !/[{}]/.test(entry[field]),
+          `${lang}.${term}.${field} must not carry a placeholder`,
+        );
+      }
+    }
+    // English stays the source dictionary, not an overlay row.
+    const en = jargonEntry(term, "en");
+    assert.equal(en.short, JARGON[term].short, `en.${term}.short is JARGON`);
+    const es = jargonEntry(term, "es");
+    assert.equal(
+      es.short,
+      JARGON_LOCALES.es[term].short,
+      `es.${term} resolves`,
+    );
+  }
+  // The painter must be told the page language at its remaining call site.
+  assert.match(
+    ui,
+    /explainElement\([^)]*document\.documentElement\.lang/,
+    "simple-results explainers pass the page language",
+  );
+});
