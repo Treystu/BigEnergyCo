@@ -186,6 +186,10 @@ export const DETAIL_COPY = {
       "The smallest prebuilt unit in this voltage class is already this size — at this bank the DIY list is the closer match.",
     dRefModel: "{kw} kW low-frequency split-phase",
     dRefNote: "48 V · 3× surge · built-in MPPT",
+    dChartGround: "Ground / Horizon",
+    dChartFacing: "🧭 Facing {compass}",
+    dChartTilt: "~{tilt}° Tilt",
+    dMatrixPick: "Select {row} at {col}: {text}",
   },
   es: {
     dAssumpData:
@@ -373,6 +377,10 @@ export const DETAIL_COPY = {
       "La unidad prefabricada más pequeña de esta clase de tensión ya tiene este tamaño; para este banco, la lista DIY se acerca más.",
     dRefModel: "{kw} kW de baja frecuencia y fase partida",
     dRefNote: "48 V · 3× pico · MPPT integrado",
+    dChartGround: "Suelo / Horizonte",
+    dChartFacing: "🧭 Orientado al {compass}",
+    dChartTilt: "~{tilt}° de inclinación",
+    dMatrixPick: "Elegir {row} con {col}: {text}",
   },
   pt: {
     dAssumpData:
@@ -555,6 +563,10 @@ export const DETAIL_COPY = {
       "A unidade pré-fabricada mais pequena desta classe de tensão já tem este tamanho; para este banco, a lista DIY aproxima-se mais.",
     dRefModel: "{kw} kW de baixa frequência e fase dividida",
     dRefNote: "48 V · 3× pico · MPPT integrado",
+    dChartGround: "Solo / Horizonte",
+    dChartFacing: "🧭 Voltado a {compass}",
+    dChartTilt: "~{tilt}° de inclinação",
+    dMatrixPick: "Escolher {row} com {col}: {text}",
   },
   fr: {
     dAssumpData:
@@ -741,6 +753,10 @@ export const DETAIL_COPY = {
       "La plus petite unité toute faite de cette classe de tension fait déjà cette taille ; pour ce parc, la liste DIY correspond mieux.",
     dRefModel: "{kw} kW basse fréquence à phase divisée",
     dRefNote: "48 V · 3× pointe · MPPT intégré",
+    dChartGround: "Sol / Horizon",
+    dChartFacing: "🧭 Orienté {compass}",
+    dChartTilt: "~{tilt}° d'inclinaison",
+    dMatrixPick: "Choisir {row} avec {col} : {text}",
   },
   de: {
     dAssumpData:
@@ -925,6 +941,10 @@ export const DETAIL_COPY = {
       "Die kleinste fertige Einheit dieser Spannungsklasse hat bereits diese Größe — bei dieser Bank passt die Eigenbau-Liste besser.",
     dRefModel: "{kw} kW Niedrigfrequenz-Split-Phase",
     dRefNote: "48 V · 3× Anlauf · integrierter MPPT",
+    dChartGround: "Boden / Horizont",
+    dChartFacing: "🧭 Ausrichtung {compass}",
+    dChartTilt: "~{tilt}° Neigung",
+    dMatrixPick: "{row} mit {col} wählen: {text}",
   },
   nl: {
     dAssumpData:
@@ -1106,6 +1126,10 @@ export const DETAIL_COPY = {
       "De kleinste kant-en-klare eenheid in deze spanningsklasse is al zo groot; bij deze bank past de zelfbouwlijst beter.",
     dRefModel: "{kw} kW laagfrequent split-fase",
     dRefNote: "48 V · 3× piek · ingebouwde MPPT",
+    dChartGround: "Grond / Horizon",
+    dChartFacing: "🧭 Gericht op {compass}",
+    dChartTilt: "~{tilt}° helling",
+    dMatrixPick: "{row} met {col} kiezen: {text}",
   },
   ar: {
     dAssumpData:
@@ -1284,5 +1308,9 @@ export const DETAIL_COPY = {
       "أصغر وحدة جاهزة في فئة الجهد هذه بهذا الحجم بالفعل — بالنسبة لهذا البنك، قائمة التركيب الذاتي أقرب.",
     dRefModel: "{kw} كيلوواط منخفض التردد بطور منقسم",
     dRefNote: "48 فولت · 3× بدء · MPPT مدمج",
+    dChartGround: "الأرض / الأفق",
+    dChartFacing: "🧭 باتجاه {compass}",
+    dChartTilt: "~{tilt}° ميل",
+    dMatrixPick: "اختيار {row} عند {col}: {text}",
   },
 };

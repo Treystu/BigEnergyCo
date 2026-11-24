@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261124k";
+import { APPLIANCES } from "./appliances.js?v=20261124l";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261124k";
+} from "./pwa-install.js?v=20261124l";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261124k";
+} from "./usecases.js?v=20261124l";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261124k";
+} from "./run-coordinator.js?v=20261124l";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261124k";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261124k";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261124k";
+} from "./mode-chrome.js?v=20261124l";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261124l";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261124l";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261124k";
+} from "./location-picker.js?v=20261124l";
 
 import {
   estimateTariff,
@@ -57,15 +57,15 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261124k";
+} from "./pricing.js?v=20261124l";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261124k";
+import { currencyForCountry } from "./country-currency.js?v=20261124l";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261124k";
-import { planBreakdown } from "./plan-card.js?v=20261124k";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261124l";
+import { planBreakdown } from "./plan-card.js?v=20261124l";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -84,7 +84,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261124k").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261124l").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -95,15 +95,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261124k";
+} from "./lead-acid.js?v=20261124l";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261124k";
+} from "./bom.js?v=20261124l";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261124k";
+import { BOM_ITEMS } from "../shared/content.js?v=20261124l";
 
 import {
   applyI18n,
@@ -112,11 +112,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261124k";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261124k";
-import { byId as $, el } from "../shared/dom.js?v=20261124k";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261124k";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261124k";
+} from "../shared/i18n.js?v=20261124l";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261124l";
+import { byId as $, el } from "../shared/dom.js?v=20261124l";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261124l";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261124l";
 import {
   advisorJevContext,
   interpretSanity,
@@ -124,29 +124,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261124k";
+} from "./validate.js?v=20261124l";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261124k";
+} from "../shared/cut-targets.js?v=20261124l";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261124k";
+} from "./share-codec.js?v=20261124l";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261124k";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261124k";
+} from "./infeasible-copy.js?v=20261124l";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261124l";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261124k";
+} from "./fuel-units.js?v=20261124l";
 
 import {
   createLeafletProvider,
@@ -154,18 +154,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261124k";
+} from "./map-provider.js?v=20261124l";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261124k";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261124k";
+} from "./wizard.js?v=20261124l";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261124l";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261124k";
+} from "./budget-span.js?v=20261124l";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -177,10 +177,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261124k"),
-      import("./charts.js?v=20261124k"),
-      import("./frontier-chart.js?v=20261124k"),
-      import("./rescale.js?v=20261124k"),
+      import("./engine.js?v=20261124l"),
+      import("./charts.js?v=20261124l"),
+      import("./frontier-chart.js?v=20261124l"),
+      import("./rescale.js?v=20261124l"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -248,9 +248,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261124k";
+} from "./money.js?v=20261124l";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261124k";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261124l";
 
 let worker = null;
 
@@ -2188,8 +2188,8 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
       <title>${escapeHtml(t("resSunPathTitle", { compass: compassShort, tilt: yrTilt }))}</title>
       <!-- Ground line -->
       <line x1="15" y1="${groundY}" x2="${svgW - 15}" y2="${groundY}" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
-      <text x="20" y="${groundY + 16}" fill="var(--text-muted)" font-size="10" font-family="sans-serif">Ground / Horizon</text>
-      <text x="${svgW - 20}" y="${groundY + 16}" fill="var(--primary-accent)" font-size="10.5" font-weight="bold" font-family="sans-serif" text-anchor="end">\uD83E\uDDED Facing ${compassShort}</text>
+      <text x="20" y="${groundY + 16}" fill="var(--text-muted)" font-size="10" font-family="sans-serif">${escapeHtml(t("dChartGround"))}</text>
+      <text x="${svgW - 20}" y="${groundY + 16}" fill="var(--primary-accent)" font-size="10.5" font-weight="bold" font-family="sans-serif" text-anchor="end">${escapeHtml(t("dChartFacing", { compass: compassShort }))}</text>
 
       <!-- Mount bracket -->
       <path d="M 68 ${groundY} L ${(x1 + (x0 - x1) * 0.45).toFixed(1)} ${(y1 + (y0 - y1) * 0.45).toFixed(1)} L 95 ${groundY}" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linejoin="round" />
@@ -2200,7 +2200,7 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
 
       <!-- Tilt angle arc & text -->
       <path d="M ${x0 - rArc} ${groundY} A ${rArc} ${rArc} 0 0 1 ${arcX.toFixed(1)} ${arcY.toFixed(1)}" fill="none" stroke="#34d399" stroke-width="1.5" stroke-dasharray="3 2" />
-      <text x="${x0 - rArc - 4}" y="${groundY - 8}" fill="#34d399" font-size="10" font-weight="bold" font-family="monospace" text-anchor="end">~${yrTilt}\u00B0 Tilt</text>
+      <text x="${x0 - rArc - 4}" y="${groundY - 8}" fill="#34d399" font-size="10" font-weight="bold" font-family="monospace" text-anchor="end">${escapeHtml(t("dChartTilt", { tilt: yrTilt }))}</text>
 
       <!-- Seasonal sky swing arc -->
       <path d="M ${sx_s.toFixed(1)} ${sy_s.toFixed(1)} A ${R_s} ${R_s} 0 0 1 ${sx_w.toFixed(1)} ${sy_w.toFixed(1)}" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" stroke-dasharray="3 3" />
@@ -4120,7 +4120,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261124k",
+      "./assets/js/sizing/sizing-worker.js?v=20261124l",
       {
         type: "module",
       },
@@ -6009,11 +6009,24 @@ function localizedBestReason(p) {
   return `${why}${tail}${agm}`;
 }
 
+/**
+ * A matrix column's display text. The engine labels the custom column
+ * "Your ~N% target" in English (it has no dictionary), so the painter maps
+ * that shape onto the keyed sentence; every other label is data as written.
+ */
+function matrixColLabel(col) {
+  const m = String(col.label || "").match(/^Your ~(\d+)% target$/);
+  if (m) return t("resColCustom", { pct: m[1] });
+  return String(col.label || "")
+    .split("\u2014")[0]
+    .trim();
+}
+
 function matrixColShort(p, col) {
   if (p.mode === "gridtie") {
     if (col.custom)
       return (
-        col.label ||
+        (col.label && matrixColLabel(col)) ||
         t("resColCustom", {
           pct: p.customCut ? Math.round(p.customCut.fraction * 100) : 80,
         })
@@ -6025,10 +6038,10 @@ function matrixColShort(p, col) {
         : col.id === "cut95"
           ? t("resColBill95")
           : col.label
-            ? col.label.split("\u2014")[0].trim()
+            ? matrixColLabel(col)
             : t("resChipBillCut", { pct: col.id.replace("cut", "") });
   }
-  return col.label.split("\u2014")[0].trim();
+  return matrixColLabel(col);
 }
 
 /**
@@ -6127,7 +6140,7 @@ function matrixHtml(p) {
             .filter(Boolean)
             .join(" ");
           const clickable = selectable
-            ? ` data-sel="${key}" role="button" tabindex="0" aria-label="${escapeAttr(`Select ${row.label} at ${col.label}: ${visibleText}`)}" style="cursor:pointer;"`
+            ? ` data-sel="${key}" role="button" tabindex="0" aria-label="${escapeAttr(t("dMatrixPick", { row: row.label, col: matrixColLabel(col), text: visibleText }))}" style="cursor:pointer;"`
             : "";
           const lcoe = lcoeText
             ? `<span style="color:var(--text-muted);">${lcoeText}</span>`
@@ -9543,11 +9556,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261124k")
+    import("../shared/translation-suggestion-loader.js?v=20261124l")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261124k"),
+          () => import("../translation-suggestion.js?v=20261124l"),
         );
       })
       .catch(() => {});
