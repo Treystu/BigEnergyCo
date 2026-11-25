@@ -51,7 +51,7 @@ test("HOME: the place field hands off to the calculator's one input", () => {
 
 test("CALCULATOR: where, goal, monthly bill, then one action", () => {
   const where = html.indexOf('id="citySearch"');
-  const goal = html.indexOf('class="form-group goal-segmented-wrap"');
+  const goal = html.indexOf('class="form-group case-ladder-wrap"');
   const bill = html.indexOf('id="billSliderWrap"');
   const advanced = html.indexOf('id="advancedControls"');
   const form = html.indexOf('id="fullControls"');

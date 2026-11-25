@@ -29,6 +29,7 @@ import {
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
 } from "./usecases.js?v=20261125e";
+import { rankCases } from "./priors.js?v=20261125e";
 import {
   createRunChannel,
   staleRunAction,
@@ -3619,65 +3620,191 @@ function selectMatrixCell(key) {
   }
 }
 
-function setupGoalControls() {
-  const btnGt = $("btnGoalGridtie");
-  const btnOff = $("btnGoalOffgrid");
-  const sysGoal = $("systemGoal");
-  if (!btnGt || !btnOff) return;
+// ── The case ladder (#440, spec §12) ────────────────────────────────────────
+// One control for the six cases: rows built from the registry, in the registry's
+// order at rest, re-ranked by the location priors once a feature with a live
+// source exists. A click is a pick and wins instantly (§12.5); the run stays an
+// explicit button (§10.3). Zero answers is a complete display: the top case is
+// already selected and nothing here gates the primary.
+let ladderFeatures = {};
 
-  const setGoal = (goal) => {
-    const isGt = goal === "gridtie";
-    // Single writer: the goal buttons never touch systemGoal. They select a CASE and
-    // let applyUseCase derive the enum, so button and chooser cannot drift. Choosing
-    // by mode, not label: backup and offgrid share the mode and backup sizes the
-    // essentials only, so defaulting a mode switch onto it would silently resize.
-    const chooser = $("useCase");
-    const current =
-      chooser && useCase(chooser.value) ? chooser.value : "billcut";
-    const derived =
-      deriveLegacy(current).mode === "offgrid" ? "offgrid" : "gridtie";
-    if (derived !== goal)
-      applyUseCase(goal === "gridtie" ? "billcut" : "offgrid", {
-        silent: true,
-      });
-    if (isGt) {
-      btnGt.classList.add("active");
-      btnOff.classList.remove("active");
-      const title = document.querySelector(".section-title");
-      if (title) title.textContent = t("modeTitleGt");
-      const desc = document.querySelector(".section-desc");
-      if (desc) desc.textContent = t("modeDescGt");
-      const optBill = $("optLoadBill");
-      if (optBill) optBill.textContent = t("loadBill");
-    } else {
-      btnOff.classList.add("active");
-      btnGt.classList.remove("active");
-      const title = document.querySelector(".section-title");
+function ladderRowId(id) {
+  if (id === "billcut") return "btnGoalGridtie";
+  if (id === "offgrid") return "btnGoalOffgrid";
+  return "btnCase" + id.charAt(0).toUpperCase() + id.slice(1);
+}
+
+function paintLadderSelection() {
+  const active = $("useCase") ? $("useCase").value : "billcut";
+  document.querySelectorAll("#caseLadder .btn-ladder").forEach((b) => {
+    const on = b.dataset.case === active;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-checked", on ? "true" : "false");
+  });
+}
+
+function renderCaseLadder(features) {
+  const host = $("caseLadder");
+  if (!host) return;
+  if (features !== undefined) ladderFeatures = features || {};
+  host.textContent = "";
+  for (const { id, whyKey } of rankCases(ladderFeatures)) {
+    const c = useCase(id);
+    if (!c) continue;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.id = ladderRowId(id);
+    btn.className = "btn btn-ladder goal-mode-control";
+    btn.dataset.case = id;
+    btn.setAttribute("role", "radio");
+    btn.setAttribute("aria-checked", "false");
+    const label = document.createElement("span");
+    label.className = "case-ladder-label";
+    label.textContent = t(c.labelKey);
+    btn.appendChild(label);
+    if (whyKey) {
+      // One caption line, hedged by the dictionary key (spec §12.3). A place
+      // with no resolved feature carries no why-line rather than a guess.
+      const why = document.createElement("span");
+      why.className = "case-why";
+      why.textContent = t(whyKey);
+      btn.appendChild(why);
+    }
+    host.appendChild(btn);
+  }
+  paintLadderSelection();
+}
+
+// Only features with a live, cited source (priors.js FEATURE_SOURCES). The
+// tariff record supplies the rate; a TOU schedule, outage exposure and place
+// class have no field on it yet, so they stay ABSENT rather than guessed
+// (spec §12.3, priors rule 1) and the ladder falls back to registry order.
+function featuresFromLocation() {
+  const f = {};
+  const rate = displayRate();
+  if (Number.isFinite(rate) && rate > 0) f.rateLevel = Math.min(1, rate / 0.6);
+  return f;
+}
+
+// The estimate summary (spec §11.4 as amended by 11.8): the defaults this
+// estimate will use and the rate they are priced at, before any typing. A
+// priced system figure only ever comes from a run payload, so none is invented
+// here.
+function renderEstimateCard() {
+  const card = $("estimateCard");
+  if (!card) return;
+  const rate = displayRate();
+  const billNode = $("billSlider");
+  const cutNode = $("cutSlider");
+  if (!Number.isFinite(rate) || rate <= 0 || !billNode) {
+    card.hidden = true;
+    return;
+  }
+  const bill = parseFloat(billNode.value);
+  const kwh = Number.isFinite(billAnchorKwh) ? billAnchorKwh : null;
+  const cut = cutNode ? parseFloat(cutNode.value) : null;
+  const set = (id, text) => {
+    const n = $(id);
+    if (n) n.textContent = text;
+  };
+  set("estimateBill", Number.isFinite(bill) ? fmtBill(bill) : "—");
+  set(
+    "estimateLoad",
+    kwh === null
+      ? "—"
+      : t("offgridKwhReadout", { kwh: Math.round(kwh * 10) / 10 }),
+  );
+  set("estimateCut", Number.isFinite(cut) ? Math.round(cut) + "%" : "—");
+  const basis = $("estimateBasis");
+  if (basis) basis.textContent = t("estimateBasis", { rate: rate.toFixed(2) });
+  card.hidden = false;
+}
+
+function setupCaseLadder() {
+  const host = $("caseLadder");
+  if (!host) return;
+  ladderFeatures = featuresFromLocation();
+  renderCaseLadder();
+
+  // Chrome that follows the case's derived mode. The case is the source; the
+  // legacy enum is never written here (applyUseCase owns that derivation).
+  const syncChrome = (id) => {
+    const derived = deriveLegacy(id).mode;
+    const title = document.querySelector(".section-title");
+    const desc = document.querySelector(".section-desc");
+    const optBill = $("optLoadBill");
+    if (derived === "offgrid") {
       if (title) title.textContent = t("modeTitleOff");
-      const desc = document.querySelector(".section-desc");
       if (desc) desc.textContent = t("modeDescOff");
-      const optBill = $("optLoadBill");
       if (optBill) optBill.textContent = t("dailyEnergyNeed");
+    } else {
+      if (title) title.textContent = t("modeTitleGt");
+      if (desc) desc.textContent = t("modeDescGt");
+      if (optBill) optBill.textContent = t("loadBill");
     }
     updateAutoRows();
     showAllControls();
     syncBillSlider();
-    // A goal switch changes what the results chrome may show (an off-grid
-    // goal has no bill to cut) even when no new result has rendered yet.
+    // An off-grid case has no bill to cut, even before a result renders.
     syncCutRowVisibility();
-    // A goal change is a pre-calc change only after a successful result; the
-    // first calculation still belongs to the explicit sizing button.
     markPrecalcDirty();
+    renderEstimateCard();
   };
 
-  btnGt.addEventListener("click", () => setGoal("gridtie"));
-  btnOff.addEventListener("click", () => setGoal("offgrid"));
+  const pick = (id) => {
+    if (!useCase(id)) return;
+    applyUseCase(id);
+    paintLadderSelection();
+    syncChrome(id);
+  };
 
-  if (sysGoal) {
-    sysGoal.addEventListener("change", () => {
-      setGoal(sysGoal.value);
+  // The legacy coarse goal control (a hidden select and the smoke scripts' two
+  // ids) routes to a CASE, never to the enum: applyUseCase is the only writer of
+  // systemGoal. Choosing by mode would silently resize, since backup and offgrid
+  // share a mode and backup sizes the essentials only.
+  const setGoal = (goal) => {
+    const current =
+      $("useCase") && useCase($("useCase").value)
+        ? $("useCase").value
+        : "billcut";
+    const derived =
+      deriveLegacy(current).mode === "offgrid" ? "offgrid" : "gridtie";
+    if (derived === goal) return;
+    const target = goal === "gridtie" ? "billcut" : "offgrid";
+    applyUseCase(target);
+    paintLadderSelection();
+    syncChrome(target);
+  };
+
+  host.addEventListener("click", (e) => {
+    const btn =
+      e.target && e.target.closest ? e.target.closest(".btn-ladder") : null;
+    if (!btn) return;
+    pick(btn.dataset.case);
+  });
+
+  // Keyboard: the group behaves as one tab stop with arrow-key navigation, and
+  // a pick commits on Enter/Space as a real button does.
+  host.addEventListener("keydown", (e) => {
+    if (!["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"].includes(e.key))
+      return;
+    const rows = [...host.querySelectorAll(".btn-ladder")];
+    const at = rows.indexOf(document.activeElement);
+    if (at < 0) return;
+    e.preventDefault();
+    const step = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : -1;
+    const next = rows[(at + step + rows.length) % rows.length];
+    if (next) {
+      next.focus();
+      pick(next.dataset.case);
+    }
+  });
+
+  if ($("systemGoal"))
+    $("systemGoal").addEventListener("change", () => {
+      setGoal($("systemGoal").value);
+      syncChrome($("useCase") ? $("useCase").value : "billcut");
     });
-  }
 }
 
 function setupOffgridControls() {
@@ -9514,7 +9641,7 @@ async function initSizingUI() {
       });
 
     // Goal control + Offgrid slider + Monthly-bill slider + bill-cut slider.
-    setupGoalControls();
+    setupCaseLadder();
     setupOffgridControls();
     setupBillSlider();
     setupCutSlider();

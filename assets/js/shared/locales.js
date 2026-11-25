@@ -14,8 +14,6 @@ export const LOCALES = {
     ...RESULT_COPY.en,
     ...TILT_COPY.en,
     ...DETAIL_COPY.en,
-    sizingFor: "What are you sizing for?",
-    goalCutBill: "Cut My Electric Bill",
     goalOffgrid: "Off-grid / Backup",
     buildMadeOf: "What a ~100 kWh Build Is Made Of",
     commonQuestions: "Common Questions",
@@ -537,6 +535,22 @@ export const LOCALES = {
       "Starts from ~{bill} (≈{kwh} kWh/day). Set your real bill here, choose a location, then click Size My System. The bill-cut slider appears with results.",
     dailyEnergyNeed: "Daily energy need (kWh/day slider)",
     billPerMonth: "/mo",
+    caseLadderTitle: "What are you here for?",
+    caseLadderHint:
+      "Nothing to choose — the top case is already estimated. Pick another to change it.",
+    estimateTitle: "Your estimate",
+    estimateBillLabel: "Monthly bill",
+    estimateLoadLabel: "Daily use",
+    estimateCutLabel: "Bill cut target",
+    estimateBasis:
+      "Planning defaults for your location, priced at your local rate of {rate}/kWh. The full simulation runs when you click Size My System.",
+    caseWhyTou: "Time-of-use rates here likely make a battery pay on its own.",
+    caseWhyBackup:
+      "Outages here are common — solar with backup is likely what you need.",
+    caseWhyRate:
+      "High local rates — cutting the bill is likely the reason people size here.",
+    caseWhyOffgrid: "A rural setting — going off-grid is likely in play.",
+    caseWhyReserve: "Outages here make holding a backup reserve likely useful.",
     simpleHeadline: "At your location, this system gets you {goal}:",
     heroPlaceholder: "City, town, or postcode",
     advancedSummary: "Fine-tune the system (optional)",
@@ -841,8 +855,6 @@ export const LOCALES = {
     ...RESULT_COPY.es,
     ...TILT_COPY.es,
     ...DETAIL_COPY.es,
-    sizingFor: "¿Qué estás dimensionando?",
-    goalCutBill: "Reducir mi factura eléctrica",
     goalOffgrid: "Aislado / Respaldo",
     buildMadeOf: "De qué se compone un sistema de ~100 kWh",
     commonQuestions: "Preguntas frecuentes",
@@ -1460,6 +1472,25 @@ export const LOCALES = {
       "Empieza desde ~{bill} (≈{kwh} kWh/día). Pon aquí tu factura real, elige una ubicación y pulsa Dimensionar mi sistema. El control de recorte aparece con los resultados.",
     dailyEnergyNeed: "Necesidad diaria de energía (control kWh/día)",
     billPerMonth: "/mes",
+    caseLadderTitle: "¿Para qué estás aquí?",
+    caseLadderHint:
+      "No hace falta elegir: el caso principal ya está estimado. Elige otro para cambiarlo.",
+    estimateTitle: "Tu estimación",
+    estimateBillLabel: "Factura mensual",
+    estimateLoadLabel: "Consumo diario",
+    estimateCutLabel: "Objetivo de recorte",
+    estimateBasis:
+      "Valores de partida para tu ubicación, a tu tarifa local de {rate}/kWh. La simulación completa se ejecuta al pulsar Dimensionar mi sistema.",
+    caseWhyTou:
+      "Las tarifas por franjas horarias de aquí probablemente hacen que una batería se pague sola.",
+    caseWhyBackup:
+      "Aquí son comunes los cortes: probablemente necesites solar con respaldo.",
+    caseWhyRate:
+      "Tarifas locales altas: probablemente recortar la factura sea la razón para dimensionar aquí.",
+    caseWhyOffgrid:
+      "Entorno rural: probablemente te interese ir fuera de la red.",
+    caseWhyReserve:
+      "Los cortes de aquí hacen que mantener una reserva de respaldo sea útil.",
     simpleHeadline: "En tu ubicación, este sistema consigue {goal}:",
     heroPlaceholder: "Ciudad, pueblo o código postal",
     advancedSummary: "Ajustar el sistema (opcional)",
@@ -1679,8 +1710,6 @@ export const LOCALES = {
     ...RESULT_COPY.pt,
     ...TILT_COPY.pt,
     ...DETAIL_COPY.pt,
-    sizingFor: "O que você está dimensionando?",
-    goalCutBill: "Reduzir minha conta de luz",
     goalOffgrid: "Isolado / Backup",
     buildMadeOf: "Do que é feito um sistema de ~100 kWh",
     commonQuestions: "Perguntas frequentes",
@@ -2293,6 +2322,24 @@ export const LOCALES = {
       "Começa em ~{bill} (≈{kwh} kWh/dia). Coloque aqui sua conta real, escolha uma localização e clique em Dimensionar meu sistema. O controle de corte aparece com os resultados.",
     dailyEnergyNeed: "Necessidade diária de energia (controle kWh/dia)",
     billPerMonth: "/mês",
+    caseLadderTitle: "Para que você está aqui?",
+    caseLadderHint:
+      "Nada a escolher — o caso principal já está estimado. Escolha outro para mudar.",
+    estimateTitle: "Sua estimativa",
+    estimateBillLabel: "Conta mensal",
+    estimateLoadLabel: "Consumo diário",
+    estimateCutLabel: "Meta de corte",
+    estimateBasis:
+      "Valores iniciais para a sua localização, à sua tarifa local de {rate}/kWh. A simulação completa roda ao clicar em Dimensionar meu sistema.",
+    caseWhyTou:
+      "As tarifas por horário aqui provavelmente fazem uma bateria se pagar sozinha.",
+    caseWhyBackup:
+      "Faltas de energia são comuns aqui — solar com backup é provavelmente o que você precisa.",
+    caseWhyRate:
+      "Tarifas locais altas — cortar a conta é provavelmente o motivo de dimensionar aqui.",
+    caseWhyOffgrid: "Ambiente rural — sair da rede provavelmente está em jogo.",
+    caseWhyReserve:
+      "As faltas de energia aqui tornam útil manter uma reserva de backup.",
     simpleHeadline: "Na sua localização, este sistema consegue {goal}:",
     heroPlaceholder: "Cidade, vila ou código postal",
     advancedSummary: "Ajustar o sistema (opcional)",
@@ -2506,8 +2553,6 @@ export const LOCALES = {
     ...RESULT_COPY.fr,
     ...TILT_COPY.fr,
     ...DETAIL_COPY.fr,
-    sizingFor: "Que dimensionnez-vous ?",
-    goalCutBill: "Réduire ma facture d'électricité",
     goalOffgrid: "Autonome / Secours",
     buildMadeOf: "De quoi se compose une installation de ~100 kWh",
     commonQuestions: "Questions fréquentes",
@@ -3135,6 +3180,25 @@ export const LOCALES = {
       "Démarre à ~{bill} (≈{kwh} kWh/jour). Indiquez ici votre vraie facture, choisissez un lieu, puis cliquez sur Dimensionner mon système. Le curseur de réduction apparaît avec les résultats.",
     dailyEnergyNeed: "Besoin énergétique quotidien (curseur kWh/jour)",
     billPerMonth: "/mois",
+    caseLadderTitle: "Pourquoi êtes-vous ici ?",
+    caseLadderHint:
+      "Rien à choisir : le cas principal est déjà estimé. Choisissez-en un autre pour le changer.",
+    estimateTitle: "Votre estimation",
+    estimateBillLabel: "Facture mensuelle",
+    estimateLoadLabel: "Consommation quotidienne",
+    estimateCutLabel: "Objectif de réduction",
+    estimateBasis:
+      "Valeurs de départ pour votre lieu, à votre tarif local de {rate}/kWh. La simulation complète se lance en cliquant sur Dimensionner mon système.",
+    caseWhyTou:
+      "Les tarifs heures pleines/creuses ici font probablement payer une batterie d'elle-même.",
+    caseWhyBackup:
+      "Les coupures sont courantes ici — le solaire avec secours est probablement ce qu'il vous faut.",
+    caseWhyRate:
+      "Tarifs locaux élevés — réduire la facture est probablement la raison de dimensionner ici.",
+    caseWhyOffgrid:
+      "Un cadre rural — l'autonomie hors réseau est probablement en jeu.",
+    caseWhyReserve:
+      "Les coupures ici rendent une réserve de secours probablement utile.",
     simpleHeadline: "À votre lieu, ce système vous permet de {goal} :",
     heroPlaceholder: "Ville, village ou code postal",
     advancedSummary: "Ajuster le système (facultatif)",
@@ -3352,8 +3416,6 @@ export const LOCALES = {
     ...RESULT_COPY.de,
     ...TILT_COPY.de,
     ...DETAIL_COPY.de,
-    sizingFor: "Was möchten Sie dimensionieren?",
-    goalCutBill: "Meine Stromrechnung senken",
     goalOffgrid: "Insel / Notstrom",
     buildMadeOf: "Woraus eine Anlage mit ~100 kWh besteht",
     commonQuestions: "Häufige Fragen",
@@ -3974,6 +4036,25 @@ export const LOCALES = {
       "Beginnt bei ~{bill} (≈{kwh} kWh/Tag). Tragen Sie hier Ihre echte Rechnung ein, wählen Sie einen Standort und klicken Sie auf Mein System dimensionieren. Der Spar-Schieber erscheint mit den Ergebnissen.",
     dailyEnergyNeed: "Täglicher Energiebedarf (kWh/Tag-Schieber)",
     billPerMonth: "/Mon.",
+    caseLadderTitle: "Wofür sind Sie hier?",
+    caseLadderHint:
+      "Nichts zu wählen — der wichtigste Fall ist bereits geschätzt. Wählen Sie einen anderen, um ihn zu ändern.",
+    estimateTitle: "Ihre Schätzung",
+    estimateBillLabel: "Monatliche Rechnung",
+    estimateLoadLabel: "Täglicher Verbrauch",
+    estimateCutLabel: "Sparziel",
+    estimateBasis:
+      "Planungsannahmen für Ihren Standort, zu Ihrem lokalen Tarif von {rate}/kWh. Die vollständige Simulation startet mit Mein System dimensionieren.",
+    caseWhyTou:
+      "Zeitabhängige Tarife hier lassen eine Batterie wahrscheinlich für sich selbst zahlen.",
+    caseWhyBackup:
+      "Stromausfälle sind hier üblich — Solar mit Notstrom ist wahrscheinlich das Richtige.",
+    caseWhyRate:
+      "Hohe lokale Tarife — die Rechnung zu senken ist wahrscheinlich der Grund hier.",
+    caseWhyOffgrid:
+      "Ländliche Lage — Inselbetrieb ist wahrscheinlich ein Thema.",
+    caseWhyReserve:
+      "Ausfälle hier machen eine Notreserve wahrscheinlich sinnvoll.",
     simpleHeadline: "An Ihrem Standort bringt Ihnen dieses System {goal}:",
     heroPlaceholder: "Stadt, Dorf oder Postleitzahl",
     advancedSummary: "System anpassen (optional)",
@@ -4186,8 +4267,6 @@ export const LOCALES = {
     ...RESULT_COPY.nl,
     ...TILT_COPY.nl,
     ...DETAIL_COPY.nl,
-    sizingFor: "Waar dimensionneert u voor?",
-    goalCutBill: "Mijn energierekening verlagen",
     goalOffgrid: "Off-grid / Noodstroom",
     buildMadeOf: "Waaruit een installatie van ~100 kWh bestaat",
     commonQuestions: "Veelgestelde vragen",
@@ -4648,6 +4727,24 @@ export const LOCALES = {
       "Begint bij ~{bill} (≈{kwh} kWh/dag). Stel hier uw echte rekening in, kies een locatie en klik op Systeem dimensioneren. De besparingsschuif verschijnt bij de resultaten.",
     dailyEnergyNeed: "Dagelijkse energiebehoefte (kWh/dag-schuif)",
     billPerMonth: "/mnd",
+    caseLadderTitle: "Waarvoor bent u hier?",
+    caseLadderHint:
+      "Niets te kiezen — het belangrijkste geval is al geschat. Kies een ander om het te wijzigen.",
+    estimateTitle: "Uw schatting",
+    estimateBillLabel: "Maandrekening",
+    estimateLoadLabel: "Dagelijks verbruik",
+    estimateCutLabel: "Doel voor verlaging",
+    estimateBasis:
+      "Planningsuitgangspunten voor uw locatie, tegen uw lokale tarief van {rate}/kWh. De volledige simulatie start bij Systeem dimensioneren.",
+    caseWhyTou:
+      "Piek/dal-tarieven hier laten een batterij waarschijnlijk zichzelf terugverdienen.",
+    caseWhyBackup:
+      "Stroomuitval is hier gebruikelijk — zonnepanelen met noodstroom is waarschijnlijk wat u nodig hebt.",
+    caseWhyRate:
+      "Hoge lokale tarieven — de rekening verlagen is waarschijnlijk de reden hier.",
+    caseWhyOffgrid:
+      "Landelijke omgeving — volledig off-grid is waarschijnlijk aan de orde.",
+    caseWhyReserve: "Uitval hier maakt een noodreserve waarschijnlijk nuttig.",
     simpleHeadline: "Op uw locatie levert dit systeem u {goal}:",
     heroPlaceholder: "Stad, dorp of postcode",
     advancedSummary: "Systeem verfijnen (optioneel)",
@@ -5128,8 +5225,6 @@ export const LOCALES = {
     ...TILT_COPY.ar,
     ...DETAIL_COPY.ar,
     rtl: true,
-    sizingFor: "ما الذي تحدد حجمه؟",
-    goalCutBill: "تقليل فاتورة الكهرباء",
     goalOffgrid: "منفصل عن الشبكة / احتياطي",
     buildMadeOf: "مم يتكون نظام بسعة ~100 kWh",
     commonQuestions: "أسئلة شائعة",
@@ -5717,6 +5812,23 @@ export const LOCALES = {
       "يبدأ من ~{bill} (≈{kwh} كيلوواط·ساعة/يوم). ضع فاتورتك الحقيقية هنا، واختر موقعًا، ثم انقر على «حجم نظامي». يظهر منزلق خفض الفاتورة مع النتائج.",
     dailyEnergyNeed: "الحاجة اليومية من الطاقة (منزلق كيلوواط·ساعة/يوم)",
     billPerMonth: "/شهريًا",
+    caseLadderTitle: "ما الذي تريده هنا؟",
+    caseLadderHint:
+      "لا حاجة للاختيار — الحالة الأولى مقدَّرة مسبقًا. اختر غيرها لتغييرها.",
+    estimateTitle: "تقديرك",
+    estimateBillLabel: "الفاتورة الشهرية",
+    estimateLoadLabel: "الاستهلاك اليومي",
+    estimateCutLabel: "هدف خفض الفاتورة",
+    estimateBasis:
+      "قيم تخطيطية لموقعك، بسعرك المحلي {rate}/كيلوواط·ساعة. تُشغَّل المحاكاة الكاملة عند النقر على «حجم نظامي».",
+    caseWhyTou:
+      "أسعار الوقت المحدد هنا تجعل البطارية غالبًا تُسدّد ثمنها بنفسها.",
+    caseWhyBackup:
+      "انقطاعات الكهرباء شائعة هنا — من المرجح أن تحتاج طاقة شمسية مع نسخة احتياطية.",
+    caseWhyRate:
+      "الأسعار المحلية مرتفعة — يبدو أن خفض الفاتورة هو سبب الحساب هنا.",
+    caseWhyOffgrid: "بيئة ريفية — يبدو أن الاستقلال عن الشبكة مطروح.",
+    caseWhyReserve: "الانقطاعات هنا تجعل الاحتفاظ باحتياطي أمرًا مفيدًا.",
     simpleHeadline: "في موقعك، يمنحك هذا النظام {goal}:",
     heroPlaceholder: "مدينة أو بلدة أو رمز بريدي",
     advancedSummary: "ضبط النظام (اختياري)",

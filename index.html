@@ -817,12 +817,16 @@
                 </details>
               </div>
 
-              <!-- Goal: a control, not an action (spec s1 r2), after location. -->
+              <!-- The case ladder: the registry's six cases, ranked by location
+                   priors (spec 12.1-12.3). Rendered by setupCaseLadder() from
+                   usecases.js so the options cannot drift from the registry; the
+                   two original ids are kept on their cases for the smoke scripts. -->
               <div
-                class="form-group goal-segmented-wrap"
+                class="form-group case-ladder-wrap"
                 style="margin-bottom: 0.9rem"
               >
                 <span
+                  id="caseLadderLabel"
                   style="
                     font-size: 0.85rem;
                     color: var(--text-muted);
@@ -830,34 +834,52 @@
                     display: block;
                     margin-bottom: 0.4rem;
                   "
-                  data-i18n="sizingFor"
-                  >What are you sizing for?</span
+                  data-i18n="caseLadderTitle"
+                  >What are you here for?</span
                 >
                 <div
-                  class="goal-segmented-buttons"
+                  id="caseLadder"
+                  class="case-ladder"
+                  role="radiogroup"
+                  aria-labelledby="caseLadderLabel"
+                ></div>
+                <p
+                  class="case-ladder-hint"
                   style="
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 0.6rem;
+                    font-size: 0.78rem;
+                    color: var(--text-muted);
+                    margin: 0.35rem 0 0;
                   "
+                  data-i18n="caseLadderHint"
                 >
-                  <button
-                    type="button"
-                    id="btnGoalGridtie"
-                    class="btn btn-segmented active goal-mode-control"
-                  >
-                    <span>🏠</span>
-                    <span data-i18n="goalCutBill">Cut My Electric Bill</span>
-                  </button>
-                  <button
-                    type="button"
-                    id="btnGoalOffgrid"
-                    class="btn btn-segmented goal-mode-control"
-                  >
-                    <span>🌲</span>
-                    <span data-i18n="goalOffgrid">Off-grid / Backup</span>
-                  </button>
-                </div>
+                  Nothing to choose: the top case is already estimated. Pick
+                  another to change it.
+                </p>
+              </div>
+
+              <!-- The estimate summary (spec 10.4, 11.4 as amended by 11.8):
+                   the defaults this estimate will use, and the tariff grade,
+                   before anything is typed. A priced figure only ever comes
+                   from a run payload, so this card states what it knows. -->
+              <div id="estimateCard" class="estimate-card" hidden>
+                <h3 class="estimate-title" data-i18n="estimateTitle">
+                  Your estimate
+                </h3>
+                <dl class="estimate-lines">
+                  <div>
+                    <dt data-i18n="estimateBillLabel">Monthly bill</dt>
+                    <dd id="estimateBill">—</dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="estimateLoadLabel">Daily use</dt>
+                    <dd id="estimateLoad">—</dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="estimateCutLabel">Bill cut target</dt>
+                    <dd id="estimateCut">—</dd>
+                  </div>
+                </dl>
+                <p class="estimate-basis" id="estimateBasis"></p>
               </div>
               <div class="form-group" style="margin-bottom: 0.7rem">
                 <div
