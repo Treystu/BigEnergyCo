@@ -29,7 +29,7 @@ import {
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
 } from "./usecases.js?v=20261125e";
-import { rankCases } from "./priors.js?v=20261125e";
+import { rankCases } from "./intake-priors.js?v=20261125e";
 import {
   createRunChannel,
   staleRunAction,
@@ -3648,7 +3648,7 @@ function renderCaseLadder(features) {
   if (!host) return;
   if (features !== undefined) ladderFeatures = features || {};
   host.textContent = "";
-  for (const { id, whyKey } of rankCases(ladderFeatures)) {
+  for (const { id, why } of rankCases(ladderFeatures)) {
     const c = useCase(id);
     if (!c) continue;
     const btn = document.createElement("button");
@@ -3662,27 +3662,30 @@ function renderCaseLadder(features) {
     label.className = "case-ladder-label";
     label.textContent = t(c.labelKey);
     btn.appendChild(label);
-    if (whyKey) {
+    if (why) {
       // One caption line, hedged by the dictionary key (spec §12.3). A place
       // with no resolved feature carries no why-line rather than a guess.
-      const why = document.createElement("span");
-      why.className = "case-why";
-      why.textContent = t(whyKey);
-      btn.appendChild(why);
+      const caption = document.createElement("span");
+      caption.className = "case-why";
+      caption.textContent = t(why);
+      btn.appendChild(caption);
     }
     host.appendChild(btn);
   }
   paintLadderSelection();
 }
 
-// Only features with a live, cited source (priors.js FEATURE_SOURCES). The
-// tariff record supplies the rate; a TOU schedule, outage exposure and place
-// class have no field on it yet, so they stay ABSENT rather than guessed
-// (spec §12.3, priors rule 1) and the ladder falls back to registry order.
+// Only features with a live, cited source (intake-priors.js PRIOR_FEATURES).
+// The tariff registry supplies the displayed residential rate, so the rate band
+// is live. A TOU schedule, export regime, outage exposure and place class have
+// no field on the resolved place or tariff record yet, so they stay ABSENT
+// rather than guessed (spec §12.3, prior rule 1) and the ladder falls back to
+// the registry order where nothing fires.
 function featuresFromLocation() {
   const f = {};
   const rate = displayRate();
-  if (Number.isFinite(rate) && rate > 0) f.rateLevel = Math.min(1, rate / 0.6);
+  if (Number.isFinite(rate) && rate > 0)
+    f.tariffLevel = rate >= 0.25 ? "high" : rate >= 0.15 ? "medium" : "low";
   return f;
 }
 

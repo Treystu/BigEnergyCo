@@ -28,8 +28,7 @@
       name="google-site-verification"
       content="zVFiMH4WnfvhMHtnivIgDm_-5XtelVgcL709oHh3pWk"
     />
-    <!-- Legacy: token for the old pages.dev URL-prefix property; retire it with
-         that property (revisit after 2027-01-01). -->
+    <!-- Legacy pages.dev token; retire with that property (after 2027-01-01). -->
     <meta
       name="google-site-verification"
       content="iXiF6PQy5IhjMtll2YzS3-amK6BtApSkpdlKM73dSEc"
@@ -567,8 +566,7 @@
 
           <div class="calc-card">
             <div class="calc-controls">
-              <!-- Location-first (GQ F1 / #430, spec V1 s3 R1): the question
-               that makes every number specific comes first. -->
+              <!-- Location-first (#430, spec s3 R1): the specific ask comes first. -->
               <div class="form-group no-bottom-spacing">
                 <div
                   style="
@@ -817,23 +815,14 @@
                 </details>
               </div>
 
-              <!-- The case ladder: the registry's six cases, ranked by location
-                   priors (spec 12.1-12.3). Rendered by setupCaseLadder() from
-                   usecases.js so the options cannot drift from the registry; the
-                   two original ids are kept on their cases for the smoke scripts. -->
+              <!-- #440 case ladder (spec 12.1-12.3), rendered from usecases.js. -->
               <div
                 class="form-group case-ladder-wrap"
                 style="margin-bottom: 0.9rem"
               >
                 <span
                   id="caseLadderLabel"
-                  style="
-                    font-size: 0.85rem;
-                    color: var(--text-muted);
-                    font-weight: 700;
-                    display: block;
-                    margin-bottom: 0.4rem;
-                  "
+                  class="case-ladder-label"
                   data-i18n="caseLadderTitle"
                   >What are you here for?</span
                 >
@@ -843,24 +832,13 @@
                   role="radiogroup"
                   aria-labelledby="caseLadderLabel"
                 ></div>
-                <p
-                  class="case-ladder-hint"
-                  style="
-                    font-size: 0.78rem;
-                    color: var(--text-muted);
-                    margin: 0.35rem 0 0;
-                  "
-                  data-i18n="caseLadderHint"
-                >
+                <p class="case-ladder-hint" data-i18n="caseLadderHint">
                   Nothing to choose: the top case is already estimated. Pick
                   another to change it.
                 </p>
               </div>
 
-              <!-- The estimate summary (spec 10.4, 11.4 as amended by 11.8):
-                   the defaults this estimate will use, and the tariff grade,
-                   before anything is typed. A priced figure only ever comes
-                   from a run payload, so this card states what it knows. -->
+              <!-- Estimate summary (spec 10.4/11.4): defaults and rate, no price. -->
               <div id="estimateCard" class="estimate-card" hidden>
                 <h3 class="estimate-title" data-i18n="estimateTitle">
                   Your estimate
@@ -2048,8 +2026,7 @@
                 <span id="pipeElapsed" class="pipe-elapsed"></span>
               </div>
 
-              <!-- Speed note: honest explanation when a run resolves instantly
-                   (repeat configuration or cached weather). -->
+              <!-- Speed note: why a run resolved instantly. -->
               <p id="speedNote" style="display: none" role="status"></p>
             </div>
 
@@ -2701,8 +2678,7 @@
                   </p>
                 </details>
 
-                <!-- P1.6: the three modelling choices nobody made and cannot
-                  see each change what the numbers above mean. -->
+                <!-- P1.6: the three modelling choices, and what they change. -->
                 <p
                   id="assumptionDisclosure"
                   class="assumption-disclosure"

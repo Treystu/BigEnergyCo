@@ -544,13 +544,18 @@ export const LOCALES = {
     estimateCutLabel: "Bill cut target",
     estimateBasis:
       "Planning defaults for your location, priced at your local rate of {rate}/kWh. The full simulation runs when you click Size My System.",
-    caseWhyTou: "Time-of-use rates here likely make a battery pay on its own.",
-    caseWhyBackup:
+    whyGoodSun:
+      "Strong sun here — offsetting the bill with solar is likely common.",
+    whySuburbanSolarBackup:
+      "A suburban setting — solar with a battery is likely the usual install.",
+    whyTouBattery:
+      "Time-of-use rates here likely make a battery pay on its own.",
+    whyOutageBackup:
       "Outages here are common — solar with backup is likely what you need.",
-    caseWhyRate:
+    whyHighRates:
       "High local rates — cutting the bill is likely the reason people size here.",
-    caseWhyOffgrid: "A rural setting — going off-grid is likely in play.",
-    caseWhyReserve: "Outages here make holding a backup reserve likely useful.",
+    whyRuralOffgrid: "A rural setting — going off-grid is likely in play.",
+    whyReserve: "Outages here make holding a backup reserve likely useful.",
     simpleHeadline: "At your location, this system gets you {goal}:",
     heroPlaceholder: "City, town, or postcode",
     advancedSummary: "Fine-tune the system (optional)",
@@ -1481,15 +1486,19 @@ export const LOCALES = {
     estimateCutLabel: "Objetivo de recorte",
     estimateBasis:
       "Valores de partida para tu ubicación, a tu tarifa local de {rate}/kWh. La simulación completa se ejecuta al pulsar Dimensionar mi sistema.",
-    caseWhyTou:
+    whyGoodSun:
+      "Sol abundante aquí: compensar la factura con solar probablemente sea lo habitual.",
+    whySuburbanSolarBackup:
+      "Entorno suburbano: solar con batería probablemente sea la instalación habitual.",
+    whyTouBattery:
       "Las tarifas por franjas horarias de aquí probablemente hacen que una batería se pague sola.",
-    caseWhyBackup:
+    whyOutageBackup:
       "Aquí son comunes los cortes: probablemente necesites solar con respaldo.",
-    caseWhyRate:
+    whyHighRates:
       "Tarifas locales altas: probablemente recortar la factura sea la razón para dimensionar aquí.",
-    caseWhyOffgrid:
+    whyRuralOffgrid:
       "Entorno rural: probablemente te interese ir fuera de la red.",
-    caseWhyReserve:
+    whyReserve:
       "Los cortes de aquí hacen que mantener una reserva de respaldo sea útil.",
     simpleHeadline: "En tu ubicación, este sistema consigue {goal}:",
     heroPlaceholder: "Ciudad, pueblo o código postal",
@@ -2331,14 +2340,19 @@ export const LOCALES = {
     estimateCutLabel: "Meta de corte",
     estimateBasis:
       "Valores iniciais para a sua localização, à sua tarifa local de {rate}/kWh. A simulação completa roda ao clicar em Dimensionar meu sistema.",
-    caseWhyTou:
+    whyGoodSun:
+      "Sol forte aqui — compensar a conta com solar é provavelmente o habitual.",
+    whySuburbanSolarBackup:
+      "Ambiente suburbano — solar com bateria é provavelmente a instalação habitual.",
+    whyTouBattery:
       "As tarifas por horário aqui provavelmente fazem uma bateria se pagar sozinha.",
-    caseWhyBackup:
+    whyOutageBackup:
       "Faltas de energia são comuns aqui — solar com backup é provavelmente o que você precisa.",
-    caseWhyRate:
+    whyHighRates:
       "Tarifas locais altas — cortar a conta é provavelmente o motivo de dimensionar aqui.",
-    caseWhyOffgrid: "Ambiente rural — sair da rede provavelmente está em jogo.",
-    caseWhyReserve:
+    whyRuralOffgrid:
+      "Ambiente rural — sair da rede provavelmente está em jogo.",
+    whyReserve:
       "As faltas de energia aqui tornam útil manter uma reserva de backup.",
     simpleHeadline: "Na sua localização, este sistema consegue {goal}:",
     heroPlaceholder: "Cidade, vila ou código postal",
@@ -3189,15 +3203,19 @@ export const LOCALES = {
     estimateCutLabel: "Objectif de réduction",
     estimateBasis:
       "Valeurs de départ pour votre lieu, à votre tarif local de {rate}/kWh. La simulation complète se lance en cliquant sur Dimensionner mon système.",
-    caseWhyTou:
+    whyGoodSun:
+      "Beau soleil ici — compenser la facture avec du solaire est probablement courant.",
+    whySuburbanSolarBackup:
+      "Cadre périurbain — le solaire avec batterie est probablement l'installation courante.",
+    whyTouBattery:
       "Les tarifs heures pleines/creuses ici font probablement payer une batterie d'elle-même.",
-    caseWhyBackup:
+    whyOutageBackup:
       "Les coupures sont courantes ici — le solaire avec secours est probablement ce qu'il vous faut.",
-    caseWhyRate:
+    whyHighRates:
       "Tarifs locaux élevés — réduire la facture est probablement la raison de dimensionner ici.",
-    caseWhyOffgrid:
+    whyRuralOffgrid:
       "Un cadre rural — l'autonomie hors réseau est probablement en jeu.",
-    caseWhyReserve:
+    whyReserve:
       "Les coupures ici rendent une réserve de secours probablement utile.",
     simpleHeadline: "À votre lieu, ce système vous permet de {goal} :",
     heroPlaceholder: "Ville, village ou code postal",
@@ -4045,16 +4063,19 @@ export const LOCALES = {
     estimateCutLabel: "Sparziel",
     estimateBasis:
       "Planungsannahmen für Ihren Standort, zu Ihrem lokalen Tarif von {rate}/kWh. Die vollständige Simulation startet mit Mein System dimensionieren.",
-    caseWhyTou:
+    whyGoodSun:
+      "Viel Sonne hier — die Rechnung mit Solar auszugleichen ist wahrscheinlich üblich.",
+    whySuburbanSolarBackup:
+      "Vorstadtlage — Solar mit Batterie ist hier wahrscheinlich die übliche Anlage.",
+    whyTouBattery:
       "Zeitabhängige Tarife hier lassen eine Batterie wahrscheinlich für sich selbst zahlen.",
-    caseWhyBackup:
+    whyOutageBackup:
       "Stromausfälle sind hier üblich — Solar mit Notstrom ist wahrscheinlich das Richtige.",
-    caseWhyRate:
+    whyHighRates:
       "Hohe lokale Tarife — die Rechnung zu senken ist wahrscheinlich der Grund hier.",
-    caseWhyOffgrid:
+    whyRuralOffgrid:
       "Ländliche Lage — Inselbetrieb ist wahrscheinlich ein Thema.",
-    caseWhyReserve:
-      "Ausfälle hier machen eine Notreserve wahrscheinlich sinnvoll.",
+    whyReserve: "Ausfälle hier machen eine Notreserve wahrscheinlich sinnvoll.",
     simpleHeadline: "An Ihrem Standort bringt Ihnen dieses System {goal}:",
     heroPlaceholder: "Stadt, Dorf oder Postleitzahl",
     advancedSummary: "System anpassen (optional)",
@@ -4736,15 +4757,19 @@ export const LOCALES = {
     estimateCutLabel: "Doel voor verlaging",
     estimateBasis:
       "Planningsuitgangspunten voor uw locatie, tegen uw lokale tarief van {rate}/kWh. De volledige simulatie start bij Systeem dimensioneren.",
-    caseWhyTou:
+    whyGoodSun:
+      "Veel zon hier — de rekening met zon compenseren is waarschijnlijk gebruikelijk.",
+    whySuburbanSolarBackup:
+      "Suburbane ligging — zon met batterij is waarschijnlijk de gebruikelijke installatie.",
+    whyTouBattery:
       "Piek/dal-tarieven hier laten een batterij waarschijnlijk zichzelf terugverdienen.",
-    caseWhyBackup:
+    whyOutageBackup:
       "Stroomuitval is hier gebruikelijk — zonnepanelen met noodstroom is waarschijnlijk wat u nodig hebt.",
-    caseWhyRate:
+    whyHighRates:
       "Hoge lokale tarieven — de rekening verlagen is waarschijnlijk de reden hier.",
-    caseWhyOffgrid:
+    whyRuralOffgrid:
       "Landelijke omgeving — volledig off-grid is waarschijnlijk aan de orde.",
-    caseWhyReserve: "Uitval hier maakt een noodreserve waarschijnlijk nuttig.",
+    whyReserve: "Uitval hier maakt een noodreserve waarschijnlijk nuttig.",
     simpleHeadline: "Op uw locatie levert dit systeem u {goal}:",
     heroPlaceholder: "Stad, dorp of postcode",
     advancedSummary: "Systeem verfijnen (optioneel)",
@@ -5821,14 +5846,18 @@ export const LOCALES = {
     estimateCutLabel: "هدف خفض الفاتورة",
     estimateBasis:
       "قيم تخطيطية لموقعك، بسعرك المحلي {rate}/كيلوواط·ساعة. تُشغَّل المحاكاة الكاملة عند النقر على «حجم نظامي».",
-    caseWhyTou:
+    whyGoodSun:
+      "شمس قوية هنا — تعويض الفاتورة بالطاقة الشمسية هو الخيار المعتاد على الأرجح.",
+    whySuburbanSolarBackup:
+      "ضاحية سكنية — الطاقة الشمسية مع بطارية هي التركيب المعتاد على الأرجح.",
+    whyTouBattery:
       "أسعار الوقت المحدد هنا تجعل البطارية غالبًا تُسدّد ثمنها بنفسها.",
-    caseWhyBackup:
+    whyOutageBackup:
       "انقطاعات الكهرباء شائعة هنا — من المرجح أن تحتاج طاقة شمسية مع نسخة احتياطية.",
-    caseWhyRate:
+    whyHighRates:
       "الأسعار المحلية مرتفعة — يبدو أن خفض الفاتورة هو سبب الحساب هنا.",
-    caseWhyOffgrid: "بيئة ريفية — يبدو أن الاستقلال عن الشبكة مطروح.",
-    caseWhyReserve: "الانقطاعات هنا تجعل الاحتفاظ باحتياطي أمرًا مفيدًا.",
+    whyRuralOffgrid: "بيئة ريفية — يبدو أن الاستقلال عن الشبكة مطروح.",
+    whyReserve: "الانقطاعات هنا تجعل الاحتفاظ باحتياطي أمرًا مفيدًا.",
     simpleHeadline: "في موقعك، يمنحك هذا النظام {goal}:",
     heroPlaceholder: "مدينة أو بلدة أو رمز بريدي",
     advancedSummary: "ضبط النظام (اختياري)",

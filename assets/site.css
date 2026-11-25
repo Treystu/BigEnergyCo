@@ -792,10 +792,8 @@ input[type="number"]::-webkit-inner-spin-button {
   left: 0.75rem;
 }
 
-/* RTL (Arabic): flexbox and grid follow `direction` automatically, so most
-   of the layout mirrors for free. Only the absolutely-positioned pieces
-   need explicit mirrors. Full logical-property migration (margin-inline
-   etc.) is tracked separately; nothing here changes LTR rendering. */
+/* RTL (Arabic): flexbox/grid mirror for free; only absolute pieces need
+   explicit mirrors. Nothing here changes LTR rendering. */
 [dir="rtl"] .skip-link {
   left: auto;
   right: -9999px;
@@ -864,13 +862,9 @@ input[type="number"]::-webkit-inner-spin-button {
   text-decoration: none;
 }
 
-/* #441: the display-mode fork is gone, so nothing here may hide a panel by
-   mode. The plain-language card leads every result and the technical panels
-   stay reachable behind the result disclosures (presentation spec V1, section
-   5) — hidden by a closed <details>, never by a root attribute. Charts and the
-   comparison matrix were always meant to stay; the ladder, money bar, focus
-   panel, BOM and the result actions were hidden here and are now reachable
-   again, which is what "all the options in one gesture" requires. */
+/* #441: no panel is hidden by display mode. The plain-language card leads each
+   result; technical panels stay behind closed result disclosures, never a root
+   attribute (spec V1 s5). */
 
 /* The Simple results card. */
 .simple-results-card {
@@ -995,10 +989,8 @@ textarea:focus-visible {
 }
 
 /* ── Use-case form utilities ────────────────────────────────────────────────
-   Added with the six-case chooser (D-16) so the new markup spends ZERO inline
-   style attributes: check-quality.mjs freezes that count as a ratchet, and a
-   feature that needs four looks repeated four times needs four named classes
-   instead. */
+   Six-case chooser (D-16): named classes keep inline style attributes at zero
+   (check-quality.mjs ratchet). */
 .uc-note {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -1042,8 +1034,7 @@ textarea:focus-visible {
   box-shadow: 0 0 10px var(--primary-glow);
 }
 
-/* A field-level error that is actually readable: text, not just a red border.
-   The input owns aria-invalid + aria-describedby so the message is announced;
+/* A readable field-level error: text, not just a red border. The input owns aria-invalid + aria-describedby so the message is announced;
    this block only makes it visible and legible at every width. */
 /* P1.6: the always-visible assumption lines. Muted but readable at every
    width, and separated from the interactive row below it. */
@@ -1227,10 +1218,8 @@ textarea:focus-visible {
   margin-bottom: 1.25rem;
 }
 
-/* The provenance link. It is the one place the product hands the visitor the
- * audit trail itself, so it is a real link and not a styled div: a reader
- * should be able to open it in a new tab, copy it, or send it to someone
- * arguing about whether the numbers are made up. */
+/* The provenance link: the audit trail itself, so a real link (open, copy,
+ * send), never a styled div. */
 .sources-link {
   color: var(--primary-accent);
   font-size: 0.85rem;
@@ -1983,10 +1972,8 @@ footer {
   color: var(--text-muted);
 }
 
-/* #437 owner order 2026-11-24: the results surface is the full one again. The
-   demoted blocks (charts, ladder, frontier, ELI5) are visible without opening a
-   disclosure; their renderers own their own display rules and nothing is folded
-   into a host at runtime. */
+/* #437: the full results surface is back — demoted blocks (charts, ladder,
+   frontier, ELI5) are visible; their renderers own their display rules. */
 
 .results-more {
   margin-top: 1.5rem;
@@ -2003,8 +1990,7 @@ footer {
 }
 
 /* Simplified interface (owner order 2026-11-22): home is one place field and
-   one action. The plan card and its stat grid reuse the existing result-card,
-   simple-heroes and paths-rows classes, so this file gains almost nothing. */
+   one action, reusing the existing result-card and paths-rows classes. */
 .hero-compact .hero-tag,
 .hero-compact .hero-stats-grid,
 .hero-compact > .container > p {
@@ -2022,5 +2008,61 @@ footer {
 .plan-price,
 .paths-upfront,
 .paths-total {
+  font-variant-numeric: tabular-nums;
+}
+
+/* #440 case ladder + estimate summary (spec 12, 10.4). */
+.case-ladder-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.case-ladder-hint,
+.estimate-basis {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.case-ladder {
+  display: grid;
+  gap: 0.45rem;
+}
+.btn-ladder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  text-align: left;
+}
+.case-why {
+  font-size: 0.78rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+.estimate-card {
+  margin-bottom: 0.9rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border, rgba(127, 127, 127, 0.3));
+  border-radius: 8px;
+}
+.estimate-title {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+.estimate-lines {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  font-size: 0.85rem;
+}
+.estimate-lines div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.estimate-lines dd {
+  margin: 0;
   font-variant-numeric: tabular-nums;
 }

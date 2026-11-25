@@ -291,7 +291,7 @@ test("homepage copy casing is consistent", () => {
   // The case label lives in the registry's own option now that the ladder
   // replaced the two-button goal control (spec V1.1 §12.1).
   assert.ok(html.includes("Go fully off-grid"));
-  assert.doesNotMatch(html, /Off-Grid / Backup/);
+  assert.doesNotMatch(html, /Off-Grid \/ Backup/);
   assert.ok(html.includes("Sodium-ion vs LFP"));
 });
 
