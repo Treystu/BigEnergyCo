@@ -117,26 +117,35 @@ test("the 2026-10-24 full meaning back-read fixes stay fixed", () => {
   // assertion fails if the specific unreadable or wrong string it names comes
   // back — the same contract the reviewed-value pins above carry.
   for (const [locale, value] of Object.entries({
-    es: "☀️ Dimensionar mi sistema (simulación de 5 años)",
-    pt: "☀️ Dimensionar meu sistema (simulação de 5 anos)",
-    fr: "☀️ Dimensionner (simulation sur 5 ans)",
-    de: "☀️ System dimensionieren (5-Jahres-Simulation)",
-    nl: "☀️ Systeem dimensioneren (5-jaarssimulatie)",
-    ar: "☀️ احسب نظامي (محاكاة 5 سنوات)",
+    es: "Dimensionar mi sistema (simulación de 5 años)",
+    pt: "Dimensionar meu sistema (simulação de 5 anos)",
+    fr: "Dimensionner (simulation sur 5 ans)",
+    de: "System dimensionieren (5-Jahres-Simulation)",
+    nl: "Systeem dimensioneren (5-jaarssimulatie)",
+    ar: "احسب نظامي (محاكاة 5 سنوات)",
   })) {
-    // The CTA must not lose its marker or change wording between its two
-    // states: runBtn is painted before a run, runBtnReady while it runs.
+    // The CTA must not change wording between its two states: runBtn is
+    // painted before a run, runBtnReady while it runs. #432 F14 removed the
+    // emoji from the label itself; a control's name is words, not decoration.
     assert.equal(LOCALES[locale].runBtn, value, `${locale}.runBtn`);
     assert.equal(LOCALES[locale].runBtnReady, value, `${locale}.runBtnReady`);
+  }
+  for (const locale of Object.keys(LOCALES)) {
+    assert.doesNotMatch(
+      LOCALES[locale].runBtn,
+      /[\u2600-\u27BF\u{1F300}-\u{1FAFF}]/u,
+      `${locale}.runBtn must not carry an emoji in its label`,
+    );
+    assert.doesNotMatch(
+      LOCALES[locale].locBtn,
+      /[\u2600-\u27BF\u{1F300}-\u{1FAFF}]/u,
+      `${locale}.locBtn must not carry an emoji in its label`,
+    );
   }
   for (const locale of ["es", "pt", "fr", "ar"]) {
     assert.ok(
       LOCALES[locale].heroTag.startsWith("🌍 "),
       `${locale}.heroTag lost the marker the other locales carry`,
-    );
-    assert.ok(
-      LOCALES[locale].locBtn.includes("📍"),
-      `${locale}.locBtn lost the marker the other locales carry`,
     );
   }
   assert.match(LOCALES.ar.statusSuccess, /البيانات الساعية/);
