@@ -573,6 +573,7 @@ test("#437: the restored-surface intake chrome repaints on a language change", (
   for (const key of [
     "derateHintMpptTypical",
     "fxRateLabel",
+    "fxRateOptional",
     "stepLocation",
     "stepLoad",
     "stepTariff",
@@ -587,6 +588,11 @@ test("#437: the restored-surface intake chrome repaints on a language change", (
   }
   assert.match(ui, /t\("derateHintMpptTypical"\)/);
   assert.match(ui, /t\("fxRateLabel"\)/);
+  assert.match(
+    ui,
+    /muted-note[\s\S]{0,80}t\("fxRateOptional"\)/,
+    "the '(optional)' span is visible copy too, so it needs its own key",
+  );
   assert.match(ui, /t\("stepLocation"\)/);
   assert.ok(
     !ui.includes('location: "1. Location"'),
