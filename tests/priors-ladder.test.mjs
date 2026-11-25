@@ -137,6 +137,19 @@ test("#440: the ladder never gates the run and a pick commits at once", () => {
   assert.match(ui, /id === "offgrid"\) return "btnGoalOffgrid"/);
 });
 
+test("#440: the ladder repaints after the deferred dictionary lands", () => {
+  // Built during setup, before locales.js resolves, so without this repaint the
+  // rendered rows show the echoed keys ("useCaseBillCut", "whyHighRates").
+  const body =
+    /function repaintRuntimeCopy\(\) \{[\s\S]*?\n\}/.exec(ui)?.[0] || "";
+  assert.match(
+    body,
+    /renderCaseLadder\(\);/,
+    "the ladder repaints on language",
+  );
+  assert.match(body, /renderEstimateCard\(\);/, "the estimate repaints too");
+});
+
 test("#440: the estimate summary states defaults, never a priced figure", () => {
   assert.ok(html.includes('id="estimateCard"'), "the card exists");
   assert.ok(html.includes('id="estimateBasis"'), "its basis line exists");
