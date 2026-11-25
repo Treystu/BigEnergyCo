@@ -150,6 +150,21 @@ test("#440: the ladder repaints after the deferred dictionary lands", () => {
   assert.match(body, /renderEstimateCard\(\);/, "the estimate repaints too");
 });
 
+test("#440: the estimate and the ranking follow the location in place", () => {
+  // A resolved place can move the rate band: the tariff writer re-derives the
+  // features, and both surfaces repaint without a reload (spec 11.6).
+  const tariff =
+    /function applyEstimatedTariff\([\s\S]*?\n\}/.exec(ui)?.[0] || "";
+  assert.match(tariff, /renderCaseLadder\(featuresFromLocation\(\)\)/);
+  assert.match(tariff, /renderEstimateCard\(\)/);
+  // A drag on either control re-renders the card in place.
+  const bill =
+    /function paintBillSliderLabel\([\s\S]*?\n\}/.exec(ui)?.[0] || "";
+  assert.match(bill, /renderEstimateCard\(\)/);
+  const cut = /function syncCutControls\([\s\S]*?\n\}/.exec(ui)?.[0] || "";
+  assert.match(cut, /renderEstimateCard\(\)/);
+});
+
 test("#440: the estimate summary states defaults, never a priced figure", () => {
   assert.ok(html.includes('id="estimateCard"'), "the card exists");
   assert.ok(html.includes('id="estimateBasis"'), "its basis line exists");
