@@ -247,6 +247,55 @@ Residual, recorded not fixed: the tariff estimate still names its region box wit
 the English **data** label (`US mainland`). The 26 boxes in `pricing.js` carry
 English geographic names; localizing them is its own dispatch, attached here.
 
+## Landing record — 2026-11-25 (queue item 1: live defects closed out)
+
+Census correction first: the queue's live-defect row named PR #453 and issues
+#442/#444/#447, but GitHub says #442, #444 and #447 are all **CLOSED** and PR #453
+is **MERGED** (`7d0ebfa0`). What was missing was not work on the issues but the
+rendered verification and the rail read on #453. Both are now on record.
+
+- **#453 rail read (the row's own ask).** Head `25b4043b`: CircleCI pipeline
+  `798d1d20-9305-421f-a34a-cd1e485bc078`, workflow `verify` success
+  2026-11-17T15:17:12Z → 15:23:34Z. The GitHub check-runs list on that head holds
+  only the dead Actions jobs plus `jev-complete`, so the CircleCI workflow is the
+  rail read and is stated as one.
+- **#442 re-driven, and it exposed a live regression.** On staging `924d7528`, the
+  issue's batched fill-and-click (off-grid, `19.39386, -154.93075`, kWh/day entry
+  `1.2`) started the run on the first click — #454's cure holds — but the run
+  sized **2 kWh/day**: `syncBillSlider()` on the 500 ms coordinate resolve wrote
+  its bill-derived mirror back over `#dailyKwhInput` before the queued run read
+  inputs. **#484 `5353f558`**: in the typed-kWh mode the entry owns the anchor,
+  the touched-bill branch no longer overrides it, and the mirror skips the entry.
+- **A second write site, found on the next build.** The bill slider's own drag
+  handler wrote the same mirror unconditionally, so in the kWh/day mode the
+  slider either clobbered the entry or (after #484) was snapped back as a dead
+  control. **#485 `62b12f05`**: a drag on the bill control is a pick of the bill as
+  the load source — it moves the selector through `commitLoadMode()` — and its
+  mirror skips the entry. Gates added in `tests/offgrid-daily-kwh-source.test.mjs`
+  (6 tests: the derivation, the guard, the single guarded write, the drag pick).
+- **#444 re-verified on the rendered build.** `input`-only and `change`-only each
+  commit the pick, reveal the advanced panel and keep `1.2`. No bill-panel
+  regression. Evidence filed on #444 (comment 7162419595).
+- **#447 residue verified.** Precision: fields `19.39386` / `-154.93075`, note
+  `Using custom coordinates (19.39386, -154.93075).`, share state `la:19.39386,
+lo:-154.93075`. Locality: the coordinate query reverse-geocodes to `Kehena,
+Hawaii, USA`; the search box names it; no road name on the page. Evidence filed on
+  #447 (comment 7162418956).
+
+**Rendered re-drive, `https://db9b5c6e.bigenergyco.pages.dev`** (390x844, stamp
+`20261125e`, SW `beco-v303`): off-grid, `19.39386, -154.93075`, entry `1.2`, one
+batched click → results; entry still `1.2`; grid spend `about $184 per year`
+(1.2 × 365 × $0.42); plan `$750`=`$169` + `$459`+`$122`; parts payback
+`Year 4`; installed payback and cut row `—`(off-grid, legitimate); frontier SVG
+present; both charts drawn (one canvas each);`#resultsMore.open`false;`scrollWidth − 390 = −11`; console clean apart from the known advisor CORS
+failure (#364). Bill-slider drag in the kWh/day mode moves the pick to `bill`,
+hides the kWh panel and mirrors `15.3 kWh/day`.
+
+**Named follow-up, attached to #443 not re-filed:** the quick-bill helper line
+still reads `Starts from ~$26/mo (≈1 kWh/day)` beside a `1.2` entry — the bill
+slider's minimum floors the amount and the note rounds the load to a whole kWh.
+Display copy only; the sizing input is now correct on every surface.
+
 ## Readiness line
 
 The FULL results surface is live on STAGING and STAGING-RESTORED on #429 (stamp
@@ -262,11 +311,12 @@ and SEO censuses unchanged at zero URL changes. NOT promoted: production
 production-branch alias, still serves `20261103u`. Promotion remains a separate
 D-2026-11-13-008 step.
 
-WAIT-STATE: nothing is waiting on another party. Rung: the #437 remainder is
-landed (#480 `2d6191ba`, #481 `42ad5906`, #482 `846afbfc`) and verified on the
-rendered ES staging surface `924d7528` — the eleven-group census now returns zero
-English probes. Next rung is the live-defect queue in order: #442, #444 residue,
-#447 residue (custom coordinates), then the Wave-1 remainder.
+WAIT-STATE: nothing is waiting on another party. Rung: queue item 1 (live
+defects) is closed out — #453 confirmed merged with its rail read, #444 and #447
+re-verified on the rendered staging build, and the two #443-rule regressions the
+drive exposed cured as #484 `5353f558` and #485 `62b12f05`, each rail-green at its
+exact head. Next rung is the queue's Wave 1 row (#441/#430/#440/#431), which this
+pass deliberately did not start.
 
 ## Known follow-ups (already attached, not re-filed)
 
