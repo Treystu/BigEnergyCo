@@ -408,11 +408,11 @@ These are the places where the live record does not decide, so no rule is claime
 Each names its decider; the closing census treats an unanswered one as a gate
 finding, not a silent default.
 
-| #   | Question                                                                                                        | Decider | Gate read that shows it undecided                                                                                                           |
-| --- | --------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| #   | Question                                                                                                        | Decider                           | Gate read that shows it undecided                                                                                                                     |
+| --- | --------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Q1  | Is the estimate summary a new block on the intake (10.4) or the results card revealed early?                    | #440 — DECIDED 11.8: intake block | Settled in #440's landing: 11.8 states the rule and `tests/priors-ladder.test.mjs` pins the card; retained here with its receipt rather than deleted. |
-| Q2  | Does the `#useCase` select survive beside the ladder as its accessible fallback, or does the ladder replace it? | #440    | the select exists in `index.html` (`hidden`) and no issue text retires or keeps it; #434 owns the accessibility input that would settle it. |
-| Q3  | Which type role the estimate card's value takes (block, or a section-size lead)                                 | #432    | §6 gives #432 the scale and this gate reads no type decision for a block that does not exist yet.                                           |
+| Q2  | Does the `#useCase` select survive beside the ladder as its accessible fallback, or does the ladder replace it? | #440                              | the select exists in `index.html` (`hidden`) and no issue text retires or keeps it; #434 owns the accessibility input that would settle it.           |
+| Q3  | Which type role the estimate card's value takes (block, or a section-size lead)                                 | #432                              | §6 gives #432 the scale and this gate reads no type decision for a block that does not exist yet.                                                     |
 
 An open question is not a licence: a builder may implement the smallest thing that
 satisfies §10-§14 and record which option it chose, and the decider's own gate
