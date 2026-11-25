@@ -281,6 +281,13 @@ visible anywhere on the surface.
 
 11.7 No control in the intake is disabled while the permission state is unknown.
 
+11.8 **The estimate summary is a new block on the intake.** It sits between the
+ladder and the bill controls at R1, as 10.4's card. It is not the results card
+revealed early: at rest there is no result payload, and a revealed results card
+would have to carry a price this surface does not have. This settles §15 Q1; its
+presence is what makes 12.6's zero-answer display complete. Enforcement:
+`tests/priors-ladder.test.mjs` pins the card and its three defaults.
+
 ## 12. Priors and the ladder (#440)
 
 12.1 **The ladder is the registry, rendered.** Its six rows are `usecases.js`'s
@@ -401,11 +408,11 @@ These are the places where the live record does not decide, so no rule is claime
 Each names its decider; the closing census treats an unanswered one as a gate
 finding, not a silent default.
 
-| #   | Question                                                                                                        | Decider | Gate read that shows it undecided                                                                                                           |
-| --- | --------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Q1  | Is the estimate summary a new block on the intake (10.4) or the results card revealed early?                    | #440    | #430's receipt defers scope 2-3 to #440; #440's text asks for "the complete applicable display" at zero answers without placing the block.  |
-| Q2  | Does the `#useCase` select survive beside the ladder as its accessible fallback, or does the ladder replace it? | #440    | the select exists in `index.html` (`hidden`) and no issue text retires or keeps it; #434 owns the accessibility input that would settle it. |
-| Q3  | Which type role the estimate card's value takes (block, or a section-size lead)                                 | #432    | §6 gives #432 the scale and this gate reads no type decision for a block that does not exist yet.                                           |
+| #   | Question                                                                                                        | Decider                           | Gate read that shows it undecided                                                                                                                     |
+| --- | --------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Q1  | Is the estimate summary a new block on the intake (10.4) or the results card revealed early?                    | #440 — DECIDED 11.8: intake block | Settled in #440's landing: 11.8 states the rule and `tests/priors-ladder.test.mjs` pins the card; retained here with its receipt rather than deleted. |
+| Q2  | Does the `#useCase` select survive beside the ladder as its accessible fallback, or does the ladder replace it? | #440                              | the select exists in `index.html` (`hidden`) and no issue text retires or keeps it; #434 owns the accessibility input that would settle it.           |
+| Q3  | Which type role the estimate card's value takes (block, or a section-size lead)                                 | #432                              | §6 gives #432 the scale and this gate reads no type decision for a block that does not exist yet.                                                     |
 
 An open question is not a licence: a builder may implement the smallest thing that
 satisfies §10-§14 and record which option it chose, and the decider's own gate

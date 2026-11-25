@@ -24,7 +24,7 @@ const at = (needle) => {
 
 test("#430: the location ask leads the intake, before the goal and the numbers", () => {
   const location = at('id="citySearch"');
-  const goal = at('class="form-group goal-segmented-wrap"');
+  const goal = at('class="form-group case-ladder-wrap"');
   const bill = at('id="billSliderWrap"');
   const form = at('id="fullControls"');
   const run = at('id="btnRunSizing"');

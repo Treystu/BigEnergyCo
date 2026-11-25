@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261125e";
+import { APPLIANCES } from "./appliances.js?v=20261125f";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261125e";
+} from "./pwa-install.js?v=20261125f";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,28 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261125e";
+} from "./usecases.js?v=20261125f";
+import { rankCases } from "./intake-priors.js?v=20261125f";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261125e";
+} from "./run-coordinator.js?v=20261125f";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261125e";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261125e";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261125e";
+} from "./mode-chrome.js?v=20261125f";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261125f";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261125f";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261125e";
+} from "./location-picker.js?v=20261125f";
 
 import {
   estimateTariff,
@@ -57,15 +58,15 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261125e";
+} from "./pricing.js?v=20261125f";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261125e";
+import { currencyForCountry } from "./country-currency.js?v=20261125f";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261125e";
-import { partsBreakdown } from "./plan-card.js?v=20261125e";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261125f";
+import { partsBreakdown } from "./plan-card.js?v=20261125f";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -84,7 +85,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261125e").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261125f").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -95,15 +96,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261125e";
+} from "./lead-acid.js?v=20261125f";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261125e";
+} from "./bom.js?v=20261125f";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261125e";
+import { BOM_ITEMS } from "../shared/content.js?v=20261125f";
 
 import {
   applyI18n,
@@ -112,11 +113,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261125e";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261125e";
-import { byId as $, el } from "../shared/dom.js?v=20261125e";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261125e";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261125e";
+} from "../shared/i18n.js?v=20261125f";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261125f";
+import { byId as $, el } from "../shared/dom.js?v=20261125f";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261125f";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261125f";
 import {
   advisorJevContext,
   interpretSanity,
@@ -124,29 +125,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261125e";
+} from "./validate.js?v=20261125f";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261125e";
+} from "../shared/cut-targets.js?v=20261125f";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261125e";
+} from "./share-codec.js?v=20261125f";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261125e";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261125e";
+} from "./infeasible-copy.js?v=20261125f";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261125f";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261125e";
+} from "./fuel-units.js?v=20261125f";
 
 import {
   createLeafletProvider,
@@ -154,18 +155,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261125e";
+} from "./map-provider.js?v=20261125f";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261125e";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261125e";
+} from "./wizard.js?v=20261125f";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261125f";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261125e";
+} from "./budget-span.js?v=20261125f";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -177,10 +178,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261125e"),
-      import("./charts.js?v=20261125e"),
-      import("./frontier-chart.js?v=20261125e"),
-      import("./rescale.js?v=20261125e"),
+      import("./engine.js?v=20261125f"),
+      import("./charts.js?v=20261125f"),
+      import("./frontier-chart.js?v=20261125f"),
+      import("./rescale.js?v=20261125f"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -248,9 +249,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261125e";
+} from "./money.js?v=20261125f";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261125e";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261125f";
 
 let worker = null;
 
@@ -3619,65 +3620,194 @@ function selectMatrixCell(key) {
   }
 }
 
-function setupGoalControls() {
-  const btnGt = $("btnGoalGridtie");
-  const btnOff = $("btnGoalOffgrid");
-  const sysGoal = $("systemGoal");
-  if (!btnGt || !btnOff) return;
+// ── The case ladder (#440, spec §12) ────────────────────────────────────────
+// One control for the six cases: rows built from the registry, in the registry's
+// order at rest, re-ranked by the location priors once a feature with a live
+// source exists. A click is a pick and wins instantly (§12.5); the run stays an
+// explicit button (§10.3). Zero answers is a complete display: the top case is
+// already selected and nothing here gates the primary.
+let ladderFeatures = {};
 
-  const setGoal = (goal) => {
-    const isGt = goal === "gridtie";
-    // Single writer: the goal buttons never touch systemGoal. They select a CASE and
-    // let applyUseCase derive the enum, so button and chooser cannot drift. Choosing
-    // by mode, not label: backup and offgrid share the mode and backup sizes the
-    // essentials only, so defaulting a mode switch onto it would silently resize.
-    const chooser = $("useCase");
-    const current =
-      chooser && useCase(chooser.value) ? chooser.value : "billcut";
-    const derived =
-      deriveLegacy(current).mode === "offgrid" ? "offgrid" : "gridtie";
-    if (derived !== goal)
-      applyUseCase(goal === "gridtie" ? "billcut" : "offgrid", {
-        silent: true,
-      });
-    if (isGt) {
-      btnGt.classList.add("active");
-      btnOff.classList.remove("active");
-      const title = document.querySelector(".section-title");
-      if (title) title.textContent = t("modeTitleGt");
-      const desc = document.querySelector(".section-desc");
-      if (desc) desc.textContent = t("modeDescGt");
-      const optBill = $("optLoadBill");
-      if (optBill) optBill.textContent = t("loadBill");
-    } else {
-      btnOff.classList.add("active");
-      btnGt.classList.remove("active");
-      const title = document.querySelector(".section-title");
+function ladderRowId(id) {
+  if (id === "billcut") return "btnGoalGridtie";
+  if (id === "offgrid") return "btnGoalOffgrid";
+  return "btnCase" + id.charAt(0).toUpperCase() + id.slice(1);
+}
+
+function paintLadderSelection() {
+  const active = $("useCase") ? $("useCase").value : "billcut";
+  document.querySelectorAll("#caseLadder .btn-ladder").forEach((b) => {
+    const on = b.dataset.case === active;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-checked", on ? "true" : "false");
+  });
+}
+
+function renderCaseLadder(features) {
+  const host = $("caseLadder");
+  if (!host) return;
+  if (features !== undefined) ladderFeatures = features || {};
+  host.textContent = "";
+  for (const { id, why } of rankCases(ladderFeatures)) {
+    const c = useCase(id);
+    if (!c) continue;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.id = ladderRowId(id);
+    btn.className = "btn btn-ladder goal-mode-control";
+    btn.dataset.case = id;
+    btn.setAttribute("role", "radio");
+    btn.setAttribute("aria-checked", "false");
+    const label = document.createElement("span");
+    label.className = "case-ladder-label";
+    label.textContent = t(c.labelKey);
+    btn.appendChild(label);
+    if (why) {
+      // One caption line, hedged by the dictionary key (spec §12.3). A place
+      // with no resolved feature carries no why-line rather than a guess.
+      const caption = document.createElement("span");
+      caption.className = "case-why";
+      caption.textContent = t(why);
+      btn.appendChild(caption);
+    }
+    host.appendChild(btn);
+  }
+  paintLadderSelection();
+}
+
+// Only features with a live, cited source (intake-priors.js PRIOR_FEATURES).
+// The tariff registry supplies the displayed residential rate, so the rate band
+// is live. A TOU schedule, export regime, outage exposure and place class have
+// no field on the resolved place or tariff record yet, so they stay ABSENT
+// rather than guessed (spec §12.3, prior rule 1) and the ladder falls back to
+// the registry order where nothing fires.
+function featuresFromLocation() {
+  const f = {};
+  const rate = displayRate();
+  if (Number.isFinite(rate) && rate > 0)
+    f.tariffLevel = rate >= 0.25 ? "high" : rate >= 0.15 ? "medium" : "low";
+  return f;
+}
+
+// The estimate summary (spec §11.4 as amended by 11.8): the defaults this
+// estimate will use and the rate they are priced at, before any typing. A
+// priced system figure only ever comes from a run payload, so none is invented
+// here.
+function renderEstimateCard() {
+  const card = $("estimateCard");
+  if (!card) return;
+  const rate = displayRate();
+  const billNode = $("billSlider");
+  const cutNode = $("cutSlider");
+  if (!Number.isFinite(rate) || rate <= 0 || !billNode) {
+    card.hidden = true;
+    return;
+  }
+  const bill = parseFloat(billNode.value);
+  const kwh = Number.isFinite(billAnchorKwh) ? billAnchorKwh : null;
+  const cut = cutNode ? parseFloat(cutNode.value) : null;
+  const set = (id, text) => {
+    const n = $(id);
+    if (n) n.textContent = text;
+  };
+  set("estimateBill", Number.isFinite(bill) ? fmtBill(bill) : "—");
+  set(
+    "estimateLoad",
+    kwh === null
+      ? "—"
+      : t("offgridKwhReadout", { kwh: Math.round(kwh * 10) / 10 }),
+  );
+  set("estimateCut", Number.isFinite(cut) ? Math.round(cut) + "%" : "—");
+  const basis = $("estimateBasis");
+  if (basis) basis.textContent = t("estimateBasis", { rate: rate.toFixed(2) });
+  card.hidden = false;
+}
+
+function setupCaseLadder() {
+  const host = $("caseLadder");
+  if (!host) return;
+  ladderFeatures = featuresFromLocation();
+  renderCaseLadder();
+
+  // Chrome that follows the case's derived mode. The case is the source; the
+  // legacy enum is never written here (applyUseCase owns that derivation).
+  const syncChrome = (id) => {
+    const derived = deriveLegacy(id).mode;
+    const title = document.querySelector(".section-title");
+    const desc = document.querySelector(".section-desc");
+    const optBill = $("optLoadBill");
+    if (derived === "offgrid") {
       if (title) title.textContent = t("modeTitleOff");
-      const desc = document.querySelector(".section-desc");
       if (desc) desc.textContent = t("modeDescOff");
-      const optBill = $("optLoadBill");
       if (optBill) optBill.textContent = t("dailyEnergyNeed");
+    } else {
+      if (title) title.textContent = t("modeTitleGt");
+      if (desc) desc.textContent = t("modeDescGt");
+      if (optBill) optBill.textContent = t("loadBill");
     }
     updateAutoRows();
     showAllControls();
     syncBillSlider();
-    // A goal switch changes what the results chrome may show (an off-grid
-    // goal has no bill to cut) even when no new result has rendered yet.
+    // An off-grid case has no bill to cut, even before a result renders.
     syncCutRowVisibility();
-    // A goal change is a pre-calc change only after a successful result; the
-    // first calculation still belongs to the explicit sizing button.
     markPrecalcDirty();
+    renderEstimateCard();
   };
 
-  btnGt.addEventListener("click", () => setGoal("gridtie"));
-  btnOff.addEventListener("click", () => setGoal("offgrid"));
+  const pick = (id) => {
+    if (!useCase(id)) return;
+    applyUseCase(id);
+    paintLadderSelection();
+    syncChrome(id);
+  };
 
-  if (sysGoal) {
-    sysGoal.addEventListener("change", () => {
-      setGoal(sysGoal.value);
+  // The legacy coarse goal control (a hidden select and the smoke scripts' two
+  // ids) routes to a CASE, never to the enum: applyUseCase is the only writer of
+  // systemGoal. Choosing by mode would silently resize, since backup and offgrid
+  // share a mode and backup sizes the essentials only.
+  const setGoal = (goal) => {
+    const current =
+      $("useCase") && useCase($("useCase").value)
+        ? $("useCase").value
+        : "billcut";
+    const derived =
+      deriveLegacy(current).mode === "offgrid" ? "offgrid" : "gridtie";
+    if (derived === goal) return;
+    const target = goal === "gridtie" ? "billcut" : "offgrid";
+    applyUseCase(target);
+    paintLadderSelection();
+    syncChrome(target);
+  };
+
+  host.addEventListener("click", (e) => {
+    const btn =
+      e.target && e.target.closest ? e.target.closest(".btn-ladder") : null;
+    if (!btn) return;
+    pick(btn.dataset.case);
+  });
+
+  // Keyboard: the group behaves as one tab stop with arrow-key navigation, and
+  // a pick commits on Enter/Space as a real button does.
+  host.addEventListener("keydown", (e) => {
+    if (!["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"].includes(e.key))
+      return;
+    const rows = [...host.querySelectorAll(".btn-ladder")];
+    const at = rows.indexOf(document.activeElement);
+    if (at < 0) return;
+    e.preventDefault();
+    const step = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : -1;
+    const next = rows[(at + step + rows.length) % rows.length];
+    if (next) {
+      next.focus();
+      pick(next.dataset.case);
+    }
+  });
+
+  if ($("systemGoal"))
+    $("systemGoal").addEventListener("change", () => {
+      setGoal($("systemGoal").value);
+      syncChrome($("useCase") ? $("useCase").value : "billcut");
     });
-  }
 }
 
 function setupOffgridControls() {
@@ -4236,7 +4366,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261125e",
+      "./assets/js/sizing/sizing-worker.js?v=20261125f",
       {
         type: "module",
       },
@@ -9514,7 +9644,7 @@ async function initSizingUI() {
       });
 
     // Goal control + Offgrid slider + Monthly-bill slider + bill-cut slider.
-    setupGoalControls();
+    setupCaseLadder();
     setupOffgridControls();
     setupBillSlider();
     setupCutSlider();
@@ -9665,11 +9795,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261125e")
+    import("../shared/translation-suggestion-loader.js?v=20261125f")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261125e"),
+          () => import("../translation-suggestion.js?v=20261125f"),
         );
       })
       .catch(() => {});
