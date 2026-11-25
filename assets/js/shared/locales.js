@@ -3,10 +3,10 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261125b";
-import { RESULT_COPY } from "./result-copy.js?v=20261125b";
-import { TILT_COPY } from "./tilt-copy.js?v=20261125b";
-import { DETAIL_COPY } from "./detail-copy.js?v=20261125b";
+import { HOME_COPY } from "./home-copy.js?v=20261125c";
+import { RESULT_COPY } from "./result-copy.js?v=20261125c";
+import { TILT_COPY } from "./tilt-copy.js?v=20261125c";
+import { DETAIL_COPY } from "./detail-copy.js?v=20261125c";
 
 export const LOCALES = {
   en: {
@@ -255,6 +255,7 @@ export const LOCALES = {
     derateHintTypical: "85–100; 98 is typical",
     derateHintMpptTypical: "90–100; 98 is typical",
     fxRateLabel: "Your currency",
+    fxRateOptional: "(optional)",
     stepLocation: "1. Location",
     stepLoad: "2. What you power",
     stepTariff: "3. Electricity price",
@@ -1163,6 +1164,7 @@ export const LOCALES = {
     derateHintTypical: "85–100; 98 es lo típico",
     derateHintMpptTypical: "90–100; 98 es lo típico",
     fxRateLabel: "Tu moneda",
+    fxRateOptional: "(opcional)",
     stepLocation: "1. Ubicación",
     stepLoad: "2. Qué alimentas",
     stepTariff: "3. Precio de la electricidad",
@@ -2004,6 +2006,7 @@ export const LOCALES = {
     derateHintTypical: "85–100; 98 é o típico",
     derateHintMpptTypical: "90–100; 98 é o típico",
     fxRateLabel: "A sua moeda",
+    fxRateOptional: "(opcional)",
     stepLocation: "1. Localização",
     stepLoad: "2. O que alimenta",
     stepTariff: "3. Preço da eletricidade",
@@ -2840,6 +2843,7 @@ export const LOCALES = {
     derateHintTypical: "85–100 ; 98 est la valeur typique",
     derateHintMpptTypical: "90–100 ; 98 est la valeur typique",
     fxRateLabel: "Votre devise",
+    fxRateOptional: "(facultatif)",
     stepLocation: "1. Emplacement",
     stepLoad: "2. Ce que vous alimentez",
     stepTariff: "3. Prix de l'électricité",
@@ -3680,6 +3684,7 @@ export const LOCALES = {
     derateHintTypical: "85–100; 98 ist typisch",
     derateHintMpptTypical: "90–100; 98 ist typisch",
     fxRateLabel: "Ihre Währung",
+    fxRateOptional: "(optional)",
     stepLocation: "1. Standort",
     stepLoad: "2. Was Sie versorgen",
     stepTariff: "3. Strompreis",
@@ -4426,6 +4431,7 @@ export const LOCALES = {
     derateHintTypical: "85–100; 98 is gebruikelijk",
     derateHintMpptTypical: "90–100; 98 is gebruikelijk",
     fxRateLabel: "Uw valuta",
+    fxRateOptional: "(optioneel)",
     stepLocation: "1. Locatie",
     stepLoad: "2. Wat u van stroom voorziet",
     stepTariff: "3. Elektriciteitsprijs",
@@ -5436,6 +5442,7 @@ export const LOCALES = {
     derateHintTypical: "85–100؛ 98 هو المعتاد",
     derateHintMpptTypical: "90–100؛ 98 هو المعتاد",
     fxRateLabel: "عملتك",
+    fxRateOptional: "(اختياري)",
     stepLocation: "1. الموقع",
     stepLoad: "2. ما الذي تزوّده بالطاقة",
     stepTariff: "3. سعر الكهرباء",
