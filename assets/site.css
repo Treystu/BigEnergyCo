@@ -40,6 +40,15 @@
     Arial, sans-serif;
 
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Type roles (#432). One owner for the scale; values mirror the observed
+     scale in PRESENTATION_SPEC_V1.md section 6. */
+  --type-display: 3.25rem;
+  --type-section: 2.25rem;
+  --type-block: 1.2rem;
+  --type-body: 1rem;
+  --type-caption: 0.85rem;
+  --type-control: 0.95rem;
 }
 
 * {
@@ -185,7 +194,7 @@ header {
   padding: 0.65rem 1.4rem;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: var(--type-control);
   cursor: pointer;
   transition: all 0.25s ease;
   border: none;
@@ -316,7 +325,7 @@ button.btn {
 }
 
 .hero h1 {
-  font-size: 3.25rem;
+  font-size: var(--type-display);
   font-weight: 900;
   line-height: 1.15;
   margin-bottom: 1.5rem;
@@ -391,7 +400,7 @@ button.btn {
 }
 
 .section-title {
-  font-size: 2.25rem;
+  font-size: var(--type-section);
   font-weight: 800;
 }
 
@@ -1101,6 +1110,11 @@ textarea:focus-visible {
   font-weight: 900;
   color: var(--primary-accent);
   font-family: var(--font-mono);
+}
+
+/* The chart-panel figure is a caption-grade number, not the hero saving. */
+.savings-highlight .savings-num {
+  font-size: 1.6rem;
 }
 
 .savings-sub {
@@ -2049,7 +2063,59 @@ footer {
 }
 .estimate-title {
   margin: 0 0 0.4rem;
-  font-size: 0.95rem;
+  font-size: var(--type-control);
+}
+/* #432 F13: the clear-all preset is a caption-grade tertiary control; its
+   size lives here, not in the markup. */
+.preset-clear {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* #432: the location control keeps its emphasis as a class, not an inline
+   size. F3 renamed it away from "primary" because it holds no primary rank. */
+.btn-geo-emphasis {
+  white-space: nowrap;
+  font-size: var(--type-body);
+  font-weight: 800;
+  padding: 0.85rem 1.3rem;
+}
+
+/* #432 F13: a chart title is a block role, not an inline override. */
+.chart-title {
+  font-size: var(--type-control);
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+}
+/* #432: every price is a column digit set, so figures align wherever they
+   stack (estimate card, bill readout, savings, plan price, four ways). */
+#estimateBill,
+#estimateLoad,
+#estimateCut,
+#readoutBill,
+.input-readout,
+.savings-num,
+.simple-headline + .plan-price,
+.plan-price,
+.paths-upfront,
+.paths-total {
+  font-variant-numeric: tabular-nums;
+}
+/* #432 F14: no emoji inside a control label. The marker beside a control is
+   decoration, never part of its name. */
+.btn .emoji,
+.chart-title .emoji {
+  font-variant-emoji: text;
+}
+/* #432 locale type: the longest-word locales (de, nl) must be able to break a
+   long control label at any width instead of overflowing the card. */
+.btn,
+.case-ladder-row,
+.estimate-title {
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 .estimate-lines {
   display: grid;

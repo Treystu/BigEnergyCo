@@ -3,10 +3,10 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261125k";
-import { RESULT_COPY } from "./result-copy.js?v=20261125k";
-import { TILT_COPY } from "./tilt-copy.js?v=20261125k";
-import { DETAIL_COPY } from "./detail-copy.js?v=20261125k";
+import { HOME_COPY } from "./home-copy.js?v=20261125l";
+import { RESULT_COPY } from "./result-copy.js?v=20261125l";
+import { TILT_COPY } from "./tilt-copy.js?v=20261125l";
+import { DETAIL_COPY } from "./detail-copy.js?v=20261125l";
 
 export const LOCALES = {
   en: {
@@ -78,8 +78,8 @@ export const LOCALES = {
     statusOffgrid:
       "⏳ Fetching 5 years of hourly satellite weather and searching system sizes…",
     runningBtn: "⏳ Running 5-year simulation…",
-    runBtnReady: "☀️ Size My System (5-yr simulation)",
-    runBtn: "☀️ Size My System (5-yr simulation)",
+    runBtnReady: "Size My System (5-yr simulation)",
+    runBtn: "Size My System (5-yr simulation)",
     errorSim:
       "⚠️ Sizing engine failed to load. Refresh the page (Ctrl+F5) and try again.",
     statusSuccess:
@@ -693,7 +693,7 @@ export const LOCALES = {
     // English: its five translations existed and nothing ever read them.
     langLabel: "Language",
     suggestTranslationFix: "Suggest a translation fix",
-    locBtn: "📍 Use my precise location",
+    locBtn: "Use my precise location",
     tariffNote:
       "Electricity price estimated for {label} — change it above if you know your rate.",
 
@@ -1022,10 +1022,10 @@ export const LOCALES = {
     readoutBillIncomplete:
       "Introduce tu factura mensual para ver la estimación diaria.",
     readoutKwhReady: "Usando {kwh} kWh/día directamente.",
-    runBtn: "☀️ Dimensionar mi sistema (simulación de 5 años)",
+    runBtn: "Dimensionar mi sistema (simulación de 5 años)",
     runningBtn: "⏳ Simulando 5 años...",
-    runBtnReady: "☀️ Dimensionar mi sistema (simulación de 5 años)",
-    locBtn: "📍 Usar mi ubicación actual",
+    runBtnReady: "Dimensionar mi sistema (simulación de 5 años)",
+    locBtn: "Usar mi ubicación actual",
     chemLabel: "Química de la batería:",
     tariffNote:
       "Precio estimado para {label} — cámbialo arriba si conoces tu tarifa.",
@@ -1848,8 +1848,8 @@ export const LOCALES = {
       "Informe sua conta mensal para ver a estimativa diária.",
     readoutKwhEmpty: "Informe seu consumo diário em kWh para ver a estimativa.",
     readoutKwhReady: "Usando {kwh} kWh/dia diretamente.",
-    runBtn: "☀️ Dimensionar meu sistema (simulação de 5 anos)",
-    locBtn: "📍 Usar minha localização atual",
+    runBtn: "Dimensionar meu sistema (simulação de 5 anos)",
+    locBtn: "Usar minha localização atual",
     chemLabel: "Química da bateria:",
     tariffNote:
       "Preço estimado para {label} — mude acima se souber sua tarifa.",
@@ -1879,7 +1879,7 @@ export const LOCALES = {
     statusOffgrid:
       "⏳ Obtendo 5 anos de clima horário por satélite e buscando tamanhos de sistema…",
     runningBtn: "⏳ Simulando 5 anos...",
-    runBtnReady: "☀️ Dimensionar meu sistema (simulação de 5 anos)",
+    runBtnReady: "Dimensionar meu sistema (simulação de 5 anos)",
     errorSim:
       "⚠️ O motor de dimensionamento não pôde carregar. Atualize a página (Ctrl+F5) e tente novamente.",
     statusSuccess:
@@ -2699,8 +2699,8 @@ export const LOCALES = {
     readoutKwhEmpty:
       "Entrez votre consommation quotidienne en kWh pour voir l'estimation.",
     readoutKwhReady: "Utilisation de {kwh} kWh/jour directement.",
-    runBtn: "☀️ Dimensionner (simulation sur 5 ans)",
-    locBtn: "📍 Utiliser ma position actuelle",
+    runBtn: "Dimensionner (simulation sur 5 ans)",
+    locBtn: "Utiliser ma position actuelle",
     chemLabel: "Chimie de la batterie :",
     tariffNote:
       "Prix estimé pour {label} — changez-le ci-dessus si vous connaissez votre tarif.",
@@ -2732,7 +2732,7 @@ export const LOCALES = {
     statusOffgrid:
       "⏳ Récupération de 5 ans de météo horaire par satellite et recherche de tailles de système…",
     runningBtn: "⏳ Simulation de 5 ans...",
-    runBtnReady: "☀️ Dimensionner (simulation sur 5 ans)",
+    runBtnReady: "Dimensionner (simulation sur 5 ans)",
     errorSim:
       "⚠️ Le moteur de dimensionnement n'a pas pu se charger. Actualisez la page (Ctrl+F5) et réessayez.",
     statusSuccess:
@@ -3502,7 +3502,7 @@ export const LOCALES = {
     statusOffgrid:
       "⏳ 5 Jahre stündliches Satellitenwetter werden geladen, Systemgrößen gesucht…",
     runningBtn: "⏳ 5-Jahres-Simulation läuft…",
-    runBtnReady: "☀️ System dimensionieren (5-Jahres-Simulation)",
+    runBtnReady: "System dimensionieren (5-Jahres-Simulation)",
     errorSim:
       "⚠️ Die Dimensionierungs-Engine konnte nicht geladen werden. Aktualisieren Sie die Seite (Ctrl+F5) und versuchen Sie es erneut.",
     tariffSpendLine:
@@ -3608,8 +3608,8 @@ export const LOCALES = {
     loadAppliances: "Geräte auswählen",
     loadBill: "Monatliche Rechnung",
     loadKwh: "Ich kenne kWh/Tag (fortgeschritten)",
-    locBtn: "📍 Präzisen Standort verwenden",
-    runBtn: "☀️ System dimensionieren (5-Jahres-Simulation)",
+    locBtn: "Präzisen Standort verwenden",
+    runBtn: "System dimensionieren (5-Jahres-Simulation)",
     langLabel: "Sprache",
     suggestTranslationFix: "Übersetzungskorrektur vorschlagen",
     // -- Verständnis-Glossen (E13/V4): einfache Worte beim ersten Gebrauch.
@@ -4355,8 +4355,8 @@ export const LOCALES = {
     statusOffgrid:
       "⏳ 5 jaar aan uurlijkse satellietweergegevens wordt opgehaald en systeemgroottes worden gezocht…",
     runningBtn: "⏳ 5-jaarssimulatie loopt…",
-    runBtnReady: "☀️ Systeem dimensioneren (5-jaarssimulatie)",
-    runBtn: "☀️ Systeem dimensioneren (5-jaarssimulatie)",
+    runBtnReady: "Systeem dimensioneren (5-jaarssimulatie)",
+    runBtn: "Systeem dimensioneren (5-jaarssimulatie)",
     errorSim:
       "⚠️ De berekeningsmodule kon niet worden geladen. Vernieuw de pagina (Ctrl+F5) en probeer het opnieuw.",
     statusSuccess:
@@ -4893,7 +4893,7 @@ export const LOCALES = {
     chemLabel: "Accuchemie:",
     langLabel: "Taal",
     suggestTranslationFix: "Een vertaalcorrectie voorstellen",
-    locBtn: "📍 Mijn exacte locatie gebruiken",
+    locBtn: "Mijn exacte locatie gebruiken",
     tariffNote:
       "Stroomprijs geschat voor {label} — wijzig deze hierboven als u uw tarief kent.",
     pathsLabel_turnkey: "Installateur, sleutelklaar",
@@ -5373,8 +5373,8 @@ export const LOCALES = {
     readoutBillIncomplete: "أدخل فاتورتك الشهرية لرؤية التقدير اليومي.",
     readoutKwhEmpty: "أدخل استهلاكك اليومي بالكيلوواط ساعة لرؤية التقدير.",
     readoutKwhReady: "استخدام {kwh} كيلوواط ساعة/يوم مباشرة.",
-    runBtn: "☀️ احسب نظامي (محاكاة 5 سنوات)",
-    locBtn: "📍 استخدم موقعي الحالي",
+    runBtn: "احسب نظامي (محاكاة 5 سنوات)",
+    locBtn: "استخدم موقعي الحالي",
     chemLabel: "نوع البطارية:",
     tariffNote: "سعر تقديري لـ {label} — غيّره أعلاه إذا كنت تعرف تعريفتك.",
     pickCity: "اختر مدينة (أو استخدم 📍 موقعي) لمعرفة إشعاعك الشمسي.",
@@ -5400,7 +5400,7 @@ export const LOCALES = {
     statusOffgrid:
       "⏳ جاري الحصول على 5 سنوات من طقس الأقمار الصناعية ساعة بساعة والبحث عن أحجام الأنظمة…",
     runningBtn: "⏳ جاري المحاكاة لمدة 5 سنوات...",
-    runBtnReady: "☀️ احسب نظامي (محاكاة 5 سنوات)",
+    runBtnReady: "احسب نظامي (محاكاة 5 سنوات)",
     errorSim:
       "⚠️ تعذّر تحميل محرك التقدير. حدّث الصفحة (Ctrl+F5) وحاول مرة أخرى.",
     statusSuccess:
