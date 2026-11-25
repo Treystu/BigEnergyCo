@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261125g";
+import { APPLIANCES } from "./appliances.js?v=20261125k";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261125g";
+} from "./pwa-install.js?v=20261125k";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,28 +28,28 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261125g";
-import { rankCases } from "./intake-priors.js?v=20261125g";
+} from "./usecases.js?v=20261125k";
+import { rankCases } from "./intake-priors.js?v=20261125k";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261125g";
+} from "./run-coordinator.js?v=20261125k";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261125g";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261125g";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261125g";
+} from "./mode-chrome.js?v=20261125k";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261125k";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261125k";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261125g";
+} from "./location-picker.js?v=20261125k";
 
 import {
   estimateTariff,
@@ -58,15 +58,15 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261125g";
+} from "./pricing.js?v=20261125k";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261125g";
+import { currencyForCountry } from "./country-currency.js?v=20261125k";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261125g";
-import { partsBreakdown } from "./plan-card.js?v=20261125g";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261125k";
+import { partsBreakdown } from "./plan-card.js?v=20261125k";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -85,7 +85,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261125g").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261125k").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -96,15 +96,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261125g";
+} from "./lead-acid.js?v=20261125k";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261125g";
+} from "./bom.js?v=20261125k";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261125g";
+import { BOM_ITEMS } from "../shared/content.js?v=20261125k";
 
 import {
   applyI18n,
@@ -113,11 +113,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261125g";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261125g";
-import { byId as $, el } from "../shared/dom.js?v=20261125g";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261125g";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261125g";
+} from "../shared/i18n.js?v=20261125k";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261125k";
+import { byId as $, el } from "../shared/dom.js?v=20261125k";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261125k";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261125k";
 import {
   advisorJevContext,
   interpretSanity,
@@ -125,29 +125,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261125g";
+} from "./validate.js?v=20261125k";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261125g";
+} from "../shared/cut-targets.js?v=20261125k";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261125g";
+} from "./share-codec.js?v=20261125k";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261125g";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261125g";
+} from "./infeasible-copy.js?v=20261125k";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261125k";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261125g";
+} from "./fuel-units.js?v=20261125k";
 
 import {
   createLeafletProvider,
@@ -155,18 +155,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261125g";
+} from "./map-provider.js?v=20261125k";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261125g";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261125g";
+} from "./wizard.js?v=20261125k";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261125k";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261125g";
+} from "./budget-span.js?v=20261125k";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -178,10 +178,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261125g"),
-      import("./charts.js?v=20261125g"),
-      import("./frontier-chart.js?v=20261125g"),
-      import("./rescale.js?v=20261125g"),
+      import("./engine.js?v=20261125k"),
+      import("./charts.js?v=20261125k"),
+      import("./frontier-chart.js?v=20261125k"),
+      import("./rescale.js?v=20261125k"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -249,9 +249,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261125g";
+} from "./money.js?v=20261125k";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261125g";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261125k";
 
 let worker = null;
 
@@ -1563,6 +1563,8 @@ function paintBillSliderLabel(value) {
   billSliderDisplayValue = value;
   const out = $("billSliderVal");
   if (out) out.textContent = "~" + fmtBill(value);
+  // #440 / 11.6: repaint the estimate in place.
+  if (typeof renderEstimateCard === "function") renderEstimateCard();
 }
 
 // #437: the sentence above the bill slider is dictionary copy, but it was
@@ -1662,6 +1664,9 @@ function syncBillSlider() {
 
   paintQuickBillNote(value, billAnchorKwh);
   updateLoadReadout();
+  // #440: location/tariff/currency changes can move the rate band.
+  if (typeof renderCaseLadder === "function")
+    renderCaseLadder(featuresFromLocation());
 }
 
 function displayRate() {
@@ -1686,9 +1691,7 @@ function repaintRuntimeCopy() {
   // idempotent and costs nothing.
   setLoadPanel();
   applyUseCase(selectedUseCase(), { silent: true });
-  // #440: the ladder is built during setup, before the deferred dictionary
-  // lands, so its case labels and why-lines kept the echoed keys. Re-rendering
-  // is idempotent: same ranking, same features, translated copy.
+  // #440: both were built before the deferred dictionary landed.
   renderCaseLadder();
   renderEstimateCard();
   // #448: the appliance rows are built during setup, before the deferred
@@ -2716,6 +2719,10 @@ function applyEstimatedTariff(lat, lon, region, country) {
   // nothing read them, so the note rendered in English on every locale. The
   // estimate is stored so repaintTariffNote() can re-render it on a language change.
   lastTariffEstimate = { label: est.label, rate: est.rate, fx: !!fx };
+  // #440: the resolved place moves the band; re-derive and repaint.
+  if (typeof renderCaseLadder === "function")
+    renderCaseLadder(featuresFromLocation());
+  if (typeof renderEstimateCard === "function") renderEstimateCard();
 
   const existing = document.getElementById("tariffNote");
   if (existing) existing.remove();
@@ -3295,6 +3302,8 @@ function syncCutControls(pct) {
   const slider = $("cutSlider");
   if (slider) slider.value = String(v);
   syncCutLabel();
+  // #440 / 11.6: the card follows the cut in place.
+  if (typeof renderEstimateCard === "function") renderEstimateCard();
   const agSelect = $("autoTarget");
   if (agSelect) {
     // The select mirrors the slider exactly — a real target when it is one,
@@ -3680,12 +3689,9 @@ function renderCaseLadder(features) {
   paintLadderSelection();
 }
 
-// Only features with a live, cited source (intake-priors.js PRIOR_FEATURES).
-// The tariff registry supplies the displayed residential rate, so the rate band
-// is live. A TOU schedule, export regime, outage exposure and place class have
-// no field on the resolved place or tariff record yet, so they stay ABSENT
-// rather than guessed (spec §12.3, prior rule 1) and the ladder falls back to
-// the registry order where nothing fires.
+// Only features with a live, cited source (intake-priors.js PRIOR_FEATURES):
+// the tariff rate band. A TOU schedule, export regime, outage exposure and place
+// class have no field yet, so they stay ABSENT (spec §12.3, prior rule 1).
 function featuresFromLocation() {
   const f = {};
   const rate = displayRate();
@@ -4371,7 +4377,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261125g",
+      "./assets/js/sizing/sizing-worker.js?v=20261125k",
       {
         type: "module",
       },
@@ -9800,11 +9806,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261125g")
+    import("../shared/translation-suggestion-loader.js?v=20261125k")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261125g"),
+          () => import("../translation-suggestion.js?v=20261125k"),
         );
       })
       .catch(() => {});
