@@ -1,10 +1,4 @@
-// Locale chrome for the surfaces that are painted rather than written in
-// markup: the results-detail tables, the comparison grid, the hardware list
-// and its print sheet, plus the two nav links and the install control that had
-// no hook. Same shape as the other copy modules: English is the fallback, and
-// every other locale gets a full set so no painted label falls back silently.
-//
-// Placeholders are the t() braces: {place}, {n}, {ah}, {kwh}, {v}, {chem}.
+// Painted results-detail chrome, seven locales ({place} {n} {ah} {kwh} {v} {chem}), same shape as the other copy tables.
 
 export const CHROME_COPY = {
   en: {
