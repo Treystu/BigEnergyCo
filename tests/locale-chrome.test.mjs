@@ -456,3 +456,133 @@ test("#437: the shared-result note is in the language-change repaint list", () =
     "the note is painted before the language is known, so a change must repaint it",
   );
 });
+
+// ---- #437 remainder on the restored results surface -----------------------
+// The restored ES census found nine English groups that survived. Five are
+// JS-painted chrome (the quick-bill sentence, the tariff estimate, both derate
+// hints, the currency label, the guided-step label) and four live inside the
+// chemistry temperature widget, which had no keys at all. A key alone is not a
+// cure: the painter must also sit on the language-change repaint path.
+const CHEM_TEMP_KEYS = [
+  "chemTempTitle",
+  "chemTempSiteLow",
+  "chemTempDeepFreeze",
+  "chemTempLfpCutoff",
+  "chemTempIdeal",
+  "chemTempHeat",
+  "chemTempLfpWinterTitle",
+  "chemTempLfpWinterBody",
+  "chemTempLfpSafeTitle",
+  "chemTempLfpSafeBody",
+  "chemTempNaionTitle",
+  "chemTempNaionBody",
+  "chemTempAgmTitle",
+  "chemTempAgmBody",
+  "chemTempCompareTitle",
+  "chemTempFreezeNaion",
+  "chemTempFreezeLfp",
+  "chemTempFreezeAgm",
+  "chemTempMildLfp",
+  "chemTempMildNaion",
+  "chemTempMildAgm",
+];
+
+test("#437: the chemistry temperature widget paints from the dictionary", () => {
+  for (const key of CHEM_TEMP_KEYS) {
+    for (const [lang, dict] of Object.entries(LOCALES)) {
+      assert.equal(
+        typeof dict[key],
+        "string",
+        `${lang}.${key} must exist - the widget would render English`,
+      );
+      assert.ok(
+        dict[key].trim().length > 2,
+        `${lang}.${key} must not be blank`,
+      );
+    }
+  }
+  for (const key of [
+    "chemTempSiteLow",
+    "chemTempLfpWinterBody",
+    "chemTempCompareTitle",
+  ]) {
+    for (const [lang, dict] of Object.entries(LOCALES)) {
+      assert.match(
+        dict[key],
+        /\{c\}/,
+        `${lang}.${key} must keep the temperature placeholder`,
+      );
+    }
+  }
+  const at = ui.indexOf("function renderChemTempVisualizer(");
+  assert.ok(at > 0, "renderChemTempVisualizer must exist");
+  const body = ui.slice(at, ui.indexOf("\n}\n", at));
+  for (const literal of [
+    "Ambient Temperature &",
+    "provides the lowest 20-year lifetime cost",
+    "offers non-flammable chemistry",
+    "has low upfront cost",
+    "Site Low ~",
+    "Winter Freezing Notice",
+    "Sub-Zero Resilient",
+    "Cold Derating Warning",
+    "Deep Freeze",
+  ]) {
+    assert.ok(
+      !body.includes(literal),
+      `the widget still writes its own English: ${literal}`,
+    );
+  }
+  assert.match(body, /t\("chemTempTitle"\)/);
+  for (const key of [
+    "chemTempMildLfp",
+    "chemTempMildNaion",
+    "chemTempMildAgm",
+  ]) {
+    assert.ok(
+      body.includes(`"${key}"`),
+      `the censused chemistry sentence ${key} must pass through the painter`,
+    );
+  }
+});
+
+test("#437: the restored-surface intake chrome repaints on a language change", () => {
+  const start = ui.indexOf("function repaintRuntimeCopy()");
+  const body = ui.slice(start, ui.indexOf("\n}\n", start));
+  for (const call of [
+    "paintQuickBillNote()",
+    "paintDerateHints()",
+    "paintFxRateLabel()",
+    "updateGuidedProgress()",
+    "repaintTariffNote()",
+    "renderChemTempVisualizer()",
+  ]) {
+    assert.ok(body.includes(call), `repaintRuntimeCopy must call ${call}`);
+  }
+  for (const key of [
+    "derateHintMpptTypical",
+    "fxRateLabel",
+    "stepLocation",
+    "stepLoad",
+    "stepTariff",
+  ]) {
+    for (const [lang, dict] of Object.entries(LOCALES)) {
+      assert.equal(
+        typeof dict[key],
+        "string",
+        `${lang}.${key} must exist - the chrome would render English`,
+      );
+    }
+  }
+  assert.match(ui, /t\("derateHintMpptTypical"\)/);
+  assert.match(ui, /t\("fxRateLabel"\)/);
+  assert.match(ui, /t\("stepLocation"\)/);
+  assert.ok(
+    !ui.includes('location: "1. Location"'),
+    "the guided-step label must come from the dictionary",
+  );
+  assert.ok(
+    !ui.includes('"90\u2013100; 98 is typical"'),
+    "the MPPT derate hint must come from the dictionary",
+  );
+});

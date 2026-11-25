@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261124r";
+import { APPLIANCES } from "./appliances.js?v=20261125a";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261124r";
+} from "./pwa-install.js?v=20261125a";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,27 +28,27 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261124r";
+} from "./usecases.js?v=20261125a";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261124r";
+} from "./run-coordinator.js?v=20261125a";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261124r";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261124r";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261124r";
+} from "./mode-chrome.js?v=20261125a";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261125a";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261125a";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261124r";
+} from "./location-picker.js?v=20261125a";
 
 import {
   estimateTariff,
@@ -57,15 +57,15 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261124r";
+} from "./pricing.js?v=20261125a";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261124r";
+import { currencyForCountry } from "./country-currency.js?v=20261125a";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261124r";
-import { partsBreakdown } from "./plan-card.js?v=20261124r";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261125a";
+import { partsBreakdown } from "./plan-card.js?v=20261125a";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -84,7 +84,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261124r").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261125a").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -95,15 +95,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261124r";
+} from "./lead-acid.js?v=20261125a";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261124r";
+} from "./bom.js?v=20261125a";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261124r";
+import { BOM_ITEMS } from "../shared/content.js?v=20261125a";
 
 import {
   applyI18n,
@@ -112,11 +112,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261124r";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261124r";
-import { byId as $, el } from "../shared/dom.js?v=20261124r";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261124r";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261124r";
+} from "../shared/i18n.js?v=20261125a";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261125a";
+import { byId as $, el } from "../shared/dom.js?v=20261125a";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261125a";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261125a";
 import {
   advisorJevContext,
   interpretSanity,
@@ -124,29 +124,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261124r";
+} from "./validate.js?v=20261125a";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261124r";
+} from "../shared/cut-targets.js?v=20261125a";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261124r";
+} from "./share-codec.js?v=20261125a";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261124r";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261124r";
+} from "./infeasible-copy.js?v=20261125a";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261125a";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261124r";
+} from "./fuel-units.js?v=20261125a";
 
 import {
   createLeafletProvider,
@@ -154,18 +154,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261124r";
+} from "./map-provider.js?v=20261125a";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261124r";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261124r";
+} from "./wizard.js?v=20261125a";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261125a";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261124r";
+} from "./budget-span.js?v=20261125a";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -177,10 +177,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261124r"),
-      import("./charts.js?v=20261124r"),
-      import("./frontier-chart.js?v=20261124r"),
-      import("./rescale.js?v=20261124r"),
+      import("./engine.js?v=20261125a"),
+      import("./charts.js?v=20261125a"),
+      import("./frontier-chart.js?v=20261125a"),
+      import("./rescale.js?v=20261125a"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -248,9 +248,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261124r";
+} from "./money.js?v=20261125a";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261124r";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261125a";
 
 let worker = null;
 
@@ -1564,6 +1564,21 @@ function paintBillSliderLabel(value) {
   if (out) out.textContent = "~" + fmtBill(value);
 }
 
+// #437: the sentence above the bill slider is dictionary copy, but it was
+// painted once inside syncBillSlider() and never again, so a language change
+// left it in the language the page booted in. One painter, two callers.
+function paintQuickBillNote(
+  billValue = billSliderDisplayValue ?? Number($("billSlider")?.value),
+  kwh = billAnchorKwh,
+) {
+  const note = $("quickBillNote");
+  if (!note || !Number.isFinite(billValue) || !Number.isFinite(kwh)) return;
+  note.textContent = t("quickBillStarts", {
+    bill: fmtBill(billValue),
+    kwh: Math.round(kwh),
+  });
+}
+
 // Re-express the slider around the current rate/currency, preserving the
 // user's kWh/day anchor. Runs whenever location/tariff/currency change.
 function syncBillSlider() {
@@ -1625,14 +1640,7 @@ function syncBillSlider() {
     if (kwhInput) kwhInput.value = String(clampedKwh);
   }
 
-  const note = $("quickBillNote");
-  if (note) {
-    const params = {
-      bill: fmtBill(value),
-      kwh: Math.round(billAnchorKwh),
-    };
-    note.textContent = t("quickBillStarts", params);
-  }
+  paintQuickBillNote(value, billAnchorKwh);
   updateLoadReadout();
 }
 
@@ -1667,6 +1675,15 @@ function repaintRuntimeCopy() {
   updateLoadReadout();
   syncCutLabel();
   renderFxStatus();
+  // #437 remainder (restored surface): these six surfaces are painted by JS, so
+  // the data-i18n scan never reaches them and a language change used to leave
+  // them in the previous language.
+  paintQuickBillNote();
+  paintDerateHints();
+  paintFxRateLabel();
+  updateGuidedProgress();
+  repaintTariffNote();
+  renderChemTempVisualizer();
   // #437: the hardware reference is painted from content.js, so its price-scope
   // note and spec paragraphs never saw the dictionary either.
   renderBom();
@@ -1680,6 +1697,25 @@ function repaintRuntimeCopy() {
   // so switching language left the caption, the tariff line and the frontier verdict in
   // the previous language: one page, two languages. Re-rendering the payload costs
   if (lastPayload) renderResults(lastPayload);
+}
+
+// #437: the MPPT derate hint has no markup hook (the wiring hint has one), so it
+// is painted from the dictionary here; the FX label's words sit in a text node
+// beside its "(optional)" span, which is why only the node is rewritten.
+function paintDerateHints() {
+  const mppt = $("mpptOverrideHint");
+  if (mppt) mppt.textContent = t("derateHintMpptTypical");
+}
+
+function paintFxRateLabel() {
+  const label = document.querySelector('label[for="fxRate"]');
+  if (!label) return;
+  for (const node of label.childNodes) {
+    if (node.nodeType === 3 && node.textContent.trim()) {
+      node.textContent = t("fxRateLabel") + " ";
+      return;
+    }
+  }
 }
 
 function updateLoadReadout() {
@@ -2282,6 +2318,16 @@ function renderSunPath(lat, hasPv = $("hardwareConfig")?.value !== "battery") {
   `;
 }
 
+// #437: this widget is assembled by JS, so no data-i18n hook can reach it and
+// every sentence kept the language the page booted in. Each branch paints
+// through t(); the lat it last resolved is kept so a language change can
+// repaint it without re-deriving the site from an input that may have moved on.
+let chemTempLat = null;
+
+function chemTempBullet(color, brand, key) {
+  return `<br>&bull; <span style="color:${color};font-weight:700;">${brand}</span> ${escapeHtml(t(key))}`;
+}
+
 function renderChemTempVisualizer(lat) {
   const wrap = $("chemTempVisualizer");
 
@@ -2293,7 +2339,9 @@ function renderChemTempVisualizer(lat) {
 
   const validLat = Number.isFinite(lat)
     ? lat
-    : parseFloat($("latInput")?.value) || 21.31;
+    : (chemTempLat ?? (parseFloat($("latInput")?.value) || 21.31));
+
+  chemTempLat = validLat;
 
   const absLat = Math.abs(validLat);
 
@@ -2320,54 +2368,62 @@ function renderChemTempVisualizer(lat) {
     const isFreezingRisk = estWinterLowC <= 0;
     statusHtml = `
       <div class="chem-temp-status-box" style="background:${isFreezingRisk ? "rgba(239,68,68,0.12)" : "rgba(16,185,129,0.1)"};border:1px solid ${isFreezingRisk ? "rgba(239,68,68,0.35)" : "rgba(16,185,129,0.35)"};">
-        <strong style="color:${isFreezingRisk ? "#fca5a5" : "var(--primary-accent)"};">${isFreezingRisk ? "Winter Freezing Notice:" : "Safe Operating Climate:"}</strong>
+        <strong style="color:${isFreezingRisk ? "#fca5a5" : "var(--primary-accent)"};">${isFreezingRisk ? t("chemTempLfpWinterTitle") : t("chemTempLfpSafeTitle")}</strong>
         ${
           isFreezingRisk
-            ? `Local winter temps reach ~${estWinterLowC}\u00B0C (below 0\u00B0C / 32\u00B0F). LiFePO4 BMS cuts off charging below freezing to prevent permanent lithium plating. Install batteries indoors, in an insulated battery enclosure, or choose models with internal heating pads.`
-            : `LiFePO4 charges safely above 0\u00B0C (32\u00B0F) and operates at 95%+ round-trip efficiency. Discharging is supported down to -20\u00B0C.`
+            ? t("chemTempLfpWinterBody", { c: estWinterLowC })
+            : t("chemTempLfpSafeBody")
         }
       </div>`;
   } else if (chem === "naion") {
     statusHtml = `
       <div class="chem-temp-status-box" style="background:rgba(14,165,233,0.12);border:1px solid rgba(14,165,233,0.35);">
-        <strong style="color:#7dd3fc;">Sub-Zero Resilient:</strong>
-        Sodium-ion charges and discharges reliably from -20\u00B0C to +45\u00B0C without dendrite risk or thermal runaway. Retains 85%+ usable capacity in freezing weather without requiring heating pads.
+        <strong style="color:#7dd3fc;">${t("chemTempNaionTitle")}</strong>
+        ${t("chemTempNaionBody")}
       </div>`;
   } else if (chem === "agm") {
     statusHtml = `
       <div class="chem-temp-status-box" style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);">
-        <strong style="color:#fcd34d;">Cold Derating Warning:</strong>
-        Lead-Acid (AGM) usable capacity drops severely below freezing (~50% at -10\u00B0C). Discharged electrolyte can freeze and crack the battery casing.
+        <strong style="color:#fcd34d;">${t("chemTempAgmTitle")}</strong>
+        ${t("chemTempAgmBody")}
       </div>`;
   } else {
     const isFreezing = estWinterLowC <= 0;
     statusHtml = `
       <div class="chem-temp-status-box" style="background:rgba(255,255,255,0.04);border:1px solid var(--border-card);">
-        <strong style="color:var(--text-main);">Climate Comparison at ~${estWinterLowC}\u00B0C Winter Low:</strong>
+        <strong style="color:var(--text-main);">${t("chemTempCompareTitle", { c: estWinterLowC })}</strong>
         ${
           isFreezing
-            ? `<br>&bull; <span style="color:#7dd3fc;font-weight:700;">Sodium-Ion</span> charges directly in freezing weather down to -20\u00B0C.<br>&bull; <span style="color:#fbbf24;font-weight:700;">LiFePO4</span> needs indoor placement or heating pads below 0\u00B0C.<br>&bull; <span style="color:#f87171;font-weight:700;">Lead-Acid</span> suffers ~50% capacity loss in winter.`
-            : `<br>&bull; <span style="color:var(--primary-accent);font-weight:700;">LiFePO4</span> provides the lowest 20-year lifetime cost in mild/warm climates.<br>&bull; <span style="color:#7dd3fc;font-weight:700;">Sodium-Ion</span> offers non-flammable chemistry and thermal headroom.<br>&bull; <span style="color:#f87171;font-weight:700;">Lead-Acid</span> has low upfront cost but shortest cycle life.`
+            ? chemTempBullet("#7dd3fc", "Sodium-Ion", "chemTempFreezeNaion") +
+              chemTempBullet("#fbbf24", "LiFePO4", "chemTempFreezeLfp") +
+              chemTempBullet("#f87171", "Lead-Acid", "chemTempFreezeAgm")
+            : chemTempBullet(
+                "var(--primary-accent)",
+                "LiFePO4",
+                "chemTempMildLfp",
+              ) +
+              chemTempBullet("#7dd3fc", "Sodium-Ion", "chemTempMildNaion") +
+              chemTempBullet("#f87171", "Lead-Acid", "chemTempMildAgm")
         }
       </div>`;
   }
 
   wrap.innerHTML = `
     <div class="chem-temp-title">
-      <span>Ambient Temperature &amp; Battery Chemistry Limits</span>
+      <span>${t("chemTempTitle")}</span>
       <span style="font-size:0.75rem;font-weight:500;color:var(--text-muted);font-family:var(--font-mono);">-30\u00B0C to +45\u00B0C</span>
     </div>
     <div class="chem-temp-bar-wrap">
       <div class="chem-temp-pin" style="left:${pinPct}%;">
-        <div class="chem-temp-pin-label">Site Low ~${estWinterLowC}\u00B0C</div>
+        <div class="chem-temp-pin-label">${t("chemTempSiteLow", { c: estWinterLowC })}</div>
         <div class="chem-temp-pin-arrow"></div>
       </div>
     </div>
     <div class="chem-temp-legend">
-      <span>-30\u00B0C (Deep Freeze)</span>
-      <span style="color:#38bdf8;">0\u00B0C (LFP Cutoff)</span>
-      <span style="color:var(--primary-accent);">20\u00B0C (Ideal)</span>
-      <span style="color:#ef4444;">45\u00B0C (Heat)</span>
+      <span>${t("chemTempDeepFreeze")}</span>
+      <span style="color:#38bdf8;">${t("chemTempLfpCutoff")}</span>
+      <span style="color:var(--primary-accent);">${t("chemTempIdeal")}</span>
+      <span style="color:#ef4444;">${t("chemTempHeat")}</span>
     </div>
     ${statusHtml}
   `;
@@ -2586,6 +2642,17 @@ function resolveRegionCountry(lat, lon, region, country) {
   return near ? { region: near.r, country: near.country } : { region, country };
 }
 
+// #437: the estimate's label and rate are kept so the sentence can be repainted
+// on a language change without re-deriving the location.
+let lastTariffEstimate = null;
+
+function paintTariffNote() {
+  const note = document.getElementById("tariffNote");
+  if (!note || !lastTariffEstimate) return;
+  const { label, rate, fx } = lastTariffEstimate;
+  note.textContent = `${t("tariffNote", { label })}${fx ? ` (~ ${rate.toFixed(2)} US$/kWh)` : ""}`;
+}
+
 function applyEstimatedTariff(lat, lon, region, country) {
   if (tariffTouched) return;
 
@@ -2617,20 +2684,22 @@ function applyEstimatedTariff(lat, lon, region, country) {
   const input = $("customRateVal");
   if (input) input.value = String(shownRate);
 
-  const note = el(
-    "div",
-    { style: "font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem;" },
-    // Translated, not a template literal: all five translated tariffNote strings existed and
-    // nothing read them, so the note rendered in English on every locale. The rate is appended
-    `${t("tariffNote", { label: est.label })}${fx ? ` (~ ${est.rate.toFixed(2)} US$/kWh)` : ""}`,
-  );
+  // Translated, not a template literal: all five translated tariffNote strings existed and
+  // nothing read them, so the note rendered in English on every locale. The
+  // estimate is stored so paintTariffNote() can re-render it on a language change.
+  lastTariffEstimate = { label: est.label, rate: est.rate, fx: !!fx };
 
   const existing = document.getElementById("tariffNote");
   if (existing) existing.remove();
 
+  const note = el("div", {
+    id: "tariffNote",
+    style: "font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem;",
+  });
+
   const host = input ? input.closest(".form-group") : null;
   if (host) host.appendChild(note);
-  note.id = "tariffNote";
+  paintTariffNote();
 
   syncBillSlider();
 
@@ -2646,9 +2715,9 @@ function updateGuidedProgress(step = wizard.state.step) {
   const progress = $("guidedProgress");
   if (!progress) return;
   const labels = {
-    location: "1. Location",
-    load: "2. What you power",
-    tariff: "3. Electricity price",
+    location: t("stepLocation"),
+    load: t("stepLoad"),
+    tariff: t("stepTariff"),
     result: t("dStepResult"),
   };
   progress.textContent = labels[step] || labels.location;
@@ -4135,7 +4204,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261124r",
+      "./assets/js/sizing/sizing-worker.js?v=20261125a",
       {
         type: "module",
       },
@@ -9564,11 +9633,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261124r")
+    import("../shared/translation-suggestion-loader.js?v=20261125a")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261124r"),
+          () => import("../translation-suggestion.js?v=20261125a"),
         );
       })
       .catch(() => {});
