@@ -347,6 +347,54 @@ Gate receipts: Lucas PASS (canon untouched, no surface pre-built, ownership
 boundaries stated, every value cited), product Jev PASS (mean 3.0, no facet below
 2). Nothing in Wave 1 or the #401 re-base was built, opened or promoted.
 
+## Park record — 2026-11-25 (Wave 1 remainder: #440 and #431)
+
+Census read live this pass: main `e100432c` (Wave 0 V1.1 landed), one open PR
+(#455, dependabot), #436/#441/#430 CLOSED, **#440 and #431 OPEN**. Nothing drifted.
+
+**#440 — PARTIAL, parked DECISION-READY.** The prior registry, the ladder and the
+estimate summary are built on `wip/440-431-priors-ladder` (`52bdbced`, pushed, not
+merged): `assets/js/sizing/priors.js` (features with sources and grades, the
+ranking, the fixture suite including both owner examples, one recorded open
+prior question), the six-row ladder replacing the two-button goal control in
+`index.html` (registry order, why-lines only where a live feature exists), the
+estimate summary card (§11.4 as amended: defaults and the local rate, never an
+invented price), 12 keys in all seven locales, and `tests/priors-ladder.test.mjs`
+(8/8 green). Gates that pass on the branch: `check-usecases` OK, chars OK, seo
+asset tokens OK, format OK.
+
+Blocked by two real findings, each with its receipt:
+
+1. **Deploy-manifest module graph** — `tests/deploy-manifest.test.mjs` fails with
+   "module(s) the shipped entry loads but the manifest omits:
+   assets/js/sizing/priors.js". The manifest copies `assets` recursively, so this
+   is the module-graph clause disagreeing with the directory rule; until that is
+   resolved in the gate itself, adding any new sizing module ships a red rail.
+   This is a gate-mechanics decision, not an owner decision, and it is why the
+   branch is not merged.
+2. **No live source for three priors** — the tariff registry carries a rate but
+   no TOU-schedule flag, no outage exposure and no place class
+   (`pricing.js` exports `estimateTariff` only), so the ranking can only read
+   `rateLevel` today. #440's LA-vs-Trabuco drive receipts need those fields,
+   which is data work with no home in the open set yet. The ladder therefore
+   renders registry order with no why-lines (spec §12.3's feature-poor path),
+   which is honest but does not meet #440's acceptance.
+
+**#431 — not started, parked DECISION-READY.** Its matrix needs the same
+region-record fields (case-eligibility per route is derivable from `PATH_IDS`,
+but "only applicable information" needs the case features above), and its
+acceptance is six per-case rendered receipts. Filed with the gate receipt rather
+than half-built: a matrix without a source for its own predicates would be the
+kind of invented rule the spec forbids.
+
+Spec §15 Q1 (estimate placement): NOT resolved into a rule this pass. The branch
+implements the intake-block reading (10.4/11.4 with 11.8 drafted), but the rule
+stays unlanded with the code, so the question is parked with the item rather than
+recorded as decided.
+
+Nothing promoted; production untouched; no Wave 2-3, #401 re-base or promotion
+work started.
+
 ## Readiness line
 
 The FULL results surface is live on STAGING and STAGING-RESTORED on #429 (stamp
@@ -362,13 +410,15 @@ and SEO censuses unchanged at zero URL changes. NOT promoted: production
 production-branch alias, still serves `20261103u`. Promotion remains a separate
 D-2026-11-13-008 step.
 
-WAIT-STATE: nothing is waiting on another party. Rung: Wave 0 is landed — the #436
-spec is at V1.1 with the Wave 1 contract (§10-§15) and both gate receipts, so
-#440 and #431 now build against stated rules rather than each deciding its own
-(#441 and #430 are already closed and now have conformance rules instead of
-one-line pointers). Production untouched; nothing promoted. Next rung is the
-queue's Wave 1 row: #440 (priors + ladder, which also inherits #430's deferred
-pre-render) and #431 (applicability matrix), beside the #401 re-base.
+WAIT-STATE: waiting on one gate decision, not on a party — the deploy-manifest
+module-graph clause must accept a new sizing module (its own test currently fails
+on `priors.js` while the manifest copies `assets` recursively), and #440 needs a
+region-record field for TOU schedule, outage exposure and place class before its
+ranking can be more than the rate. Rung: Wave 0 landed (`e100432c`); Wave 1's
+#441 and #430 are closed and conform to the spec, #440 and #431 are parked
+DECISION-READY with their receipts (branch `52bdbced`) and nothing half-built was
+merged. Next rung once the gate decision lands: finish #440's ladder on real
+features, then #431's matrix.
 
 ## Known follow-ups (already attached, not re-filed)
 
