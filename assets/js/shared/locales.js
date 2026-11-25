@@ -3,10 +3,10 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261124r";
-import { RESULT_COPY } from "./result-copy.js?v=20261124r";
-import { TILT_COPY } from "./tilt-copy.js?v=20261124r";
-import { DETAIL_COPY } from "./detail-copy.js?v=20261124r";
+import { HOME_COPY } from "./home-copy.js?v=20261125a";
+import { RESULT_COPY } from "./result-copy.js?v=20261125a";
+import { TILT_COPY } from "./tilt-copy.js?v=20261125a";
+import { DETAIL_COPY } from "./detail-copy.js?v=20261125a";
 
 export const LOCALES = {
   en: {
@@ -253,6 +253,41 @@ export const LOCALES = {
     labelLongitude: "Longitude (−180 to 180):",
     labelOffgridKwh: "Off-grid power need (kWh/day):",
     derateHintTypical: "85–100; 98 is typical",
+    derateHintMpptTypical: "90–100; 98 is typical",
+    fxRateLabel: "Your currency",
+    stepLocation: "1. Location",
+    stepLoad: "2. What you power",
+    stepTariff: "3. Electricity price",
+    // #437: the chemistry temperature widget is assembled by JS and carried no
+    // keys at all, so it rendered English on every locale. These are its whole
+    // copy - the censused title and chemistry sentences, and the branches and
+    // legend a cold or single-chemistry site shows.
+    chemTempTitle: "Ambient Temperature & Battery Chemistry Limits",
+    chemTempSiteLow: "Site Low ~{c}°C",
+    chemTempDeepFreeze: "-30°C (Deep Freeze)",
+    chemTempLfpCutoff: "0°C (LFP Cutoff)",
+    chemTempIdeal: "20°C (Ideal)",
+    chemTempHeat: "45°C (Heat)",
+    chemTempLfpWinterTitle: "Winter Freezing Notice:",
+    chemTempLfpWinterBody:
+      "Local winter temperatures reach ~{c}°C (below 0°C / 32°F). The LiFePO4 BMS stops charging below freezing to prevent permanent lithium plating. Install the battery indoors, in an insulated enclosure, or choose a model with an internal heating pad.",
+    chemTempLfpSafeTitle: "Safe Operating Climate:",
+    chemTempLfpSafeBody:
+      "LiFePO4 charges safely above 0°C (32°F) and runs at 95%+ round-trip efficiency. Discharging works down to -20°C.",
+    chemTempNaionTitle: "Sub-Zero Resilient:",
+    chemTempNaionBody:
+      "Sodium-ion charges and discharges reliably from -20°C to +45°C without dendrite risk or thermal runaway. It keeps 85%+ usable capacity in freezing weather without heating pads.",
+    chemTempAgmTitle: "Cold Derating Warning:",
+    chemTempAgmBody:
+      "Lead-acid (AGM) usable capacity drops sharply below freezing (~50% at -10°C). A discharged electrolyte can freeze and crack the casing.",
+    chemTempCompareTitle: "Climate Comparison at a ~{c}°C Winter Low:",
+    chemTempFreezeNaion: "charges directly in freezing weather down to -20°C.",
+    chemTempFreezeLfp: "needs indoor placement or heating pads below 0°C.",
+    chemTempFreezeAgm: "loses ~50% of its capacity in winter.",
+    chemTempMildLfp:
+      "provides the lowest 20-year lifetime cost in mild or warm climates.",
+    chemTempMildNaion: "offers non-flammable chemistry and thermal headroom.",
+    chemTempMildAgm: "has the lowest upfront cost and the shortest cycle life.",
     partsExWorksNote: "(indicative ex-works China, Aug 2026)",
 
     partsIndicativeNote: "(indicative, Aug 2026)",
@@ -1126,6 +1161,40 @@ export const LOCALES = {
     labelLongitude: "Longitud (−180 a 180):",
     labelOffgridKwh: "Necesidad fuera de red (kWh/día):",
     derateHintTypical: "85–100; 98 es lo típico",
+    derateHintMpptTypical: "90–100; 98 es lo típico",
+    fxRateLabel: "Tu moneda",
+    stepLocation: "1. Ubicación",
+    stepLoad: "2. Qué alimentas",
+    stepTariff: "3. Precio de la electricidad",
+    chemTempTitle: "Temperatura ambiente y límites de la química de la batería",
+    chemTempSiteLow: "Mínima del sitio ~{c}°C",
+    chemTempDeepFreeze: "-30°C (frío extremo)",
+    chemTempLfpCutoff: "0°C (corte del LFP)",
+    chemTempIdeal: "20°C (ideal)",
+    chemTempHeat: "45°C (calor)",
+    chemTempLfpWinterTitle: "Aviso de heladas invernales:",
+    chemTempLfpWinterBody:
+      "Las temperaturas invernales locales llegan a ~{c}°C (por debajo de 0°C / 32°F). El BMS del LiFePO4 corta la carga bajo cero para evitar el plateado permanente del litio. Instala la batería en interiores, en un recinto aislado, o elige un modelo con almohadilla térmica interna.",
+    chemTempLfpSafeTitle: "Clima de funcionamiento seguro:",
+    chemTempLfpSafeBody:
+      "El LiFePO4 carga con seguridad por encima de 0°C (32°F) y trabaja con una eficiencia de ida y vuelta del 95% o más. La descarga funciona hasta -20°C.",
+    chemTempNaionTitle: "Resistente al frío extremo:",
+    chemTempNaionBody:
+      "El sodio-ion carga y descarga de forma fiable de -20°C a +45°C sin riesgo de dendritas ni fuga térmica. Conserva más del 85% de su capacidad útil con heladas, sin almohadillas térmicas.",
+    chemTempAgmTitle: "Aviso de pérdida de capacidad por frío:",
+    chemTempAgmBody:
+      "La capacidad útil del plomo-ácido (AGM) cae bruscamente bajo cero (~50% a -10°C). El electrolito descargado puede congelarse y agrietar la carcasa.",
+    chemTempCompareTitle:
+      "Comparación de climas con una mínima invernal de ~{c}°C:",
+    chemTempFreezeNaion: "carga directamente con heladas hasta -20°C.",
+    chemTempFreezeLfp:
+      "necesita colocación en interiores o almohadillas térmicas bajo 0°C.",
+    chemTempFreezeAgm: "pierde ~50% de su capacidad en invierno.",
+    chemTempMildLfp:
+      "ofrece el coste vitalicio más bajo en 20 años en climas templados o cálidos.",
+    chemTempMildNaion: "ofrece una química no inflamable y margen térmico.",
+    chemTempMildAgm:
+      "tiene el coste inicial más bajo y la vida útil más corta.",
     partsExWorksNote: "(indicativo, ex-fábrica China, ago 2026)",
 
     partsIndicativeNote: "(orientativo, ago 2026)",
@@ -1933,6 +2002,39 @@ export const LOCALES = {
     labelLongitude: "Longitude (−180 a 180):",
     labelOffgridKwh: "Necessidade fora da rede (kWh/dia):",
     derateHintTypical: "85–100; 98 é o típico",
+    derateHintMpptTypical: "90–100; 98 é o típico",
+    fxRateLabel: "A sua moeda",
+    stepLocation: "1. Localização",
+    stepLoad: "2. O que alimenta",
+    stepTariff: "3. Preço da eletricidade",
+    chemTempTitle: "Temperatura ambiente e limites da química da bateria",
+    chemTempSiteLow: "Mínima do local ~{c}°C",
+    chemTempDeepFreeze: "-30°C (frio extremo)",
+    chemTempLfpCutoff: "0°C (corte do LFP)",
+    chemTempIdeal: "20°C (ideal)",
+    chemTempHeat: "45°C (calor)",
+    chemTempLfpWinterTitle: "Aviso de geada no inverno:",
+    chemTempLfpWinterBody:
+      "As temperaturas mínimas de inverno no local chegam a ~{c}°C (abaixo de 0°C / 32°F). O BMS do LiFePO4 interrompe o carregamento abaixo de zero para evitar a deposição permanente de lítio. Instale a bateria no interior, num invólucro isolado, ou escolha um modelo com almofada térmica interna.",
+    chemTempLfpSafeTitle: "Clima de funcionamento seguro:",
+    chemTempLfpSafeBody:
+      "O LiFePO4 carrega em segurança acima de 0°C (32°F) e funciona com eficiência de ida e volta superior a 95%. A descarga funciona até -20°C.",
+    chemTempNaionTitle: "Resistente ao frio extremo:",
+    chemTempNaionBody:
+      "O sódio-ião carrega e descarrega de forma fiável entre -20°C e +45°C, sem risco de dendrites nem fuga térmica. Mantém mais de 85% da capacidade útil com geada, sem almofadas térmicas.",
+    chemTempAgmTitle: "Aviso de perda de capacidade pelo frio:",
+    chemTempAgmBody:
+      "A capacidade útil do chumbo-ácido (AGM) cai acentuadamente abaixo de zero (~50% a -10°C). O eletrólito descarregado pode congelar e rachar a caixa.",
+    chemTempCompareTitle:
+      "Comparação de climas com uma mínima de inverno de ~{c}°C:",
+    chemTempFreezeNaion: "carrega diretamente com geada até -20°C.",
+    chemTempFreezeLfp:
+      "precisa de instalação no interior ou de almofadas térmicas abaixo de 0°C.",
+    chemTempFreezeAgm: "perde ~50% da capacidade no inverno.",
+    chemTempMildLfp:
+      "oferece o menor custo ao longo de 20 anos em climas amenos ou quentes.",
+    chemTempMildNaion: "oferece química não inflamável e margem térmica.",
+    chemTempMildAgm: "tem o custo inicial mais baixo e a vida útil mais curta.",
     partsExWorksNote: "(indicativo, ex-fábrica China, ago 2026)",
 
     partsIndicativeNote: "(indicativo, ago 2026)",
@@ -2736,6 +2838,43 @@ export const LOCALES = {
     labelLongitude: "Longitude (−180 à 180) :",
     labelOffgridKwh: "Besoin hors réseau (kWh/jour) :",
     derateHintTypical: "85–100 ; 98 est la valeur typique",
+    derateHintMpptTypical: "90–100 ; 98 est la valeur typique",
+    fxRateLabel: "Votre devise",
+    stepLocation: "1. Emplacement",
+    stepLoad: "2. Ce que vous alimentez",
+    stepTariff: "3. Prix de l'électricité",
+    chemTempTitle:
+      "Température ambiante et limites de la chimie de la batterie",
+    chemTempSiteLow: "Minimale du site ~{c}°C",
+    chemTempDeepFreeze: "-30°C (grand froid)",
+    chemTempLfpCutoff: "0°C (coupure LFP)",
+    chemTempIdeal: "20°C (idéal)",
+    chemTempHeat: "45°C (chaleur)",
+    chemTempLfpWinterTitle: "Avis de gel hivernal :",
+    chemTempLfpWinterBody:
+      "Les températures hivernales locales descendent jusqu'à ~{c}°C (sous 0°C / 32°F). Le BMS du LiFePO4 coupe la charge sous zéro pour éviter un placage de lithium permanent. Installez la batterie à l'intérieur, dans un caisson isolé, ou choisissez un modèle à pad chauffant intégré.",
+    chemTempLfpSafeTitle: "Climat de fonctionnement sûr :",
+    chemTempLfpSafeBody:
+      "Le LiFePO4 se charge sans danger au-dessus de 0°C (32°F) et fonctionne avec un rendement aller-retour supérieur à 95%. La décharge fonctionne jusqu'à -20°C.",
+    chemTempNaionTitle: "Résistant au grand froid :",
+    chemTempNaionBody:
+      "Le sodium-ion se charge et se décharge de façon fiable de -20°C à +45°C, sans risque de dendrites ni emballement thermique. Il conserve plus de 85% de sa capacité utile par temps de gel, sans pad chauffant.",
+    chemTempAgmTitle: "Avis de perte de capacité au froid :",
+    chemTempAgmBody:
+      "La capacité utile du plomb-acide (AGM) chute fortement sous zéro (~50% à -10°C). L'électrolyte déchargé peut geler et fissurer le boîtier.",
+    chemTempCompareTitle:
+      "Comparaison des climats pour une minimale hivernale de ~{c}°C :",
+    chemTempFreezeNaion:
+      "se charge directement par temps de gel jusqu'à -20°C.",
+    chemTempFreezeLfp:
+      "exige une installation intérieure ou des pads chauffants sous 0°C.",
+    chemTempFreezeAgm: "perd ~50% de sa capacité en hiver.",
+    chemTempMildLfp:
+      "offre le coût sur 20 ans le plus bas en climat doux ou chaud.",
+    chemTempMildNaion:
+      "offre une chimie non inflammable et une marge thermique.",
+    chemTempMildAgm:
+      "a le coût initial le plus bas et la durée de vie la plus courte.",
     partsExWorksNote: "(indicatif, départ usine Chine, août 2026)",
 
     partsIndicativeNote: "(indicatif, août 2026)",
@@ -3539,6 +3678,39 @@ export const LOCALES = {
     labelLongitude: "Längengrad (−180 bis 180):",
     labelOffgridKwh: "Bedarf ohne Netz (kWh/Tag):",
     derateHintTypical: "85–100; 98 ist typisch",
+    derateHintMpptTypical: "90–100; 98 ist typisch",
+    fxRateLabel: "Ihre Währung",
+    stepLocation: "1. Standort",
+    stepLoad: "2. Was Sie versorgen",
+    stepTariff: "3. Strompreis",
+    chemTempTitle: "Umgebungstemperatur und Grenzen der Batteriechemie",
+    chemTempSiteLow: "Tiefstwert am Standort ~{c}°C",
+    chemTempDeepFreeze: "-30°C (Extremkälte)",
+    chemTempLfpCutoff: "0°C (LFP-Abschaltung)",
+    chemTempIdeal: "20°C (ideal)",
+    chemTempHeat: "45°C (Hitze)",
+    chemTempLfpWinterTitle: "Winterfrost-Hinweis:",
+    chemTempLfpWinterBody:
+      "Die örtlichen Wintertemperaturen erreichen ~{c}°C (unter 0°C / 32°F). Das LiFePO4-BMS stoppt die Ladung unter dem Gefrierpunkt, um dauerhafte Lithiumabscheidung zu verhindern. Installieren Sie die Batterie im Innenraum, in einem isolierten Gehäuse, oder wählen Sie ein Modell mit integrierter Heizmatte.",
+    chemTempLfpSafeTitle: "Sicheres Betriebsklima:",
+    chemTempLfpSafeBody:
+      "LiFePO4 lädt sicher über 0°C (32°F) und arbeitet mit über 95% Round-Trip-Wirkungsgrad. Entladen ist bis -20°C möglich.",
+    chemTempNaionTitle: "Kälteresistent unter null:",
+    chemTempNaionBody:
+      "Natrium-Ionen lädt und entlädt zuverlässig von -20°C bis +45°C, ohne Dendritenrisiko und ohne thermisches Durchgehen. Bei Frost bleiben über 85% der nutzbaren Kapazität erhalten, ohne Heizmatten.",
+    chemTempAgmTitle: "Hinweis auf Kälteleistungsverlust:",
+    chemTempAgmBody:
+      "Die nutzbare Kapazität von Blei-Säure (AGM) sinkt unter dem Gefrierpunkt stark (~50% bei -10°C). Entladener Elektrolyt kann gefrieren und das Gehäuse sprengen.",
+    chemTempCompareTitle: "Klimavergleich bei ~{c}°C Wintertiefstwert:",
+    chemTempFreezeNaion: "lädt bei Frost direkt bis -20°C.",
+    chemTempFreezeLfp: "braucht unter 0°C einen Innenplatz oder Heizmatten.",
+    chemTempFreezeAgm: "verliert im Winter ~50% seiner Kapazität.",
+    chemTempMildLfp:
+      "bietet die niedrigsten Lebenszeitkosten über 20 Jahre in milden oder warmen Klimaten.",
+    chemTempMildNaion:
+      "bietet nicht entflammbare Chemie und thermische Reserven.",
+    chemTempMildAgm:
+      "hat die niedrigsten Anschaffungskosten und die kürzeste Lebensdauer.",
     partsExWorksNote: "(Richtwert, ab Werk China, Aug. 2026)",
 
     partsIndicativeNote: "(Richtwert, Aug. 2026)",
@@ -4252,6 +4424,40 @@ export const LOCALES = {
     labelLongitude: "Lengtegraad (−180 tot 180):",
     labelOffgridKwh: "Behoefte off-grid (kWh/dag):",
     derateHintTypical: "85–100; 98 is gebruikelijk",
+    derateHintMpptTypical: "90–100; 98 is gebruikelijk",
+    fxRateLabel: "Uw valuta",
+    stepLocation: "1. Locatie",
+    stepLoad: "2. Wat u van stroom voorziet",
+    stepTariff: "3. Elektriciteitsprijs",
+    chemTempTitle: "Omgevingstemperatuur en grenzen van de accuchemie",
+    chemTempSiteLow: "Laagste waarde op locatie ~{c}°C",
+    chemTempDeepFreeze: "-30°C (strenge vorst)",
+    chemTempLfpCutoff: "0°C (LFP-afschakeling)",
+    chemTempIdeal: "20°C (ideaal)",
+    chemTempHeat: "45°C (hitte)",
+    chemTempLfpWinterTitle: "Waarschuwing wintervorst:",
+    chemTempLfpWinterBody:
+      "De plaatselijke wintertemperatuur daalt tot ~{c}°C (onder 0°C / 32°F). De BMS van LiFePO4 stopt het laden onder het vriespunt om blijvende lithiumafzetting te voorkomen. Plaats de accu binnen, in een geïsoleerde behuizing, of kies een model met een ingebouwd verwarmingsmatje.",
+    chemTempLfpSafeTitle: "Veilig bedrijfsklimaat:",
+    chemTempLfpSafeBody:
+      "LiFePO4 laadt veilig boven 0°C (32°F) en werkt met meer dan 95% round-trip-rendement. Ontladen kan tot -20°C.",
+    chemTempNaionTitle: "Bestand tegen strenge vorst:",
+    chemTempNaionBody:
+      "Natrium-ion laadt en ontlaadt betrouwbaar van -20°C tot +45°C, zonder dendrietrisico of thermal runaway. Bij vorst blijft meer dan 85% van de bruikbare capaciteit behouden, zonder verwarmingsmatjes.",
+    chemTempAgmTitle: "Waarschuwing capaciteitsverlies door kou:",
+    chemTempAgmBody:
+      "De bruikbare capaciteit van lood-zuur (AGM) daalt sterk onder het vriespunt (~50% bij -10°C). Ontladen elektrolyt kan bevriezen en de behuizing laten barsten.",
+    chemTempCompareTitle:
+      "Klimaatvergelijking bij een winterminimum van ~{c}°C:",
+    chemTempFreezeNaion: "laadt bij vorst rechtstreeks tot -20°C.",
+    chemTempFreezeLfp:
+      "heeft onder 0°C een plek binnen of verwarmingsmatjes nodig.",
+    chemTempFreezeAgm: "verliest in de winter ~50% van zijn capaciteit.",
+    chemTempMildLfp:
+      "biedt de laagste kosten over 20 jaar in milde of warme klimaten.",
+    chemTempMildNaion: "biedt niet-ontvlambare chemie en thermische reserve.",
+    chemTempMildAgm:
+      "heeft de laagste aanschafkosten en de kortste levensduur.",
     partsExWorksNote: "(indicatief, af fabriek China, aug. 2026)",
 
     partsIndicativeNote: "(indicatief, aug 2026)",
@@ -5228,6 +5434,37 @@ export const LOCALES = {
     labelLongitude: "خط الطول (−180 إلى 180):",
     labelOffgridKwh: "الحاجة خارج الشبكة (كيلوواط ساعة/يوم):",
     derateHintTypical: "85–100؛ 98 هو المعتاد",
+    derateHintMpptTypical: "90–100؛ 98 هو المعتاد",
+    fxRateLabel: "عملتك",
+    stepLocation: "1. الموقع",
+    stepLoad: "2. ما الذي تزوّده بالطاقة",
+    stepTariff: "3. سعر الكهرباء",
+    chemTempTitle: "درجة الحرارة المحيطة وحدود كيمياء البطارية",
+    chemTempSiteLow: "أدنى حرارة في الموقع ~{c}°C",
+    chemTempDeepFreeze: "-30°C (صقيع شديد)",
+    chemTempLfpCutoff: "0°C (قطع شحن LFP)",
+    chemTempIdeal: "20°C (مثالي)",
+    chemTempHeat: "45°C (حرارة)",
+    chemTempLfpWinterTitle: "تنبيه تجمّد شتوي:",
+    chemTempLfpWinterBody:
+      "تنخفض درجات الحرارة الشتوية في الموقع إلى ~{c}°C (تحت 0°C / 32°F). يوقف نظام إدارة LiFePO4 الشحن تحت درجة التجمد لمنع ترسّب الليثيوم الدائم. ركّب البطارية في الداخل أو في حاوية معزولة، أو اختر طرازًا مزوّدًا بوسادة تدفئة داخلية.",
+    chemTempLfpSafeTitle: "مناخ تشغيل آمن:",
+    chemTempLfpSafeBody:
+      "يشحن LiFePO4 بأمان فوق 0°C (32°F) ويعمل بكفاءة ذهاب وإياب تزيد على 95%. يعمل التفريغ حتى -20°C.",
+    chemTempNaionTitle: "مقاوم للصقيع:",
+    chemTempNaionBody:
+      "يشحن صوديوم-أيون ويفرّغ بثبات من -20°C إلى +45°C دون خطر التشعّب أو الهروب الحراري. يحتفظ بأكثر من 85% من سعته القابلة للاستخدام في الصقيع دون وسادات تدفئة.",
+    chemTempAgmTitle: "تنبيه انخفاض السعة في البرد:",
+    chemTempAgmBody:
+      "تنخفض السعة القابلة للاستخدام في الرصاص-حمض (AGM) بشدة تحت التجمد (~50% عند -10°C). قد يتجمد الإلكتروليت المفرّغ ويشقق الغلاف.",
+    chemTempCompareTitle: "مقارنة المناخات عند أدنى حرارة شتوية ~{c}°C:",
+    chemTempFreezeNaion: "يشحن مباشرة في الصقيع حتى -20°C.",
+    chemTempFreezeLfp: "يحتاج إلى تركيب داخلي أو وسادات تدفئة تحت 0°C.",
+    chemTempFreezeAgm: "يفقد ~50% من سعته في الشتاء.",
+    chemTempMildLfp:
+      "يوفّر أقل تكلفة على مدى 20 عامًا في المناخات المعتدلة أو الدافئة.",
+    chemTempMildNaion: "يوفّر كيمياء غير قابلة للاشتعال وهامشًا حراريًا.",
+    chemTempMildAgm: "له أقل تكلفة أولية وأقصر عمر دورات.",
     partsExWorksNote: "(إرشادي، تسليم من المصنع في الصين، أغسطس 2026)",
 
     partsIndicativeNote: "(إرشادي، أغسطس 2026)",
