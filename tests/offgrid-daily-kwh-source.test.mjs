@@ -81,3 +81,38 @@ test("readInputs takes the off-grid load from this rule and nowhere else", () =>
   assert.ok(branch.includes("offgridDailyKwh("), "the branch must call it");
   assert.ok(!/offSliderVal/.test(branch));
 });
+
+test("the bill slider is derived from the typed load, never written back over it", () => {
+  const s = src.indexOf("function syncBillSlider()");
+  const end = src.indexOf("function displayRate()", s);
+  assert.ok(s > 0 && end > s, "syncBillSlider must sit before displayRate");
+  const body = src.slice(s, end);
+  // The anchor has to know which control owns the load in this mode...
+  assert.ok(
+    body.includes('$("loadMode")?.value === "kwh"'),
+    "the bill anchor must recognise the kWh/day entry mode",
+  );
+  assert.match(
+    body,
+    /typedEntryOwnsLoad[\s\S]{0,160}billAnchorKwh = parseFloat\(\$\("dailyKwhInput"\)\.value\)/,
+    "the anchor is derived from the typed entry, not the other way round",
+  );
+  // ...and the bill branch must not take the anchor back while it does.
+  assert.match(
+    body,
+    /!typedEntryOwnsLoad &&\s*billTouched/,
+    "a touched bill slider must not override the entry that owns the load",
+  );
+  // The mirror write exists once, guarded: an unguarded write is the defect
+  // (a typed 1.2 came back as 2 on the next resolve, and the queued run sized 2).
+  assert.equal(
+    (body.match(/kwhInput\.value = /g) || []).length,
+    1,
+    "the entry may be mirrored in one place only",
+  );
+  assert.match(
+    body,
+    /if \(kwhInput && !typedEntryOwnsLoad\) kwhInput\.value = String\(clampedKwh\)/,
+    "the mirror must skip the field that owns the load",
+  );
+});
