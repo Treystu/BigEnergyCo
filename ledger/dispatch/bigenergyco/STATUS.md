@@ -200,6 +200,53 @@ Chemistry Limits`, the three chemistry sentences, `Your currency`), plus the
   evidence, not on that observation.
 - NOT done: production untouched; #467's truthful-verdict cure unlanded.
 
+## Landing record — 2026-11-25 (#437 remainder on the restored surface)
+
+Three landings, all rail-green at their exact head (CircleCI `verify`, check-runs
+read, never the combined status API), all staged only — production untouched:
+
+- **#480, squash `2d6191ba`** (head `53c2467f`). Keyed the nine English groups the
+  restored-surface ES census named. Five were dictionary copy whose painter never
+  sat on the language-change repaint path — `quickBillStarts` (`paintQuickBillNote`),
+  `tariffNote` (`repaintTariffNote`), the MPPT derate hint (`derateHintMpptTypical`,
+  which had no hook at all), the FX label (`fxRateLabel`) and the guided-step label
+  (`stepLocation`/`stepLoad`/`stepTariff` + `dStepResult`). Four were the chemistry
+  temperature widget, which carried **no keys** and wrote every branch inline: 21
+  `chemTemp*` keys cover its title, site-low label, legend, all three chemistry
+  branches, the freezing/mild bullet sets and the compare title, and the widget
+  keeps `chemTempLat` so a repaint does not re-derive the site.
+- **#481, squash `42ad5906`** (head `aecb1ee5`). #480 called `repaintTariffNote()`
+  but declared `paintTariffNote()`; the first repaint threw `ReferenceError` and
+  aborted `initSizingUI` (caught by its `.catch`, so the page sat half-built and
+  the widget kept raw keys). Caught on the rendered staging build, not by a gate.
+  Renamed, and a new gate asserts every bare call in `repaintRuntimeCopy()` names a
+  function `ui.js` defines — the class that missed it.
+- **#482, squash `846afbfc`** (head `cf9fcc9c`). The muted `(optional)` span beside
+  the currency label stayed English (`Tu moneda (optional):`); `fxRateOptional` now
+  paints it in all seven locales.
+
+**Rendered census on `https://924d7528.bigenergyco.pages.dev`** (390x844, stamp
+`20261125c`, SW `beco-v301`; ES chosen first, then fixture 37.985/-103.543,
+~~$150/mo, 80% cut): zero hits for all twelve censused English probes
+(`Starts from`, `Electricity price estimated`, `is typical`, `Ambient Temperature`,
+`provides the lowest`, `offers non-flammable`, `has low upfront cost`,
+`Your currency`, `Your result`, `(optional)`, `Winter Freezing`, `Deep Freeze`).
+In ES: `Empieza desde ~$147/mes (≈28 kWh/día)…`, `Precio estimado para US mainland
+— cámbialo arriba si conoces tu tarifa. (~~ 0.17 US$/kWh)`, `90–100; 98 es lo
+típico`, `Temperatura ambiente y límites de la química de la batería … Mínima del
+sitio ~1°C … Comparación de climas con una mínima invernal de ~1°C: • LiFePO4
+ofrece el coste vitalicio más bajo… • Sodium-Ion ofrece una química no inflamable…
+• Lead-Acid tiene el coste inicial más bajo…`, `Tu moneda (opcional):`, and the
+stepper reads `4. Tu resultado`. Results: plan `$6,632.00`=`$1,398.00` +
+`$4,150.00`+`$1,084.00`, paybacks `Año 5`(parts) /`Año 16`(installed), bill
+cut`80%`, frontier SVG present, both charts drawn (one canvas each),
+`#resultsMore.open`false,`scrollWidth - 390 = -11`, console clean apart from the
+known advisor CORS failure (#364) on the unique preview origin.
+
+Residual, recorded not fixed: the tariff estimate still names its region box with
+the English **data** label (`US mainland`). The 26 boxes in `pricing.js` carry
+English geographic names; localizing them is its own dispatch, attached here.
+
 ## Readiness line
 
 The FULL results surface is live on STAGING and STAGING-RESTORED on #429 (stamp
@@ -215,9 +262,11 @@ and SEO censuses unchanged at zero URL changes. NOT promoted: production
 production-branch alias, still serves `20261103u`. Promotion remains a separate
 D-2026-11-13-008 step.
 
-WAIT-STATE: nothing is waiting on another party. Rung: merge landed (#474 as
-`7cd81663`) with its rendered evidence filed; next rung is the #437 rendered ES
-re-drive on this restored surface, then #442/#444/#447 residue in queue order.
+WAIT-STATE: nothing is waiting on another party. Rung: the #437 remainder is
+landed (#480 `2d6191ba`, #481 `42ad5906`, #482 `846afbfc`) and verified on the
+rendered ES staging surface `924d7528` — the eleven-group census now returns zero
+English probes. Next rung is the live-defect queue in order: #442, #444 residue,
+#447 residue (custom coordinates), then the Wave-1 remainder.
 
 ## Known follow-ups (already attached, not re-filed)
 
