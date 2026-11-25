@@ -2018,7 +2018,13 @@ footer {
   margin: 0 0 0.35rem;
 }
 
-/* #432: prices align and scan as a column. */
+/* #432: every price is a column digit set. */
+#estimateBill,
+#estimateLoad,
+#estimateCut,
+#readoutBill,
+.input-readout,
+.savings-num,
 .plan-price,
 .paths-upfront,
 .paths-total {
@@ -2065,16 +2071,14 @@ footer {
   margin: 0 0 0.4rem;
   font-size: var(--type-control);
 }
-/* #432 F13: the clear-all preset is a caption-grade tertiary control; its
-   size lives here, not in the markup. */
+/* #432 F13: the clear-all preset takes its size here, not inline. */
 .preset-clear {
   padding: 0.3rem 0.65rem;
   font-size: 0.78rem;
   color: var(--text-muted);
 }
 
-/* #432: the location control keeps its emphasis as a class, not an inline
-   size. F3 renamed it away from "primary" because it holds no primary rank. */
+/* #432/F3: emphasis as a class; the control holds no primary rank. */
 .btn-geo-emphasis {
   white-space: nowrap;
   font-size: var(--type-body);
@@ -2082,35 +2086,14 @@ footer {
   padding: 0.85rem 1.3rem;
 }
 
-/* #432 F13: a chart title is a block role, not an inline override. */
+/* #432 F13: chart titles are a role, not inline overrides. */
 .chart-title {
   font-size: var(--type-control);
   font-weight: 700;
   color: var(--text-main);
   margin-bottom: 0.4rem;
 }
-/* #432: every price is a column digit set, so figures align wherever they
-   stack (estimate card, bill readout, savings, plan price, four ways). */
-#estimateBill,
-#estimateLoad,
-#estimateCut,
-#readoutBill,
-.input-readout,
-.savings-num,
-.simple-headline + .plan-price,
-.plan-price,
-.paths-upfront,
-.paths-total {
-  font-variant-numeric: tabular-nums;
-}
-/* #432 F14: no emoji inside a control label. The marker beside a control is
-   decoration, never part of its name. */
-.btn .emoji,
-.chart-title .emoji {
-  font-variant-emoji: text;
-}
-/* #432 locale type: the longest-word locales (de, nl) must be able to break a
-   long control label at any width instead of overflowing the card. */
+/* #432: the long-word locales break a control label, not the card. */
 .btn,
 .case-ladder-row,
 .estimate-title {

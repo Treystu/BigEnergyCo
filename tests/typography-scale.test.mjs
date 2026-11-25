@@ -44,14 +44,19 @@ test("each role has one owner, not a scattered raw value", () => {
     /\.section-title\s*\{\s*font-size:\s*var\(--type-section\)/,
   );
   assert.match(css, /\.btn\s*\{[^}]*font-size:\s*var\(--type-control\)/);
-  assert.match(css, /\.chart-title\s*\{[^}]*font-size:\s*var\(--type-control\)/);
+  assert.match(
+    css,
+    /\.chart-title\s*\{[^}]*font-size:\s*var\(--type-control\)/,
+  );
 });
 
 test("no action carries an inline font-size or padding", () => {
   // F13: the hero CTA used to carry style="font-size: 1.1rem; padding: ...".
   // Every button and every rank-classed control must take its size from the
   // scale, so an inline size on one of them is a failing test.
-  const controls = html.match(/<(?:button|a|div)\b[^>]*class="[^"]*\bbtn\b[^"]*"[^>]*>/g) || [];
+  const controls =
+    html.match(/<(?:button|a|div)\b[^>]*class="[^"]*\bbtn\b[^"]*"[^>]*>/g) ||
+    [];
   assert.ok(controls.length > 20, "expected the page's ranked controls");
   for (const tag of controls) {
     assert.doesNotMatch(
@@ -69,7 +74,9 @@ test("no action carries an inline font-size or padding", () => {
 
 test("every price surface shares the tabular-figures rule", () => {
   const rules = [
-    ...css.matchAll(/([^{}]+)\{([^}]*font-variant-numeric:\s*tabular-nums[^}]*)\}/g),
+    ...css.matchAll(
+      /([^{}]+)\{([^}]*font-variant-numeric:\s*tabular-nums[^}]*)\}/g,
+    ),
   ];
   assert.ok(rules.length > 0, "a tabular-nums rule must exist");
   const covered = rules.map((m) => m[1]).join(",");
@@ -114,7 +121,9 @@ test("control labels carry words, not emoji (all seven locales)", () => {
 test("the long-word locales have wrapping room on controls", () => {
   // German and Dutch set the wrapping risk; a control that cannot break a long
   // word overflows a 390px card instead of wrapping inside it.
-  const block = css.match(/\.btn,\s*\.case-ladder-row,\s*\.estimate-title\s*\{([^}]*)\}/);
+  const block = css.match(
+    /\.btn,\s*\.case-ladder-row,\s*\.estimate-title\s*\{([^}]*)\}/,
+  );
   assert.ok(block, "the control wrapping rule must exist");
   assert.match(block[1], /overflow-wrap:\s*anywhere/);
   assert.match(block[1], /hyphens:\s*auto/);
@@ -128,6 +137,9 @@ test("the display role is not re-declared at a fourth size on mobile", () => {
   // between them is exactly what section 6 forbids.
   const media = css.match(/@media \(max-width: 768px\) \{([\s\S]*?)\n\}/);
   assert.ok(media);
-  assert.match(media[1], /\.hero h1\s*\{\s*font-size:\s*clamp\(1\.85rem, 6vw, 2\.5rem\)/);
+  assert.match(
+    media[1],
+    /\.hero h1\s*\{\s*font-size:\s*clamp\(1\.85rem, 6vw, 2\.5rem\)/,
+  );
   assert.match(media[1], /\.section-title\s*\{\s*font-size:\s*1\.75rem/);
 });
