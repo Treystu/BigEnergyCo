@@ -397,28 +397,28 @@ work started.
 
 ## Readiness line
 
-The FULL results surface is live on STAGING and STAGING-RESTORED on #429 (stamp
-`20261124p`, SW `beco-v296`, verified on `https://bfd68431.bigenergyco.pages.dev`
-at 390x844). Home is one place field and one action, and the calculator still asks
-the three questions with no mode fork; results now show the complete previous
-experience — the plan card, the readable card, both charts, the frontier curve,
-the hardware list and the four-ways comparison all visible — with one price basis
-(DIY parts cost of goods, three parts lines summing to the headline) and payback
-named per basket. The #439 support path renders beside the result actions. Blog
-and SEO censuses unchanged at zero URL changes. NOT promoted: production
-(`freeoffgridcalculator.com`) is untouched and `bigenergyco.pages.dev`, the
-production-branch alias, still serves `20261103u`. Promotion remains a separate
-D-2026-11-13-008 step.
+The intake now carries the case ladder and the estimate summary on STAGING
+(deploy `f9b01c8c`, stamp `20261125k`, SW `beco-v308`, verified at 390x844 on
+`https://f9b01c8c.bigenergyco.pages.dev`). The ladder renders `usecases.js`'s
+six cases, ranked by the one prior model (`intake-priors.js`), with one hedged
+why-line where a live feature fires; the estimate card states the bill, load and
+cut defaults plus the local rate and follows the place in place. The full
+results surface is unchanged from STAGING-RESTORED: plan card, readable card,
+both charts, the frontier curve, the hardware list and the four-ways comparison
+all visible, with one price basis. Blog and SEO censuses unchanged at zero URL
+changes. NOT promoted: production (`freeoffgridcalculator.com`) is untouched and
+`bigenergyco.pages.dev`, the production-branch alias, still serves `20261103u`.
+Promotion remains a separate D-2026-11-13-008 step.
 
-WAIT-STATE: waiting on one gate decision, not on a party — the deploy-manifest
-module-graph clause must accept a new sizing module (its own test currently fails
-on `priors.js` while the manifest copies `assets` recursively), and #440 needs a
-region-record field for TOU schedule, outage exposure and place class before its
-ranking can be more than the rate. Rung: Wave 0 landed (`e100432c`); Wave 1's
-#441 and #430 are closed and conform to the spec, #440 and #431 are parked
-DECISION-READY with their receipts (branch `52bdbced`) and nothing half-built was
-merged. Next rung once the gate decision lands: finish #440's ladder on real
-features, then #431's matrix.
+WAIT-STATE: not waiting on a party. #440 is landed and verified (#489, #490,
+#492); its one open residue is data, not a decision — the tariff record carries
+no TOU-schedule, export-regime, outage-exposure or place-class field, so the
+rendered ranking is only as rich as the rate band until a cited source exists.
+#431 is parked DECISION-READY with its receipt and needs that same data plus six
+per-case drives. Rung: Wave 1's #441 and #430 were already closed and #440 is now
+landed and rendered-verified; next is #431's matrix when a cited source for the
+case features exists, otherwise the queue's Wave 2 rows (#432 typography, #437
+locale residue, #439 support path) which do not depend on it.
 
 ## Known follow-ups (already attached, not re-filed)
 
@@ -426,3 +426,65 @@ features, then #431's matrix.
   removal needs `scripts/jev-dispositions.mjs` updated in the same change.
 - The readable card's "see details" opens the first `details` by position rather
   than by name; it should name the disclosure it means.
+
+## Landing record — 2026-11-25 (Wave 1 remainder: #440 landed and verified)
+
+Census read live this pass: main `f9d38858`; open PRs none but dependabot #455;
+#440 merged (ladder, prior ranking, estimate card on main), #431 open and still
+DECISION-READY, spec §15 Q1 settled as a numbered rule. No second Home was
+created: #440 keeps intake inference and sequencing.
+
+- **#440 intake priors + ladder -> PR #489, squash `0c628d3e`.** Rail
+  `verify:success` at the exact head `0531a830` (CircleCI pipeline `31391e31`,
+  workflow `verify`; revision read back from the pipeline API and matched; the
+  Actions jobs are the known-dead ones). Landed: one prior model — the duplicate
+  `priors.js` is deleted and the ladder renders `intake-priors.js`'s
+  `rankCases()`, the module whose fixture suite (owner's LA and Trabuco examples
+  verbatim) landed in `038d7fd9`; a six-row ladder in `usecases.js` order with
+  the legacy ids `btnGoalGridtie`/`btnGoalOffgrid` kept for the smoke scripts;
+  a pick routed through `applyUseCase`; the §4 estimate card stating bill, load
+  and cut defaults plus the local rate and never a priced figure; seven why-line
+  keys in all seven locales, each English line <= 90 chars and hedged; and spec
+  §15 Q1 settled as **rule 11.8** (the estimate summary is a new intake block,
+  not the results card revealed early). The §15 row keeps its receipt.
+- **The live-feature boundary is stated, not papered over.** #440 item 1 wants a
+  tariff TOU-schedule, export regime, outage exposure and place class. None has
+  a field on the resolved place or the tariff record today, so they stay ABSENT
+  and the ladder falls back to registry order where nothing fires (spec §12.3).
+  The one live feature is the rate band, declared in `PRIOR_FEATURES`. The
+  owner's LA-vs-Trabuco order is proven by the fixture suite; a rendered place
+  is only as rich as the source behind it. That residue is the next #440
+  dispatch, not a silent default.
+- **#490, squash `9da7e360` (head `926a9183`) — the repaint cure.** Driving the
+  merged staging build showed the ladder rendering raw keys (`useCaseBillCut`,
+  `whyHighRates`): it is built during setup, before the deferred `locales.js`
+  import resolves. Both the ladder and the estimate card now sit in
+  `repaintRuntimeCopy()`; `tests/priors-ladder.test.mjs` pins it.
+- **#492, squash `f9d38858` (head `ebb1744`) — the card and the ranking follow
+  the place.** Driving showed that after a place resolved (rate field `0.302`,
+  California tariff note) the card still quoted `0.28` and the ladder kept its
+  boot order. `applyEstimatedTariff()` and `syncBillSlider()` — the one path a
+  location, tariff or currency change goes through — now re-derive the features
+  and repaint both surfaces, so a hand-entered rate moves the ladder too; a drag
+  on the bill or cut control repaints the card in place (spec 11.6). The calls
+  are `typeof`-guarded so the tests that eval the extracted function bodies keep
+  working. #491 was closed superseded: every push to that head returned GitHub
+  500s during the outage, and #492 carries the same commits plus the guards.
+- **Rendered drive, `https://f9b01c8c.bigenergyco.pages.dev` at 390x844**
+  (stamp `20261125k`, SW `beco-v308`): at rest the ladder is the registry's six
+  rows in registry order with the bill-cut row selected and its hedged why-line,
+  and the estimate card reads `$167/mo`, `~20 kWh/day`, `80%`, basis
+  `0.28/kWh`. Resolving Trabuco Canyon, California: `#locNote` names the place,
+  the rate field becomes `0.302`, the basis `0.30/kWh`, the bill default
+  `$188/mo`. All six labels render translated, no echoed keys anywhere; a pick
+  moves `aria-checked` in the same tick. Console clean; no horizontal overflow
+  (`scrollWidth - clientWidth = 0`); index order `citySearch < caseLadder <
+estimateCard < billSliderWrap < btnRunSizing`.
+- **Budget and stamp work shipped with the code**, not by widening a gate:
+  `index.html` and `site.css` were over budget with the new block, so comments
+  in both were compressed with no citation dropped; the asset stamp moved
+  `20261125e -> 20261125k` (`beco-v303 -> beco-v308`) as the graph files changed.
+- **#431 stays parked DECISION-READY** with its receipt: the applicability
+  matrix needs the same unresolved case features plus six per-case rendered
+  drives. Nothing half-built was merged for it.
+- Production untouched; no Wave 2-3, #401 re-base or promotion work started.
