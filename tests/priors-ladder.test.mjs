@@ -157,6 +157,10 @@ test("#440: the estimate and the ranking follow the location in place", () => {
     /function applyEstimatedTariff\([\s\S]*?\n\}/.exec(ui)?.[0] || "";
   assert.match(tariff, /renderCaseLadder\(featuresFromLocation\(\)\)/);
   assert.match(tariff, /renderEstimateCard\(\)/);
+  // A rate the visitor edits goes through syncBillSlider, which must re-rank
+  // too: the hand-entered 0.10 is a different band from the 0.30 estimate.
+  const sync = /function syncBillSlider\([\s\S]*?\n\}/.exec(ui)?.[0] || "";
+  assert.match(sync, /renderCaseLadder\(featuresFromLocation\(\)\)/);
   // A drag on either control re-renders the card in place.
   const bill =
     /function paintBillSliderLabel\([\s\S]*?\n\}/.exec(ui)?.[0] || "";
