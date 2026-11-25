@@ -2,15 +2,15 @@
 // Pure functions only: no DOM, no network, no globals. Every constant is
 // exported so the UI can render a complete "show the arithmetic" panel.
 
-import { batteryReplacements, lifetimeCostUsd } from "./money.js?v=20261125d";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261125d";
+import { batteryReplacements, lifetimeCostUsd } from "./money.js?v=20261125e";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261125e";
 import {
   CHEMISTRIES,
   coldCapacityScale,
   capacityScaleFor,
   CYCLE_LIFE_CURVES,
   cycleLifeForDoD,
-} from "./chem-model.js?v=20261125d";
+} from "./chem-model.js?v=20261125e";
 //
 // Units:
 //   irradiance  GHI(h) in W/m²  (NASA POWER hourly ALLSKY_SFC_SW_DWN, local solar time)
