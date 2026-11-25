@@ -487,6 +487,17 @@ const CHEM_TEMP_KEYS = [
   "chemTempMildAgm",
 ];
 
+// The repaint list is a set of bare calls. A name that does not exist throws on
+// the first language change AND on first paint, which aborts initSizingUI and
+// leaves the page half-built - invisible to a gate that only checks the call is
+// mentioned. This asserts every callee is defined.
+function repaintListBody() {
+  const start = ui.indexOf("function repaintRuntimeCopy()");
+  assert.ok(start > 0, "repaintRuntimeCopy must exist");
+  const end = ui.slice(start).search(/\r?\n}[ \t]*\r?\n/);
+  return ui.slice(start, end > 0 ? start + end : start + 4000);
+}
+
 test("#437: the chemistry temperature widget paints from the dictionary", () => {
   for (const key of CHEM_TEMP_KEYS) {
     for (const [lang, dict] of Object.entries(LOCALES)) {
@@ -516,7 +527,8 @@ test("#437: the chemistry temperature widget paints from the dictionary", () => 
   }
   const at = ui.indexOf("function renderChemTempVisualizer(");
   assert.ok(at > 0, "renderChemTempVisualizer must exist");
-  const body = ui.slice(at, ui.indexOf("\n}\n", at));
+  const end = ui.slice(at).search(/\r?\n}[ \t]*\r?\n/);
+  const body = ui.slice(at, end > 0 ? at + end : at + 6000);
   for (const literal of [
     "Ambient Temperature &",
     "provides the lowest 20-year lifetime cost",
@@ -547,8 +559,7 @@ test("#437: the chemistry temperature widget paints from the dictionary", () => 
 });
 
 test("#437: the restored-surface intake chrome repaints on a language change", () => {
-  const start = ui.indexOf("function repaintRuntimeCopy()");
-  const body = ui.slice(start, ui.indexOf("\n}\n", start));
+  const body = repaintListBody();
   for (const call of [
     "paintQuickBillNote()",
     "paintDerateHints()",
@@ -585,4 +596,21 @@ test("#437: the restored-surface intake chrome repaints on a language change", (
     !ui.includes('"90\u2013100; 98 is typical"'),
     "the MPPT derate hint must come from the dictionary",
   );
+});
+
+test("#437: every repaintRuntimeCopy call names a function ui.js defines", () => {
+  const body = repaintListBody();
+  const calls = [...body.matchAll(/^ {2}([A-Za-z_]\w*)\(\);$/gm)].map(
+    (m) => m[1],
+  );
+  assert.ok(
+    calls.length >= 10,
+    `expected the repaint list to be substantive, got ${calls.length}`,
+  );
+  for (const name of calls) {
+    assert.ok(
+      ui.includes(`function ${name}(`),
+      `repaintRuntimeCopy calls ${name}() but ui.js defines no such function`,
+    );
+  }
 });
