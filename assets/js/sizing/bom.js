@@ -7,8 +7,8 @@
 // Every number here is an EDUCATIONAL estimate with documented assumptions.
 // Real designs must be verified by a licensed electrician or engineer.
 
-import { CHEMISTRIES } from "./chem-model.js?v=20261125m";
-import { POWMR_CATALOG } from "./pricing.js?v=20261125m";
+import { CHEMISTRIES } from "./chem-model.js?v=20261125o";
+import { POWMR_CATALOG } from "./pricing.js?v=20261125o";
 
 // ── Constants (shown in the UI's arithmetic panel) ──────────────────────────
 
@@ -65,8 +65,16 @@ export const RETAIL_MODULE_KWH = 5.12; // PowMr-class 51.2 V rack unit
 // is what the DIY path already assumes at those voltages.
 const RETAIL_UNITS = {
   12: [
-    { kwh: 1.28, v: 12, label: "12 V 100 Ah deep-cycle battery units (BMS included)" },
-    { kwh: 2.56, v: 12, label: "12 V 200 Ah deep-cycle battery units (BMS included)" },
+    {
+      kwh: 1.28,
+      v: 12,
+      label: "12 V 100 Ah deep-cycle battery units (BMS included)",
+    },
+    {
+      kwh: 2.56,
+      v: 12,
+      label: "12 V 200 Ah deep-cycle battery units (BMS included)",
+    },
   ],
   24: [
     { kwh: 2.56, v: 24, label: "24 V 100 Ah battery units (BMS included)" },
@@ -74,7 +82,8 @@ const RETAIL_UNITS = {
   ],
   48: [
     {
-      kwh: RETAIL_MODULE_KWH, v: 51.2,
+      kwh: RETAIL_MODULE_KWH,
+      v: 51.2,
       label: `${RETAIL_MODULE_KWH} kWh rack modules (51.2 V, BMS included)`,
     },
   ],
@@ -236,7 +245,8 @@ export function retailConfig(chemistry, nameplateKwh, vBatt = 48) {
   return {
     unitLabel: best.unit.label,
     modules: best.modules,
-    unitKwh: best.unit.kwh, unitV: best.unit.v,
+    unitKwh: best.unit.kwh,
+    unitV: best.unit.v,
     providedKwh: best.providedKwh,
     oversizeRatio: ratio(best.providedKwh),
   };

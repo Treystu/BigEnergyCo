@@ -16,15 +16,16 @@ export const CHROME_COPY = {
     dInstallAria: "Install the BigEnergyCo app",
     resultSunshineData: "Sunshine data from {place}",
     roofConfirm: "Confirm your roof or yard",
-    chemAutoCompare:
-      "Auto — compare all three chemistries by lifetime cost",
+    chemAutoCompare: "Auto — compare all three chemistries by lifetime cost",
     leadAcidSkips: "vs lead-acid · skips ~{n} swaps",
     cmpBattery: "Battery",
     leadAcidSave: "save ~{amount}",
     leadAcidCheaper: "lead-acid ~{amount} cheaper",
     leadAcidBankFactor: "vs lead-acid · {n}× the bank for the same usable kWh",
-    leadAcidSwapsUpkeep: "but needs ~{n} swaps and acid upkeep · not recommended",
-    leadAcidBankShort: "but needs {n}× the bank and the shortest life · not recommended",
+    leadAcidSwapsUpkeep:
+      "but needs ~{n} swaps and acid upkeep · not recommended",
+    leadAcidBankShort:
+      "but needs {n}× the bank and the shortest life · not recommended",
     cmpSolar: "Solar",
     cmpBank: "Bank usable (nameplate)",
     cmpFirstCost: "First cost",
@@ -60,15 +61,17 @@ export const CHROME_COPY = {
     dInstallAria: "Instalar la app BigEnergyCo",
     resultSunshineData: "Datos de sol de {place}",
     roofConfirm: "Confirma tu tejado o patio",
-    chemAutoCompare:
-      "Auto — compara las tres químicas por coste de por vida",
+    chemAutoCompare: "Auto — compara las tres químicas por coste de por vida",
     leadAcidSkips: "frente a plomo-ácido · evita ~{n} recambios",
     cmpBattery: "Batería",
     leadAcidSave: "ahorras ~{amount}",
     leadAcidCheaper: "plomo-ácido ~{amount} más barato",
-    leadAcidBankFactor: "frente a plomo-ácido · {n}× el banco para la misma energía útil",
-    leadAcidSwapsUpkeep: "pero necesita ~{n} recambios y mantenimiento de ácido · no recomendado",
-    leadAcidBankShort: "pero necesita {n}× el banco y la vida más corta · no recomendado",
+    leadAcidBankFactor:
+      "frente a plomo-ácido · {n}× el banco para la misma energía útil",
+    leadAcidSwapsUpkeep:
+      "pero necesita ~{n} recambios y mantenimiento de ácido · no recomendado",
+    leadAcidBankShort:
+      "pero necesita {n}× el banco y la vida más corta · no recomendado",
     cmpSolar: "Solar",
     cmpBank: "Banco utilizable (nominal)",
     cmpFirstCost: "Coste inicial",
@@ -110,9 +113,12 @@ export const CHROME_COPY = {
     cmpBattery: "Bateria",
     leadAcidSave: "poupas ~{amount}",
     leadAcidCheaper: "chumbo-ácido ~{amount} mais barato",
-    leadAcidBankFactor: "face ao chumbo-ácido · {n}× o banco para a mesma energia útil",
-    leadAcidSwapsUpkeep: "mas precisa de ~{n} trocas e manutenção de ácido · não recomendado",
-    leadAcidBankShort: "mas precisa de {n}× o banco e da vida mais curta · não recomendado",
+    leadAcidBankFactor:
+      "face ao chumbo-ácido · {n}× o banco para a mesma energia útil",
+    leadAcidSwapsUpkeep:
+      "mas precisa de ~{n} trocas e manutenção de ácido · não recomendado",
+    leadAcidBankShort:
+      "mas precisa de {n}× o banco e da vida mais curta · não recomendado",
     cmpSolar: "Solar",
     cmpBank: "Banco utilizável (nominal)",
     cmpFirstCost: "Custo inicial",
@@ -154,9 +160,12 @@ export const CHROME_COPY = {
     cmpBattery: "Batterie",
     leadAcidSave: "économise ~{amount}",
     leadAcidCheaper: "plomb-acide ~{amount} moins cher",
-    leadAcidBankFactor: "face au plomb-acide · {n}× le parc pour la même énergie utile",
-    leadAcidSwapsUpkeep: "mais exige ~{n} remplacements et l'entretien de l'acide · non recommandé",
-    leadAcidBankShort: "mais exige {n}× le parc et la durée de vie la plus courte · non recommandé",
+    leadAcidBankFactor:
+      "face au plomb-acide · {n}× le parc pour la même énergie utile",
+    leadAcidSwapsUpkeep:
+      "mais exige ~{n} remplacements et l'entretien de l'acide · non recommandé",
+    leadAcidBankShort:
+      "mais exige {n}× le parc et la durée de vie la plus courte · non recommandé",
     cmpSolar: "Solaire",
     cmpBank: "Capacité utile (nominale)",
     cmpFirstCost: "Coût initial",
@@ -198,9 +207,12 @@ export const CHROME_COPY = {
     cmpBattery: "Batterie",
     leadAcidSave: "spart ~{amount}",
     leadAcidCheaper: "Blei-Säure ~{amount} günstiger",
-    leadAcidBankFactor: "gegenüber Blei-Säure · {n}× die Bank für dieselbe Nutzkapazität",
-    leadAcidSwapsUpkeep: "braucht aber ~{n} Wechsel und Säurepflege · nicht empfohlen",
-    leadAcidBankShort: "braucht aber {n}× die Bank und die kürzeste Lebensdauer · nicht empfohlen",
+    leadAcidBankFactor:
+      "gegenüber Blei-Säure · {n}× die Bank für dieselbe Nutzkapazität",
+    leadAcidSwapsUpkeep:
+      "braucht aber ~{n} Wechsel und Säurepflege · nicht empfohlen",
+    leadAcidBankShort:
+      "braucht aber {n}× die Bank und die kürzeste Lebensdauer · nicht empfohlen",
     cmpSolar: "Solar",
     cmpBank: "Nutzbare Kapazität (nominal)",
     cmpFirstCost: "Anschaffungskosten",
@@ -236,15 +248,17 @@ export const CHROME_COPY = {
     dInstallAria: "BigEnergyCo-app installeren",
     resultSunshineData: "Zonuren voor {place}",
     roofConfirm: "Bevestig je dak of erf",
-    chemAutoCompare:
-      "Auto — vergelijk alle drie chemieën op levensduurkosten",
+    chemAutoCompare: "Auto — vergelijk alle drie chemieën op levensduurkosten",
     leadAcidSkips: "tegen lood-accu · scheelt ~{n} vervangingen",
     cmpBattery: "Accu",
     leadAcidSave: "bespaart ~{amount}",
     leadAcidCheaper: "lood-accu ~{amount} goedkoper",
-    leadAcidBankFactor: "tegen lood-accu · {n}× het accupakket voor dezelfde bruikbare kWh",
-    leadAcidSwapsUpkeep: "maar vraagt ~{n} vervangingen en zuuronderhoud · niet aanbevolen",
-    leadAcidBankShort: "maar vraagt {n}× het accupakket en de kortste levensduur · niet aanbevolen",
+    leadAcidBankFactor:
+      "tegen lood-accu · {n}× het accupakket voor dezelfde bruikbare kWh",
+    leadAcidSwapsUpkeep:
+      "maar vraagt ~{n} vervangingen en zuuronderhoud · niet aanbevolen",
+    leadAcidBankShort:
+      "maar vraagt {n}× het accupakket en de kortste levensduur · niet aanbevolen",
     cmpSolar: "Zon",
     cmpBank: "Bruikbare capaciteit (nominaal)",
     cmpFirstCost: "Initiële kosten",
@@ -285,8 +299,10 @@ export const CHROME_COPY = {
     cmpBattery: "البطارية",
     leadAcidSave: "توفّر نحو {amount}",
     leadAcidCheaper: "الرصاص-حمض أرخص بنحو {amount}",
-    leadAcidBankFactor: "مقابل الرصاص-حمض · {n}× سعة البنك لنفس الطاقة القابلة للاستخدام",
-    leadAcidSwapsUpkeep: "لكنه يحتاج نحو {n} استبدالات وصيانة الحمض · غير موصى به",
+    leadAcidBankFactor:
+      "مقابل الرصاص-حمض · {n}× سعة البنك لنفس الطاقة القابلة للاستخدام",
+    leadAcidSwapsUpkeep:
+      "لكنه يحتاج نحو {n} استبدالات وصيانة الحمض · غير موصى به",
     leadAcidBankShort: "لكنه يحتاج {n}× سعة البنك وأقصر عمر · غير موصى به",
     cmpSolar: "الشمسية",
     cmpBank: "السعة القابلة للاستخدام (الاسمية)",

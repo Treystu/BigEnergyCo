@@ -620,3 +620,127 @@ test("#437: every repaintRuntimeCopy call names a function ui.js defines", () =>
     );
   }
 });
+
+// The second census (2026-11-25) drove the same page in ES with the results
+// open: the default result was clean, but the comparison grid, the hardware
+// list, its print sheet and three markup blocks still rendered English. These
+// pins hold the results-detail cure.
+test("#437: the results-detail chrome is keyed in all seven locales", async () => {
+  const { CHROME_COPY } = await import("../assets/js/shared/chrome-copy.js");
+  const keys = [
+    "navHeatmap",
+    "navAbout",
+    "legalHeading",
+    "dInstallApp",
+    "dInstallAria",
+    "resultSunshineData",
+    "roofConfirm",
+    "chemAutoCompare",
+    "leadAcidSkips",
+    "cmpBattery",
+    "cmpSolar",
+    "cmpBank",
+    "cmpFirstCost",
+    "cmpSwaps",
+    "cmpSwapsLabor",
+    "cmpTrueCost",
+    "cmpBreakEven",
+    "cmpTitleGt",
+    "cmpTitleOff",
+    "hwTitle",
+    "hwPanels",
+    "hwBankVoltage",
+    "hwBatteryDiy",
+    "hwBatteryRetail",
+    "hwStrings",
+    "hwCellsTotal",
+    "hwRackModules",
+    "hwSizedPeak",
+    "hwMainFuse",
+    "hwBatteryDisconnect",
+    "hwPvDisconnect",
+    "hwBatteryCable",
+    "hwBatteryOnly",
+    "hwNone",
+    "printHowFar",
+  ];
+  for (const [lang, dict] of Object.entries(CHROME_COPY)) {
+    for (const key of keys) {
+      assert.equal(
+        typeof dict[key],
+        "string",
+        `${lang}.${key} must exist - the painted chrome would render English`,
+      );
+    }
+    // Each locale also reaches the dictionary the pages read.
+    for (const key of keys) {
+      assert.equal(
+        typeof LOCALES[lang][key],
+        "string",
+        `LOCALES.${lang}.${key} must be spread from CHROME_COPY`,
+      );
+    }
+  }
+});
+
+test("#437: the censused result-detail English is gone from the painters", () => {
+  for (const literal of [
+    "Bank usable (nameplate)",
+    "Swaps in 20 yr",
+    "True break-even",
+    "Hardware list for the selected system",
+    "How far money gets you:",
+    "Sunshine data from",
+    "Battery cable (2 m run)",
+    "Main DC fuse/breaker",
+  ]) {
+    assert.ok(
+      !ui.includes(literal) &&
+        !readFileSync(
+          join(ROOT, "assets/js/sizing/location-picker.js"),
+          "utf8",
+        ).includes(literal),
+      `the painter still writes "${literal}" as a literal`,
+    );
+  }
+  assert.match(ui, /t\("cmpTrueCost"\)/);
+  assert.match(ui, /t\("hwTitle", \{ chem: hwChemLabel \}\)/);
+  assert.match(ui, /t\("hwStrings", \{/);
+  assert.match(ui, /t\("hwRackModules", \{/);
+  assert.match(ui, /t\("printHowFar"\)/);
+});
+
+test("#437: the markup blocks the second census caught carry hooks", () => {
+  for (const key of [
+    "navHeatmap",
+    "navAbout",
+    "legalHeading",
+    "roofConfirm",
+    "chemAutoCompare",
+    "dInstallAria",
+  ]) {
+    assert.ok(
+      html.includes(`data-i18n="${key}"`) ||
+        html.includes(`data-i18n-aria-label="${key}"`),
+      `index.html has no hook for ${key}`,
+    );
+  }
+  assert.ok(
+    !/&#128242; Install App/.test(html),
+    "the install control keeps its label as words, not an emoji glyph",
+  );
+});
+
+test("#437: the lead-acid chip takes its words from the dictionary", () => {
+  const source = readFileSync(
+    join(ROOT, "assets/js/sizing/lead-acid.js"),
+    "utf8",
+  );
+  assert.match(source, /t = null/);
+  assert.match(source, /leadAcidSkips/);
+  assert.match(
+    ui,
+    /leadAcidChipCopy\([\s\S]{0,160}\bmoney,\s*\n\s*t,\s*\n\s*\)/,
+    "the chip must receive the dictionary, not default to English",
+  );
+});
