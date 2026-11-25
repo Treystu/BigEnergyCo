@@ -1,8 +1,14 @@
 # PRESENTATION SPEC V1 — the house layout, block ranks and action ranks
 
+Version 1.1 (2026-11-25): sections 10-15 add the Wave 1 presentation contract
+(the single flow, location-first, the case ladder, applicability) and the copy and
+number-formatting rules, so #441/#430/#440/#431 build to stated rules instead of
+each deciding its own. Sections 1-9 are unchanged and keep their gate receipts.
+
 Status: BINDING for every presentation wave (Wave 1 UI work, #432 typography, #437
 locale chrome, #438 share card, #439 support path, #430/#431/#440 intake work).
-Owner: #436 (GQ F7). Gate receipts are attached on that issue.
+Owner: #436 (GQ F7). Gate receipts are attached on that issue; the V1.1 receipts
+are in `docs/audits/PRESENTATION-SPEC-V1.1-GATES.md`.
 Scope boundary: this document owns **block order and rank, action rank, card
 anatomy, the disclosure pattern, and the layout grid**. #432 owns the type system
 including the heading scale; where this document names a type role, #432 decides
@@ -106,6 +112,11 @@ ask. Binding:
 3. A disclosure summary is a control: it never carries action rank styling.
 4. The primary action never lives inside a closed disclosure.
 5. A demoted input stays reachable in one gesture from where it was asked for.
+6. **A disclosure is addressed by name, never by position.** Any control that
+   opens a disclosure targets it by its `id` or summary text; "open the first
+   `details`" is not an implementation of this pattern (the soft spot recorded in
+   the #441 receipt). Two disclosures on one surface must not be
+   indistinguishable by summary.
 
 ## 6. Type roles (values are the current observed scale; #432 owns them)
 
@@ -189,6 +200,11 @@ dispositions.
   labels keep their rank under translation.
 - **#438 (share card)**: F6's single share action is the entry point.
 - **#439 (support path)**: F11/F12 stay tertiary; one support path, not more rank.
+- **Wave 2 (chrome / landing / blog pass)**: owns P1 and P6 (demote chrome's
+  primary and secondary to tertiary, or drop the rank class from the header
+  control) and P5 (promote the article CTA to the article surface's one primary).
+  No wave was named for these before V1.1; this document assigns them here so the
+  closing census cannot find them unowned.
 - **Closing scorecard (#429)**: re-run the section 7 census and require the
   settled counts: one primary per surface, chrome carrying none.
 
@@ -199,3 +215,198 @@ co-primary occurrence named here must still exist in the page it was measured on
 the required sections must be present, and the rank rules must be stated. A
 surface that re-introduces a second primary is a failing test once its occurrence
 is recorded here, and the census in section 7 is how new occurrences are found.
+
+## 10. Wave 1 intake contract — the single flow
+
+Measured frame, not invented: on merged head of 2026-11-22 the intake reads
+`#citySearch` 1204 < goal control 1380 < `#billSliderWrap` 1465 <
+`#fullControls` 1611 < `#btnRunSizing` 3260 (document offsets at 1280x900, #430
+receipt); at 390x844 the same order holds (1598 < 1791 < 1968 < 2138 < 4358).
+#441 removed the fork that used to precede all of it. Everything below fixes how
+Wave 1 builds on that frame.
+
+10.1 **No gate control.** A control may change a value, or reveal extra inputs in
+place. No control may exist whose only effect is choosing which other controls
+exist. Conformance: for every control in the intake, removing it must not change
+whether any other control is in the DOM — only disclosures (§5) add and remove
+their own contents.
+
+10.2 **The intake has one reading order, and it is index order.** Location ask ->
+case ladder -> estimate summary -> load/bill inputs -> the one primary -> demoted
+inputs. CSS order, grid order and `order` must agree with DOM order; a block moved
+by stylesheet is a spec violation even when it looks right.
+
+10.3 **The primary is last in the ask** (P3, §1) and the only action-rank control
+on the intake. The run stays an explicit button: no zero-input auto-run (#441's
+pinned contract, `tests/mode-fork-removed.test.mjs`).
+
+10.4 **The estimate summary is a card by §4 anatomy** — title ("Your estimate"),
+the value, a basis line naming the defaults and the tariff grade, body, and no
+action row of its own. It never contains the primary.
+
+10.5 **Demoted inputs sit in disclosures at R4, closed by default**, one gesture
+away from where they are asked for: appliance picking, the manual kWh/day entry,
+the generator helper, and the optional map/coordinates.
+
+10.6 **No new rank, no card inside a card.** Wave 1 adds blocks to the ranks of
+§3; it does not add a rank, a second container width or a nested emphasis box.
+
+## 11. Location-first presentation (#430)
+
+11.1 The location control is the first control in the intake card (11.2's order;
+the #430 receipt is the measurement). Nothing is asked before it.
+
+11.2 One purpose line under the control, from the dictionary (`locPurposeLine`),
+stating what the location is used for and what it is not. No second privacy
+paragraph on this surface: the line is the whole consent copy.
+
+11.3 The resolved place is named in one line in `#locNote` ("Sunshine data from
+<place>"), nothing else. The grade and the defaults belong to the estimate card's
+basis line (10.4), not to the note.
+
+11.4 Once a place resolves, the estimate summary must be present at rest, labelled
+as an estimate, and it must name its bill default, its cut default and the
+tariff's grade. This is the pre-render that #430's receipt deferred to #440; the
+presentation contract for it is this card, and its numbers are #401's dictionary.
+
+11.5 The permission ask is a control, never a modal, and never blocks the form. On
+denial, dismissal or unavailability the search is the fallback in one step, and
+the estimate card shows its defaults **without** a place: no fabricated locality,
+no tariff grade it does not have.
+
+11.6 Recalculation is in place: changing the bill amount or the bill-cut target
+re-renders the estimate and the result figures without navigation, a new page
+pass, or a new fetch of the weather series. The superseded figure must not remain
+visible anywhere on the surface.
+
+11.7 No control in the intake is disabled while the permission state is unknown.
+
+## 12. Priors and the ladder (#440)
+
+12.1 **The ladder is the registry, rendered.** Its six rows are `usecases.js`'s
+`billcut, tou, backup, reserve, offgrid, portable` — the same six ids, and the
+same order at rest, that `#useCase`'s options already carry in `index.html`.
+Priors re-order the rendering; they never add, drop or rename a case.
+
+12.2 **The ladder is a control group at R1**, between the location ask and the
+estimate summary: title plus one why-line per case, top case selected by default
+with its why-line visible, the remaining five in rank order and visible (a demoted
+case is demoted in order, never hidden behind a disclosure).
+
+12.3 **Why-lines hedge and are short.** One caption line per case, muted, at most
+90 characters, and each carries a hedge the dictionary supplies ("likely",
+"common") — never a certainty claim. A feature-poor place renders the neutral
+order with no why-lines rather than a guessed reason.
+
+12.4 **One round of the ladder is visible at a time**, at R2, as a single control
+group with a caption naming why it is asked. No round asks what a prior or an
+earlier answer already settled.
+
+12.5 **An explicit pick wins instantly.** Selecting a case re-renders the selection,
+the why-lines and the estimate in place; the prior order does not reassert itself
+against the visitor's answer, and no confirmation step stands between the pick and
+the recomputed figure.
+
+12.6 **Zero answers is a complete display.** With nothing answered, the top case's
+estimate renders at labelled defaults and the primary stays enabled — the ladder
+is an offer, not a toll.
+
+## 13. Applicability (#431)
+
+13.1 **One matrix, beside the registry.** Which sections, purchase routes, lead
+metric and framing each of the six cases gets is declared in one module beside
+`usecases.js` and checked by the repo gate in the family of
+`scripts/check-usecases.mjs`. The matrix is data; no surface branches on the case
+inline.
+
+13.2 **Inapplicable means absent, not empty.** A block that does not apply to the
+active case is not in the DOM. No empty shells, no "not available" placeholders in
+place of a block, no disabled controls standing in for content.
+
+13.3 **The one exception, and its shape.** A purchase route that cannot serve the
+active case may render as one muted line in R2 stating that and its reason, with
+no action, at most one such line per route. A route that can serve the case
+renders as a full card with its action (the cheapest route first, per the #401
+dictionary's order).
+
+13.4 **The case's own metric leads.** The R1 value of the results surface is the
+metric the registry declares for the active case (`usecases.js` `metric`), one
+value per card. Another case's metric may appear only inside a result disclosure,
+never beside the lead value.
+
+13.5 **Never filtered out**: safety, permit and interconnection content material
+to the case and place; and the honest-refusal verdict — a case whose answer is
+"not here" still renders its card with the reason and no recommendation.
+
+13.6 **A case switch re-renders in place** under 11.6's rules, and resets
+disclosure state to the default of §5.1 except a disclosure the visitor opened
+themselves in that session.
+
+## 14. Copy and number formatting
+
+Home: this section. It is the presentation home for the copy residue carried on
+the live-defect row (the quick-bill helper line beside a typed kWh/day entry), so
+that residue stops living as prose on #443. Enforcement is
+`tests/presentation-spec.test.mjs`.
+
+14.1 **A displayed number is the visitor's number.** Never a control's floor or
+ceiling substituted for a value the visitor set. Where an input clamps, the clamp
+is stated in words next to the control and the displayed figure is the clamped
+value **and says so** — never the value the visitor typed when the run used
+another. The numeric half of this (sub-1 kWh/day loads) is #479's defect; this
+rule governs the display, not the resolution.
+
+14.2 **The helper line quotes the visitor's own load and bill.** A helper beside
+the bill control states the load in kWh/day at the engine's precision (one
+decimal, §14.6) and the bill that load implies at the displayed rate. It must not
+state the slider's minimum bill as the visitor's starting point, and must not
+round the load to a whole kWh. Measured instance this rule cures: with `1.2`
+typed, `paintQuickBillNote()` shows the slider minimum (about `$26/mo` at
+`$0.42/kWh`, which is `BILL_MIN_KWH = 2` kWh/day) and `Math.round(kwh)` renders
+`≈1 kWh/day` beside the `1.2` entry.
+
+14.3 **`≈` marks a derived value and nothing else.** A figure the visitor typed
+never carries `≈`; a figure computed from a stated rate or a stated default does.
+
+14.4 **One formatter per quantity.** Monthly bills use the bill formatter
+(`fmtBill`: currency symbol, zero fraction digits, locale separator); totals use
+the money formatter. Two formatters for one quantity on one surface is a defect,
+and every result figure comes from the #401 dictionary — a number this section
+formats is not a number this section computes.
+
+14.5 **Units are dictionary text, not concatenation.** Number, space, then the
+unit as the locale defines it (`offgridKwhReadout` and its siblings: `kWh/day`,
+`kWh/día`, `kWh/Tag`). An English unit or data label is never concatenated into
+localized prose; registry values shown to a visitor (for example the `US mainland`
+tariff label in `assets/js/sizing/pricing.js`) are localized through the
+dictionary — chrome and locale copy are #437's, this rule forbids new instances.
+
+14.6 **Load precision is one decimal, and a trailing `.0` is dropped.** The
+engine carries 0.1 kWh/day resolution (the bill slider's anchor is rounded to one
+decimal in `syncBillSlider()`), so a displayed load is `1.2`, `15.3`, `20` — never
+`1` for `1.2`, never `20.0`. Annual energy is a whole number of kWh.
+
+14.7 **An input's `step` equals the precision it displays.** No surface may add a
+fractional load entry while `#dailyKwhInput` advertises `step="1"` with
+`min="0.5"` (the mismatch #479 owns). A builder who needs a different precision
+changes the input and #479's resolution together, not the display alone.
+
+14.8 **One number, one place, byte-identical.** A quantity stated twice on one
+surface (hero card and details, estimate and result) reads identically, from one
+dictionary value (#401). Formatting differences between the two are a §14 defect.
+
+## 15. Open questions (recorded, not invented)
+
+These are the places where the live record does not decide, so no rule is claimed.
+Each names its decider; the closing census treats an unanswered one as a gate
+finding, not a silent default.
+
+| #   | Question                                                                                                        | Decider | Gate read that shows it undecided                                                                                                           |
+| --- | --------------------------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Q1  | Is the estimate summary a new block on the intake (10.4) or the results card revealed early?                    | #440    | #430's receipt defers scope 2-3 to #440; #440's text asks for "the complete applicable display" at zero answers without placing the block.  |
+| Q2  | Does the `#useCase` select survive beside the ladder as its accessible fallback, or does the ladder replace it? | #440    | the select exists in `index.html` (`hidden`) and no issue text retires or keeps it; #434 owns the accessibility input that would settle it. |
+| Q3  | Which type role the estimate card's value takes (block, or a section-size lead)                                 | #432    | §6 gives #432 the scale and this gate reads no type decision for a block that does not exist yet.                                           |
+
+An open question is not a licence: a builder may implement the smallest thing that
+satisfies §10-§14 and record which option it chose, and the decider's own gate
+confirms or corrects it. Nothing here overrides #401's dictionary or #432's scale.
