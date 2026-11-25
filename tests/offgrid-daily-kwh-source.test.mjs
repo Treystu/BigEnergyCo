@@ -116,3 +116,26 @@ test("the bill slider is derived from the typed load, never written back over it
     "the mirror must skip the field that owns the load",
   );
 });
+
+test("a bill-slider drag moves the load pick instead of being overwritten", () => {
+  const s = src.indexOf("function setupBillSlider()");
+  const body = src.slice(s, src.indexOf("\nfunction ", s + 10));
+  assert.ok(s > 0 && body.length > 200, "setupBillSlider must exist");
+  // In the typed-kWh mode the bill slider is not the load source. A drag is a
+  // pick, so it moves the selector rather than being cancelled by the entry.
+  assert.ok(
+    body.includes('modePick.value === "kwh"'),
+    "the drag must notice the typed-kWh mode",
+  );
+  assert.match(
+    body,
+    /modePick\.value = "bill";\s*commitLoadMode\(\);/,
+    "the drag must move the pick to the bill through the one commit path",
+  );
+  // And the drag's own mirror must not write the field that owns the load.
+  assert.match(
+    body,
+    /if \(kwhInput && \$\("loadMode"\)\?\.value !== "kwh"\)\s*kwhInput\.value = String\(clampedKwh\)/,
+    "the drag may not clobber the typed entry",
+  );
+});
