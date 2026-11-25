@@ -1,7 +1,4 @@
-/* BigEnergyCo site styles, extracted verbatim from index.html.
- * Loaded via <link> with the unified ?v= cache-busting stamp (see
- * scripts/bump-asset-tokens.mjs). Keep page-specific overrides inline
- * only if they must beat this sheet without a redeploy. */
+/* Site styles; cache-busted by scripts/bump-asset-tokens.mjs. */
 /* BigEnergyCo Design System - Premium Dark Glassmorphic Energy Aesthetic */
 
 :root {
@@ -132,8 +129,7 @@ header {
   top: 0;
   z-index: 100;
 
-  /* No backdrop-filter: the header is 90% opaque, so the 16px blur is
-     invisible, but the LCP snapshot it forces on every composite is not. */
+  /* No backdrop-filter: invisible blur, visible LCP cost. */
   background: rgba(9, 13, 22, 0.9);
   border-bottom: 1px solid var(--border-card);
   padding: 1rem 0;
@@ -825,9 +821,7 @@ input[type="number"]::-webkit-inner-spin-button {
   border: 0;
 }
 
-/* Two-column inline form grids (lat/lon, derates, currency) collapse to one
-   column on narrow phones so number inputs never squeeze below ~135px. The
-   !important overrides the grids' inline grid-template-columns. */
+/* Inline form grids collapse to one column on narrow phones; !important beats their inline columns. */
 @media (max-width: 480px) {
   .form-grid-2col {
     grid-template-columns: 1fr !important;
@@ -871,9 +865,7 @@ input[type="number"]::-webkit-inner-spin-button {
   text-decoration: none;
 }
 
-/* #441: no panel is hidden by display mode. The plain-language card leads each
-   result; technical panels stay behind closed result disclosures, never a root
-   attribute (spec V1 s5). */
+/* #441: no panel is hidden by a mode attribute (spec V1 s5). */
 
 /* The Simple results card. */
 .simple-results-card {
@@ -939,8 +931,7 @@ input[type="number"]::-webkit-inner-spin-button {
   line-height: 1.55;
 }
 
-/* Jev sanity badge — reads the result, never changes it. Quiet by design:
-   a muted status line that only raises its voice on a confident flag. */
+/* Jev sanity badge: reads the result, never changes it. */
 .sanity-badge {
   margin: 0.9rem 0 0;
   font-size: 0.85rem;
@@ -997,9 +988,7 @@ textarea:focus-visible {
   margin-bottom: 1.5rem;
 }
 
-/* ── Use-case form utilities ────────────────────────────────────────────────
-   Six-case chooser (D-16): named classes keep inline style attributes at zero
-   (check-quality.mjs ratchet). */
+/* Use-case form utilities: named classes keep inline styles at zero. */
 .uc-note {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -1043,8 +1032,7 @@ textarea:focus-visible {
   box-shadow: 0 0 10px var(--primary-glow);
 }
 
-/* A readable field-level error: text, not just a red border. The input owns aria-invalid + aria-describedby so the message is announced;
-   this block only makes it visible and legible at every width. */
+/* Field-level error: visible, legible, announced via aria-describedby. */
 /* P1.6: the always-visible assumption lines. Muted but readable at every
    width, and separated from the interactive row below it. */
 .assumption-disclosure {
@@ -1688,9 +1676,7 @@ footer {
   line-height: 1.45;
 }
 
-/* ── The four ways to pay (D-01 §6.4) ──────────────────────────────────────
-   Four cards of the SAME system side by side, so a reader can compare two
-   real prices instead of two descriptions of what each side counts. */
+/* Four ways to pay (D-01 6.4): four cards of the SAME system, side by side. */
 #pathsPanel h3 {
   font-size: 1rem;
   font-weight: 800;
@@ -1968,8 +1954,7 @@ footer {
   }
 }
 
-/* #155: shared checkbox-toggle row (no-swap option); keeps the frozen
-   inline-style budget intact — markup carries no style attributes. */
+/* #155: shared checkbox-toggle row; markup carries no style attributes. */
 .toggle-row {
   display: flex;
   align-items: center;
@@ -1986,8 +1971,7 @@ footer {
   color: var(--text-muted);
 }
 
-/* #437: the full results surface is back — demoted blocks (charts, ladder,
-   frontier, ELI5) are visible; their renderers own their display rules. */
+/* #437: demoted result blocks are visible; their renderers own display. */
 
 .results-more {
   margin-top: 1.5rem;
@@ -2003,8 +1987,7 @@ footer {
   color: var(--primary-accent);
 }
 
-/* Simplified interface (owner order 2026-11-22): home is one place field and
-   one action, reusing the existing result-card and paths-rows classes. */
+/* Simplified interface (2026-11-22): one place field, one action. */
 .hero-compact .hero-tag,
 .hero-compact .hero-stats-grid,
 .hero-compact > .container > p {
