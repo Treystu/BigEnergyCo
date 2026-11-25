@@ -4253,6 +4253,7 @@ function renderFocusPanel(p, entry, isPreview) {
   const leadAcid = leadAcidChipCopy(
     leadAcidComparison(entry, p.agmReference),
     money,
+    t,
   );
   if (leadAcid) chip("🏚️", leadAcid.big, leadAcid.small);
   const note = $("focusNote");
@@ -8887,10 +8888,13 @@ function populatePrintSheet(p, inp) {
   let rows, head, title;
 
   if (p.auto && p.auto.length) {
-    title = `Battery Lifetime Comparison (${isGT ? "Grid-Connected" : "Off-Grid"})`;
+    title = t(isGT ? "cmpTitleGt" : "cmpTitleOff");
 
     head =
-      "<tr><th>Battery</th><th>Solar</th><th>Bank usable (nameplate)</th><th>First cost</th><th>Swaps in 20 yr</th><th>Swaps + labor</th><th>True 20-yr cost</th><th>True break-even</th></tr>";
+      `<tr><th>${t("cmpBattery")}</th><th>${t("cmpSolar")}</th>` +
+      `<th>${t("cmpBank")}</th><th>${t("cmpFirstCost")}</th>` +
+      `<th>${t("cmpSwaps")}</th><th>${t("cmpSwapsLabor")}</th>` +
+      `<th>${t("cmpTrueCost")}</th><th>${t("cmpBreakEven")}</th></tr>`;
 
     rows = p.auto
       .filter((t) => t.solvable)
@@ -9006,38 +9010,54 @@ function populatePrintSheet(p, inp) {
     const hwRows = [];
     if (bom.panels) {
       hwRows.push([
-        "Solar panels",
+        t("hwPanels"),
         `${PANEL_WATTS_DEFAULT} W mono`,
         `${bom.panels.count} pcs`,
         `${bom.panels.kwActual} kW \u00B7 ~${bom.panels.areaM2} m\u00B2`,
       ]);
     } else {
-      hwRows.push(["Solar panels", "None", "-", "Battery-only configuration"]);
+      hwRows.push([
+        t("hwPanels"),
+        t("hwNone"),
+        "-",
+        t("hwBatteryOnly"),
+      ]);
     }
     if (bom.voltage && bom.battery) {
       hwRows.push(
-        ["Bank voltage", `${bom.voltage.volts} V`, "-", ""],
+        [t("hwBankVoltage"), `${bom.voltage.volts} V`, "-", ""],
         [
-          "Battery (DIY)",
-          bom.battery.diy.unitLabel,
+          t("hwBatteryDiy"),
+          t("hwStrings", {
+            n: bom.battery.diy.seriesPerString,
+            ah: bom.battery.diy.labelVars.ah,
+          }),
           `${bom.battery.diy.stringsParallel} string(s)`,
-          `${bom.battery.diy.blocksTotal} cells total`,
+          t("hwCellsTotal", { n: bom.battery.diy.blocksTotal }),
         ],
         [
-          "Battery (retail alt.)",
-          bom.battery.retail.unitLabel,
+          t("hwBatteryRetail"),
+          t("hwRackModules", {
+            kwh: bom.battery.retail.unitKwh,
+            v: bom.battery.retail.unitV,
+          }),
           `${bom.battery.retail.modules} pcs`,
           "BMS included",
         ],
       );
     } else {
-      hwRows.push(["Battery bank", "None", "-", "Solar-only configuration"]);
+      hwRows.push([
+        t("hwBatteryDiy"),
+        t("hwNone"),
+        "-",
+        t("hwBatteryOnly"),
+      ]);
     }
     hwRows.push([
       "Inverter",
       `${bom.inverter.recommendedKw} kW class`,
       "1",
-      "sized to peak load incl. surge margin",
+      t("hwSizedPeak"),
     ]);
     if (bom.controller) {
       hwRows.push(
@@ -9048,14 +9068,14 @@ function populatePrintSheet(p, inp) {
           bom.controller.suggestion,
         ],
         [
-          "Main DC fuse/breaker",
+          t("hwMainFuse"),
           `${bom.protection.mainFuseAmps} A`,
           "1",
-          "battery disconnect",
+          t("hwBatteryDisconnect"),
         ],
-        ["PV disconnect", `${bom.protection.pvBreakerAmps} A`, "1", ""],
+        [t("hwPvDisconnect"), `${bom.protection.pvBreakerAmps} A`, "1", ""],
         [
-          "Battery cable (2 m run)",
+          t("hwBatteryCable"),
           bom.cable[0].mm2
             ? `${bom.cable[0].awg} copper`
             : `larger than ${bom.cable[0].awg}`,
@@ -9071,7 +9091,7 @@ function populatePrintSheet(p, inp) {
         p.matrix.rows.find((r) => r.id === hwEntry.chemistry)?.label) ||
       hwEntry.chemistry;
     hwHtml = `
-      <h2 style="font-size:12pt;margin:10pt 0 4pt;">Hardware list for the selected system (${hwChemLabel})</h2>
+      <h2 style="font-size:12pt;margin:10pt 0 4pt;">${escapeHtml(t("hwTitle", { chem: hwChemLabel }))}</h2>
       <table style="border-collapse:collapse;width:100%;font-size:9pt;margin-bottom:8pt;">
         <tr style="background:#eef2f7;"><th>Item</th><th>Spec</th><th>Qty</th><th>Note</th></tr>
         ${hwRows.map((r) => "<tr><td>" + r.join("</td><td>") + "</td></tr>").join("")}
@@ -9113,7 +9133,7 @@ function populatePrintSheet(p, inp) {
 
     ${
       p.frontier && p.frontier.points && p.frontier.points.length > 1
-        ? `<p style="font-size:9.5pt;margin:0 0 4pt;"><strong>How far money gets you:</strong> ${_frontierChart.frontierVerdict(p.frontier, { t, money })}</p>`
+        ? `<p style="font-size:9.5pt;margin:0 0 4pt;"><strong>${escapeHtml(t("printHowFar"))}</strong> ${_frontierChart.frontierVerdict(p.frontier, { t, money })}</p>`
         : ""
     }
 

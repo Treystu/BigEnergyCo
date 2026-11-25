@@ -335,13 +335,13 @@
           </a>
 
           <nav class="nav-links">
-            <a href="./solar-heatmap/">Heatmap</a>
+            <a href="./solar-heatmap/" data-i18n="navHeatmap">Heatmap</a>
 
             <a href="#bom" data-i18n="navBom">Hardware Reference</a>
 
             <a href="./blog/" data-i18n="navBlog">Guides &amp; Blog</a>
 
-            <a href="./about/">About</a>
+            <a href="./about/" data-i18n="navAbout">About</a>
 
             <a href="#legal" data-i18n="navLegal">Terms &amp; Disclaimer</a>
           </nav>
@@ -363,9 +363,10 @@
               type="button"
               aria-label="Install BigEnergyCo Web App"
               data-i18n="dInstallApp"
+              data-i18n-aria-label="dInstallAria"
               style="display: none"
             >
-              &#128242; Install App
+              Install App
             </button>
 
             <a href="#support" class="btn btn-secondary" data-i18n="navSupport"
@@ -711,7 +712,9 @@
                 </button>
                 <div id="roofMapPanel" class="roof-map-panel" hidden>
                   <div class="roof-map-header">
-                    <strong>Confirm your roof or yard</strong>
+                    <strong data-i18n="roofConfirm">
+                      Confirm your roof or yard
+                    </strong>
                     <button
                       id="btnCloseRoofMap"
                       type="button"
@@ -1759,7 +1762,7 @@
                     >
 
                     <select id="chemSelect" class="form-control">
-                      <option value="auto" selected>
+                      <option value="auto" data-i18n="chemAutoCompare" selected>
                         Auto &mdash; compare all three chemistries by lifetime
                         cost
                       </option>
@@ -3026,7 +3029,9 @@
       <section id="legal" class="legal-section">
         <div class="container">
           <div class="section-header">
-            <h2 class="section-title">Terms &amp; Disclaimer</h2>
+            <h2 class="section-title" data-i18n="legalHeading">
+              Terms &amp; Disclaimer
+            </h2>
 
             <p class="section-desc" data-i18n="freeToolDisclaimer">
               Short version: this is a free educational toy that produces rough

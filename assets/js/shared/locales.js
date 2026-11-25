@@ -7,6 +7,7 @@ import { HOME_COPY } from "./home-copy.js?v=20261125m";
 import { RESULT_COPY } from "./result-copy.js?v=20261125m";
 import { TILT_COPY } from "./tilt-copy.js?v=20261125m";
 import { DETAIL_COPY } from "./detail-copy.js?v=20261125m";
+import { CHROME_COPY } from "./chrome-copy.js?v=20261125k";
 
 export const LOCALES = {
   en: {
@@ -14,6 +15,7 @@ export const LOCALES = {
     ...RESULT_COPY.en,
     ...TILT_COPY.en,
     ...DETAIL_COPY.en,
+    ...CHROME_COPY.en,
     goalOffgrid: "Off-grid / Backup",
     buildMadeOf: "What a ~100 kWh Build Is Made Of",
     commonQuestions: "Common Questions",
@@ -860,6 +862,7 @@ export const LOCALES = {
     ...RESULT_COPY.es,
     ...TILT_COPY.es,
     ...DETAIL_COPY.es,
+    ...CHROME_COPY.es,
     goalOffgrid: "Aislado / Respaldo",
     buildMadeOf: "De qué se compone un sistema de ~100 kWh",
     commonQuestions: "Preguntas frecuentes",
@@ -1719,6 +1722,7 @@ export const LOCALES = {
     ...RESULT_COPY.pt,
     ...TILT_COPY.pt,
     ...DETAIL_COPY.pt,
+    ...CHROME_COPY.pt,
     goalOffgrid: "Isolado / Backup",
     buildMadeOf: "Do que é feito um sistema de ~100 kWh",
     commonQuestions: "Perguntas frequentes",
@@ -2567,6 +2571,7 @@ export const LOCALES = {
     ...RESULT_COPY.fr,
     ...TILT_COPY.fr,
     ...DETAIL_COPY.fr,
+    ...CHROME_COPY.fr,
     goalOffgrid: "Autonome / Secours",
     buildMadeOf: "De quoi se compose une installation de ~100 kWh",
     commonQuestions: "Questions fréquentes",
@@ -3434,6 +3439,7 @@ export const LOCALES = {
     ...RESULT_COPY.de,
     ...TILT_COPY.de,
     ...DETAIL_COPY.de,
+    ...CHROME_COPY.de,
     goalOffgrid: "Insel / Notstrom",
     buildMadeOf: "Woraus eine Anlage mit ~100 kWh besteht",
     commonQuestions: "Häufige Fragen",
@@ -4288,6 +4294,7 @@ export const LOCALES = {
     ...RESULT_COPY.nl,
     ...TILT_COPY.nl,
     ...DETAIL_COPY.nl,
+    ...CHROME_COPY.nl,
     goalOffgrid: "Off-grid / Noodstroom",
     buildMadeOf: "Waaruit een installatie van ~100 kWh bestaat",
     commonQuestions: "Veelgestelde vragen",
@@ -5249,6 +5256,7 @@ export const LOCALES = {
     ...RESULT_COPY.ar,
     ...TILT_COPY.ar,
     ...DETAIL_COPY.ar,
+    ...CHROME_COPY.ar,
     rtl: true,
     goalOffgrid: "منفصل عن الشبكة / احتياطي",
     buildMadeOf: "مم يتكون نظام بسعة ~100 kWh",

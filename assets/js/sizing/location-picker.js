@@ -18,6 +18,7 @@ import {
   typedCityCandidates,
 } from "./cities.js?v=20261125m";
 import { byId, el } from "../shared/dom.js?v=20261125m";
+import { translate as t } from "../shared/i18n.js?v=20261125k";
 
 const citySearchDisposers = new WeakMap();
 
@@ -62,7 +63,7 @@ export function setupCitySearch({
         onPick(
           c.lat,
           c.lon,
-          `Sunshine data from ${formatCityLabel(c)}`,
+          t("resultSunshineData", { place: formatCityLabel(c) }),
           c.r,
           c.country,
         );
@@ -168,7 +169,7 @@ export function setupCitySearch({
       onPick(
         local.lat,
         local.lon,
-        `Sunshine data from ${formatCityLabel(local)}`,
+        t("resultSunshineData", { place: formatCityLabel(local) }),
         local.r,
         local.country,
       );
@@ -192,7 +193,7 @@ export function setupCitySearch({
       onPick(
         offline.lat,
         offline.lon,
-        `Sunshine data from ${formatCityLabel(offline)}`,
+        t("resultSunshineData", { place: formatCityLabel(offline) }),
         offline.r,
         offline.country,
       );
@@ -227,7 +228,7 @@ export function setupCitySearch({
     onPick(
       match.lat,
       match.lon,
-      `Sunshine data from ${formatCityLabel(match)}`,
+      t("resultSunshineData", { place: formatCityLabel(match) }),
       match.r,
       match.country,
     );

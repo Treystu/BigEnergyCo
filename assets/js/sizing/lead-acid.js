@@ -69,23 +69,50 @@ export function leadAcidComparison(entry, agm) {
  * whatever currency/FX the payload was rescaled to.
  * @returns {null|{big:string, small:string}}
  */
-export function leadAcidChipCopy(comparison, money) {
+export function leadAcidChipCopy(comparison, money, t = null) {
   if (!comparison) return null;
   const { direction, deltaUsd, agmSwaps, bankFactor } = comparison;
+  // The UI passes its translate() binding; without it the English wording is
+  // the fallback, so the pure module stays testable on its own.
+  const tr = (key, vars, fallback) => (t ? t(key, vars) : fallback);
   if (direction === "save")
     return {
-      big: `save ~${money(deltaUsd)}`,
+      big: tr(
+        "leadAcidSave",
+        { amount: money(deltaUsd) },
+        `save ~${money(deltaUsd)}`,
+      ),
       small:
         agmSwaps > 0
-          ? `vs lead-acid · skips ~${agmSwaps} swaps`
-          : `vs lead-acid · ${bankFactor}× the bank for the same usable kWh`,
+          ? tr(
+              "leadAcidSkips",
+              { n: agmSwaps },
+              `vs lead-acid · skips ~${agmSwaps} swaps`,
+            )
+          : tr(
+              "leadAcidBankFactor",
+              { n: bankFactor },
+              `vs lead-acid · ${bankFactor}× the bank for the same usable kWh`,
+            ),
     };
   return {
-    big: `lead-acid ~${money(deltaUsd)} cheaper`,
+    big: tr(
+      "leadAcidCheaper",
+      { amount: money(deltaUsd) },
+      `lead-acid ~${money(deltaUsd)} cheaper`,
+    ),
     small:
       agmSwaps > 0
-        ? `but needs ~${agmSwaps} swaps and acid upkeep · not recommended`
-        : `but needs ${bankFactor}× the bank and the shortest life · not recommended`,
+        ? tr(
+            "leadAcidSwapsUpkeep",
+            { n: agmSwaps },
+            `but needs ~${agmSwaps} swaps and acid upkeep · not recommended`,
+          )
+        : tr(
+            "leadAcidBankShort",
+            { n: bankFactor },
+            `but needs ${bankFactor}× the bank and the shortest life · not recommended`,
+          ),
   };
 }
 

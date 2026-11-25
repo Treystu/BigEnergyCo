@@ -65,16 +65,16 @@ export const RETAIL_MODULE_KWH = 5.12; // PowMr-class 51.2 V rack unit
 // is what the DIY path already assumes at those voltages.
 const RETAIL_UNITS = {
   12: [
-    { kwh: 1.28, label: "12 V 100 Ah deep-cycle battery units (BMS included)" },
-    { kwh: 2.56, label: "12 V 200 Ah deep-cycle battery units (BMS included)" },
+    { kwh: 1.28, v: 12, label: "12 V 100 Ah deep-cycle battery units (BMS included)" },
+    { kwh: 2.56, v: 12, label: "12 V 200 Ah deep-cycle battery units (BMS included)" },
   ],
   24: [
-    { kwh: 2.56, label: "24 V 100 Ah battery units (BMS included)" },
-    { kwh: 5.12, label: "24 V 200 Ah battery units (BMS included)" },
+    { kwh: 2.56, v: 24, label: "24 V 100 Ah battery units (BMS included)" },
+    { kwh: 5.12, v: 24, label: "24 V 200 Ah battery units (BMS included)" },
   ],
   48: [
     {
-      kwh: RETAIL_MODULE_KWH,
+      kwh: RETAIL_MODULE_KWH, v: 51.2,
       label: `${RETAIL_MODULE_KWH} kWh rack modules (51.2 V, BMS included)`,
     },
   ],
@@ -236,7 +236,7 @@ export function retailConfig(chemistry, nameplateKwh, vBatt = 48) {
   return {
     unitLabel: best.unit.label,
     modules: best.modules,
-    unitKwh: best.unit.kwh,
+    unitKwh: best.unit.kwh, unitV: best.unit.v,
     providedKwh: best.providedKwh,
     oversizeRatio: ratio(best.providedKwh),
   };
