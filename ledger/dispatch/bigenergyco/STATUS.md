@@ -296,6 +296,57 @@ still reads `Starts from ~$26/mo (≈1 kWh/day)` beside a `1.2` entry — the bi
 slider's minimum floors the amount and the note rounds the load to a whole kWh.
 Display copy only; the sizing input is now correct on every surface.
 
+## Landing record — 2026-11-25 (Wave 0: the #436 presentation spec, V1.1)
+
+Census correction, read live from GitHub this pass: **#436 CLOSED, #441 CLOSED,
+#430 CLOSED**; #440 and #431 open; one open PR (#455, a dependabot group bump).
+The previous STATUS block and the carrier both implied Wave 0 was still to be
+written. It was not: V1 landed as `8ffc1440` (PR #458, 2026-11-21) and is binding,
+and #441 (`908e537b`) and #430 (`7717fac6`) were built to it. What was genuinely
+missing is the part this pass lands: V1 pointed each Wave 1 item at one line of
+§8 and left the four to decide their own presentation while building.
+
+**Landed: `docs/PRESENTATION_SPEC_V1.md` V1.1 (§10-§15, 33 numbered rules)**, with
+receipts in `docs/audits/PRESENTATION-SPEC-V1.1-GATES.md` and enforcement in
+`tests/presentation-spec-wave1.test.mjs`.
+
+- §10 the single flow, stated so a reviewer can fail a build: no gate control
+  (removing a control must not change what else is in the DOM), index order equals
+  reading order, the primary last, the estimate summary as a §4 card that holds no
+  action, demoted inputs in closed disclosures.
+- §11 location-first: the ask is the first control, one dictionary purpose line,
+  the place named in `#locNote` only, the estimate present at rest with its
+  defaults and grade, denial parity with no fabricated locality, in-place recalculation
+  with no superseded figure left on the surface.
+- §12 the ladder: the six registry cases in registry order (pinned in the test
+  against `usecases.js` and `#useCase`), as an R1 control group, why-lines hedged
+  and ≤ 90 characters, one round visible at a time, an explicit pick wins
+  instantly, zero answers is a complete display.
+- §13 applicability: the matrix is data beside the registry, inapplicable means
+  absent (not an empty shell), the one exception is a muted reason line with no
+  action, the case's own metric leads R1, safety/permit/interconnection and honest
+  refusals are never filtered.
+- §14 copy and number formatting, **the new home for the quick-bill residue**: the
+  helper line must quote the visitor's own load at one decimal and the bill that
+  load implies, never the slider minimum (`BILL_MIN_KWH = 2` → about `$26/mo` at
+  `$0.42/kWh`) and never `Math.round(kwh)` (which prints `≈1 kWh/day` beside a
+  `1.2` entry). The numeric half is delegated to #479; the English data-label
+  residue (`US mainland`, `pricing.js`) to #437.
+- §15 three open questions with their deciders and the read that shows them
+  undecided (Q1 estimate placement → #440, Q2 `#useCase` survival as accessible
+  fallback → #440 with #434's input, Q3 the estimate's type role → #432).
+- §5 gains 5.6 (a disclosure is addressed by name, never by position — the soft
+  spot in the #441 receipt), and §8 now assigns P1/P6/P5 to the Wave 2 chrome and
+  article pass so the closing census cannot find them unowned.
+
+Overlap check at filing time: nothing new filed. #436 keeps the contract, #440
+inference and sequencing, #431 applicability, #432 the type scale, #401 the
+numbers, #437 locale copy, #479 the sub-1 kWh/day resolution.
+
+Gate receipts: Lucas PASS (canon untouched, no surface pre-built, ownership
+boundaries stated, every value cited), product Jev PASS (mean 3.0, no facet below
+2). Nothing in Wave 1 or the #401 re-base was built, opened or promoted.
+
 ## Readiness line
 
 The FULL results surface is live on STAGING and STAGING-RESTORED on #429 (stamp
@@ -311,12 +362,13 @@ and SEO censuses unchanged at zero URL changes. NOT promoted: production
 production-branch alias, still serves `20261103u`. Promotion remains a separate
 D-2026-11-13-008 step.
 
-WAIT-STATE: nothing is waiting on another party. Rung: queue item 1 (live
-defects) is closed out — #453 confirmed merged with its rail read, #444 and #447
-re-verified on the rendered staging build, and the two #443-rule regressions the
-drive exposed cured as #484 `5353f558` and #485 `62b12f05`, each rail-green at its
-exact head. Next rung is the queue's Wave 1 row (#441/#430/#440/#431), which this
-pass deliberately did not start.
+WAIT-STATE: nothing is waiting on another party. Rung: Wave 0 is landed — the #436
+spec is at V1.1 with the Wave 1 contract (§10-§15) and both gate receipts, so
+#440 and #431 now build against stated rules rather than each deciding its own
+(#441 and #430 are already closed and now have conformance rules instead of
+one-line pointers). Production untouched; nothing promoted. Next rung is the
+queue's Wave 1 row: #440 (priors + ladder, which also inherits #430's deferred
+pre-render) and #431 (applicability matrix), beside the #401 re-base.
 
 ## Known follow-ups (already attached, not re-filed)
 
