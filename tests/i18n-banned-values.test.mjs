@@ -119,6 +119,11 @@ test("BANNED: reintroducing any known-bad value makes the gate fail", () => {
     join(ROOT, "assets", "js", "shared", "detail-copy.js"),
     join(sandbox, "detail-copy.js"),
   );
+  // The painted results-detail chrome table is spread in the same way (#437).
+  cpSync(
+    join(ROOT, "assets", "js", "shared", "chrome-copy.js"),
+    join(sandbox, "chrome-copy.js"),
+  );
   const script = `
     import { LOCALES } from "./locales.js";
     const langs = Object.keys(LOCALES);

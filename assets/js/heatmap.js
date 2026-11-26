@@ -736,13 +736,13 @@
     }
 
     var boot = Promise.all([
-      fetch("../assets/img/heatmap/manifest.json?v=20261125m").then(
+      fetch("../assets/img/heatmap/manifest.json?v=20261126c").then(
         function (r) {
           if (!r.ok) throw new Error("manifest");
           return r.json();
         },
       ),
-      fetch("../assets/data/heatmap-rankings.json?v=20261125m").then(
+      fetch("../assets/data/heatmap-rankings.json?v=20261126c").then(
         function (r) {
           if (!r.ok) throw new Error("rankings");
           return r.json();

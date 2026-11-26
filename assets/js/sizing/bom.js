@@ -7,8 +7,8 @@
 // Every number here is an EDUCATIONAL estimate with documented assumptions.
 // Real designs must be verified by a licensed electrician or engineer.
 
-import { CHEMISTRIES } from "./chem-model.js?v=20261125m";
-import { POWMR_CATALOG } from "./pricing.js?v=20261125m";
+import { CHEMISTRIES } from "./chem-model.js?v=20261126c";
+import { POWMR_CATALOG } from "./pricing.js?v=20261126c";
 
 // ── Constants (shown in the UI's arithmetic panel) ──────────────────────────
 
@@ -57,24 +57,29 @@ const DIY_CELLS = {
 const AGM_BLOCK = { blockV: 12, blockAh: 200 }; // 12 V × 200 Ah = 2.4 kWh each
 export const RETAIL_MODULE_KWH = 5.12; // PowMr-class 51.2 V rack unit
 
-// Prebuilt formats by bus class, smallest unit first. The 51.2 V rack module is
-// the house-scale answer, not the universal one: quoted against a 1.2 kWh
+// Prebuilt formats by bus class, smallest first (#446: the 51.2 V rack is not universal).
 // off-grid bank it sells 5.12 kWh — more than four times what the sizing
-// justified — and in a bus the rest of that system does not use (#446). The
-// same shelf carries 12 V 100-200 Ah and 24 V 100-200 Ah prebuilt units, which
-// is what the DIY path already assumes at those voltages.
 const RETAIL_UNITS = {
   12: [
-    { kwh: 1.28, label: "12 V 100 Ah deep-cycle battery units (BMS included)" },
-    { kwh: 2.56, label: "12 V 200 Ah deep-cycle battery units (BMS included)" },
+    {
+      kwh: 1.28,
+      v: 12,
+      label: "12 V 100 Ah deep-cycle battery units (BMS included)",
+    },
+    {
+      kwh: 2.56,
+      v: 12,
+      label: "12 V 200 Ah deep-cycle battery units (BMS included)",
+    },
   ],
   24: [
-    { kwh: 2.56, label: "24 V 100 Ah battery units (BMS included)" },
-    { kwh: 5.12, label: "24 V 200 Ah battery units (BMS included)" },
+    { kwh: 2.56, v: 24, label: "24 V 100 Ah battery units (BMS included)" },
+    { kwh: 5.12, v: 24, label: "24 V 200 Ah battery units (BMS included)" },
   ],
   48: [
     {
       kwh: RETAIL_MODULE_KWH,
+      v: 51.2,
       label: `${RETAIL_MODULE_KWH} kWh rack modules (51.2 V, BMS included)`,
     },
   ],
@@ -237,6 +242,7 @@ export function retailConfig(chemistry, nameplateKwh, vBatt = 48) {
     unitLabel: best.unit.label,
     modules: best.modules,
     unitKwh: best.unit.kwh,
+    unitV: best.unit.v,
     providedKwh: best.providedKwh,
     oversizeRatio: ratio(best.providedKwh),
   };

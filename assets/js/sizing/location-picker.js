@@ -16,8 +16,15 @@ import {
   searchCities,
   shouldAutoResolve,
   typedCityCandidates,
-} from "./cities.js?v=20261125m";
-import { byId, el } from "../shared/dom.js?v=20261125m";
+} from "./cities.js?v=20261126c";
+import { byId, el } from "../shared/dom.js?v=20261126c";
+import { translate as t } from "../shared/i18n.js?v=20261126c";
+
+const sunshineLine = (place) => {
+  const said = t("resultSunshineData", { place });
+
+  return said === "resultSunshineData" ? `Sunshine data from ${place}` : said;
+};
 
 const citySearchDisposers = new WeakMap();
 
@@ -59,13 +66,7 @@ export function setupCitySearch({
       button.addEventListener("click", () => {
         lookupGeneration += 1;
         cancelAutoResolve();
-        onPick(
-          c.lat,
-          c.lon,
-          `Sunshine data from ${formatCityLabel(c)}`,
-          c.r,
-          c.country,
-        );
+        onPick(c.lat, c.lon, sunshineLine(formatCityLabel(c)), c.r, c.country);
         lastResolvedQuery = normalizeCityQuery(search.value);
         lastResolvedLabel = search.value = formatCityLabel(c);
         list.hidden = true;
@@ -168,7 +169,7 @@ export function setupCitySearch({
       onPick(
         local.lat,
         local.lon,
-        `Sunshine data from ${formatCityLabel(local)}`,
+        sunshineLine(formatCityLabel(local)),
         local.r,
         local.country,
       );
@@ -192,7 +193,7 @@ export function setupCitySearch({
       onPick(
         offline.lat,
         offline.lon,
-        `Sunshine data from ${formatCityLabel(offline)}`,
+        sunshineLine(formatCityLabel(offline)),
         offline.r,
         offline.country,
       );
@@ -227,7 +228,7 @@ export function setupCitySearch({
     onPick(
       match.lat,
       match.lon,
-      `Sunshine data from ${formatCityLabel(match)}`,
+      sunshineLine(formatCityLabel(match)),
       match.r,
       match.country,
     );

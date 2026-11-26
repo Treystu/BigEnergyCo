@@ -13,11 +13,11 @@
 // NOTE: nasa.js also exports CITY_PRESETS, but location search here uses the
 // CITY_CATALOG in cities.js — importing the preset list would only bloat the
 // bundle, so it is deliberately not imported.
-import { APPLIANCES } from "./appliances.js?v=20261125m";
+import { APPLIANCES } from "./appliances.js?v=20261126c";
 import {
   INSTALL_NAV_BREAKPOINT_PX,
   installReveal,
-} from "./pwa-install.js?v=20261125m";
+} from "./pwa-install.js?v=20261126c";
 import {
   USE_CASES,
   USE_CASE_IDS,
@@ -28,28 +28,28 @@ import {
   normaliseOutageTarget,
   DEFAULT_RESERVE_PCT,
   DEFAULT_TOU,
-} from "./usecases.js?v=20261125m";
-import { rankCases } from "./intake-priors.js?v=20261125m";
+} from "./usecases.js?v=20261126c";
+import { rankCases } from "./intake-priors.js?v=20261126c";
 import {
   createRunChannel,
   staleRunAction,
   errorReleasesRunChannel,
   RUN_REPLY_DEADLINE_MS,
-} from "./run-coordinator.js?v=20261125m";
+} from "./run-coordinator.js?v=20261126c";
 import {
   assumptionDisclosureKeys,
   cutRowVisible,
   tierForGeneratorRuntime,
   generatorRuntimeForTier,
   generatorAllowedForRuntime,
-} from "./mode-chrome.js?v=20261125m";
-import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261125m";
-import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261125m";
+} from "./mode-chrome.js?v=20261126c";
+import { CITY_CATALOG, nearestCity } from "./cities.js?v=20261126c";
+import { bestAffordableCurvePoint } from "../shared/budget-targets.js?v=20261126c";
 import {
   locateMe,
   purgeLegacyCityCache,
   setupCitySearch,
-} from "./location-picker.js?v=20261125m";
+} from "./location-picker.js?v=20261126c";
 
 import {
   estimateTariff,
@@ -58,15 +58,15 @@ import {
   fxMeta,
   DAYS_PER_MONTH,
   battOnlyCost,
-} from "./pricing.js?v=20261125m";
+} from "./pricing.js?v=20261126c";
 // The country -> currency table. Static, not lazy: it is consulted the moment
 // a location resolves, so a dynamic import would only add a round trip to the
 // one path that must not wait. Its 11.5 KB is data, and the first-load budget
 // below records the deliberate trade.
-import { currencyForCountry } from "./country-currency.js?v=20261125m";
+import { currencyForCountry } from "./country-currency.js?v=20261126c";
 
-import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261125m";
-import { partsBreakdown } from "./plan-card.js?v=20261125m";
+import { savingsPanelState, seriesBreakdown } from "./money.js?v=20261126c";
+import { partsBreakdown } from "./plan-card.js?v=20261126c";
 
 // THE FOUR WAYS TO PAY FOR ONE SYSTEM (master plan D-01 §6.4, R-PATH-01..10).
 //
@@ -85,7 +85,7 @@ let pathsLoading = null;
 function loadPaths() {
   if (pathsApi) return Promise.resolve(pathsApi);
   if (!pathsLoading)
-    pathsLoading = import("./paths.js?v=20261125m").then((mod) => {
+    pathsLoading = import("./paths.js?v=20261126c").then((mod) => {
       pathsApi = mod;
       PATHS_HORIZON_YEARS = mod.HORIZON_YEARS;
       return mod;
@@ -96,15 +96,15 @@ import {
   leadAcidChipCopy,
   leadAcidComparison,
   leadAcidReferenceCopy,
-} from "./lead-acid.js?v=20261125m";
+} from "./lead-acid.js?v=20261126c";
 
 import {
   buildBom,
   panelLayout,
   PANEL_WATTS_DEFAULT,
-} from "./bom.js?v=20261125m";
+} from "./bom.js?v=20261126c";
 
-import { BOM_ITEMS } from "../shared/content.js?v=20261125m";
+import { BOM_ITEMS } from "../shared/content.js?v=20261126c";
 
 import {
   applyI18n,
@@ -113,11 +113,11 @@ import {
   // uses, so `t` is a binding to the one implementation rather than a second
   // copy of the placeholder contract.
   translate as t,
-} from "../shared/i18n.js?v=20261125m";
-import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261125m";
-import { byId as $, el } from "../shared/dom.js?v=20261125m";
-import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261125m";
-import { buildSimpleView } from "../shared/simple-view.js?v=20261125m";
+} from "../shared/i18n.js?v=20261126c";
+import { escapeHtml, escapeAttr } from "../shared/escape.js?v=20261126c";
+import { byId as $, el } from "../shared/dom.js?v=20261126c";
+import { JARGON, explainElement } from "../shared/jargon-dict.js?v=20261126c";
+import { buildSimpleView } from "../shared/simple-view.js?v=20261126c";
 import {
   advisorJevContext,
   interpretSanity,
@@ -125,29 +125,29 @@ import {
   renderSanityBadge,
   requestSanity,
   sanityState,
-} from "./validate.js?v=20261125m";
+} from "./validate.js?v=20261126c";
 import {
   CUT_TARGET_PCT,
   sliderStateDrifted,
   targetForPct,
-} from "../shared/cut-targets.js?v=20261125m";
+} from "../shared/cut-targets.js?v=20261126c";
 import {
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
-} from "./share-codec.js?v=20261125m";
+} from "./share-codec.js?v=20261126c";
 import {
   hasInfeasibleCopy,
   infeasibleCopyKeys,
-} from "./infeasible-copy.js?v=20261125m";
-import { csvDocument, partsListRows } from "./parts-csv.js?v=20261125m";
+} from "./infeasible-copy.js?v=20261126c";
+import { csvDocument, partsListRows } from "./parts-csv.js?v=20261126c";
 import {
   fuelBurnPerKwh,
   fuelDisplay,
   fuelRateUsd,
   fuelTypeName,
   isImperialLocation,
-} from "./fuel-units.js?v=20261125m";
+} from "./fuel-units.js?v=20261126c";
 
 import {
   createLeafletProvider,
@@ -155,18 +155,18 @@ import {
   rotatedRectangleAreaM2,
   rotatedRectangleCorners,
   manualRoofHint,
-} from "./map-provider.js?v=20261125m";
+} from "./map-provider.js?v=20261126c";
 import {
   createWizard,
   persistWizard,
   restoreWizard,
-} from "./wizard.js?v=20261125m";
-import { tiltValueSummary } from "./tilt-harvest.js?v=20261125m";
+} from "./wizard.js?v=20261126c";
+import { tiltValueSummary } from "./tilt-harvest.js?v=20261126c";
 import {
   interpolateCurveTarget,
   surplusAnchor,
   budgetSpanMax,
-} from "./budget-span.js?v=20261125m";
+} from "./budget-span.js?v=20261126c";
 // Heavy modules used only after a sizing result stay outside the initial UI graph.
 let _engine = null;
 let _charts = null;
@@ -178,10 +178,10 @@ let _chartsInitialized = false;
 function preloadRunModules() {
   if (!_runModulesPromise) {
     _runModulesPromise = Promise.all([
-      import("./engine.js?v=20261125m"),
-      import("./charts.js?v=20261125m"),
-      import("./frontier-chart.js?v=20261125m"),
-      import("./rescale.js?v=20261125m"),
+      import("./engine.js?v=20261126c"),
+      import("./charts.js?v=20261126c"),
+      import("./frontier-chart.js?v=20261126c"),
+      import("./rescale.js?v=20261126c"),
     ])
       .then(([engine, charts, frontierChart, rescale]) => {
         _engine = engine;
@@ -249,9 +249,9 @@ import {
   batteryReplacements,
   lifetimeCostUsd,
   cumulativeCostSeries,
-} from "./money.js?v=20261125m";
+} from "./money.js?v=20261126c";
 
-import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261125m";
+import { fullRange, landedMidBattKwhFor } from "./pricing.js?v=20261126c";
 
 let worker = null;
 
@@ -1369,14 +1369,8 @@ function updateAutoRows() {
   if (targetRow) targetRow.style.display = "none";
 }
 
-// #444: a load-mode pick must take effect on the interaction the browser
-// actually reports. A <select> fires `input` and then `change`; wiring only
-// `change` meant a pick the browser reported as `input` (the filed symptom: the
-// option "did not take effect", with an error on the click) left every panel on
-// the previous mode, so the advanced kWh/day entry never appeared. Both events
-// now reach ONE idempotent commit. The panels are also looked up defensively:
-// this runs inside the interaction, and a missing node used to throw here, which
-// is an error on the click that leaves the old panel on screen.
+// #444: input AND change both reach one idempotent mode commit, and the panels
+// are looked up defensively - a missing node must not throw on the click.
 let paintedLoadMode = null;
 
 function setLoadPanel() {
@@ -1810,16 +1804,9 @@ function updateLoadReadout() {
   }
 }
 
-// #448: the appliance picker paints its watt and hours badges from t() while it
-// is being BUILT, and it is built during setup - before the deferred dictionary
-// resolves. translate() echoes the key until then (deliberately: echoing is a
-// signal, not a translation), so every row shipped "apWatts", "apWattsRunning"
-// and "fmtHoursDay" to the visitor while the kWh/day figures beside them were
-// correct. Every other runtime-painted surface is repainted after applyI18n()
-// through repaintRuntimeCopy; the rows were not, and no test could see it
-// because the text is only wrong for the life of a page nobody re-renders.
-// The registry below is how the rows join that repaint without a rebuild: a
-// rebuild would drop the visitor's ticks and quantities, which live in the DOM.
+// #448: rows are built before the deferred dictionary resolves, so translate()
+// echoes keys; the registry below rejoins them to repaintRuntimeCopy without a
+// rebuild, which would drop the visitor's ticks and quantities.
 const applianceRepainters = [];
 
 function renderAppliances() {
@@ -4253,6 +4240,7 @@ function renderFocusPanel(p, entry, isPreview) {
   const leadAcid = leadAcidChipCopy(
     leadAcidComparison(entry, p.agmReference),
     money,
+    t,
   );
   if (leadAcid) chip("🏚️", leadAcid.big, leadAcid.small);
   const note = $("focusNote");
@@ -4379,7 +4367,7 @@ function restoreRunButton() {
 function ensureWorker() {
   if (!worker) {
     const runWorker = new Worker(
-      "./assets/js/sizing/sizing-worker.js?v=20261125m",
+      "./assets/js/sizing/sizing-worker.js?v=20261126c",
       {
         type: "module",
       },
@@ -8887,10 +8875,13 @@ function populatePrintSheet(p, inp) {
   let rows, head, title;
 
   if (p.auto && p.auto.length) {
-    title = `Battery Lifetime Comparison (${isGT ? "Grid-Connected" : "Off-Grid"})`;
+    title = t(isGT ? "cmpTitleGt" : "cmpTitleOff");
 
     head =
-      "<tr><th>Battery</th><th>Solar</th><th>Bank usable (nameplate)</th><th>First cost</th><th>Swaps in 20 yr</th><th>Swaps + labor</th><th>True 20-yr cost</th><th>True break-even</th></tr>";
+      `<tr><th>${t("cmpBattery")}</th><th>${t("cmpSolar")}</th>` +
+      `<th>${t("cmpBank")}</th><th>${t("cmpFirstCost")}</th>` +
+      `<th>${t("cmpSwaps")}</th><th>${t("cmpSwapsLabor")}</th>` +
+      `<th>${t("cmpTrueCost")}</th><th>${t("cmpBreakEven")}</th></tr>`;
 
     rows = p.auto
       .filter((t) => t.solvable)
@@ -9006,38 +8997,44 @@ function populatePrintSheet(p, inp) {
     const hwRows = [];
     if (bom.panels) {
       hwRows.push([
-        "Solar panels",
+        t("hwPanels"),
         `${PANEL_WATTS_DEFAULT} W mono`,
         `${bom.panels.count} pcs`,
         `${bom.panels.kwActual} kW \u00B7 ~${bom.panels.areaM2} m\u00B2`,
       ]);
     } else {
-      hwRows.push(["Solar panels", "None", "-", "Battery-only configuration"]);
+      hwRows.push([t("hwPanels"), t("hwNone"), "-", t("hwBatteryOnly")]);
     }
     if (bom.voltage && bom.battery) {
       hwRows.push(
-        ["Bank voltage", `${bom.voltage.volts} V`, "-", ""],
+        [t("hwBankVoltage"), `${bom.voltage.volts} V`, "-", ""],
         [
-          "Battery (DIY)",
-          bom.battery.diy.unitLabel,
+          t("hwBatteryDiy"),
+          t("hwStrings", {
+            n: bom.battery.diy.seriesPerString,
+            ah: bom.battery.diy.labelVars.ah,
+          }),
           `${bom.battery.diy.stringsParallel} string(s)`,
-          `${bom.battery.diy.blocksTotal} cells total`,
+          t("hwCellsTotal", { n: bom.battery.diy.blocksTotal }),
         ],
         [
-          "Battery (retail alt.)",
-          bom.battery.retail.unitLabel,
+          t("hwBatteryRetail"),
+          t("hwRackModules", {
+            kwh: bom.battery.retail.unitKwh,
+            v: bom.battery.retail.unitV,
+          }),
           `${bom.battery.retail.modules} pcs`,
           "BMS included",
         ],
       );
     } else {
-      hwRows.push(["Battery bank", "None", "-", "Solar-only configuration"]);
+      hwRows.push([t("hwBatteryDiy"), t("hwNone"), "-", t("hwBatteryOnly")]);
     }
     hwRows.push([
       "Inverter",
       `${bom.inverter.recommendedKw} kW class`,
       "1",
-      "sized to peak load incl. surge margin",
+      t("hwSizedPeak"),
     ]);
     if (bom.controller) {
       hwRows.push(
@@ -9048,14 +9045,14 @@ function populatePrintSheet(p, inp) {
           bom.controller.suggestion,
         ],
         [
-          "Main DC fuse/breaker",
+          t("hwMainFuse"),
           `${bom.protection.mainFuseAmps} A`,
           "1",
-          "battery disconnect",
+          t("hwBatteryDisconnect"),
         ],
-        ["PV disconnect", `${bom.protection.pvBreakerAmps} A`, "1", ""],
+        [t("hwPvDisconnect"), `${bom.protection.pvBreakerAmps} A`, "1", ""],
         [
-          "Battery cable (2 m run)",
+          t("hwBatteryCable"),
           bom.cable[0].mm2
             ? `${bom.cable[0].awg} copper`
             : `larger than ${bom.cable[0].awg}`,
@@ -9071,7 +9068,7 @@ function populatePrintSheet(p, inp) {
         p.matrix.rows.find((r) => r.id === hwEntry.chemistry)?.label) ||
       hwEntry.chemistry;
     hwHtml = `
-      <h2 style="font-size:12pt;margin:10pt 0 4pt;">Hardware list for the selected system (${hwChemLabel})</h2>
+      <h2 style="font-size:12pt;margin:10pt 0 4pt;">${escapeHtml(t("hwTitle", { chem: hwChemLabel }))}</h2>
       <table style="border-collapse:collapse;width:100%;font-size:9pt;margin-bottom:8pt;">
         <tr style="background:#eef2f7;"><th>Item</th><th>Spec</th><th>Qty</th><th>Note</th></tr>
         ${hwRows.map((r) => "<tr><td>" + r.join("</td><td>") + "</td></tr>").join("")}
@@ -9113,7 +9110,7 @@ function populatePrintSheet(p, inp) {
 
     ${
       p.frontier && p.frontier.points && p.frontier.points.length > 1
-        ? `<p style="font-size:9.5pt;margin:0 0 4pt;"><strong>How far money gets you:</strong> ${_frontierChart.frontierVerdict(p.frontier, { t, money })}</p>`
+        ? `<p style="font-size:9.5pt;margin:0 0 4pt;"><strong>${escapeHtml(t("printHowFar"))}</strong> ${_frontierChart.frontierVerdict(p.frontier, { t, money })}</p>`
         : ""
     }
 
@@ -9808,11 +9805,11 @@ async function initSizingUI() {
     // for it. The loader arms the CTA's own pointerdown and click handlers, and the
     // feature module was already a click-time import. Without the loader the CTA is a
     // plain link — the same fallback the loader's catch takes.
-    import("../shared/translation-suggestion-loader.js?v=20261125m")
+    import("../shared/translation-suggestion-loader.js?v=20261126c")
       .then(({ installTranslationSuggestionLoader }) => {
         installTranslationSuggestionLoader(
           document.querySelector("[data-translation-suggestion]"),
-          () => import("../translation-suggestion.js?v=20261125m"),
+          () => import("../translation-suggestion.js?v=20261126c"),
         );
       })
       .catch(() => {});
