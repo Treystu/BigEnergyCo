@@ -16,9 +16,9 @@ import {
   searchCities,
   shouldAutoResolve,
   typedCityCandidates,
-} from "./cities.js?v=20261126c";
-import { byId, el } from "../shared/dom.js?v=20261126c";
-import { translate as t } from "../shared/i18n.js?v=20261126c";
+} from "./cities.js?v=20261126d";
+import { byId, el } from "../shared/dom.js?v=20261126d";
+import { translate as t } from "../shared/i18n.js?v=20261126d";
 
 const sunshineLine = (place) => {
   const said = t("resultSunshineData", { place });
