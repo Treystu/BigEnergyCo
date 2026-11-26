@@ -744,3 +744,19 @@ test("#437: the lead-acid chip takes its words from the dictionary", () => {
     "the chip must receive the dictionary, not default to English",
   );
 });
+
+test("#437: a location line never exposes its key before the dictionary loads", () => {
+  const picker = readFileSync(
+    join(ROOT, "assets/js/sizing/location-picker.js"),
+    "utf8",
+  );
+  assert.match(
+    picker,
+    /said === "resultSunshineData"[\s\S]{0,80}Sunshine data from/,
+    "the picker must fall back to the English line, not to the raw key",
+  );
+  assert.ok(
+    !/t\("resultSunshineData", \{ place: formatCityLabel/.test(picker),
+    "every call site goes through the guarded helper",
+  );
+});

@@ -16,9 +16,18 @@ import {
   searchCities,
   shouldAutoResolve,
   typedCityCandidates,
-} from "./cities.js?v=20261125q";
-import { byId, el } from "../shared/dom.js?v=20261125q";
-import { translate as t } from "../shared/i18n.js?v=20261125q";
+} from "./cities.js?v=20261126a";
+import { byId, el } from "../shared/dom.js?v=20261126a";
+import { translate as t } from "../shared/i18n.js?v=20261126a";
+
+// Before the deferred dictionary resolves translate() echoes the key, so a fast
+// pick would show "resultSunshineData" to the visitor. Say the English line
+// instead: a surface waiting on translation must never expose a key.
+const sunshineLine = (place) => {
+  const said = t("resultSunshineData", { place });
+
+  return said === "resultSunshineData" ? `Sunshine data from ${place}` : said;
+};
 
 const citySearchDisposers = new WeakMap();
 
@@ -60,13 +69,7 @@ export function setupCitySearch({
       button.addEventListener("click", () => {
         lookupGeneration += 1;
         cancelAutoResolve();
-        onPick(
-          c.lat,
-          c.lon,
-          t("resultSunshineData", { place: formatCityLabel(c) }),
-          c.r,
-          c.country,
-        );
+        onPick(c.lat, c.lon, sunshineLine(formatCityLabel(c)), c.r, c.country);
         lastResolvedQuery = normalizeCityQuery(search.value);
         lastResolvedLabel = search.value = formatCityLabel(c);
         list.hidden = true;
@@ -169,7 +172,7 @@ export function setupCitySearch({
       onPick(
         local.lat,
         local.lon,
-        t("resultSunshineData", { place: formatCityLabel(local) }),
+        sunshineLine(formatCityLabel(local)),
         local.r,
         local.country,
       );
@@ -193,7 +196,7 @@ export function setupCitySearch({
       onPick(
         offline.lat,
         offline.lon,
-        t("resultSunshineData", { place: formatCityLabel(offline) }),
+        sunshineLine(formatCityLabel(offline)),
         offline.r,
         offline.country,
       );
@@ -228,7 +231,7 @@ export function setupCitySearch({
     onPick(
       match.lat,
       match.lon,
-      t("resultSunshineData", { place: formatCityLabel(match) }),
+      sunshineLine(formatCityLabel(match)),
       match.r,
       match.country,
     );
