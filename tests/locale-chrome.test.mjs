@@ -690,7 +690,6 @@ test("#437: the censused result-detail English is gone from the painters", () =>
     "True break-even",
     "Hardware list for the selected system",
     "How far money gets you:",
-    "Sunshine data from",
     "Battery cable (2 m run)",
     "Main DC fuse/breaker",
   ]) {
@@ -708,6 +707,15 @@ test("#437: the censused result-detail English is gone from the painters", () =>
   assert.match(ui, /t\("hwStrings", \{/);
   assert.match(ui, /t\("hwRackModules", \{/);
   assert.match(ui, /t\("printHowFar"\)/);
+  const pickerSource = readFileSync(
+    join(ROOT, "assets/js/sizing/location-picker.js"),
+    "utf8",
+  );
+  assert.equal(
+    (pickerSource.match(/Sunshine data from/g) || []).length,
+    1,
+    "the English line survives once, as the pre-dictionary fallback only",
+  );
 });
 
 test("#437: the markup blocks the second census caught carry hooks", () => {

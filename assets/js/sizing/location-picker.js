@@ -16,9 +16,9 @@ import {
   searchCities,
   shouldAutoResolve,
   typedCityCandidates,
-} from "./cities.js?v=20261126a";
-import { byId, el } from "../shared/dom.js?v=20261126a";
-import { translate as t } from "../shared/i18n.js?v=20261126a";
+} from "./cities.js?v=20261126b";
+import { byId, el } from "../shared/dom.js?v=20261126b";
+import { translate as t } from "../shared/i18n.js?v=20261126b";
 
 // Before the deferred dictionary resolves translate() echoes the key, so a fast
 // pick would show "resultSunshineData" to the visitor. Say the English line
