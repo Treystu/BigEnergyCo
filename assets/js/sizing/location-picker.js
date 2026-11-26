@@ -16,13 +16,10 @@ import {
   searchCities,
   shouldAutoResolve,
   typedCityCandidates,
-} from "./cities.js?v=20261126b";
-import { byId, el } from "../shared/dom.js?v=20261126b";
-import { translate as t } from "../shared/i18n.js?v=20261126b";
+} from "./cities.js?v=20261126c";
+import { byId, el } from "../shared/dom.js?v=20261126c";
+import { translate as t } from "../shared/i18n.js?v=20261126c";
 
-// Before the deferred dictionary resolves translate() echoes the key, so a fast
-// pick would show "resultSunshineData" to the visitor. Say the English line
-// instead: a surface waiting on translation must never expose a key.
 const sunshineLine = (place) => {
   const said = t("resultSunshineData", { place });
 
