@@ -113,7 +113,10 @@ test("#439: the support path is at the value moment, in every locale", () => {
   ]) {
     assert.ok(html.includes(hook), `support path carries ${hook}`);
   }
-  assert.match(html, /href="mailto:lucasballek@gmail\.com\?subject=Help/);
+  // #439: the subject is set from the dictionary when the path is revealed.
+  const uiSource = readFileSync(join(ROOT, "assets/js/sizing/ui.js"), "utf8");
+  assert.match(html, /href="mailto:lucasballek@gmail\.com"/);
+  assert.match(uiSource, /t\("resultSupportSubject"\)/);
   for (const [lang, dict] of Object.entries(LOCALES)) {
     for (const key of [
       "resultSupportLead",
