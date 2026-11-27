@@ -272,11 +272,22 @@ function stubPowerFetch(counter) {
       ghi[key] = Math.max(0, Math.sin(((hour - 6) / 12) * Math.PI)) * 600;
       t2m[key] = 20;
     }
+    // The wire since #433 is NASA's CSV, so the stub speaks CSV: header block,
+    // then YEAR,MO,DY,HR,ghi,t2m with unpadded fields.
+    const rows = Object.keys(ghi).map((key) =>
+      [
+        key.slice(0, 4),
+        Number(key.slice(4, 6)),
+        Number(key.slice(6, 8)),
+        Number(key.slice(8, 10)),
+        ghi[key],
+        t2m[key],
+      ].join(","),
+    );
     return {
       ok: true,
-      json: async () => ({
-        properties: { parameter: { ALLSKY_SFC_SW_DWN: ghi, T2M: t2m } },
-      }),
+      text: async () =>
+        `-BEGIN HEADER-\r\nNASA/POWER\r\n-END HEADER-\r\nYEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,T2M\r\n${rows.join("\r\n")}\r\n`,
     };
   };
 }

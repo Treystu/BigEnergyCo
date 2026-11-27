@@ -43,16 +43,11 @@ test("NASA chunks fetch in parallel and concatenate in year order", async () => 
     // One distinct hour per chunk so ordering is checkable.
     const m = url.match(/start=(\d{4})\d{4}&end=(\d{4})\d{4}/);
     assert.ok(m, `chunked url: ${url}`);
+    // The wire format since #433: NASA's CSV (36% fewer bytes than its JSON).
     return {
       ok: true,
-      json: async () => ({
-        properties: {
-          parameter: {
-            ALLSKY_SFC_SW_DWN: { [`${m[1]}010100`]: Number(m[1]) },
-            T2M: { [`${m[1]}010100`]: 20 },
-          },
-        },
-      }),
+      text: async () =>
+        `YEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,T2M\n${m[1]},1,1,0,${Number(m[1])},20\n`,
     };
   };
   const { hours } = await fetchHourlySeries({

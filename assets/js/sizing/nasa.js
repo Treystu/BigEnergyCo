@@ -6,9 +6,13 @@
 //   GET https://power.larc.nasa.gov/api/temporal/hourly/point
 //       ?parameters=ALLSKY_SFC_SW_DWN,T2M
 //       &community=RE&latitude=..&longitude=..
-//       &start=YYYYMMDD&end=YYYYMMDD&format=JSON
-//   -> GeoJSON Feature; properties.parameter.<PARAM>["YYYYMMDDHH"] = value
+//       &start=YYYYMMDD&end=YYYYMMDD&format=CSV
+//   -> a header block, then YEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,T2M rows (LST)
 //   ALLSKY_SFC_SW_DWN is W/m² averaged over the hour; T2M is °C.
+//
+// CSV, NOT JSON (#433): NASA serves both uncompressed, 653,437 B vs 417,287 B
+// for the same two years, and this pull is 80% of the time to first number. A
+// JSON body still parses, so the wire can never be why weather goes missing.
 //   Timestamps are LOCAL SOLAR TIME (time_standard=LST) — hour-of-day lines up
 //   with load profiles without timezone math. Fill value: -999.
 
@@ -16,7 +20,7 @@ const POWER_HOURLY_URL =
   "https://power.larc.nasa.gov/api/temporal/hourly/point";
 
 // One owner of the coordinate precision, shared with every other egress.
-import { roundCoords } from "../shared/coords.js?v=20261127a";
+import { roundCoords } from "../shared/coords.js?v=20261127b";
 
 // A satellite request that hangs must never hold the sizing hostage: after
 // this long with no answer, abort and let the caller fall back to bundled
@@ -70,7 +74,7 @@ export async function fetchHourlySeries({
         ctrl ? { signal: ctrl.signal } : undefined,
       );
       if (!res.ok) throw new Error(`NASA POWER request failed (${res.status})`);
-      const parsed = parseHourly(await res.json());
+      const parsed = parseHourlyPayload(await res.text());
       // Progress is per-chunk (chunk count is known up front): one call per
       // landed year-pair. Report-only — a throwing callback must never kill
       // a good fetch.
@@ -120,7 +124,7 @@ export function buildUrl(latitude, longitude, start, end) {
   return (
     `${POWER_HOURLY_URL}?parameters=ALLSKY_SFC_SW_DWN,T2M` +
     `&community=RE&latitude=${c.lat}&longitude=${c.lon}` +
-    `&start=${start}&end=${end}&format=JSON`
+    `&start=${start}&end=${end}&format=CSV`
   );
 }
 
@@ -138,24 +142,50 @@ export function parseHourly(json) {
   }));
 }
 
-// ── Unified multi-layer weather cache ───────────────────────────────────────
-// In-memory Map for 0ms access within the session / worker lifetime.
-// In-flight Promise Map to eliminate duplicate concurrent network pulls.
-// Cache Storage (and localStorage fallback) for persistence across reloads.
+// POWER CSV: a header block, then YEAR,MO,DY,HR,ghi,t2m rows with UNPADDED
+// month/day/hour. The column header is FOUND, never counted past, and the stamp
+// is rebuilt padded to the JSON parser's YYYYMMDDHH so every consumer sees one
+// shape.
+function parseHourlyCsv(text) {
+  const lines = String(text || "").split(/\r?\n/);
+  const at = lines.findIndex((l) => l.startsWith("YEAR,"));
+  const bad = "unexpected NASA POWER payload shape";
+  if (at < 0) throw new Error(bad);
+  const p = (v) => String(v).padStart(2, "0");
+  const n = (v) => (Number(v) === -999 ? NaN : Number(v));
+  const rows = [];
+  for (const l of lines.slice(at + 1)) {
+    const [y, mo, dy, hr, ghi, tAmb] = l.split(",");
+    if (!tAmb) continue;
+    rows.push({
+      stamp: y + p(mo) + p(dy) + p(hr),
+      hourOfDay: Number(hr),
+      ghi: n(ghi),
+      tAmb: n(tAmb),
+    });
+  }
+  if (!rows.length) throw new Error(bad);
+  return rows;
+}
+
+// Chosen from the body, never from the URL we asked for.
+function parseHourlyPayload(text) {
+  const head = String(text || "").trimStart();
+  return head.startsWith("{")
+    ? parseHourly(JSON.parse(head))
+    : parseHourlyCsv(head);
+}
+
+// Weather cache: memo Map, in-flight map (no duplicate pulls), persistent store.
 
 const CACHE_PREFIX = "beco-power-v1:";
 const CACHE_STORAGE_NAME = "beco-weather-v1";
 
-// Compact persistent layer (v2): stores the PARSED series as flat typed
-// arrays instead of the raw ~2 MB NASA JSON. A Cache-Storage JSON blob costs
-// a full JSON.parse of ~44k objects on every cold load; the typed-array
-// record restores via structured-clone-like reads with no per-object parsing.
-// Key grid, layering order and fallbacks are unchanged from v1.
+// Compact persistent layer (v2): the PARSED series as flat typed arrays, not
+// the raw ~2 MB JSON blob, whose ~44k objects cost a full parse per cold load.
 const CACHE_PREFIX_V2 = "beco-power-v2:";
 const IDB_NAME = "beco-weather-v2";
-// Version 2: the v1 opener never created the object store (no upgrade
-// handler), so every browser that already opened the DB carries a storeless
-// database. Bumping the version forces the upgrade path to run on those.
+// v1 opened storeless databases in the wild; the bump runs the upgrade on them.
 const IDB_VERSION = 2;
 const IDB_STORE = "series";
 
@@ -166,10 +196,8 @@ function idbOpen() {
   if (typeof indexedDB === "undefined") return null;
   try {
     const req = indexedDB.open(IDB_NAME, IDB_VERSION);
-    // The store is created HERE, in the upgrade handler — never lazily at
-    // read/write time. Without this hook the DB opened with NO object
-    // store: every read missed and every write silently no-oped, so the
-    // compact layer never persisted anything.
+    // The store is created HERE, never lazily: without this hook every read
+    // missed and every write no-oped, so nothing ever persisted.
     req.onupgradeneeded = () => {
       const db = req.result;
       if (!db.objectStoreNames.contains(IDB_STORE))
@@ -189,14 +217,9 @@ function idbReq(request) {
   });
 }
 
-// A transaction is NOT a request. `IDBTransaction` has no `complete` property and
-// never fires `onsuccess`; it reports completion through `oncomplete` (and
-// `onerror` / `onabort`). The compact-cache writers used to await it with
-// `idbReq`, so the promise never settled in a browser: the write still landed
-// (put is queued synchronously) but `db.close()` after the await never ran, and
-// every cold fetch leaked one open connection. The tests could not see it
-// because the IndexedDB double exposed `complete: Promise.resolve()`, which
-// `idbReq` treats exactly the same way — a promise it waits on forever.
+// A transaction is NOT a request: it settles through oncomplete/onerror/
+// onabort. Awaiting it via idbReq never settled in a browser, leaking one open
+// connection per cold fetch (the test double hid it).
 function txDone(tx) {
   return new Promise((resolve, reject) => {
     tx.oncomplete = () => resolve();
@@ -505,15 +528,12 @@ export async function fetchHourlyCached(
   }
 }
 
-// ── Offline typical-year synthesis ──────────────────────────────────────────
+// Offline typical-year synthesis.
 
 const MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-/**
- * Expand a bundled monthly/hourly profile into an hourly series shaped
- * exactly like fetchHourlySeries output, so the whole deterministic
- * pipeline (derates, SOC sim, tier search, charts) runs unchanged offline.
- */
+// Expand a bundled monthly/hourly profile into fetchHourlySeries shape, so the
+// whole deterministic pipeline runs unchanged offline.
 export function synthesizeFromProfile(profile) {
   const hours = [];
   for (let m = 0; m < 12; m++) {
@@ -526,196 +546,196 @@ export function synthesizeFromProfile(profile) {
   return hours;
 }
 
-/** Preset cities so nobody needs GPS coordinates. Grouped for the dropdown. */ export const CITY_PRESETS =
-  [
-    // North America
-    { name: "Honolulu, USA", r: "North America", lat: 21.31, lon: -157.86 },
-    { name: "Los Angeles, USA", r: "North America", lat: 34.05, lon: -118.24 },
-    { name: "Phoenix, USA", r: "North America", lat: 33.45, lon: -112.07 },
-    { name: "Denver, USA", r: "North America", lat: 39.74, lon: -104.99 },
-    { name: "Chicago, USA", r: "North America", lat: 41.88, lon: -87.63 },
-    { name: "Miami, USA", r: "North America", lat: 25.76, lon: -80.19 },
-    { name: "New York, USA", r: "North America", lat: 40.71, lon: -74.01 },
-    { name: "Toronto, Canada", r: "North America", lat: 43.65, lon: -79.38 },
-    {
-      name: "Mexico City, Mexico",
-      r: "North America",
-      lat: 19.43,
-      lon: -99.13,
-    },
-    // Caribbean & Central America
-    {
-      name: "San Juan, Puerto Rico",
-      r: "Caribbean & Central America",
-      lat: 18.47,
-      lon: -66.11,
-    },
-    {
-      name: "Santo Domingo, Dominican Rep.",
-      r: "Caribbean & Central America",
-      lat: 18.49,
-      lon: -69.93,
-    },
-    {
-      name: "Guatemala City, Guatemala",
-      r: "Caribbean & Central America",
-      lat: 14.63,
-      lon: -90.51,
-    },
-    {
-      name: "Panama City, Panama",
-      r: "Caribbean & Central America",
-      lat: 8.98,
-      lon: -79.52,
-    },
-    {
-      name: "Havana, Cuba",
-      r: "Caribbean & Central America",
-      lat: 23.11,
-      lon: -82.37,
-    },
-    {
-      name: "Port-au-Prince, Haiti",
-      r: "Caribbean & Central America",
-      lat: 18.59,
-      lon: -72.31,
-    },
-    // South America
-    { name: "Bogotá, Colombia", r: "South America", lat: 4.71, lon: -74.07 },
-    { name: "Lima, Peru", r: "South America", lat: -12.05, lon: -77.04 },
-    { name: "Cusco, Peru", r: "South America", lat: -13.53, lon: -71.97 },
-    { name: "Santiago, Chile", r: "South America", lat: -33.45, lon: -70.67 },
-    { name: "São Paulo, Brazil", r: "South America", lat: -23.55, lon: -46.63 },
-    {
-      name: "Buenos Aires, Argentina",
-      r: "South America",
-      lat: -34.6,
-      lon: -58.38,
-    },
-    { name: "Quito, Ecuador", r: "South America", lat: -0.18, lon: -78.47 },
-    { name: "La Paz, Bolivia", r: "South America", lat: -16.49, lon: -68.12 },
-    // Europe
-    { name: "London, UK", r: "Europe", lat: 51.51, lon: -0.13 },
-    { name: "Paris, France", r: "Europe", lat: 48.86, lon: 2.35 },
-    { name: "Madrid, Spain", r: "Europe", lat: 40.42, lon: -3.7 },
-    { name: "Rome, Italy", r: "Europe", lat: 41.89, lon: 12.48 },
-    { name: "Berlin, Germany", r: "Europe", lat: 52.52, lon: 13.41 },
-    { name: "Warsaw, Poland", r: "Europe", lat: 52.23, lon: 21.01 },
-    { name: "Athens, Greece", r: "Europe", lat: 37.98, lon: 23.73 },
-    { name: "Oslo, Norway", r: "Europe", lat: 59.91, lon: 10.75 },
-    // Africa
-    { name: "Casablanca, Morocco", r: "Africa", lat: 33.57, lon: -7.59 },
-    { name: "Cairo, Egypt", r: "Africa", lat: 30.04, lon: 31.24 },
-    { name: "Accra, Ghana", r: "Africa", lat: 5.6, lon: -0.19 },
-    { name: "Lagos, Nigeria", r: "Africa", lat: 6.52, lon: 3.38 },
-    { name: "Nairobi, Kenya", r: "Africa", lat: -1.29, lon: 36.82 },
-    { name: "Johannesburg, South Africa", r: "Africa", lat: -26.2, lon: 28.05 },
-    { name: "Dakar, Senegal", r: "Africa", lat: 14.72, lon: -17.47 },
-    { name: "Bamako, Mali", r: "Africa", lat: 12.65, lon: -8.0 },
-    { name: "Ouagadougou, Burkina Faso", r: "Africa", lat: 12.37, lon: -1.52 },
-    { name: "Addis Ababa, Ethiopia", r: "Africa", lat: 9.02, lon: 38.75 },
-    { name: "Kinshasa, DR Congo", r: "Africa", lat: -4.44, lon: 15.27 },
-    { name: "Antananarivo, Madagascar", r: "Africa", lat: -18.88, lon: 47.51 },
-    // Middle East & Central Asia
-    {
-      name: "Istanbul, Türkiye",
-      r: "Middle East & Central Asia",
-      lat: 41.01,
-      lon: 28.98,
-    },
-    {
-      name: "Dubai, UAE",
-      r: "Middle East & Central Asia",
-      lat: 25.2,
-      lon: 55.27,
-    },
-    {
-      name: "Tashkent, Uzbekistan",
-      r: "Middle East & Central Asia",
-      lat: 41.3,
-      lon: 69.24,
-    },
-    // South Asia
-    { name: "Karachi, Pakistan", r: "South Asia", lat: 24.86, lon: 67.01 },
-    { name: "Delhi, India", r: "South Asia", lat: 28.61, lon: 77.21 },
-    { name: "Mumbai, India", r: "South Asia", lat: 19.08, lon: 72.88 },
-    { name: "Colombo, Sri Lanka", r: "South Asia", lat: 6.93, lon: 79.85 },
-    { name: "Dhaka, Bangladesh", r: "South Asia", lat: 23.81, lon: 90.41 },
-    { name: "Kathmandu, Nepal", r: "South Asia", lat: 27.72, lon: 85.32 },
-    // East & Southeast Asia
-    {
-      name: "Bangkok, Thailand",
-      r: "East & Southeast Asia",
-      lat: 13.76,
-      lon: 100.5,
-    },
-    {
-      name: "Ho Chi Minh City, Vietnam",
-      r: "East & Southeast Asia",
-      lat: 10.82,
-      lon: 106.63,
-    },
-    {
-      name: "Jakarta, Indonesia",
-      r: "East & Southeast Asia",
-      lat: -6.21,
-      lon: 106.85,
-    },
-    {
-      name: "Phnom Penh, Cambodia",
-      r: "East & Southeast Asia",
-      lat: 11.56,
-      lon: 104.92,
-    },
-    {
-      name: "Manila, Philippines",
-      r: "East & Southeast Asia",
-      lat: 14.6,
-      lon: 120.98,
-    },
-    { name: "Hong Kong", r: "East & Southeast Asia", lat: 22.32, lon: 114.17 },
-    {
-      name: "Taipei, Taiwan",
-      r: "East & Southeast Asia",
-      lat: 25.03,
-      lon: 121.57,
-    },
-    {
-      name: "Seoul, South Korea",
-      r: "East & Southeast Asia",
-      lat: 37.57,
-      lon: 126.98,
-    },
-    {
-      name: "Tokyo, Japan",
-      r: "East & Southeast Asia",
-      lat: 35.68,
-      lon: 139.69,
-    },
-    // Oceania & Pacific
-    { name: "Suva, Fiji", r: "Oceania & Pacific", lat: -18.14, lon: 178.44 },
-    {
-      name: "Papeete, French Polynesia",
-      r: "Oceania & Pacific",
-      lat: -17.54,
-      lon: -149.57,
-    },
-    {
-      name: "Perth, Australia",
-      r: "Oceania & Pacific",
-      lat: -31.95,
-      lon: 115.86,
-    },
-    {
-      name: "Sydney, Australia",
-      r: "Oceania & Pacific",
-      lat: -33.87,
-      lon: 151.21,
-    },
-    {
-      name: "Auckland, New Zealand",
-      r: "Oceania & Pacific",
-      lat: -36.85,
-      lon: 174.76,
-    },
-  ];
+// Preset cities so nobody needs GPS coordinates. Grouped for the dropdown.
+export const CITY_PRESETS = [
+  // North America
+  { name: "Honolulu, USA", r: "North America", lat: 21.31, lon: -157.86 },
+  { name: "Los Angeles, USA", r: "North America", lat: 34.05, lon: -118.24 },
+  { name: "Phoenix, USA", r: "North America", lat: 33.45, lon: -112.07 },
+  { name: "Denver, USA", r: "North America", lat: 39.74, lon: -104.99 },
+  { name: "Chicago, USA", r: "North America", lat: 41.88, lon: -87.63 },
+  { name: "Miami, USA", r: "North America", lat: 25.76, lon: -80.19 },
+  { name: "New York, USA", r: "North America", lat: 40.71, lon: -74.01 },
+  { name: "Toronto, Canada", r: "North America", lat: 43.65, lon: -79.38 },
+  {
+    name: "Mexico City, Mexico",
+    r: "North America",
+    lat: 19.43,
+    lon: -99.13,
+  },
+  // Caribbean & Central America
+  {
+    name: "San Juan, Puerto Rico",
+    r: "Caribbean & Central America",
+    lat: 18.47,
+    lon: -66.11,
+  },
+  {
+    name: "Santo Domingo, Dominican Rep.",
+    r: "Caribbean & Central America",
+    lat: 18.49,
+    lon: -69.93,
+  },
+  {
+    name: "Guatemala City, Guatemala",
+    r: "Caribbean & Central America",
+    lat: 14.63,
+    lon: -90.51,
+  },
+  {
+    name: "Panama City, Panama",
+    r: "Caribbean & Central America",
+    lat: 8.98,
+    lon: -79.52,
+  },
+  {
+    name: "Havana, Cuba",
+    r: "Caribbean & Central America",
+    lat: 23.11,
+    lon: -82.37,
+  },
+  {
+    name: "Port-au-Prince, Haiti",
+    r: "Caribbean & Central America",
+    lat: 18.59,
+    lon: -72.31,
+  },
+  // South America
+  { name: "Bogotá, Colombia", r: "South America", lat: 4.71, lon: -74.07 },
+  { name: "Lima, Peru", r: "South America", lat: -12.05, lon: -77.04 },
+  { name: "Cusco, Peru", r: "South America", lat: -13.53, lon: -71.97 },
+  { name: "Santiago, Chile", r: "South America", lat: -33.45, lon: -70.67 },
+  { name: "São Paulo, Brazil", r: "South America", lat: -23.55, lon: -46.63 },
+  {
+    name: "Buenos Aires, Argentina",
+    r: "South America",
+    lat: -34.6,
+    lon: -58.38,
+  },
+  { name: "Quito, Ecuador", r: "South America", lat: -0.18, lon: -78.47 },
+  { name: "La Paz, Bolivia", r: "South America", lat: -16.49, lon: -68.12 },
+  // Europe
+  { name: "London, UK", r: "Europe", lat: 51.51, lon: -0.13 },
+  { name: "Paris, France", r: "Europe", lat: 48.86, lon: 2.35 },
+  { name: "Madrid, Spain", r: "Europe", lat: 40.42, lon: -3.7 },
+  { name: "Rome, Italy", r: "Europe", lat: 41.89, lon: 12.48 },
+  { name: "Berlin, Germany", r: "Europe", lat: 52.52, lon: 13.41 },
+  { name: "Warsaw, Poland", r: "Europe", lat: 52.23, lon: 21.01 },
+  { name: "Athens, Greece", r: "Europe", lat: 37.98, lon: 23.73 },
+  { name: "Oslo, Norway", r: "Europe", lat: 59.91, lon: 10.75 },
+  // Africa
+  { name: "Casablanca, Morocco", r: "Africa", lat: 33.57, lon: -7.59 },
+  { name: "Cairo, Egypt", r: "Africa", lat: 30.04, lon: 31.24 },
+  { name: "Accra, Ghana", r: "Africa", lat: 5.6, lon: -0.19 },
+  { name: "Lagos, Nigeria", r: "Africa", lat: 6.52, lon: 3.38 },
+  { name: "Nairobi, Kenya", r: "Africa", lat: -1.29, lon: 36.82 },
+  { name: "Johannesburg, South Africa", r: "Africa", lat: -26.2, lon: 28.05 },
+  { name: "Dakar, Senegal", r: "Africa", lat: 14.72, lon: -17.47 },
+  { name: "Bamako, Mali", r: "Africa", lat: 12.65, lon: -8.0 },
+  { name: "Ouagadougou, Burkina Faso", r: "Africa", lat: 12.37, lon: -1.52 },
+  { name: "Addis Ababa, Ethiopia", r: "Africa", lat: 9.02, lon: 38.75 },
+  { name: "Kinshasa, DR Congo", r: "Africa", lat: -4.44, lon: 15.27 },
+  { name: "Antananarivo, Madagascar", r: "Africa", lat: -18.88, lon: 47.51 },
+  // Middle East & Central Asia
+  {
+    name: "Istanbul, Türkiye",
+    r: "Middle East & Central Asia",
+    lat: 41.01,
+    lon: 28.98,
+  },
+  {
+    name: "Dubai, UAE",
+    r: "Middle East & Central Asia",
+    lat: 25.2,
+    lon: 55.27,
+  },
+  {
+    name: "Tashkent, Uzbekistan",
+    r: "Middle East & Central Asia",
+    lat: 41.3,
+    lon: 69.24,
+  },
+  // South Asia
+  { name: "Karachi, Pakistan", r: "South Asia", lat: 24.86, lon: 67.01 },
+  { name: "Delhi, India", r: "South Asia", lat: 28.61, lon: 77.21 },
+  { name: "Mumbai, India", r: "South Asia", lat: 19.08, lon: 72.88 },
+  { name: "Colombo, Sri Lanka", r: "South Asia", lat: 6.93, lon: 79.85 },
+  { name: "Dhaka, Bangladesh", r: "South Asia", lat: 23.81, lon: 90.41 },
+  { name: "Kathmandu, Nepal", r: "South Asia", lat: 27.72, lon: 85.32 },
+  // East & Southeast Asia
+  {
+    name: "Bangkok, Thailand",
+    r: "East & Southeast Asia",
+    lat: 13.76,
+    lon: 100.5,
+  },
+  {
+    name: "Ho Chi Minh City, Vietnam",
+    r: "East & Southeast Asia",
+    lat: 10.82,
+    lon: 106.63,
+  },
+  {
+    name: "Jakarta, Indonesia",
+    r: "East & Southeast Asia",
+    lat: -6.21,
+    lon: 106.85,
+  },
+  {
+    name: "Phnom Penh, Cambodia",
+    r: "East & Southeast Asia",
+    lat: 11.56,
+    lon: 104.92,
+  },
+  {
+    name: "Manila, Philippines",
+    r: "East & Southeast Asia",
+    lat: 14.6,
+    lon: 120.98,
+  },
+  { name: "Hong Kong", r: "East & Southeast Asia", lat: 22.32, lon: 114.17 },
+  {
+    name: "Taipei, Taiwan",
+    r: "East & Southeast Asia",
+    lat: 25.03,
+    lon: 121.57,
+  },
+  {
+    name: "Seoul, South Korea",
+    r: "East & Southeast Asia",
+    lat: 37.57,
+    lon: 126.98,
+  },
+  {
+    name: "Tokyo, Japan",
+    r: "East & Southeast Asia",
+    lat: 35.68,
+    lon: 139.69,
+  },
+  // Oceania & Pacific
+  { name: "Suva, Fiji", r: "Oceania & Pacific", lat: -18.14, lon: 178.44 },
+  {
+    name: "Papeete, French Polynesia",
+    r: "Oceania & Pacific",
+    lat: -17.54,
+    lon: -149.57,
+  },
+  {
+    name: "Perth, Australia",
+    r: "Oceania & Pacific",
+    lat: -31.95,
+    lon: 115.86,
+  },
+  {
+    name: "Sydney, Australia",
+    r: "Oceania & Pacific",
+    lat: -33.87,
+    lon: 151.21,
+  },
+  {
+    name: "Auckland, New Zealand",
+    r: "Oceania & Pacific",
+    lat: -36.85,
+    lon: 174.76,
+  },
+];

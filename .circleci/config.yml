@@ -45,9 +45,13 @@ jobs:
       - run:
           name: Deployment staging check
           command: node scripts/deploy-pages-local.mjs --check
+      # #433: the real-page speed budget, measured on the artifact the step
+      # above just built. Byte axes only — this executor has no browser, so the
+      # phone-class timings are taken by scripts/measure-speed.mjs on the
+      # deployed artifact and recorded in scripts/lib/speed-budgets.mjs.
       - run:
-          name: Offline test suite
-          command: npm test
+          name: Speed budget (#433)
+          command: npm run gate:speed
 
 workflows:
   verify:
