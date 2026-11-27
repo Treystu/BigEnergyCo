@@ -69,27 +69,33 @@ export const SPEED_FIRST_MEASUREMENT = {
     ttfn_ms_weather_blocked: 3_162,
   },
   after: {
-    surface: "pending the post-cure deploy",
-    lcp_ms: null,
-    entry_transfer_bytes: null,
-    results_transfer_bytes: null,
-    ttfn_ms: null,
-    ttfn_ms_weather_blocked: null,
+    surface: "https://9c1dcd34.bigenergyco.pages.dev",
+    lcp_ms: 1152,
+    entry_transfer_bytes: 643_937,
+    results_transfer_bytes: 1_205_043,
+    ttfn_ms: 11_051,
+    ttfn_ms_weather_blocked: 2_113,
+    // Run 0 only: runs 2+ in one browser are service-worker warm, which the
+    // instrument now says out loud instead of averaging into the reading.
+    note: "cold run 0, same profile and city as `before`",
   },
   // Where the wait actually is, so the budget cannot be read as an opinion.
   // Blocking the weather host splits the run: the difference is third-party
   // transport and nothing else.
   finding: {
     weather_share_of_ttfn:
-      "12.7 s of 15.9 s cold: 1,795,599 bytes of results-phase transfer, of " +
-      "which 1,755,000 is three NASA POWER pulls",
+      "12.7 s of 15.9 s cold before the cure; 8.9 s of 11.1 s after it. The " +
+      "results phase still carries three POWER pulls (1,755,000 JSON bytes " +
+      "before, 1,164,000 CSV bytes after)",
     nasa_payload:
       "the endpoint serves UNCOMPRESSED JSON: 653,437 bytes per two-year " +
       "chunk, 144,088 gzipped, offered with no Content-Encoding",
     cure:
       "ask for CSV instead: 417,287 bytes for the same two years (36% fewer " +
       "bytes), parsed by parseHourlyCsv with the JSON parser kept as the " +
-      "fallback for any body that is not CSV",
+      "fallback for any body that is not CSV. Measured effect: results " +
+      "transfer 1,795,599 -> 1,205,043 bytes, time to first number 15,898 -> " +
+      "11,051 ms cold, and the versioned asset stamp is unchanged",
     remaining_lever:
       "edge compression of the weather pull. NOT available to this lane: no " +
       "origin serves /api (*/api/health measured 404 on the staging preview, " +

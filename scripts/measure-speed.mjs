@@ -295,7 +295,10 @@ async function main() {
       network: "Slow 4G (1.6 Mbps down / 750 kbps up, 150 ms RTT)",
       cpu: `${CPU_THROTTLE}x throttle`,
       viewport: `${VIEWPORT.width}x${VIEWPORT.height} @${VIEWPORT.deviceScaleFactor}x`,
-      cache: "disabled, so every run is a first load",
+      cache:
+        "HTTP cache disabled; run 0 is the cold reading and later runs are " +
+        "service-worker warm (sw.js answers from its own cache, which the " +
+        "CDP cache flag does not bypass)",
       surface: url
         ? `deployed origin ${url}`
         : `staged build ${stage} on loopback`,
@@ -309,26 +312,26 @@ async function main() {
   if (out) writeFileSync(out, json);
   else process.stdout.write(json);
 
-  // --check applies the wire targets from the budget file to the WORST sample,
-  // because one fast run is not a reading: the slow run is the one a visitor
-  // on a bad train gets.
+  // --check applies the wire targets to RUN 0 — the cold reading — and says so.
+  // Runs 2+ in the same browser are service-worker warm: sw.js serves the app
+  // shell from its own cache, which `Network.setCacheDisabled` does not touch,
+  // so their entry timing collapses (480 ms FCP measured) and their transfer
+  // counts include the worker's background prefetch. Scoring the worst run
+  // would measure the service worker, not the visitor's first load.
   if (check) {
-    const worst = {
-      lcp_ms: Math.max(...samples.map((s) => s.lcpMs || 0)) || null,
-      ttfn_ms: Math.max(...samples.map((s) => s.ttfnMs || 0)) || null,
-      ttfn_ms_weather_blocked: blockHost
-        ? Math.max(...samples.map((s) => s.ttfnMs || 0))
-        : undefined,
-      results_transfer_bytes: Math.max(
-        ...samples.map((s) => s.resultsTransferBytes || 0),
-      ),
+    const cold = samples[0] || {};
+    const reading = {
+      lcp_ms: cold.lcpMs || null,
+      ttfn_ms: cold.ttfnMs || null,
+      ttfn_ms_weather_blocked: blockHost ? cold.ttfnMs || null : undefined,
+      results_transfer_bytes: cold.resultsTransferBytes || null,
     };
     const targets = Object.fromEntries(
       Object.entries(SPEED_FIRST_MEASUREMENT.wire_targets).filter(
         ([axis]) => axis !== "ttfn_ms_weather_blocked" || blockHost,
       ),
     );
-    const verdict = evaluateSpeedReading(worst, targets);
+    const verdict = evaluateSpeedReading(reading, targets);
     for (const c of verdict.checks)
       console.error(
         `SPEED ${c.ok ? "ok  " : "OVER"} ${c.axis} ${c.value} / ${c.budget}` +
