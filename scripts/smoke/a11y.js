@@ -506,7 +506,6 @@ async function measureSite(ctx, { label, sel, instant }) {
 const STRUCTURAL = [
   "citySearch",
   "btnRunSizing",
-  "simpleModeToggle",
   "btnGoalGridtie",
   "btnGoalOffgrid",
 ];
@@ -540,15 +539,12 @@ export async function runA11yFlow(ctx) {
       s.dispatchEvent(new Event("change", { bubbles: true }));
       return s.value; })()`);
 
-  // Arrival state, so every phase below can restore it. Simple mode is
-  // normalized off first: the scroll sites measure the Regular surface (the
-  // Simple card is exercised by the sites themselves).
+  // Arrival state, so every phase below can restore it. There is no mode fork
+  // to normalize any more (#441 deleted `#simpleModeToggle`); the readable card
+  // and the dense result render together, so one surface is measured.
   const arrivalLoadMode = await evaluate(
     `document.getElementById("loadMode")?.value || "bill"`,
   );
-  if (await evaluate(`document.getElementById("simpleModeToggle")?.checked`)) {
-    await evaluate(`document.getElementById("simpleModeToggle").click()`);
-  }
 
   // Names in the arrival state (covers whatever is visible right now).
   const nameSets = [await evaluate(page(accessibleName, nameFailures))];
@@ -603,10 +599,11 @@ export async function runA11yFlow(ctx) {
   }
 
   // Exercise both module paths through actual controls in normal and reduced
-  // motion. The first two are in ui.js and self-balance Simple mode;
-  // the hero CTA reaches chat.js's scrollToSection handler.
+  // motion. The sizing path is the level ladder's Compare tab (`#lvlCompare`),
+  // which exists exactly when a result card does — the deleted Simple-mode
+  // toggle used to stand here. The hero CTA reaches chat.js's scrollToSection.
   if (cardVisible) {
-    const SIZING_PATH = "#simpleModeToggle";
+    const SIZING_PATH = "#lvlCompare";
     const SIZING_DETAILS_PATH = "#btnSimpleDetails";
     const CHAT_PATH = "#btnHeroSizing";
     const CHAT_NAV_PATH = "#btnNavSizeArray";
@@ -670,11 +667,6 @@ export async function runA11yFlow(ctx) {
         cleared === false,
         String(cleared),
       );
-      if (
-        await evaluate(`document.getElementById("simpleModeToggle")?.checked`)
-      ) {
-        await evaluate(`document.getElementById("simpleModeToggle").click()`);
-      }
     }
   }
 

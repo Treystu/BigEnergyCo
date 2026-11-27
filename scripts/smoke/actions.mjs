@@ -62,7 +62,7 @@ export function createActions(ctx) {
     await evaluate(jevFetchStubSource()).catch(() => {});
   };
 
-  const chooseHonolulu = async () => {
+  const chooseHonolulu = async (label = "city suggestions for Honolulu") => {
     await evaluate(
       `(() => { const s = document.getElementById("citySearch"); s.focus(); s.value = "Honolulu"; s.dispatchEvent(new InputEvent("input", { bubbles: true })); return true; })()`,
     );
@@ -74,7 +74,7 @@ export function createActions(ctx) {
       15000,
       500,
     );
-    gate("city suggestions for Honolulu", ok);
+    gate(label, ok);
     if (!ok) return false;
     await evaluate(
       `document.querySelector('#citySuggestions [role="option"]').click()`,
