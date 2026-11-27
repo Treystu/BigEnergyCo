@@ -60,15 +60,15 @@
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
-    "@trigger.dev/build": "4.8.4",
+    "@trigger.dev/build": "4.8.6",
     "@types/node": "^26.6.6",
-    "axe-core": "4.14.0",
+    "axe-core": "4.14.1",
     "chrome-launcher": "1.2.3",
     "lighthouse": "13.6.0",
-    "playwright": "1.65.0",
+    "playwright": "1.65.1",
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "@trigger.dev/sdk": "4.8.4"
+    "@trigger.dev/sdk": "4.8.6"
   }
 }
