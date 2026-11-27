@@ -20,7 +20,7 @@ const POWER_HOURLY_URL =
   "https://power.larc.nasa.gov/api/temporal/hourly/point";
 
 // One owner of the coordinate precision, shared with every other egress.
-import { roundCoords } from "../shared/coords.js?v=20261127d";
+import { roundCoords } from "../shared/coords.js?v=20261127f";
 
 // A satellite request that hangs must never hold the sizing hostage: after
 // this long with no answer, abort and let the caller fall back to bundled

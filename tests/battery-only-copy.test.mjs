@@ -236,16 +236,37 @@ test("every locale carries all five battery verdicts, and none claims a bill", (
 // the accessibility contract. The transparent ring under the visible dot is what
 // a finger presses, so it must be at least 24x24 CSS px — WCAG 2.2's target
 // minimum. r=10 measured 20x20 and the points sit as close as 7px, so the
-// spacing exception cannot rescue it either; the ring is now 12.
-test("every frontier point's hit ring meets the WCAG 2.2 24px target minimum", () => {
-  const host = fakeHost();
-  renderFrontier(host, BATTERY_ONLY_FRONTIER(), renderOpts);
-  const rings = [
-    ...host.innerHTML.matchAll(/<circle\b[^>]*fill="transparent"[^>]*>/g),
-  ].map((m) => m[0]);
-  assert.ok(rings.length > 0, "the chart renders clickable points");
-  for (const ring of rings) {
-    const r = Number(/\br="([\d.]+)"/.exec(ring)?.[1]);
-    assert.ok(r * 2 >= 24, `hit ring r=${r} is under the 24px target minimum`);
+// spacing exception cannot rescue it either.
+//
+// The target is 25 CSS px, not 24: the viewBox is clamped to a minimum width,
+// so a phone container draws the SVG smaller than its viewBox (262.8 CSS px for
+// a 300-wide box at a 390 viewport, 192.8 at 320). A fixed r of 12 rendered
+// 23.9x23.9 CSS px on a laptop — under the minimum, invisibly — and 21.7 on a
+// phone. So the rendered size is what is measured here: the radius is scaled by
+// the same ratio the viewBox is drawn at.
+test("every frontier point's hit ring clears the WCAG 2.2 24px target minimum", () => {
+  const cases = [
+    { width: 720, note: "laptop" },
+    { width: 465, note: "narrow results column" },
+    { width: 262.8, note: "phone: viewBox clamped up to 300" },
+    { width: 192.8, note: "small phone: viewBox clamped up to 300" },
+  ];
+  for (const { width, note } of cases) {
+    const host = fakeHost();
+    renderFrontier(host, BATTERY_ONLY_FRONTIER(), { ...renderOpts, width });
+    const rings = [
+      ...host.innerHTML.matchAll(/<circle\b[^>]*fill="transparent"[^>]*>/g),
+    ].map((m) => m[0]);
+    assert.ok(rings.length > 0, `${note}: the chart renders clickable points`);
+    const viewBox = Number(/viewBox="0 0 ([\d.]+)/.exec(host.innerHTML)?.[1]);
+    const drawnAt = Math.min(1, width / viewBox);
+    for (const ring of rings) {
+      const r = Number(/\br="([\d.]+)"/.exec(ring)?.[1]);
+      assert.ok(
+        r * 2 * drawnAt >= 24,
+        `${note}: hit ring r=${r} in a ${viewBox} viewBox drawn at ${drawnAt.toFixed(3)} is ` +
+          `${(r * 2 * drawnAt).toFixed(1)} CSS px, under the 24px minimum`,
+      );
+    }
   }
 });
