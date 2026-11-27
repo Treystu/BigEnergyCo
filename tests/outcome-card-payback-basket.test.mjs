@@ -55,8 +55,10 @@ test("the installed row is read from the priced routes, not recomputed", () => {
   );
   // The helper's only source of that figure is the priced model, and it requires
   // the routes to have priced THIS system before it answers.
+  // The priced-route lookup is its own helper (#467 gave the verdict a second
+  // reader of the same route), so the slice starts where the routes are read.
   const helper = src.slice(
-    src.indexOf("function installedBreakEvenYear"),
+    src.indexOf("function installedRouteFor"),
     src.indexOf("/** Renders the Plain-English ELI5"),
   );
   assert.ok(helper.includes("p.pathsPriced"), "must read the priced routes");

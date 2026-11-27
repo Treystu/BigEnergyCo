@@ -1236,6 +1236,25 @@ function finish(p, sys) {
   return p;
 }
 
+// WHY a route has no break-even inside the horizon (#467): the card printed one
+// canned cause for every null — "replacements outpace savings" — while its own
+// swaps row said "None in 20 years". Derive it instead from the same identity
+// `explainRanking` uses: spend20 + residual - baseline = the shortfall. The
+// largest POSITIVE component is the driver, so a zero-swap route is never told
+// it lost to replacements; "no-baseline" is the off-grid frame.
+export function breakEvenDriver(route) {
+  if (!route) return null;
+  if (!(route.baselineBills20 > 0)) return { code: "no-baseline" };
+  const parts = [
+    ["upfront", route.year0 - route.incentives],
+    ["replacements", route.replacementsTotal || 0],
+    ["upkeep", route.omTotal || 0],
+    ["residual", route.residualBills20 || 0],
+  ].filter(([, v]) => v > 0);
+  parts.sort((a, b) => b[1] - a[1]);
+  return { code: parts.length ? parts[0][0] : "upfront" };
+}
+
 /**
  * R-PATH-07 break-even: the first year in which cumulative (system spend +
  * residual bills) is at or below cumulative baseline bills. Null when it never

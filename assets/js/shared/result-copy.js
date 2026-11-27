@@ -33,6 +33,13 @@ export const RESULT_COPY = {
       "{requested} isn't reachable within the sizes this tool searches at this site, so the cards below show {effective} instead — the curve shows how far this location can actually get.",
     resRowTrueBreakeven: "True 20-yr break-even",
     resRowNever: "never — replacements outpace savings",
+    resNeverUpfront:
+      "never — installed cost exceeds {years} years of bills replaced",
+    resNeverUpkeep: "never — upkeep and fuel outpace the savings",
+    resNeverResidual:
+      "never — the remaining grid bill cannot repay it in {years} years",
+    resNeverNoGridBill: "no grid bill to repay — compare its cost per kWh",
+    resCardPaybackFrame: "Payback",
     resRowPaysForItself: "Pays for itself in",
     resMatrixLegendOffgrid:
       'Green outline = lowest true 20-year cost in that column (every bank swap counted). "Unmet" hours are covered by a generator or the grid.',
@@ -257,6 +264,14 @@ export const RESULT_COPY = {
       "{requested} no es alcanzable con los tamaños que esta herramienta busca en este sitio, así que las tarjetas de abajo muestran {effective}: la curva muestra hasta dónde puede llegar realmente este lugar.",
     resRowTrueBreakeven: "Punto de equilibrio real a 20 años",
     resRowNever: "nunca: los cambios superan el ahorro",
+    resNeverUpfront:
+      "nunca: el coste instalado supera {years} años de facturas sustituidas",
+    resNeverUpkeep: "nunca: mantenimiento y combustible superan el ahorro",
+    resNeverResidual:
+      "nunca: la factura de red restante no lo amortiza en {years} años",
+    resNeverNoGridBill:
+      "sin factura de red que amortizar: compara su coste por kWh",
+    resCardPaybackFrame: "Amortización",
     resRowPaysForItself: "Se paga en",
     resMatrixLegendOffgrid:
       "El contorno verde marca el coste real más bajo a 20 años en esa columna (contando cada cambio de batería). Las horas «sin cubrir» las cubre un generador o la red.",
@@ -484,6 +499,14 @@ export const RESULT_COPY = {
       "{requested} não é alcançável com os tamanhos que esta ferramenta procura neste local, por isso os cartões abaixo mostram {effective}: a curva mostra até onde este local consegue realmente chegar.",
     resRowTrueBreakeven: "Ponto de equilíbrio real a 20 anos",
     resRowNever: "nunca: as substituições superam a poupança",
+    resNeverUpfront:
+      "nunca: o custo instalado supera {years} anos de faturas substituídas",
+    resNeverUpkeep: "nunca: manutenção e combustível superam a poupança",
+    resNeverResidual:
+      "nunca: a fatura da rede restante não o recupera em {years} anos",
+    resNeverNoGridBill:
+      "sem fatura da rede a recuperar: compare o custo por kWh",
+    resCardPaybackFrame: "Retorno",
     resRowPaysForItself: "Paga-se em",
     resMatrixLegendOffgrid:
       "O contorno verde marca o custo real mais baixo a 20 anos nessa coluna (contando cada troca de bateria). As horas «não cobertas» são cobertas por um gerador ou pela rede.",
@@ -710,6 +733,14 @@ export const RESULT_COPY = {
       "{requested} n'est pas atteignable avec les tailles que cet outil recherche sur ce site, donc les fiches ci-dessous montrent {effective} : la courbe montre jusqu'où ce lieu peut réellement aller.",
     resRowTrueBreakeven: "Seuil de rentabilité réel sur 20 ans",
     resRowNever: "jamais — les remplacements dépassent les économies",
+    resNeverUpfront:
+      "jamais — le coût installé dépasse {years} ans de factures remplacées",
+    resNeverUpkeep: "jamais — entretien et carburant dépassent les économies",
+    resNeverResidual:
+      "jamais — la facture réseau restante ne le rembourse pas en {years} ans",
+    resNeverNoGridBill:
+      "aucune facture réseau à rembourser — comparez son coût par kWh",
+    resCardPaybackFrame: "Amortissement",
     resRowPaysForItself: "Rentabilisé en",
     resMatrixLegendOffgrid:
       "Le contour vert indique le coût réel sur 20 ans le plus bas de la colonne (chaque remplacement de parc compté). Les heures «non couvertes» le sont par un groupe ou le réseau.",
@@ -937,6 +968,14 @@ export const RESULT_COPY = {
       "{requested} ist mit den Größen, die dieses Werkzeug hier sucht, nicht erreichbar, daher zeigen die Karten unten {effective} — die Kurve zeigt, wie weit dieser Standort tatsächlich kommt.",
     resRowTrueBreakeven: "Echter Break-even über 20 Jahre",
     resRowNever: "nie — Wechsel übersteigen die Ersparnis",
+    resNeverUpfront:
+      "nie — Installationskosten übersteigen {years} Jahre ersetzter Rechnungen",
+    resNeverUpkeep: "nie — Wartung und Brennstoff übersteigen die Ersparnis",
+    resNeverResidual:
+      "nie — die restliche Netzrechnung zahlt es in {years} Jahren nicht zurück",
+    resNeverNoGridBill:
+      "keine Netzrechnung zurückzuzahlen — vergleiche die Kosten pro kWh",
+    resCardPaybackFrame: "Amortisation",
     resRowPaysForItself: "Amortisiert in",
     resMatrixLegendOffgrid:
       "Grüner Rahmen = niedrigste echte Kosten über 20 Jahre in dieser Spalte (jeder Akkuwechsel gezählt). „Ungedeckte“ Stunden übernehmen Generator oder Netz.",
@@ -1163,6 +1202,14 @@ export const RESULT_COPY = {
       "{requested} is met de formaten die dit hulpmiddel hier zoekt niet haalbaar, dus de kaarten hieronder tonen {effective} — de curve laat zien hoe ver deze locatie echt kan komen.",
     resRowTrueBreakeven: "Echt break-evenpunt over 20 jaar",
     resRowNever: "nooit — vervangingen overtreffen de besparing",
+    resNeverUpfront:
+      "nooit — installatiekosten overtreffen {years} jaar vervangen rekeningen",
+    resNeverUpkeep: "nooit — onderhoud en brandstof overtreffen de besparing",
+    resNeverResidual:
+      "nooit — de resterende netrekening verdient het in {years} jaar niet terug",
+    resNeverNoGridBill:
+      "geen netrekening om terug te verdienen — vergelijk de kosten per kWh",
+    resCardPaybackFrame: "Terugverdientijd",
     resRowPaysForItself: "Terugverdiend in",
     resMatrixLegendOffgrid:
       "Groene rand = laagste echte kosten over 20 jaar in die kolom (elke accuwissel meegeteld). „Niet gedekte” uren worden door een generator of het net gedekt.",
@@ -1387,6 +1434,13 @@ export const RESULT_COPY = {
       "{requested} غير قابل للتحقيق ضمن المقاسات التي يبحث عنها هذا البرنامج في هذا الموقع، لذا تعرض البطاقات أدناه {effective} — ويوضح المنحنى إلى أي مدى يمكن لهذا الموقع أن يصل فعلًا.",
     resRowTrueBreakeven: "نقطة التعادل الحقيقية على 20 عامًا",
     resRowNever: "أبدًا — الاستبدالات تتجاوز التوفير",
+    resNeverUpfront:
+      "أبدًا — تكلفة التركيب تتجاوز {years} سنة من الفواتير المستبدلة",
+    resNeverUpkeep: "أبدًا — الصيانة والوقود يتجاوزان التوفير",
+    resNeverResidual:
+      "أبدًا — فاتورة الشبكة المتبقية لا تسدده خلال {years} سنة",
+    resNeverNoGridBill: "لا فاتورة شبكة لسدادها — قارن تكلفته لكل كيلوواط ساعة",
+    resCardPaybackFrame: "السداد",
     resRowPaysForItself: "يُسترد ثمنه في",
     resMatrixLegendOffgrid:
       "الإطار الأخضر يعني أقل تكلفة حقيقية على 20 عامًا في ذلك العمود (مع حساب كل تبديل بطارية). الساعات «غير المغطاة» يغطيها مولد أو الشبكة.",

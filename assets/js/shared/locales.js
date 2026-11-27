@@ -3,11 +3,11 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261127s";
-import { RESULT_COPY } from "./result-copy.js?v=20261127s";
-import { TILT_COPY } from "./tilt-copy.js?v=20261127s";
-import { DETAIL_COPY } from "./detail-copy.js?v=20261127s";
-import { CHROME_COPY } from "./chrome-copy.js?v=20261127s";
+import { HOME_COPY } from "./home-copy.js?v=20261127u";
+import { RESULT_COPY } from "./result-copy.js?v=20261127u";
+import { TILT_COPY } from "./tilt-copy.js?v=20261127u";
+import { DETAIL_COPY } from "./detail-copy.js?v=20261127u";
+import { CHROME_COPY } from "./chrome-copy.js?v=20261127u";
 
 export const LOCALES = {
   en: {
@@ -96,7 +96,7 @@ export const LOCALES = {
     tariffSpendBattery:
       "At {tariff}/kWh, your power costs about {annual} per year today. A battery with no panels moves when you draw power; it does not cut what you pay.",
     tariffSpendOffgrid:
-      "At {tariff}/kWh, this use costs about {annual} per year in grid power. Payback figures below compare system cost against that spend.",
+      "There is no grid bill to repay off-grid. What applies is the system's own cost per kWh — shown with the results — against what you would otherwise pay for power.",
     tariffSpendFixed:
       " That includes {fixed}/mo in fixed charges solar can't cut.",
     readoutAppliancesEmpty:
@@ -1308,7 +1308,7 @@ export const LOCALES = {
     fuelApplyOk:
       "Tu combustible de generador sale a unos {rate}/kWh — se ha introducido como tu precio de la electricidad, así que cada cifra de amortización abajo compara con lo que quemas hoy.",
     tariffSpendOffgrid:
-      "A {tariff}/kWh, este consumo cuesta unos {annual} al año en electricidad de red. Las cifras de amortización abajo comparan el coste del sistema contra ese gasto.",
+      "Sin conexión a la red no hay factura que amortizar. Lo que aplica es el coste propio del sistema por kWh —que aparece con los resultados— frente a lo que pagarías de otro modo por la energía.",
     tariffSpendFixed:
       " Eso incluye {fixed}/mes en cargos fijos que el solar no reduce.",
     readoutKwhEmpty:
@@ -1906,7 +1906,7 @@ export const LOCALES = {
     tariffSpendBattery:
       "A {tariff}/kWh, a sua eletricidade custa cerca de {annual} por ano hoje. Uma bateria sem painéis muda quando consome; não reduz o que paga.",
     tariffSpendOffgrid:
-      "A {tariff}/kWh, este uso custa cerca de {annual} por ano em energia da rede. Os valores de retorno abaixo comparam o custo do sistema com esse gasto.",
+      "Sem ligação à rede não há fatura a recuperar. O que se aplica é o custo do próprio sistema por kWh — mostrado com os resultados — face ao que pagaria de outra forma pela energia.",
     tariffSpendFixed:
       " Isso inclui {fixed}/mês em encargos fixos que o solar não reduz.",
     // -- Glosas de compreensão (E13/V4): palavras simples no primeiro uso.
@@ -2764,7 +2764,7 @@ export const LOCALES = {
     tariffSpendBattery:
       "À {tariff}/kWh, votre électricité coûte environ {annual} par an aujourd'hui. Une batterie sans panneaux décale le moment où vous consommez ; elle ne réduit pas ce que vous payez.",
     tariffSpendOffgrid:
-      "À {tariff}/kWh, cet usage coûte environ {annual} par an en électricité du réseau. Les délais de retour ci-dessous comparent le coût du système à cette dépense.",
+      "Hors réseau, il n'y a pas de facture à rembourser. Ce qui s'applique, c'est le coût du système par kWh — affiché avec les résultats — face à ce que vous paieriez autrement l'électricité.",
     tariffSpendFixed:
       " Dont {fixed}/mois de charges fixes que le solaire ne réduit pas.",
     // -- Gloses de compréhension (E13/V4) : des mots simples au premier usage.
@@ -3536,7 +3536,7 @@ export const LOCALES = {
     tariffSpendBattery:
       "Bei {tariff}/kWh kostet dein Strom heute etwa {annual} pro Jahr. Eine Batterie ohne Module verschiebt, wann du Strom ziehst; sie senkt nicht, was du zahlst.",
     tariffSpendOffgrid:
-      "Bei {tariff}/kWh kostet dieser Verbrauch etwa {annual} pro Jahr an Netzstrom. Die Amortisationswerte unten vergleichen die Systemkosten mit diesen Ausgaben.",
+      "Ohne Netzanschluss gibt es keine Rechnung zurückzuzahlen. Maßgeblich sind die Kosten des Systems pro kWh — mit den Ergebnissen angezeigt — gegenüber dem, was du sonst für Strom zahlen würdest.",
     tariffSpendFixed:
       " Darin sind {fixed}/Monat an Fixkosten enthalten, die Solar nicht senken kann.",
     readoutAppliancesEmpty:
@@ -4398,7 +4398,7 @@ export const LOCALES = {
     tariffSpendBattery:
       "Bij {tariff}/kWh kost uw stroom vandaag ongeveer {annual} per jaar. Een accu zonder panelen verschuift wanneer u stroom verbruikt; hij verlaagt niet wat u betaalt.",
     tariffSpendOffgrid:
-      "Bij {tariff}/kWh kost dit verbruik ongeveer {annual} per jaar aan netstroom. De terugverdiencijfers hieronder vergelijken de systeemkosten met die uitgave.",
+      "Zonder netaansluiting is er geen rekening om terug te verdienen. Wat geldt is de kostprijs per kWh van het systeem — getoond bij de resultaten — tegenover wat je anders voor stroom zou betalen.",
     tariffSpendFixed:
       " Daarvan is {fixed}/mnd aan vaste kosten die zonne-energie niet kan verlagen.",
     readoutAppliancesEmpty:
@@ -5447,7 +5447,7 @@ export const LOCALES = {
     tariffSpendBattery:
       "بسعر {tariff}/كيلوواط/ساعة، تكلفك كهرباؤك حوالي {annual} سنويًا اليوم. البطارية بدون ألواح تغيّر وقت الاستهلاك؛ ولا تخفّض ما تدفعه.",
     tariffSpendOffgrid:
-      "بسعر {tariff}/كيلوواط/ساعة، يكلفك هذا الاستخدام حوالي {annual} سنويًا من كهرباء الشبكة. أرقام الاسترداد أدناه تقارن تكلفة النظام بهذا الإنفاق.",
+      "من دون اتصال بالشبكة لا توجد فاتورة لسدادها. ما ينطبق هو تكلفة النظام لكل كيلوواط ساعة — الظاهرة مع النتائج — مقابل ما ستدفعه للطاقة بطريقة أخرى.",
     tariffSpendFixed:
       " ويشمل ذلك {fixed}/شهريًا في رسوم ثابتة لا تخفضها الطاقة الشمسية.",
     // -- شروح الفهم (E13/V4): كلمات بسيطة عند أول استخدام.
