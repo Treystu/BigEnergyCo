@@ -783,3 +783,43 @@ the promoted state). #328 remains the only owner-held row, parked with its
 receipt. #431 stays DECISION-READY behind case-feature data. The browser drive's
 harness staleness (above) is a named reliability row, not a gate this lane can
 declare green.
+
+## Landing record — 2026-11-27 (live-defect tier: #467 and #479, with their gates)
+
+Five landings this pass, each green at its own exact head (CircleCI `verify`, read via check-runs, never the combined status API) and each with a non-empty squash proven against the previous main.
+
+| Row                                                                                                                                                              | PR   | Merge SHA  | Head at rail | Rail              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------- | ------------ | ----------------- |
+| harness repair (weather wipe, guarded geo stage, share/auto-run gates, gridtie copy, jev remount, a11y `SCROLL_SITES`, use-cases panel + verdict classification) | #507 | `0d378648` | `474c61b2`   | success           |
+| refused share link keeps the intake prior (harness)                                                                                                              | #510 | `34abbee4` | `9df845fd`   | success (job 368) |
+| **#467** verdict names a cause its numbers deny                                                                                                                  | #508 | `c90ce176` | `969d705d`   | success (job 370) |
+| **#479** sub-1 kWh/day silent substitution                                                                                                                       | #509 | `4c3f238f` | `53f8c9f9`   | success (job 372) |
+| kWh gates take the bounds from the codec; eager tripwire recorded                                                                                                | #511 | `fe33d725` | `135cc9a1`   | success (job 374) |
+
+- **#467, the cause.** The card printed one canned cause for every null break-even while its own swaps row said "None in 20 years". `paths.breakEvenDriver(route)` now derives the driver from the same additive identity the route ranking uses (`spend20 + residualBills20 − baselineBills20`), naming only a POSITIVE component; `ui.installedRouteFor` / `neverVerdictCopy` feed the card, both payback rows and both print twins; off-grid prints the cost-per-kWh frame; danger red is an explicit `opts.tone === "danger"` flag. Copy ×7 locales.
+- **#479, the cause.** The bound has one owner: `MIN_DAILY_KWH = 0.01` / `MAX_DAILY_KWH = 500` in `share-codec.js`, used by the share parser and by `ui.js` validation, with the input's `min`/`step` and the `invalidDailyKwh` copy ×7 stating the same range. Entered value equals encodable value by construction.
+- **Gates that outlived the fix.** The staging suite and `npm test` still pinned the old `0.5` floor (three staging gates, two test assertions incl. `kw < 0.5`); #511 moves both onto the codec's constants and derives the out-of-range hazards from them (0.005 / 501), so a gate cannot outlive the form it guards. `npm test` on merged main: **2444/2444**.
+- **One budget moved, from a reading.** The eager-JS tripwire read 894,989 against 895,000 (11 bytes were left) before this work and 898,217 after #467's installed-payback row and driver-derived verdict. #511 declares 900,000 with that reading and the rationale beside it, in the file's own convention; the deferred layer stayed inside its own budget (`1054686 / 1055000`), and neither row needed a gate-text change of its own.
+
+### Rendered verification (staging, stamp `20261127v` / SW `beco-v342`, deploy of `4c3f238f`)
+
+Persistence wiped **and the wipe proven** before any probe: `.lane/wipe-proof.mjs` seeds a `beco:wipe-probe` localStorage key and a `beco-v100-stale` cache, then clears storage, cookies and caches and reloads — `WIPE_BEFORE` shows both, `WIPE_AFTER` shows neither and only the current `beco-v342` cache → `WIPE_PROVEN true`.
+
+- **#467 grid-tied** (Lehighton PA, ZIP 18255, 5 kWh/day): `Battery swaps over 20 yr: None in 20 years` beside `Pays for itself (installed): never — installed cost exceeds 20 years of bills replaced`; no "replacements outpace savings" node on the card; `Never breaks even within 20 years` renders `rgb(239, 68, 68)` from the caller flag.
+- **#467 off-grid** (5 kWh/day): no grid-bill payback row; the money bar prints "There is no grid bill to repay off-grid…" — the cost-per-kWh frame.
+- **#479**: `0.21` → `Using 0.21 kWh/day directly.` with the share hash decoding to `kw: 0.21`; `0.28` → `kw: 0.28`; `0.5` → `kw: 0.5` (no 1 kWh/day floor); `0.005` and `501` refused before the worker starts, an empty field keeps its range hint (15/15 location gates).
+- **Full suite on that stamp**: **228/234**, every red gate owned by **#364** (see below), none by the product.
+
+### #364 — DECISION-READY, refreshed read (2026-11-27T16:29:55Z)
+
+`curl -H "Origin: https://staging.bigenergyco.pages.dev" …/api/health` returns `HTTP/1.1 200 OK` with `Access-Control-Allow-Headers/Methods/Max-Age` and **no `Access-Control-Allow-Origin`**, which is exactly what the suite's six console/API gates report. The repository already trusts this exact origin with tests, so the whole act is one `wrangler deploy` of `worker/` — an access change, parked on the issue with its receipt, never blocking the lane.
+
+### Census — re-derived live after the merges (2026-11-27, read: gh pr/issue list + check-runs, this session)
+
+- **Main head `fe33d725`.** Open PRs: **#455** (npm-group dependabot bump, untouched by this lane). Open issues **27**.
+- **Closed this pass:** #467, #479 (receipts on the issues, mirrored to #429 and #145).
+- **Open set (27):** #145; #328 (owner act, DECISION-READY, parked); #345/#358, #353; #360, #361, #362, #364; #366 with #393–#399 and #408; #400 with #401/#402/#403; #429; #431; #438; #440; #466.
+
+## Readiness line (2026-11-27, after the #467/#479 landings)
+
+Next row in filed order: **#438 share card**, with #440 and #431 beside it in the live queue. Main `fe33d725`, rail green at every merged head, `npm test` 2444/2444, staging serves stamp `20261127v` / SW `beco-v342` from the merged shape, and both live-defect rows are verified on that surface with the persistence wipe proven. Production is untouched (still the 2026-11-04 deploy), so promotion stays gated on the D-2026-11-13-008 trigger (rail green + Jev vision PASS on rendered surfaces + scope flush; #360 closes on the promoted state). #328 remains owner-held and parked; #364 stays DECISION-READY behind its one worker deploy and owns the six remaining suite gates; #431 stays DECISION-READY behind case-feature data. The browser suite cannot run on CircleCI (`cimg/node:22` has no browser), so its receipts are lane-run drives on the deployed artifact, cited by log.
