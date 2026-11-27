@@ -8,6 +8,13 @@
 
 export const SHARE_PREFIX = "#s=";
 
+// THE daily-load bounds, in one place, because they are two ends of ONE fact:
+// any load the form accepts must be a load a share link can carry, or a visitor
+// can size a system and fail to share it (#479). ui.js validates direct entry
+// against these same numbers.
+export const MIN_DAILY_KWH = 0.01;
+export const MAX_DAILY_KWH = 500;
+
 export function b64urlEncode(obj) {
   const json = JSON.stringify(obj);
   const bytes = new TextEncoder().encode(json);
@@ -26,7 +33,7 @@ export function b64urlDecode(str) {
 /**
  * Parse + validate an incoming share hash. Returns the decoded state with
  * numeric la/lo/kw, or null for anything malformed or out of bounds
- * (version must be 1; |la| <= 90; |lo| <= 180; 0.5 <= kw <= 500).
+ * (version must be 1; |la| <= 90; |lo| <= 180; MIN_DAILY_KWH <= kw <= MAX_DAILY_KWH).
  */
 export function parseShareHash(hash) {
   if (typeof hash !== "string" || !hash.startsWith(SHARE_PREFIX)) return null;
@@ -46,8 +53,8 @@ export function parseShareHash(hash) {
     !Number.isFinite(kw) ||
     Math.abs(la) > 90 ||
     Math.abs(lo) > 180 ||
-    kw < 0.5 ||
-    kw > 500
+    kw < MIN_DAILY_KWH ||
+    kw > MAX_DAILY_KWH
   )
     return null;
   return { ...o, la, lo, kw };

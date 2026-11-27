@@ -132,6 +132,8 @@ import {
   targetForPct,
 } from "../shared/cut-targets.js?v=20261127u";
 import {
+  MAX_DAILY_KWH,
+  MIN_DAILY_KWH,
   SHARE_PREFIX,
   b64urlEncode,
   parseShareHash,
@@ -3140,16 +3142,21 @@ function run(quiet = false, explicit = false) {
   }
 
   const directKwh = $("loadMode")?.value === "kwh";
+  // The floor used to be 0.5 kWh/day for a directly entered load, and the run
+  // silently sized something else when the entry was below it (#479). Sub-1
+  // kWh/day is a real off-grid class (gate openers, cabins, pumps, lighting),
+  // so the entry runs: the only floor left is the one that keeps arithmetic
+  // honest — a positive number, stated in the refusal copy.
   if (
     !Number.isFinite(inp.dailyKwh) ||
     inp.dailyKwh <= 0 ||
-    (directKwh && inp.dailyKwh < 0.5) ||
-    inp.dailyKwh > 500
+    (directKwh && inp.dailyKwh < MIN_DAILY_KWH) ||
+    inp.dailyKwh > MAX_DAILY_KWH
   ) {
     runChannel.dropPending();
     setResultsHidden(true);
     setStatus(
-      directKwh || inp.dailyKwh > 500
+      directKwh || inp.dailyKwh > MAX_DAILY_KWH
         ? t("invalidDailyKwh")
         : t("tellPowerUse"),
     );
