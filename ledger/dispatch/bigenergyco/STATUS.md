@@ -541,6 +541,7 @@ WAIT-STATE: not waiting on a party. Wave 2 is landed and rendered-verified
 accessibility, #435 failure states, #438 share card) with #431 parked
 DECISION-READY behind case-feature data and #328 parked as an owner act. Rung:
 Wave 2 tail closed; next is Wave 3's first row.
+
 ## Landing record — 2026-11-27 (Wave 3 row 1: #433 speed)
 
 - **#433 closed on squash `e717b7a8` (PR #499, head `7160e6cb`, CircleCI
