@@ -528,8 +528,8 @@ estimateCard < billSliderWrap < btnRunSizing`.
   keys in page text, `scrollWidth - clientWidth = 0`. On the previous staging
   deploy (`112c4d34`, stamp `20261126d`, SW `beco-v319`): comparison header
   `Batería ↓ · Objetivo → −60% factura...`, hardware `Paneles solares /
-  Inversor / Batería (útil)`, print title `Comparación de vida útil — conectada
-  a la red`, sunshine `Datos de sol de Madrid, Europe, Spain`, lead-acid chip in
+Inversor / Batería (útil)`, print title `Comparación de vida útil — conectada
+a la red`, sunshine `Datos de sol de Madrid, Europe, Spain`, lead-acid chip in
   Spanish. Console carried only the #364 advisor-origin CORS errors, before and
   after these heads.
 - **No promotion.** Production (`freeoffgridcalculator.com`) is untouched; the
