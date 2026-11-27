@@ -235,9 +235,17 @@ test("PERF-BUDGET: eager first-load payload stays within budget", () => {
     cssBytes <= 41_000,
     `site.css ${cssBytes} bytes exceeds 41,000 budget`,
   );
+  // 900,000 (+5,000, 2026-11-27): the reading was 894,989 against an 895,000
+  // tripwire — 11 bytes of headroom — so the next real feature crossed it. What
+  // crossed it: #467's installed-payback row reads its year from the priced
+  // route and its never-verdict names the run's own driver, both on the results
+  // card's eager path (ui.js +2,468 code bytes, re-measured here at 898,217 on
+  // the merged head). The raise is declared from that reading with explicit
+  // headroom, not typed in to fit a number; the deferred layer absorbed the rest
+  // and stayed inside its own budget (1,054,686 / 1,055,000).
   assert.ok(
-    jsBytes <= 895_000,
-    `eager JS ${jsBytes} bytes exceeds 895,000 budget — you added eager code; lazy-load it or raise the budget deliberately`,
+    jsBytes <= 900_000,
+    `eager JS ${jsBytes} bytes exceeds 900,000 budget — you added eager code; lazy-load it or raise the budget deliberately`,
   );
 });
 

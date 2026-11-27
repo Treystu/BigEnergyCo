@@ -5,25 +5,44 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { LOCALES } from "../assets/js/shared/locales.js";
+import {
+  MAX_DAILY_KWH,
+  MIN_DAILY_KWH,
+} from "../assets/js/sizing/share-codec.js";
 
 const ui = fs.readFileSync("assets/js/sizing/ui.js", "utf8");
 const html = fs.readFileSync("index.html", "utf8");
 const locationSmoke = fs.readFileSync("scripts/smoke/location.js", "utf8");
 
 test("direct kWh sizing enforces the range the form advertises", () => {
-  assert.match(html, /id="dailyKwhInput"[\s\S]*?min="0\.5"[\s\S]*?max="500"/);
-  assert.match(ui, /directKwh && inp\.dailyKwh < 0\.5/);
-  assert.match(ui, /inp\.dailyKwh > 500/);
+  // One owner: the numbers below are the codec's, so this test pins the FORM to
+  // the product's bound instead of pinning a literal that can drift from it.
+  const min = String(MIN_DAILY_KWH);
+  assert.match(
+    html,
+    new RegExp(
+      `id="dailyKwhInput"[\\s\\S]*?min="${min}"[\\s\\S]*?max="${MAX_DAILY_KWH}"`,
+    ),
+  );
+  assert.match(ui, /directKwh && inp\.dailyKwh < MIN_DAILY_KWH/);
+  assert.match(ui, /inp\.dailyKwh > MAX_DAILY_KWH/);
   assert.match(
     ui,
-    /directKwh \|\| inp\.dailyKwh > 500[\s\S]*t\("invalidDailyKwh"\)/,
+    /directKwh \|\| inp\.dailyKwh > MAX_DAILY_KWH[\s\S]*t\("invalidDailyKwh"\)/,
   );
   assert.match(locationSmoke, /empty kWh entry stays on the form/);
   assert.match(
     locationSmoke,
     /out-of-range coordinates explain the valid bounds/,
   );
-  assert.match(locationSmoke, /"0\.1", "501"/);
+  // The smoke gate takes its edges from the codec too, so neither the reason
+  // copy nor the rejected value can be older than the form.
+  assert.match(
+    locationSmoke,
+    /from "\.\.\/\.\.\/assets\/js\/sizing\/share-codec\.js"/,
+  );
+  assert.match(locationSmoke, /MIN_DAILY_KWH \/ 2/);
+  assert.match(locationSmoke, /MAX_DAILY_KWH \+ 1/);
 });
 
 test("share restoration keeps its source hash until all inputs are restored", () => {
@@ -68,8 +87,8 @@ test("share restoration keeps its source hash until all inputs are restored", ()
   const codec = fs.readFileSync("assets/js/sizing/share-codec.js", "utf8");
   assert.match(codec, /Math\.abs\(la\) > 90/);
   assert.match(codec, /Math\.abs\(lo\) > 180/);
-  assert.match(codec, /kw < 0\.5/);
-  assert.match(codec, /kw > 500/);
+  assert.match(codec, /kw < MIN_DAILY_KWH/);
+  assert.match(codec, /kw > MAX_DAILY_KWH/);
 });
 
 test("background location refinements are tied to the current user choice", () => {

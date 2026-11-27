@@ -2,6 +2,20 @@
 // old coordinates, and edited/cleared coordinates must retire old results.
 import { gate, sleep } from "./runtime.mjs";
 import { RUN_TIMEOUT_MS } from "./actions.mjs";
+// The bounds are the product's, not the harness's: read the one source
+// (share-codec.js) so a gate can never pin a range the form stopped offering.
+import {
+  MAX_DAILY_KWH,
+  MIN_DAILY_KWH,
+} from "../../assets/js/sizing/share-codec.js";
+
+const bound = (n) => String(n).replace(".", "\\.");
+const RANGE_COPY = new RegExp(
+  `${bound(MIN_DAILY_KWH)}.*${bound(MAX_DAILY_KWH)} kWh`,
+  "i",
+);
+// Just outside each edge: below the floor, above the ceiling.
+const OUT_OF_RANGE_KWH = [String(MIN_DAILY_KWH / 2), String(MAX_DAILY_KWH + 1)];
 
 export async function runLocationFlow(ctx, actions) {
   const { evaluate } = ctx;
@@ -249,12 +263,10 @@ export async function runLocationFlow(ctx, actions) {
   })`);
   gate(
     "empty kWh entry stays on the form with an actionable range hint",
-    emptyKwh.hidden &&
-      emptyKwh.posts === 3 &&
-      /0\.5.*500 kWh/i.test(emptyKwh.status),
+    emptyKwh.hidden && emptyKwh.posts === 3 && RANGE_COPY.test(emptyKwh.status),
     JSON.stringify(emptyKwh),
   );
-  for (const invalidKwh of ["0.1", "501"]) {
+  for (const invalidKwh of OUT_OF_RANGE_KWH) {
     await evaluate(`(() => {
       const kwh = document.getElementById("dailyKwhInput");
       kwh.value = "${invalidKwh}";
@@ -270,7 +282,7 @@ export async function runLocationFlow(ctx, actions) {
       `${invalidKwh} kWh/day is rejected before starting the worker`,
       invalidLoad.hidden &&
         invalidLoad.posts === 3 &&
-        /0\.5.*500 kWh/i.test(invalidLoad.status),
+        RANGE_COPY.test(invalidLoad.status),
       JSON.stringify(invalidLoad),
     );
   }
