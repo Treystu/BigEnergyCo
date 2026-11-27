@@ -185,3 +185,24 @@ test("one source per string: the locale merge does not shadow HOME_COPY", () => 
   // Dutch has no HOME_COPY block at all; its copy lives in locales.js only.
   assert.ok(!("nl" in HOME_COPY), "nl must not gain a second copy source");
 });
+
+// #439 drive: the mailto subject is reader-facing copy. An English subject with
+// a Spanish body is the same leak the census looked for on the page.
+test("#439: the support mailto subject comes from the dictionary", () => {
+  const ui = readFileSync(
+    new URL("../assets/js/sizing/ui.js", import.meta.url),
+    "utf8",
+  );
+  assert.match(ui, /t\("resultSupportSubject"\)/);
+  assert.ok(
+    !HTML.includes("?subject=Help"),
+    "the markup must not ship a hard-coded English subject",
+  );
+  for (const [lang, dict] of Object.entries(LOCALES)) {
+    assert.equal(
+      typeof dict.resultSupportSubject,
+      "string",
+      `${lang}.resultSupportSubject must exist`,
+    );
+  }
+});
