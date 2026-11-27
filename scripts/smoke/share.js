@@ -18,42 +18,48 @@ export async function runShareFlow(ctx, actions) {
   );
   if (shareHash) {
     await actions.navigate(`${ctx.base}${shareHash}`);
-    const restoredInputs = await ctx.poll(
+    // A VALID LINK AUTO-RUNS — the gated decision of 2026-11-07 ("the recipient
+    // gap", docs/audit/BURNDOWN_LEDGER_2026-11-03.md): the sender made the link
+    // to show a result, so the recipient gets the result, not a form, and the
+    // landing copy tells them whose result it is. This gate used to require the
+    // superseded "waiting for a click" contract and a status string that the
+    // same change deleted, so it could only ever be red. What is asserted now is
+    // the contract that actually ships: the shared inputs come back, the run
+    // completes with no click from this harness, and the note says whose result
+    // it is.
+    const restored = await ctx.poll(
       async () =>
-        evaluate(
-          `!!document.getElementById("dailyKwhInput")?.value && document.getElementById("resultsRegion")?.hidden === true`,
-        ),
-      10000,
+        evaluate(`(() => {
+          const r = document.getElementById("resultsRegion");
+          return !!r && r.hidden === false;
+        })()`),
+      RUN_TIMEOUT_MS,
     );
-    const beforeRun = await evaluate(
-      `(() => ({ kwh: document.getElementById("dailyKwhInput")?.value, results: !document.getElementById("resultsRegion")?.hidden, hash: location.hash }))()`,
-    );
+    const landed = await evaluate(`(() => ({
+      kwh: document.getElementById("dailyKwhInput")?.value || "",
+      hash: location.hash,
+      note: (document.getElementById("sharedResultNote")?.textContent || "").trim(),
+      noteHidden: document.getElementById("sharedResultNote")?.hidden,
+    }))()`);
     const sharedState = JSON.parse(
       Buffer.from(shareHash.slice(3), "base64url").toString("utf8"),
     );
-    const restoreStatus = await evaluate(
-      `document.getElementById("sizingStatus")?.textContent || ""`,
-    );
     gate(
-      "share link restores inputs and explains it is waiting for a click",
-      !!restoredInputs &&
-        beforeRun.results === false &&
-        Number(beforeRun.kwh) === sharedState.kw &&
-        beforeRun.hash === shareHash &&
-        /review the inputs/i.test(restoreStatus) &&
-        /click Size My System/i.test(restoreStatus),
+      "share link delivers the shared result without a click",
+      !!restored &&
+        Number(landed.kwh) === sharedState.kw &&
+        landed.hash === shareHash,
       JSON.stringify({
-        ...beforeRun,
+        kwh: landed.kwh,
         expectedKwh: sharedState.kw,
-        status: restoreStatus,
+        hashRestored: landed.hash === shareHash,
       }),
     );
-    await evaluate(`document.getElementById("btnRunSizing").click()`);
-    const restored = await ctx.poll(
-      async () => evaluate(`!document.getElementById("resultsRegion")?.hidden`),
-      RUN_TIMEOUT_MS,
+    gate(
+      "shared result is labelled as the sender's",
+      landed.noteHidden === false && /shared with you/i.test(landed.note),
+      landed.note.slice(0, 90),
     );
-    gate("share link sizes after the explicit click", !!restored);
 
     // Careless reload while another calculation is visibly in progress: hold
     // exactly one real Worker message, then reload the same share URL. The
@@ -137,20 +143,22 @@ export async function runShareFlow(ctx, actions) {
           } catch {
             return false; // a navigation is still in flight
           }
+          // A reload of a share URL is the same act as opening it: the link
+          // auto-runs once and delivers the result again. The gate asserts that
+          // state — inputs restored from the link, result present — instead of
+          // the superseded "waits for a click" contract.
           return (
             afterReload.loaded &&
             Number(afterReload.kwh) === sharedState.kw &&
             afterReload.hash === shareHash &&
-            afterReload.resultsHidden === true &&
-            /review the inputs/i.test(afterReload.status) &&
-            afterReload.posts === 0
+            afterReload.resultsHidden === false
           );
         },
-        15000,
+        60000,
         250,
       );
       gate(
-        "reload during sizing preserves share inputs and waits for explicit consent",
+        "reload during sizing restores the share and delivers the result",
         settled && loaded,
         JSON.stringify(afterReload),
       );

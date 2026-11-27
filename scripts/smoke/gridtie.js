@@ -411,7 +411,7 @@ export async function runGridTieFlow(ctx, actions) {
   gate(
     "with-panels keeps the tilt guide and its PV safety item",
     panelSurface.tilt === "block" &&
-      /PV Array Isolator/.test(panelSurface.region),
+      /PV array isolator/i.test(panelSurface.region),
     `sunPathWrap display=${panelSurface.tilt}`,
   );
 
@@ -469,7 +469,7 @@ export async function runGridTieFlow(ctx, actions) {
           // textContent, not innerText: innerText is "" for a hidden
           // subtree, so an innerText-based poll can never observe the state
           // it is waiting for and just burns its whole timeout.
-          return !!p && p.textContent.includes("None (Battery-only)");
+          return !!p && p.textContent.toLowerCase().includes("none (battery-only");
         })()`),
     RUN_TIMEOUT_MS,
     2000,
@@ -672,9 +672,11 @@ export async function runGridTieFlow(ctx, actions) {
   );
   gate(
     "battery-only BOS checklist carries no PV-only item",
-    !/PV Array Isolator|PV DC Isolator/.test(noPanelSurface.region) &&
-      /battery rack, the inverter chassis/.test(noPanelSurface.region),
-    (noPanelSurface.region.match(/Equipment Grounding[^A-Z]{0,90}/) || [""])
+    !/PV array isolator|PV DC Isolator/i.test(noPanelSurface.region) &&
+      /battery rack, inverter chassis and any metal enclosure/.test(
+        noPanelSurface.region,
+      ),
+    (noPanelSurface.region.match(/Equipment grounding[^A-Z]{0,120}/) || [""])
       .join("")
       .slice(0, 150),
   );

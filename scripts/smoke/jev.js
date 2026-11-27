@@ -189,23 +189,34 @@ export async function runJevFlow(ctx) {
     uncertainGate,
   );
 
-  // The badge must survive a Simple-mode toggle: applySimpleMode re-renders
-  // the simple card through the SAME sanity owner (runSanityCheck), which
-  // re-mounts from the state cache — no second /api/jev request. Teeth:
-  // reverting the toggle-path call to runSanityCheck re-renders without the
-  // badge and fails this gate.
-  const toggleGate = await evaluate(
+  // The badge mounts ONCE, on the readable card that leads the result — #441
+  // deleted the mode fork, so there is no `#simpleModeToggle` to flip. What
+  // still has teeth: mount() is the only writer of a badge, and the sanity
+  // STATE CACHE must serve a repeat of the same result state without a second
+  // /api/jev request. Reverting either re-mounts without the badge or refetches
+  // on every render, and this gate goes red.
+  const remountGate = await evaluate(
     `(async () => {
         const of = window.fetch;
         const k = document.getElementById("dailyKwhInput");
         const btn = document.getElementById("btnRunSizing");
-        const toggle = document.getElementById("simpleModeToggle");
-        if (!toggle) return JSON.stringify({ err: "no toggle" });
+        if (!k || !btn) return JSON.stringify({ err: "no run controls" });
         const before = k.value;
         ${stubFetch("window.__jevCalls3", PASS_JSON)}
-        const flip = (on) => {
-          toggle.checked = on;
-          toggle.dispatchEvent(new Event("change"));
+        // The readable card lives INSIDE #resultsRegion, so ownership is
+        // counted at page level: one badge on the page, and that one on the
+        // card — a second badge anywhere is a double mount.
+        const badges = () => ({
+          card: document.querySelectorAll("#simpleResultsWrap .sanity-badge").length,
+          total: document.querySelectorAll(".sanity-badge").length,
+          pass: document.querySelectorAll("#simpleResultsWrap .sanity-badge.sanity-pass").length,
+        });
+        const settle = async () => {
+          const t0 = Date.now();
+          while (!document.querySelector(".sanity-badge") && Date.now() - t0 < 15000) {
+            await new Promise((r) => setTimeout(r, 100));
+          }
+          await new Promise((r) => setTimeout(r, 400));
         };
         try {
           // Earlier gates leave appended badges and cache entries behind; a
@@ -217,42 +228,28 @@ export async function runJevFlow(ctx) {
             await new Promise((r) => setTimeout(r, 100));
           }
           btn.click();
-          const t0 = Date.now();
-          let regularBadge = false;
-          while (Date.now() - t0 < 15000) {
-            if (document.querySelector("#resultsRegion .sanity-badge.sanity-pass")) {
-              regularBadge = true;
-              break;
-            }
+          await settle();
+          const first = badges();
+          const callsAtMount = window.__jevCalls3 || 0;
+          // The same state, driven again: the run re-renders the result, so the
+          // badge is re-mounted — from the cache, not from a new request.
+          const t1w = Date.now();
+          while (btn.disabled && Date.now() - t1w < 30000) {
             await new Promise((r) => setTimeout(r, 100));
           }
-          const callsAtMount = window.__jevCalls3 || 0;
-          flip(true);
-          await new Promise((r) => setTimeout(r, 400));
-          const simpleBadge = !!document.querySelector("#simpleResultsWrap .sanity-badge.sanity-pass");
-          const simpleBadgeCount = document.querySelectorAll("#simpleResultsWrap .sanity-badge").length;
-          flip(false);
-          await new Promise((r) => setTimeout(r, 400));
-          const regularBadgeBack = !!document.querySelector("#resultsRegion .sanity-badge.sanity-pass");
-          const regularBadgeCount = document.querySelectorAll("#resultsRegion .sanity-badge").length;
+          btn.click();
+          await settle();
+          const second = badges();
           return JSON.stringify({
-            regularBadge,
-            simpleBadge,
-            regularBadgeBack,
-            regularBadgeCount,
-            simpleBadgeCount,
+            first,
+            second,
             callsAtMount,
-            callsAfterToggles: window.__jevCalls3 || 0,
+            callsAfterRepeat: window.__jevCalls3 || 0,
           });
         } finally {
           try {
-            flip(false);
             k.value = before;
             if (!btn.disabled) btn.click();
-            const t1 = Date.now();
-            while (btn.disabled && Date.now() - t1 < 30000) {
-              await new Promise((r) => setTimeout(r, 100));
-            }
           } catch {}
           window.fetch = of;
         }
@@ -260,19 +257,22 @@ export async function runJevFlow(ctx) {
   );
   let tg = {};
   try {
-    tg = JSON.parse(toggleGate);
+    tg = JSON.parse(remountGate);
   } catch (_) {
-    tg = { err: String(toggleGate).slice(0, 120) };
+    tg = { err: String(remountGate).slice(0, 120) };
   }
   gate(
-    "Jev badge survives Simple-mode toggle (cache re-mount, no refetch)",
-    tg.regularBadge === true &&
-      tg.simpleBadge === true &&
-      tg.regularBadgeBack === true &&
-      tg.regularBadgeCount === 1 &&
-      tg.simpleBadgeCount === 1 &&
-      tg.callsAfterToggles === tg.callsAtMount,
-    toggleGate,
+    "Jev badge mounts once on the readable card and re-mounts from cache on a repeat run",
+    tg.first &&
+      tg.first.card === 1 &&
+      tg.first.total === 1 &&
+      tg.first.pass === 1 &&
+      tg.second &&
+      tg.second.card === 1 &&
+      tg.second.total === 1 &&
+      tg.second.pass === 1 &&
+      tg.callsAfterRepeat === tg.callsAtMount,
+    remountGate,
   );
 
   // ── the advisor brief must know what the run actually built ────────────────

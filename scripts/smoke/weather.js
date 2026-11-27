@@ -61,14 +61,41 @@ export async function runWeatherFlow(ctx, actions) {
   );
   gate("first-load run completes", firstRun);
 
-  // Cold reload: wipe every persistence layer first, so the run MUST fetch.
-  await evaluate(`localStorage.clear()`);
-  await evaluate(`indexedDB.deleteDatabase("beco-weather-v2")`);
-  await evaluate(`caches.delete("beco-weather-v1")`);
+  // Cold reload: wipe every persistence layer first, and PROVE the wipe, so a
+  // completed run can only have come from the wire.
+  //
+  // The chosen site lives in localStorage, so the wipe takes the location with
+  // it, and the location-first UI (#430) refuses to size without one: clicking
+  // Run here is correctly a no-op. The old flow clicked it anyway and then read
+  // the missing card and the absent pulls as a weather defect. A cold load is a
+  // first load for a SITE, so the site is re-established here — that is the
+  // state the gate is about — and only then is the run clicked.
+  const wiped = await evaluate(`(async () => {
+    localStorage.clear();
+    for (const d of ((await indexedDB.databases?.()) || []))
+      await new Promise((res) => {
+        const req = indexedDB.deleteDatabase(d.name);
+        req.onsuccess = req.onerror = req.onblocked = () => res(true);
+      });
+    await Promise.all((await caches.keys()).map((k) => caches.delete(k)));
+    return {
+      dbs: ((await indexedDB.databases?.()) || []).length,
+      caches: (await caches.keys()).length,
+    };
+  })()`);
+  gate(
+    "persistence wipe is proven before the cold load",
+    wiped?.dbs === 0 && wiped?.caches === 0,
+    JSON.stringify(wiped),
+  );
   nasa.reset();
   await send("Page.reload", { ignoreCache: false }).catch(() => {});
   await sleep(5000);
-  gate("cold reload run completes", await actions.runAfterReload());
+  gate(
+    "a wiped page can be given a site again",
+    await actions.chooseHonolulu("cold-site city suggestions for Honolulu"),
+  );
+  gate("cold reload run completes", await actions.runAndWaitCard());
   await sleep(2000); // let straggler chunk responses land
   const coldPulls = nasa.count;
   gate(
@@ -88,6 +115,9 @@ export async function runWeatherFlow(ctx, actions) {
 
   // ── Explicit location consent (location selection never sizes by itself)
   console.log("SMOKE      ── auto-location ──");
+  // A fresh page: the consent gate is about a location arriving WITHOUT a
+  // result, and the runs above left one on screen.
+  await actions.navigate(`${ctx.base}?smoke=${Date.now()}`);
   let geoGranted = true;
   try {
     await send("Browser.grantPermissions", {
@@ -108,7 +138,21 @@ export async function runWeatherFlow(ctx, actions) {
     );
   }
   if (geoGranted) {
-    await evaluate(`document.getElementById("btnGeoLocate").click()`);
+    // The button is clicked through a guard that returns its own failure: an
+    // exception inside an event handler propagates out of Runtime.evaluate and
+    // used to abort the whole suite at this stage, which reports "smoke run
+    // completed: false" and tells nobody what actually happened.
+    const geoClick = await evaluate(`(() => {
+      const b = document.getElementById("btnGeoLocate");
+      if (!b) return "missing";
+      try { b.click(); return "clicked"; }
+      catch (e) { return "threw: " + (e && e.message ? e.message : e); }
+    })()`);
+    gate(
+      "geolocation control accepts the click",
+      geoClick === "clicked",
+      geoClick,
+    );
     const geoOk = await ctx.poll(
       async () => {
         const lat = await evaluate(
@@ -122,10 +166,14 @@ export async function runWeatherFlow(ctx, actions) {
       60000,
       1000,
     );
+    const resultsShown = await evaluate(`(() => {
+      const r = document.getElementById("resultsRegion");
+      return r ? r.hidden === false : false;
+    })()`);
     gate(
       "location resolves without starting sizing",
-      geoOk &&
-        !(await evaluate(`!document.getElementById("resultsRegion")?.hidden`)),
+      geoOk && !resultsShown,
+      JSON.stringify({ geoOk, resultsShown }),
     );
   }
 }

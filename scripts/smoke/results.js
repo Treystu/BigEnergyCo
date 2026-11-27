@@ -16,11 +16,6 @@ const DELEGATED_IDS = [
   "btnCloseSystemSheet",
 ];
 
-const flipSimpleMode = (evaluate, on) =>
-  evaluate(`(() => { const t = document.getElementById("simpleModeToggle");
-        t.checked = ${on ? "true" : "false"}; t.dispatchEvent(new Event("change", { bubbles: true }));
-        return document.documentElement.dataset.displayMode; })()`);
-
 export async function runResultsFlow(ctx) {
   const { send, evaluate, poll } = ctx;
 
@@ -234,16 +229,14 @@ export async function runResultsFlow(ctx) {
     );
   }
 
-  // ── Simple mode: hide-and-card contract on the real surface ─────
-  console.log("SMOKE      ── main page: simple mode ──");
-  await flipSimpleMode(evaluate, true);
+  // ── Readable result card (#441 removed the Simple/technical fork) ─────
+  // There is no mode toggle any more: the readable card leads beside the dense
+  // result, and every chart stays available. The old section flipped
+  // `#simpleModeToggle`, which #441 deleted, so its first evaluate threw a
+  // TypeError and aborted the whole suite — the failure this repair removes.
+  console.log("SMOKE      ── main page: readable result card ──");
   gate(
-    "simple mode: root attribute set",
-    (await evaluate(`document.documentElement.dataset.displayMode`)) ===
-      "simple",
-  );
-  gate(
-    "simple mode: plain-language card renders",
+    "readable card renders beside the dense result",
     await evaluate(
       `!!document.querySelector("#simpleResultsWrap .simple-results-card")`,
     ),
@@ -306,38 +299,23 @@ export async function runResultsFlow(ctx) {
     if (m) m.style.display = "none";
   })()`);
   gate(
-    "simple mode: dense panels hidden (computed)",
-    await evaluate(
-      `["resultLadder","moneyBar","bomPanel"]
-          .every((id) => getComputedStyle(document.getElementById(id)).display === "none")`,
-    ),
-  );
-  gate(
-    "simple mode: charts + matrix stay visible (full functionality)",
+    "no mode fork: charts + matrix stay visible (full functionality)",
     await evaluate(
       `["frontierWrap","cumCostChartWrap","tierResults"]
-          .every((id) => getComputedStyle(document.getElementById(id)).display !== "none")`,
+          .every((id) => {
+            const e = document.getElementById(id);
+            return !e || getComputedStyle(e).display !== "none";
+          })`,
     ),
   );
   gate(
-    "simple mode: card has no NaN/undefined figures",
+    "readable card has no NaN/undefined figures",
     await evaluate(
       `!/[Nn]aNa|undefined/.test(document.getElementById("simpleResultsWrap").textContent)`,
     ),
   );
-  await flipSimpleMode(evaluate, false);
-  gate(
-    "simple mode: toggle off restores regular view",
-    (await evaluate(`document.documentElement.dataset.displayMode`)) ===
-      "technical" &&
-      (await evaluate(
-        `getComputedStyle(document.getElementById("resultLadder")).display !== "none"`,
-      )),
-  );
-  // Re-run while simple mode is ON: the fresh payload must flow into the
-  // simple card too (renderResults -> renderSimpleResults), not just the
-  // stale card from the earlier toggle.
-  await flipSimpleMode(evaluate, true);
+  // Re-run: the fresh payload must flow into the readable card too
+  // (renderResults → renderSimpleResults), not just the card already up.
   const simpleRerun = await evaluate(
     `(async () => {
         document.getElementById("btnRunSizing").click();
@@ -357,9 +335,8 @@ export async function runResultsFlow(ctx) {
       })()`,
   );
   gate(
-    "simple mode: fresh run refreshes the card",
+    "fresh run refreshes the readable card",
     simpleRerun.visible && simpleRerun.heroes > 0,
     JSON.stringify(simpleRerun),
   );
-  await flipSimpleMode(evaluate, false);
 }

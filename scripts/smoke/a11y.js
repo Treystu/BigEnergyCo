@@ -506,7 +506,6 @@ async function measureSite(ctx, { label, sel, instant }) {
 const STRUCTURAL = [
   "citySearch",
   "btnRunSizing",
-  "simpleModeToggle",
   "btnGoalGridtie",
   "btnGoalOffgrid",
 ];
@@ -526,6 +525,15 @@ const MANUAL_PANEL = [
 const KWH_PANEL = ["dailyKwhInput"];
 // Result-stage spectrum controls — only with a completed run.
 const RESULTS = ["cutSlider", "budgetSlider"];
+// Controls whose click must actually scroll the page, measured in both motion
+// settings. One list, so the facet gate's expected count cannot drift from the
+// sites a run really measures.
+const SCROLL_SITES = [
+  { label: "sizing/see-details", sel: "#btnSimpleDetails" },
+  { label: "chat/hero-sizing", sel: "#btnHeroSizing" },
+  { label: "chat/nav-sizing", sel: "#btnNavSizeArray" },
+];
+const SCROLL_SITE_COUNT = SCROLL_SITES.length;
 
 export async function runA11yFlow(ctx) {
   const { evaluate, send } = ctx;
@@ -540,15 +548,12 @@ export async function runA11yFlow(ctx) {
       s.dispatchEvent(new Event("change", { bubbles: true }));
       return s.value; })()`);
 
-  // Arrival state, so every phase below can restore it. Simple mode is
-  // normalized off first: the scroll sites measure the Regular surface (the
-  // Simple card is exercised by the sites themselves).
+  // Arrival state, so every phase below can restore it. There is no mode fork
+  // to normalize any more (#441 deleted `#simpleModeToggle`); the readable card
+  // and the dense result render together, so one surface is measured.
   const arrivalLoadMode = await evaluate(
     `document.getElementById("loadMode")?.value || "bill"`,
   );
-  if (await evaluate(`document.getElementById("simpleModeToggle")?.checked`)) {
-    await evaluate(`document.getElementById("simpleModeToggle").click()`);
-  }
 
   // Names in the arrival state (covers whatever is visible right now).
   const nameSets = [await evaluate(page(accessibleName, nameFailures))];
@@ -603,13 +608,11 @@ export async function runA11yFlow(ctx) {
   }
 
   // Exercise both module paths through actual controls in normal and reduced
-  // motion. The first two are in ui.js and self-balance Simple mode;
-  // the hero CTA reaches chat.js's scrollToSection handler.
+  // motion. A scroll site must actually scroll, so these are the controls that
+  // move the page: the result card's details disclosure, and the two CTAs that
+  // reach chat.js's scrollToSection. The deleted Simple-mode toggle (#441) used
+  // to stand in the first slot but never scrolled anywhere.
   if (cardVisible) {
-    const SIZING_PATH = "#simpleModeToggle";
-    const SIZING_DETAILS_PATH = "#btnSimpleDetails";
-    const CHAT_PATH = "#btnHeroSizing";
-    const CHAT_NAV_PATH = "#btnNavSizeArray";
     const emulated = (value) =>
       send("Emulation.setEmulatedMedia", {
         features: [{ name: "prefers-reduced-motion", value }],
@@ -622,17 +625,7 @@ export async function runA11yFlow(ctx) {
         normalReduce === false,
         String(normalReduce),
       );
-      await measureSite(ctx, {
-        label: "sizing/simple-mode",
-        sel: SIZING_PATH,
-      });
-      // Enabling Simple mode renders the details path.
-      await measureSite(ctx, {
-        label: "sizing/see-details",
-        sel: SIZING_DETAILS_PATH,
-      });
-      await measureSite(ctx, { label: "chat/hero-sizing", sel: CHAT_PATH });
-      await measureSite(ctx, { label: "chat/nav-sizing", sel: CHAT_NAV_PATH });
+      for (const site of SCROLL_SITES) await measureSite(ctx, site);
 
       await emulated("reduce");
       const emulatedReduce = await evaluate(`(${reduceMatches})()`);
@@ -641,26 +634,8 @@ export async function runA11yFlow(ctx) {
         emulatedReduce === true,
         String(emulatedReduce),
       );
-      await measureSite(ctx, {
-        label: "sizing/simple-mode",
-        sel: SIZING_PATH,
-        instant: true,
-      });
-      await measureSite(ctx, {
-        label: "sizing/see-details",
-        sel: SIZING_DETAILS_PATH,
-        instant: true,
-      });
-      await measureSite(ctx, {
-        label: "chat/hero-sizing",
-        sel: CHAT_PATH,
-        instant: true,
-      });
-      await measureSite(ctx, {
-        label: "chat/nav-sizing",
-        sel: CHAT_NAV_PATH,
-        instant: true,
-      });
+      for (const site of SCROLL_SITES)
+        await measureSite(ctx, { ...site, instant: true });
       if (summary) summary.reduced_motion = { checked: true };
     } finally {
       await emulated(""); // emulation must never leak past this flow
@@ -670,11 +645,6 @@ export async function runA11yFlow(ctx) {
         cleared === false,
         String(cleared),
       );
-      if (
-        await evaluate(`document.getElementById("simpleModeToggle")?.checked`)
-      ) {
-        await evaluate(`document.getElementById("simpleModeToggle").click()`);
-      }
     }
   }
 
@@ -771,9 +741,9 @@ export async function runA11yFlow(ctx) {
     buttonKeys?.passed &&
     names?.passed &&
     contrast?.passed &&
-    normalMotion.length === 4 &&
+    normalMotion.length === SCROLL_SITE_COUNT &&
     normalMotion.every((g) => g.passed) &&
-    reducedMotion.length === 4 &&
+    reducedMotion.length === SCROLL_SITE_COUNT &&
     reducedMotion.every((g) => g.passed) &&
     mediaReset?.passed &&
     motionDefaults.length === 2 &&
@@ -782,7 +752,7 @@ export async function runA11yFlow(ctx) {
   gate(
     "accessibility facet evidence covers keyboard, names, contrast and motion",
     Boolean(complete),
-    `${keyboard.length}/8 keyboard checks, ${normalMotion.length}/4 normal and ${reducedMotion.length}/4 reduced-motion scroll checks`,
+    `${keyboard.length}/8 keyboard checks, ${normalMotion.length}/${SCROLL_SITE_COUNT} normal and ${reducedMotion.length}/${SCROLL_SITE_COUNT} reduced-motion scroll checks`,
   );
   if (summary) {
     summary.names = {
