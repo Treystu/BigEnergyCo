@@ -329,7 +329,10 @@ export function renderFrontier(host, frontier, opts = {}) {
   // sits under the visible dot so small targets stay easy to grab, and each is
   // keyboard-focusable (role=button) so a keyboard or screen-reader user can
   // step through the systems too. Selecting a point moves the blue marker and
-  // its readout to that system.
+  // its readout to that system. #434: the ring is r=12, i.e. a 24x24 target —
+  // the WCAG 2.2 minimum — because r=10 measured 20x20 and the points sit as
+  // close as 7px, so the spacing exception cannot apply either. The ring is
+  // transparent, so the chart looks identical.
   for (let i = 0; i < pts.length; i++) {
     const p = pts[i];
     const tip = t("frontierPointTip", {
@@ -340,7 +343,7 @@ export function renderFrontier(host, frontier, opts = {}) {
     });
     push(
       `<g data-pt="${i}" role="button" tabindex="0" style="cursor:pointer;" aria-label="${esc(tip)}">` +
-        `<circle cx="${X(p.capexUsd).toFixed(1)}" cy="${Y(p.outcomePct).toFixed(1)}" r="10" fill="transparent"/>` +
+        `<circle cx="${X(p.capexUsd).toFixed(1)}" cy="${Y(p.outcomePct).toFixed(1)}" r="12" fill="transparent"/>` +
         `<circle cx="${X(p.capexUsd).toFixed(1)}" cy="${Y(p.outcomePct).toFixed(1)}" r="3.1" fill="${C.curve}"/>` +
         `<title>${esc(tip)}</title></g>`,
     );

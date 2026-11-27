@@ -231,3 +231,21 @@ test("every locale carries all five battery verdicts, and none claims a bill", (
     );
   }
 });
+
+// #434: every frontier point is a button, and a button's target area is part of
+// the accessibility contract. The transparent ring under the visible dot is what
+// a finger presses, so it must be at least 24x24 CSS px — WCAG 2.2's target
+// minimum. r=10 measured 20x20 and the points sit as close as 7px, so the
+// spacing exception cannot rescue it either; the ring is now 12.
+test("every frontier point's hit ring meets the WCAG 2.2 24px target minimum", () => {
+  const host = fakeHost();
+  renderFrontier(host, BATTERY_ONLY_FRONTIER(), renderOpts);
+  const rings = [
+    ...host.innerHTML.matchAll(/<circle\b[^>]*fill="transparent"[^>]*>/g),
+  ].map((m) => m[0]);
+  assert.ok(rings.length > 0, "the chart renders clickable points");
+  for (const ring of rings) {
+    const r = Number(/\br="([\d.]+)"/.exec(ring)?.[1]);
+    assert.ok(r * 2 >= 24, `hit ring r=${r} is under the 24px target minimum`);
+  }
+});
