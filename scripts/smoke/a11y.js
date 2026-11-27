@@ -21,6 +21,13 @@
 //   4. reduced motion — all four user-triggered sizing/chat scroll sites jump
 //      instantly under prefers-reduced-motion and stay animated without it,
 //      measured synchronously through the real scrollIntoView call sites.
+//   5. target size (#434) — every visible control's hit area is at least 24x24
+//      CSS px, the WCAG 2.2 minimum, measured with its label where the label is
+//      what a finger actually presses; inline links inside a paragraph are the
+//      standard's own exception and are counted separately rather than passed.
+//   6. error association (#434) — every visible field that declares
+//      aria-describedby resolves those ids on the page, so the rejection message
+//      a sighted reader sees is in the reading too.
 // Requires a completed sizing run for the result-stage, contrast, and scroll
 // checks (site A guards on lastPayload, site B only renders with results);
 // callers place it after a results flow. Ordering note: the load-mode
@@ -139,6 +146,68 @@ function nameFailures() {
         `${e.tagName.toLowerCase()}${e.id ? "#" + e.id : ""}` +
           `${e.className ? "." + String(e.className).split(" ")[0] : ""}`,
       );
+    }
+  }
+  return fails;
+}
+
+// #434: WCAG 2.2 target size (minimum, AA) — 24x24 CSS px. A checkbox or radio
+// is pressed through its label, so the label's box is the target. An anchor that
+// renders inline inside text is the standard's "inline" exception: spelled out
+// here so the exemption is a reading, not a silent skip.
+function targetFailures() {
+  const fails = [];
+  let exempt = 0;
+  for (const el of document.querySelectorAll(
+    "a[href], button, input, select, textarea, [role=button], [role=radio], [tabindex='0']",
+  )) {
+    if (el.type === "hidden") continue;
+    const r = el.getBoundingClientRect();
+    const cs = getComputedStyle(el);
+    if (!r.width || !r.height) continue;
+    if (cs.display === "none" || cs.visibility === "hidden") continue;
+    let w = r.width;
+    let h = r.height;
+    if (el.matches("input[type=checkbox], input[type=radio]")) {
+      const lab =
+        el.closest("label") ||
+        (el.id && document.querySelector(`label[for="${CSS.escape(el.id)}"]`));
+      if (lab) {
+        const lr = lab.getBoundingClientRect();
+        w = Math.max(w, lr.width);
+        h = Math.max(h, lr.height);
+      }
+    }
+    if (w >= 24 && h >= 24) continue;
+    if (el.tagName === "A" && cs.display === "inline") {
+      exempt += 1;
+      continue;
+    }
+    fails.push(
+      `${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""} ${Math.round(w)}x${Math.round(h)}`,
+    );
+  }
+  return { fails, exempt };
+}
+
+// #434: the rejection message a sighted reader sees must be the one a screen
+// reader hears, which is exactly what a resolvable aria-describedby means. A
+// reference to a node that is not on the page is announced as nothing.
+function labelFailures() {
+  const fails = [];
+  for (const el of document.querySelectorAll("input, select, textarea")) {
+    if (el.type === "hidden") continue;
+    const r = el.getBoundingClientRect();
+    const cs = getComputedStyle(el);
+    if (!r.width || !r.height) continue;
+    if (cs.display === "none" || cs.visibility === "hidden") continue;
+    const ref = el.getAttribute("aria-describedby");
+    if (!ref) continue;
+    for (const token of ref.split(/\s+/).filter(Boolean)) {
+      if (!document.getElementById(token))
+        fails.push(
+          `${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""} -> #${token}`,
+        );
     }
   }
   return fails;
@@ -464,11 +533,6 @@ export async function runA11yFlow(ctx) {
   // Everything this flow gates is measured from this mark, so the derived
   // facet line can never pick up a gate another flow wrote.
   const reportCheckpoint = gateCheckpoint();
-  const setMode = (id) =>
-    evaluate(`(() => { const r = document.getElementById(${JSON.stringify(id)});
-      if (!r) return false;
-      if (!r.checked) r.click();
-      return r.checked; })()`);
   const setLoadMode = (value) =>
     evaluate(`(() => { const s = document.getElementById("loadMode");
       if (!s) return false;
@@ -479,9 +543,6 @@ export async function runA11yFlow(ctx) {
   // Arrival state, so every phase below can restore it. Simple mode is
   // normalized off first: the scroll sites measure the Regular surface (the
   // Simple card is exercised by the sites themselves).
-  const arrivalQuick = await evaluate(
-    `document.getElementById("modeQuick")?.checked !== false`,
-  );
   const arrivalLoadMode = await evaluate(
     `document.getElementById("loadMode")?.value || "bill"`,
   );
@@ -491,6 +552,24 @@ export async function runA11yFlow(ctx) {
 
   // Names in the arrival state (covers whatever is visible right now).
   const nameSets = [await evaluate(page(accessibleName, nameFailures))];
+  // #434: the two rules the pass added, measured here in the arrival state at
+  // the width the run is driven at.
+  const targets = await evaluate(page(targetFailures));
+  gate(
+    "every visible control meets the 24x24 CSS px target minimum",
+    targets.fails.length === 0,
+    targets.fails.length
+      ? targets.fails.slice(0, 6).join(", ")
+      : `${targets.exempt} inline text links exempt`,
+  );
+  const unresolvedDescription = await evaluate(page(labelFailures));
+  gate(
+    "every field's aria-describedby resolves on the page",
+    unresolvedDescription.length === 0,
+    unresolvedDescription.length
+      ? unresolvedDescription.slice(0, 6).join(", ")
+      : "all resolve",
+  );
   // The contrast reading, declared here so both branches below can record what
   // was actually checked: a hole must never be recorded as a pass.
   let contrastFails = null;
@@ -603,17 +682,25 @@ export async function runA11yFlow(ctx) {
   // after the scroll measurements so nothing else is moving).
   await assertDivButtonsOperable(ctx);
 
-  // Quick mode (document default): structural CTA controls.
-  await setMode("modeQuick");
+  // The arrival surface (the document default): structural CTA controls.
   await tabWalk(ctx, "quick mode", STRUCTURAL, "quick");
 
-  // Manual mode: the #fullControls panel + its names sample.
-  const manualOk = await setMode("modeManual");
+  // Manual phase: the optional-depth panel. It used to be a mode radio
+  // (`#modeManual`) that the mode-fork removal (#441) deleted, so this phase
+  // clicked nothing for a while; the panel is now a <details> a visitor opens,
+  // and opening it is the interaction being measured.
+  const advancedOpen = await evaluate(`(() => {
+    const d = document.getElementById("advancedControls");
+    if (!d) return false;
+    d.open = true;
+    return d.open === true;
+  })()`);
+  const manualOk = advancedOpen;
   if (manualOk) {
     await tabWalk(ctx, "manual mode", MANUAL_PANEL, "manual");
     nameSets.push(await evaluate(page(accessibleName, nameFailures)));
   } else {
-    gate("manual mode radio present for keyboard phase", false, "not found");
+    gate("advanced panel present for keyboard phase", false, "not found");
   }
 
   // kWh load panel — LAST pre-cleanup phase: its change event is the
@@ -628,9 +715,12 @@ export async function runA11yFlow(ctx) {
   }
   await setLoadMode(arrivalLoadMode);
 
-  // Restore arrival mode radios (loadMode value restored above).
-  if (arrivalQuick) await setMode("modeQuick");
-  else await setMode("modeManual");
+  // Restore the arrival state: the panel returns to closed.
+  await evaluate(`(() => {
+    const d = document.getElementById("advancedControls");
+    if (d) d.open = false;
+    return true;
+  })()`);
 
   // One union across all sampled states — a control hidden in one state
   // must still be named when its state exposes it.

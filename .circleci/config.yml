@@ -52,6 +52,14 @@ jobs:
       - run:
           name: Speed budget (#433)
           command: npm run gate:speed
+      # #434: the markup half of the accessibility pass, on the artifact the
+      # staging step above built. No browser on this executor, so the measured
+      # half (contrast, keyboard reach, target sizes, reduced motion) lives with
+      # scripts/smoke/a11y.js and scripts/check-a11y-matrix.mjs on the
+      # browser-capable runners; this step is the rule set that needs none.
+      - run:
+          name: Static accessibility rules (#434)
+          command: npm run gate:a11y
 
 workflows:
   verify:

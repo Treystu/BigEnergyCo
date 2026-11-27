@@ -106,6 +106,16 @@ jobs:
         # scripts/lib/speed-budgets.mjs from scripts/measure-speed.mjs.
         run: npm run gate:speed
 
+      - name: Static accessibility rules (#434)
+        # The markup half of the accessibility pass, on the same staged tree:
+        # control names, resolvable aria-describedby/labelledby, no button role
+        # on a label, alt on every img, pinch-zoom not disabled, no positive
+        # tabindex, lang + title on every page. The browser half (contrast,
+        # keyboard reach, target sizes, reduced motion) is measured by
+        # scripts/smoke/a11y.js and scripts/check-a11y-matrix.mjs on runners
+        # with a browser.
+        run: npm run gate:a11y
+
       - name: Cumulative-series engine flow gate
         # Offline and deterministic: drives runSizing() through its real entry
         # point and asserts every solvable target carries a complete 20-year

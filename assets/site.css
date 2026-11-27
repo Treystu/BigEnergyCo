@@ -1,6 +1,4 @@
 /* Site styles; cache-busted by scripts/bump-asset-tokens.mjs. */
-/* BigEnergyCo Design System - Premium Dark Glassmorphic Energy Aesthetic */
-
 :root {
   color-scheme: dark;
   -webkit-text-size-adjust: 100%;
@@ -38,8 +36,7 @@
 
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Type roles (#432). One owner for the scale; values mirror the observed
-     scale in PRESENTATION_SPEC_V1.md section 6. */
+  /* Type roles (#432): one owner for the scale (PRESENTATION_SPEC_V1.md §6). */
   --type-display: 3.25rem;
   --type-section: 2.25rem;
   --type-block: 1.2rem;
@@ -194,6 +191,10 @@ header {
   cursor: pointer;
   transition: all 0.25s ease;
   border: none;
+  /* #434: a bare btn would paint the UA ButtonFace (2.09:1 under a label), so the
+   base is transparent and each variant owns its background. */
+  background: transparent;
+  color: var(--text-main);
 }
 
 .btn-primary {
@@ -240,7 +241,7 @@ button.btn {
   font-family: inherit;
 }
 
-/* Result detail ladder (Best pick / Compare batteries / All options) */
+/* Result detail ladder. */
 #resultLadder {
   display: none;
   gap: 0.5rem;
@@ -272,7 +273,7 @@ button.btn {
   border-color: var(--primary-accent);
 }
 
-/* All-options comparison matrix (the wrap rule lives with the results box) */
+/* All-options comparison matrix. */
 .matrix-table {
   width: 100%;
   border-collapse: collapse;
@@ -417,7 +418,7 @@ button.btn {
   gap: 2.5rem;
 }
 
-/* Container, Card and Layout Sizing - prevents horizontal overflow blowout */
+/* Container, card and layout sizing. */
 .calc-card,
 .calc-controls,
 .results-box,
@@ -454,14 +455,26 @@ canvas {
   height: auto !important;
 }
 
-/* Range slider cross-browser track and thumb styling */
+/* Range slider track and thumb. #434: the input is 24px tall for WCAG 2.2's
+   24x24 target (it measured 6px); the track still paints 6px inside it. */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  background: rgba(255, 255, 255, 0.12);
+  background: transparent;
+  height: 24px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
   height: 6px;
   border-radius: 3px;
-  outline: none;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -490,12 +503,6 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
   box-shadow: 0 0 10px var(--primary-glow);
   transition: transform 0.15s ease;
-}
-
-input[type="range"]::-moz-range-track {
-  background: rgba(255, 255, 255, 0.12);
-  height: 6px;
-  border-radius: 3px;
 }
 
 /* Firefox number input spinner reset */
@@ -777,8 +784,7 @@ input[type="number"]::-webkit-inner-spin-button {
   min-height: 280px;
   margin-top: 0.65rem;
   border-radius: 6px;
-  /* Dark placeholder: satellite tiles load over the page background, never a
-     pale flash in an otherwise dark UI. */
+  /* Dark placeholder: satellite tiles never flash pale over a dark UI. */
   background: #0d1117;
 }
 
@@ -797,8 +803,7 @@ input[type="number"]::-webkit-inner-spin-button {
   left: 0.75rem;
 }
 
-/* RTL (Arabic): flexbox/grid mirror for free; only absolute pieces need
-   explicit mirrors. Nothing here changes LTR rendering. */
+/* RTL: flexbox/grid mirror for free; only absolute pieces need mirrors. */
 [dir="rtl"] .skip-link {
   left: auto;
   right: -9999px;
@@ -808,7 +813,7 @@ input[type="number"]::-webkit-inner-spin-button {
   right: 0.75rem;
 }
 
-/* Screen-reader-only labels: visible to assistive tech, never painted. */
+/* Screen-reader-only labels. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -821,15 +826,14 @@ input[type="number"]::-webkit-inner-spin-button {
   border: 0;
 }
 
-/* Inline form grids collapse to one column on narrow phones; !important beats their inline columns. */
+/* Inline form grids collapse on narrow phones. */
 @media (max-width: 480px) {
   .form-grid-2col {
     grid-template-columns: 1fr !important;
   }
 }
 
-/* At ~320px the nowrap location CTA plus the search floor would cramp the
-   row; let the button wrap and breathe instead. */
+/* At ~320px let the nowrap location CTA wrap instead of cramping the row. */
 @media (max-width: 380px) {
   #btnGeoLocate {
     white-space: normal !important;
@@ -961,7 +965,7 @@ input[type="number"]::-webkit-inner-spin-button {
   outline-offset: 2px;
 }
 
-/* Keyboard users need a visible focus ring on every button-style element. */
+/* A visible focus ring on every button-style element. */
 
 .btn:focus-visible,
 .ladder-tab:focus-visible,
@@ -988,7 +992,7 @@ textarea:focus-visible {
   margin-bottom: 1.5rem;
 }
 
-/* Use-case form utilities: named classes keep inline styles at zero. */
+/* Use-case form utilities. */
 .uc-note {
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -1033,8 +1037,7 @@ textarea:focus-visible {
 }
 
 /* Field-level error: visible, legible, announced via aria-describedby. */
-/* P1.6: the always-visible assumption lines. Muted but readable at every
-   width, and separated from the interactive row below it. */
+/* P1.6: the always-visible assumption lines — muted, readable at every width. */
 .assumption-disclosure {
   margin: 1rem 0 0;
   font-size: 0.85rem;
@@ -1100,7 +1103,7 @@ textarea:focus-visible {
   font-family: var(--font-mono);
 }
 
-/* The chart-panel figure is a caption-grade number, not the hero saving. */
+/* The chart-panel figure is caption-grade. */
 .savings-highlight .savings-num {
   font-size: 1.6rem;
 }
@@ -1220,8 +1223,7 @@ textarea:focus-visible {
   margin-bottom: 1.25rem;
 }
 
-/* The provenance link: the audit trail itself, so a real link (open, copy,
- * send), never a styled div. */
+/* The provenance link is the audit trail: a real link, never a styled div. */
 .sources-link {
   color: var(--primary-accent);
   font-size: 0.85rem;
@@ -1368,7 +1370,7 @@ footer {
   }
 }
 
-/* Printable summary: at print time, only the estimate sheet survives. */
+/* Printable summary: the estimate sheet survives. */
 
 #printSheet {
   display: none;
@@ -1676,7 +1678,7 @@ footer {
   line-height: 1.45;
 }
 
-/* Four ways to pay (D-01 6.4): four cards of the SAME system, side by side. */
+/* Four ways to pay (D-01 6.4). */
 #pathsPanel h3 {
   font-size: 1rem;
   font-weight: 800;
@@ -1797,7 +1799,7 @@ footer {
   line-height: 1.5;
   margin-top: 0.7rem;
 }
-/* Plans P1.1: a derived band is not a benchmark of the visitor's market. */
+/* Plans P1.1: a derived band is not a market benchmark. */
 .paths-benchmark-missing {
   font-size: 0.72rem;
   color: var(--text-muted);
@@ -1812,7 +1814,7 @@ footer {
   border-left: 3px solid var(--warning-orange) !important;
 }
 
-/* ── Staged loading pipeline (data-loading legibility) ─────────────────── */
+/* Staged loading pipeline. */
 #loadingPipeline {
   margin-top: 0.75rem;
   padding: 0.7rem 0.9rem;
@@ -1954,7 +1956,7 @@ footer {
   }
 }
 
-/* #155: shared checkbox-toggle row; markup carries no style attributes. */
+/* #155: shared checkbox-toggle row. */
 .toggle-row {
   display: flex;
   align-items: center;
@@ -2038,6 +2040,21 @@ footer {
   align-items: flex-start;
   gap: 0.15rem;
   text-align: left;
+  /* #434: unclassed ladder <button>s need their own surface and a border that
+   states the tap area; checked uses the segmented control's emerald wash. */
+  background: rgba(9, 13, 22, 0.85);
+  border: 1px solid var(--border-card);
+  color: var(--text-main);
+}
+
+.btn-ladder:hover {
+  border-color: rgba(0, 230, 153, 0.4);
+}
+
+.btn-ladder[aria-checked="true"] {
+  background: rgba(0, 230, 153, 0.12);
+  border-color: var(--primary-accent);
+  color: var(--text-bright);
 }
 .case-why {
   font-size: 0.78rem;

@@ -735,7 +735,8 @@ export function explainElement(element, term, lang) {
   if (!element || !entry) return false;
   element.setAttribute("data-eli5", entry.long);
   element.setAttribute("title", `${entry.short}: ${entry.long}`);
-  element.setAttribute("tabindex", "0");
-  element.setAttribute("aria-label", `${term}: ${entry.long}`);
+  // #434: a description, never a name — aria-label here replaced the visible
+  // text as the accessible name (axe: label-content-name-mismatch).
+  element.setAttribute("aria-description", `${entry.short}: ${entry.long}`);
   return true;
 }

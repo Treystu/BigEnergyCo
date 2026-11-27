@@ -52,7 +52,8 @@ export const AXE_TAGS = [
 //   set    the value plus the input and change events, for a control that is
 //          NOT visible in this state — #loadMode, #dailyKwhInput, #systemGoal
 //          and #customRateVal all live inside #fullControls, which the product
-//          hides until the manual radio is checked. Playwright's own fill and
+//          keeps behind the closed #advancedControls <details> until a visitor
+//          opens it. Playwright's own fill and
 //          selectOption both wait for visibility, so a driver that used them
 //          here timed out on a control that is working exactly as designed.
 //          The events dispatched are the ones a real interaction produces.
@@ -72,11 +73,15 @@ export const STATES = [
   { id: "arrival", needs: null, steps: [] },
   { id: "result", needs: "run control", steps: RUN_INPUTS },
   {
-    // The advanced panel, revealed by the radio a visitor actually presses.
-    // A panel nobody can open is a panel nobody has audited.
+    // The advanced panel, opened the way a visitor opens it: the <summary> of
+    // `#advancedControls`. This state used to click `#modeManual`, which the
+    // mode-fork removal (#441) deleted; the cell then timed out on a control
+    // that no longer exists and reported an audit error, which is never a pass
+    // but also never measured the panel. `#fullControls` is always in the DOM
+    // now, so the state is "the optional depth is open".
     id: "manual",
-    needs: "mode radio",
-    steps: [{ action: "click", selector: "#modeManual" }],
+    needs: "advanced panel",
+    steps: [{ action: "click", selector: "#advancedControls > summary" }],
   },
 ];
 
