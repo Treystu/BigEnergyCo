@@ -183,10 +183,20 @@ export function renderFrontier(host, frontier, opts = {}) {
       : t("frontierYOffgrid");
   const xLabel = t("frontierX");
 
-  const box = chartBox(opts.width || host.getBoundingClientRect().width);
+  const hostWidth = opts.width || host.getBoundingClientRect().width;
+  const box = chartBox(hostWidth);
   const VB_W = box.W,
     VB_H = box.H,
     PAD = box.pad;
+  // #434: the hit ring is sized in CSS pixels, not viewBox units. The viewBox
+  // is clamped to VB_MIN so labels have room, which means a phone container is
+  // drawn SMALLER than its viewBox (262.8 CSS px for a 300-wide box at 390, and
+  // 192.8 at 320). A fixed r=12 measured 23.9x23.9 CSS px on a laptop - under
+  // WCAG 2.2's 24x24 target minimum, invisibly - and 21.7 on a phone. Dividing
+  // by the same ratio the viewBox is drawn at keeps the pressed area at 25 CSS
+  // px at every width, and the ring is transparent so nothing moves.
+  const ringScale = clamp((Number(hostWidth) || box.W) / box.W, 0.4, 1);
+  const HIT_R = (12.5 / ringScale).toFixed(2);
   const FS = box.font,
     FS_TAG = box.fontTag;
 
@@ -329,9 +339,10 @@ export function renderFrontier(host, frontier, opts = {}) {
   // sits under the visible dot so small targets stay easy to grab, and each is
   // keyboard-focusable (role=button) so a keyboard or screen-reader user can
   // step through the systems too. Selecting a point moves the blue marker and
-  // its readout to that system. #434: the ring is r=12, i.e. a 24x24 target —
-  // the WCAG 2.2 minimum — because r=10 measured 20x20 and the points sit as
-  // close as 7px, so the spacing exception cannot apply either. The ring is
+  // its readout to that system. #434: the transparent hit ring above is a
+  // measured 25 CSS px across at every chart width (r=10 measured 20x20 and the
+  // points sit as close as 7px, so WCAG 2.2's spacing exception cannot apply);
+  // HIT_R converts that CSS size back into viewBox units. The ring is
   // transparent, so the chart looks identical.
   for (let i = 0; i < pts.length; i++) {
     const p = pts[i];
@@ -343,7 +354,7 @@ export function renderFrontier(host, frontier, opts = {}) {
     });
     push(
       `<g data-pt="${i}" role="button" tabindex="0" style="cursor:pointer;" aria-label="${esc(tip)}">` +
-        `<circle cx="${X(p.capexUsd).toFixed(1)}" cy="${Y(p.outcomePct).toFixed(1)}" r="12" fill="transparent"/>` +
+        `<circle cx="${X(p.capexUsd).toFixed(1)}" cy="${Y(p.outcomePct).toFixed(1)}" r="${HIT_R}" fill="transparent"/>` +
         `<circle cx="${X(p.capexUsd).toFixed(1)}" cy="${Y(p.outcomePct).toFixed(1)}" r="3.1" fill="${C.curve}"/>` +
         `<title>${esc(tip)}</title></g>`,
     );
