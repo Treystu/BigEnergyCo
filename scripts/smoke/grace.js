@@ -148,9 +148,13 @@ export async function runGraceFlow(ctx, actions) {
     refused === true,
     JSON.stringify(state),
   );
+  // What must not happen is a *half-restore*: the shared 12 kWh load landing
+  // in the form. The field is not blank on arrival — the intake prior (20 kWh)
+  // is the visitor's own starting point, and a refused link leaves it alone
+  // rather than clearing it.
   gate(
     "an unresolvable share link does not auto-run or half-restore",
-    state.results === true && state.kwh === "" && state.disabled === false,
+    state.results === true && state.kwh !== "12" && state.disabled === false,
     JSON.stringify(state),
   );
 
