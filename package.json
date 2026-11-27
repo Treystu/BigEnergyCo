@@ -56,7 +56,8 @@
     "cf:check": "node scripts/cf-provision-check.mjs",
     "smoke:advisor": "node scripts/smoke/advisor-fallbacks.mjs",
     "smoke:advisor-i18n": "node scripts/smoke/advisor-i18n.mjs",
-    "check-headers": "node scripts/check-headers.mjs"
+    "check-headers": "node scripts/check-headers.mjs",
+    "gate:a11y": "node scripts/check-a11y-static.mjs --stage _pages_staging"
   },
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
