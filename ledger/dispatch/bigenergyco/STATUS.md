@@ -541,3 +541,84 @@ WAIT-STATE: not waiting on a party. Wave 2 is landed and rendered-verified
 accessibility, #435 failure states, #438 share card) with #431 parked
 DECISION-READY behind case-feature data and #328 parked as an owner act. Rung:
 Wave 2 tail closed; next is Wave 3's first row.
+## Landing record — 2026-11-27 (Wave 3 row 1: #433 speed)
+
+- **#433 closed on squash `e717b7a8` (PR #499, head `7160e6cb`, CircleCI
+  pipeline `e552bfa8`, workflow `verify` success at the exact merged revision).**
+  Squash diff proved non-empty before merge: 32 files, +1,337/−343 against
+  `e717b7a8^`. No rebase reset touched this branch, so the #496 empty-diff
+  failure mode did not apply here; the check was run anyway.
+- **The GitHub Actions check-runs on that head are red for infrastructure, not
+  code:** every job reads "The job was not started because your account is
+  locked due to a billing issue." No job ever ran. The lane's rail is CircleCI;
+  the state is recorded in the receipt rather than presented as a pass.
+- **Baseline taken on the real load path, not a synthetic substitute.**
+  `scripts/measure-speed.mjs` drives a real browser over CDP (Slow 4G, 4× CPU,
+  390x844, cache off, Honolulu) against the deployed staging artifact and times
+  the click to a numeric bill. Before (`6dccec5f`): time to first number
+  **15,898 ms**, results-phase transfer **1,795,599 B**, LCP 1,308 ms. With
+  `power.larc.nasa.gov` blocked the same run finished in 3,162 ms / 204 KB —
+  i.e. ~80% of the wait was the third-party weather transport.
+- **Cause and cure.** NASA POWER's hourly endpoint is served uncompressed
+  (653,437 B for the two-year chunk, no `Content-Encoding`). `nasa.js` now asks
+  for `format=CSV` — 417,287 B, −36% — parsed into the JSON parser's exact
+  record shape (`-999`→NaN, re-padded stamps, header located not counted past),
+  with the JSON parser retained as the fallback for any body that is not CSV.
+  Eager-JS budget was met by **trimming prose**, never by widening it.
+- **After** (`cd5f9072`, merged shape, same conditions): time to first number
+  **11,252 ms**, results transfer **1,205,374 B**, LCP 1,488 ms. Weather-blocked
+  first number 3,162 → 2,113 ms.
+- **Gate, so this cannot silently regress:** `scripts/check-speed.mjs` derives
+  first-load and deferred-layer graphs from the built artifact (markup, static
+  imports, `new Worker()`, dynamic imports, CSS `url()`, manifest) and refuses
+  to pass on a graph it could not derive; budgets in
+  `scripts/lib/speed-budgets.mjs` (first-load 1,115,000 B measured 1,107,786;
+  deferred 1,055,000 B measured 1,046,672). Wired into CircleCI after the
+  staging build and into `.github/workflows/test.yml`.
+  `tests/speed-budget.test.mjs` plants a 40 KB first-load regression that must
+  fail the gate binary, and asserts a missing axis is a fail, not a pass.
+  `tests/nasa-csv.test.mjs` pins the wire and both parsers; every fetch double
+  in the suite now speaks CSV.
+- **Rendered surface:** staging `https://cd5f9072.bigenergyco.pages.dev` (stamp
+  `20261127b`, SW `beco-v322`). Phone class: three CSV weather pulls, first
+  number at 11,252 ms with a numeric bill. Desktop 1282x900: result card renders
+  on load (`$167/mo`); Honolulu run produces `$267/mo` with the 20-year cost
+  card; 46 scripts at `?v=20261127b`, no 404s. Production untouched.
+- **Standing limitation, not silently dropped:** the next lever is an
+  edge-compressed same-origin weather proxy. No origin serves `/api` (404 on the
+  staging preview, the pages.dev apex and the apex domain) and the static Pages
+  flow cannot ship a Worker, so it is an owner/infra act recorded in
+  `speed-budgets.mjs` under `remaining_lever`.
+
+### Census — re-derived live after the merge (2026-11-27)
+
+- **Main head `e717b7a8`.** Open PRs: **#455 only** (the npm-group dependabot
+  bump, untouched by this lane).
+- **Closed this pass:** #433 (auto-closed by "Closes #433", receipt posted on the
+  issue, mirrored to #429 and #145).
+- **Open set (26):** #145 master plan tracker; #328 (owner act, Cloudflare
+  dashboard, DECISION-READY, parked); #345 and #358 (Champion badge thresholds),
+  #353 (Champion frontier); #360 (production drift), #361 (staging-origin
+  naming), #362 (plan-vs-policy drift), #364 (advisor CORS); #366 SEO program
+  with #393–#399 market posts and #408 Sinhala; #400 unify+simplify tracker with
+  #401/#402/#403 residues; #429 canonical GQ tracker with **#434 accessibility**,
+  #435 failure states, #438 share card open and #431 parked behind case data;
+  #440 landed; **#466** (codex 32-finding burndown), **#467** (verdict sentence
+  asserting a cause the numbers deny), **#479** (sub-1 kWh/day advanced loads
+  silently substituted).
+- **Queue correction from the live record:** the carrier's Wave 3 order stands
+  (#433 done, then #434, #435, #438), but three live defects filed since the
+  carrier was written sit ahead of it in the "live defects" tier and are now in
+  the queue explicitly: **#479** (silent substitution of small loads — a
+  correctness defect on the results surface), **#467** (a verdict sentence that
+  contradicts the run's own numbers), and **#466** (the codex finding audit).
+
+## Readiness line (2026-11-27, after the #433 landing)
+
+Next row in filed order: **#434 (GQ F5 accessibility)** — with #479 and #467 in
+the live-defect tier ahead of the rest. Main `e717b7a8`, rail green at the merged
+head, staging `cd5f9072` carries the landed shape at stamp `20261127b` / SW
+`beco-v322`; production is untouched and still the 2026-11-04 deploy, so
+promotion stays gated on the D-2026-11-13-008 trigger (rail green + Jev vision
+PASS on rendered surfaces + scope flush). #328 remains the only owner-held row,
+parked with its receipt. #431 stays DECISION-READY behind case-feature data.
