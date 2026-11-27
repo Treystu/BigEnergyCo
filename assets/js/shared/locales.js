@@ -3,11 +3,11 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261127u";
-import { RESULT_COPY } from "./result-copy.js?v=20261127u";
-import { TILT_COPY } from "./tilt-copy.js?v=20261127u";
-import { DETAIL_COPY } from "./detail-copy.js?v=20261127u";
-import { CHROME_COPY } from "./chrome-copy.js?v=20261127u";
+import { HOME_COPY } from "./home-copy.js?v=20261127v";
+import { RESULT_COPY } from "./result-copy.js?v=20261127v";
+import { TILT_COPY } from "./tilt-copy.js?v=20261127v";
+import { DETAIL_COPY } from "./detail-copy.js?v=20261127v";
+import { CHROME_COPY } from "./chrome-copy.js?v=20261127v";
 
 export const LOCALES = {
   en: {
@@ -68,7 +68,7 @@ export const LOCALES = {
     invalidCoordinates:
       "Latitude must be between −90 and 90 and longitude between −180 and 180.",
     invalidDailyKwh:
-      "Daily energy use must be between 0.5 and 500 kWh per day — enter a figure in that range, or tick the appliances you want to power instead.",
+      "Daily energy use must be between 0.01 and 500 kWh per day — enter a figure in that range, or tick the appliances you want to power instead.",
     inputsChanged:
       "Inputs changed — click Size My System to update the estimate.",
     errorTimeout:
@@ -923,7 +923,7 @@ export const LOCALES = {
     invalidCoordinates:
       "La latitud debe estar entre −90 y 90 y la longitud entre −180 y 180.",
     invalidDailyKwh:
-      "El consumo diario debe estar entre 0,5 y 500 kWh al día: introduce una cifra en ese rango o marca los electrodomésticos que quieras alimentar.",
+      "El consumo diario debe estar entre 0,01 y 500 kWh al día: introduce una cifra en ese rango o marca los electrodomésticos que quieras alimentar.",
     inputsChanged:
       "Los datos cambiaron: pulsa Dimensionar mi sistema para actualizar.",
     errorTimeout:
@@ -1879,7 +1879,7 @@ export const LOCALES = {
     invalidCoordinates:
       "A latitude deve estar entre −90 e 90 e a longitude entre −180 e 180.",
     invalidDailyKwh:
-      "O consumo diário deve ficar entre 0,5 e 500 kWh por dia: informe um valor nessa faixa ou marque os eletrodomésticos que quer alimentar.",
+      "O consumo diário deve ficar entre 0,01 e 500 kWh por dia: informe um valor nessa faixa ou marque os eletrodomésticos que quer alimentar.",
     inputsChanged:
       "Os dados mudaram — clique em Dimensionar meu sistema para atualizar.",
     errorTimeout:
@@ -2737,7 +2737,7 @@ export const LOCALES = {
     invalidCoordinates:
       "La latitude doit être comprise entre −90 et 90 et la longitude entre −180 et 180.",
     invalidDailyKwh:
-      "La consommation quotidienne doit être comprise entre 0,5 et 500 kWh par jour : saisissez un chiffre dans cette plage ou cochez les appareils à alimenter.",
+      "La consommation quotidienne doit être comprise entre 0,01 et 500 kWh par jour : saisissez un chiffre dans cette plage ou cochez les appareils à alimenter.",
     inputsChanged:
       "Les entrées ont changé — cliquez sur Dimensionner pour actualiser l’estimation.",
     errorTimeout:
@@ -3513,7 +3513,7 @@ export const LOCALES = {
     invalidCoordinates:
       "Der Breitengrad muss zwischen −90 und 90 und der Längengrad zwischen −180 und 180 liegen.",
     invalidDailyKwh:
-      "Der tägliche Energieverbrauch muss zwischen 0,5 und 500 kWh liegen — gib einen Wert in diesem Bereich ein oder kreuze die Geräte an, die du versorgen willst.",
+      "Der tägliche Energieverbrauch muss zwischen 0,01 und 500 kWh liegen — gib einen Wert in diesem Bereich ein oder kreuze die Geräte an, die du versorgen willst.",
     inputsChanged:
       "Eingaben geändert — klicken Sie auf System dimensionieren, um die Schätzung zu aktualisieren.",
     errorTimeout:
@@ -4370,7 +4370,7 @@ export const LOCALES = {
     invalidCoordinates:
       "De breedtegraad moet tussen −90 en 90 liggen en de lengtegraad tussen −180 en 180.",
     invalidDailyKwh:
-      "Het dagelijkse energieverbruik moet tussen 0,5 en 500 kWh per dag liggen — voer een getal binnen dat bereik in, of vink de apparaten aan die u wilt voeden.",
+      "Het dagelijkse energieverbruik moet tussen 0,01 en 500 kWh per dag liggen — voer een getal binnen dat bereik in, of vink de apparaten aan die u wilt voeden.",
     inputsChanged:
       "Invoer gewijzigd — klik op Systeem dimensioneren om de berekening bij te werken.",
     errorTimeout:
@@ -5421,7 +5421,7 @@ export const LOCALES = {
     invalidCoordinates:
       "يجب أن يتراوح خط العرض بين −90 و90 وخط الطول بين −180 و180.",
     invalidDailyKwh:
-      "يجب أن يتراوح استهلاك الطاقة اليومي بين 0.5 و500 كيلوواط ساعة — أدخل رقماً في هذا المدى أو حدّد الأجهزة التي تريد تغذيتها.",
+      "يجب أن يتراوح استهلاك الطاقة اليومي بين 0.01 و500 كيلوواط ساعة — أدخل رقماً في هذا المدى أو حدّد الأجهزة التي تريد تغذيتها.",
     inputsChanged: "تغيرت المدخلات — اضغط احسب نظامي لتحديث التقدير.",
     errorTimeout:
       "لم يرد محرك الحساب في الوقت المحدد — تحقق من اتصالك وحاول مرة أخرى.",
