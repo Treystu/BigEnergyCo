@@ -709,3 +709,77 @@ still the 2026-11-04 deploy, so promotion stays gated on the D-2026-11-13-008
 trigger (rail green + Jev vision PASS on rendered surfaces + scope flush). #328
 remains the only owner-held row, parked with its receipt. #431 stays
 DECISION-READY behind case-feature data.
+
+## Landing — #435 failure states (2026-11-27)
+
+**Landed `55916e78`** (PR #505, squash; 27 files, +560/−133; non-empty squash
+proven against `9cfd931c` before merge). Rail: CircleCI `verify` success at the
+exact PR head `85f09900` (job 356, check-runs read, not the combined status).
+Suite on the merged commit: `2435/2435`.
+
+- **The row.** Three failure states, each reproduced before it was cured: the
+  bundled offline weather series was memoized for the session, so the
+  disclosure's "re-run online for point-specific weather" never re-ran (a
+  stand-in is now stale once the browser is back and the memo hit falls through
+  to the existing cold path, once per click, with a live result retiring the
+  payload cache the offline run filled); worker errors printed raw English
+  engine text into a localized status line (diagnosis to the console, keyed
+  `errorRunFailed` / `errorRunOffline` copy in all seven locales); a failed
+  advisor send discarded the typed question (both failure branches restore it,
+  focus the box, and never clobber text typed mid-flight). Detail and readings:
+  #435 receipt, mirrored to #429 and #145.
+- **Bytes paid in seat.** The eager-JS budget had 217 B of headroom; the cure
+  reuses the cold path rather than adding a second fetch, and the memo
+  bookkeeping comes out smaller than it went in (the `fetchWeatherDefault`
+  wrapper is deleted). No budget was widened.
+- **Rendered surface** (staging `5d818031` → `staging.bigenergyco.pages.dev`,
+  stamp `20261127s`, SW `beco-v339`, from `55916e78`; production untouched):
+  with every persistence layer wiped and the wipe proven, a bare run click does
+  not size, a chosen location sizes with 3 NASA POWER pulls, a same-location
+  reload sizes with 0; with `/api/chat` aborted the advisor says it is
+  unreachable and the question is back in `#chatInput` with send enabled; an
+  older-schema `#s=` share link is refused in `#sizingStatus` with no card and
+  the form still sizes.
+- **Named, not hidden.** The full browser drive on staging ended 19/23 gates
+  before aborting in its auto-location stage: three weather gates assume a bare
+  Run click can size after `localStorage` is wiped (the location-first UI
+  refuses that — proven directly), and `weather.js` calls
+  `getElementById("btnGeoLocate").click()` unguarded in the same state. The new
+  grace flows never ran there for that reason, so the two failure states were
+  driven directly and the raw probe output is the evidence. Harness repair is a
+  separate row under the filing-time overlap check.
+- **Test honesty repaired in passing:** `tests/consistency.test.mjs` still
+  stubbed NASA as the pre-#433 JSON payload, so "one site loads weather exactly
+  once per session" was measuring one failed load being replayed — the defect
+  this row cures. The stub speaks the CSV wire now.
+- `js_to_first_result` keeps its pre-existing +19.4 KB breach of the declared
+  baseline (203.5 KB declared, 222.9 KB before this row); this row's marginal is
+  ~+300 B. Not fixed here, not blurred by a budget change.
+
+### Census — re-derived live after the merge (2026-11-27, read: gh pr/issue list + check-runs, this session)
+
+- **Main head `55916e78`.** Open PRs: **#455** (npm-group dependabot bump,
+  untouched by this lane). Open issues **29**.
+- **Closed this pass:** #435 (PR #505 carried "Closes #435"; receipt on the
+  issue, mirrored to #429 and #145).
+- **Open set (29):** #145 master plan tracker; #328 (owner act, Cloudflare
+  dashboard, DECISION-READY, parked); #345/#358 Champion badge thresholds,
+  #353 Champion frontier; #360 production drift, #361 staging-origin naming,
+  #362 plan-vs-policy drift, #364 advisor CORS; #366 SEO program with
+  #393–#399 market posts and #408 Sinhala; #400 unify+simplify tracker with
+  #401/#402/#403 residues; #429 canonical GQ tracker; #466 codex 32-finding
+  burndown, #467 verdict sentence contradicting its own numbers, #479 sub-1
+  kWh/day silent substitution.
+
+## Readiness line (2026-11-27, after the #435 landing)
+
+Next row in filed order: **#438 share card** — with **#479** and **#467** still
+sitting in the live-defect tier ahead of the SEO and governance rows. Main
+`55916e78`, rail green at the merged head, staging `5d818031` carries the landed
+shape at stamp `20261127s` / SW `beco-v339`; production is untouched and still
+the 2026-11-04 deploy, so promotion stays gated on the D-2026-11-13-008 trigger
+(rail green + Jev vision PASS on rendered surfaces + scope flush; #360 closes on
+the promoted state). #328 remains the only owner-held row, parked with its
+receipt. #431 stays DECISION-READY behind case-feature data. The browser drive's
+harness staleness (above) is a named reliability row, not a gate this lane can
+declare green.
