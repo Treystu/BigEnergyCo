@@ -3,11 +3,11 @@
 // `ar` flips the document to RTL automatically.
 // Keys not present in a locale fall back to English silently.
 
-import { HOME_COPY } from "./home-copy.js?v=20261127f";
-import { RESULT_COPY } from "./result-copy.js?v=20261127f";
-import { TILT_COPY } from "./tilt-copy.js?v=20261127f";
-import { DETAIL_COPY } from "./detail-copy.js?v=20261127f";
-import { CHROME_COPY } from "./chrome-copy.js?v=20261127f";
+import { HOME_COPY } from "./home-copy.js?v=20261127s";
+import { RESULT_COPY } from "./result-copy.js?v=20261127s";
+import { TILT_COPY } from "./tilt-copy.js?v=20261127s";
+import { DETAIL_COPY } from "./detail-copy.js?v=20261127s";
+import { CHROME_COPY } from "./chrome-copy.js?v=20261127s";
 
 export const LOCALES = {
   en: {
@@ -84,6 +84,10 @@ export const LOCALES = {
     runBtn: "Size My System (5-yr simulation)",
     errorSim:
       "⚠️ Sizing engine failed to load. Refresh the page (Ctrl+F5) and try again.",
+    errorRunFailed:
+      "⚠️ The sizing run stopped with an error — your inputs are unchanged. Click Size My System to try again.",
+    errorRunOffline:
+      "⚠️ You're offline, so the five-year weather download could not finish — your inputs are unchanged. Reconnect and click Size My System to try again.",
     statusSuccess:
       "✅ {years} yr of hourly data ({dataYears}) · {yield} kWh/yr per kW of panel.{offline}",
     offlineNote: " · 🌐 offline typical-year mode",
@@ -932,6 +936,10 @@ export const LOCALES = {
       "⏳ Obteniendo 5 años de clima horario por satélite y buscando tamaños de sistema…",
     errorSim:
       "⚠️ El motor de cálculo no pudo cargarse. Actualiza la página (Ctrl+F5) e inténtalo de nuevo.",
+    errorRunFailed:
+      "⚠️ El cálculo se detuvo por un error: tus datos no han cambiado. Pulsa Dimensionar mi sistema para intentarlo de nuevo.",
+    errorRunOffline:
+      "⚠️ Estás sin conexión, así que no se pudo completar la descarga de cinco años de clima: tus datos no han cambiado. Vuelve a conectarte y pulsa Dimensionar mi sistema para intentarlo de nuevo.",
     statusSuccess:
       "✅ {years} años de datos horarios ({dataYears}) · {yield} kWh/año por kW de panel.{offline}",
     offlineNote: " · 🌐 año típico sin conexión",
@@ -1886,6 +1894,10 @@ export const LOCALES = {
     runBtnReady: "Dimensionar meu sistema (simulação de 5 anos)",
     errorSim:
       "⚠️ O motor de dimensionamento não pôde carregar. Atualize a página (Ctrl+F5) e tente novamente.",
+    errorRunFailed:
+      "⚠️ O dimensionamento parou devido a um erro — os seus dados não foram alterados. Toque em Dimensionar meu sistema para tentar novamente.",
+    errorRunOffline:
+      "⚠️ Está sem ligação, por isso a descarga de cinco anos de clima não pôde terminar — os seus dados não foram alterados. Volte a ligar-se e toque em Dimensionar meu sistema para tentar novamente.",
     statusSuccess:
       "✅ {years} anos de dados horários ({dataYears}) · {yield} kWh/ano por kW de painel.{offline}",
     offlineNote: " · 🌐 ano típico offline",
@@ -2740,6 +2752,10 @@ export const LOCALES = {
     runBtnReady: "Dimensionner (simulation sur 5 ans)",
     errorSim:
       "⚠️ Le moteur de dimensionnement n'a pas pu se charger. Actualisez la page (Ctrl+F5) et réessayez.",
+    errorRunFailed:
+      "⚠️ Le dimensionnement s'est arrêté sur une erreur — vos données n'ont pas changé. Cliquez sur Dimensionner pour réessayer.",
+    errorRunOffline:
+      "⚠️ Vous êtes hors ligne : le téléchargement de cinq ans de météo n'a pas pu aboutir — vos données n'ont pas changé. Reconnectez-vous et cliquez sur Dimensionner pour réessayer.",
     statusSuccess:
       "✅ {years} ans de données horaires ({dataYears}) · {yield} kWh/an par kW de panneau.{offline}",
     offlineNote: " · 🌐 mode hors ligne de l’année type",
@@ -3511,6 +3527,10 @@ export const LOCALES = {
     runBtnReady: "System dimensionieren (5-Jahres-Simulation)",
     errorSim:
       "⚠️ Die Dimensionierungs-Engine konnte nicht geladen werden. Aktualisieren Sie die Seite (Ctrl+F5) und versuchen Sie es erneut.",
+    errorRunFailed:
+      "⚠️ Die Berechnung wurde durch einen Fehler beendet — Ihre Eingaben sind unverändert. Klicken Sie auf System dimensionieren, um es erneut zu versuchen.",
+    errorRunOffline:
+      "⚠️ Sie sind offline, daher konnte der Wetterabruf für fünf Jahre nicht abgeschlossen werden — Ihre Eingaben sind unverändert. Stellen Sie die Verbindung wieder her und klicken Sie auf System dimensionieren.",
     tariffSpendLine:
       "Bei {tariff}/kWh kostet dein Strom heute etwa {annual} pro Jahr. Jede Option unten zeigt die Rechnung nach Solar und wie schnell sie sich aus den Ersparnissen bezahlt.",
     tariffSpendBattery:
@@ -4366,6 +4386,10 @@ export const LOCALES = {
     runBtn: "Systeem dimensioneren (5-jaarssimulatie)",
     errorSim:
       "⚠️ De berekeningsmodule kon niet worden geladen. Vernieuw de pagina (Ctrl+F5) en probeer het opnieuw.",
+    errorRunFailed:
+      "⚠️ De berekening stopte met een fout — je invoer is ongewijzigd. Klik op Systeem dimensioneren om het opnieuw te proberen.",
+    errorRunOffline:
+      "⚠️ Je bent offline, dus de weerdownload van vijf jaar kon niet worden afgerond — je invoer is ongewijzigd. Maak opnieuw verbinding en klik op Systeem dimensioneren om het opnieuw te proberen.",
     statusSuccess:
       "✅ {years} jaar aan uurlijkse gegevens ({dataYears}) · {yield} kWh/jaar per kW aan paneel.{offline}",
     offlineNote: " · 🌐 offline typisch-jaar-modus",
@@ -5411,6 +5435,10 @@ export const LOCALES = {
     runBtnReady: "احسب نظامي (محاكاة 5 سنوات)",
     errorSim:
       "⚠️ تعذّر تحميل محرك التقدير. حدّث الصفحة (Ctrl+F5) وحاول مرة أخرى.",
+    errorRunFailed:
+      "⚠️ توقّف التقدير بسبب خطأ — لم تتغيّر بياناتك. اضغط احسب نظامي للمحاولة مرة أخرى.",
+    errorRunOffline:
+      "⚠️ أنت دون اتصال، لذا تعذّر إكمال تنزيل بيانات الطقس لخمس سنوات — لم تتغيّر بياناتك. أعد الاتصال واضغط احسب نظامي للمحاولة مرة أخرى.",
     statusSuccess:
       "✅ {years} سنوات من البيانات الساعية ({dataYears}) · {yield} كيلوواط ساعة/سنة لكل كيلوواط من اللوحة.{offline}",
     offlineNote: " · 🌐 وضع السنة النموذجية دون اتصال",
