@@ -1236,63 +1236,31 @@ function finish(p, sys) {
   return p;
 }
 
+// WHY a route has no break-even inside the horizon (#467): the card printed one
+// canned cause for every null — "replacements outpace savings" — while its own
+// swaps row said "None in 20 years". Derive it instead from the same identity
+// `explainRanking` uses: spend20 + residual - baseline = the shortfall. The
+// largest POSITIVE component is the driver, so a zero-swap route is never told
+// it lost to replacements; "no-baseline" is the off-grid frame.
+export function breakEvenDriver(route) {
+  if (!route) return null;
+  if (!(route.baselineBills20 > 0)) return { code: "no-baseline" };
+  const parts = [
+    ["upfront", route.year0 - route.incentives],
+    ["replacements", route.replacementsTotal || 0],
+    ["upkeep", route.omTotal || 0],
+    ["residual", route.residualBills20 || 0],
+  ].filter(([, v]) => v > 0);
+  parts.sort((a, b) => b[1] - a[1]);
+  return { code: parts.length ? parts[0][0] : "upfront" };
+}
+
 /**
  * R-PATH-07 break-even: the first year in which cumulative (system spend +
  * residual bills) is at or below cumulative baseline bills. Null when it never
  * happens inside the horizon, which the card states as "not within 20 years"
  * rather than printing a year it does not have.
  */
-/*
- * WHY a route has no break-even inside the horizon (#467).
- *
- * The card used to print ONE canned cause for every null break-even —
- * "replacements outpace savings" — while the same card's swaps row read "None in
- * 20 years". Two printed claims disagreeing on one card is the unification
- * defect class, so the cause is DERIVED from the same components that produce
- * `spend20` and `breakEvenYear`, with the same identity `explainRanking` uses:
- *
- *   (system spend over 20 yr + residual bills) - baseline bills = the shortfall
- *
- * The largest positive component is the driver; a component of ZERO is never a
- * driver, so a zero-swap route cannot be told it lost to replacements. Codes:
- * "upfront" (the year-0 cost alone), "replacements" (swaps + inverter), "upkeep"
- * (O&M and fuel), "residual" (the grid bill the system still pays), and
- * "no-baseline" (no grid bill at all to repay against — the off-grid frame).
- */
-export function breakEvenDriver(route) {
-  if (!route) return null;
-  const baseline = Math.round(route.baselineBills20 || 0);
-  if (!(baseline > 0))
-    return { code: "no-baseline", baseline: 0, gap: 0, horizon: HORIZON_YEARS };
-  const upfront = Math.round(route.year0 - route.incentives);
-  const replacements = Math.max(0, Math.round(route.replacementsTotal || 0));
-  const upkeep = Math.max(0, Math.round(route.omTotal || 0));
-  const residual = Math.max(0, Math.round(route.residualBills20 || 0));
-  const gap = Math.round((route.spend20 || 0) + residual - baseline);
-  const parts = [
-    ["upfront", upfront],
-    ["replacements", replacements],
-    ["upkeep", upkeep],
-    ["residual", residual],
-  ].filter(([, v]) => v > 0);
-  parts.sort((a, b) => b[1] - a[1]);
-  // A null break-even always has a positive gap; if no single component is
-  // positive the shortfall is the horizon itself (the cost fits, the years do
-  // not), which is the year-0 story in plainer words.
-  const code = parts.length ? parts[0][0] : "upfront";
-  return {
-    code,
-    amount: parts.length ? Math.round(parts[0][1]) : upfront,
-    gap,
-    baseline,
-    upfront,
-    replacements,
-    upkeep,
-    residual,
-    horizon: HORIZON_YEARS,
-  };
-}
-
 export function breakEvenYear(p, sys) {
   if (!(sys.annualBaselineBillsUsd > 0)) return null;
   const residual = Math.max(0, sys.annualResidualBillsUsd || 0);

@@ -24,7 +24,7 @@
 // dictionary, so the ranking can be tested here without owning copy in seven
 // languages.
 
-import { USE_CASE_IDS } from "./usecases.js?v=20261127s";
+import { USE_CASE_IDS } from "./usecases.js?v=20261127u";
 
 /**
  * The declared feature set. `source` names the producer, `grade` is the honesty

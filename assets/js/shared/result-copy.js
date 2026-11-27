@@ -34,12 +34,11 @@ export const RESULT_COPY = {
     resRowTrueBreakeven: "True 20-yr break-even",
     resRowNever: "never — replacements outpace savings",
     resNeverUpfront:
-      "never — the installed cost is more than {years} years of bills it replaces",
+      "never — installed cost exceeds {years} years of bills replaced",
     resNeverUpkeep: "never — upkeep and fuel outpace the savings",
     resNeverResidual:
-      "never — the grid bill that remains leaves too little to repay within {years} years",
-    resNeverNoGridBill:
-      "no grid bill to repay — compare its own cost per kWh with what you would pay for power",
+      "never — the remaining grid bill cannot repay it in {years} years",
+    resNeverNoGridBill: "no grid bill to repay — compare its cost per kWh",
     resCardPaybackFrame: "Payback",
     resRowPaysForItself: "Pays for itself in",
     resMatrixLegendOffgrid:
@@ -266,13 +265,12 @@ export const RESULT_COPY = {
     resRowTrueBreakeven: "Punto de equilibrio real a 20 años",
     resRowNever: "nunca: los cambios superan el ahorro",
     resNeverUpfront:
-      "nunca: el coste instalado supera {years} años de facturas que sustituye",
-    resNeverUpkeep:
-      "nunca: el mantenimiento y el combustible superan el ahorro",
+      "nunca: el coste instalado supera {years} años de facturas sustituidas",
+    resNeverUpkeep: "nunca: mantenimiento y combustible superan el ahorro",
     resNeverResidual:
-      "nunca: la factura de red que queda deja demasiado poco para amortizarlo en {years} años",
+      "nunca: la factura de red restante no lo amortiza en {years} años",
     resNeverNoGridBill:
-      "no hay factura de red que amortizar: compara su coste por kWh con lo que pagarías por la energía",
+      "sin factura de red que amortizar: compara su coste por kWh",
     resCardPaybackFrame: "Amortización",
     resRowPaysForItself: "Se paga en",
     resMatrixLegendOffgrid:
@@ -502,12 +500,12 @@ export const RESULT_COPY = {
     resRowTrueBreakeven: "Ponto de equilíbrio real a 20 anos",
     resRowNever: "nunca: as substituições superam a poupança",
     resNeverUpfront:
-      "nunca: o custo instalado supera {years} anos de faturas que substitui",
-    resNeverUpkeep: "nunca: a manutenção e o combustível superam a poupança",
+      "nunca: o custo instalado supera {years} anos de faturas substituídas",
+    resNeverUpkeep: "nunca: manutenção e combustível superam a poupança",
     resNeverResidual:
-      "nunca: a fatura da rede que resta deixa pouco para recuperar em {years} anos",
+      "nunca: a fatura da rede restante não o recupera em {years} anos",
     resNeverNoGridBill:
-      "não há fatura da rede a recuperar: compare o custo por kWh com o que pagaria pela energia",
+      "sem fatura da rede a recuperar: compare o custo por kWh",
     resCardPaybackFrame: "Retorno",
     resRowPaysForItself: "Paga-se em",
     resMatrixLegendOffgrid:
@@ -736,13 +734,12 @@ export const RESULT_COPY = {
     resRowTrueBreakeven: "Seuil de rentabilité réel sur 20 ans",
     resRowNever: "jamais — les remplacements dépassent les économies",
     resNeverUpfront:
-      "jamais — le coût installé dépasse {years} ans de factures qu'il remplace",
-    resNeverUpkeep:
-      "jamais — l'entretien et le carburant dépassent les économies",
+      "jamais — le coût installé dépasse {years} ans de factures remplacées",
+    resNeverUpkeep: "jamais — entretien et carburant dépassent les économies",
     resNeverResidual:
-      "jamais — la facture réseau restante laisse trop peu pour rembourser en {years} ans",
+      "jamais — la facture réseau restante ne le rembourse pas en {years} ans",
     resNeverNoGridBill:
-      "aucune facture réseau à rembourser — comparez son coût par kWh à ce que vous paieriez pour l'électricité",
+      "aucune facture réseau à rembourser — comparez son coût par kWh",
     resCardPaybackFrame: "Amortissement",
     resRowPaysForItself: "Rentabilisé en",
     resMatrixLegendOffgrid:
@@ -972,12 +969,12 @@ export const RESULT_COPY = {
     resRowTrueBreakeven: "Echter Break-even über 20 Jahre",
     resRowNever: "nie — Wechsel übersteigen die Ersparnis",
     resNeverUpfront:
-      "nie — die Installationskosten übersteigen {years} Jahre der ersetzten Rechnungen",
+      "nie — Installationskosten übersteigen {years} Jahre ersetzter Rechnungen",
     resNeverUpkeep: "nie — Wartung und Brennstoff übersteigen die Ersparnis",
     resNeverResidual:
-      "nie — die verbleibende Netzrechnung lässt zu wenig zum Zurückzahlen in {years} Jahren",
+      "nie — die restliche Netzrechnung zahlt es in {years} Jahren nicht zurück",
     resNeverNoGridBill:
-      "keine Netzrechnung zurückzuzahlen — vergleiche die Kosten pro kWh mit dem, was du sonst für Strom zahlst",
+      "keine Netzrechnung zurückzuzahlen — vergleiche die Kosten pro kWh",
     resCardPaybackFrame: "Amortisation",
     resRowPaysForItself: "Amortisiert in",
     resMatrixLegendOffgrid:
@@ -1206,12 +1203,12 @@ export const RESULT_COPY = {
     resRowTrueBreakeven: "Echt break-evenpunt over 20 jaar",
     resRowNever: "nooit — vervangingen overtreffen de besparing",
     resNeverUpfront:
-      "nooit — de installatiekosten zijn meer dan {years} jaar aan vervangen rekeningen",
+      "nooit — installatiekosten overtreffen {years} jaar vervangen rekeningen",
     resNeverUpkeep: "nooit — onderhoud en brandstof overtreffen de besparing",
     resNeverResidual:
-      "nooit — de resterende netrekening laat te weinig over om in {years} jaar terug te verdienen",
+      "nooit — de resterende netrekening verdient het in {years} jaar niet terug",
     resNeverNoGridBill:
-      "geen netrekening om terug te verdienen — vergelijk de kosten per kWh met wat je anders voor stroom betaalt",
+      "geen netrekening om terug te verdienen — vergelijk de kosten per kWh",
     resCardPaybackFrame: "Terugverdientijd",
     resRowPaysForItself: "Terugverdiend in",
     resMatrixLegendOffgrid:
@@ -1438,12 +1435,11 @@ export const RESULT_COPY = {
     resRowTrueBreakeven: "نقطة التعادل الحقيقية على 20 عامًا",
     resRowNever: "أبدًا — الاستبدالات تتجاوز التوفير",
     resNeverUpfront:
-      "أبدًا — تكلفة التركيب تتجاوز {years} سنة من الفواتير التي تحلّ محلها",
+      "أبدًا — تكلفة التركيب تتجاوز {years} سنة من الفواتير المستبدلة",
     resNeverUpkeep: "أبدًا — الصيانة والوقود يتجاوزان التوفير",
     resNeverResidual:
-      "أبدًا — فاتورة الشبكة المتبقية تترك القليل جدًا للسداد خلال {years} سنة",
-    resNeverNoGridBill:
-      "لا توجد فاتورة شبكة لسدادها — قارن تكلفته لكل كيلوواط ساعة بما ستدفعه للطاقة",
+      "أبدًا — فاتورة الشبكة المتبقية لا تسدده خلال {years} سنة",
+    resNeverNoGridBill: "لا فاتورة شبكة لسدادها — قارن تكلفته لكل كيلوواط ساعة",
     resCardPaybackFrame: "السداد",
     resRowPaysForItself: "يُسترد ثمنه في",
     resMatrixLegendOffgrid:

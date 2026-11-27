@@ -11,7 +11,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 
-import { HORIZON_YEARS, breakEvenDriver } from "../assets/js/sizing/paths.js";
+import { breakEvenDriver } from "../assets/js/sizing/paths.js";
 
 // Fixture #1: the owner's ZIP 18255 cabin run, as the card reported it.
 // Parts list ~$4,197 (year 3,599 + ~598 upkeep), cheapest of the pool, power
@@ -31,15 +31,17 @@ const cabin = {
 
 test("a zero-swap null break-even never names replacements (#467)", () => {
   const driver = breakEvenDriver(cabin);
-  assert.equal(driver.replacements, 0, "the fixture has no swaps");
+  assert.equal(cabin.replacementsTotal, 0, "the fixture has no swaps");
+  assert.ok(
+    cabin.year0 - cabin.incentives > cabin.omTotal,
+    "the fixture's year-0 cost is its largest positive component",
+  );
   assert.notEqual(
     driver.code,
     "replacements",
     "replacements are zero, so they cannot outpace anything",
   );
   assert.equal(driver.code, "upfront");
-  assert.equal(driver.gap, cabin.spend20 - cabin.baselineBills20);
-  assert.equal(driver.horizon, HORIZON_YEARS);
 });
 
 test("swaps are named only when the run actually swaps (#467)", () => {
