@@ -623,3 +623,89 @@ head, staging `cd5f9072` carries the landed shape at stamp `20261127b` / SW
 promotion stays gated on the D-2026-11-13-008 trigger (rail green + Jev vision
 PASS on rendered surfaces + scope flush). #328 remains the only owner-held row,
 parked with its receipt. #431 stays DECISION-READY behind case-feature data.
+
+## Landing record — 2026-11-27 (Wave 3 row 2: #434 accessibility)
+
+- **#434 closed on three landings, each rail-green at its exact merged head:**
+  `45f87632` (PR #501, head `8195c5b8`, CircleCI job 346) is the pass and its
+  gate; `c85fc01d` (PR #502, head `dc2a3b3b`, job 349) the chart hit ring;
+  `27e166c4` (PR #503, head `28c2594e`, job 352) the ring re-cured after the
+  live measurement showed the first cure was short. Every squash proved
+  non-empty before merge (31 files +723/−158, 23 files +118/−97, 23 files
+  +143/−111). The #496 empty-diff failure mode is checked every time.
+- **The pass cures, all in the cause:** `.btn` painted the UA ButtonFace under
+  `color-scheme: dark` and its muted label measured 2.09:1 — it now declares
+  `background: transparent; color: var(--text-main)`, with real surface,
+  border and checked styles on the ladder; the tariff gloss was replacing a
+  `<label>`'s accessible name (`aria-allowed-role`,
+  `label-content-name-mismatch`) and is now an `aria-description`, with button
+  wiring only on non-label gloss nodes; the bill slider's 296×6 target is now a
+  24 px-tall control whose track still paints 6 px. The matrix's "manual" state
+  was clicking `#modeManual`, deleted by #441 — it timed out into an _audit
+  error_, which is never a pass; it now opens `#advancedControls`, and the
+  stale click was fixed in `scripts/smoke/a11y.js` too.
+- **The chart targets took two attempts, and the second one is the honest
+  one.** The live axe pass on `a319e76d` reported zero violations and 17 chart
+  marks under the 24 px target minimum. `r=12` was declared 24×24 and measured
+  **23.9×23.9** CSS px on the live page — the viewBox is clamped to `VB_MIN=300`,
+  so the SVG is drawn smaller than its box (21.7 on a phone). The radius is now
+  divided by the drawn ratio: **24.9** measured at 1280×900, **24.81** at
+  390×844, **24.74** at 320×700, and the live axe pass on `420e8764` reports
+  `targetFails: []` in arrival and result. The test asserts the CSS size across
+  four widths — a markup-radius test passes exactly the defect that was caught.
+- **Gate, so the browser-free half cannot regress:**
+  `scripts/check-a11y-static.mjs` (`npm run gate:a11y`) audits the built stage
+  for control names, resolvable `aria-describedby`/`aria-labelledby`, button
+  roles on labels, image `alt`, pinch-zoom, positive `tabindex`, `lang` and
+  `title` — 97 pages, 0 findings — and is wired into CircleCI `verify` after
+  the staging build and into `.github/workflows/test.yml`.
+  `tests/a11y-static.test.mjs` plants a regression per rule and proves the
+  binary exits non-zero.
+- **Rendered surface (staging `420e8764`, alias `staging.bigenergyco.pages.dev`,
+  stamp `20261127f`, SW `beco-v326`):** axe arrival 0 violations / 48 passes /
+  2 incomplete, result 0 violations / 58 passes / 3 incomplete, 0 target
+  failures in both, 0 `label[role=button]`, 0 dangling `aria-describedby`.
+  Keyboard-only run end to end: Tab → `citySearch`, type "Honolulu",
+  ArrowDown + Enter → "Honolulu, Hawaii, USA", Tab → `btnRunSizing`, Enter →
+  result renders ("Your plan $3,965.00 … BILL CUT 81%", 20-year figures);
+  bill slider moved by arrows only (~$268/mo → ~$347/mo) recalculates.
+  Production untouched.
+- **Standing limitations, named not hidden:** the browser-measured half (smoke
+  flow, axe matrix) cannot run on the merge-gating executor (cimg/node:22 has
+  no browser), so the live-instrument reads above are the evidence; advisor
+  `/api/health` CORS from the staging origin belongs to #364.
+- **Local tooling defect found and cleared:** `withMutationLock` waited
+  indefinitely on a lock file whose holder PID was dead, hanging
+  `deploy-pages-local` and the entire suite on this laptop after the runner
+  restart. Removing the stale lock restored both (`2426/2426`). The documented
+  bounded acquisition not firing on Windows is a real defect with no issue of
+  its own yet; it is recorded here and the filing-time overlap check applies
+  before one is opened.
+
+### Census — re-derived live after the merge (2026-11-27)
+
+- **Main head `27e166c4`.** Open PRs: **#455** (the npm-group dependabot bump,
+  untouched by this lane). Open issues **30**.
+- **Closed this pass:** #434 (the first PR carried "Closes #434"; receipt posted
+  on the issue, mirrored to #429 and #145), #433 (previous landing).
+- **Open set (30):** #145 master plan tracker; #328 (owner act, Cloudflare
+  dashboard, DECISION-READY, parked); #345/#358 Champion badge thresholds,
+  #353 Champion frontier; #360 production drift, #361 staging-origin naming,
+  #362 plan-vs-policy drift, #364 advisor CORS; #366 SEO program with
+  #393–#399 market posts and #408 Sinhala; #400 unify+simplify tracker with
+  #401/#402/#403 residues; #429 canonical GQ tracker, now with **#435 failure
+  states** and **#438 share card** the only open GQ rows (#431 still parked
+  behind case-feature data); #466 codex 32-finding burndown, #467 verdict
+  sentence contradicting its own numbers, #479 sub-1 kWh/day silent
+  substitution.
+
+## Readiness line (2026-11-27, after the #434 landing)
+
+Next row in filed order: **#435 (GQ failure states)**, then #438 share card —
+with #479 and #467 still sitting in the live-defect tier ahead of the rest.
+Main `27e166c4`, rail green at the merged head, staging `420e8764` carries the
+landed shape at stamp `20261127f` / SW `beco-v326`; production is untouched and
+still the 2026-11-04 deploy, so promotion stays gated on the D-2026-11-13-008
+trigger (rail green + Jev vision PASS on rendered surfaces + scope flush). #328
+remains the only owner-held row, parked with its receipt. #431 stays
+DECISION-READY behind case-feature data.
