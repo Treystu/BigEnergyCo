@@ -5655,7 +5655,7 @@ function paintBestPickCard(p, wrap) {
         baBest,
       ]);
   }
-  if (p.tariff && typeof b.trueBreakEvenYear === "number") {
+  if (p.tariff && isGT && typeof b.trueBreakEvenYear === "number") {
     // Every row above prices the PARTS basket, so this one says so. On its own
     // the card showed "Pays for itself: Year 3" while the four ways to pay
     // showed Year 6 for the same installed system: one system, two paybacks, one
@@ -5665,12 +5665,17 @@ function paintBestPickCard(p, wrap) {
       t("resCardPaysForItself"),
       t("resValYear", { n: b.trueBreakEvenYear }),
     ]);
-    const installedYear = installedBreakEvenYear(p, b);
+    const route = installedRouteFor(p, b);
+    const installedYear = route
+      ? typeof route.breakEvenYear === "number"
+        ? route.breakEvenYear
+        : "never"
+      : null;
     if (installedYear !== null)
       rows.push([
         t("resCardPaysInstalled"),
         installedYear === "never"
-          ? t("resRowNever")
+          ? neverVerdictCopy(route, isGT)
           : t("resValYear", { n: installedYear }),
       ]);
     if (b.replacementsHorizon > 0 && b.paybackYearsLo !== null) {
@@ -5679,12 +5684,21 @@ function paintBestPickCard(p, wrap) {
         fmtPaybackRange(b.paybackYearsLo, b.paybackYearsHi),
       ]);
     }
+  } else if (p.tariff && isGT && b.trueBreakEvenYear === null) {
+    // No route priced yet, but the parts basket itself never breaks even.
+    rows.push([
+      t("resRowTrueBreakeven"),
+      neverVerdictCopy(installedRouteFor(p, b), isGT),
+    ]);
   } else if (
     p.tariff &&
-    b.trueBreakEvenYear === null &&
-    b.replacementsHorizon > 0
+    !isGT &&
+    (typeof b.trueBreakEvenYear === "number" || b.trueBreakEvenYear === null)
   ) {
-    rows.push([t("resRowTrueBreakeven"), t("resRowNever")]);
+    // Off-grid: there is no grid bill to repay, so the grid-payback rows are not
+    // printed. The applicable comparison is the system's own cost per kWh, which
+    // the LCOE row below carries.
+    rows.push([t("resCardPaybackFrame"), t("resNeverNoGridBill")]);
   } else if (!p.tariff && b.paybackYearsLo !== null) {
     rows.push([
       t("resRowPaysForItself"),
@@ -5745,7 +5759,7 @@ function paintBestPickCard(p, wrap) {
  * because a second derivation of one figure is how the card and the panel came
  * to disagree in the first place.
  */
-function installedBreakEvenYear(p, b) {
+function installedRouteFor(p, b) {
   const priced = p && p.pathsPriced;
   if (!priced || p.pathsPricedFor !== `${b.pvKw}|${b.battKwh}`) return null;
   const route =
@@ -5753,9 +5767,41 @@ function installedBreakEvenYear(p, b) {
       ? priced.by.selfpurchase
       : priced.cheapest;
   if (!route || route.available === false) return null;
+  return route;
+}
+
+function installedBreakEvenYear(p, b) {
+  const route = installedRouteFor(p, b);
+  if (!route) return null;
   return typeof route.breakEvenYear === "number"
     ? route.breakEvenYear
     : "never";
+}
+
+/**
+ * The null-break-even verdict, naming the run's OWN driver (#467).
+ *
+ * The card printed "replacements outpace savings" for every null route while
+ * the swaps row on the same card read "None in 20 years": one card, two claims
+ * that cannot both be true. The driver comes from paths.breakEvenDriver(), which
+ * decomposes the shortfall with the same additive identity the route ranking
+ * uses, so a zero-valued component can never be named. Off-grid has no grid
+ * bill to repay at all, so it gets the frame that applies instead of a payback
+ * verdict it cannot have.
+ */
+function neverVerdictCopy(route, isGT) {
+  if (!isGT) return t("resNeverNoGridBill");
+  const driver =
+    route && pathsApi && typeof pathsApi.breakEvenDriver === "function"
+      ? pathsApi.breakEvenDriver(route)
+      : null;
+  const years = PATHS_HORIZON_YEARS || 20;
+  if (!driver) return t("resNeverUpfront", { years });
+  if (driver.code === "replacements") return t("resRowNever");
+  if (driver.code === "upkeep") return t("resNeverUpkeep");
+  if (driver.code === "residual") return t("resNeverResidual", { years });
+  if (driver.code === "no-baseline") return t("resNeverNoGridBill");
+  return t("resNeverUpfront", { years });
 }
 
 /** Renders the Plain-English ELI5 breakdown into its dedicated container. */
@@ -7382,13 +7428,15 @@ function renderTierCards(p) {
 
     if (
       typeof t.trueBreakEvenYear === "number" ||
-      (t.trueBreakEvenYear === null && t.replacementsHorizon > 0)
+      t.trueBreakEvenYear === null
     ) {
       rows.push([
         "Breaks even on true 20-yr cost",
         typeof t.trueBreakEvenYear === "number"
           ? `\u2248 year ${t.trueBreakEvenYear} (every swap counted)`
-          : "never \u2014 swaps outpace savings",
+          : t.replacementsHorizon > 0
+            ? "never \u2014 swaps outpace savings"
+            : "never \u2014 the first cost is more than the bills it replaces",
       ]);
     }
 
@@ -7560,13 +7608,15 @@ function renderTargetCards(p, extraTargets = []) {
     if (
       tg.battKwh > 0 &&
       (typeof tg.trueBreakEvenYear === "number" ||
-        (tg.trueBreakEvenYear === null && tg.replacementsHorizon > 0))
+        tg.trueBreakEvenYear === null)
     ) {
       rows.push([
         "Breaks even on true 20-yr cost",
         typeof tg.trueBreakEvenYear === "number"
           ? `\u2248 year ${tg.trueBreakEvenYear} (every swap counted)`
-          : "never \u2014 swaps outpace savings",
+          : tg.replacementsHorizon > 0
+            ? "never \u2014 swaps outpace savings"
+            : "never \u2014 the first cost is more than the bills it replaces",
       ]);
     }
 
@@ -7611,8 +7661,12 @@ function renderTargetCards(p, extraTargets = []) {
 }
 
 function appendRows(card, rows) {
-  for (const [k, v] of rows) {
-    const danger = typeof v === "string" && v.startsWith("never");
+  for (const [k, v, opts] of rows) {
+    // A verdict is not an alarm (#467): "never" used to paint ANY payback
+    // verdict danger-red, so a true statement about a recommended, cheapest
+    // system rendered as a failure. Only a caller that marks the row does that
+    // now, and no verdict row does.
+    const danger = opts && opts.tone === "danger";
     const accent =
       /^(Cost|Total|Pays|Your power|Bill|Battery swaps)/.test(k) && !danger;
     const line = el("div", {
