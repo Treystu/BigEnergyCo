@@ -488,3 +488,56 @@ estimateCard < billSliderWrap < btnRunSizing`.
   matrix needs the same unresolved case features plus six per-case rendered
   drives. Nothing half-built was merged for it.
 - Production untouched; no Wave 2-3, #401 re-base or promotion work started.
+
+## Landing record — 2026-11-27 (Wave 2 tail: #432, #437, #439)
+
+- **#432 typography, squash `47286fb2` (PR #494, head `53982da3`).** One type
+  scale of six roles, tabular figures on every price surface, and no action
+  carrying its own inline font-size or padding. Rendered read on staging:
+  display role 52px at 1280 and 29.6px/34.04 at 390; section title 36px; h3
+  15.2px/24.32. The mobile re-declaration is gone, so the display role is one
+  size per breakpoint, not a fourth value.
+- **#437 locale chrome, squash `66847c26` (PR #495, head `01ff0b93`, pipeline
+  42ec3736, job 330).** A `CHROME_COPY` dictionary (42 keys x 7 locales) painted
+  through `t()`, covering the comparison grid, the hardware list, the print
+  sheet, the sunshine line and the lead-acid chip. The first rail at `7f6e8919`
+  failed honestly: `tests/location-picker.test.mjs:175` caught the sunshine line
+  echoing the raw key `resultSunshineData` while the deferred dictionary was
+  still loading. The cure is `sunshineLine(place)` with an English fallback at
+  all four call sites, so a key can never flash before the dictionary resolves.
+- **#439 support path, squash `b1ae138a` (PR #497, head `9680cd52`, pipeline
+  fd968f5d).** The ES drive found the support path rendered and reachable, and
+  one leak the text census could not see: the mailto carried a hard-coded
+  English subject, so a Spanish reader's draft opened headed "Help with my
+  result". `resultSupportSubject` now lives in all seven locales,
+  `renderResults()` sets the href when it reveals the path, and the markup ships
+  a bare `mailto:` for the no-script case.
+- **Correction, recorded because it changes what a green means:** #496
+  (`b56316f4`) merged with an EMPTY diff. A rebase reset moved the lane branch
+  before the file restore, so the squash carried stamp rewrites only. Rail green
+  on an empty change is evidence of nothing; #496 is not counted as #439's
+  landing and #497 carries the real change.
+- **Perf budget paid, not widened.** #497's first head (`fa05cb60`) was red at
+  the rail: eager JS 895,030 bytes against the 895,000 limit. Paid by compressing
+  the hardware-guidance comment (the repo rule is to compress comments, never to
+  raise the gate); green at `9680cd52`. This was the only red in the pass that
+  was not already fixed in the head that closed the item.
+- **Rendered drive, `https://6dccec5f.bigenergyco.pages.dev`** (stamp
+  `20261127a`, SW `beco-v321`), Spanish, result open, 1282 and 390 wide: support
+  path visible with subject `Ayuda con mi resultado` at both widths, zero raw
+  keys in page text, `scrollWidth - clientWidth = 0`. On the previous staging
+  deploy (`112c4d34`, stamp `20261126d`, SW `beco-v319`): comparison header
+  `Batería ↓ · Objetivo → −60% factura...`, hardware `Paneles solares /
+Inversor / Batería (útil)`, print title `Comparación de vida útil — conectada
+a la red`, sunshine `Datos de sol de Madrid, Europe, Spain`, lead-acid chip in
+  Spanish. Console carried only the #364 advisor-origin CORS errors, before and
+  after these heads.
+- **No promotion.** Production (`freeoffgridcalculator.com`) is untouched; the
+  D-2026-11-13-008 trigger needs a Jev vision PASS on rendered surfaces plus a
+  scope flush, and neither was attempted in this pass.
+
+WAIT-STATE: not waiting on a party. Wave 2 is landed and rendered-verified
+#432, #437 and #439. The queue now stands at Wave 3 (#433 speed, #434
+accessibility, #435 failure states, #438 share card) with #431 parked
+DECISION-READY behind case-feature data and #328 parked as an owner act. Rung:
+Wave 2 tail closed; next is Wave 3's first row.
