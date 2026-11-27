@@ -39,6 +39,7 @@ import { runClosingFlow } from "./smoke/closing.js";
 import { runAdvisorFlow } from "./smoke/advisor.js";
 import { runUseCasesFlow } from "./smoke/usecases.js";
 import { runDeadlineFlow } from "./smoke/deadline.js";
+import { runGraceFlow } from "./smoke/grace.js";
 
 // BASE must always end in "/": sub-pages are built as `${BASE}solar-heatmap/`,
 // so a slash-less argument like `https://example.com` would otherwise produce
@@ -184,6 +185,10 @@ async function main() {
     // the deadline suite, which wants a fresh page.
     await runAdvisorFlow(ctx, actions);
     await runUseCasesFlow(ctx, actions);
+    // Bad windows (#435): the advisor is forced unreachable and a stale share
+    // link is refused, each on its own fresh page. Before the deadline suite,
+    // which also wants a fresh page.
+    await runGraceFlow(ctx, actions);
     // Last: the silent-worker deadline on a fresh page.
     await runDeadlineFlow(ctx, actions);
   } catch (e) {

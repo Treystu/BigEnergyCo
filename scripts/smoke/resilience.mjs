@@ -130,7 +130,7 @@ const NASA = /power\.larc\.nasa\.gov/;
  * matched nothing has proved nothing about a transport failure — it proved the
  * page works — and the gate is given that number so it can say so.
  */
-export function installNasaInterceptor(ctx) {
+export function installNasaInterceptor(ctx, { pattern = NASA } = {}) {
   const { send, ws } = ctx;
   const sessions = new Set();
   const stats = {
@@ -154,7 +154,7 @@ export function installNasaInterceptor(ctx) {
   const held = new Map();
 
   const handlePaused = (sessionId, params) => {
-    if (!NASA.test(params?.request?.url || "")) {
+    if (!pattern.test(params?.request?.url || "")) {
       send(
         "Fetch.continueRequest",
         { requestId: params.requestId },

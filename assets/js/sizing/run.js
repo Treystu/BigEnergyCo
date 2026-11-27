@@ -28,7 +28,7 @@ import {
   billCutFraction,
   simulateOutage,
   simulatePortable,
-} from "./engine.js?v=20261127f";
+} from "./engine.js?v=20261127s";
 
 import {
   isUseCaseId,
@@ -41,24 +41,24 @@ import {
   normaliseReservePct,
   normaliseOutageTarget,
   outcomeFor,
-} from "./usecases.js?v=20261127f";
-import { memoizeSimulate } from "./sim-cache.js?v=20261127f";
+} from "./usecases.js?v=20261127s";
+import { memoizeSimulate } from "./sim-cache.js?v=20261127s";
 
 import {
   fetchHourlyCached,
   synthesizeFromProfile,
-} from "./nasa.js?v=20261127f";
-import { buildFrontier } from "./frontier.js?v=20261127f";
-import { buyablePrice } from "./bom.js?v=20261127f";
-import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261127f";
-import { climateSummary } from "./climate.js?v=20261127f";
+} from "./nasa.js?v=20261127s";
+import { buildFrontier } from "./frontier.js?v=20261127s";
+import { buyablePrice } from "./bom.js?v=20261127s";
+import { oversizeCallout, oversizeCalloutI18n } from "./rescale.js?v=20261127s";
+import { climateSummary } from "./climate.js?v=20261127s";
 import {
   fullRange,
   getScope,
   POWMR_CATALOG,
   estimateTariff,
   landedMidBattKwhFor,
-} from "./pricing.js?v=20261127f";
+} from "./pricing.js?v=20261127s";
 import {
   annualGridSpendUsd,
   paybackYears,
@@ -69,7 +69,7 @@ import {
   trueBreakEvenYear,
   cumulativeCostSeries,
   INSTALL_LABOR_PER_KWH_USABLE,
-} from "./money.js?v=20261127f";
+} from "./money.js?v=20261127s";
 
 const TIER_BASIS = {
   tier100: "100% independence — never needs a generator",
@@ -262,26 +262,14 @@ const AUTO_CARD_NOTES = {
   lfp: "The benchmark: uses most of its nameplate every day and still outlives everything else.",
 };
 
-async function fetchWeatherDefault(opts) {
-  return fetchHourlyCached(opts);
-}
-
 // ── Session weather memo: one site = one load ─────────────────────────────
-// Within a session (worker/module lifetime) every run at the same normalized
-// site reuses the exact same series object — bill edits, cut-slider moves,
-// chemistry switches and quiet refines never re-touch the network, the disk
-// cache, or the parser for a site that already loaded. The key is rounded to
-// the same ~1.1 km grid the persistent cache uses, so float dust between the
-// share-URL hash, the coordinate inputs and GPS can never cause a second
-// load. Injected test weather (deps.fetchWeather) bypasses the memo so
-// fixtures stay hermetic.
-const SITE_MEMO = { key: null, series: null };
+// Same normalized site = one series object, on the persistent cache's ~1.1 km
+// grid, so float dust never loads twice. Injected deps.fetchWeather skips it.
+const SITE_MEMO = { key: null, series: null, retriedAt: null };
 export const WEATHER_MEMO_STATS = { hits: 0, misses: 0 };
 export function clearSiteMemo() {
-  SITE_MEMO.key = null;
-  SITE_MEMO.series = null;
-  WEATHER_MEMO_STATS.hits = 0;
-  WEATHER_MEMO_STATS.misses = 0;
+  SITE_MEMO.key = SITE_MEMO.series = SITE_MEMO.retriedAt = null;
+  WEATHER_MEMO_STATS.hits = WEATHER_MEMO_STATS.misses = 0;
 }
 export function siteMemoKey(latitude, longitude, years = 5) {
   const la = Math.round(Number(latitude) * 100) / 100;
@@ -290,13 +278,34 @@ export function siteMemoKey(latitude, longitude, years = 5) {
   return `${la.toFixed(2)},${lo.toFixed(2)},${y}y`;
 }
 
-// Prefetch hook: warms the weather layers (memory → compact persistent →
-// Cache Storage → localStorage → network) for a site BEFORE the visitor
-// clicks Run. Same memo key shape as fetchWeatherOnce, so a completed
-// prefetch is always recognized as a memo hit at run time. Returns
-// `{ hit, offline, meta }`: hit=false means layers were already warm, so
-// callers must not duplicate progress UI. Errors are swallowed here by
-// design — runSizing's own fallback path reports them honestly.
+// Prefetch hook: warms the layers before Run on the run's own memo key.
+//
+// A stand-in is not live weather and the disclosure promises "re-run online", so
+// it is STALE once the browser is back: the hit falls through to the cold path,
+// once per click (prefetch and run share the stamp); a live result retires the
+// payload cache the offline run filled.
+export const OFFLINE_RETRY_SAME_CLICK_MS = 5000;
+
+export function offlineMemoIsStale(
+  series = SITE_MEMO.series,
+  retriedAt = SITE_MEMO.retriedAt,
+  now = Date.now(),
+  onLine = navigator.onLine !== false,
+) {
+  return (
+    series?.meta?.offline === true &&
+    onLine &&
+    now - retriedAt >= OFFLINE_RETRY_SAME_CLICK_MS
+  );
+}
+
+function remember(key, series) {
+  SITE_MEMO.key = key;
+  SITE_MEMO.series = series;
+  SITE_MEMO.retriedAt = series.meta.offline ? Date.now() : SITE_MEMO.retriedAt;
+  if (!series.meta.offline) clearRunPayloadCache();
+}
+
 export async function prefetchSiteWeather(
   latitude,
   longitude,
@@ -304,22 +313,23 @@ export async function prefetchSiteWeather(
   onProgress = null,
 ) {
   const key = siteMemoKey(latitude, longitude, years);
-  if (SITE_MEMO.key === key && SITE_MEMO.series)
+  const warm = SITE_MEMO.key === key && !!SITE_MEMO.series;
+  if (warm && !offlineMemoIsStale())
     return {
       hit: true,
       offline: !!SITE_MEMO.series.meta.offline,
       meta: SITE_MEMO.series.meta,
     };
+  if (warm) SITE_MEMO.retriedAt = Date.now();
   WEATHER_MEMO_STATS.misses++;
   try {
-    const series = await fetchWeatherDefault({
+    const series = await fetchHourlyCached({
       latitude,
       longitude,
       years,
       ...(typeof onProgress === "function" ? { onProgress } : {}),
     });
-    SITE_MEMO.key = key;
-    SITE_MEMO.series = series;
+    remember(key, series);
     return { hit: false, offline: !!series.meta.offline, meta: series.meta };
   } catch {
     // Leave the memo empty: runSizing's fetchWeatherWithFallback (offline
@@ -329,24 +339,25 @@ export async function prefetchSiteWeather(
 }
 async function fetchWeatherOnce(opts) {
   const key = siteMemoKey(opts.latitude, opts.longitude, opts.years);
-  if (SITE_MEMO.key === key && SITE_MEMO.series) {
+  const warm = SITE_MEMO.key === key && !!SITE_MEMO.series;
+  if (warm && !offlineMemoIsStale()) {
     WEATHER_MEMO_STATS.hits++;
     return SITE_MEMO.series;
   }
   WEATHER_MEMO_STATS.misses++;
+  if (warm) SITE_MEMO.retriedAt = Date.now();
   const series = await fetchWeatherWithFallback(opts);
-  SITE_MEMO.key = key;
-  SITE_MEMO.series = series;
+  remember(key, series);
   return series;
 }
 
 // Offline fallback: bundled typical-year profile nearest to the request.
 async function fetchWeatherWithFallback(opts) {
   try {
-    return await fetchWeatherDefault(opts);
+    return await fetchHourlyCached(opts);
   } catch (netErr) {
     const { OFFLINE_PROFILES, PROFILE_YEAR } =
-      await import("./profiles.js?v=20261127f");
+      await import("./profiles.js?v=20261127s");
     let best = null,
       bestD = Infinity;
     for (const p of OFFLINE_PROFILES) {

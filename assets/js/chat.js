@@ -434,6 +434,24 @@ function sendChatMsg() {
 
   chatInput.value = "";
 
+  // A failed request must not cost the visitor their words: drop the bubble
+  // this attempt painted and put the message back, so the "try again" the copy
+  // asks for is a click, not a retype. Text typed meanwhile is left alone.
+  function restoreFailedSend() {
+    try {
+      if (userDiv.parentNode) userDiv.parentNode.removeChild(userDiv);
+      var last = chatHistory[chatHistory.length - 1];
+      if (last && last.role === "user" && last.content === sentMsg)
+        chatHistory.pop();
+      if (chatInput.value.trim() === "") {
+        chatInput.value = userMsg;
+        chatInput.focus();
+      }
+    } catch (e) {
+      /* the failure copy still stands if the DOM moved under us */
+    }
+  }
+
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
   // Same-origin fetch via proxy_server.py (port 7510)
@@ -618,6 +636,7 @@ function sendChatMsg() {
           data,
         );
       } else {
+        restoreFailedSend();
         renderBotReply(
           chatText("advisorNoReply", " No reply received. Please try again."),
         );
@@ -634,6 +653,10 @@ function sendChatMsg() {
 
       if (loading && loading.parentNode)
         loading.parentNode.removeChild(loading);
+
+      // Both failure answers ask the visitor to send again, so both hand the
+      // message back first.
+      restoreFailedSend();
 
       if (err && (err.status === 503 || err.status === 429)) {
         renderBotReply(

@@ -199,11 +199,24 @@ function stubPowerFetch(counter) {
       ghi[key] = h >= 6 && h <= 18 ? 650 : 0;
       t2m[key] = 26;
     }
+    // The wire since #433 is NASA's CSV. This stub keeping the old JSON shape
+    // meant every run here silently fell back to the bundled stand-in: the
+    // "one load" it measured was one FAILED load, and the offline memo replayed
+    // it (the #435 defect). A live series is what this contract is about.
+    const rows = Object.keys(ghi).map((key) =>
+      [
+        key.slice(0, 4),
+        Number(key.slice(4, 6)),
+        Number(key.slice(6, 8)),
+        Number(key.slice(8, 10)),
+        ghi[key],
+        t2m[key],
+      ].join(","),
+    );
     return {
       ok: true,
-      json: async () => ({
-        properties: { parameter: { ALLSKY_SFC_SW_DWN: ghi, T2M: t2m } },
-      }),
+      text: async () =>
+        `-BEGIN HEADER-\r\nNASA/POWER\r\n-END HEADER-\r\nYEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,T2M\r\n${rows.join("\r\n")}\r\n`,
     };
   };
 }
