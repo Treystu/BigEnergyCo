@@ -100,11 +100,13 @@ export async function runUseCasesFlow(ctx, actions) {
     `${optionValues.length} options: ${optionValues.join(", ")}`,
   );
 
+  // #441 deleted the manual-mode radio: manual depth is now the optional
+  // `#advancedControls` disclosure, opened rather than toggled.
   const manualMode = await evaluate(`(() => {
-    const radio = document.getElementById("modeManual");
-    if (!radio) return false;
-    if (!radio.checked) radio.click();
-    return radio.checked;
+    const panel = document.getElementById("advancedControls");
+    if (!panel) return false;
+    panel.open = true;
+    return panel.open === true && !!document.getElementById("loadMode");
   })()`);
   gate("manual sizing controls are available to the use-case flow", manualMode);
 
@@ -147,6 +149,19 @@ export async function runUseCasesFlow(ctx, actions) {
     })()`);
     gate(`${id}: run button accepts the selected case`, runButton);
 
+    // The reserve is an input to the run, so read it before waiting: the
+    // bill-cut metric states the reserve it was measured at.
+    const reservePct = await evaluate(
+      `Number(document.getElementById("reserveSlider")?.value) || 0`,
+    );
+    const expectedMetric =
+      config.metric.labelKey === "metricBillCut" && reservePct > 0
+        ? String(locale.metricBillCutReserve || "").replace(
+            "{pct}",
+            String(reservePct),
+          )
+        : locale[config.metric.labelKey];
+
     const rendered = await ctx.poll(
       () =>
         evaluate(`(() => {
@@ -156,7 +171,7 @@ export async function runUseCasesFlow(ctx, actions) {
           const title = card.children[0]?.textContent.trim() || "";
           const metric = card.children[2]?.textContent.trim() || "";
           return title === ${JSON.stringify(expectedTitle)} &&
-            metric === ${JSON.stringify(locale[config.metric.labelKey])} &&
+            metric === ${JSON.stringify(expectedMetric)} &&
             Boolean(card.children[1]?.textContent.trim()) &&
             Boolean(card.children[3]?.textContent.trim());
         })()`),
@@ -169,9 +184,12 @@ export async function runUseCasesFlow(ctx, actions) {
       if (!card) return null;
       const parts = Array.from(card.children, el => el.innerText.replace(/\\s+/g, " ").trim());
       const statusSet = ${JSON.stringify({
-        works: locale.statusWorks,
-        partial: locale.statusPartial,
-        notHere: locale.statusNotHere,
+        // The card classifies itself by the sentence it opens with; the bare
+        // "Works / Partly / Does not work here" labels were replaced by these
+        // leads, which are also why the verdict no longer argues with itself.
+        works: locale.verdictLeadWorks,
+        partial: locale.verdictLeadPartial,
+        notHere: locale.verdictLeadNotHere,
       })};
       const verdict = parts[3] || "";
       const status = Object.entries(statusSet).find(([, word]) => word && verdict.includes(word))?.[0] || null;
@@ -205,7 +223,26 @@ export async function runUseCasesFlow(ctx, actions) {
       `${visibleControls}/${expectedControls.length}: ${expectedControls.join(", ")}`,
     );
 
-    const expectedMetric = locale[config.metric.labelKey];
+    // Name the first field that did not arrive: "no status" was once printed
+    // for a card whose status was fine and whose title had drifted, which sent
+    // the next reader after the wrong element.
+    const missing = !rendered
+      ? "not rendered"
+      : !row
+        ? "no card"
+        : [
+            row.title !== expectedTitle && "title",
+            row.metric !== expectedMetric && "metric",
+            !row.value && "value",
+            !row.verdict && "verdict",
+            !row.footer && "footer",
+            /[{}]/.test(
+              `${row.title}${row.value}${row.metric}${row.verdict}${row.footer}`,
+            ) && "placeholder",
+            !row.status && "status",
+          ]
+            .filter(Boolean)
+            .join(",");
     const validOutcome = Boolean(
       rendered &&
       row?.regionVisible &&
@@ -222,7 +259,7 @@ export async function runUseCasesFlow(ctx, actions) {
     gate(
       `${id}: rendered result uses its own translated metric, value and verdict`,
       validOutcome,
-      `${row?.metric || "no metric"} = ${row?.value || "no value"}; ${row?.status || "no status"}; runDisabled=${row?.runDisabled}; status=${row?.pageStatus || "n/a"}`,
+      `${missing || "all fields present"} | ${row?.title || "no title"} | ${row?.metric || "no metric"} = ${row?.value || "no value"}; ${row?.status || "no status"}; runDisabled=${row?.runDisabled}; status=${row?.pageStatus || "n/a"}`,
     );
     cases.push({
       id,
