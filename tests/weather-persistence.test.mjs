@@ -28,16 +28,11 @@ function fakeNetwork(stale = false) {
       calls += 1;
       const s = stale ? startYear - 1 : startYear;
       const e = stale ? endYear - 1 : endYear;
+      // The wire format since #433: NASA's CSV, one header block then rows.
       return {
         ok: true,
-        json: async () => ({
-          properties: {
-            parameter: {
-              ALLSKY_SFC_SW_DWN: { [`${s}010100`]: 5 },
-              T2M: { [`${s}010100`]: 25 },
-            },
-          },
-        }),
+        text: async () =>
+          `YEAR,MO,DY,HR,ALLSKY_SFC_SW_DWN,T2M\n${s},1,1,0,5,25\n`,
       };
     },
   };

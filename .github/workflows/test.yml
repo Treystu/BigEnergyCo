@@ -99,6 +99,13 @@ jobs:
       - name: Check deploy allowlist
         run: node scripts/deploy-pages-local.mjs --check
 
+      - name: Speed budget (#433)
+        # Measured on the stage the allowlist step just built, so the number is
+        # about the artifact that ships. Byte axes only: this runner has no
+        # browser, so phone-class timings are recorded in
+        # scripts/lib/speed-budgets.mjs from scripts/measure-speed.mjs.
+        run: npm run gate:speed
+
       - name: Cumulative-series engine flow gate
         # Offline and deterministic: drives runSizing() through its real entry
         # point and asserts every solvable target carries a complete 20-year
